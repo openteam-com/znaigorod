@@ -313,11 +313,11 @@ class Organization < ActiveRecord::Base
   end
 
   def html_description
-    @html_description ||= description.as_html
+    @html_description ||= description.try(:as_html)
   end
 
   def text_description
-    @text_description ||= html_description.as_text
+    @text_description ||= html_description.try(:as_text)
   end
 
   auto_html_for :description do

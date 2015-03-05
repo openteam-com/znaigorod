@@ -1,6 +1,6 @@
 class OrganizationCategory < ActiveRecord::Base
   alias_attribute :to_s, :title
-  attr_accessible :title
+  attr_accessible :title, :parent
 
   default_scope order('title')
 

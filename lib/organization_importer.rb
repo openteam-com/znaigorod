@@ -13,7 +13,7 @@ class OrganizationImporter
                         if r[3].present?
                           h[r[3]][r[4]] ||= []
                           h[r[3]][r[4]] << r[5]
-                          h[r[3]][r[4]].uniq!#.sort!
+                          h[r[3]][r[4]].uniq!
                         end
 
                         h
