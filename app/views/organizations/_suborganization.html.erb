@@ -48,9 +48,12 @@
   <div class="place">
     <%= suborganization.truncated_address_link.present? ? suborganization.truncated_address_link(false) : "&nbsp;".html_safe %>
   </div>
+<<<<<<< HEAD
 
   <div class='phone'>
     Тел.:
     <%= link_to "#{suborganization.organization.phone.truncate(6)}", "#", class: "js-show-phone", id: suborganization.organization.id, single_phone: true %>
   </div>
+=======
+>>>>>>> remove city from list/tile_view items
 </div>
