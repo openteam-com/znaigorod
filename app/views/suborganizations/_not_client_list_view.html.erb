@@ -1,0 +1,20 @@
+<% @presenter.without_clients_collection.each do |item|  %>
+  <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
+    data-image="<%= item.organization.logotype_url %>" data-icon="<%= asset_path('/assets/public/organizations_list_view/not_client_icon.png') %>"
+    data-icon-hover="<%= asset_path('/assets/public/organizations_list_view/not_client_icon_hover.png') %>" data-slug="<%= item.organization.slug %>"
+    data-width='9' data-height='9' data-status = '<%= item.organization.status %>'>
+    <div class="list_view_organization_poster">
+      <div class="info">
+        <!-- информация о заведении -->
+
+        <h1>
+          <%= link_to item.organization.title.truncate(30), organization_path(item.organization) %>
+          <span <%= "#{item.organization.schedules.first.holiday? ? 'class=close title=Закрыто' : 'class=open title=Открыто'}" %>></span>
+        </h1>
+        <!-- адрес -->
+        <%= content_tag(:div, "#{item.address_without_link}".html_safe, class: :place) if item.address_link.present? %>
+      </div>
+    </div>
+  </li>
+<% end %>
+<%= link_to_next_page @presenter.paginated_without_clients_collection, "Еще организации (#{@presenter.current_count + @presenter.current_without_clients_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination', :param_name => "not_client_page" , :params => params %>
