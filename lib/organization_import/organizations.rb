@@ -27,8 +27,8 @@ module OrganizationImport
     end
 
     def csv_data
-      start = 1#2608#31839
-      finish = -1#2641#31841
+      start = 1#4593#2608#31839
+      finish = -1#4593#2641#31841
       csv_data ||= CSV.read(csv_path, :col_sep => ';')[start..finish]
     end
 
@@ -48,7 +48,7 @@ module OrganizationImport
       orgs = Organization.search(:include => :address) { keywords title.split(',').first, :fields => :title_ru; paginate(:page => 1, :per_page => 1_000) }.results
 
       orgs.select { |o|
-        (splited_street(o.address.try(:street)) & splited_street(street)).any? && (o.address.try(:house).try(:squish) == house.squish)
+        (splited_street(o.address.try(:street)) & splited_street(street)).any? && (o.address.try(:house).try(:squish).try(:mb_chars).try(:downcase).gsub(' ','') == house.squish.mb_chars.downcase.gsub(' ',''))
       }
     end
 
@@ -63,7 +63,7 @@ module OrganizationImport
           hash[hash_key] = orgs
           #hash[hash_key][:csv_title] = csv_row.title
           #hash[hash_key][:csv_address] = csv_row.address
-          #hash[hash_key][:organizations] = orgs.inject({}) { |h, o| h[:title] = o.title; h[:address] = o.address.try(:to_s); h }
+          #hash[hash_key][:organizations] = orgs.inject({}) { |h, o| h[:title] = o.title; h[:address] = o.address.try(:to_s); h  }
         end
 
         hash
