@@ -26,6 +26,5 @@ end
 #  slug           :string(255)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  with_relations :boolean
 #
 
