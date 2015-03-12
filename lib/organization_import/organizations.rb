@@ -75,23 +75,26 @@ module OrganizationImport
       unique_ids.each do |id|
         csv_rows_by(id).group_by(&:address).each do |address, csv_rows|
           p csv_rows.first.title
-          csv_address = OrganizationImport::CsvAddress.new(address)
-          possible_organizations = similar_organizations(csv_rows.first.title, csv_address.street, csv_address.house)
-          address = Address.create(:street => csv_address.street, :house => csv_address.house, :office => csv_address.office,
-                                  :city => csv_rows.first.city, :latitude => csv_rows.first.latitude, :longitude => csv_rows.first.longitude)
 
           categories = csv_rows.map{ |category| OrganizationImport::Categories.new.category_by(category.category_title) }.compact
+          if categories.present?
+            csv_address = OrganizationImport::CsvAddress.new(address)
+            possible_organizations = similar_organizations(csv_rows.first.title, csv_address.street, csv_address.house)
+            organization = possible_organizations.any? ? possible_organizations.first : organization = Organization.new
 
-          organization = possible_organizations.any? ? possible_organizations.first : organization = Organization.new
+            address = organization.address.nil? ? Address.create(:street => csv_address.street, :house => csv_address.house, :office => csv_address.office,
+                                                                 :city => csv_rows.first.city, :latitude => csv_rows.first.latitude, :longitude => csv_rows.first.longitude) : organization.address
 
-          organization.address = address
-          organization.organization_categories = categories
-          organization.title = csv_rows.first.title
-          organization.email = csv_rows.map(&:email).compact.uniq.first
-          organization.phone = csv_rows.map(&:phone).compact.uniq.first
-          organization.site = csv_rows.map(&:site).compact.uniq.first
-          organization.save(:validate => false)
-
+            organization.address = address
+            organization.organization_categories = categories
+            organization.title = csv_rows.first.title
+            organization.email = csv_rows.map(&:email).compact.uniq.first
+            organization.phone = csv_rows.map(&:phone).compact.uniq.first
+            organization.site = csv_rows.map(&:site).compact.uniq.first
+            organization.save(:validate => false)
+          else
+            next
+          end
         end
         pb.increment!
       end

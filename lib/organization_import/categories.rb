@@ -31,7 +31,6 @@ module OrganizationImport
     end
 
     def category_by(title)
-      p title
       hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
         e.each { |k, v| h[k] = v.try(:[], 'title') }
 
@@ -39,7 +38,6 @@ module OrganizationImport
       end
 
       array = hash.detect { |k, _| k == title }
-      raise array.inspect
 
       array ? OrganizationCategory.find_by_title(array.last || array.first) : nil
     end
