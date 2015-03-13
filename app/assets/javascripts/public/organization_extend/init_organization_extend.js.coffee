@@ -244,3 +244,4 @@
     $(this).parent().find('.js-opener-btn').slideDown()
     $(this).parent().find('.js-opener-btn').parent().nextAll().slideUp()
 
+  true
