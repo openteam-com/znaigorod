@@ -59,6 +59,12 @@ module OrganizationImport
           end
         end
 
+        if data.try(:[], 'offers').try(:any?)
+          data['offers'].each do |csv_title, title|
+            category.features.find_or_create_by_title((title || csv_title).capitalized)
+          end
+        end
+
         create_categories(data.try(:[], 'subcategories'), category)
       end
     end
@@ -113,6 +119,20 @@ module OrganizationImport
       end
 
       OrganizationCategory.where :title => hash.map { |k, v| v ? v : k }
+    end
+
+    def feature_by(title)
+      hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
+        e.each { |k, v| h[k] = v.try(:[], 'offers') }
+
+        h
+      end
+
+      hash = Hash[hash.values.compact.map(&:to_a).inject([]) { |res, arr| arr.each { |e| res << e }; res }]
+
+      array = hash.detect { |k, _| k == title }
+
+      array ? Feature.find_by_title(array.last || array.first) : nil
     end
   end
 end
