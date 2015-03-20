@@ -10,6 +10,8 @@ class OrganizationCategory < ActiveRecord::Base
   has_many :review_category_items, :dependent => :destroy
   has_many :reviews, :through => :review_category_items
 
+  has_many :features, :dependent => :destroy
+
   validates :title, presence: true, uniqueness: { scope: :ancestry }
 
   has_ancestry

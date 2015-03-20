@@ -40,6 +40,10 @@ class String
     Russian.translit(self).underscore.gsub(/\s+|\//, "_")
   end
 
+  def capitalized
+    mb_chars.capitalize.to_s
+  end
+
   def is_json?
     begin
       !!JSON.parse(self)

@@ -45,5 +45,9 @@ module OrganizationImport
     def city
       row[6]
     end
+
+    def extra
+      row[19]
+    end
   end
 end

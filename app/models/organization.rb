@@ -16,10 +16,11 @@ class Organization < ActiveRecord::Base
                   :vkontakte_likes, :fb_likes, :odn_likes, :poster_vk_id,
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
-                  :organization_category_ids,
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
                   :barter_status,
-                  :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title
+                  :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
+                  :organization_category_ids, :csv_id
+
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
@@ -31,6 +32,8 @@ class Organization < ActiveRecord::Base
 
   has_many :organization_category_items, :dependent => :destroy
   has_many :organization_categories, :through => :organization_category_items
+  has_many :feature_organizations, :dependent => :destroy
+  has_many :features, :through => :feature_organizations
 
   has_many :activities,             :dependent => :destroy
   has_many :comments,               :dependent => :destroy, :as => :commentable

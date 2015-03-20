@@ -35,7 +35,7 @@ module Znaigorod
     config.paths['config/routes'] += Dir[Rails.root.join('config', 'routes', '*.rb')].sort
     config.action_controller.asset_host = Settings['app']['url']
 
-    config.log_level = :info
+    config.log_level = :debug
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

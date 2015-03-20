@@ -424,6 +424,23 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
 
   add_index "entertainments", ["organization_id"], :name => "index_entertainments_on_organization_id"
 
+  create_table "feature_organizations", :force => true do |t|
+    t.integer  "feature_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "feature_organizations", ["feature_id"], :name => "index_feature_organizations_on_feature_id"
+  add_index "feature_organizations", ["organization_id"], :name => "index_feature_organizations_on_organization_id"
+
+  create_table "features", :force => true do |t|
+    t.string   "title"
+    t.integer  "organization_category_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
   create_table "feeds", :force => true do |t|
     t.integer  "feedable_id"
     t.string   "feedable_type"
@@ -735,6 +752,7 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
     t.string   "afishas_navigation_title"
     t.string   "reviews_navigation_title"
     t.string   "address_navigation_title"
+    t.integer  "csv_id"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
@@ -1344,7 +1362,6 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
     t.string   "slug"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.boolean  "with_relations"
   end
 
   create_table "tickets", :force => true do |t|
