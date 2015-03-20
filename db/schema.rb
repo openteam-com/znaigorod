@@ -1373,7 +1373,6 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
     t.string   "slug"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.boolean  "with_relations"
   end
 
   create_table "tickets", :force => true do |t|
