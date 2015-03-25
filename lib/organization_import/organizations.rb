@@ -38,6 +38,10 @@ module OrganizationImport
         unique_ids.each do |id|
           csv_rows_by(id).group_by(&:address).each do |raw_address, csv_rows|
             categories = csv_rows.map { |csv_row| categories_from_yml.category_by(csv_row.category_title) }.compact
+            categories += csv_rows.map { |csv_row| categories_from_yml.feature_by(csv_row.category_title) }.compact.map(&:organization_category)
+
+            categories.uniq!
+
             csv_address = CsvAddress.new(raw_address)
 
             if categories.any?
@@ -62,8 +66,8 @@ module OrganizationImport
               address.latitude = csv_rows.first.latitude
               address.longitude = csv_rows.first.longitude
               address.save(:validate => false)
-
               organization.address = address
+
               organization.save(:validate => false)
 
               # categories

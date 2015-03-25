@@ -24,9 +24,22 @@ module OrganizationImport
 
           category ?
             category.update_attributes(:title => title, :parent => parent) :
-            category = OrganizationCategory.find_by_title(title)
+            category = OrganizationCategory.find_by_title(title) # для повторного импорта когда уже нет категории с old_title
         else
-          category = parent ? parent.children.find_or_create_by_title!(title) : OrganizationCategory.find_or_create_by_title(title)
+          category = if parent
+                       child = parent.children.find_by_title(title)
+
+                       if child
+                         child.update_attributes(:title => title)
+                       else
+                         child = OrganizationCategory.find_or_create_by_title(title)
+                         child.update_attributes(:parent => parent)
+                       end
+
+                       child
+                     else
+                       OrganizationCategory.find_or_create_by_title(title)
+                     end
         end
 
         if data.try(:[], 'offers').try(:any?)
@@ -48,7 +61,7 @@ module OrganizationImport
 
       array = hash.detect { |k, _| k == title }
 
-      array ? OrganizationCategory.find_by_title(array.last || array.first) : nil
+      array ? OrganizationCategory.find_by_title((array.last || array.first).capitalized) : nil
     end
 
     def feature_by(title)
