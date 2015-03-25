@@ -15,9 +15,10 @@ module OrganizationImport
 
     def searched_orgs
       @searched_orgs ||= begin
-                           search = Organization.search(:include => :address) do
-                             keywords title, :fields => :title_ru
-                             paginate :page => 1, :per_page => 1_000
+                           search = ORganization.where('title like')
+                           #search = Organization.search(:include => :address) do
+                             #keywords title, :fields => :title_ru
+                             #paginate :page => 1, :per_page => 1_000
                            end
 
                            search.results

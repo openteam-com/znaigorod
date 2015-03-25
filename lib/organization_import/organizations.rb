@@ -18,15 +18,46 @@ module OrganizationImport
     end
 
     def csv_data
+      @csv_rows ||= begin
+                      start = 1
+                      finish = -1
+
+                      CSV.read(csv_path, :col_sep => ';')[start..finish]
+                    end
+    end
+
+
+    def limited_csv_data
       @csv_data ||= CSV.read(csv_path, :col_sep => ';').select { |r| categories_for_import.include? r[4] }
     end
 
-    def unique_ids
-      @unique_ids ||= csv_data.map { |r| r[1] }.compact.uniq
+    def unique_ids(limited = true)
+      data = limited ? limited_csv_data : csv_data
+
+      data.map { |r| r[1] }.compact.uniq
     end
 
     def csv_rows_by(id)
-      csv_data.select { |r| r[1] == id }.map { |r| CsvRow.new r }
+      limited_csv_data.select { |r| r[1] == id }.map { |r| CsvRow.new r }
+    end
+
+    def check
+      pb = ProgressBar.new(unique_ids(false).count)
+      hash = {}
+      unique_ids(false).each do |id|
+        csv_rows_by(id).group_by(&:address).each do |address, csv_rows|
+          csv_address = CsvAddress.new(address)
+          orgs = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id).results
+
+          if orgs.any?
+            hash_key = SecureRandom.hex(4)
+            hash[hash_key] = orgs
+          end
+
+        end
+        pb.increment!
+      end
+      hash
     end
 
     def create_organizations
@@ -45,7 +76,7 @@ module OrganizationImport
             csv_address = CsvAddress.new(raw_address)
 
             if categories.any?
-              possible_organizations = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id).results
+              possible_organizations = SimilarOrganizations.new(csv_rows.first, csv_address.street, csv_address.house, id).results
 
               # organization
               organization = possible_organizations.any? ? possible_organizations.first : Organization.new
