@@ -33,14 +33,6 @@ module OrganizationImport
     end
 
     def results
-      #if street =~ /Междугородная/
-        #p csv_id
-        #puts '>'*80
-        #puts "title = #{title.inspect} street = #{street.inspect} house = #{house.inspect}"
-        #puts "count of searched orgs = #{searched_orgs.size}"
-        #puts "count of selected_orgs = #{selected_orgs.size}"
-      #end
-
       street.blank? && house.blank? ? searched_orgs : selected_orgs
     end
   end

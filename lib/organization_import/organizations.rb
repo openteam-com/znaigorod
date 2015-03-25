@@ -18,21 +18,6 @@ module OrganizationImport
     end
 
     def csv_data
-      @csv_rows ||= begin
-                      rows = CSV.read(csv_path, :col_sep => ';')
-
-                      start = 1
-                      finish = -1
-
-                      rows[start..finish]
-
-                      #[].tap do |array|
-                        #[5446, 22885, 22935, 22985].each { |index| array << rows[index] }
-                      #end
-                    end
-    end
-
-    def csv_data
       @csv_data ||= CSV.read(csv_path, :col_sep => ';').select { |r| categories_for_import.include? r[4] }
     end
 
@@ -81,10 +66,6 @@ module OrganizationImport
               organization.address = address
               organization.save(:validate => false)
 
-              #if raw_address == 'Междугородная, 28'
-                #p organization
-              #end
-
               # categories
               organization.organization_categories += categories
 
@@ -95,7 +76,7 @@ module OrganizationImport
               organization.features += features
               organization.features += extra_features
             else
-              statistics[:non_existing_categories] + csv_rows.map(&:category_title)
+              statistics[:non_existing_categories] += csv_rows.map(&:category_title)
 
               next
             end
@@ -106,7 +87,7 @@ module OrganizationImport
       end
 
       puts "Create #{statistics[:create]} organizations"
-      puts "Update #{statistics[:create]} organizations"
+      puts "Update #{statistics[:update]} organizations"
       puts "Non existing categories #{statistics[:non_existing_categories].uniq.sort.join(', ')}"
     end
   end
