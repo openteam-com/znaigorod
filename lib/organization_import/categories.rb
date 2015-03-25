@@ -2,7 +2,7 @@ module OrganizationImport
   class Categories
     attr_accessor :yml_path
 
-    def initialize(yml_path = '/home/koala/Загрузки/organization_categories.yml')
+    def initialize(yml_path)
       @yml_path = yml_path
     end
 
@@ -63,6 +63,10 @@ module OrganizationImport
       array = hash.detect { |k, _| k == title }
 
       array ? Feature.find_by_title(array.last || array.first) : nil
+    end
+
+    def categories_for_import
+      yml.keys
     end
   end
 end
