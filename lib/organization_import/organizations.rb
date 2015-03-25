@@ -47,24 +47,20 @@ module OrganizationImport
     def create_organizations
       pb = ProgressBar.new(unique_ids.count)
 
+      statistics = { :create => 0, :update => 0, :non_existing_categories => [] }
+
       ActiveRecord::Base.transaction do
         unique_ids.each do |id|
           csv_rows_by(id).group_by(&:address).each do |raw_address, csv_rows|
-
             categories = csv_rows.map { |csv_row| categories_from_yml.category_by(csv_row.category_title) }.compact
-
             csv_address = CsvAddress.new(raw_address)
 
             if categories.any?
-              possible_organizations = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house).results
+              possible_organizations = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id).results
 
               # organization
               organization = possible_organizations.any? ? possible_organizations.first : Organization.new
-
-              if raw_address == 'Междугородная, 28'
-                p csv_rows.map(&:title)
-                p organization
-              end
+              organization.new_record? ? statistics[:create] += 1 : statistics[:update] += 1
 
               organization.csv_id = id
               organization.title = csv_rows.first.title
@@ -85,9 +81,9 @@ module OrganizationImport
               organization.address = address
               organization.save(:validate => false)
 
-              if raw_address == 'Междугородная, 28'
-                p organization
-              end
+              #if raw_address == 'Междугородная, 28'
+                #p organization
+              #end
 
               # categories
               organization.organization_categories += categories
@@ -99,6 +95,8 @@ module OrganizationImport
               organization.features += features
               organization.features += extra_features
             else
+              statistics[:non_existing_categories] + csv_rows.map(&:category_title)
+
               next
             end
           end
@@ -106,6 +104,10 @@ module OrganizationImport
           pb.increment!
         end
       end
+
+      puts "Create #{statistics[:create]} organizations"
+      puts "Update #{statistics[:create]} organizations"
+      puts "Non existing categories #{statistics[:non_existing_categories].uniq.sort.join(', ')}"
     end
   end
 end
