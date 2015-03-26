@@ -24,7 +24,17 @@ namespace :organizations do
     else
       puts 'Usage rake organizations:import_from_csv CSV=/path/to/csv YML=/path/to/yml'
     end
+  end
 
+  desc 'Find unmatched organization'
+  task :find_unmatched => :environment do
+    if ENV['CSV'] && ENV['YML']
+      OrganizationImport::Categories.new(ENV['YML']).create_categories
+
+      OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).find_unmatched
+    else
+      puts 'Usage rake organizations:find_unmatched CSV=/path/to/csv YML=/path/to/yml'
+    end
   end
 end
 

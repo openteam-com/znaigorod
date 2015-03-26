@@ -78,8 +78,18 @@ module OrganizationImport
       array ? Feature.find_by_title(array.last || array.first) : nil
     end
 
-    def categories_for_import
+    def root_category_titles_for_import
       yml.keys
+    end
+
+    def subcategories_for_import
+      hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
+        e.each { |k, v| h[k] = v.try(:[], 'title') }
+
+        h
+      end
+
+      OrganizationCategory.where :title => hash.map { |k, v| v ? v : k }
     end
   end
 end

@@ -13,51 +13,40 @@ module OrganizationImport
       @categories_from_yml ||= Categories.new(yml_path)
     end
 
-    def categories_for_import
-      @categories_for_import ||= categories_from_yml.categories_for_import
-    end
-
-    def csv_data
-      @csv_rows ||= begin
-                      start = 1
-                      finish = -1
-
-                      CSV.read(csv_path, :col_sep => ';')[start..finish]
-                    end
-    end
-
-
     def limited_csv_data
-      @csv_data ||= CSV.read(csv_path, :col_sep => ';').select { |r| categories_for_import.include? r[4] }
+      @limited_csv_data ||= CSV.read(csv_path, :col_sep => ';').select { |r| categories_from_yml.root_category_titles_for_import.include? r[4] }
     end
 
-    def unique_ids(limited = true)
-      data = limited ? limited_csv_data : csv_data
-
-      data.map { |r| r[1] }.compact.uniq
+    def unique_ids
+      @unique_ids ||= limited_csv_data.map { |r| r[1] }.compact.uniq
     end
 
     def csv_rows_by(id)
       limited_csv_data.select { |r| r[1] == id }.map { |r| CsvRow.new r }
     end
 
-    def check
-      pb = ProgressBar.new(unique_ids(false).count)
-      hash = {}
-      unique_ids(false).each do |id|
+    def find_unmatched
+      pb = ProgressBar.new(unique_ids.count)
+
+      array = []
+
+      unique_ids.each do |id|
         csv_rows_by(id).group_by(&:address).each do |address, csv_rows|
           csv_address = CsvAddress.new(address)
-          orgs = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id).results
 
-          if orgs.any?
-            hash_key = SecureRandom.hex(4)
-            hash[hash_key] = orgs
-          end
+          title_for_similar = csv_rows.first.title.split(',').first
+          similar = SimilarOrganizations.new(title_for_similar, csv_address.street, csv_address.house, id)
 
+          array += similar.results
         end
+
         pb.increment!
       end
-      hash
+
+      results = Organization.joins(:organization_categories).where(:organization_categories => { :id => categories_from_yml.subcategories_for_import.pluck(:id) }).uniq - array
+      results.each do |o|
+        puts "#{o.title};#{o.address};http://znaigorod.ru/manage/organizations/#{o.slug}"
+      end
     end
 
     def create_organizations
@@ -76,7 +65,9 @@ module OrganizationImport
             csv_address = CsvAddress.new(raw_address)
 
             if categories.any?
-              possible_organizations = SimilarOrganizations.new(csv_rows.first, csv_address.street, csv_address.house, id).results
+              title_for_similar = csv_rows.first.title.split(',').first
+
+              possible_organizations = SimilarOrganizations.new(title_for_similar, csv_address.street, csv_address.house, id).results
 
               # organization
               organization = possible_organizations.any? ? possible_organizations.first : Organization.new

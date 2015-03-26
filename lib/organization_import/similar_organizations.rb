@@ -13,28 +13,53 @@ module OrganizationImport
       s.split(/\.|\s/) rescue []
     end
 
-    def searched_orgs
-      @searched_orgs ||= begin
-                           search = ORganization.where('title like')
-                           #search = Organization.search(:include => :address) do
-                             #keywords title, :fields => :title_ru
-                             #paginate :page => 1, :per_page => 1_000
-                           end
+    def searched
+      @searched ||= begin
+                      search = Organization.search(:include => :address) do
+                      keywords title, :fields => :title_ru
+                      paginate :page => 1, :per_page => 1_000
+                      end
 
-                           search.results
-                         end
+                      search.results
+                    end
     end
 
-    def selected_orgs
-      @selected_orgs ||= searched_orgs.select { |o|
-        (!o.csv_id? || o.csv_id.to_s == csv_id.to_s) &&
-          (splited_street(o.address.try(:street)) & splited_street(street)).any? &&
-          (o.address.try(:house).try(:squish).try(:mb_chars).try(:downcase) == house.squish.mb_chars.downcase)
-        }
+    def csv_id_matched?(org)
+      org.csv_id.blank? || org.csv_id.to_s == csv_id.to_s
+    end
+
+
+    def street_matched?(org)
+      (splited_street(org.address.try(:street)) & splited_street(street)).any?
+    end
+
+    def house_matched?(org)
+      org.address.try(:house).try(:squish).try(:mb_chars).try(:downcase) == house.squish.mb_chars.downcase
+    end
+
+    def address_matched?(org)
+      street_matched?(org) && house_matched?(org)
+    end
+
+    def not_matched_reason
+      return :title if searched.empty?
+      return :address if selected.empty?
+    end
+
+    def searched_limited
+      searched.select { |o| csv_id_matched?(o) }
+    end
+
+    def selected
+      @selected ||= searched_limited.select { |o| address_matched?(o) }
+    end
+
+    def address_empty?
+      street.blank? && house.blank?
     end
 
     def results
-      street.blank? && house.blank? ? searched_orgs : selected_orgs
+      address_empty? ? searched_limited : selected
     end
   end
 end
