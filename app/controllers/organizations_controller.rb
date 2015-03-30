@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController
   has_scope :page, :default => 1
 
-  helper_method :view_type, :scrolltrack
+  helper_method :scrolltrack
 
   before_filter :allow_cross_domain_access
 
@@ -143,10 +143,6 @@ class OrganizationsController < ApplicationController
   def increment_site_link_counter
     Organization.find(params[:organization_id]).increment!(:site_link_counter)
     render :nothing => true, :status => 200 and return if request.xhr?
-  end
-
-  def view_type
-    params[:view_type] || 'list'
   end
 
   def scrolltrack(key)

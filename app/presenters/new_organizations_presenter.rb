@@ -42,8 +42,12 @@ class NewOrganizationsPresenter
     OrganizationDecorator.decorate orgs
   end
 
-  def clients_total_count
-    return 14 if params[:view_type] == 'tile'
+  def view_type
+    params[:view_type] || 'list'
+  end
+
+  def clients_per_page
+    return 14 if view_type == 'tile'
 
     Organization.search {
       with :status, :client
@@ -55,7 +59,33 @@ class NewOrganizationsPresenter
     orgs = Organization.search {
       with :status, :client
       with :organization_category_slugs, category.slug if category
-      paginate :page => params[:page] || 1, :per_page => clients_total_count
+      paginate :page => params[:page] || 1, :per_page => clients_per_page
+
+      case order_by_param
+      when 'activity'
+        order_by :positive_activity_date, :desc
+      when 'title'
+        order_by :title, :asc
+      when 'rating'
+        order_by :total_rating, :desc
+      else
+        order_by :positive_activity_date, :desc
+      end
+    }.results
+
+    OrganizationDecorator.decorate orgs
+  end
+
+
+  def not_clients_per_page
+    view_type == 'tile' ? 14 : 40
+  end
+
+  def not_clients
+    orgs = Organization.search {
+      without :status, :client
+      with :organization_category_slugs, category.slug if category
+      paginate :page => params[:page] || 1, :per_page => not_clients_per_page
 
       case order_by_param
       when 'activity'

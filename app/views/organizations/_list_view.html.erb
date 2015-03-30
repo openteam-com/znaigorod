@@ -19,7 +19,7 @@
         <% if @presenter.clients.any? %>
           <% @presenter.clients.each do |item| %>
           <%# OrganizationDecorator.decorate(Organization.where(:status => :client).limit(20)).each do |item| %>
-            <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{view_type}_#{item.id}", expires_in: 10.minutes) do %>
+            <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{@presenter.view_type}_#{item.id}", expires_in: 10.minutes) do %>
               <% #TODO: migrate %>
               <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude.gsub(',', '.') %>" data-latitude="<%= item.latitude.gsub(',', '.') %>"
                 data-image="<%= item.organization.logotype_url %>" data-slug="<%= item.organization.slug %>"

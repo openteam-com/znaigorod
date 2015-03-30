@@ -2,7 +2,7 @@
 
 <% if params[:slug] %>
   <% #TODO: implement %>
-  <%= render :partial => "#{view_type}_view" %>
+  <%= render :partial => "#{@presenter.view_type}_view" %>
 <% else %>
   <%= render :partial => 'tree_view' %>
 <% end %>
