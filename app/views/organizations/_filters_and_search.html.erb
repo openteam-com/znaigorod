@@ -1,0 +1,41 @@
+<div class="filter_and_search">
+  <div class='filter_header'>
+    <% if page_meta %>
+      <h1><%= page_meta.header.squish.html_safe %></h1>
+    <% elsif @presenter.page_header.blank? %>
+      <h1><%= t('meta.organizations.page_header') %></h1>
+    <% else %>
+      <h1><%= @presenter.page_header %></h1>
+    <% end %>
+    <%= link_to 'Добавить организацию', organizations_add_path, class: [:button, :big, :add_organization] %>
+  </div>
+
+  <div class='filter_and_share js-filters-wrapper'>
+    <!--noindex-->
+    <div class='presentation_filters organization'>
+      <%= render :partial => 'commons/presentation_filters' %>
+    </div>
+
+    <% if params[:slug] %>
+      <div class='view_by'>
+        <div class="tile_view <%= view_type == 'tile' ? 'selected' : '' %>"><%= link_to "Плиточный вид", params.merge({:view_type => "tile"}), class: :view_link, :title => 'Плиточный вид' %></div>
+
+        <div class="list_view <%= view_type == 'list' ? 'selected' : '' %>"><%= link_to "Списочный вид", params.merge({:view_type => "list"}), class: :view_link, :title => 'Списочный вид' %> </div>
+      </div>
+    <% end %>
+
+    <div class='search_wrapper'>
+      <div class='search_fields'>
+        <%= form_tag '', method: :get do %>
+          <%= text_field_tag :search_query, params[:search_query], class: [:search_field, 'js-search-field'], placeholder: 'Поиск организации' %>
+          <%= button_tag :search_button, class: [:search_button, 'js-search-button'] %>
+          <%= hidden_field_tag :view_type, view_type %>
+        <% end %>
+      </div>
+      <%= link_to "Расширенный поиск &darr;".html_safe, '#', class: [:extended_search, 'js-extended-search'] unless controller_name == 'organizations' %>
+    </div>
+
+    <%= render partial: 'advanced_filters' unless controller_name == 'organizations' %>
+    <!--/noindex-->
+  </div>
+</div>

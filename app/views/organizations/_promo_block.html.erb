@@ -1,0 +1,11 @@
+<div class='organization_content js-button-pagination'>
+  <ul class='posters js-paginable-list' data-item-width="220">
+    <% #TODO: implement %>
+    <% collection = Organization.search { with(:sms_claimable, true); with(:status, :client); paginate(:page => 1, :per_page => 7) }.results.map(&:priority_sms_claimable_suborganization) %>
+    <% collection.each do |suborganization| %>
+      <li class='item_organization fresh'>
+        <%= render partial: 'suborganization', locals: { suborganization: SuborganizationDecorator.decorate(suborganization), width: 150, height: 150  } %>
+      </li>
+    <% end %>
+  </ul>
+</div>

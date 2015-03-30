@@ -682,6 +682,7 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
     t.string   "ancestry"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "slug"
   end
 
   add_index "organization_categories", ["ancestry"], :name => "index_organization_categories_on_ancestry"

@@ -1,0 +1,41 @@
+<%= render partial: 'filters_and_search' %>
+
+<div class="organization_wrapper">
+  <%= render partial: 'promo_block' %>
+
+  <div class="map_and_tree_wrapper">
+    <ul class= "placemark_list">
+      <% @presenter.clients.each do |item| %>
+        <% #TODO: migrate %>
+        <li class='list_view_organization_item' data-longitude="<%= item.longitude.gsub(',', '.') %>" data-latitude="<%= item.latitude.gsub(',', '.') %>"
+          data-image="<%= item.logotype_url %>"
+          data-icon='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(nil,nil)}.png") %>'
+          data-width='35' data-height='50'>
+          <div class="info">
+            <h1><%= link_to item.title.truncate(30), organization_path(item) %></h1>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class="suborganizations_map_wrapper">
+      <div class="map"></div>
+    </div>
+
+    <div class="tree left_position">
+      <%= link_to "swap","#", :class => "js-swap-position swap_position swap_left" %>
+      <div class="scroll_wrapper">
+        <% OrganizationCategory.used_roots.each do |category| %>
+          <div class="kind_wrapper">
+            <p><%= link_to "+", "#", :class => "js-open-list open_list plus" %> <%= link_to category, organizations_by_category_path(category.slug), :class => "kind" %> <span class="organization_quantity"><%= category.organizations.count %></span></p>
+            <div class="categories">
+              <% category.children.each do |child| %>
+                <p><%= link_to child, organizations_by_category_path(child.slug), :class => "category" %> <span class="organization_quantity"><%= child.organizations.count %></span></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

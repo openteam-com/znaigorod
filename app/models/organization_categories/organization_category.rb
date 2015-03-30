@@ -1,11 +1,12 @@
 class OrganizationCategory < ActiveRecord::Base
+  extend FriendlyId
+
   alias_attribute :to_s, :title
   attr_accessible :title, :parent
 
   default_scope order('title')
 
   has_many :organization_category_items, :dependent => :destroy
-  has_many :organizations, :through => :organization_category_items
 
   has_many :review_category_items, :dependent => :destroy
   has_many :reviews, :through => :review_category_items
@@ -14,10 +15,20 @@ class OrganizationCategory < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: { scope: :ancestry }
 
+  friendly_id :title, :use => :slugged
+
   has_ancestry
 
   def self.used_roots
     OrganizationCategory.roots.where('title NOT IN (?)', ['Автосервис', 'Туристические агентства','Магазины'])
+  end
+
+  def should_generate_new_friendly_id?
+    slug? ? false : true
+  end
+
+  def organizations
+    Organization.joins(:organization_categories).where(:organization_categories => { :id => subtree_ids }).uniq
   end
 
   def downcased_title
@@ -31,16 +42,6 @@ class OrganizationCategory < ActiveRecord::Base
   def kind
     parent ? available_kinds[parent.downcased_title] : available_kinds[downcased_title]
   end
-
-  def organizations_count
-    facet_row = Organization.search { facet :organization_category, :only => downcased_title }.facet(:organization_category).rows.first
-
-    facet_row ? facet_row.count : 0
-  end
-
-  #def organizations
-    #Organization.search { with :organization_category, downcased_title; paginate :page => 1, :per_page => 1_000_000 }.results
-  #end
 
   def category_path_string
     return 'car_washes_avtomoykis_path' if downcased_title == 'автомойки'

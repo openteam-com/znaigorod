@@ -1,1 +1,8 @@
-<%= render :file => 'suborganizations/index' %>
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.1.17/?load=package.full&lang=ru-RU') %>
+
+<% if params[:slug] %>
+  <% #TODO: implement %>
+  <%= render :partial => "#{view_type}_view" %>
+<% else %>
+  <%= render :partial => 'tree_view' %>
+<% end %>

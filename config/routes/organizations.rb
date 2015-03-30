@@ -7,6 +7,10 @@ Znaigorod::Application.routes.draw do
   get '/organizations/shirli-myrli-kottedzh--2', :to => redirect('/organizations/shirli-myrli-usadba--2')
   get '/organizations/shirli-myrli-kottedzh', :to => redirect('/organizations/shirli-myrli-usadba')
 
+  get '/:slug' => 'organizations#index',
+    :constraints => { :slug => Regexp.new(OrganizationCategory.pluck(:slug).join('|')) },
+    :as => :organizations_by_category
+
   resources :organizations, :only => [:index, :show] do
     get :in_bounding_box, :on => :collection
     get :details_for_balloon, :on => :member

@@ -179,19 +179,21 @@ class Organization < ActiveRecord::Base
   alias_attribute :payment_ru, :payment
   alias_attribute :address_ru, :address
 
-  def organization_categories_uniq_downcased_titles
-    organization_categories.flat_map { |c| c.path }.uniq.map(&:downcased_title)
+  def organization_category_uniq_slugs
+    organization_categories.flat_map { |c| c.path }.uniq.map(&:slug)
   end
 
   def most_valueable_organization_category
     return '' if organization_categories.empty?
 
     Organization.search {
-      facet :organization_category, :only => organization_categories.map(&:downcased_title), :sort => :count
-    }.facet(:organization_category).rows.first.value
+      facet :organization_category_slugs, :only => organization_category_uniq_slugs, :sort => :count
+    }.facet(:organization_category_slugs).rows.first.value
   end
 
   def map_image_name(kind, categories = [])
+    return :teatry
+
     return most_valueable_organization_category.from_russian_to_param unless kind || categories
 
     return organization_categories.find_by_title!(categories.first.mb_chars.capitalize).title.from_russian_to_param if (categories || []).any?
@@ -219,9 +221,10 @@ class Organization < ActiveRecord::Base
 
     string(:inviteable_categories, :multiple => true) { ::Inviteables.instance.categories_for_organization self }
     string(:kind, :multiple => true)                  { ['organization'] }
-    string(:organization_category, :multiple => true) { organization_categories_uniq_downcased_titles }
+    string(:organization_category_slugs, :multiple => true) { organization_category_uniq_slugs }
     string(:state)                                    { :published }
     string(:suborganizations, :multiple => true)      { suborganizations.map(&:class).map(&:name).map(&:underscore) }
+    string(:features, :multiple => true)              { features.map(&:title).uniq }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,              :more_like_this => true

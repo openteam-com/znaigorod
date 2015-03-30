@@ -10,9 +10,9 @@ class OrganizationsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @presenter = OrganizationsCatalogPresenter.new(params.merge(per_page: 7))
-        @placemarks = Organization.search { with :status, [:client, :client_economy, :client_standart, :client_premium]; paginate :page => 1, :per_page => 1_000 }.results
+        @presenter = NewOrganizationsPresenter.new(params.merge(per_page: 7))
         @categories = OrganizationCategory.used_roots
+        #@placemarks = NewOrganizationsPresenter.new({}).clients_only
       }
 
       format.json {
@@ -146,7 +146,7 @@ class OrganizationsController < ApplicationController
   end
 
   def view_type
-    "tile"
+    params[:view_type] || 'list'
   end
 
   def scrolltrack(key)
