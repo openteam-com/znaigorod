@@ -1,0 +1,20 @@
+<% @presenter.not_clients.each do |item|  %>
+  <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
+    data-image="<%= item.logotype_url %>" data-icon="<%= asset_path('/assets/public/organizations_list_view/not_client_icon.png') %>"
+    data-icon-hover="<%= asset_path('/assets/public/organizations_list_view/not_client_icon_hover.png') %>" data-slug="<%= item.slug %>"
+    data-width='9' data-height='9'>
+    <div class="list_view_organization_poster">
+      <div class="info">
+        <!-- информация о заведении -->
+
+        <h1>
+          <%= link_to item.title.truncate(30), organization_path(item) %>
+          <span <%= "#{item.organization.schedules.first.holiday? ? 'class=close title=Закрыто' : 'class=open title=Открыто'}" %>></span>
+        </h1>
+        <!-- адрес -->
+        <%= content_tag(:div, "#{item.address_without_link}".html_safe, class: :place) if item.address_link.present? %>
+      </div>
+    </div>
+  </li>
+<% end %>
+<%= link_to_next_page @presenter.not_clients_results, "Еще организации (#{@presenter.not_clients_results_current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination', :param_name => "not_clients_page" , :params => params %>

@@ -15,7 +15,7 @@ class OrganizationsController < ApplicationController
 
         if request.xhr?
           if @presenter.view_type == 'list'
-            render partial: 'suborganizations/not_client_list_view', layout: false
+            render partial: 'not_client_list_view', layout: false
           else
             render partial: 'tile_view_posters', layout: false and return if params[:not_clients_page].blank?
 
