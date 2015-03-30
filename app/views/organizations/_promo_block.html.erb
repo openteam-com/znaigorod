@@ -1,5 +1,5 @@
-<div class='organization_content js-button-pagination'>
-  <ul class='posters js-paginable-list' data-item-width="220">
+<div class='organization_content'>
+  <ul class='posters'>
     <% @presenter.promoted_clients.each do |item| %>
       <li class='item_organization fresh'>
         <%= render partial: 'suborganization', locals: { suborganization: item, width: 150, height: 150  } %>

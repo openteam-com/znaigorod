@@ -39,3 +39,17 @@
     <!--/noindex-->
   </div>
 </div>
+
+<% if params[:slug] %>
+  <div>
+    <ul>
+      <% @categories.each do |category|  %>
+        <li>
+          <%= link_to category, organizations_by_category_path(category.slug, params) %>
+          <%= category.organizations.count %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+

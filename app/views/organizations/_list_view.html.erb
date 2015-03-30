@@ -15,12 +15,10 @@
       <%= link_to 'Сменить позицию', '#', class: 'js-swap-position swap_position swap_left' %>
 
       <ul class="list_view_organization_posters js-paginable-list">
-        <% #TODO: implement %>
         <% if @presenter.clients.any? %>
           <% @presenter.clients.each do |item| %>
-          <%# OrganizationDecorator.decorate(Organization.where(:status => :client).limit(20)).each do |item| %>
             <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{@presenter.view_type}_#{item.id}", expires_in: 10.minutes) do %>
-              <% #TODO: migrate %>
+              <% #TODO: migrate latitide & longitude %>
               <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude.gsub(',', '.') %>" data-latitude="<%= item.latitude.gsub(',', '.') %>"
                 data-image="<%= item.organization.logotype_url %>" data-slug="<%= item.organization.slug %>"
                 data-icon='<%= asset_path("/assets/public/organizations_list_view/#{item.organization.map_image_name(params[:kind], params[:categories])}.png") %>'

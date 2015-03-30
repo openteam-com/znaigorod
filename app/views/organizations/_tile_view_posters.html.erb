@@ -1,0 +1,14 @@
+<% @presenter.clients.each do |item| %>
+  <li class='item_organization fresh'>
+    <%= render partial: 'suborganization', locals: { suborganization: item, width: 150, height: 150  } %>
+  </li>
+<% end %>
+
+<% unless @presenter.clients_results_last_page? %>
+  <li class="item pagination">
+    <%= link_to_next_page @presenter.clients_results, "Еще организации (#{@presenter.clients_results_current_count + @presenter.not_clients_results_total_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :param_name => :clients_page, :params => params %>
+  </li>
+<% else %>
+  <div style="clear:both"></div>
+  <%= render partial: 'not_client_posters' %>
+<% end %>

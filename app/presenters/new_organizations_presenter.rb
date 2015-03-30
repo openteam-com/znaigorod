@@ -1,21 +1,16 @@
 class NewOrganizationsPresenter
-  attr_accessor :params
+  attr_accessor :params, :category, :view_type, :order_by_param
 
   def initialize(params)
     @params = params
-  end
-
-  def old_presenter
-    @old_presenter ||= OrganizationsCatalogPresenter.new(params)
+    @category ||= OrganizationCategory.find_by_slug(params[:slug])
+    @view_type = params[:view_type] || 'list'
+    @order_by_param = params[:order_by] || 'activity'
   end
 
   # TODO: implement
   def page_header
     nil
-  end
-
-  def order_by_param
-    params[:order_by] || 'activity'
   end
 
   def sortings_links
@@ -28,10 +23,6 @@ class NewOrganizationsPresenter
     end
   end
 
-  def category
-    @category ||= OrganizationCategory.find_by_slug(params[:slug])
-  end
-
   def promoted_clients
     orgs = Organization.search {
       with :status, :client
@@ -42,50 +33,30 @@ class NewOrganizationsPresenter
     OrganizationDecorator.decorate orgs
   end
 
-  def view_type
-    params[:view_type] || 'list'
-  end
-
-  def clients_per_page
-    return 14 if view_type == 'tile'
-
-    Organization.search {
+  def clients_results_total_count
+    @clients_results_total_count ||= Organization.search {
       with :status, :client
       with :organization_category_slugs, category.slug if category
     }.results.total_count
   end
 
-  def clients
-    orgs = Organization.search {
-      with :status, :client
-      with :organization_category_slugs, category.slug if category
-      paginate :page => params[:page] || 1, :per_page => clients_per_page
-
-      case order_by_param
-      when 'activity'
-        order_by :positive_activity_date, :desc
-      when 'title'
-        order_by :title, :asc
-      when 'rating'
-        order_by :total_rating, :desc
-      else
-        order_by :positive_activity_date, :desc
-      end
-    }.results
-
-    OrganizationDecorator.decorate orgs
+  def not_clients_results_total_count
+    not_clients_results.total_count
   end
 
+  def clients_per_page
+    view_type == 'tile' ?  14 : clients_results_total_count
+  end
 
   def not_clients_per_page
-    view_type == 'tile' ? 14 : 40
+    42
   end
 
-  def not_clients
-    orgs = Organization.search {
-      without :status, :client
+  def clients_results
+    @clients_results ||= Organization.search {
+      with :status, :client
       with :organization_category_slugs, category.slug if category
-      paginate :page => params[:page] || 1, :per_page => not_clients_per_page
+      paginate :page => clients_page, :per_page => clients_per_page
 
       case order_by_param
       when 'activity'
@@ -98,7 +69,42 @@ class NewOrganizationsPresenter
         order_by :positive_activity_date, :desc
       end
     }.results
+  end
 
-    OrganizationDecorator.decorate orgs
+  def not_clients_results
+    @not_clients_results ||= Organization.search {
+      without :status, :client
+      with :organization_category_slugs, category.slug if category
+      paginate :page => not_clients_page, :per_page => not_clients_per_page
+
+      case order_by_param
+      when 'activity'
+        order_by :positive_activity_date, :desc
+      when 'title'
+        order_by :title, :asc
+      when 'rating'
+        order_by :total_rating, :desc
+      else
+        order_by :positive_activity_date, :desc
+      end
+    }.results
+  end
+
+  %w[clients not_clients].each do |prefix|
+    define_method "#{prefix}_page" do
+      (params["#{prefix}_page"] || 1).to_i
+    end
+
+    define_method prefix do
+      OrganizationDecorator.decorate send("#{prefix}_results")
+    end
+
+     define_method "#{prefix}_results_last_page?" do
+       send("#{prefix}_results").last_page?
+     end
+
+     define_method "#{prefix}_results_current_count" do
+       send("#{prefix}_results_total_count") - (send("#{prefix}_page") * send("#{prefix}_per_page"))
+     end
   end
 end

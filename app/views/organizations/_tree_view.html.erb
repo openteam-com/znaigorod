@@ -24,7 +24,7 @@
     <div class="tree left_position">
       <%= link_to "swap","#", :class => "js-swap-position swap_position swap_left" %>
       <div class="scroll_wrapper">
-        <% OrganizationCategory.used_roots.each do |category| %>
+        <% @categories.each do |category| %>
           <div class="kind_wrapper">
             <p><%= link_to "+", "#", :class => "js-open-list open_list plus" %> <%= link_to category, organizations_by_category_path(category.slug), :class => "kind" %> <span class="organization_quantity"><%= category.organizations.count %></span></p>
             <div class="categories">

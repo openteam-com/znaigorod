@@ -11,8 +11,17 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html {
         @presenter = NewOrganizationsPresenter.new(params)
-        @categories = OrganizationCategory.used_roots
-        #@placemarks = NewOrganizationsPresenter.new({}).clients_only
+        @categories = @presenter.category ? @presenter.category.path.last.children : OrganizationCategory.used_roots
+
+        if request.xhr?
+          if @presenter.view_type == 'list'
+            render partial: 'suborganizations/not_client_list_view', layout: false
+          else
+            render partial: 'tile_view_posters', layout: false and return if params[:not_clients_page].blank?
+
+            render partial: 'organizations/not_client_posters', layout: false
+          end
+        end
       }
 
       format.json {
