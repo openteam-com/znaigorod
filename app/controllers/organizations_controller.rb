@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @presenter = NewOrganizationsPresenter.new(params.merge(per_page: 7))
+        @presenter = NewOrganizationsPresenter.new(params)
         @categories = OrganizationCategory.used_roots
         #@placemarks = NewOrganizationsPresenter.new({}).clients_only
       }

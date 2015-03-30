@@ -32,16 +32,30 @@ class NewOrganizationsPresenter
     @category ||= OrganizationCategory.find_by_slug(params[:slug])
   end
 
-  def clients
-    total_count = Organization.search {
+  def promoted_clients
+    orgs = Organization.search {
+      with :status, :client
+      paginate :page => 1, :per_page => 7
+      order_by :positive_activity_date, :desc
+    }.results
+
+    OrganizationDecorator.decorate orgs
+  end
+
+  def clients_total_count
+    return 14 if params[:view_type] == 'tile'
+
+    Organization.search {
       with :status, :client
       with :organization_category_slugs, category.slug if category
     }.results.total_count
+  end
 
+  def clients
     orgs = Organization.search {
       with :status, :client
       with :organization_category_slugs, category.slug if category
-      paginate :page => 1, :per_page => total_count
+      paginate :page => params[:page] || 1, :per_page => clients_total_count
 
       case order_by_param
       when 'activity'
