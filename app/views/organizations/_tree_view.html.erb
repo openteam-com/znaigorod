@@ -6,8 +6,7 @@
   <div class="map_and_tree_wrapper">
     <ul class= "placemark_list">
       <% @presenter.clients.each do |item| %>
-        <% #TODO: migrate %>
-        <li class='list_view_organization_item' data-longitude="<%= item.longitude.gsub(',', '.') %>" data-latitude="<%= item.latitude.gsub(',', '.') %>"
+        <li class='list_view_organization_item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
           data-image="<%= item.logotype_url %>"
           data-icon='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(nil,nil)}.png") %>'
           data-width='35' data-height='50'>

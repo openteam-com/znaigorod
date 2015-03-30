@@ -19,7 +19,7 @@
           <% @presenter.clients.each do |item| %>
             <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{@presenter.view_type}_#{item.id}", expires_in: 10.minutes) do %>
               <% #TODO: migrate latitide & longitude %>
-              <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude.gsub(',', '.') %>" data-latitude="<%= item.latitude.gsub(',', '.') %>"
+              <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
                 data-image="<%= item.logotype_url %>" data-slug="<%= item.slug %>"
                 data-icon='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(params[:kind], params[:categories])}.png") %>'
                 data-icon-hover='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(params[:kind], params[:categories])}_hover.png") %>'
