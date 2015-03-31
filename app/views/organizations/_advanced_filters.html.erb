@@ -4,11 +4,10 @@
     <div class='filter show' id='features'>
       <div class="filter_label">Особенности</div>
       <div class="filter_checkboxes">
-        <%# @presenter.send("#{filter_name}_filter").available.each_with_index do |value, index| %>
-        <% %w[one two three].each_with_index do |value, index| %>
+        <% @presenter.category.all_features.ordered_by_title.pluck(:title).each_with_index do |feature_title, index| %>
           <div class='checkbox'>
-            <%= check_box_tag "features[]", value, true, :id => "feature_#{index}" %>
-            <%= label_tag "feature_#{index}", value %>
+            <%= check_box_tag "features[]", feature_title, @presenter.features.include?(feature_title), :id => "feature_#{index}" %>
+            <%= label_tag "feature_#{index}", feature_title %>
           </div>
         <% end %>
       </div>
@@ -20,7 +19,7 @@
       </div>
 
       <div class='results_counter'>
-        <span class='counter'>Найдено организаций: <%= 0 %></span>
+        <span class='counter'>Найдено организаций: <%= @presenter.total_count %></span>
       </div>
 
       <div class='clear_wrapper'>

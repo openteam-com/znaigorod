@@ -31,6 +31,14 @@ class OrganizationCategory < ActiveRecord::Base
     Organization.joins(:organization_categories).where(:organization_categories => { :id => subtree_ids }).uniq
   end
 
+  def all_features
+    if is_root?
+      features
+    else
+      Feature.where :id => root.feature_ids + feature_ids
+    end
+  end
+
   def downcased_title
     title.mb_chars.downcase.to_s
   end

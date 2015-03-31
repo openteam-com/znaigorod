@@ -1,5 +1,5 @@
 class NewOrganizationsPresenter
-  attr_accessor :params, :category, :view_type, :order_by_param, :query
+  attr_accessor :params, :category, :view_type, :order_by_param, :query, :features
 
   def initialize(params)
     @params = params
@@ -7,6 +7,7 @@ class NewOrganizationsPresenter
     @view_type = params[:view_type] || 'list'
     @order_by_param = params[:order_by] || 'activity'
     @query = params[:search_query].present? ? params[:search_query] : nil
+    @features = params[:features] || []
   end
 
   # TODO: implement
@@ -43,13 +44,18 @@ class NewOrganizationsPresenter
   def clients_results_total_count
     @clients_results_total_count ||= Organization.search {
       keywords query if query
-      with :status, :client
+      with :features, features if features.any?
       with :organization_category_slugs, category.slug if category
+      with :status, :client
     }.results.total_count
   end
 
   def not_clients_results_total_count
     not_clients_results.total_count
+  end
+
+  def total_count
+    clients_results_total_count + not_clients_results_total_count
   end
 
   def clients_per_page
@@ -63,6 +69,7 @@ class NewOrganizationsPresenter
   def clients_results
     @clients_results ||= Organization.search {
       paginate :page => clients_page, :per_page => clients_per_page
+      with :features, features if features.any?
       with :organization_category_slugs, category.slug if category
       with :status, :client
 
@@ -86,6 +93,7 @@ class NewOrganizationsPresenter
   def not_clients_results
     @not_clients_results ||= Organization.search {
       paginate :page => not_clients_page, :per_page => not_clients_per_page
+      with :features, features if features.any?
       with :organization_category_slugs, category.slug if category
       without :status, :client
 

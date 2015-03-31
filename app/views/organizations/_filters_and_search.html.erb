@@ -31,9 +31,9 @@
 
     <% if params[:slug] %>
       <div class='view_by'>
-        <div class="tile_view <%= @presenter.view_type == 'tile' ? 'selected' : '' %>"><%= link_to "Плиточный вид", params.merge({:view_type => "tile"}), class: :view_link, :title => 'Плиточный вид' %></div>
+        <div class="tile_view <%= @presenter.view_type == 'tile' ? 'selected' : '' %>"><%= link_to "Плиточный вид", params.merge(:view_type => "tile"), class: :view_link, :title => 'Плиточный вид' %></div>
 
-        <div class="list_view <%= @presenter.view_type == 'list' ? 'selected' : '' %>"><%= link_to "Списочный вид", params.merge({:view_type => "list"}), class: :view_link, :title => 'Списочный вид' %> </div>
+        <div class="list_view <%= @presenter.view_type == 'list' ? 'selected' : '' %>"><%= link_to "Списочный вид", params.merge(:view_type => "list"), class: :view_link, :title => 'Списочный вид' %> </div>
       </div>
     <% end %>
 
