@@ -1,11 +1,12 @@
 class NewOrganizationsPresenter
-  attr_accessor :params, :category, :view_type, :order_by_param
+  attr_accessor :params, :category, :view_type, :order_by_param, :query
 
   def initialize(params)
     @params = params
     @category ||= OrganizationCategory.find_by_slug(params[:slug])
     @view_type = params[:view_type] || 'list'
     @order_by_param = params[:order_by] || 'activity'
+    @query = params[:search_query].present? ? params[:search_query] : nil
   end
 
   # TODO: implement
@@ -35,6 +36,7 @@ class NewOrganizationsPresenter
 
   def clients_results_total_count
     @clients_results_total_count ||= Organization.search {
+      keywords query if query
       with :status, :client
       with :organization_category_slugs, category.slug if category
     }.results.total_count
@@ -54,38 +56,46 @@ class NewOrganizationsPresenter
 
   def clients_results
     @clients_results ||= Organization.search {
-      with :status, :client
-      with :organization_category_slugs, category.slug if category
       paginate :page => clients_page, :per_page => clients_per_page
+      with :organization_category_slugs, category.slug if category
+      with :status, :client
 
-      case order_by_param
-      when 'activity'
-        order_by :positive_activity_date, :desc
-      when 'title'
-        order_by :title, :asc
-      when 'rating'
-        order_by :total_rating, :desc
+      if query
+        keywords query
       else
-        order_by :positive_activity_date, :desc
+        case order_by_param
+        when 'activity'
+          order_by :positive_activity_date, :desc
+        when 'title'
+          order_by :title, :asc
+        when 'rating'
+          order_by :total_rating, :desc
+        else
+          order_by :positive_activity_date, :desc
+        end
       end
     }.results
   end
 
   def not_clients_results
     @not_clients_results ||= Organization.search {
-      without :status, :client
-      with :organization_category_slugs, category.slug if category
       paginate :page => not_clients_page, :per_page => not_clients_per_page
+      with :organization_category_slugs, category.slug if category
+      without :status, :client
 
-      case order_by_param
-      when 'activity'
-        order_by :positive_activity_date, :desc
-      when 'title'
-        order_by :title, :asc
-      when 'rating'
-        order_by :total_rating, :desc
+      if query
+        keywords query
       else
-        order_by :positive_activity_date, :desc
+        case order_by_param
+        when 'activity'
+          order_by :positive_activity_date, :desc
+        when 'title'
+          order_by :title, :asc
+        when 'rating'
+          order_by :total_rating, :desc
+        else
+          order_by :positive_activity_date, :desc
+        end
       end
     }.results
   end
