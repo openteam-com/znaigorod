@@ -1,0 +1,31 @@
+<%= form_tag organizations_by_category_path(@presenter.category.slug, params), :method => :get do %>
+  <div class='advanced <%= @presenter.filter_used? ? 'opened' : 'closed' %>'>
+
+    <div class='filter show' id='features'>
+      <div class="filter_label">Особенности</div>
+      <div class="filter_checkboxes">
+        <%# @presenter.send("#{filter_name}_filter").available.each_with_index do |value, index| %>
+        <% %w[one two three].each_with_index do |value, index| %>
+          <div class='checkbox'>
+            <%= check_box_tag "features[]", value, true, :id => "feature_#{index}" %>
+            <%= label_tag "feature_#{index}", value %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='submit_action'>
+      <div class='submit_wrapper'>
+        <input type='submit' value='Применить фильтр' class='button small' />
+      </div>
+
+      <div class='results_counter'>
+        <span class='counter'>Найдено организаций: <%= 0 %></span>
+      </div>
+
+      <div class='clear_wrapper'>
+        <%= link_to 'Очистить', '#' %>
+      </div>
+    </div>
+  </div>
+<% end %>

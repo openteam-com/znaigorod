@@ -1,3 +1,16 @@
+<% if @presenter.category %>
+  <div>
+    <ul>
+      <% @categories.each do |category|  %>
+        <li>
+          <%= link_to category, organizations_by_category_path(category.slug, params) %>
+          <%= category.organizations.count %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="filter_and_search">
   <div class='filter_header'>
     <% if page_meta %>
@@ -32,24 +45,12 @@
           <%= hidden_field_tag :view_type, @presenter.view_type %>
         <% end %>
       </div>
-      <%= link_to "Расширенный поиск &darr;".html_safe, '#', class: [:extended_search, 'js-extended-search'] unless controller_name == 'organizations' %>
+      <%= link_to "Расширенный поиск &darr;".html_safe, '#', class: [:extended_search, 'js-extended-search'] if @presenter.category %>
     </div>
 
-    <%= render partial: 'advanced_filters' unless controller_name == 'organizations' %>
+    <%= render partial: 'advanced_filters' if @presenter.category %>
     <!--/noindex-->
   </div>
 </div>
 
-<% if params[:slug] %>
-  <div>
-    <ul>
-      <% @categories.each do |category|  %>
-        <li>
-          <%= link_to category, organizations_by_category_path(category.slug, params) %>
-          <%= category.organizations.count %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
 

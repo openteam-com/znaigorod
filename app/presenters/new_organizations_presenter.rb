@@ -24,6 +24,12 @@ class NewOrganizationsPresenter
     end
   end
 
+  def filter_used?
+    return false if query
+
+    !!params[:utf8]
+  end
+
   def promoted_clients
     orgs = Organization.search {
       with :status, :client
