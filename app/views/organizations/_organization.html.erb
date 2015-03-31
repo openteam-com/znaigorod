@@ -1,0 +1,41 @@
+<div class='info'>
+  <% if organization.status.client?  %>
+    <div class='image'>
+      <% if organization.sms_claimable? %>
+        <div class='sms_claimable'>
+          <%= organization.priority_sms_claimable_suborganization.reservation_title %>
+        </div>
+        <%= link_to organization.priority_sms_claimable_suborganization.reservation_title,
+          send("new_#{organization.priority_sms_claimable_suborganization.class.name.underscore}_sms_claim_path", organization.priority_sms_claimable_suborganization),
+          :class => :sms_claim_link %>
+      <% end %>
+
+      <% if organization.logotype_url? %>
+        <%= link_to organization_path(organization) do %>
+          <%= image_tag(resized_image_url(organization.logotype_url, width, height, :watermark => false), size: "#{width}x#{height}", alt: organization.title) %>
+        <% end %>
+      <% else %>
+        <%= link_to organization_path(organization) do %>
+          <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+        <% end %>
+      <% end %>
+      <%= link_to organization_path(organization), class: :details do %>
+        <span class='first_line'>
+          <span class='show_tipsy fa fa-users' title='Участники'> <%= organization.visits.count %></span>
+          <span class='show_tipsy fa fa-user' title='Приглашения'> 0</span>
+          <span class='show_tipsy fa fa-comments' title='Комментарии'> <%= organization.comments.count %></span>
+        </span>
+        <span class='second_line'>
+          <span class='show_tipsy fa fa-heart' title='Понравилось'> <%= organization.likes_count %></span>
+          <span class='show_tipsy fa fa-eye' title='Просмотры'> <%= organization.page_visits.count %></span>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class='title'><%= organization.truncated_title_link(28) %> </div>
+
+  <div class="place">
+    <%= organization.truncated_address_link.present? ? organization.truncated_address_link : "&nbsp;".html_safe %>
+  </div>
+</div>

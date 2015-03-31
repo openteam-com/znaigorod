@@ -17,4 +17,7 @@
     </div>
   </li>
 <% end %>
-<%= link_to_next_page @presenter.not_clients_results, "Еще организации (#{@presenter.not_clients_results_current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination', :param_name => "not_clients_page" , :params => params %>
+
+<%= link_to_next_page @presenter.not_clients_results,
+  "Еще организации (#{@presenter.not_clients_results_current_count})",
+  :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination', :param_name => "not_clients_page" , :params => params %>

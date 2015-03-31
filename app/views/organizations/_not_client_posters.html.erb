@@ -1,6 +1,6 @@
-<% @presenter.not_clients.each do |suborganization| %>
+<% @presenter.not_clients.each do |organization| %>
   <li class="item_organization fresh not_client_poster <%= cycle('item_1', 'item_2', 'item_3', 'item_4', 'item_5', 'item_6', 'item_7',)%>">
-    <%= render partial: 'organizations/suborganization', locals: { suborganization: suborganization, width: 194, height: 190 } %>
+    <%= render partial: 'organizations/organization', locals: { organization: organization, width: 194, height: 190 } %>
   </li>
 <% end %>
 

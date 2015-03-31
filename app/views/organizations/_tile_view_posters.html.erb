@@ -1,6 +1,6 @@
-<% @presenter.clients.each do |item| %>
+<% @presenter.clients.each do |organization| %>
   <li class='item_organization fresh'>
-    <%= render partial: 'suborganization', locals: { suborganization: item, width: 150, height: 150  } %>
+    <%= render partial: 'organization', locals: { organization: organization, width: 150, height: 150  } %>
   </li>
 <% end %>
 

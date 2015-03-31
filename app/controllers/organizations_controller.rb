@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html {
         @presenter = NewOrganizationsPresenter.new(params)
-        @categories = @presenter.category ? @presenter.category.path.last.children : OrganizationCategory.used_roots
+        @categories = @presenter.category ? @presenter.category.root.children : OrganizationCategory.used_roots
 
         if request.xhr?
           if @presenter.view_type == 'list'
