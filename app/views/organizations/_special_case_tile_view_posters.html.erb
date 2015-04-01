@@ -1,0 +1,52 @@
+<% @presenter.clients.each do |organization| %>
+  <li class='sauna_item <%= cycle('item_1', 'item_2', 'item_3', :name => 'sauna_item') %>'>
+    <div class='info'>
+      <div class='image'>
+        <% if organization.sauna.sms_claimable? %>
+          <div class='sms_claimable'>
+            <%= organization.sauna.reservation_title %>
+          </div>
+          <%= link_to organization.sauna.reservation_title,
+            send("new_sauna_sms_claim_path", organization.sauna), :class => :sms_claim_link %>
+        <% end %>
+        <%= link_to organization_path(organization) do %>
+          <% if organization.logotype_url? %>
+            <%= image_tag(resized_image_url(organization.logotype_url, 150, 150), :size => '150x150', :alt => organization.title.text_gilensize) %>
+          <% else %>
+            <span class='stub_poster <%= organization.priority_suborganization_kind %>'></span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class='title'><%= organization.truncated_title_link %> </div>
+
+      <div class='address'>
+        <%= organization.truncated_address_link.present? ? organization.truncated_address_link : "&nbsp;".html_safe %>
+      </div>
+
+    </div>
+
+    <ul class='sauna_halls need_scrolling'>
+      <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
+        <li<%= ' class=non_suitable' unless @presenter.sauna_hall_ids.include?(sauna_hall.id) %>>
+          <%= render :partial => 'saunas/sauna_hall', :locals => { :sauna_hall => sauna_hall } %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+
+<% unless @presenter.clients_results_last_page? %>
+  <li class="item pagination">
+    <%= link_to_next_page @presenter.clients_results, "Еще организации (#{@presenter.clients_results_current_count + @presenter.not_clients_results_total_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :param_name => :clients_page, :params => params %>
+  </li>
+<% else %>
+  <div style="clear:both"></div>
+  <%= render partial: 'not_client_posters' %>
+<% end %>
+
+<% unless true || @presenter.last_page? %>
+  <li class="item pagination">
+    <%= link_to_next_page @presenter.paginated_collection, "Еще организации (#{@presenter.current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
+  </li>
+<% end %>

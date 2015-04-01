@@ -11,6 +11,7 @@ class NewSaunyPresenter < NewOrganizationsPresenter
     :pool_features_filter_used?, :available_pool_features, :selected_pool_features,
     :baths_filter_used?, :available_baths, :selected_baths,
     :features_filter_used?, :available_features, :selected_features,
+    :sauna_hall_ids,
     :to => :sauna_halls_presenter
 
   def clients_results
@@ -24,6 +25,10 @@ class NewSaunyPresenter < NewOrganizationsPresenter
                          end
   end
 
+  def clients_per_page
+    view_type == 'tile' ?  9 : clients_results_total_count
+  end
+
   def clients_organization_ids
     sauna_ids = sauna_halls_presenter.search_with_groups.group(:sauna_id).groups.map(&:value).map(&:to_i)
 
@@ -31,7 +36,7 @@ class NewSaunyPresenter < NewOrganizationsPresenter
   end
 
   def clients_results_total_count
-    sauna_halls_presenter.total_count
+    clients_organization_ids.count
   end
 
   def not_clients_results_total_count

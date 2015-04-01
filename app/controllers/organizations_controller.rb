@@ -17,7 +17,11 @@ class OrganizationsController < ApplicationController
           if @presenter.view_type == 'list'
             render partial: 'not_client_list_view', layout: false
           else
-            render partial: 'tile_view_posters', layout: false and return if params[:not_clients_page].blank?
+            if @presenter.special_case?
+              render partial: 'special_case_tile_view_posters', layout: false and return if params[:not_clients_page].blank?
+            else
+              render partial: 'tile_view_posters', layout: false and return if params[:not_clients_page].blank?
+            end
 
             render partial: 'organizations/not_client_posters', layout: false
           end

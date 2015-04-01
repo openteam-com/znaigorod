@@ -36,5 +36,10 @@ namespace :organizations do
       puts 'Usage rake organizations:find_unmatched CSV=/path/to/csv YML=/path/to/yml'
     end
   end
+
+  desc 'Link organizations with categories'
+  task :set_categories => :environment do
+    OrganizationImport::OrganizationsCategoriesLinker.new.set_categories_for_organizations_with_suborganizations
+  end
 end
 
