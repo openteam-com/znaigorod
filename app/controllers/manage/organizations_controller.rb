@@ -34,6 +34,18 @@ class Manage::OrganizationsController < Manage::ApplicationController
     render :nothing => true, :status => 200
   end
 
+  def sort
+    begin
+      params[:position].each do |id, position|
+        Section.find(id).update_attribute :position, position
+      end
+    rescue Exception => e
+      render :text => e.message, :status => 500 and return
+    end
+
+    render :nothing => true, :status => 200
+  end
+
   private
 
   def build_nested_objects
