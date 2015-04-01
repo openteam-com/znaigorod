@@ -28,10 +28,10 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :organizations, 'Заведения', organizations_path,
       highlights_on: -> { %w[organizations suborganizations saunas].include? controller.class.name.underscore.split("_").first } do |organization|
 
-      Organization.suborganization_kinds_for_navigation.drop(1).each do |suborganization_kind|
-        organization.item suborganization_kind, I18n.t("organization.kind.#{suborganization_kind}"), send("#{suborganization_kind.pluralize}_path"), :class => suborganization_kind  do |category|
-          "#{suborganization_kind.pluralize}_presenter".camelize.constantize.new.categories_links.each do |link|
-            category.item "#{suborganization_kind}_#{link[:klass]}", link[:title], send(link[:url])
+      OrganizationCategory.used_roots.each do |category|
+        organization.item category.slug, category.title, organizations_by_category_path(category.slug), :class => category.slug do |category_item|
+          category.children.each do |child|
+            category_item.item child.slug, child.title, organizations_by_category_path(child.slug)
           end
         end
       end
