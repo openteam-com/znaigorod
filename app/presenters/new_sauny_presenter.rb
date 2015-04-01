@@ -19,6 +19,12 @@ class NewSaunyPresenter < NewOrganizationsPresenter
                            search = Organization.search {
                              paginate :page => clients_page, :per_page => clients_per_page
                              with :id, clients_organization_ids if clients_organization_ids.any?
+
+                             if query
+                               keywords query
+                             else
+                               order_by criterion, sauna_halls_presenter.direction unless criterion == 'price'
+                             end
                            }
 
                            search.results
