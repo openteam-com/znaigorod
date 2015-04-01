@@ -1,5 +1,5 @@
 <%= form_tag organizations_by_category_path(@presenter.category.slug, params), :method => :get do %>
-  <div class='advanced <%= @presenter.filter_used? ? 'opened' : 'closed' %>'>
+  <div class='advanced <%= @presenter.advanced_filter_used? ? 'opened' : 'closed' %>'>
 
     <div class='filter show' id='features'>
       <div class="filter_label">Особенности</div>

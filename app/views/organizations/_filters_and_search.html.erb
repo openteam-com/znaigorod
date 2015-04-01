@@ -48,7 +48,13 @@
       <%= link_to "Расширенный поиск &darr;".html_safe, '#', class: [:extended_search, 'js-extended-search'] if @presenter.category %>
     </div>
 
-    <%= render partial: 'advanced_filters' if @presenter.category %>
+    <% if @presenter.category %>
+      <% if @presenter.special_case? %>
+        <%= render partial: "#{@presenter.category.slug}_advanced_filters" %>
+      <% else %>
+        <%= render partial: 'advanced_filters' %>
+      <% end %>
+    <% end %>
     <!--/noindex-->
   </div>
 </div>

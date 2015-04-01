@@ -23,8 +23,6 @@ class SaunaHallsPresenter
     super(args)
 
     self.params = args
-    self.params['controller']
-    self.params['action']
 
     self.capacity     = self.capacity.to_i.zero? ? 1 : self.capacity.to_i
     self.price_min    = self.price_min.blank? ?  SaunaHallSchedule.minimum(:price) : self.price_min

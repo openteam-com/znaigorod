@@ -1,13 +1,22 @@
 class NewOrganizationsPresenter
-  attr_accessor :params, :category, :view_type, :order_by_param, :query, :features
+  attr_accessor :params, :category, :view_type, :query, :features
 
   def initialize(params)
     @params = params
     @category ||= OrganizationCategory.find_by_slug(params[:slug])
     @view_type = params[:view_type] || 'list'
-    @order_by_param = params[:order_by] || 'activity'
     @query = params[:search_query].present? ? params[:search_query] : nil
     @features = params[:features] || []
+  end
+
+  def self.special_case?(slug)
+    %w[sauny].include? slug
+  end
+
+  def self.build(params)
+    special_case?(params[:slug]) ?
+      "new_#{params[:slug]}_presenter".classify.constantize.new(params) :
+      new(params)
   end
 
   # TODO: implement
@@ -15,17 +24,33 @@ class NewOrganizationsPresenter
     nil
   end
 
+  def special_case?
+    self.class.special_case? params[:slug]
+  end
+
+  def available_sortings
+    %w[positive_activity_date rating title]
+  end
+
   def sortings_links
-    %w[activity rating title].map do |value|
+    available_sortings.map do |value|
       {
         title: I18n.t("organization.sort.#{value}"),
         parameters: params.merge(order_by: value),
-        selected: order_by_param == value
+        selected: criterion == value
       }
     end
   end
 
-  def filter_used?
+  def criterion
+    @criterion ||= available_sortings.include?(params[:order_by]) ? params[:order_by] : available_sortings.first
+  end
+
+  def directions
+    { 'positive_activity_date' => 'desc', 'rating' => 'desc', 'title' => 'asc' }
+  end
+
+  def advanced_filter_used?
     return false if query
 
     !!params[:utf8]
@@ -76,16 +101,7 @@ class NewOrganizationsPresenter
       if query
         keywords query
       else
-        case order_by_param
-        when 'activity'
-          order_by :positive_activity_date, :desc
-        when 'title'
-          order_by :title, :asc
-        when 'rating'
-          order_by :total_rating, :desc
-        else
-          order_by :positive_activity_date, :desc
-        end
+        order_by criterion, directions[criterion]
       end
     }.results
   end
@@ -100,16 +116,7 @@ class NewOrganizationsPresenter
       if query
         keywords query
       else
-        case order_by_param
-        when 'activity'
-          order_by :positive_activity_date, :desc
-        when 'title'
-          order_by :title, :asc
-        when 'rating'
-          order_by :total_rating, :desc
-        else
-          order_by :positive_activity_date, :desc
-        end
+        order_by criterion, directions[criterion]
       end
     }.results
   end
