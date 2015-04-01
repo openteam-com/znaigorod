@@ -69,7 +69,7 @@ class NewOrganizationsPresenter
   def clients_results_total_count
     @clients_results_total_count ||= Organization.search {
       keywords query if query
-      with :features, features if features.any?
+      with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
       with :status, :client
     }.results.total_count
@@ -94,7 +94,7 @@ class NewOrganizationsPresenter
   def clients_results
     @clients_results ||= Organization.search {
       paginate :page => clients_page, :per_page => clients_per_page
-      with :features, features if features.any?
+      with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
       with :status, :client
 

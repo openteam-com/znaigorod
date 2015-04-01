@@ -225,7 +225,7 @@ class Organization < ActiveRecord::Base
     string(:organization_category_slugs, :multiple => true) { organization_category_uniq_slugs }
     string(:state)                                    { :published }
     string(:suborganizations, :multiple => true)      { suborganizations.map(&:class).map(&:name).map(&:underscore) }
-    string(:features, :multiple => true)              { features.pluck(:title).uniq }
+    string(:organization_features, :multiple => true) { features.pluck(:title).uniq }
 
     text :title,                :boost => 1.0 * 1.2
     text :title_ru,             :boost => 1.0,              :more_like_this => true
