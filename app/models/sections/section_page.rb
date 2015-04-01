@@ -14,6 +14,14 @@ class SectionPage < ActiveRecord::Base
   def self.generate_vfs_path
     "/znaigorod/section_pages/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}"
   end
+
+  def content_for_show(sanitize = true, options = {})
+    if sanitize
+      sanitize(cached_content_for_show.try(:html_safe), :tags => %w(ul li h3 p b strong strike)) # tags => allowed tags
+    else
+      cached_content_for_show.try(:html_safe)
+    end
+  end
 end
 
 # == Schema Information
