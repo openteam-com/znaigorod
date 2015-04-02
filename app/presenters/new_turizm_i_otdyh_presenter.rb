@@ -12,8 +12,7 @@ class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
     @clients_results ||= begin
                            search = Organization.search {
                              paginate :page => clients_page, :per_page => clients_per_page
-                             with :id, clients_organization_ids if clients_organization_ids.any?
-                             with :status, :client
+                             with :id, clients_organization_ids
 
                              query ? keywords(query) : order_by(criterion, directions[criterion])
                            }
@@ -25,7 +24,9 @@ class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
   def clients_organization_ids
     hotel_ids = rooms_presenter.send(:context_id_groups).map(&:value).map(&:to_i)
 
-    Hotel.where(:id => hotel_ids).pluck(:organization_id)
+    ids = Hotel.where(:id => hotel_ids).pluck(:organization_id)
+
+    ids.any? ? ids : nil
   end
 
   def clients_per_page
@@ -33,7 +34,7 @@ class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
   end
 
   def clients_results_total_count
-    clients_organization_ids.count
+    clients_organization_ids.count rescue 0
   end
 
   def not_clients_results
@@ -41,6 +42,7 @@ class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
                                search = Organization.search {
                                  paginate :page => not_clients_page, :per_page => not_clients_per_page
                                  with :id, not_clients_organization_ids if not_clients_organization_ids.any?
+                                 with :organization_category_slugs, category.slug if category
 
                                  query ? keywords(query) : order_by(criterion, directions[criterion])
                                }
@@ -51,18 +53,16 @@ class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
 
   def not_clients_organization_ids
     @not_clients_organization_ids ||= begin
-                                        ids = Hotel.search_ids {
-                                          fulltext query
-
-                                          any_of do
-                                            with(:with_rooms, false)
-                                            without(:status, :client)
-                                          end
-
+                                        search = Organization.search {
                                           paginate(:page => 1, :per_page => 10_000)
+
+                                          with :organization_category_slugs, category.slug if category
+                                          without :status, :client
+
+                                          query ? keywords(query) : order_by(criterion, directions[criterion])
                                         }
 
-                                        Hotel.where(:id => ids).pluck(:organization_id)
+                                        search.hits.map(&:primary_key).map(&:to_i)
                                       end
   end
 end

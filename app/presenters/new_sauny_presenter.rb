@@ -18,7 +18,7 @@ class NewSaunyPresenter < NewOrganizationsPresenter
     @clients_results ||= begin
                            search = Organization.search {
                              paginate :page => clients_page, :per_page => clients_per_page
-                             with :id, clients_organization_ids if clients_organization_ids.any?
+                             with :id, clients_organization_ids
 
                              if query
                                keywords query
@@ -38,11 +38,13 @@ class NewSaunyPresenter < NewOrganizationsPresenter
   def clients_organization_ids
     sauna_ids = sauna_halls_presenter.search_with_groups.group(:sauna_id).groups.map(&:value).map(&:to_i)
 
-    Sauna.where(:id => sauna_ids).pluck(:organization_id)
+    ids = Sauna.where(:id => sauna_ids).pluck(:organization_id)
+
+    ids.any? ? ids : nil
   end
 
   def clients_results_total_count
-    clients_organization_ids.count
+    clients_organization_ids.count rescue 0
   end
 
   def not_clients_results_total_count

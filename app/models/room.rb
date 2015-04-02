@@ -30,10 +30,11 @@ class Room < ActiveRecord::Base
     text(:title_ru, :boost => 1.0)        { context.organization.title }
     text(:title_translit, :boost => 0.0)  { context.organization.title }
 
-    string(:context_type)                { context_type.underscore }
-    string(:features, :multiple => true) { context_features }
-    string(:offers,   :multiple => true) { context_offers }
-    string(:status)                      { context.organization.status }
+    string(:context_type)                                   { context_type.underscore }
+    string(:features, :multiple => true)                    { context_features }
+    string(:offers,   :multiple => true)                    { context_offers }
+    string(:status)                                         { context.organization.status }
+    string(:organization_category_slugs, :multiple => true) { context.organization.organization_category_uniq_slugs }
   end
 
   def price_min

@@ -195,7 +195,8 @@ class RoomsPresenter
                 :features,
                 :offers,
                 :lat, :lon, :radius,
-                :page, :per_page, :search_query
+                :page, :per_page, :search_query,
+                :slug
 
   def initialize(context_type, args = {})
     @context_type = context_type
@@ -300,10 +301,11 @@ class RoomsPresenter
       with(:capacity).greater_than_or_equal_to(capacity_filter.capacity)
       with(:rooms_count).greater_than_or_equal_to(rooms_filter.rooms)
 
-      with :categories,    categories                                          if categories.any?
+      #with :categories,    categories                                          if categories.any?
       with :features,      features_filter.selected_features.map(&:title)      if features_filter.used?
       with :offers,        offers_filter.selected_offers.map(&:title)          if offers_filter.used?
       with :room_features, room_features_filter.selected_features.map(&:title) if room_features_filter.used?
+      with :organization_category_slugs, slug                                  if slug.present?
     end
   end
 

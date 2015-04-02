@@ -9,13 +9,25 @@ class NewOrganizationsPresenter
     @features = params[:features] || []
   end
 
-  def self.special_case?(slug)
-    %w[sauny turizm-i-otdyh].include? slug
+  def self.organization_category(slug)
+    OrganizationCategory.find(slug)
   end
+
+  def self.root_category_slug(slug)
+    organization_category(slug).root.slug
+  end
+
+  def self.special_case?(slug)
+    %w[sauny turizm-i-otdyh kafe-i-restorany].include? root_category_slug(slug)
+  end
+
+  def special_case_advanced_filter?
+  end
+
 
   def self.build(params)
     special_case?(params[:slug]) ?
-      "new_#{params[:slug]}_presenter".underscore.classify.constantize.new(params) :
+      "new_#{root_category_slug(params[:slug])}_presenter".underscore.classify.constantize.new(params) :
       new(params)
   end
 
@@ -26,6 +38,10 @@ class NewOrganizationsPresenter
 
   def special_case?
     self.class.special_case? params[:slug]
+  end
+
+  def root_category_slug
+    self.class.root_category_slug(params[:slug])
   end
 
   def available_sortings
