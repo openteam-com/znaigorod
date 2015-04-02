@@ -96,7 +96,7 @@
           <%= link_to "Еще организации (#{@presenter.not_clients_results_total_count})", params.merge(:not_client_page => 1),
             :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination' %>
         <% else %>
-          <%= render partial: 'not_client_list_view' if !@presenter.advanced_filter_used? && !@presenter.special_case? %>
+          <%= render partial: 'not_client_list_view' unless (@presenter.special_case? && @presenter.advanced_filter_used?) %>
         <% end %>
       </ul>
 
