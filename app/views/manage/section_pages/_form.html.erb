@@ -4,6 +4,14 @@
   <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path', :value => SectionPage.generate_vfs_path } %>
   <%= f.input :title %>
   <%= f.input :content, :as => :ckeditor %>
+  <%= f.input :poster_image, :as => :file %>
+  <div>
+    <% if action_name == 'edit' && resource.poster_image? %>
+      <%= image_tag resized_image_url(resource.poster_image_url, 150, 100), :size => '150x100' %>
+      <%= link_to 'Удалить постер', destroy_poster_manage_organization_section_section_page_path, :method => 'DELETE',
+        :data => { :confirm => 'Вы уверены?' } %>
+    <% end %>
+  </div>
   <%= f.submit %>
 <% end %>
 
