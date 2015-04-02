@@ -9,29 +9,6 @@ class NewOrganizationsPresenter
     @features = params[:features] || []
   end
 
-  def self.special_classes
-    {
-      'sauny' => NewSaunyPresenter,
-      'hostely' => NewRoomsPresenter,
-      'gostevye-doma' => NewRoomsPresenter,
-      'kafe-i-restorany' => NewRoomsPresenter
-    }
-  end
-
-  def self.special_case?(slug)
-    special_classes.keys.include? slug
-  end
-
-  def self.class_from(slug)
-    special_classes[slug]
-  end
-
-  def self.build(params)
-    klass = special_case?(params[:slug]) ? class_from(params[:slug]) : self
-
-    klass.new(params)
-  end
-
   # TODO: implement
   def page_header
     nil
@@ -44,11 +21,7 @@ class NewOrganizationsPresenter
   end
 
   def special_case?
-    self.class.special_case? params[:slug]
-  end
-
-  def root_category_slug
-    self.class.root_category_slug(params[:slug])
+    OrganizationsPresenterBuilder.new(params).special_case?
   end
 
   def available_sortings

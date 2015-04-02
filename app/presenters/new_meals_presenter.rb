@@ -1,0 +1,2 @@
+class NewMealsPresenter < NewOrganizationsPresenter
+end

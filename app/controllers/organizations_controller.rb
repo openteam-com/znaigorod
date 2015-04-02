@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @presenter = NewOrganizationsPresenter.build(params)
+        @presenter = OrganizationsPresenterBuilder.new(params).build
         @categories = @presenter.category ? @presenter.category.root.children : OrganizationCategory.used_roots
 
         if request.xhr?
