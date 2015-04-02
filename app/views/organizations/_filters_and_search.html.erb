@@ -51,7 +51,7 @@
 
     <% if @presenter.category %>
       <% if @presenter.special_case? %>
-        <%= render partial: "#{@presenter.root_category_slug}_advanced_filters" %>
+        <%= render partial: "#{@presenter.view_prefix}advanced_filters" %>
       <% else %>
         <%= render partial: 'advanced_filters' %>
       <% end %>

@@ -6,7 +6,7 @@
   <div class='organization_content js-button-pagination sauna_housing_content'>
     <ul class='posters js-paginable-list sauna_posters' data-item-width="220">
       <% if @presenter.special_case? %>
-        <%= render :partial => "#{@presenter.root_category_slug}_tile_view_posters" %>
+        <%= render :partial => "#{@presenter.view_prefix}tile_view_posters" %>
       <% else %>
         <%= render :partial => 'tile_view_posters' %>
       <% end %>

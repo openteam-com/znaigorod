@@ -9,31 +9,38 @@ class NewOrganizationsPresenter
     @features = params[:features] || []
   end
 
-  def self.organization_category(slug)
-    OrganizationCategory.find(slug)
-  end
-
-  def self.root_category_slug(slug)
-    organization_category(slug).root.slug
+  def self.special_classes
+    {
+      'sauny' => NewSaunyPresenter,
+      'hostely' => NewRoomsPresenter,
+      'gostevye-doma' => NewRoomsPresenter,
+      'kafe-i-restorany' => NewRoomsPresenter
+    }
   end
 
   def self.special_case?(slug)
-    %w[sauny turizm-i-otdyh kafe-i-restorany].include? root_category_slug(slug)
+    special_classes.keys.include? slug
   end
 
-  def special_case_advanced_filter?
+  def self.class_from(slug)
+    special_classes[slug]
   end
-
 
   def self.build(params)
-    special_case?(params[:slug]) ?
-      "new_#{root_category_slug(params[:slug])}_presenter".underscore.classify.constantize.new(params) :
-      new(params)
+    klass = special_case?(params[:slug]) ? class_from(params[:slug]) : self
+
+    klass.new(params)
   end
 
   # TODO: implement
   def page_header
     nil
+  end
+
+  def view_prefix
+    return nil if self === NewOrganizationsPresenter
+
+    self.class.name.underscore.gsub('new_', '').gsub('presenter', '')
   end
 
   def special_case?

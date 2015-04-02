@@ -1,4 +1,4 @@
-class NewTurizmIOtdyhPresenter < NewOrganizationsPresenter
+class NewRoomsPresenter < NewOrganizationsPresenter
   def rooms_presenter
     @rooms_presenter ||= RoomsPresenter.new(:hotel, params)
   end
