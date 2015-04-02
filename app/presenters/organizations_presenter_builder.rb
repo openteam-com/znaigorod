@@ -29,6 +29,8 @@ class OrganizationsPresenterBuilder
       'sauny' => NewSaunyPresenter,
       'hostely' => NewRoomsPresenter,
       'gostevye-doma' => NewRoomsPresenter,
+      'bazy-otdyha' => NewRoomsPresenter,
+      'gostinitsy' => NewRoomsPresenter,
       'kafe-i-restorany' => NewMealsPresenter
     }
 
