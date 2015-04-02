@@ -1,4 +1,7 @@
-<%= form_tag organizations_by_category_path(@presenter.category.slug, params), :method => :get do %>
+<%= form_tag organizations_by_category_path(@presenter.category.slug), :method => :get do %>
+  <%= hidden_field_tag :view_type, @presenter.view_type %>
+  <%= hidden_field_tag :order_by, @presenter.criterion %>
+
   <div class='advanced <%= @presenter.advanced_filter_used? ? 'opened' : 'closed' %>'>
 
     <div class='filter show' id='features'>

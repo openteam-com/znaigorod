@@ -29,7 +29,7 @@
       <%= render :partial => 'commons/presentation_filters' %>
     </div>
 
-    <% if params[:slug] %>
+    <% if @presenter.category %>
       <div class='view_by'>
         <div class="tile_view <%= @presenter.view_type == 'tile' ? 'selected' : '' %>"><%= link_to "Плиточный вид", params.merge(:view_type => "tile"), class: :view_link, :title => 'Плиточный вид' %></div>
 
@@ -40,9 +40,10 @@
     <div class='search_wrapper'>
       <div class='search_fields'>
         <%= form_tag '', method: :get do %>
-          <%= text_field_tag :search_query, params[:search_query], class: [:search_field, 'js-search-field'], placeholder: 'Поиск организации' %>
+          <%= text_field_tag :search_query, @presenter.query, class: [:search_field, 'js-search-field'], placeholder: 'Поиск организации' %>
           <%= button_tag :search_button, class: [:search_button, 'js-search-button'] %>
           <%= hidden_field_tag :view_type, @presenter.view_type %>
+          <%= hidden_field_tag :order_by, @presenter.criterion %>
         <% end %>
       </div>
       <%= link_to "Расширенный поиск &darr;".html_safe, '#', class: [:extended_search, 'js-extended-search'] if @presenter.category %>

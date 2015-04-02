@@ -1,6 +1,8 @@
-<%= form_tag organizations_by_category_path(@presenter.category.slug, params), :method => :get do %>
-  <div class='advanced <%= @presenter.advanced_filter_used? ? 'opened' : 'closed' %>'>
+<%= form_tag organizations_by_category_path(@presenter.category.slug), :method => :get do %>
+  <%= hidden_field_tag :view_type, @presenter.view_type %>
+  <%= hidden_field_tag :order_by, @presenter.criterion %>
 
+  <div class='advanced <%= @presenter.advanced_filter_used? ? 'opened' : 'closed' %>'>
     <div class='filter <%= @presenter.price_filter_used? ? 'used' : 'not_used' %>' id='amount'>
       <div class='filter_label wide'>Цена</div>
       <div class='filter_inputs'>

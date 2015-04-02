@@ -33,6 +33,7 @@ class Room < ActiveRecord::Base
     string(:context_type)                { context_type.underscore }
     string(:features, :multiple => true) { context_features }
     string(:offers,   :multiple => true) { context_offers }
+    string(:status)                      { context.organization.status }
   end
 
   def price_min

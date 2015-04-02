@@ -1,0 +1,101 @@
+<%= form_tag organizations_by_category_path(@presenter.category.slug), :method => :get do %>
+  <%= hidden_field_tag :view_type, @presenter.view_type %>
+  <%= hidden_field_tag :order_by, @presenter.criterion %>
+
+  <div class='advanced <%= @presenter.advanced_filter_used? ? 'opened' : 'closed' %>'>
+    <div class='filter used' id='amount'>
+      <div class='filter_label wide'>Цена</div>
+      <div class='filter_inputs'>
+        <div class='input'>
+          <%= label_tag :price_min, 'от' %>
+          <%= text_field_tag :price_min, @presenter.price_min, :class => 'min' %>
+        </div>
+        <div class='input'>
+          <%= label_tag :price_max, 'до' %>
+          <%= text_field_tag :price_max, @presenter.price_max, :class => 'max' %>
+        </div>
+      </div>
+      <div class='filter_input_label'>руб./сутки</div>
+
+      <div class='filter_slider_wrapper amount'>
+        <div class='filter_slider' data-range='true' data-min='<%= @presenter.available_price_min %>' data-max='<%= @presenter.available_price_max %>' data-step='50'></div>
+      </div>
+    </div>
+
+    <div class='filter used' id='capacity_filter'>
+      <div class='filter_label wide'>Вместительность</div>
+      <div class='filter_inputs'>
+        <div class="input">
+          <%= label_tag :capacity, 'от' %>
+          <%= text_field_tag :capacity, @presenter.capacity, :class => 'max' %>
+        </div>
+      </div>
+      <div class='filter_input_label'>человек</div>
+
+      <div class='filter_slider_wrapper capacity'>
+        <div class="filter_slider" data-range='max' data-min='<%= @presenter.capacity_min %>' data-max='<%= @presenter.capacity_max %>' data-step='1'></div>
+      </div>
+    </div>
+
+    <div class='filter used' id='rooms_count_filter'>
+      <div class='filter_label wide'>Количество комнат</div>
+      <div class='filter_inputs'>
+        <div class="input">
+          <%= label_tag :rooms, 'от' %>
+          <%= text_field_tag :rooms, @presenter.rooms, :class => 'max' %>
+        </div>
+      </div>
+
+      <div class='filter_slider_wrapper rooms_count'>
+        <div class="filter_slider" data-range='max' data-min='<%= @presenter.rooms_min %>' data-max='<%= @presenter.rooms_max %>' data-step='1'></div>
+      </div>
+    </div>
+
+    <div class="filter <%= @presenter.features_filter_css_class %>" id='hotel_features'>
+      <%= link_to 'убрать', '#', :class => 'remove_filter_link' %>
+      <div class='filter_label'>Особенности гостиницы</div>
+      <div class='filter_checkboxes'>
+        <% @presenter.features.each_with_index do |feature, index| %>
+          <div class='checkbox'>
+            <%= check_box_tag 'hotel_features[]', feature.title, feature.selected?, :id => "hotel_feature_#{index}" %>
+            <%= label_tag "hotel_feature_#{index}", feature.title %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="filter <%= @presenter.room_features_filter_css_class %>" id='room_features'>
+      <%= link_to 'убрать', '#', :class => 'remove_filter_link' %>
+      <div class='filter_label'>Особенности номера</div>
+      <div class='filter_checkboxes'>
+        <% @presenter.room_features.each_with_index do |feature, index| %>
+          <div class='checkbox'>
+            <%= check_box_tag 'room_features[]', feature.title, feature.selected?, :id => "room_feature_#{index}" %>
+            <%= label_tag "room_feature_#{index}", feature.title %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='criteria_list'>
+      <div class='criteria_label'>Добавить критерии:</div>
+      <ul>
+        <li>
+          <%= link_to 'Особенности гостиницы', '#', :class => 'hotel_features'  %>
+        </li>
+        <li>
+          <%= link_to 'Особенности номера', '#', :class => 'room_features'  %>
+        </li>
+      </ul>
+    </div>
+
+    <div class='submit_action'>
+      <div class='submit_wrapper'>
+        <input type='submit' value='Применить фильтр' class='button small' />
+      </div>
+      <div class='clear_wrapper'>
+        <%= link_to 'Очистить', '#' %>
+      </div>
+    </div>
+  </div>
+<% end %>

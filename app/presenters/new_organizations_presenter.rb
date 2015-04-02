@@ -10,12 +10,12 @@ class NewOrganizationsPresenter
   end
 
   def self.special_case?(slug)
-    %w[sauny].include? slug
+    %w[sauny turizm-i-otdyh].include? slug
   end
 
   def self.build(params)
     special_case?(params[:slug]) ?
-      "new_#{params[:slug]}_presenter".classify.constantize.new(params) :
+      "new_#{params[:slug]}_presenter".underscore.classify.constantize.new(params) :
       new(params)
   end
 
@@ -109,7 +109,7 @@ class NewOrganizationsPresenter
   def not_clients_results
     @not_clients_results ||= Organization.search {
       paginate :page => not_clients_page, :per_page => not_clients_per_page
-      with :features, features if features.any?
+      with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
       without :status, :client
 
