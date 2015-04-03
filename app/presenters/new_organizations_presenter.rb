@@ -147,4 +147,8 @@ class NewOrganizationsPresenter
   def not_clients_results_current_count
     not_clients_results_total_count - raw_not_clients_page * not_clients_per_page
   end
+
+  def show_not_clients_in_avdanced_filter?
+    true
+  end
 end

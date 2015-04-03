@@ -61,4 +61,8 @@ class NewRoomsPresenter < NewOrganizationsPresenter
                                         search.hits.map(&:primary_key).map(&:to_i)
                                       end
   end
+
+  def show_not_clients_in_avdanced_filter?
+    advanced_filter_used? ? false : true
+  end
 end

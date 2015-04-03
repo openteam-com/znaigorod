@@ -76,4 +76,8 @@ class NewSaunyPresenter < NewOrganizationsPresenter
                                         Sauna.where(:id => ids).pluck(:organization_id)
                                       end
   end
+
+  def show_not_clients_in_avdanced_filter?
+    advanced_filter_used? ? false : true
+  end
 end
