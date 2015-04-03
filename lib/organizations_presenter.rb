@@ -49,7 +49,11 @@ module OrganizationsPresenter
   end
 
   def initialize(args = {})
+    p '>'*80
+    p args
     super(args)
+    p cuisine
+
     self.sms_claimable = self.sms_claimable && collection_sms_claimable?
 
     @page ||= 1
