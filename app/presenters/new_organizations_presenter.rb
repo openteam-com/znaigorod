@@ -121,6 +121,7 @@ class NewOrganizationsPresenter
        send("#{prefix}_results").last_page?
      end
   end
+  alias_method :collection, :clients
 
   def minimal_clients_results_total_count
     30
