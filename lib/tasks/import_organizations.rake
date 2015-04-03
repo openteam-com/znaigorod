@@ -21,6 +21,8 @@ namespace :organizations do
       OrganizationImport::Categories.new(ENV['YML']).import
 
       OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).create_organizations
+
+      OrganizationImport::OrganizationsCategoriesLinker.new.set_categories_for_organizations_with_suborganizations
     else
       puts 'Usage rake organizations:import_from_csv CSV=/path/to/csv YML=/path/to/yml'
     end

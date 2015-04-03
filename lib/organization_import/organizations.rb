@@ -1,6 +1,12 @@
 require 'progress_bar'
 
 module OrganizationImport
+  Organization.class_eval do
+    def should_generate_new_friendly_id?
+      true
+    end
+  end
+
   class Organizations
     attr_accessor :csv_path, :yml_path
 
@@ -90,6 +96,8 @@ module OrganizationImport
               address.save(:validate => false)
               organization.address = address
 
+              # force generate slug
+              organization.send :set_slug unless organization.slug?
               organization.save(:validate => false)
 
               # categories
