@@ -12,6 +12,11 @@ module OrganizationImport
                end
     end
 
+    def import
+      create_categories
+      avoid_extra_nesting
+    end
+
     def create_categories(hash = yml, parent = nil)
       return unless hash
 
@@ -49,6 +54,18 @@ module OrganizationImport
         end
 
         create_categories(data.try(:[], 'subcategories'), category)
+      end
+    end
+
+    def avoid_extra_nesting
+      OrganizationCategory.roots.each do |root_category|
+        root_category.children.each do |child_category|
+          child_category.subtree.each do |nested_category|
+            nested_category.parent = root_category
+
+            nested_category.save
+          end
+        end
       end
     end
 

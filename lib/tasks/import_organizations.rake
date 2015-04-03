@@ -2,7 +2,7 @@ namespace :categories do
   desc 'Import categories from YML=(/path/to/yml)'
   task :import_from_yml => :environment do
     if ENV['YML']
-      OrganizationImport::Categories.new(ENV['YML']).create_categories
+      OrganizationImport::Categories.new(ENV['YML']).import
     else
       puts 'Usage rake organizations:import_categories YML=/path/to/yml'
     end
@@ -18,7 +18,7 @@ namespace :organizations do
   desc 'Import organizations from 2gis CSV=(/path/to/csv) YML=(/path/to/yml)'
   task :import_from_csv => :environment do
     if ENV['CSV'] && ENV['YML']
-      OrganizationImport::Categories.new(ENV['YML']).create_categories
+      OrganizationImport::Categories.new(ENV['YML']).import
 
       OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).create_organizations
     else
@@ -29,7 +29,7 @@ namespace :organizations do
   desc 'Find unmatched organization'
   task :find_unmatched => :environment do
     if ENV['CSV'] && ENV['YML']
-      OrganizationImport::Categories.new(ENV['YML']).create_categories
+      OrganizationImport::Categories.new(ENV['YML']).import
 
       OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).find_unmatched
     else
