@@ -20,7 +20,7 @@
       <div class="filter_checkboxes">
         <% @presenter.cuisines_filter.available.each_with_index do |value, index| %>
           <div class='checkbox'>
-            <%= check_box_tag "cuisine[]", value, (@presenter.cuisines_filter.selected.include?(value)), :id => "cuisine_#{index}" %>
+            <%= check_box_tag "cuisines[]", value, (@presenter.cuisines_filter.selected.include?(value)), :id => "cuisine_#{index}" %>
             <%= label_tag "cuisine_#{index}", @presenter.cuisines_filter.available[index] %>
           </div>
         <% end %>

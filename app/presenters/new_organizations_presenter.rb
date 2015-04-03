@@ -63,12 +63,7 @@ class NewOrganizationsPresenter
   end
 
   def clients_results_total_count
-    @clients_results_total_count ||= Organization.search {
-      keywords query if query
-      with :organization_features, features if features.any?
-      with :organization_category_slugs, category.slug if category
-      with :status, :client
-    }.results.total_count
+    clients_results.total_count
   end
 
   def not_clients_results_total_count
@@ -79,8 +74,12 @@ class NewOrganizationsPresenter
     clients_results_total_count + not_clients_results_total_count
   end
 
+  def tile_view_clients_per_page
+    14
+  end
+
   def clients_per_page
-    view_type == 'tile' ?  14 : clients_results_total_count
+    view_type == 'tile' ? tile_view_clients_per_page : 1_000_000
   end
 
   def not_clients_per_page
@@ -94,11 +93,7 @@ class NewOrganizationsPresenter
       with :organization_category_slugs, category.slug if category
       with :status, :client
 
-      if query
-        keywords query
-      else
-        order_by criterion, directions[criterion]
-      end
+      query ? keywords(query) : order_by(criterion, directions[criterion])
     }.results
   end
 
@@ -109,11 +104,7 @@ class NewOrganizationsPresenter
       with :organization_category_slugs, category.slug if category
       without :status, :client
 
-      if query
-        keywords query
-      else
-        order_by criterion, directions[criterion]
-      end
+      query ? keywords(query) : order_by(criterion, directions[criterion])
     }.results
   end
 
@@ -129,9 +120,31 @@ class NewOrganizationsPresenter
      define_method "#{prefix}_results_last_page?" do
        send("#{prefix}_results").last_page?
      end
+  end
 
-     define_method "#{prefix}_results_current_count" do
-       send("#{prefix}_results_total_count") - (send("#{prefix}_page") * send("#{prefix}_per_page"))
-     end
+  def minimal_clients_results_total_count
+    30
+  end
+
+  def raw_not_clients_page
+    return params[:not_clients_page].to_i if params[:not_clients_page]
+
+    if view_type == 'tile'
+      if params[:not_clients_page]
+        params[:not_clients_page].to_i
+      else
+        clients_results_last_page? ? 1 : params[:not_clients_page].to_i
+      end
+    else
+      clients_results_total_count > minimal_clients_results_total_count ? params[:not_clients_page].to_i : 1
+    end
+  end
+
+  def clients_results_current_count
+    clients_results_total_count - clients_page * clients_per_page
+  end
+
+  def not_clients_results_current_count
+    not_clients_results_total_count - raw_not_clients_page * not_clients_per_page
   end
 end

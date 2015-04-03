@@ -154,7 +154,7 @@ class SaunaHallsPresenter
 
       group :sauna_id if args[:group_by_sauna_id]
 
-      paginate(:page => args[:page], :per_page => args[:per_page])
+      paginate(:page => 1, :per_page => 1_000_000)
     }
   end
 

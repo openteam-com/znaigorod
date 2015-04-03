@@ -4,7 +4,7 @@ class NewSaunyPresenter < NewOrganizationsPresenter
   end
 
   def sauna_halls_presenter
-    @sauna_halls_presenter ||= SaunaHallsPresenter.new(params)
+    @sauna_halls_presenter ||= SaunaHallsPresenter.new(params.merge(:page => clients_page, :per_page => clients_per_page))
   end
   delegate :price_filter_used?, :price,
     :capacity_filter_used?, :capacity_hash,
@@ -31,8 +31,8 @@ class NewSaunyPresenter < NewOrganizationsPresenter
                          end
   end
 
-  def clients_per_page
-    view_type == 'tile' ?  9 : clients_results_total_count
+  def tile_view_clients_per_page
+    9
   end
 
   def clients_organization_ids
@@ -41,14 +41,6 @@ class NewSaunyPresenter < NewOrganizationsPresenter
     ids = Sauna.where(:id => sauna_ids).pluck(:organization_id)
 
     ids.any? ? ids : nil
-  end
-
-  def clients_results_total_count
-    clients_organization_ids.count rescue 0
-  end
-
-  def not_clients_results_total_count
-    not_clients_organization_ids.count
   end
 
   def not_clients_results

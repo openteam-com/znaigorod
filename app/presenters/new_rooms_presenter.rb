@@ -1,6 +1,6 @@
 class NewRoomsPresenter < NewOrganizationsPresenter
   def rooms_presenter
-    @rooms_presenter ||= RoomsPresenter.new(:hotel, params)
+    @rooms_presenter ||= RoomsPresenter.new(:hotel, params.merge(:page => clients_page, :per_page => clients_per_page))
   end
   delegate :price_min, :price_max, :available_price_min, :available_price_max,
     :capacity, :capacity_min, :capacity_max,
@@ -29,12 +29,8 @@ class NewRoomsPresenter < NewOrganizationsPresenter
     ids.any? ? ids : nil
   end
 
-  def clients_per_page
-    view_type == 'tile' ?  9 : clients_results_total_count
-  end
-
-  def clients_results_total_count
-    clients_organization_ids.count rescue 0
+  def tile_view_clients_per_page
+    9
   end
 
   def not_clients_results

@@ -92,8 +92,8 @@
           </div>
         <% end %>
 
-        <% if @presenter.clients_results_total_count > 30 %>
-          <%= link_to "Еще организации (#{@presenter.not_clients_results_total_count})", params.merge(:not_client_page => 1),
+        <% if @presenter.clients_results_total_count > @presenter.minimal_clients_results_total_count %>
+          <%= link_to "Еще организации (#{@presenter.not_clients_results_current_count})", params.merge(:not_clients_page => 1),
             :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-small pagination' %>
         <% else %>
           <%= render partial: 'not_client_list_view' unless (@presenter.special_case? && @presenter.advanced_filter_used?) %>
