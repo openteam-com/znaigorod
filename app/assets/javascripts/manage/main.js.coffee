@@ -24,6 +24,7 @@ $ ->
   init_contest() if $('#contest_og_image').length
   init_organization() if $('.sections').length || $('.js-section-show')
   init_organization_form() if $('.organization_organization_categories').length
+  init_organization_categories() if $('.root').length
   init_photogallery() if $('#photogallery_og_image').length
   initMyReviews() if $('.review_form').length
   initPromoteAfisha() if $('.promoted_link').length

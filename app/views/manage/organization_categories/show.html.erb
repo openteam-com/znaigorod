@@ -1,0 +1,27 @@
+<h1><%= @organization_category.title %> <%= link_to '( Редактировать )', edit_manage_organization_category_path(@organization_category) %></h1>
+<div>
+  <span class="label">SLUG:</span>
+  <span class="value"><%= @organization_category.slug %></span>
+</div>
+<div>
+  <span class="label">Изображение:</span>
+  <span class="value">
+    <% if @organization_category.default_image_url %>
+      <%= image_tag @organization_category.default_image_url  %>
+    <% else %>
+      Нет изображения
+    <% end %>
+  </span>
+</div>
+<div>
+  <span class="label">Hover - Изображение:</span>
+  <span class="value">
+    <% if @organization_category.hover_image_url %>
+      <%= image_tag @organization_category.hover_image_url  %>
+    <% else %>
+      Нет изображения
+    <% end %>
+  </span>
+</div>
+<p><%= link_to 'Удалить', manage_organization_category_path(@organization_category), :method => :delete, :confirm => 'Вы уверены?' %> </p>
+<p><%= link_to 'Назад', manage_organization_categories_path %></p>

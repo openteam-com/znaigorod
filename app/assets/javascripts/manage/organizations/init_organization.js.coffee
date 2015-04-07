@@ -125,6 +125,11 @@ check_root = (root, checked, checkbox_count) ->
     root.find('input').prop('checked', false)
     root.find('input').prop('indeterminate', true) # indeterminate check for root
 
+@init_organization_categories = () ->
+  $('.root_toggler').change ->
+    $('.child').toggleClass('show hide')
+    false
+
 @initMarkitup = ->
   $('.markitup').markItUp(markItUpSettings())
   handleImageButtonClick()

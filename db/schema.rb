@@ -680,9 +680,19 @@ ActiveRecord::Schema.define(:version => 20150416034900) do
   create_table "organization_categories", :force => true do |t|
     t.string   "title"
     t.string   "ancestry"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "slug"
+    t.string   "default_image_file_name"
+    t.string   "default_image_content_type"
+    t.integer  "default_image_file_size"
+    t.datetime "default_image_updated_at"
+    t.text     "default_image_url"
+    t.string   "hover_image_file_name"
+    t.string   "hover_image_content_type"
+    t.integer  "hover_image_file_size"
+    t.datetime "hover_image_updated_at"
+    t.text     "hover_image_url"
   end
 
   add_index "organization_categories", ["ancestry"], :name => "index_organization_categories_on_ancestry"

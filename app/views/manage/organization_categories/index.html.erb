@@ -1,0 +1,16 @@
+<h1>Категории организаций <%= link_to '(Новая категория)', new_manage_organization_category_path %></h1>
+<div class="organization_organization_categories">
+  <% OrganizationCategory.roots.each do |root| %>
+    <div class="label">
+      <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
+      <%= link_to root.title, manage_organization_category_path(root) %>
+    </div>
+    <div class="children closed">
+      <% root.children.each do |child| %>
+        <div class="label">
+          <%= link_to child.title, manage_organization_category_path(child) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

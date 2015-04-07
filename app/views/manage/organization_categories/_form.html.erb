@@ -1,0 +1,16 @@
+<%= simple_form_for [:manage, @organization_category] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :slug %>
+  <div class="root">
+    <%= label_tag 'Корневая категория' %>
+    <%= check_box_tag 'organization_category[root]', 'root', (@organization_category.is_root? && !@organization_category.new_record?), :class => 'root_toggler'%>
+  </div>
+  <div class="child <%= (@organization_category.is_root? && !@organization_category.new_record?) ? 'hide' : 'show'%>">
+    <%= f.input :parent, :collection => OrganizationCategory.roots, :selected => @organization_category.parent.object_id,
+      :label_method => :title, :value_method => :id %>
+    <%= f.input :default_image %>
+    <%= f.input :hover_image %>
+  </div>
+  <%= f.submit %>
+  <%= link_to 'Назад', manage_organization_categories_path %>
+<% end %>

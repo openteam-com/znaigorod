@@ -50,5 +50,6 @@ end
 #  afisha_block_title            :string(255)      default("Афиша")
 #  reviews_block_title           :string(255)      default("Обзоры")
 #  comments_block_title          :string(255)      default("Отзывы")
+#  csv_id                        :integer
 #
 

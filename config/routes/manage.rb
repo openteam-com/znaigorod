@@ -195,6 +195,10 @@ Znaigorod::Application.routes.draw do
       resources :teaser_items, :only =>[:edit, :update]
     end
 
+    resources :organization_categories do
+      resources :features, :except => [:show]
+    end
+
     root :to => 'organizations#index'
   end
 end
