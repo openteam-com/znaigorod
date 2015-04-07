@@ -22,6 +22,9 @@ class OrganizationCategory < ActiveRecord::Base
 
   has_many :features, :dependent => :destroy
 
+  has_attached_file :default_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+  has_attached_file :hover_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
   validates :title, presence: true, uniqueness: { scope: :ancestry }
   validates_presence_of :slug
 
