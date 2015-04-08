@@ -9,3 +9,19 @@
     <%= render :partial => 'tree_view' %>
   <% end %>
 <% end %>
+<div class="like_this">
+  <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
+</div>
+
+<% if @reviews.present? %>
+  <div class="organization_reviews">
+    <div class='reviews_title '>
+      Обзоры
+    </div>
+    <div class='suborganization_info related-reviews'>
+      <ul class='posters'>
+        <%= render :partial => 'reviews/posters', locals: { collection: @reviews, height: '120', width: '184' } %>
+      </ul>
+    </div>
+  </div>
+<% end %>

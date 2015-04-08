@@ -12,6 +12,7 @@ class OrganizationsController < ApplicationController
       format.html {
         @presenter = OrganizationsPresenterBuilder.new(params).build
         @categories = @presenter.category ? @presenter.category.root.children : OrganizationCategory.used_roots
+        @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
 
         if request.xhr?
           if @presenter.view_type == 'list'

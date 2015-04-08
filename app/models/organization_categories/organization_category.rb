@@ -9,7 +9,6 @@ class OrganizationCategory < ActiveRecord::Base
   has_many :organization_category_items, :dependent => :destroy
 
   has_many :review_category_items, :dependent => :destroy
-  has_many :reviews, :through => :review_category_items
 
   has_many :features, :dependent => :destroy
 
@@ -40,6 +39,10 @@ class OrganizationCategory < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     slug? ? false : true
+  end
+
+  def reviews
+    Review.joins(:organization_categories).where(:organization_categories => { :id => subtree_ids }).uniq
   end
 
   def organizations
