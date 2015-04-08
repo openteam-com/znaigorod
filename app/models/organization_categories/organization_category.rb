@@ -19,16 +19,23 @@ class OrganizationCategory < ActiveRecord::Base
   validates :title, presence: true, uniqueness: { scope: :ancestry }
   validates_presence_of :slug
 
+  after_update :reindex_related_organizations
+
   friendly_id :title, :use => :slugged
 
   has_ancestry
 
-  def root_category?
-    root.present? ? true : false
-  end
-
   def self.used_roots
     OrganizationCategory.roots.where('title NOT IN (?)', ['Автосервис', 'Туристические агентства','Магазины'])
+  end
+
+  def reindex_related_organizations
+    organizations.each do |org|
+      org.delay.index
+      org.meal.delay.index if org.meal
+      org.sauna.sauna_halls.map{ |sauna_hall| sauna_hall.delay.index } if org.sauna
+      org.hotel.rooms.map{ |room| room.delay.index } if org.hotel
+    end
   end
 
   def should_generate_new_friendly_id?

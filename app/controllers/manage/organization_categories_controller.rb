@@ -2,7 +2,7 @@ class Manage::OrganizationCategoriesController < Manage::ApplicationController
   authorize_resource
 
   def create
-    @organization_category = params[:organization_category][:root] ?
+    @organization_category = params[:root] ?
                               OrganizationCategory.new(params[:organization_category].except(:parent)) :
                               OrganizationCategory.find(params[:organization_category][:parent]).children.new(params[:organization_category].except(:parent))
 

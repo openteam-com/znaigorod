@@ -3,10 +3,10 @@
   <%= f.input :slug %>
   <div class="root">
     <%= label_tag 'Корневая категория' %>
-    <%= check_box_tag 'organization_category[root]', 'root', (@organization_category.is_root? && !@organization_category.new_record?), :class => 'root_toggler'%>
+    <%= check_box_tag 'root', 'root', (@organization_category.is_root? && !@organization_category.new_record?), :class => 'root_toggler'%>
   </div>
   <div class="child <%= (@organization_category.is_root? && !@organization_category.new_record?) ? 'hide' : 'show'%>">
-    <%= f.input :parent, :collection => OrganizationCategory.roots, :selected => @organization_category.parent.object_id,
+    <%= f.input :parent, :collection => OrganizationCategory.roots, :selected => @organization_category.root.id,
       :label_method => :title, :value_method => :id %>
     <%= f.input :default_image %>
     <%= f.input :hover_image %>
