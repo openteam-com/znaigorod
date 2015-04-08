@@ -184,21 +184,16 @@ class Organization < ActiveRecord::Base
   end
 
   def most_valueable_organization_category
-    return '' if organization_categories.empty?
-
-    Organization.search {
-      facet :organization_category_slugs, :only => organization_category_uniq_slugs, :sort => :count
-    }.facet(:organization_category_slugs).rows.first.value
+    organization_categories.sort! { |a,b| b.organizations.count <=> a.organizations.count}.first
   end
 
-  def map_image_name(kind, categories = [])
-    return :teatry
+  def map_image_name(slug, image_type = 'default')
+    return most_valueable_organization_category.send("#{image_type}_image_url") unless slug
 
-    return most_valueable_organization_category.from_russian_to_param unless kind || categories
+    organization_category = OrganizationCategory.find(slug)
 
-    return organization_categories.find_by_title!(categories.first.mb_chars.capitalize).title.from_russian_to_param if (categories || []).any?
-
-    organization_categories.detect { |c| c.kind == kind }.try(:downcased_title).try(:from_russian_to_param)
+    organization_category.is_root? ? most_valueable_organization_category.send("#{image_type}_image_url") :
+      organization_category.send("#{image_type}_image_url")
   end
 
   searchable do

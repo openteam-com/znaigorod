@@ -19,8 +19,12 @@
           <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{@presenter.view_type}_#{item.id}", expires_in: 10.minutes) do %>
             <li class='list_view_organization_item js-organization-item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
               data-image="<%= item.logotype_url %>" data-slug="<%= item.slug %>"
-              data-icon='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(params[:kind], params[:categories])}.png") %>'
-              data-icon-hover='<%= asset_path("/assets/public/organizations_list_view/#{item.map_image_name(params[:kind], params[:categories])}_hover.png") %>'
+              data-icon='<%= item.map_image_name(params[:slug], 'default') ?
+                item.map_image_name(params[:slug], 'default') :
+                asset_path("/assets/public/organizations_list_view/teatry.png") %>'
+              data-icon-hover='<%= item.map_image_name(params[:slug], 'hover') ?
+                item.map_image_name(params[:slug], 'hover') :
+                asset_path("/assets/public/organizations_list_view/teatry_hover.png") %>'
               data-width='35' data-height='50'>
 
               <% if item.sms_claimable? %>

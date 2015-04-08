@@ -9,7 +9,7 @@ Znaigorod::Application.routes.draw do
 
   get '/:slug' => 'organizations#index',
     :constraints => { :slug => Regexp.new(OrganizationCategory.pluck(:slug).join('|')) },
-    :as => :organizations_by_category # rescue true # NOTE: remove rescue after import
+    :as => :organizations_by_category #rescue true # NOTE: remove rescue after import
 
   resources :organizations, :only => [:index, :show] do
     get :in_bounding_box, :on => :collection
