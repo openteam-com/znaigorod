@@ -1,0 +1,7 @@
+<%= simple_form_for [:manage, @feature.organization_category, @feature] do |f| %>
+  <%= f.input :title %>
+  <%= f.submit %>
+  <%= link_to 'Назад', manage_organization_category_path(@feature.organization_category) %>
+  <%= link_to 'Удалить', manage_organization_category_feature_path(@feature.organization_category, @feature),
+                          :method => :delete, :confirm => 'Вы уверены?' unless @feature.new_record?%>
+<% end %>

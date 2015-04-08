@@ -2,6 +2,7 @@ class Feature < ActiveRecord::Base
   attr_accessible :title
 
   belongs_to :organization_category
+  validates_presence_of :title
 
   scope :ordered_by_title, -> { order :title }
 end
