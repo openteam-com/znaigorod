@@ -283,11 +283,11 @@
     </div>
   <% end %>
 
-  <% if @presenter.collection.any? && !@organization.client? %>
+  <% if @presenter.nearest_clients.any? && !@organization.client? %>
     <div class='suborganization_info next_organization'>
       <div class='title'>Рекомендуем</div>
       <ul class='posters js-paginable-list' data-item-width="220">
-        <% @presenter.collection.each do |item| %>
+        <% @presenter.nearest_clients.each do |item| %>
           <li class="item_organization">
             <%= render partial: 'organizations/organization', locals: { organization: item, width: 150, height: 150 } %>
           </li>

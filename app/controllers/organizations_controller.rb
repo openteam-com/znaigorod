@@ -14,6 +14,14 @@ class OrganizationsController < ApplicationController
         @categories = @presenter.category ? @presenter.category.root.children : OrganizationCategory.used_roots
         @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
 
+        add_breadcrumb "Все организации", organizations_path
+        if @presenter.category.is_root?
+          add_breadcrumb @presenter.category.root.title, organizations_by_category_path(@presenter.category.root)
+        else
+          add_breadcrumb @presenter.category.root.title, organizations_by_category_path(@presenter.category.root)
+          add_breadcrumb @presenter.category.title, organizations_by_category_path(@presenter.category)
+        end
+
         if request.xhr?
           if @presenter.view_type == 'list'
             render partial: 'not_client_list_view', layout: false
@@ -66,14 +74,8 @@ class OrganizationsController < ApplicationController
         @organization.delay(:queue => 'critical').create_page_visit(request.session_options[:id], request.user_agent, current_user)
         @visits = @organization.visits.page(1)
 
-        #case @organization.priority_suborganization_kind
-        #when 'sauna'
-          #@presenter = SaunaHallsPresenter.new(:order_by => "rating")
-        #else
-          #klass = "#{@organization.priority_suborganization_kind.pluralize}_presenter".classify.constantize
-          #@presenter = klass.new(:categories => [@organization.priority_suborganization.try(:categories).try(:first).try(:mb_chars).try(:downcase)],:lat => @organization.latitude, :lon => @organization.longitude, :radius => 100, :order_by => 'nearness', :per_page => 3 )
-        #end
-        @presenter = NewOrganizationsPresenter.new({})
+        @presenter = NewOrganizationsPresenter.new({:latitude => @organization.latitude.to_f, :longitude => @organization.longitude.to_f,
+                                                    :radius => 50, :slug => @organization.most_valueable_organization_category.slug})
 
         cookie = cookies['_znaigorod_afisha_list_settings'].to_s
         settings_from_cookie = {}

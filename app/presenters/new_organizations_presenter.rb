@@ -1,5 +1,5 @@
 class NewOrganizationsPresenter
-  attr_accessor :params, :category, :view_type, :query, :features
+  attr_accessor :params, :category, :view_type, :query, :features, :latitude, :longitude, :radius
 
   def initialize(params)
     @params = params
@@ -7,6 +7,9 @@ class NewOrganizationsPresenter
     @view_type = params[:view_type] || 'list'
     @query = params[:search_query].present? ? params[:search_query] : nil
     @features = params[:features] || []
+    @latitude ||= params[:latitude]
+    @longitude ||= params[:longitude]
+    @radius ||= params[:radius]
   end
 
   # TODO: implement
@@ -84,6 +87,17 @@ class NewOrganizationsPresenter
 
   def not_clients_per_page
     42
+  end
+
+  def nearest_clients
+    @clients_results ||= Organization.search {
+      paginate :page => 1, :per_page => 4
+      with :status, :client
+      with :organization_category_slugs, category.slug if category
+      with(:location ).in_radius(latitude, longitude, radius)
+    }.results
+
+    OrganizationDecorator.decorate @clients_results
   end
 
   def clients_results
