@@ -40,8 +40,7 @@ module OrganizationImport
         csv_rows_by(id).group_by(&:address).each do |address, csv_rows|
           csv_address = CsvAddress.new(address)
 
-          title_for_similar = csv_rows.first.title.split(',').first
-          similar = SimilarOrganizations.new(title_for_similar, csv_address.street, csv_address.house, id)
+          similar = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id)
 
           array += similar.results
         end
@@ -71,9 +70,7 @@ module OrganizationImport
             csv_address = CsvAddress.new(raw_address)
 
             if categories.any?
-              title_for_similar = csv_rows.first.title.split(',').first
-
-              possible_organizations = SimilarOrganizations.new(title_for_similar, csv_address.street, csv_address.house, id).results
+              possible_organizations = SimilarOrganizations.new(csv_rows.first.title, csv_address.street, csv_address.house, id).results
 
               # organization
               organization = possible_organizations.any? ? possible_organizations.first : Organization.new

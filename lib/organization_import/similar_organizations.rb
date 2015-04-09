@@ -14,14 +14,7 @@ module OrganizationImport
     end
 
     def searched
-      @searched ||= begin
-                      search = Organization.search(:include => :address) do
-                      keywords title, :fields => :title_ru
-                      paginate :page => 1, :per_page => 1_000
-                      end
-
-                      search.results
-                    end
+      @searched ||= Organization.where(:title => title)
     end
 
     def csv_id_matched?(org)

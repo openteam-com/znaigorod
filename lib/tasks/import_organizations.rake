@@ -20,6 +20,8 @@ namespace :organizations do
     if ENV['CSV'] && ENV['YML']
       OrganizationImport::Categories.new(ENV['YML']).import
 
+      Organization.all.each { |org| org.features += OrganizationImport::Features.new(org.feature).features }
+
       OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).create_organizations
 
       OrganizationImport::OrganizationsCategoriesLinker.new.set_categories_for_organizations_with_suborganizations
