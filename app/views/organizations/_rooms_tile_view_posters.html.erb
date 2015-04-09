@@ -19,7 +19,7 @@
     <ul class='rooms need_scrolling'>
         <% organization.hotel.ordered_rooms.each do |room| %>
           <li>
-            <%= render :partial => 'rooms/room', :locals => { :room => RoomDecorator.decorate(room) } %>
+            <%= render :partial => 'room', :locals => { :room => RoomDecorator.decorate(room) } %>
           </li>
         <% end %>
     </ul>
