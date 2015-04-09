@@ -15,11 +15,9 @@ class OrganizationsController < ApplicationController
         @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
 
         add_breadcrumb "Все организации", organizations_path
-        if @presenter.category.is_root?
+        if @presenter.category
           add_breadcrumb @presenter.category.root.title, organizations_by_category_path(@presenter.category.root)
-        else
-          add_breadcrumb @presenter.category.root.title, organizations_by_category_path(@presenter.category.root)
-          add_breadcrumb @presenter.category.title, organizations_by_category_path(@presenter.category)
+          add_breadcrumb @presenter.category.title, organizations_by_category_path(@presenter.category) if !@presenter.category.is_root?
         end
 
         if request.xhr?
