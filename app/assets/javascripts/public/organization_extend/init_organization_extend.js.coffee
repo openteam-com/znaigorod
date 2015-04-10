@@ -198,37 +198,38 @@
     })
     true
 
+
+  # state, h - highlight
+  # state, n - not highlight
+  init_hl_icons_on_map = (target, state = 'h', clusterer) ->
+    objects = clusterer.getGeoObjects()
+    objects.each (index, value) ->
+      slug = index.properties.get('id')
+      if $(target).attr('data-slug') == slug
+        if state == 'n'
+          index.options.set('iconImageHref', $(target).attr('data-icon'))
+          index.options.set('zIndex', 100)
+        else
+          index.options.set('iconImageHref', $(target).attr('data-icon-hover'))
+          index.options.set('zIndex', 1000)
+
+    true
+
+  li_hover = (clusterer) ->
+    $('.js-organization-item').each (index, item) ->
+      $(item).hover (e) ->
+        init_hl_icons_on_map($(this), 'h', clusterer)
+      , (e) ->
+        init_hl_icons_on_map($(this), 'n', clusterer)
+
+    true
+
 @init_focus_for_search_button = () ->
   $('.js-search-field').focusin ->
     $('.js-search-button').toggleClass('selected')
 
   $('.js-search-field').focusout ->
     $('.js-search-button').toggleClass('selected')
-
-# state, h - highlight
-# state, n - not highlight
-init_hl_icons_on_map = (target, state = 'h', clusterer) ->
-  objects = clusterer.getGeoObjects()
-  objects.each (index, value) ->
-    slug = index.properties.get('id')
-    if $(target).attr('data-slug') == slug
-      if state == 'n'
-        index.options.set('iconImageHref', $(target).attr('data-icon'))
-        index.options.set('zIndex', 100)
-      else
-        index.options.set('iconImageHref', $(target).attr('data-icon-hover'))
-        index.options.set('zIndex', 1000)
-
-  true
-
-li_hover = (clusterer) ->
-  $('.js-organization-item').each (index, item) ->
-    $(item).hover (e) ->
-      init_hl_icons_on_map($(this), 'h', clusterer)
-    , (e) ->
-      init_hl_icons_on_map($(this), 'n', clusterer)
-
-  true
 
 @init_delimiter_on_sections = () ->
   $('.js-opener-btn').parent().nextAll().slideUp()

@@ -120,6 +120,7 @@ $ ->
 
 $(window).load ->
   init_affix() if $('.js-sidebar').length
+  init_fixed_menu() if $('.js-fixed-menu').length
   init_3dtourme_stat() if $('a.3dtourme').length
   init_afisha_map() if $('.show_map_link').length || $('.feeds').length
   init_afisha_yandex_map() if $('.yandex_map .map').length

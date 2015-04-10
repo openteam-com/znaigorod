@@ -9,7 +9,7 @@
 <% end %>
 
 <div class='organization_show'>
-  <div class='left'>
+  <div class='left js-fixed-menu'>
     <div class='image'>
       <% if @organization.client? %>
         <% if @organization.logotype_url? %>
@@ -34,21 +34,15 @@
     <% end %>
 
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
+    <div class="organization_show_navs">
+      <ul>
+        <li><%= link_to 'Photo', '#photo_block', class: :js_fixed_menu_item %></li>
+        <li><%= link_to 'Photo', '#discounts_block', class: :js_fixed_menu_item %></li>
+        <li><%= link_to 'Photo', '#reviews_block', class: :js_fixed_menu_item %></li>
+        <li><%= link_to 'Photo', '#afisha_block', class: :js_fixed_menu_item %></li>
+      </ul>
+    </div>
 
-    <% @organization.offered_discounts.published.each do |discount| %>
-      <div class="offers_wrapper">
-        <div class="info">
-          <h3><%= link_to truncate(discount.title, :length => 35), discount_path(discount), :title => discount.title %></h3>
-          <%= link_to image_tag(resized_image_url(discount.poster_url, 200, 149), :size => '200x149', :title => discount.title.text_gilensize, :alt => discount.title.text_gilensize),
-            discount_path(discount) %>
-        </div>
-
-        <%= render :partial => 'offers/offers_block', :locals => { :discount => discount, :show_help => true } %>
-      </div>
-    <% end %>
-
-    <%= render :partial => 'organizations/discounts', :locals => { :collection => @certificate_presenter.decorated_collection } if @certificate_presenter.collection.any? %>
-    <%= render :partial => 'organizations/discounts', :locals => { :collection => @coupon_presenter.decorated_collection } if @coupon_presenter.collection.any? %>
   </div>
 
   <div class='right'>
@@ -147,7 +141,7 @@
 
 
     <div class='photogallery suborganization_info'>
-      <div class="title">
+      <div class="title" id='photo_block'>
         <%= @organization.photo_block_title %>
       </div>
       <% if @organization.client? %>
@@ -191,7 +185,7 @@
         <% @organization.sections.order_by_position.each do |section| %>
           <% if section.section_pages.any? %>
             <div class="section <%= section.title.from_russian_to_param %>">
-              <div class="title"><%= content_tag :h2, section.title %></div>
+              <div class="title" id='<%= section.title.from_russian_to_param %>'><%= content_tag :h2, section.title %></div>
               <% section.section_pages.order_by_position.each do |page| %>
                 <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>">
                   <% if page.poster_image? %>
@@ -216,7 +210,7 @@
   <% end %>
 
   <div class="suborganization_info discount_details">
-    <div class="title">
+    <div class="title" id='discounts_block'>
       <%= @organization.discounts_block_title %>
       <span class='link'><%= link_to 'Добавить скидку', help_my_discounts_path %></span>
     </div>
@@ -232,7 +226,7 @@
   </div>
 
   <div class='suborganization_info afisha_content js-button-pagination'>
-    <div class='title'>
+    <div class='title' id='afisha_block'>
       <%= @organization.afisha_block_title %>
       <span class='link'><%= link_to 'Добавить афишу', new_my_afisha_path %></span>
     </div>
@@ -244,7 +238,7 @@
   </div>
 
   <div class='suborganization_info related-reviews'>
-    <div class='title'>
+    <div class='title' id='reviews_block'>
       <%= @organization.reviews_block_title %>
       <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>
     </div>

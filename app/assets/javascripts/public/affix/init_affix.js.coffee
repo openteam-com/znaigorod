@@ -65,3 +65,27 @@
     $('> a', $("a[href=#{window.location.hash}]").parents('li')).addClass('active')
 
   return
+
+@init_fixed_menu = () ->
+  sidebar = $('.js-fixed-menu')
+
+  sidebarOffset = 10
+  sidebarTop = sidebar.offset().top
+
+  $(window).scroll ->
+    scrollTop = $(this).scrollTop()
+    windowTop = scrollTop + sidebarOffset
+
+    if sidebarTop < windowTop
+      sidebar.css
+        'position': 'fixed'
+        'top': "#{sidebarOffset}px"
+    else
+      sidebar.css
+        'position': 'static'
+
+  $('.js_fixed_menu_item').click ->
+    element = $(this).attr('href')
+    $.scrollTo element, 750
+
+    false
