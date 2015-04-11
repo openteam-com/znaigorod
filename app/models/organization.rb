@@ -63,6 +63,8 @@ class Organization < ActiveRecord::Base
   has_one :address,             :dependent => :destroy
   has_one :organization_stand,  :dependent => :destroy
 
+  has_many :organization_navigations
+
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :client_economy, :client_standart, :client_premium, :non_cooperation, :debtor],
               default: :fresh, predicates: true

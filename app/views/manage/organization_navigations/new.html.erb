@@ -1,0 +1,6 @@
+<%= simple_form_for resource, url: manage_organization_organization_navigations_path(params[:organization_id]) do |f| %>
+  <%= f.input :title, label: 'Заголовок' %>
+  <%= f.input :href, label: 'Что добавить', :collection => Organization.find(params[:organization_id]).sections %>
+  <%= f.input :organization_id, as: :hidden, input_html: { value: params[:organization_id] } %>
+  <%= f.submit 'Сохранить' %>
+<% end %>

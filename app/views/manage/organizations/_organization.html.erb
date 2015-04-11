@@ -295,7 +295,6 @@
   </ul>
 </div>
 
-
 <div class="sections_wrapper">
   <h3>Разделы</h3>
   <%= link_to "Новый раздел", "#", class: "new_section_link" %>
@@ -319,6 +318,13 @@
     </div>
   </form>
 </div>
+</div>
+
+<div class="navigation_wrapper">
+  <h3>
+    Навигация внутри заведения
+  </h3>
+  <%= link_to 'Добавить элемент навигации', new_manage_organization_organization_navigation_path(resource) %>
 </div>
 
 <div class='images'>

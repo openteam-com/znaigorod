@@ -115,6 +115,8 @@ Znaigorod::Application.routes.draw do
 
       post 'sort', :on => :collection
 
+      resources :organization_navigations
+
       resource :meal do
         resources :menus, :except => [:index, :show]
       end
