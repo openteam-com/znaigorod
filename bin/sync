@@ -3,13 +3,21 @@
 COLOR="\033[1;32m"
 ENDCOLOR="\033[0m"
 
+stage="$1"
+
+if [[ -z "$stage" ]]; then
+  stages=`find config/deploy -type f -printf "%f\n" | sed "s/\(.*\)\..*/\1/" | tr "\\n" " "`
+  echo "No stage specified. Please specify one of: $stages"
+  exit 0
+fi
+
 echo -e "$COLOR-> rake db:drop & db:create $ENDCOLOR"
 bin/rake db:drop db:create
 
-echo -e "$COLOR-> cap $1 db:pull $ENDCOLOR"
-yes | bin/cap $1 db:pull
+echo -e "$COLOR-> cap "$stage" db:pull $ENDCOLOR"
+yes | bin/cap "$stage" db:pull
 echo -e "$COLOR-> rake db:migrate $ENDCOLOR"
 bin/rake db:migrate
 
-echo -e "$COLOR-> cap $1 sunspot:pull $ENDCOLOR"
-bin/cap $1 sunspot:pull
+echo -e "$COLOR-> cap "$stage" sunspot:pull $ENDCOLOR"
+bin/cap "$stage" sunspot:pull
