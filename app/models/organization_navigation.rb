@@ -1,10 +1,12 @@
 class OrganizationNavigation < ActiveRecord::Base
-  attr_accessible :title, :href, :position, :organization_id
+  attr_accessor :skip_callbacks
+
+  attr_accessible :title, :href, :position, :organization_id, :skip_callbacks
 
   validates_presence_of :title, :href, :organization_id
 
-  before_save :set_original_href
-  before_save :set_href
+  before_save :set_original_href, :unless => :skip_callbacks
+  before_save :set_href, :unless => :skip_callbacks
 
   belongs_to :organization
 

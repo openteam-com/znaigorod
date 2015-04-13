@@ -27,7 +27,7 @@ class Manage::OrganizationNavigationsController < Manage::ApplicationController
   def sort
     begin
       params[:position].each do |id, position|
-        OrganizationNavigation.find(id).update_attribute :position, position
+        OrganizationNavigation.find(id).update_attributes(:position => position, :skip_callbacks => true)
       end
     rescue Exception => e
       render :text => e.message, :status => 500 and return

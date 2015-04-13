@@ -332,7 +332,7 @@
         <li>
           <div class='sortable_handle'>&#8597;</div>
           <%= hidden_field :position, nav.id, :class => :position, :value => nav.position %>
-          <%= link_to nav.title, edit_manage_organization_organization_navigation_path(params[:id], nav.id) %> -> <%= nav.href %>
+          <%= link_to nav.title, edit_manage_organization_organization_navigation_path(params[:id], nav.id) %> -> <%= nav.href %> -> <%= nav.original_href %>
         </li>
       <% end %>
     </ul>
