@@ -24,6 +24,12 @@ class Manage::OrganizationNavigationsController < Manage::ApplicationController
     }
   end
 
+  def destroy
+    destroy! {
+      render :nothing => true, :status => 200 and return if request.xhr?
+    }
+  end
+
   def sort
     begin
       params[:position].each do |id, position|
