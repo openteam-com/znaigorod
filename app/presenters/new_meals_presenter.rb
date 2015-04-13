@@ -18,7 +18,7 @@ class NewMealsPresenter < NewOrganizationsPresenter
                            search = Meal.search(:include => :organization) {
                              paginate :page => clients_page, :per_page => clients_per_page
 
-                             #with :organization_features, features if features.any?
+                             with :meal_features, features if features.any?
                              with :meal_cuisine, cuisines if cuisines.any?
                              with :organization_category_slugs, category.slug if category
                              with :status, :client
@@ -39,7 +39,7 @@ class NewMealsPresenter < NewOrganizationsPresenter
                                search = Meal.search(:include => :organization) {
                                  paginate :page => not_clients_page, :per_page => not_clients_per_page
 
-                                 #with :organization_features, features if features.any?
+                                 with :meal_features, features if features.any?
                                  with :meal_cuisine, cuisines if cuisines.any?
                                  with :organization_category_slugs, category.slug if category
                                  without :status, :client

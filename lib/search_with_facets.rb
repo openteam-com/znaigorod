@@ -37,6 +37,7 @@ module SearchWithFacets
         string(:status) { organization_status }
         string(:positive_activity_date) { organization_positive_activity_date }
         string(:organization_category_slugs, :multiple => true) { organization.organization_category_uniq_slugs }
+        string(:meal_features, :multiple => true) { organization.features.pluck(:title).uniq }
 
         text :title, :using => :organization_title
 

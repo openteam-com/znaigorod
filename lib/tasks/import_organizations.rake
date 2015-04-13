@@ -10,9 +10,25 @@ namespace :categories do
 end
 
 namespace :organizations do
-  desc 'Connect organizations with features'
-  task :connect_with_features => :environment do
+  desc 'Update SLUGS'
+  task :update_slugs => :environment do
+    YAML.load_file(ENV['YML']).each do |key, value|
+      OrganizationCategory.find(value).update_attribute(:slug, key)
+    end
+  end
+
+  desc 'Add features from YML'
+  task :add_features => :environment do
+    YAML.load_file(ENV['YML']).each do |key, value|
+      org_category = OrganizationCategory.where(slug: key).first
+      if org_category
+        value['features'].map{ |feature| org_category.features.create(title: feature.capitalized) } if value['features']
+        value['offers'].map{ |offer| org_category.features.create(title: offer.capitalized) } if value['offers']
+      end
+    end
+
     Organization.all.each { |org| org.features += OrganizationImport::Features.new(org.feature).features }
+    Organization.all.each { |org| org.features += OrganizationImport::Features.new(org.offer).features }
   end
 
   desc 'Import organizations from 2gis CSV=(/path/to/csv) YML=(/path/to/yml)'
@@ -39,11 +55,6 @@ namespace :organizations do
     else
       puts 'Usage rake organizations:find_unmatched CSV=/path/to/csv YML=/path/to/yml'
     end
-  end
-
-  desc 'Link organizations with categories'
-  task :set_categories => :environment do
-    OrganizationImport::OrganizationsCategoriesLinker.new.set_categories_for_organizations_with_suborganizations
   end
 end
 

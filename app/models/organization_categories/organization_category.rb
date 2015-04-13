@@ -59,11 +59,7 @@ class OrganizationCategory < ActiveRecord::Base
   end
 
   def all_features
-    if is_root?
-      features
-    else
-      Feature.where :id => root.feature_ids + feature_ids
-    end
+    is_root? ? features : Feature.where(:id => root.feature_ids + feature_ids)
   end
 
   def downcased_title

@@ -146,6 +146,7 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def work_schedule_for_list_view
+    return "Гибкий график работы" if schedules.empty?
     from = schedules.pluck(:from).uniq
     to   = schedules.pluck(:to).uniq
     week_day = Time.zone.today.cwday

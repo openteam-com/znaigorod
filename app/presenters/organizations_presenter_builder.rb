@@ -26,12 +26,12 @@ class OrganizationsPresenterBuilder
 
   def special_classes
     results = {
-      'sauny' => NewSaunyPresenter,
+      'saunas' => NewSaunyPresenter,
       'hostely' => NewRoomsPresenter,
       'gostevye-doma' => NewRoomsPresenter,
       'bazy-otdyha' => NewRoomsPresenter,
       'gostinitsy' => NewRoomsPresenter,
-      'kafe-i-restorany' => NewMealsPresenter
+      'kafe_tomska' => NewMealsPresenter
     }
 
     results
