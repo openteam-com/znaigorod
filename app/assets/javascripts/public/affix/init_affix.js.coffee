@@ -67,14 +67,11 @@
   return
 
 @init_fixed_menu = () ->
-  sidebar = $('.js-fixed-menu')
+  sidebar = $('.js-menu-sidebar')
 
-  $(sidebar).stick_in_parent({offset_top: 10})
+  $('.js-fixed-menu').stick_in_parent({offset_top: 10})
 
   navs = $('a', sidebar)
-
-  sidebarOffset = 30
-  sidebarTop = sidebar.offset().top
 
   sections = $('.js-scrolltrack')
 
@@ -85,8 +82,6 @@
     sections_positions.push($(this).offset().top - 10)
 
     return
-
-  console.log sections_positions
 
   current_index = 0
   len = sections_positions.length
@@ -102,17 +97,15 @@
 
   $(window).scroll ->
     scrollTop = $(this).scrollTop()
-    windowTop = scrollTop + sidebarOffset
 
     return if busy
-    console.log scrollTop
 
-    console.log getCurrent(scrollTop)
     checkIndex = getCurrent(scrollTop)
     if checkIndex != currentIndex
       currentIndex = checkIndex
       navs.removeClass('active')
       current =  navs.eq(currentIndex)
+
       $('> a', current.parent()).addClass('active')
 
     return

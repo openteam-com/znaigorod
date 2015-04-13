@@ -36,7 +36,7 @@
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
 
     <% if @organization.organization_navigations.any? %>
-      <div class="organization_show_navs">
+      <div class="organization_show_navs js-menu-sidebar">
         <ul>
           <% @organization.organization_navigations.ordered.each do |nav| %>
             <li><%= link_to nav.title, "##{nav.href}", class: :js_fixed_menu_item %></li>
