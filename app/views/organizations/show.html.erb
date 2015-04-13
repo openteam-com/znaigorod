@@ -34,14 +34,16 @@
     <% end %>
 
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
-    <div class="organization_show_navs">
-      <ul>
-        <li><%= link_to 'Photo', '#photo_block', class: :js_fixed_menu_item %></li>
-        <li><%= link_to 'Photo', '#discounts_block', class: :js_fixed_menu_item %></li>
-        <li><%= link_to 'Photo', '#reviews_block', class: :js_fixed_menu_item %></li>
-        <li><%= link_to 'Photo', '#afisha_block', class: :js_fixed_menu_item %></li>
-      </ul>
-    </div>
+
+    <% if @organization.organization_navigations.any? %>
+      <div class="organization_show_navs">
+        <ul>
+          <% @organization.organization_navigations.ordered.each do |nav| %>
+            <li><%= link_to nav.title, "##{nav.href}", class: :js_fixed_menu_item %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
   </div>
 
@@ -141,7 +143,7 @@
 
 
     <div class='photogallery suborganization_info'>
-      <div class="title" id='photo_block'>
+      <div class="title" id='foto'>
         <%= @organization.photo_block_title %>
       </div>
       <% if @organization.client? %>
@@ -173,7 +175,6 @@
       </div>
     </div>
   </div>
-
 
   <% if @organization.client? %>
     <% @organization.decorated_suborganizations.each do |suborganization| %>
@@ -210,7 +211,7 @@
   <% end %>
 
   <div class="suborganization_info discount_details">
-    <div class="title" id='discounts_block'>
+    <div class="title" id='skidki'>
       <%= @organization.discounts_block_title %>
       <span class='link'><%= link_to 'Добавить скидку', help_my_discounts_path %></span>
     </div>
@@ -226,7 +227,7 @@
   </div>
 
   <div class='suborganization_info afisha_content js-button-pagination'>
-    <div class='title' id='afisha_block'>
+    <div class='title' id='afisha'>
       <%= @organization.afisha_block_title %>
       <span class='link'><%= link_to 'Добавить афишу', new_my_afisha_path %></span>
     </div>
@@ -238,7 +239,7 @@
   </div>
 
   <div class='suborganization_info related-reviews'>
-    <div class='title' id='reviews_block'>
+    <div class='title' id='obzory'>
       <%= @organization.reviews_block_title %>
       <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>
     </div>

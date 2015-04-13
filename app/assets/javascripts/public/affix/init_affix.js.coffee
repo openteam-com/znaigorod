@@ -72,17 +72,30 @@
   sidebarOffset = 10
   sidebarTop = sidebar.offset().top
 
+  absolute = false
+
   $(window).scroll ->
     scrollTop = $(this).scrollTop()
     windowTop = scrollTop + sidebarOffset
+    bottom = $(document).height() - $(sidebar).height() - $(sidebar).offset().top
 
-    if sidebarTop < windowTop
+    # TODO: need some fixes
+
+    if sidebarTop < windowTop && bottom > 470
       sidebar.css
         'position': 'fixed'
         'top': "#{sidebarOffset}px"
+      absolute = false
+    else if bottom < 470 && windowTop > 5900
+      return if absolute
+      sidebar.css
+        'position': 'absolute'
+        'top': "#{$(sidebar).offset().top - $('.organization_show_navs').height()}px"
+      absolute = true
     else
       sidebar.css
         'position': 'static'
+      absolute = false
 
   $('.js_fixed_menu_item').click ->
     element = $(this).attr('href')

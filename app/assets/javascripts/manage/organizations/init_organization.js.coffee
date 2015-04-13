@@ -17,10 +17,12 @@
   wrapper_sections = $('.sections_wrapper .js-sortable')
   wrapper_section_pages = $('.section_show .js-sortable')
   wrapper_gallery_images = $('.images .js-sortable')
+  wrapper_navigations = $('.navigation_wrapper .js-sortable')
 
   init_sort(wrapper_sections)
   init_sort(wrapper_section_pages)
   init_sort(wrapper_gallery_images)
+  init_sort(wrapper_navigations)
 
 recalculate_position = (wrapper) ->
   $('li input.position', wrapper).each (index, item) ->

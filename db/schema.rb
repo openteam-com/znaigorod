@@ -676,6 +676,16 @@ ActiveRecord::Schema.define(:version => 20150414080943) do
     t.datetime "updated_at",               :null => false
   end
 
+  create_table "organization_navigations", :force => true do |t|
+    t.string   "title"
+    t.string   "original_href"
+    t.string   "href"
+    t.integer  "position"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"
     t.integer  "places"

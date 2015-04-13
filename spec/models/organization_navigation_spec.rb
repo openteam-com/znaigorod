@@ -10,6 +10,7 @@ end
 #
 #  id              :integer          not null, primary key
 #  title           :string(255)
+#  original_href   :string(255)
 #  href            :string(255)
 #  position        :integer
 #  organization_id :integer
