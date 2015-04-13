@@ -4,9 +4,10 @@ require 'curb'
 
 class YampGeocoder
   def self.get_coordinates(options)
-    options = {:city => 'город Томск'}.merge(options)
-    address = [options[:city], "Томская область", options[:street], options[:house]].join(', ')
-    address =  [options[:city], "Томская область", options[:address_string]].join(', ') if options[:address_string].present?
+    options = {:city => "город #{Settings['app.city']}"}.merge(options)
+    region = "Томская область" if Settings['app.city'] == 'tomsk'
+    address = [options[:city], region, options[:street], options[:house]].join(', ')
+    address =  [options[:city], region, options[:address_string]].join(', ') if options[:address_string].present?
     parameters = { geocode: address, format: :json, results: 1 }
     result = [nil, nil]
 
@@ -39,8 +40,9 @@ class YampGeocoder
     unless query.nil? || query.empty?
       cache = call_cache query
       if cache.nil?
-        address = ["Россия", "Томск", query].join(', ')
-        coords = [84.94817, 56.490594].join(', ')
+        region = "Томская область" if Settings['app.city'] == 'tomsk'
+        address = [Settings['app.city_ru'], region, query].join(', ')
+        coords = [Settings['app.coords.longitude'], Settings['app.coords.latitude']].join(', ')
         parameters = {
           text: address,
           sll: coords,
@@ -143,7 +145,7 @@ class YampGeocoder
     get_houses(query)
   end
 
-  def geo_info_for(address, city = 'Томск')
+  def geo_info_for(address, city = Settings['app.city_ru'])
     address_line = "#{city},#{address}"
     params = { :format => :json, :results => 1, :geocode => address_line }
 
