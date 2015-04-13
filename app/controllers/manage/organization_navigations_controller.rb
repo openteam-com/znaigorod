@@ -3,12 +3,12 @@ class Manage::OrganizationNavigationsController < Manage::ApplicationController
 
   def new
     @organization = Organization.find(params[:organization_id])
-    @select_sollection = ['Фото', 'Афиша', 'Скидки', 'Обзоры'] + @organization.sections.pluck(:title)
+    @select_sollection = ['Фото', 'Афиша', 'Скидки', 'Обзоры', 'Адрес'] + @organization.sections.pluck(:title)
   end
 
   def edit
     @organization = Organization.find(params[:organization_id])
-    @select_sollection = ['Фото', 'Афиша', 'Скидки', 'Обзоры'] + @organization.sections.pluck(:title)
+    @select_sollection = ['Фото', 'Афиша', 'Скидки', 'Обзоры', 'Адрес'] + @organization.sections.pluck(:title)
     @selected = @organization.organization_navigations.find(params[:id]).original_href
   end
 
