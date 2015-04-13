@@ -165,6 +165,7 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def work_schedule
+    return h.content_tag(:div, "Гибкий график работы", :class => "schedule_wrapper work_schedule") if schedules.empty?
     content = ''
     more_schedule = ''
     from = schedules.pluck(:from).uniq

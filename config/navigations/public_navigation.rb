@@ -26,13 +26,12 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     if Settings['app.city'] == 'tomsk'
-      primary.item :organizations, 'Заведения', organizations_path,
-        highlights_on: -> { %w[organizations suborganizations saunas].include? controller.class.name.underscore.split("_").first } do |organization|
-
-      OrganizationCategory.used_roots.each do |category|
-        organization.item category.slug, category.title, organizations_by_category_path(category.slug), :class => category.slug do |category_item|
-          category.children.each do |child|
-            category_item.item child.slug, child.title, organizations_by_category_path(child.slug)
+      primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> {controller_name == 'organizations'} do |organization|
+        OrganizationCategory.used_roots.each do |category|
+          organization.item category.slug, category.title, organizations_by_category_path(category.slug), :class => category.slug do |category_item|
+            category.children.each do |child|
+              category_item.item child.slug, child.title, organizations_by_category_path(child.slug)
+            end
           end
         end
       end
