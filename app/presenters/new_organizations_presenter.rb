@@ -12,9 +12,32 @@ class NewOrganizationsPresenter
     @radius ||= params[:radius]
   end
 
-  # TODO: implement
   def page_header
-    nil
+    return  I18n.t("meta.#{Settings['app']['city']}.organizations.page_header", default: '') unless category
+    header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.page_header", default: '')
+    header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.page_header", default: '') : header
+    header
+  end
+
+  def page_title
+    return  I18n.t("meta.#{Settings['app']['city']}.organizations.page_title", default: '') unless category
+    header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.page_title", default: '')
+    header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.page_title", default: '') : header
+    header
+  end
+
+  def meta_keywords
+    return  I18n.t("meta.#{Settings['app']['city']}.organizations.keywords", default: '') unless category
+    header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.keywords", default: '')
+    header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.keywords", default: '') : header
+    header
+  end
+
+  def meta_description
+    return  I18n.t("meta.#{Settings['app']['city']}.organizations.description", default: '') unless category
+    header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.description", default: '')
+    header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.description", default: '') : header
+    header
   end
 
   def view_prefix

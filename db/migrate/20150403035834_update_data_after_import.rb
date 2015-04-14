@@ -9,9 +9,6 @@ class UpdateDataAfterImport < ActiveRecord::Migration
       oc.save
     end
 
-    YAML.load_file('/home/koala/Загрузки/slugs.yml').each do |key, value|
-      OrganizationCategory.find(value).update_attribute(:slug, key)
-    end
   end
 
   def down

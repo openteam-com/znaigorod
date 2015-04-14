@@ -1,4 +1,15 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.1.17/?load=package.full&lang=ru-RU') %>
+<% content_for :page_title, @presenter.page_title %>
+<% content_for :meta_keywords, @presenter.meta_keywords %>
+<% content_for :meta_description, @presenter.meta_description %>
+<% content_for :extra_meta do %>
+
+  <% if page_meta %>
+    <%= render :partial => 'commons/page_meta_og' %>
+  <% else %>
+    <%= vk_meta(@presenter.category.slug, (send "organization_by_category_url"), 'znaigorod_logo.png') %>
+  <% end %>
+<% end %>
 
 <% if @presenter.category %>
   <%= render :partial => "#{@presenter.view_type}_view" %>
