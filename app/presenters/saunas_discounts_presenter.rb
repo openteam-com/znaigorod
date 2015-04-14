@@ -14,7 +14,8 @@ class SaunasDiscountsPresenter
     discount_offered = DiscountsPresenter.new({:organization_id => ids, :q => "сауны", :order_by => "random", :type => 'offered_discount'}).collection
     @discount_collection = discount_offered.zip(discount_coupons)
                                            .flatten.compact.first(@count)
-    @discount_collection.insert(0, Discount.find('podbor-sauny-po-vashemu-zhelaniyu'))
+
+    @discount_collection.insert(0, Discount.find('podbor-sauny-po-vashemu-zhelaniyu')) if Settings['app.city'] == 'tomsk'
   end
 
 end

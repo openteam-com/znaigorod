@@ -30,7 +30,7 @@ class EntertainmentsPresenter
   end
 
   def add_advanced_categories_links(links)
-    links.insert(2, {
+    links.insert(0, {
         title: I18n.t("organization.kind.sauna"),
         klass: 'sauna',
         url: "saunas_path",
