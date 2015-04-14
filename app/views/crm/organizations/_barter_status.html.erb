@@ -1,0 +1,4 @@
+<div class='view'>
+  <%= @organization.barter_status.text %>
+  <%= link_to 'изменить', edit_crm_organization_path(@organization, field: 'barter_status'), class: :edit %>
+</div>

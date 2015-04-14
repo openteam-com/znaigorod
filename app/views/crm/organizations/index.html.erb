@@ -16,6 +16,14 @@
       include_blank: true,
       required: false %>
 
+    <%= f.input :barter_status,
+      label: 'Статус бартера',
+      as: :select,
+      collection: Organization.barter_status.options,
+      selected: params[:search].try(:[], :barter_status),
+      include_blank: true,
+      required: false %>
+
     <%= f.input :user_id,
       label: 'Менеджер',
       as: :select,
@@ -37,7 +45,7 @@
       <%= f.button :submit, 'Найти', class: :button %>
     </div>
 
-    <%= link_to "отчистить", crm_organizations_path, class: 'clear' %>
+    <%= link_to "очистить", crm_organizations_path, class: 'clear' %>
   <% end %>
 </div>
 

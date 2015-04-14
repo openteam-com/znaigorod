@@ -17,7 +17,8 @@ class Organization < ActiveRecord::Base
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
                   :organization_category_ids,
-                  :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title
+                  :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
+                  :barter_status
 
   ### <=== CRM
 
@@ -65,6 +66,9 @@ class Organization < ActiveRecord::Base
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :client_economy, :client_standart, :client_premium, :non_cooperation, :debtor],
               default: :fresh, predicates: true
+
+  enumerize :barter_status, :in => [:no_information, :barter_implemented, :barter_not_implemented],
+              predicates: true
 
   default_value_for :total_rating, 0
 
@@ -201,6 +205,7 @@ class Organization < ActiveRecord::Base
     string :positive_activity_date
     string :search_kind
     string :status
+    string :barter_status
 
     string(:inviteable_categories, :multiple => true) { ::Inviteables.instance.categories_for_organization self }
     string(:kind, :multiple => true)                  { ['organization'] }

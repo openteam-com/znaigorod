@@ -41,6 +41,10 @@
   margin-bottom: 10px
 
   .input
+    &.search_q
+      label, input
+        width: 300px
+
     float: left
     margin-right: 20px
     label
@@ -50,6 +54,7 @@
       +default_input_style
     select
       +default_input_style('2px 3px')
+
 
   .submit
     float: left

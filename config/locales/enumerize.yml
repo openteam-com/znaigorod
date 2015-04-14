@@ -75,6 +75,11 @@ ru:
       debtor:                  Должник
       advertising_service:     Рекламные услуги
 
+    barter_status:
+      no_information: Нет информации
+      barter_implemented: Бартер реализован
+      barter_not_implemented: Бартер не реализован
+
     state:
       planned:             Запланированное
       completed:           Завершено

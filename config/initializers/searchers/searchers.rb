@@ -74,6 +74,7 @@ HasSearcher.create_searcher :manage_organization do
   property :status
   property :user_id
   property :suborganizations
+  property :barter_status
 end
 
 HasSearcher.create_searcher :photogalleries do
