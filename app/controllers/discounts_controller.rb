@@ -12,7 +12,7 @@ class DiscountsController < ApplicationController
 
         render partial: 'discounts/discount_posters', layout: false and return if request.xhr?
 
-        @organizations = OrganizationsCatalogPresenter.new(params.merge(per_page: 5))
+        @organizations = NewOrganizationsPresenter.new({:promoted_clients_per_page => 5})
 
       }
 

@@ -36,4 +36,8 @@
   <div class="place">
     <%= organization.truncated_address_link.present? ? organization.truncated_address_link : "&nbsp;".html_safe %>
   </div>
+  <div class='phone'>
+    Тел.:
+    <%= link_to "#{organization.phone.truncate(6)}", "#", class: "js-show-phone", id: organization.id, single_phone: true %>
+  </div>
 </div>

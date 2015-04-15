@@ -1,8 +1,9 @@
-<div class='organization_content js-button-pagination'>
-  <ul class='posters'>
-    <% @presenter.promoted_clients.each do |organization| %>
-      <li class='item_organization fresh'>
-        <%= render partial: 'organization', locals: { organization: organization, width: 150, height: 150  } %>
+<div class='recommended_organizations_wrapper organization_content <%= sub_class %>'>
+  <h1>Рекомендуем посетить</h1>
+  <ul class='recommended_organization posters'>
+    <% promoted_clients.each do |organization| %>
+      <li class='recommended_organization_item item_organization'>
+        <%= render partial: 'organizations/organization', locals: { organization: organization, width: 150, height: 150  } %>
       </li>
     <% end %>
   </ul>

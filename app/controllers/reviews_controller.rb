@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
         @presenter = ReviewsPresenter.new(params)
         @reviews = @presenter.decorated_collection
 
-        @organizations = OrganizationsCatalogPresenter.new(params.merge(per_page: 7))
+        @organizations = NewOrganizationsPresenter.new({})
 
         render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '200', :width => '354' }, :layout => false and return if request.xhr?
       }

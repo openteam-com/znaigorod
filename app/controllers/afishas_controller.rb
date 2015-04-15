@@ -22,7 +22,7 @@ class AfishasController < ApplicationController
           @decorator = @presenter.decorated_collection
         end
 
-        @organizations = OrganizationsCatalogPresenter.new(params.merge(per_page: 5))
+        @organizations = NewOrganizationsPresenter.new({:promoted_clients_per_page => 5})
 
         if request.xhr?
           if params[:page]

@@ -49,7 +49,7 @@
     </ul>
 
     <% if defined?(@organizations) %>
-      <%= render :partial => 'organizations/recommended', :locals => { :organizations => @organizations, :sub_class => 'discounts' } %>
+      <%= render :partial => 'organizations/promo_block', :locals => { :promoted_clients => @organizations.promoted_clients, :sub_class => 'discounts' } %>
     <% end %>
   </div>
   <%= render :partial => 'commons/ads_by_google' %>

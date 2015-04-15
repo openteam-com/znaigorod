@@ -12,6 +12,10 @@ class NewOrganizationsPresenter
     @radius ||= params[:radius]
   end
 
+  def promoted_clients_per_page
+    @promoted_clients_per_page =  params[:promoted_clients_per_page] || 7
+  end
+
   def page_header
     return  I18n.t("meta.#{Settings['app']['city']}.organizations.page_header", default: '') unless category
     header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.page_header", default: '')
@@ -81,7 +85,7 @@ class NewOrganizationsPresenter
   def promoted_clients
     orgs = Organization.search {
       with :status, :client
-      paginate :page => 1, :per_page => 7
+      paginate :page => 1, :per_page => promoted_clients_per_page
       order_by :positive_activity_date, :desc
     }.results
 

@@ -8,7 +8,7 @@
       <% cache("review_#{review.useful_type}_#{action_name}_#{review.id}", expires_in: 10.minutes) do %>
         <%= review.annotation_gallery(140, 80) %>
       <% end %>
-    <% elsif controller_path == 'afishas' || controller_path == 'map_projects' || controller_path == 'suborganizations' || controller_path == 'saunas' || controller_path == 'hotels' || controller_path == 'organizations' && action_name == 'show' %>
+    <% elsif controller_path == 'afishas' || controller_path == 'map_projects' || controller_path == 'organizations' || controller_path == 'saunas' || controller_path == 'hotels' || controller_path == 'organizations' && action_name == 'show' %>
       <% cache("review_#{review.useful_type}_#{action_name}_#{review.id}", expires_in: 10.minutes) do %>
         <%= review.annotation_gallery(120, 80) %>
       <% end %>

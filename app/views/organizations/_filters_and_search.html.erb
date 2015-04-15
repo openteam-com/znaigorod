@@ -1,16 +1,3 @@
-<% if @presenter.category %>
-  <div>
-    <ul>
-      <% @categories.each do |category|  %>
-        <li>
-          <%= link_to category, organizations_by_category_path(category.slug, params) %>
-          <%= category.organizations.count %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
 <div class="filter_and_search">
   <div class='filter_header'>
     <% if page_meta %>
@@ -22,6 +9,21 @@
     <% end %>
     <%= link_to 'Добавить организацию', organizations_add_path, class: [:button, :big, :add_organization] %>
   </div>
+
+  <% if @presenter.category %>
+    <div class='organization_categories'>
+      <ul>
+        <% @categories.each do |category|  %>
+          <li>
+            <%= link_to category, organizations_by_category_path(category.slug, params) %>
+            <span>
+              <%= category.organizations.count %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class='filter_and_share js-filters-wrapper'>
     <!--noindex-->
