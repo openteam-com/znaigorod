@@ -19,11 +19,11 @@ module OrganizationImport
     end
 
     def latitude
-      row[8]
+      row[9]
     end
 
     def longitude
-      row[9]
+      row[8]
     end
 
     def address
