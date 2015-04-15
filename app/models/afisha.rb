@@ -102,7 +102,10 @@ class Afisha < ActiveRecord::Base
   attr_accessible :step, :social_gallery_url
 
   def self.available_tags(query)
-    pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
+    begin
+      pluck(:tag).compact.flat_map { |str| str.split(',') }.compact.map(&:squish).uniq.delete_if(&:blank?).select { |str| str =~ /^#{query}/ }.sort
+    rescue
+    end
   end
 
   def self.steps
