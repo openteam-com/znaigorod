@@ -328,10 +328,19 @@ ru:
         page_meta_description: Meta - description
         page_meta_title: Title
         photo_block_title: Заголовок блока фотографий
+        photos_navigation_title: Заголовок фотографий в навигации заведения
         discounts_block_title: Заголовок блока скидок
+        discounts_navigation_title: Заголовок скидок в навигации заведения
         afisha_block_title: Заголовок блока афиш
+        afishas_navigation_title: Заголовок афиш в навигации заведения
         reviews_block_title: Заголовок блока обзоров
+        reviews_navigation_title: Заголовок обзоров в навигации заведения
+        address_navigation_title: Заголовок адреса в навигации заведения
         comments_block_title: Заголовок блока комментариев
+
+      section:
+        <<: *common_attributes
+        navigation_title: Заголовок раздела в навигации заведения
 
       organization_stand:
         guarded:            Охрана

@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController
   has_scope :page, :default => 1
 
-  helper_method :view_type
+  helper_method :view_type, :scrolltrack
 
   before_filter :allow_cross_domain_access
 
@@ -147,5 +147,9 @@ class OrganizationsController < ApplicationController
 
   def view_type
     "tile"
+  end
+
+  def scrolltrack(key)
+    @organization.navigation_collection[key].present? ? 'js-scrolltrack' : ''
   end
 end

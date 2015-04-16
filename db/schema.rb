@@ -740,6 +740,11 @@ ActiveRecord::Schema.define(:version => 20150414080943) do
     t.string   "reviews_block_title",           :default => "Обзоры"
     t.string   "comments_block_title",          :default => "Отзывы"
     t.string   "barter_status",                 :default => "no_information"
+    t.string   "discounts_navigation_title"
+    t.string   "photos_navigation_title"
+    t.string   "afishas_navigation_title"
+    t.string   "reviews_navigation_title"
+    t.string   "address_navigation_title"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true

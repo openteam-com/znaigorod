@@ -16,9 +16,14 @@
   <%= f.input :primary_organization_id, :collection => Organization.grouped_collection_for_select, :include_blank => true, :selected => f.object.primary_organization_id  %>
   <%= f.input :situated_at, :collection => Organization.grouped_collection_for_select, :include_blank => true, :selected => f.object.situated_at  %>
   <%= f.input :photo_block_title %>
+  <%= f.input :photos_navigation_title %>
   <%= f.input :discounts_block_title %>
+  <%= f.input :discounts_navigation_title %>
   <%= f.input :afisha_block_title %>
+  <%= f.input :afishas_navigation_title %>
   <%= f.input :reviews_block_title %>
+  <%= f.input :reviews_navigation_title %>
+  <%= f.input :address_navigation_title %>
   <%= f.input :comments_block_title %>
   <%= f.input :comment %>
   <%= f.input :description, :as => :ckeditor, :label => false %>

@@ -35,11 +35,11 @@
 
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
 
-    <% if @organization.organization_navigations.any? %>
+    <% if @organization.navigation_collection.any? %>
       <div class="organization_show_navs js-menu-sidebar">
         <ul>
-          <% @organization.organization_navigations.ordered.each do |nav| %>
-            <li><%= link_to nav.title, "##{nav.href}", class: :js_fixed_menu_item %></li>
+          <% @organization.navigation_collection.each do |key, value| %>
+            <li><%= link_to key, "##{value}", class: :js_fixed_menu_item %></li>
           <% end %>
         </ul>
       </div>
@@ -125,7 +125,8 @@
       <% end %>
 
       <h1><%= @organization.title %></h1>
-      <%= content_tag(:div, "Адрес: #{@organization.address_link}".html_safe, class: [:place, 'js-scrolltrack'], id: :adres) if @organization.address_link.present? %>
+      <%= content_tag(:div, "Адрес: #{@organization.address_link}".html_safe,
+                      class: [:place, scrolltrack(@organization.address_navigation_title)], id: @organization.address_navigation_title.try(:from_russian_to_param)) if @organization.address_link.present? %>
       <%= @organization.work_schedule %>
 
       <div class='phone_wrapper'>
@@ -158,7 +159,7 @@
 
 
     <div class='photogallery suborganization_info'>
-      <div class="title js-scrolltrack" id='foto'>
+      <div class="title <%= scrolltrack(@organization.photos_navigation_title) %>" id='<%= @organization.photos_navigation_title.try(:from_russian_to_param) %>'>
         <%= @organization.photo_block_title %>
       </div>
       <% if @organization.client? %>
@@ -200,8 +201,8 @@
       <% if @organization.sections.any? %>
         <% @organization.sections.order_by_position.each do |section| %>
           <% if section.section_pages.any? %>
-            <div class="section js-scrolltrack <%= section.title.from_russian_to_param %>">
-              <div class="title" id='<%= section.title.from_russian_to_param %>'><%= content_tag :h2, section.title %></div>
+            <div class="section <%= scrolltrack(section.navigation_title) %> <%= section.title.from_russian_to_param %>">
+              <div class="title" id='<%= section.navigation_title.try(:from_russian_to_param) %>'><%= content_tag :h2, section.title %></div>
               <% section.section_pages.order_by_position.each do |page| %>
                 <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>">
                   <% if page.poster_image? %>
@@ -226,7 +227,7 @@
   <% end %>
 
   <div class="suborganization_info discount_details">
-    <div class="title js-scrolltrack" id='skidki'>
+    <div class="title <%= scrolltrack(@organization.discounts_navigation_title) %>" id='<%= @organization.discounts_navigation_title.try(:from_russian_to_param) %>'>
       <%= @organization.discounts_block_title %>
       <span class='link'><%= link_to 'Добавить скидку', help_my_discounts_path %></span>
     </div>
@@ -242,7 +243,7 @@
   </div>
 
   <div class='suborganization_info afisha_content js-button-pagination'>
-    <div class='title js-scrolltrack' id='afisha'>
+    <div class='title <%= scrolltrack(@organization.afishas_navigation_title) %>' id='<%= @organization.afishas_navigation_title.try(:from_russian_to_param) %>'>
       <%= @organization.afisha_block_title %>
       <span class='link'><%= link_to 'Добавить афишу', new_my_afisha_path %></span>
     </div>
@@ -254,7 +255,7 @@
   </div>
 
   <div class='suborganization_info related-reviews'>
-    <div class='title js-scrolltrack' id='obzory'>
+    <div class='title <%= scrolltrack(@organization.reviews_navigation_title) %>' id='<%= @organization.reviews_navigation_title.try(:from_russian_to_param) %>'>
       <%= @organization.reviews_block_title %>
       <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>
     </div>
@@ -296,5 +297,7 @@
   <% end %>
 
   <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization, :comments_block_title => @organization.comments_block_title } if @organization.ability_to_comment? %>
+
+  <div class="js-scrolltrack"> </div>
 </div>
 </div>

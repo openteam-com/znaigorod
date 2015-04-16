@@ -1,7 +1,8 @@
 <div class="section_show js-section-show">
   <div class='title'>
     <%= simple_form_for [:manage, :organization, @section], :remote => true do |f| %>
-      <%= f.input :title, :label => false %>
+      <%= f.input :title %>
+      <%= f.input :navigation_title, :input_html => { :placeholder => 'Заголовок в блоке навигации' } %>
       <%= f.submit %>
 
       <%= link_to 'Удалить', manage_organization_section_path(params[:organization_id], resource), method: 'DELETE',

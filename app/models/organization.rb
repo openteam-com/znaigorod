@@ -18,8 +18,8 @@ class Organization < ActiveRecord::Base
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
                   :organization_category_ids,
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
-                  :barter_status
-
+                  :barter_status,
+                  :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
@@ -370,17 +370,27 @@ class Organization < ActiveRecord::Base
   def sold_tickets_count
   end
 
+  def navigation_collection
+    {}.tap do |hash|
+      %w[address photos].each do |prefix|
+        hash[send("#{prefix}_navigation_title")] = send("#{prefix}_navigation_title").from_russian_to_param if send("#{prefix}_navigation_title").present?
+      end
+
+      sections.select { |s| s.navigation_title.present? }.each do |section|
+        hash[section.navigation_title] = section.navigation_title.from_russian_to_param
+      end
+
+      %w[discounts afishas reviews].each do |prefix|
+        hash[send("#{prefix}_navigation_title")] = send("#{prefix}_navigation_title").from_russian_to_param if send("#{prefix}_navigation_title").present?
+      end
+    end
+  end
+
   def update_rating
     OrganizationObserver.disabled = true
-    #update_attribute :total_rating, ((client? ? 10 : 0) +
-                                     #afisha.map {|a| a.copies.sold.count}.sum +
-                                     #discounts.map {|d| d.copies.sold.count}.sum +
-                                     #0.5*afisha.actual.count +
-                                     #0.5*visits.count +
-                                     #0.1*votes.liked.count +
-                                     #0.01*page_visits.count)
 
     update_attribute :total_rating, votes.liked.count
+
     OrganizationObserver.disabled = false
   end
 end
