@@ -6,11 +6,15 @@
       <% end %>
     <% end %>
   </ul>
-  <div class="map_banner">
-    <%= link_to 'http://znaigorod.ru/afisha/iquest-kvest-v-realnosti' do %>
-      <%= image_tag asset_path("public/map_projects/map_banner.jpg")%>
-    <% end %>
-  </div>
+
+  <% unless map_project.slug == 'svadba_vtomske' %>
+    <div class="map_banner">
+      <%= link_to 'http://znaigorod.ru/afisha/iquest-kvest-v-realnosti' do %>
+        <%= image_tag asset_path("public/map_projects/map_banner.jpg")%>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class='actual_reviews'>
     <a href='#actual_reviews'>Актуальные обзоры</a>
   </div>
