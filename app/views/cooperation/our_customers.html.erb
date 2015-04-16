@@ -7,9 +7,9 @@
   <h1>Клиенты ЗнайГорода</h1>
   <div class="organization_content">
     <div class='organizations_list js-button-pagination '>
-      <% if @presenter.collection.any? %>
+      <% if @presenter.clients.any? %>
         <ul class='posters js-paginable-list'>
-          <%= render :partial => 'organizations/organizations_posters' %>
+          <%= render :partial => 'organizations/tile_view_posters' %>
         </ul>
       <% else %>
         <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>

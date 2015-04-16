@@ -7,7 +7,7 @@ class MainPageController < ApplicationController
     @afisha_list += other_afishas_list
     @afisha_filter     = AfishaPresenter.new(:has_tickets => false)
 
-    @organizations     = OrganizationsCatalogPresenter.new(:per_page => 7)
+    @organizations     = NewOrganizationsPresenter.new({})
 
     @discounts           = DiscountsPresenter.new(:type => 'coupon', :per_page => 5).decorated_collection
     advertisement = Advertisement.new(list: 'main_page_discounts')

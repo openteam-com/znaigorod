@@ -12,6 +12,29 @@ class NewOrganizationsPresenter
     @radius ||= params[:radius]
   end
 
+  def categories_links
+    @categories_links ||= [].tap { |array|
+      array << {
+        title: 'Все',
+        klass: 'all',
+        url: "organizations_path",
+        parameters: {},
+        count: Organization.count
+      }
+
+      %w[saunas bary dostavka_edy kafe restorany fitnes vizazh-studii car_washes].each do |item|
+        category = OrganizationCategory.find(item)
+        array << {
+          title: category.title,
+          klass: item,
+          url: "organizations_by_category_path",
+          parameters: {:slug => item},
+          count: category.organizations.count
+        }
+      end
+    }
+  end
+
   def promoted_clients_per_page
     @promoted_clients_per_page =  params[:promoted_clients_per_page] || 7
   end
