@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  attr_accessible :title
+  attr_accessible :title, :navigation_title
 
   has_many :section_pages, :dependent => :destroy
   belongs_to :organization

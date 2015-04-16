@@ -1225,9 +1225,10 @@ ActiveRecord::Schema.define(:version => 20150414080943) do
   create_table "sections", :force => true do |t|
     t.string   "title"
     t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "position"
+    t.string   "navigation_title"
   end
 
   create_table "services", :force => true do |t|

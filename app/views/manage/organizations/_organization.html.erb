@@ -320,26 +320,6 @@
 </div>
 </div>
 
-<div class="navigation_wrapper">
-  <h3>
-    Навигация внутри заведения
-  </h3>
-  <%= link_to 'Добавить элемент навигации', new_manage_organization_organization_navigation_path(resource) %>
-
-  <form class='js-sortable' data-sort='<%= sort_manage_organization_organization_navigations_path(resource) %>'>
-    <ul>
-      <% resource.organization_navigations.ordered.each do |nav| %>
-        <li>
-          <div class='sortable_handle'>&#8597;</div>
-          <%= hidden_field :position, nav.id, :class => :position, :value => nav.position %>
-          <%= link_to nav.title, edit_manage_organization_organization_navigation_path(params[:id], nav.id) %> -> <%= nav.href %> -> <%= nav.original_href %>
-          <%= link_to 'Удалить', manage_organization_organization_navigation_path(resource, nav.id), :remote => true, :method => :delete, :data => { :confirm => 'Удалить?' }  %>
-        </li>
-      <% end %>
-    </ul>
-  </form>
-</div>
-
 <div class='images'>
   <h3>Галерея изображений</h3>
 
