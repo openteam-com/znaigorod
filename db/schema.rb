@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150414080943) do
+ActiveRecord::Schema.define(:version => 20150416034900) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -674,16 +674,6 @@ ActiveRecord::Schema.define(:version => 20150414080943) do
     t.integer  "organization_id"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-  end
-
-  create_table "organization_navigations", :force => true do |t|
-    t.string   "title"
-    t.string   "original_href"
-    t.string   "href"
-    t.integer  "position"
-    t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
   end
 
   create_table "organization_stands", :force => true do |t|

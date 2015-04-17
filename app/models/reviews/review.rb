@@ -74,7 +74,7 @@ class Review < ActiveRecord::Base
             :eighteen_plus, :humor, :hi_tech, :entertainment, :family, :lifehack,
             :economy, :complaints_book, :spirituality, :help, :men_and_women, :creation,
             :handmade, :boiling, :good_news, :health, :sport, :policy, :studies, :abiturient,
-            :commercial, :other, :adv_plus],
+            :commercial, :other, :adv_plus, :megapolis],
     :multiple => true,
     :predicates => true
 

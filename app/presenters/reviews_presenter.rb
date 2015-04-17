@@ -97,6 +97,10 @@ class ReviewsPresenter
       selected == 'eighteen_plus'
     end
 
+    def megapolis?
+      selected == 'megapolis'
+    end
+
     def adv_plus?
       selected == 'adv_plus'
     end
@@ -262,6 +266,7 @@ class ReviewsPresenter
       order_by_filter.random? ? s.order_by(:random) : s.send("order_by_#{order_by_filter.selected}")
 
       s.without_questions
+      s.without_megapolis             unless category_filter.megapolis?
       s.without_eighteen_plus         unless category_filter.eighteen_plus?
       s.without_adv_plus              unless category_filter.adv_plus?
       s.only_tomsk                    if     only_tomsk_filter.selected?
