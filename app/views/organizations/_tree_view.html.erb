@@ -9,7 +9,7 @@
           data-image="<%= item.logotype_url %>"
           data-icon='<%= item.map_image_name(params[:slug], 'default') ?
             item.map_image_name(params[:slug], 'default') :
-            asset_path("/assets/public/organizations_list_view/teatry.png") %>'
+            asset_path("/assets/public/organizations_list_view/default.png") %>'
           data-width='35' data-height='50'>
           <div class="info">
             <h1><%= link_to item.title.truncate(30), organization_path(item) %></h1>

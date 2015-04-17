@@ -19,10 +19,10 @@
               data-image="<%= item.logotype_url %>" data-slug="<%= item.slug %>"
               data-icon='<%= item.map_image_name(params[:slug], 'default') ?
                 item.map_image_name(params[:slug], 'default') :
-                asset_path("/assets/public/organizations_list_view/teatry.png") %>'
+                asset_path("/assets/public/organizations_list_view/default.png") %>'
               data-icon-hover='<%= item.map_image_name(params[:slug], 'hover') ?
                 item.map_image_name(params[:slug], 'hover') :
-                asset_path("/assets/public/organizations_list_view/teatry_hover.png") %>'
+                asset_path("/assets/public/organizations_list_view/default_hover.png") %>'
               data-width='35' data-height='50'>
 
               <% if item.sms_claimable? %>
