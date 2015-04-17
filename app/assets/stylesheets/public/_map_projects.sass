@@ -239,12 +239,18 @@ body
   .related-reviews
     margin: 15px 0 0 15px
 
-    li.item
-      background-color: white
-      margin: 5px 26px 20px 0 !important
+    &.map_project_related_reviews
 
-      &:nth-child(5n)
-        margin: 5px 0px 20px 0
+      li.item
+        background-color: white
+        margin: 5px 26px 20px 0 !important
+        height: 270px
+
+        &:nth-child(5n)
+          margin: 5px 0px 20px 0
+
+        &:nth-child(3n)
+          margin: 5px 26px 20px 0
 
 .map_project_reviews
   .reviews_title
