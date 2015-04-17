@@ -52,6 +52,7 @@
               <tr>
                 <td><%= copy.code %></td>
                 <td><%= copy.copy_payment ? copy.copy_payment.phone : '' %></td>
+                <td><%= copy.copy_payment ? copy.copy_payment.email : '' %></td>
                 <td><%= copy.state_text %></td>
                 <% if copy.copy_payment %>
                   <td><%= l copy.copy_payment.created_at, :format => :long %></td>
