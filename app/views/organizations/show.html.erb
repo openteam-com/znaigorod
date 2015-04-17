@@ -254,7 +254,7 @@
     <% end %>
   </div>
 
-  <div class='suborganization_info related-reviews'>
+  <div class='suborganization_info related-reviews organization_reviews'>
     <div class='title <%= scrolltrack(@organization.reviews_navigation_title) %>' id='<%= @organization.reviews_navigation_title.try(:from_russian_to_param) %>'>
       <%= @organization.reviews_block_title %>
       <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>

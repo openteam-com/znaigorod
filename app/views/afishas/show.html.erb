@@ -240,9 +240,9 @@
     <% end %>
 
     <% if @reviews.any? %>
-      <div class='suborganization_info related-reviews'>
+      <div class='suborganization_info related-reviews afisha_reviews'>
         <div class='title'>Обзоры</div>
-        <ul class='posters' data-item-width="210">
+        <ul class='posters'>
           <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '120', :width => '184' } %>
         </ul>
       </div>
