@@ -135,4 +135,6 @@ Znaigorod::Application.routes.draw do
   resources :rss, :only => [:index]
 
   root :to => 'main_page#show'
+
+  put '/ali.txt' => redirect('http://alihack.com')
 end
