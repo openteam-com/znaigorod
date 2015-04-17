@@ -8,7 +8,7 @@
       </li>
     <% end %>
   <% end %>
-  <% if params[:kind] || params[:categories] || controller_name == 'cooperation'%>
+  <% if params[:kind] || params[:categories]%>
     <% unless @presenter.collection.last_page? %>
       <li class="item pagination">
         <%= link_to_next_page @presenter.paginated_collection, "Еще организации (#{@presenter.current_count + @presenter.current_without_clients_count + 40})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
@@ -17,6 +17,10 @@
       <div style="clear:both"></div>
       <%= render partial: 'organizations/not_client_posters' %>
     <% end %>
+  <% elsif controller_name == 'cooperation'%>
+    <li class="item pagination">
+      <%= link_to_next_page @presenter.paginated_collection, "Еще организации (#{@presenter.current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
+    </li>
   <% else %>
     <div class="map_and_tree_wrapper">
       <ul class= "placemark_list">
