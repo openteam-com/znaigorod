@@ -1,2 +1,2 @@
 require 'whenever/capistrano'
-set :branch, 'promotion'
+set :branch, 'release_categories'
