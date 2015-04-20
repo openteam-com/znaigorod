@@ -20,7 +20,7 @@
     :remote => true %>
 
   <div class='submit'>
-    <%= f.button :submit, resource.new_record? ? 'Создать мероприятие' : 'Сохранить общее описание', class: :button %>
+    <%= f.button :submit, resource.new_record? ? 'Продолжить оформление афиши' : 'Сохранить общее описание', class: :button %>
     <%= link_to 'Отмена', resource.new_record? && request.env['HTTP_REFERER'].present? ? :back : my_afisha_show_path(resource) %>
   </div>
 <% end %>
