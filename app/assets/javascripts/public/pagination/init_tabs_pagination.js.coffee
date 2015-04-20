@@ -6,7 +6,7 @@
     'visibility': 'hidden'
   busy = false
 
-  item = $("#discounts_filter ##{state} .discounts_list .posters,
+  item = $("#discounts_filter ##{state} .discount_content .posters,
             #events_filter ##{state} .afisha_main_page_list .posters")
   first_item = $('li:first', item)
   return true unless first_item.length
