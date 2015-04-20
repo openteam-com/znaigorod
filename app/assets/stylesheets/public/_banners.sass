@@ -1,44 +1,53 @@
-.banner12
-  +clearfix
-  height: 80px
+.banner12_contest_wrapper
   width: 880px
-  position: relative
-  margin: 20px auto
 
-  &.main_page
-    margin: 20px auto 0
+  &.reviews, &.photogalleries, &.accounts, &.webcams
+    width: 1200px
+    background-color: whitesmoke
+    padding: 10px 0
+    margin: 0 auto
 
-  &.afishas,
-  &.discounts,
-  &.hotels,
-  &.organizations,
-  &.reviews,
-  &.saunas,
-  &.suborganizations
-    margin: 25px auto 0
-
-  &.questions
-    margin: 45px auto 0
-
-  > li
+  .banner12
     +clearfix
-    display: none
     height: 80px
     width: 880px
-    position: absolute
-    top: 0
-    left: 0
+    position: relative
+    margin: 20px auto
 
-    &:first-child
-      display: block
+    &.main_page
+      margin: 20px auto 0
 
-    .link_to_for_flash
-      display: block
-      height: 100px
+    &.afishas,
+    &.discounts,
+    &.hotels,
+    &.organizations,
+    &.reviews,
+    &.saunas,
+    &.suborganizations
+      margin: 25px auto 0
+
+    &.questions
+      margin: 45px auto 0
+
+    > li
+      +clearfix
+      display: none
+      height: 80px
+      width: 880px
       position: absolute
-      text-indent: -999999px
       top: 0
-      width: 600px
+      left: 0
+
+      &:first-child
+        display: block
+
+      .link_to_for_flash
+        display: block
+        height: 100px
+        position: absolute
+        text-indent: -999999px
+        top: 0
+        width: 600px
 
 .banners_wrapper
   padding: 15px
