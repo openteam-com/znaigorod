@@ -26,7 +26,7 @@
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/email_request_form' %>
       <%= render :partial => 'commons/public_header' %>
-      <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless controller_name == 'main_page' || controller_name == 'afishas' || controller_name == 'organizations' || controller_name == 'discounts' || controller_name == 'questions' || controller_name == 'suborganizations' || controller_name == 'saunas' || controller_name == 'hotels' || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014' %>
+      <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless controller_name == 'main_page' || controller_name == 'afishas' || controller_name == 'organizations' || controller_name == 'discounts' || controller_name == 'questions' || controller_name == 'suborganizations' || controller_name == 'saunas' || controller_name == 'hotels' || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014' || controller_name == 'contests' %>
       <%= render :partial => 'commons/public_content' %>
       <%= render :partial => 'commons/public_footer' %>
       <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
