@@ -8,6 +8,13 @@
       <% @webcams.each do |webcam| %>
         <li><%= render :partial => 'webcams/webcam_poster', :locals => { :webcam => webcam } %></li>
       <% end %>
+      <li>
+        <ul class="item">
+          <% @megapolis_review.each do |review|%>
+           <li> <%= link_to review.title, review %></li>
+          <% end %>
+        </ul>
+      </li>
     </ul>
   <% end %>
 
