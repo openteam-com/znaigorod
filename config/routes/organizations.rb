@@ -4,6 +4,9 @@ Znaigorod::Application.routes.draw do
   get 'organizations/add' => "organization_requests#new"
   post 'organizations/send_mail'=> "organization_requests#send_mail"
 
+  get '/organizations/shirli-myrli-kottedzh--2', :to => redirect('/organizations/shirli-myrli-usadba--2')
+  get '/organizations/shirli-myrli-kottedzh', :to => redirect('/organizations/shirli-myrli-usadba')
+
   resources :organizations, :only => [:index, :show] do
     get :in_bounding_box, :on => :collection
     get :details_for_balloon, :on => :member
@@ -135,4 +138,5 @@ Znaigorod::Application.routes.draw do
   get "/kafe_tomska" => 'suborganizations#index', :as => 'meals', :constraints => { :kind => 'meal' }, :defaults => { :kind => 'meal' }
   get "/show_phone" => "organizations#show_phone", :as => 'show_phone'
   get "/increment_site_link_counter" => "organizations#increment_site_link_counter", :as => 'increment_site_link_counter'
+
 end

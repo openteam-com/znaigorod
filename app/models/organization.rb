@@ -155,6 +155,11 @@ class Organization < ActiveRecord::Base
   alias_attribute :to_s, :title
 
   friendly_id :title, use: :slugged
+  def should_generate_new_friendly_id?
+    return true if !self.slug?
+
+    false
+  end
 
   paginates_per Settings['pagination.per_page'] || 10
 
