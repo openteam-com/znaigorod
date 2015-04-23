@@ -1,7 +1,7 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
       <li class='js-banner miss-tomsk-2015-banner'>
-        <%= link_to (image_tag 'public/banners/miss-tomsk.jpg', size: '880x80'), contest_path('miss-tomsk-2015'), target: '_blank', class: 'js-stat-monopode' %>
+        <%= link_to (image_tag 'public/banners/miss-tomsk.jpg', size: '880x80'), contest_path('miss-tomsk-2015'), class: 'js-stat-miss-tomsk' %>
       </li>
   </ul>
 </div>
