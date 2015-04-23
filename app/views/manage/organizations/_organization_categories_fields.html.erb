@@ -2,7 +2,7 @@
   <div class="error_message">
     <%= resource.errors[:organization_category_ids][0] %>
   </div>
-  <% OrganizationCategory.used_roots.each do |root| %>
+  <% OrganizationCategory.roots.each do |root| %>
     <div class="label">
       <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
       <%= label_tag root.title %>

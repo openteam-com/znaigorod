@@ -2,7 +2,7 @@ class NewOrganizationsController < ApplicationController
   def index
 
     @category = OrganizationCategory.all.detect { |c| c.title.from_russian_to_param == params[:category] }
-    @categories = OrganizationCategory.used_roots
+    @categories = OrganizationCategory.roots
     @placemarks = Organization.where(status: :client)
 
     category = @category

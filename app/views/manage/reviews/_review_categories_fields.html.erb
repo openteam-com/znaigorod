@@ -1,6 +1,6 @@
 <div class="organization_organization_categories">
   <%= hidden_field_tag 'review[organization_category_ids][]' %>
-  <% OrganizationCategory.used_roots.each do |root| %>
+  <% OrganizationCategory.roots.each do |root| %>
     <div class="label root_<%= root.title.from_russian_to_param %>">
       <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
       <%= label_tag root.title %>
