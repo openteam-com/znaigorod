@@ -1,9 +1,10 @@
 # encoding: utf-8
 
 namespace :update_rating do
+
   desc "Обновление рейтинга пользователей"
   task :accounts => :environment do
-    Account.all.map(&:update_rating)
+    Account.actual.map(&:update_rating)
   end
 
   desc "Обновление рейтинга афиши"

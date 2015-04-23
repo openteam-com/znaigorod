@@ -2,7 +2,6 @@ require File.expand_path('../directories.rb', __FILE__)
 require 'configliere'
 
 dir = Directories.new
-Settings.read(File.expand_path('../settings.yml', __FILE__))
 
 if RUBY_PLATFORM =~ /freebsd/
   set :job_template, "/usr/local/bin/bash -l -i -c ':job' 1>#{dir.log('schedule.log')} 2>#{dir.log('schedule-errors.log')}"
@@ -24,8 +23,14 @@ end
 
 every :day, :at => '3:00 am' do
   rake 'update_rating:all'
-  rake 'social_likes'
+end
+
+every :day, :at => '3:30 am' do
   rake 'organization:update_positive_activity_date'
+end
+
+every :day, :at => '4:00 am' do
+  rake 'social_likes'
 end
 
 every :day, :at => '6:30 am' do

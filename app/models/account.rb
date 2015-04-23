@@ -67,6 +67,7 @@ class Account < ActiveRecord::Base
   scope :with_rating,             -> { where('rating IS NOT NULL') }
   scope :with_site_digest,        -> { includes(:account_settings).where('account_settings.site_digest = ?', true) }
   scope :with_statistics_digest,  -> { includes(:account_settings).where('account_settings.statistics_digest = ?', true) }
+  scope :actual, -> { where('last_visit_at >= ? and last_visit_at <= ?', Time.zone.now - 1.month, Time.zone.now) }
 
   serialize :badge, Array
   enumerize :badge, :in => [:photo_correspondent], :multiple => true, :predicates => true
