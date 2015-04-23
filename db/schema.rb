@@ -683,8 +683,8 @@ ActiveRecord::Schema.define(:version => 20150424101101) do
   create_table "organization_categories", :force => true do |t|
     t.string   "title"
     t.string   "ancestry"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "slug"
     t.string   "default_image_file_name"
     t.string   "default_image_content_type"
