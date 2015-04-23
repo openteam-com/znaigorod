@@ -1,10 +1,10 @@
 class OrganizationCategory < ActiveRecord::Base
   extend FriendlyId
 
+  attr_accessor :sort_flag
+
   alias_attribute :to_s, :title
   attr_accessible :title, :parent, :slug, :default_image, :hover_image
-
-  default_scope order('title')
 
   has_many :organization_category_items, :dependent => :destroy
 
@@ -23,7 +23,7 @@ class OrganizationCategory < ActiveRecord::Base
   validates :title, presence: true, uniqueness: { scope: :ancestry }
   validates_presence_of :slug
 
-  after_update :reindex_related_organizations
+  after_update :reindex_related_organizations, :unless => :sort_flag
 
   friendly_id :title, :use => :slugged
 
@@ -31,10 +31,6 @@ class OrganizationCategory < ActiveRecord::Base
 
   def root_category?
     root.present? ? true : false
-  end
-
-  def self.used_roots
-    OrganizationCategory.roots.where('title NOT IN (?)', ['Автосервис', 'Туристические агентства','Магазины'])
   end
 
   def reindex_related_organizations

@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html {
         @presenter = OrganizationsPresenterBuilder.new(params).build
-        @categories = @presenter.category ? @presenter.category.root.children : OrganizationCategory.used_roots
+        @categories = @presenter.category ? @presenter.category.root.children.order(:position) : OrganizationCategory.roots.order(:position)
         @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
 
         add_breadcrumb "Все организации", organizations_path

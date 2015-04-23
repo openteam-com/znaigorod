@@ -28,7 +28,7 @@
           <div class="kind_wrapper">
             <p><%= link_to "+", "#", :class => "js-open-list open_list plus" %> <%= link_to category, organizations_by_category_path(category.slug), :class => "kind" %> <span class="organization_quantity"><%= category.organizations.count %></span></p>
             <div class="categories">
-              <% category.children.each do |child| %>
+              <% category.children.order(:position).each do |child| %>
                 <p><%= link_to child, organizations_by_category_path(child.slug), :class => "category" %> <span class="organization_quantity"><%= child.organizations.count %></span></p>
               <% end %>
             </div>

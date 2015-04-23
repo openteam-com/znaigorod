@@ -197,6 +197,7 @@ Znaigorod::Application.routes.draw do
 
     resources :organization_categories do
       resources :features, :except => [:show, :index]
+      post 'sort', :on => :collection
     end
 
     root :to => 'organizations#index'

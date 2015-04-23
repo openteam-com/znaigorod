@@ -21,10 +21,12 @@
   wrapper_sections = $('.sections_wrapper .js-sortable')
   wrapper_section_pages = $('.section_show .js-sortable')
   wrapper_gallery_images = $('.images .js-sortable')
+  wrapper_organization_category = $('.organization_category_sort .js-sortable')
 
   init_sort(wrapper_sections) if $(wrapper_sections).length
   init_sort(wrapper_section_pages) if $(wrapper_section_pages).length
   init_sort(wrapper_gallery_images) if $(wrapper_gallery_images).length
+  init_sort(wrapper_organization_category) if $(wrapper_organization_category).length
 
 recalculate_position = (wrapper) ->
   $('li input.position', wrapper).each (index, item) ->
