@@ -207,6 +207,13 @@ ru:
     other: "Опубликованные (%{count})"
     zero:  "Опубликованные"
 
+  archive:
+    one:   "В архиве (%{count})"
+    few:   "В архиве (%{count})"
+    many:  "В архиве (%{count})"
+    other: "В архиве (%{count})"
+    zero:  "В архиве"
+
   account_friends:
     one:   "%{count} человек"
     few:   "%{count} человека"

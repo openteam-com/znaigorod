@@ -5,10 +5,12 @@ ru:
         events:
           to_draft:     В черновики
           to_published: Опубликовать
+          to_archive:   В архив
 
         states:
           draft:      Черновик
           published:  Опубликовано
+          archive:    В архиве
 
       bet:
         state:
