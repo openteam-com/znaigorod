@@ -115,28 +115,12 @@ init_sort = (wrapper) ->
   true
 
 check_root = (root, checked, checkbox_count) ->
-  if checked == checkbox_count
+  if checked == 0 || checkbox_count == 0
+    root.find('input').prop('indeterminate', false) # indeterminate check for root
+    root.find('input').prop('checked', false)
+  else if checked == checkbox_count
     root.find('input').prop('indeterminate', false) # indeterminate check for root
     root.find('input').prop('checked', true)
-  else if checked == 0
-    root.find('input').prop('indeterminate', false) # indeterminate check for root
-    root.find('input').prop('checked', false)
-  else
-    root.find('input').prop('checked', false)
-    root.find('input').prop('indeterminate', true) # indeterminate check for root
-
-@init_organization_categories = () ->
-  $('.root_toggler').change ->
-    $('.child').toggleClass('show hide')
-    false
-
-check_root = (root, checked, checkbox_count) ->
-  if checked == checkbox_count
-    root.find('input').prop('indeterminate', false) # indeterminate check for root
-    root.find('input').prop('checked', true)
-  else if checked == 0
-    root.find('input').prop('indeterminate', false) # indeterminate check for root
-    root.find('input').prop('checked', false)
   else
     root.find('input').prop('checked', false)
     root.find('input').prop('indeterminate', true) # indeterminate check for root
