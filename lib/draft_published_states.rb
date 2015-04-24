@@ -17,6 +17,10 @@ module DraftPublishedStates
         object.feed.destroy if object.is_a?(Afisha) && object.feed
       end
 
+      after_transition any => :archive do |object, transition|
+        object.send(:update_attribute, :archived_at, Time.zone.now)
+      end
+
       event :to_published do
         transition :draft => :published
       end
