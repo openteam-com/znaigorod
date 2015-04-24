@@ -424,6 +424,7 @@
       +box-shadow(none)
       margin: 0 0 10px 0
       padding-top: 10px
+      background-color: whitesmoke
 
       ul
         padding: 0
@@ -925,7 +926,7 @@
 
       .posters
         +clearfix
-        padding: 0 0 0 0
+        padding: 0
         li
           float: left
           margin: 0 15px 20px 0
@@ -937,9 +938,16 @@
 .discount_content
   .posters, .posters.tiny
     li
-      width: 200px
+      width: 210px
+      margin: 15px 12px 0 0
+
+      .title
+        text-align: center
 
       .item
         .image
-          .first_line
-            color: grey
+          padding: 0 5px
+
+      .badges
+        +clearfix
+        padding: 2px 0 4px

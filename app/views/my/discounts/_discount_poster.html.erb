@@ -1,23 +1,10 @@
 <div class="item" id="ad_<%= discount.id %>">
   <div class="title">
-    <%= link_to truncate(discount.title.text_gilensize, :length => 22), my_discount_path(discount) %>
+    <%= link_to truncate(discount.title.text_gilensize, :length => 28), my_discount_path(discount) %>
   </div>
 
   <div class="image">
     <%= link_to image_tag(resized_image_url((discount.poster_url.nil? ? 'public/stub_poster.png' : discount.poster_url), 198, 164), :size => '198x164', :title => discount.title.text_gilensize, :alt => discount.title.text_gilensize), my_discount_path(discount) %>
-
-    <%= link_to my_discount_path(discount), :class => :details do %>
-      <span class="first_line">
-        <span class="show_tipsy fa fa-users" title="Участники"> <%= discount.members.count %></span>
-        <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= discount.comments.count %></span>
-        <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= discount.likes_count %></span>
-        <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= discount.page_visits.count %></span>
-      </span>
-    <% end %>
-  </div>
-
-  <div class="info">
-    <%= render :partial => "my/discounts/#{discount.class.name.underscore}_info", :locals => { :discount => discount } %>
   </div>
 
   <div class="badges">
