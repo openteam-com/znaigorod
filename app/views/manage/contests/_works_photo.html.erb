@@ -31,8 +31,12 @@
 
       <div>
         <span class="label">Автор:</span>
-        <span class="value"><%= work.account.title %></span>
-        <span class="value"><%= link_to('Профиль в социальной сети', work.account.link_to_social, :rel => 'nofollow', :target => '_blank') %> </span>
+        <% if work.account %>
+          <span class="value"><%= work.account.title %></span>
+          <span class="value"><%= link_to('Профиль в социальной сети', work.account.link_to_social, :rel => 'nofollow', :target => '_blank') %> </span>
+        <% else %>
+          <span class="value">нет автора</span>
+        <% end %>
       </div>
       <div>
         <%= link_to 'Редактировать', [:edit, :manage, resource, work.becomes(Work)]  %>
