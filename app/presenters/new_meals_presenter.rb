@@ -54,4 +54,12 @@ class NewMealsPresenter < NewOrganizationsPresenter
   def not_clients
     @not_clients ||= OrganizationDecorator.decorate(not_clients_results.map(&:organization))
   end
+
+  def available_sortings
+    %w[positive_activity_date organization_total_rating organization_title]
+  end
+
+  def directions
+    { 'positive_activity_date' => 'desc', 'organization_total_rating' => 'desc', 'organization_title' => 'asc' }
+  end
 end

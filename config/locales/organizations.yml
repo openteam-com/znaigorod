@@ -82,8 +82,10 @@ ru:
     show: Описание
     sort:
       rating: Рейтингу
+      organization_total_rating: Рейтингу
       price: Цене
       title: Названию
+      organization_title: Названию
       activity: Обновлению
       positive_activity_date: Обновлению
 
