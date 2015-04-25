@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    request.xhr? ? false : 'public'
+    return request.xhr? ? false : 'public_contest' if Settings['app.city'] == 'tomsk'
+
+    return request.xhr? ? false : 'public' if Settings['app.city'] == 'sevastopol'
   end
 
   def page
