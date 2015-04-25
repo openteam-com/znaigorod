@@ -3,7 +3,7 @@
     <% if page_meta %>
       <h1><%= page_meta.header.squish.html_safe %></h1>
     <% elsif @presenter.page_header.blank? %>
-      <h1><%= t('meta.organizations.page_header') %></h1>
+      <h1><%= t("meta.#{Settings['app.city']}.organizations.page_header") %></h1>
     <% else %>
       <h1><%= @presenter.page_header %></h1>
     <% end %>
