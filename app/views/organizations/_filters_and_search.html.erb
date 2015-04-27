@@ -10,6 +10,16 @@
     <%= link_to 'Добавить организацию', organizations_add_path, class: [:button, :big, :add_organization] %>
   </div>
 
+  <% if page_meta && top_introduction? %>
+    <div class='introduction suborganization'>
+      <%= page_meta.html_introduction %>
+    </div>
+  <% elsif @presenter.meta_introduction && top_introduction? %>
+    <div class='introduction suborganization'>
+      <%= @presenter.meta_introduction.as_html%>
+    </div>
+  <% end %>
+
   <% if @presenter.category %>
     <div class='organization_categories'>
       <ul>

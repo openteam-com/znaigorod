@@ -41,11 +41,11 @@
   </div>
 <% end %>
 
-<% if page_meta %>
+<% if page_meta && !top_introduction? %>
   <div class='introduction suborganization'>
     <%= page_meta.html_introduction %>
   </div>
-<% elsif @presenter.meta_introduction %>
+<% elsif @presenter.meta_introduction && !top_introduction? %>
   <div class='introduction suborganization'>
     <%= @presenter.meta_introduction.as_html%>
   </div>

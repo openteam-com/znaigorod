@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController
   has_scope :page, :default => 1
 
-  helper_method :scrolltrack
+  helper_method :scrolltrack, :top_introduction?
 
   before_filter :allow_cross_domain_access
 
@@ -15,6 +15,7 @@ class OrganizationsController < ApplicationController
         @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
 
         add_breadcrumb "Все организации", organizations_path
+
         if @presenter.category
           add_breadcrumb @presenter.category.root.title, organizations_by_category_path(@presenter.category.root)
           add_breadcrumb @presenter.category.title, organizations_by_category_path(@presenter.category) if !@presenter.category.is_root?
@@ -162,5 +163,9 @@ class OrganizationsController < ApplicationController
 
   def scrolltrack(key)
     @organization.navigation_collection[key].present? ? 'js-scrolltrack' : ''
+  end
+
+  def top_introduction?
+    %w(kafe_tomska restorany saunas).include? params[:slug]
   end
 end
