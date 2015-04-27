@@ -406,8 +406,6 @@ ActiveRecord::Schema.define(:version => 20150427083853) do
     t.string   "discount_type"
     t.text     "email_addresses"
     t.boolean  "stale"
-    t.datetime "published_at"
-    t.datetime "archived_at"
   end
 
   add_index "discounts", ["afisha_id"], :name => "index_discounts_on_afisha_id"

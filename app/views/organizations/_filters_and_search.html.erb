@@ -11,11 +11,11 @@
   </div>
 
   <% if page_meta && top_introduction? %>
-    <div class='introduction suborganization'>
+    <div class='introduction suborganization top_introduction'>
       <%= page_meta.html_introduction %>
     </div>
   <% elsif @presenter.meta_introduction && top_introduction? %>
-    <div class='introduction suborganization'>
+    <div class='introduction suborganization top_introduction'>
       <%= @presenter.meta_introduction.as_html%>
     </div>
   <% end %>
