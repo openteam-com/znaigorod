@@ -10,6 +10,12 @@ namespace :sitemap do
   after 'deploy:create_symlink', 'sitemap:symlinks'
 end
 
-#set :default_stage, 'production'
+namespace :robots do
+  desc 'Create symlinks for robots.txt'
+  task :symlinks, :except => { :no_release => true } do
+    run "ln -nfs #{shared_path}/robots.txt #{deploy_to}/current/public/robots.txt"
+  end
+  after 'deploy:create_symlink', 'robots:symlinks'
+end
 
 set :shared_children, fetch(:shared_children) + %w[config/sape.yml sape public/yandex]
