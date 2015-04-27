@@ -13,7 +13,7 @@ class Contest < ActiveRecord::Base
   has_many :accounts, :through => :works, :uniq => true
   has_many :reviews
 
-  validates_presence_of :title, :starts_at, :ends_at, :participation_ends_at, :vote_type
+  validates_presence_of :title, :starts_at, :ends_at, :participation_ends_at, :vote_type, :contest_type
 
   scope :available, -> { where('starts_at <= ?', Time.zone.now).order('starts_at desc') }
 

@@ -6,7 +6,7 @@
     <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
     <%= f.input :title %>
     <%= f.input :description, :as => :ckeditor, :label => false %>
-    <%= f.input :contest_type %>
+    <%= f.input :contest_type, selected: @contest.type.try(:underscore) %>
     <%= f.input :default_sort %>
     <%= f.input :new_work_text %>
     <%= f.input :vote_type %>
