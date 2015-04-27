@@ -22,7 +22,7 @@ class NewOrganizationsPresenter
         count: Organization.count
       }
 
-      %w[saunas bary dostavka_edy kafe restorany fitnes vizazh-studii car_washes].each do |item|
+      %w[saunas bary dostavka_edy kafe restorany fitnes vizazh_studii car_washes].each do |item|
         category = OrganizationCategory.find(item)
         array << {
           title: category.title,
@@ -65,6 +65,13 @@ class NewOrganizationsPresenter
     header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.description", default: '')
     header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.description", default: '') : header
     header
+  end
+
+  def meta_introduction
+    return  I18n.t("meta.#{Settings['app']['city']}.organizations.introduction", default: '') unless category
+    introduction = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.introduction", default: '')
+    introduction = introduction.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.introduction", default: '') : introduction
+    introduction
   end
 
   def view_prefix

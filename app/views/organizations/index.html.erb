@@ -40,3 +40,13 @@
     </div>
   </div>
 <% end %>
+
+<% if page_meta %>
+  <div class='introduction suborganization'>
+    <%= page_meta.html_introduction %>
+  </div>
+<% elsif @presenter.meta_introduction %>
+  <div class='introduction suborganization'>
+    <%= @presenter.meta_introduction.as_html%>
+  </div>
+<% end %>

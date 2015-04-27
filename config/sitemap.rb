@@ -36,14 +36,12 @@ SitemapGenerator::Sitemap.create do
   add organizations_path, :changefreq => 'weekly', :priority => 1.0, :lastmod => Organization.unscoped.last.updated_at
 
   # Список заведений по категориям
-  Organization.suborganization_kinds_for_navigation.drop(1).each do |suborganization_kind|
-    add send("#{suborganization_kind.pluralize}_path"), :changefreq => 'weekly', :priority => 0.8, :lastmod => suborganization_kind.classify.constantize.unscoped.last.updated_at
-    "#{suborganization_kind.pluralize}_presenter".camelize.constantize.new.categories_links.drop(1).each do |link|
-      next if link[:klass] == 'kafe' || link[:klass] == 'kompyuternyy_mir'
-      add send(link[:url]), :changefreq => 'weekly', :priority => '0.5', :lastmod => suborganization_kind.classify.constantize.unscoped.last.updated_at
+  OrganizationCategory.roots.order(:position).each do |category|
+    add organizations_by_category_path(category.slug), :changefreq => 'weekly', :priority => 0.8, :lastmod => category.updated_at
+    category.children.order(:position).each do |child|
+      add organizations_by_category_path(child.slug), :changefreq => 'weekly', :priority => 0.8, :lastmod => child.updated_at
     end
   end
-
 
   # Просмотр заведения
   Organization.find_each do |organization|
