@@ -188,6 +188,7 @@ ru:
         short_number: Короткий номер
         sms_secret: Секретная фраза
         default_sort: Сортировка по умолчанию
+        placeholder: Placeholder для описания работы
 
       work:
         <<: *common_attributes

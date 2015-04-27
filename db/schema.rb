@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150423040930) do
+ActiveRecord::Schema.define(:version => 20150427083853) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -290,6 +290,7 @@ ActiveRecord::Schema.define(:version => 20150423040930) do
     t.string   "sms_secret"
     t.string   "default_sort",          :default => "by_id"
     t.string   "new_work_text",         :default => "Добавить фотографию"
+    t.text     "placeholder"
   end
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
@@ -405,6 +406,8 @@ ActiveRecord::Schema.define(:version => 20150423040930) do
     t.string   "discount_type"
     t.text     "email_addresses"
     t.boolean  "stale"
+    t.datetime "published_at"
+    t.datetime "archived_at"
   end
 
   add_index "discounts", ["afisha_id"], :name => "index_discounts_on_afisha_id"

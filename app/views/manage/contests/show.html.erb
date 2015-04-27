@@ -49,6 +49,15 @@
     <% end %>
   </div>
 
+  <div>
+    <span class="label">Placeholder для описания работы:</span>
+    <% if resource.placeholder? %>
+      <span class="value"><%= resource.placeholder %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
   <div class='snapshot'>
     <span class="label">OG image:</span>
     <%= content_tag(:p, image_tag(resized_image_url(resource.og_image_url, 200, 97), size: '200x97')) if resource.og_image.present? %>

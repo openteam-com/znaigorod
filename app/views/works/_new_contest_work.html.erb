@@ -31,8 +31,8 @@
       <%= f.error :base %>
       <%= f.input :image %>
 
-      <% if @contest.slug == 'deti-risuyut-pobedu' %>
-        <%= f.input :description, label: false, input_html: { placeholder: 'Укажите имя и возраст ребенка', cols: 100 } %>
+      <% if @contest.placeholder %>
+        <%= f.input :description, label: false, input_html: { placeholder: @contest.placeholder, cols: 100 } %>
         <%= f.input :author_info, :as => :hidden, :input_html => { :value => "" } %>
       <% end %>
 
