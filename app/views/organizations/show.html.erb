@@ -130,8 +130,12 @@
       <%= @organization.work_schedule %>
 
       <div class='phone_wrapper'>
-        Телефон: <%= @organization.phone.truncate(5) %>
-      <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id %>
+        <% if @organization.phone.present? %>
+          Телефон: <%= @organization.phone.truncate(5) %>
+        <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id %>
+      <% else %>
+        нет телефона
+      <% end %>
     </div>
 
     <% if @organization.contact_links.present? %>

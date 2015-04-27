@@ -1,5 +1,4 @@
 require File.expand_path('../directories.rb', __FILE__)
-require 'configliere'
 
 dir = Directories.new
 
@@ -9,7 +8,11 @@ else
   set :job_template, "/bin/bash -l -i -c ':job' 1>#{dir.log('schedule.log')} 2>#{dir.log('schedule-errors.log')}"
 end
 
-if true #false
+# ----------------------------------
+# tasks for znaigorod.ru
+# FIXME: костылек
+
+if dir.root.split('/').include?('znaigorod.ru')
   # ------------------------------------------
 
   # tasks run one time at week
@@ -20,6 +23,10 @@ if true #false
   # ------------------------------------------
 
   # everyday tasks
+
+  every :day, :at => '2:10 am' do
+    rake 'sitemap:refresh refresh_sitemaps'
+  end
 
   every :day, :at => '3:00 am' do
     rake 'update_rating:all'
@@ -72,6 +79,7 @@ if true #false
     rake 'update_ponominalu_tickets'
   end
 
+
   # ------------------------------------------
 
   # Commented for future
@@ -83,10 +91,6 @@ if true #false
   #every :day, :at => '6:00 am' do
   #rake 'send_digest:personal'
   #rake 'generate_yandex_companies_xml_files'
-  #end
-
-  #every 6.hours do
-  #rake 'sitemap:refresh refresh_sitemaps'
   #end
 
   #every :day, :at => '5am' do
