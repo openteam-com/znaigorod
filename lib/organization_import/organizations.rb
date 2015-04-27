@@ -83,15 +83,17 @@ module OrganizationImport
               organization.site = csv_rows.map(&:site).compact.uniq.first
 
               # address
-              address = organization.address.nil? ? Address.new : organization.address
-              address.street = csv_address.street
-              address.house = csv_address.house
-              address.office = csv_address.office
-              address.city = csv_rows.first.city
-              address.latitude = csv_rows.first.latitude
-              address.longitude = csv_rows.first.longitude
-              address.save(:validate => false)
-              organization.address = address
+              if raw_address
+                address = organization.address.nil? ? Address.new : organization.address
+                address.street = csv_address.street
+                address.house = csv_address.house
+                address.office = csv_address.office
+                address.city = csv_rows.first.city
+                address.latitude = csv_rows.first.latitude.gsub(',','.')
+                address.longitude = csv_rows.first.longitude.gsub(',','.')
+                address.save(:validate => false)
+                organization.address = address
+              end
 
               # force generate slug
               organization.send :set_slug unless organization.slug?

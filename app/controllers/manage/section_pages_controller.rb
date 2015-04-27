@@ -9,7 +9,7 @@ class Manage::SectionPagesController < Manage::ApplicationController
 
   def update
     update! {
-      redirect_to edit_manage_organization_section_section_page_path(params[:organization_id], params[:section_id], params[:id]) and return
+      redirect_to manage_organization_section_path(params[:organization_id], params[:section_id]) and return
     }
   end
 

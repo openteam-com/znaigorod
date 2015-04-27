@@ -77,7 +77,7 @@ module OrganizationImport
 
     def category_by(title)
       hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
-        e.each { |k, v| h[k] = v.try(:[], 'title') }
+        e.each { |k, v| h[k] = v.try(:[], 'title') } if e.present?
 
         h
       end
@@ -89,7 +89,7 @@ module OrganizationImport
 
     def feature_by(title)
       hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
-        e.each { |k, v| h[k] = v.try(:[], 'offers') }
+        e.each { |k, v| h[k] = v.try(:[], 'offers') } if e.present?
 
         h
       end
@@ -113,20 +113,6 @@ module OrganizationImport
       end
 
       OrganizationCategory.where :title => hash.map { |k, v| v ? v : k }
-    end
-
-    def feature_by(title)
-      hash = yml.flat_map { |k, v| v['subcategories'] }.inject({}) do |h, e|
-        e.each { |k, v| h[k] = v.try(:[], 'offers') }
-
-        h
-      end
-
-      hash = Hash[hash.values.compact.map(&:to_a).inject([]) { |res, arr| arr.each { |e| res << e }; res }]
-
-      array = hash.detect { |k, _| k == title }
-
-      array ? Feature.find_by_title(array.last || array.first) : nil
     end
   end
 end
