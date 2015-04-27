@@ -23,16 +23,13 @@ if dir.root.split('/').include?('znaigorod.ru')
   # ------------------------------------------
 
   # everyday tasks
-  every :day, :at => '2:30 am' do
-    rake 'discounts:archive_discounts'
-  end
-
-  every :day, :at => '3:00 am' do
-    rake 'update_rating:all'
-  end
 
   every :day, :at => '2:10 am' do
     rake 'sitemap:refresh refresh_sitemaps'
+  end
+
+  every :day, :at => '2:30 am' do
+    rake 'discounts:archive_discounts'
   end
 
   every :day, :at => '3:00 am' do
