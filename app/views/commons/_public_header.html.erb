@@ -1,7 +1,22 @@
 <div class='header_wrapper'>
   <div class='header'>
     <div class='logo'><a href='/'><%= t("meta.#{Settings['app.city']}.default.title") %></a></div>
-    <div class="<%= Settings['app.city'] %>"><%= Settings['app.city_ru'] %></div>
+    <div class="<%= Settings['app.city'] %>">
+      <div class='select_menu'>
+        <span>
+          <%= Settings['app.city_ru'] %>
+        </span>
+        <ul>
+          <li>
+            <% if Settings['app.city'] == 'tomsk' %>
+              <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru' %>
+            <% else %>
+              <%= link_to 'Томск', 'http://znaigorod.ru' %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <% if Settings['app.city'] == 'tomsk' %>
       <a href='/webcams' title='Веб камеры Томска' class='webcams'>
@@ -33,7 +48,7 @@
           <% elsif current_user.account.notification_messages.unread.any? %>
             <%= link_to "+#{current_user.account.messages.unread.count}", my_notification_messages_path, class: :new, title: 'Есть новые сообщения' %>
           <% else %>
-            <%= link_to current_user.account.messages.count, my_root_path, class: :empty, title: 'Нет новых соощений' %>
+            <%= link_to current_user.account.messages.count, my_root_path, class: :empty, title: 'Нет новых сообщений' %>
           <% end %>
           <%= link_to('Личный кабинет', my_root_path) %>
         </p>
