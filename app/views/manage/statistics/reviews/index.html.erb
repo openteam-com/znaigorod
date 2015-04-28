@@ -55,7 +55,7 @@
             <% end %>
           </table>
         </td>
-        <td class='author'><%= review.map{ |review| review.content ? review.content.size : 0 }.sum %></td>
+        <td class='author'><%= review.map{ |review| review.content ? review.content.gsub(/!http\S+\s*!|:http\S+\s*|"/, "").size : 0 }.sum %></td>
       </tr>
     <% end %>
   </tbody>
