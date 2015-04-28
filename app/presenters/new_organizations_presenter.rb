@@ -43,6 +43,7 @@ class NewOrganizationsPresenter
     return  I18n.t("meta.#{Settings['app']['city']}.organizations.page_header", default: '') unless category
     header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.page_header", default: '')
     header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.page_header", default: '') : header
+    header = header.blank? ? category.root.title : header
     header
   end
 
@@ -50,6 +51,7 @@ class NewOrganizationsPresenter
     return  I18n.t("meta.#{Settings['app']['city']}.organizations.page_title", default: '') unless category
     header = I18n.t("meta.#{Settings['app']['city']}.#{category.slug}.page_title", default: '')
     header = header.blank? ? I18n.t("meta.#{Settings['app']['city']}.#{category.root.slug}.page_title", default: '') : header
+    header = header.blank? ? category.root.title : header
     header
   end
 
