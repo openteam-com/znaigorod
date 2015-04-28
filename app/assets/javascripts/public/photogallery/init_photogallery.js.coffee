@@ -16,6 +16,19 @@
     visible:  visible_count
     start:    start_position
 
+  $('.body .photogallery a').colorbox
+    close: 'закрыть'
+    current: '{current} из {total}'
+    maxHeight: '90%'
+    maxWidth: '90%'
+    next: 'следующая'
+    opacity: '0.5'
+    photo: true
+    previous: 'предыдущая'
+    returnFocus: false
+    title: ->
+      $(this).attr('title') || $('img', this).attr('alt') || '&nbsp;'
+
   if $('.photogallery img').hasClass('stub')
     return true
   else
@@ -31,6 +44,7 @@
       returnFocus: false
       title: ->
         $(this).attr('title') || $('img', this).attr('alt') || '&nbsp;'
+
 
   $('.js-section-colorbox a').colorbox
     close: 'закрыть'
