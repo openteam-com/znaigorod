@@ -398,12 +398,6 @@
             ol
               list-style: inside decimal
 
-            ul
-              list-style: inside disc
-
-            ol
-              list-style: inside decimal
-
             h2
               margin-bottom: 5px
               font-size: 14px
@@ -433,6 +427,18 @@
 
               &.hidden
                 display: none
+
+            .menu_with_images_wrapper
+              list-style: none
+
+              li
+                +inline-block
+                vertical-align: top
+                margin: 15px 33px 0 0
+                width: 156px
+
+                &:nth-child(4n)
+                  margin: 15px 0 0 0
 
     .icon_edit
       float: right

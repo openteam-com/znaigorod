@@ -245,17 +245,3 @@
     $(this).parent().find('.js-opener-btn').parent().nextAll().slideUp()
 
   true
-
-@init_delimiter_on_sections = () ->
-  $('.js-opener-btn').parent().nextAll().slideUp()
-
-  $('.js-opener-btn').click ->
-    $(this).parent().nextAll().slideDown()
-    $(this).parent().find('js-closer-btn').slideDown()
-    $(this).slideUp()
-
-  $('.js-closer-btn').click ->
-    $(this).slideUp()
-    $(this).parent().find('.js-opener-btn').slideDown()
-    $(this).parent().find('.js-opener-btn').parent().nextAll().slideUp()
-
