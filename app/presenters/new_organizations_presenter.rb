@@ -114,7 +114,7 @@ class NewOrganizationsPresenter
 
   def promoted_clients
     orgs = Organization.search {
-      with :status, :client
+      with :status, [:client, :client_economy, :client_standart, :client_premium]
       paginate :page => 1, :per_page => promoted_clients_per_page
       order_by :positive_activity_date, :desc
     }.results
@@ -149,7 +149,7 @@ class NewOrganizationsPresenter
   def nearest_clients
     @clients_results ||= Organization.search {
       paginate :page => 1, :per_page => 4
-      with :status, :client
+      with :status, [:client, :client_economy, :client_standart, :client_premium]
       with :organization_category_slugs, category.slug if category
       with(:location ).in_radius(latitude, longitude, radius)
     }.results
@@ -162,7 +162,7 @@ class NewOrganizationsPresenter
       paginate :page => clients_page, :per_page => clients_per_page
       with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
-      with :status, :client
+      with :status, [:client, :client_economy, :client_standart, :client_premium]
 
       query ? keywords(query) : order_by(criterion, directions[criterion])
     }.results
