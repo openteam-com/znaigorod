@@ -56,5 +56,16 @@ namespace :organizations do
       puts 'Usage rake organizations:find_unmatched CSV=/path/to/csv YML=/path/to/yml'
     end
   end
+
+  desc 'Find similar organization'
+  task :find_similar => :environment do
+    if ENV['CSV'] && ENV['YML']
+      OrganizationImport::Categories.new(ENV['YML']).import
+
+      OrganizationImport::Organizations.new(ENV['CSV'], ENV['YML']).find_similar
+    else
+      puts 'Usage rake organizations:find_unmatched CSV=/path/to/csv YML=/path/to/yml'
+    end
+  end
 end
 

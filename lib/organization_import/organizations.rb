@@ -49,8 +49,49 @@ module OrganizationImport
       end
 
       results = Organization.joins(:organization_categories).where(:organization_categories => { :id => categories_from_yml.subcategories_for_import.pluck(:id) }).uniq - array
-      results.each do |o|
-        puts "#{o.title};#{o.address};http://znaigorod.ru/manage/organizations/#{o.slug}"
+      if results.any?
+        results.each do |o|
+          puts "#{o.title};#{o.address};http://znaigorod.ru/manage/organizations/#{o.slug}"
+        end
+      else
+        puts 'Ничего не найдено.'
+      end
+    end
+
+    def splited_street(s)
+      s.split(/\.|\s/).delete_if(&:blank?) rescue []
+    end
+
+    def street_matched?(org1, org2)
+      (splited_street(org1.address.try(:street)) & splited_street(org2.address.try(:street))).any?
+    end
+
+    def house_matched?(org1, org2)
+      org1.address.try(:house).try(:squish).try(:mb_chars).try(:downcase) == org2.address.try(:house).try(:squish).try(:mb_chars).try(:downcase)
+    end
+
+    def address_matched?(org1, org2)
+      street_matched?(org1, org2) && house_matched?(org1, org2)
+    end
+
+    def find_similar
+      hash = {}
+      pb = ProgressBar.new(Organization.count)
+      Organization.find_each do |org|
+        results = Organization.search { keywords(org.title) }.results
+          .delete_if { |o| o == org }
+          .delete_if { |o| !address_matched?(o, org) }
+        hash[org] = results if results.any?
+        pb.increment!
+      end
+
+      hash.each do |key, value|
+        puts "#{key.title}; #{key.address}; http://znaigorod.ru/manage/organizations/#{key.slug};"
+        puts "Возможные совпадения;"
+        value.each do |org|
+          puts "#{org.title}; #{org.address}; http://znaigorod.ru/manage/organizations/#{org.slug};"
+        end
+        puts "<<<<<<<<<<<<<<<<<<<;"
       end
     end
 
