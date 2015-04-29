@@ -370,6 +370,10 @@ class Account < ActiveRecord::Base
   def poster_url=(poster_url)
     self.avatar_url = poster_url
   end
+
+  def has_email?
+    email.present?
+  end
 end
 
 # == Schema Information

@@ -6,6 +6,6 @@ class AddOrganizationMailer < ActionMailer::Base
   def send_request(request)
     @request = request
 
-    mail :to => 'office@znaigorod.ru', :subject => 'На сайте znaigorod.ru поступил запрос на добавление организации'
+    mail :to => Settings['mail']['to_office'], :subject => 'На сайте znaigorod.ru поступил запрос на добавление организации'
   end
 end
