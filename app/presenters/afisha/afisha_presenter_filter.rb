@@ -51,7 +51,7 @@ class PeriodFilter
   end
 
   def self.available_period_values
-    %w[today week weekend daily]
+    %w[na_segodnya na_nedelyu na_vyhodnye daily]
   end
 
   def available_period_values
@@ -75,14 +75,14 @@ class PeriodFilter
     case period
     when 'all'
       actual_collection
-    when 'today'
+    when 'na_segodnya'
       actual_collection.where('showings.starts_at < ?', DateTime.now.end_of_day)
-    when 'week'
+    when 'na_nedelyu'
       actual_collection.where('showings.starts_at > ? OR showings.starts_at < ?',
                        DateTime.now.beginning_of_week,
                        DateTime.now.end_of_week).where('showings.ends_at IS NULL OR showings.ends_at < ?',
                                                        DateTime.now.end_of_week)
-    when 'weekend'
+    when 'na_vyhodnye'
       actual_collection.where('showings.starts_at > ? OR showings.starts_at < ?',
                               DateTime.now.end_of_week - 2.days + 1.second,
                               DateTime.now.end_of_week).where('showings.ends_at IS NULL OR showings.ends_at < ?',
@@ -121,8 +121,6 @@ class SortingFilter
 
   def order_by
     @order_by = available_sortings_values.include?(@order_by) ? @order_by : 'creation'
-    #@order_by = (available_sortings_values & [@order_by]).any? ? @order_by : 'creation' if !@geo_filter.used?
-
     @order_by
   end
 end

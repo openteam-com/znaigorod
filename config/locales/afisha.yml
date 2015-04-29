@@ -4,6 +4,11 @@ ru:
     pay_attention: "Хочешь обратить внимание на свою афишу? ЗнайГород поможет тебе в этом!"
     pay_attention_discount: "Хочешь обратить внимание на свою акцию/скидку? ЗнайГород поможет тебе в этом!"
 
+    period:
+      na_segodnya: "на сегодня"
+      na_nedelyu: "на неделе"
+      na_vyhodnye: "на выходных"
+
     discounts:
       buy: "Купить"
       my_price: "Предложить свою цену"
@@ -59,10 +64,10 @@ ru:
       other: "нравится %{count} пользователям"
 
   afisha_periods:
-    today: Сегодня
+    na_segodnya: Сегодня
     weekly: На неделе
-    week: На неделе
-    weekend: На выходных
+    na_nedelyu: На неделе
+    na_vyhodnye: На выходных
     daily: Выбрать дату
     all:
       afisha: Вся афиша мероприятий

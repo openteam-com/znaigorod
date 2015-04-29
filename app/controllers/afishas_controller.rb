@@ -4,6 +4,7 @@ class AfishasController < ApplicationController
   include ImageHelper
 
   respond_to :html, :rss, :promotion
+  helper_method :params_exist?
 
   def index
 
@@ -95,5 +96,11 @@ class AfishasController < ApplicationController
     }
 
     render json: single_afisha.to_json
+  end
+
+  private
+
+  def params_exist?
+    request.url.split('?').many?
   end
 end

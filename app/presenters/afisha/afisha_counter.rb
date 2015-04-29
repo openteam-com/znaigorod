@@ -16,11 +16,11 @@ class AfishaCounter
         case @presenter.period_filter.period
         when 'all'
           s.actual
-        when 'today'
+        when 'na_segodnya'
           s.today.actual
-        when 'week'
+        when 'na_nedelyu'
           s.week.actual
-        when 'weekend'
+        when 'na_vyhodnye'
           s.weekend.actual
         end
       end

@@ -136,13 +136,13 @@ class AfishaPresenter
   def periods_links
     @periods_links ||= [].tap { |array|
       @period_filter.available_period_values.each do |period_value|
-        link_url = (period_value == 'today' && !categories.present?) ? 'afisha_today_path' : url
+        link_url = (period_value == 'na_segodnya' && !categories.present?) ? 'afisha_today_path' : url
 
         array << {
           title: (@period_filter.daily? && period_value == 'daily') ? I18n.l(@period_filter.date, format: '%d %B').gsub(/^0/, '') : I18n.t("afisha_periods.#{period_value}"),
           url: link_url,
           class: period_value,
-          parameters: url_parameters(period: period_value),
+          parameters: url_parameters(period: period_value, on: nil),
           selected: period_value == @period_filter.period
         }
       end
@@ -161,8 +161,7 @@ class AfishaPresenter
   def sortings_links
     @sortings_links ||= [].tap { |array|
       @sorting_filter.available_sortings_values.each do |sorting_value|
-        link_url = @period_filter.today? ? 'afisha_today_path' : url
-
+        link_url = @period_filter.na_segodnya? ? 'afisha_today_path' : url
         array << {
           title: I18n.t("afisha.sort.#{sorting_value}"),
           url: link_url,
@@ -239,11 +238,11 @@ class AfishaPresenter
         case period_filter.period
         when 'all'
           s.actual
-        when 'today'
+        when 'na_segodnya'
           s.today.actual
-        when 'week'
+        when 'na_nedelyu'
           s.week.actual
-        when 'weekend'
+        when 'na_vyhodnye'
           s.weekend.actual
         end
       end

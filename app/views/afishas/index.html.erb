@@ -1,7 +1,3 @@
-<% content_for :page_title, @presenter.page_title %>
-<% content_for :meta_keywords, @presenter.meta_keywords %>
-<% content_for :meta_description, @presenter.meta_description %>
-
 <% content_for :extra_meta do %>
   <% if page_meta %>
     <%= render :partial => 'commons/page_meta_og' %>
@@ -16,7 +12,7 @@
 
   <div class="filter_header">
     <% if page_meta %>
-      <h1><%= page_meta.header.squish.html_safe %></h1>
+      <h1><%= page_meta_item('header') %></h1>
     <% elsif @presenter.categories_filter.selected.empty? %>
       <h1><%= t("meta.#{Settings['app.city']}.afisha.page_header") %></h1>
     <% else %>
@@ -49,14 +45,16 @@
 
   <%= render :partial => 'commons/ads_by_google' %>
 
-  <% if page_meta %>
-    <div class='introduction green'>
-      <%= page_meta.html_introduction %>
-    </div>
-  <% elsif !t("meta.#{Settings['app.city']}.#{@presenter.kind}.introduction", default: '').blank? || @presenter.has_tickets %>
-    <div class='introduction green'>
-      <%= t("meta.#{Settings['app.city']}.#{@presenter.has_tickets ? 'tickets' : @presenter.kind}.introduction").as_html %>
-    </div>
+  <% unless params_exist? %>
+    <% if page_meta %>
+      <div class='introduction green'>
+        <%= page_meta.html_introduction %>
+      </div>
+    <% elsif !t("meta.#{Settings['app.city']}.#{@presenter.kind}.introduction", default: '').blank? || @presenter.has_tickets %>
+      <div class='introduction green'>
+        <%= t("meta.#{Settings['app.city']}.#{@presenter.has_tickets ? 'tickets' : @presenter.kind}.introduction").as_html %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

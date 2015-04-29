@@ -5,25 +5,28 @@
     <meta name='google-site-verification' content='4WezRNvvwZCOYCxFNt9PKHdon29hbt-V7bMbhZhaMMk' />
     <meta name='yandex-verification' content='6f2efa53b5d49370' />
     <meta name="rpfe26e092c7954d7c8a1551ff5169c34f" content="46d58b82e71fe375debceed79ad42b29" />
+    <meta property='fb:app_id' content='131807160304776'/>
     <!-- fb0efcfc2fdc4ac1 -->
     <%= yield(:verify_reformal) %>
-    <meta property='fb:app_id' content='131807160304776'/>
+
     <% if page_meta %>
-      <title><%= page_meta.title.squish.html_safe %></title>
+      <title><%= page_meta_item('title') %></title>
     <% elsif content_for?(:page_title) %>
       <title><%= yield(:page_title).squish.html_safe %></title>
     <% else %>
       <title><%= I18n.t("meta.#{Settings['app.city']}.default.title", :default => '').squish.html_safe %></title>
     <% end %>
+
     <% if page_meta %>
-      <meta name='keywords' content='<%= page_meta.keywords.squish.html_safe %>' />
+      <meta name='keywords' content='<%= page_meta_item('keywords') %>' />
     <% elsif content_for?(:meta_keywords) %>
       <meta name='keywords' content='<%= yield(:meta_keywords) %>' />
     <% else %>
       <meta name='keywords' content='<%= I18n.t("meta.#{Settings['app.city']}.default.keywords", :default => '').squish.html_safe %>' />
     <% end %>
+
     <% if page_meta %>
-      <meta name='description' content='<%= page_meta.description.squish.html_safe %>' />
+      <meta name='description' content='<%= page_meta_item('description') %>' />
     <% elsif content_for?(:meta_description) %>
       <meta name='description' content='<%= yield(:meta_description) %>' />
     <% else %>
@@ -32,6 +35,7 @@
     <% if content_for?(:meta_title) %>
       <meta name='title' content='<%= yield(:meta_title) %>' />
     <% end %>
+
     <%= yield(:canonical_link) %>
     <%= yield(:extra_meta) %>
     <%= favicon_link_tag %>

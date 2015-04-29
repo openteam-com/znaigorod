@@ -7,9 +7,9 @@ Znaigorod::Application.routes.draw do
   get '/api/afisha_collection' => 'afishas#afisha_collection', :as => :afisha_collection_api
   get '/api/single_afisha' => 'afishas#single_afisha', :as => :single_afisha_api
 
-  get '/afisha_tomsk_segodnya' => 'afishas#index', :as => :afisha_today, :defaults => { :period => 'today' }, :constraints => { :period => 'today' }
+  get '/afisha_tomsk_segodnya' => 'afishas#index', :as => :afisha_today, :defaults => { :period => 'na_segodnya' }, :constraints => { :period => 'na_segodnya' }
   get '/afisha',
-    :constraints => -> (req) { req.query_parameters['period'] == 'today' },
+    :constraints => -> (req) { req.query_parameters['period'] == 'na_segodnya' },
     :to => redirect { |path_params, req|
       params = req.query_parameters.dup
       params.delete('period')
