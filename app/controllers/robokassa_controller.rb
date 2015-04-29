@@ -16,7 +16,6 @@ class RobokassaController < ApplicationController
     end
   end
 
-  # TODO: надо сделать и проверить
   def success
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
@@ -33,12 +32,14 @@ class RobokassaController < ApplicationController
     end
   end
 
-  # TODO: надо сделать и проверить
   def fail
     notification = Robokassa::Notification.new(request.raw_post)
     payment = Payment.find(notification.item_id)
     paymentable = payment.paymentable
-    payment.cancel_and_release_tickets!
+    begin
+      payment.cancel_and_release_tickets!
+    rescue
+    end
 
     if paymentable
       if paymentable.is_a?(Ticket)

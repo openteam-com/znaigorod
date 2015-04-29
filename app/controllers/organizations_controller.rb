@@ -150,15 +150,21 @@ class OrganizationsController < ApplicationController
   end
 
   def show_phone
-    organization = Organization.find(params[:organization_id])
-    organization.increment!(:phone_show_counter)
-    phone = params[:single_phone] ? organization.phone.split(',').try(:first) : organization.phone
-    render text: "#{phone}".html_safe and return if request.xhr?
+    if request.xhr?
+      organization = Organization.find(params[:organization_id])
+      organization.increment!(:phone_show_counter)
+      phone = params[:single_phone] ? organization.phone.split(',').try(:first) : organization.phone
+      render text: "#{phone}".html_safe
+    else
+      render :nothing => true, :status => 200 and return
+    end
   end
 
   def increment_site_link_counter
-    Organization.find(params[:organization_id]).increment!(:site_link_counter)
-    render :nothing => true, :status => 200 and return if request.xhr?
+    if request.xhr?
+      Organization.find(params[:organization_id]).increment!(:site_link_counter)
+      render :nothing => true, :status => 200
+    end
   end
 
   def scrolltrack(key)
