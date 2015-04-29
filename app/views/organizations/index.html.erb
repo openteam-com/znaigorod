@@ -12,7 +12,8 @@
 <% end %>
 
 <%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } %>
-<div class='breadcrumbs'><%= render_breadcrumbs :separator => ' / ' %></div>
+
+<%= render partial: 'filters_and_search' %>
 
 <% if @presenter.category %>
   <%= render :partial => "#{@presenter.view_type}_view" %>
