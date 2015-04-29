@@ -383,7 +383,7 @@ class Organization < ActiveRecord::Base
         hash[send("#{prefix}_navigation_title")] = send("#{prefix}_navigation_title").from_russian_to_param if send("#{prefix}_navigation_title").present?
       end
 
-      sections.select { |s| s.navigation_title.present? }.each do |section|
+      sections.order('position').select { |s| s.navigation_title.present? }.each do |section|
         hash[section.navigation_title] = section.navigation_title.from_russian_to_param
       end
 
