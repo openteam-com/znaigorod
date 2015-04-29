@@ -1,6 +1,6 @@
 <meta property="og:title" content="<%= page_meta_item('og_title') %>" />
 <meta property="og:description" content="<%= page_meta_item('og_description') %>" />
-<meta property="og:url" content="<%= request.url.split("?").first %>" />
+<meta property="og:url" content="<%= canonical_link %>" />
 <% if page_meta.og_image.present? %>
   <meta property='og:image' content='<%= resized_image_url(page_meta.og_image_url, 130, 63) %>' />
 <% end %>
