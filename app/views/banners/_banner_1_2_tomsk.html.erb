@@ -4,8 +4,10 @@
       <%= link_to (image_tag 'public/banners/miss-tomsk.jpg', size: '880x80'), contest_path('miss-tomsk-2015'), class: 'js-stat-miss-tomsk' %>
     </li>
 
-    <li class='js-banner shashlyk-banner'>
-      <%= link_to (image_tag 'public/banners/banner_shashlyk.png', size: '880x80'), contest_path('tvoy-shashlyk-samyy-vkusnyy'), class: 'js-stat-shashlyk' %>
-    </li>
+    <% unless params[:id] == 'tvoy-shashlyk-samyy-vkusnyy' %>
+      <li class='js-banner shashlyk-banner'>
+        <%= link_to (image_tag 'public/banners/banner_shashlyk.png', size: '880x80'), contest_path('tvoy-shashlyk-samyy-vkusnyy'), class: 'js-stat-shashlyk' %>
+      </li>
+    <% end %>
   </ul>
 </div>
