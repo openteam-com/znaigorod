@@ -1,3 +1,4 @@
+<span class="value"><%= link_to 'Назад к организации', manage_organization_path(params[:organization_id])%></span>
 <div class="section_show js-section-show">
   <div class='title'>
     <%= simple_form_for [:manage, :organization, @section], :remote => true do |f| %>
