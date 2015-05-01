@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     if controller_name == 'afishas'
       base_url, params_string = request.url.split('?')
       needed_params_string = (params_string || "").split('&').delete_if{ |param| param.exclude?('on=') && param.exclude?('period=')}.join('&')
-      base_url + (needed_params_string.empty? ? '' : needed_params_string.insert(0,"?"))
+      base_url + (needed_params_string.present? ? needed_params_string.insert(0,"?") : '')
     else
       request.url.split('?').first
     end
