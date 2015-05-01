@@ -450,6 +450,11 @@ class Afisha < ActiveRecord::Base
     self.trailer_code.gsub!(/(object|embed)/, '\1 wmode="opaque"') if self.trailer_code?
   end
 
+  def self.new_afisha_url
+    [ ["child", "deti"], ["movie", "kinoafisha"], ["concert", "concerts"], ["party", "vecherinki"], ["spectacle", "afisha-teatrov"],
+      ["exhibition", "vystavki"], ["training", "treningi-i-kursy"], ["masterclass", "masterclasses"], ["sportsevent", "sportsevents"],
+      ["competition", "konkursy"], ["other", "others"] ]
+  end
 end
 
 # == Schema Information
@@ -495,4 +500,3 @@ end
 #  promoted_at               :datetime
 #  bkz_link                  :text
 #
-

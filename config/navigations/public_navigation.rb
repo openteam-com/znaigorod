@@ -12,14 +12,12 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :afisha, 'Афиша', afisha_index_path, highlights_on: -> { controller_name == 'afishas' } do |afisha|
-
-      Afisha.kind.values.each do |item|
-        afisha.item "afisha_#{item}", I18n.t("enumerize.afisha.kind.#{item}") ,send("#{item.pluralize}_path")
+      Afisha.kind.values.each do |kind|
+        afisha.item "afisha_#{kind}", I18n.t("enumerize.afisha.kind.#{kind}") ,send("#{kind}_index_path")
       end
     end
 
     primary.item :questions, 'Спрашивай', questions_path, highlights_on: -> { controller_name == 'questions' } do |questions|
-
       Hash[Question.categories.options].invert.each do |category, title|
         questions.item category, title, [:questions, category]
       end
@@ -36,14 +34,12 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :discounts, 'Скидки', discounts_path, highlights_on: -> { controller_name == 'discounts' } do |discount|
-
       Hash[Discount.kind.options].invert.each do |kind, title|
         discount.item kind, title, [:discounts, kind]
       end
     end
 
     primary.item :reviews, 'Обзоры', reviews_path, highlights_on: -> { controller_name == 'reviews' } do |reviews|
-
       Hash[Review.categories.options].invert.each do |category, title|
         reviews.item category, title, [:reviews, category]
       end

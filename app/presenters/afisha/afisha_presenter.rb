@@ -50,7 +50,7 @@ class AfishaPresenter
 
   def url
     @url ||= "".tap do |str|
-      str << "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}"
+      str << "#{(categories_filter.selected.first || 'afisha')}"
       str << '_with_tickets' if has_tickets
       str << "_index_path"
     end
@@ -58,14 +58,14 @@ class AfishaPresenter
 
   def direct_url
     "".tap do |str|
-      str << "#{(categories_filter.selected.first.try(:pluralize) || 'afisha')}"
+      str << "#{(categories_filter.selected.first || 'afisha')}"
       str << '_with_tickets' if has_tickets
       str << "_index_url"
     end
   end
 
   def kind
-    @kind ||= categories_filter.selected.first.try(:pluralize) || 'afisha'
+    @kind ||= categories_filter.selected.first || 'afisha'
   end
 
   def collection
@@ -122,9 +122,9 @@ class AfishaPresenter
       }
       Afisha.kind.values.each do |kind|
         array << {
-          title: "#{kind.text}",
+          title: I18n.t("enumerize.afisha.kind.#{kind}"),
           klass: kind.pluralize,
-          url: has_tickets ? "#{kind.pluralize}_with_tickets_index_path" : "#{kind.pluralize}_index_path",
+          url: has_tickets ? "#{kind}_with_tickets_index_path" : "#{kind}_index_path",
           parameters: url_parameters,
           current: categories.include?(kind),
           count: AfishaCounter.new(presenter: self, categories: [kind]).count
@@ -136,11 +136,9 @@ class AfishaPresenter
   def periods_links
     @periods_links ||= [].tap { |array|
       @period_filter.available_period_values.each do |period_value|
-        link_url = (period_value == 'na_segodnya' && !categories.present?) ? 'afisha_today_path' : url
-
         array << {
           title: (@period_filter.daily? && period_value == 'daily') ? I18n.l(@period_filter.date, format: '%d %B').gsub(/^0/, '') : I18n.t("afisha_periods.#{period_value}"),
-          url: link_url,
+          url: url,
           class: period_value,
           parameters: url_parameters(period: period_value, on: nil),
           selected: period_value == @period_filter.period
@@ -161,10 +159,9 @@ class AfishaPresenter
   def sortings_links
     @sortings_links ||= [].tap { |array|
       @sorting_filter.available_sortings_values.each do |sorting_value|
-        link_url = @period_filter.na_segodnya? ? 'afisha_today_path' : url
         array << {
           title: I18n.t("afisha.sort.#{sorting_value}"),
-          url: link_url,
+          url: url,
           parameters: url_parameters(order_by: sorting_value),
           selected: @sorting_filter.order_by == sorting_value
         }
