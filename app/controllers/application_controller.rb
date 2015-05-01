@@ -91,7 +91,8 @@ class ApplicationController < ActionController::Base
   def page_meta_item(item)
     if controller_name == 'afishas'
       params[:on] ?
-        page_meta.send(item).gsub("<period>", I18n.l(DateTime.parse(params[:on]), format: "на %A %d %B %Y года")).squish.html_safe :
+        page_meta.send(item).gsub("<period>", I18n.l(DateTime.parse(params[:on]), format: "на %A %d %B %Y года"))
+                                                    .sub('пятница','пятницу').sub('среда','среду').sub('суббота','субботу').squish.html_safe :
         page_meta.send(item).gsub("<period>", I18n.t("afisha.period.#{params[:period]}")).squish.html_safe
     else
       page_meta.send(item).squish.html_safe
