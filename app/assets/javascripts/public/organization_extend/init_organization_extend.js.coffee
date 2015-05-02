@@ -241,6 +241,7 @@
 
   $('.js-closer-btn').click ->
     $(this).slideUp()
+    $.scrollTo "##{$(this).parent().parent().parent().attr('id')}", 500
     $(this).parent().find('.js-opener-btn').slideDown()
     $(this).parent().find('.js-opener-btn').parent().nextAll().slideUp()
 

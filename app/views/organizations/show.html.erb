@@ -208,7 +208,7 @@
             <div class="section <%= scrolltrack(section.navigation_title) %> <%= section.title.from_russian_to_param %>">
               <div class="title" id='<%= section.navigation_title.try(:from_russian_to_param) %>'><%= content_tag :h2, section.title %></div>
               <% section.section_pages.order_by_position.each do |page| %>
-                <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>">
+                <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>" id='<%= page.title.from_russian_to_param %>'>
                   <% if page.poster_image? %>
                     <div class="image js-section-colorbox">
                       <%= link_to (image_tag resized_image_url(page.poster_image_url, 150, 100), size: '150x100', title: section.title, alt: section.title), page.poster_image_url, alt: section.title %>
@@ -216,10 +216,10 @@
                   <% end %>
                   <div class='info'>
                     <h2><%= page.title %></h2>
-                    <span class='section_content'>
+                    <div class='section_content'>
                       <%= page.content.as_html %>
                       <span class="js-closer-btn delimiter hidden">Спрятать</span>
-                    </span>
+                    </div>
                   </div>
                 </div>
               <% end %>

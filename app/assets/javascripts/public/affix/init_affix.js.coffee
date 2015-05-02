@@ -69,7 +69,9 @@
 @init_fixed_menu = () ->
   sidebar = $('.js-menu-sidebar')
 
-  $('.js-fixed-menu').stick_in_parent({offset_top: 10})
+  $('.js-fixed-menu').stick_in_parent
+    offset_top: 10
+    recalc_every: 1
 
   navs = $('a', sidebar)
 
