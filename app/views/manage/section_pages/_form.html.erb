@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'esp-ckeditor/application' %>
 
-<%= simple_nested_form_for [:manage, resource.section.organization, resource.section, resource] do |f| %>
+<%= simple_form_for [:manage, resource.section.organization, resource.section, resource] do |f| %>
   <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path', :value => SectionPage.generate_vfs_path } %>
   <%= f.input :title %>
   <%= f.input :content, :as => :ckeditor %>

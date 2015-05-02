@@ -2,15 +2,17 @@ class Manage::SectionPagesController < Manage::ApplicationController
   load_and_authorize_resource
 
   def create
-    create! {
-      redirect_to manage_organization_section_path(params[:organization_id], params[:section_id]) and return
-    }
+    create! do |success, failure|
+      success.html { redirect_to manage_organization_section_path(params[:organization_id], params[:section_id]) and return }
+      failure.html { render :new and return }
+    end
   end
 
   def update
-    update! {
-      redirect_to manage_organization_section_path(params[:organization_id], params[:section_id]) and return
-    }
+    update! do |success, failure|
+      success.html { redirect_to manage_organization_section_path(params[:organization_id], params[:section_id]) and return }
+      failure.html { render :edit and return }
+    end
   end
 
   def destroy
@@ -42,5 +44,4 @@ class Manage::SectionPagesController < Manage::ApplicationController
   def build_resource
     Section.find(params[:section_id]).section_pages.new(params[:section_page])
   end
-
 end
