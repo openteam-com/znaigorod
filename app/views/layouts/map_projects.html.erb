@@ -28,7 +28,6 @@
 
 <%= content_for :content do %>
   <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
-  <%= render :partial => 'commons/email_request_form' %>
   <div class='unique_header_wrapper'>
     <%= render :partial => 'commons/public_header' %>
   </div>

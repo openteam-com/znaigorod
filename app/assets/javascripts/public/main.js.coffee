@@ -78,7 +78,6 @@ $ ->
   init_comments() if $('.comments').length
   init_pagination_dialogs() if $('#dialogs').length
   init_help() if $('.gallery_help_wrapper').length
-  init_email_form() if $('#email_request_form').length
   init_account_edit() if $('.properties_form #edit_account').length
   init_offer_price() if $('.offer_price').length
   init_sweets_carousel() if $('#sweets_carousel').length

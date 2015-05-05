@@ -96,8 +96,6 @@ init_comments_images = ->
       # фотогалерея для новых комментариев с картинками
       init_photogallery() if $('.photogallery').length
 
-    $("#email_request_form").dialog('open')
-
   $(".ajaxed").on 'ajax:beforeSend', (evt, xhr, settings) ->
     $this = $(evt.target)
     if $this.is('a') && $this.hasClass('delete')
