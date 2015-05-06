@@ -275,6 +275,7 @@ ru:
         kind:                 Тип обзора
         link_with_title:      Этот пост связан с
         only_tomsk:           Только Томск
+        only_sevastopol:      Только Севастополь
         status:               Опубликовать
         tag:                  Теги через запятую
         video_url:            Ссылка на видео

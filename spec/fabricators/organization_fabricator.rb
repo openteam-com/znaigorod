@@ -50,6 +50,12 @@ end
 #  afisha_block_title            :string(255)      default("Афиша")
 #  reviews_block_title           :string(255)      default("Обзоры")
 #  comments_block_title          :string(255)      default("Отзывы")
+#  barter_status                 :string(255)      default("no_information")
+#  discounts_navigation_title    :string(255)
+#  photos_navigation_title       :string(255)
+#  afishas_navigation_title      :string(255)
+#  reviews_navigation_title      :string(255)
+#  address_navigation_title      :string(255)
 #  csv_id                        :integer
 #
 

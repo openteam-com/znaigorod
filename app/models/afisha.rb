@@ -500,3 +500,48 @@ end
 #  promoted_at               :datetime
 #  bkz_link                  :text
 #
+
+# == Schema Information
+#
+# Table name: afisha
+#
+#  id                        :integer          not null, primary key
+#  title                     :string(255)
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  description               :text
+#  original_title            :string(255)
+#  poster_url                :text
+#  trailer_code              :text
+#  tag                       :text
+#  vfs_path                  :string(255)
+#  image_url                 :text
+#  distribution_starts_on    :datetime
+#  distribution_ends_on      :datetime
+#  slug                      :string(255)
+#  constant                  :boolean
+#  yandex_metrika_page_views :integer
+#  vkontakte_likes           :integer
+#  vk_aid                    :string(255)
+#  yandex_fotki_url          :string(255)
+#  popularity                :float
+#  age_min                   :float
+#  age_max                   :float
+#  total_rating              :float
+#  state                     :string(255)
+#  poster_image_file_name    :string(255)
+#  poster_image_content_type :string(255)
+#  poster_image_file_size    :integer
+#  poster_image_updated_at   :datetime
+#  poster_image_url          :text
+#  user_id                   :integer
+#  kind                      :text
+#  vk_event_url              :string(255)
+#  fb_likes                  :integer
+#  odn_likes                 :integer
+#  allow_auction             :boolean
+#  poster_vk_id              :string(255)
+#  promoted_at               :datetime
+#  bkz_link                  :text
+#
+

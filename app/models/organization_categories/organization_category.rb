@@ -91,5 +91,6 @@ end
 #  hover_image_file_size      :integer
 #  hover_image_updated_at     :datetime
 #  hover_image_url            :text
+#  position                   :integer          default(1)
 #
 

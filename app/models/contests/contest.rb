@@ -110,5 +110,6 @@ end
 #  sms_secret            :string(255)
 #  default_sort          :string(255)      default("by_id")
 #  new_work_text         :string(255)      default("Добавить фотографию")
+#  placeholder           :text
 #
 

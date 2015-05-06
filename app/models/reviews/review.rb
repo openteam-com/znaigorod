@@ -25,7 +25,7 @@ class Review < ActiveRecord::Base
   after_save :parse_related_items, :if => :need_change
 
   attr_accessible :content, :title, :tag, :categories,
-                  :allow_external_links, :only_tomsk,
+                  :allow_external_links, :only_tomsk, :only_sevastopol,
                   :related_items, :tagit_categories, :need_change, :category_flag,
                   :organization_category_ids
 
@@ -68,6 +68,7 @@ class Review < ActiveRecord::Base
 
   default_value_for :allow_external_links, false
   default_value_for :only_tomsk,           false
+  default_value_for :only_sevastopol,           false
 
   enumerize :categories,
     :in => [:newyear, :children, :interesting, :auto, :accidents, :crash, :animals, :cookery,
@@ -92,6 +93,7 @@ class Review < ActiveRecord::Base
 
   searchable do
     boolean :only_tomsk
+    boolean :only_sevastopol
 
     float :rating
 
@@ -234,5 +236,6 @@ end
 #  only_tomsk                :boolean
 #  contest_id                :integer
 #  old_slug                  :string(255)
+#  only_sevastopol           :boolean
 #
 
