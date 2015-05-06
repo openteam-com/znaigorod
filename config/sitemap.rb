@@ -66,7 +66,7 @@ SitemapGenerator::Sitemap.create do
   end
 
   # Список веб-камер
-  add webcams_path, :changefreq => 'weekly', :priority => 0.5, :lastmod => Webcam.published.unscoped.last.updated_at
+  add webcams_path, :changefreq => 'weekly', :priority => 0.5, :lastmod => Webcam.published.unscoped.last.updated_at if Webcam.any?
 
   # Просмотр вер-камеры
   Webcam.published.each do |webcam|
@@ -74,10 +74,10 @@ SitemapGenerator::Sitemap.create do
   end
 
   # Конкурсы
-  add contests_path, :changefreq => 'weekly', :priority => 0.5, :lastmod => Contest.unscoped.last.updated_at
+  add contests_path, :changefreq => 'weekly', :priority => 0.5, :lastmod => Contest.unscoped.last.updated_at if Contest.any?
 
   # Фотогалереи
-  add photogalleries_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Photogallery.unscoped.last.updated_at
+  add photogalleries_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Photogallery.unscoped.last.updated_at if Photogallery.any?
 
   # Знакомства
   add accounts_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Account.unscoped.last.updated_at
@@ -104,7 +104,7 @@ SitemapGenerator::Sitemap.create do
   end
 
   # Список вопросов
-  add questions_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Question.unscoped.last.updated_at
+  add questions_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Question.unscoped.last.updated_at if Question.any?
 
   # Список вопросов по категориям
   Question.categories.values.each do |item|
