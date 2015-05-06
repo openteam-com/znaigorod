@@ -105,4 +105,12 @@ if dir.root.split('/').include?('znaigorod.ru')
   #every 15.minutes do
   #rake 'get_sape_links'
   #end
+# -----
+# tasks for sevastopol.znaigorod.ru
+else
+  # ---
+  # every day tasks
+  every :day, :at => '2:10 am' do
+    rake 'sitemap:refresh refresh_sitemaps'
+  end
 end
