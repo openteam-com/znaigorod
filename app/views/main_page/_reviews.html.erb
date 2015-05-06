@@ -1,6 +1,6 @@
 <% if @decorated_reviews.any? %>
   <div class='reviews_main_page'>
-    <h1><%= link_to 'Томск. Обзоры, блоги, мнения', reviews_path %></h1>
+    <h1><%= link_to "#{Settings['app.city_ru']}. Обзоры, блоги, мнения", reviews_path %></h1>
 
     <% cache('main_page_reviews', :expires_in => 10.minutes) do %>
       <div class='left'>
