@@ -1,7 +1,10 @@
-SitemapGenerator::Sitemap.default_host = Rails.env.production? ? "http://znaigorod.ru" : "http://localhost:3000"
+if Settings['app.city'] == 'tomsk'
+  SitemapGenerator::Sitemap.default_host = Rails.env.production? ? "http://znaigorod.ru" : "http://localhost:3000"
+else
+  SitemapGenerator::Sitemap.default_host = Rails.env.production? ? "http://sevastopol.znaigorod.ru" : "http://localhost:3000"
+end
 SitemapGenerator::Sitemap.sitemaps_path = Rails.env.production? ? File.expand_path('../../../../shared/sitemaps/', __FILE__) : ''
 SitemapGenerator::Sitemap.create_index = false
-
 
 SitemapGenerator::Sitemap.create do
   def afisha_priority(afisha)
@@ -14,7 +17,7 @@ SitemapGenerator::Sitemap.create do
 
   # Список афиш
   add afisha_index_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Afisha.unscoped.last.updated_at
-  add afisha_with_tickets_index_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Ticket.for_sale.last.afisha.updated_at
+  add afisha_with_tickets_index_path, :changefreq => 'daily', :priority => 1.0, :lastmod => Ticket.for_sale.last.afisha.updated_at if Ticket.any?
 
   # Список афиш по категориям
   Afisha.kind.values.each do |item|
