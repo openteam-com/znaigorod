@@ -123,7 +123,7 @@ class Organization < ActiveRecord::Base
   end
   has_one :entertainment, :dependent => :destroy, :conditions => { type: nil }
 
-  validates_presence_of :title, :priority_suborganization_kind
+  validates_presence_of :title
   validates_presence_of :organization_category_ids, :message => "* Категория не может быть пустой"
 
   validates  :email, :email_format => {

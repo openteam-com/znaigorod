@@ -124,7 +124,7 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def suborganizations
-    @suborganizations ||= [priority_suborganization] + (Organization.available_suborganization_kinds - [priority_suborganization_kind]).map { |kind| organization.send(kind) }.compact.uniq
+    @suborganizations ||= (Organization.available_suborganization_kinds - [priority_suborganization_kind]).map { |kind| organization.send(kind) }.compact.uniq
   end
 
   def decorated_suborganizations
@@ -349,12 +349,6 @@ class OrganizationDecorator < ApplicationDecorator
       with(:location).in_radius(lat, lon, radius) if lat.present? && lon.present?
       without(priority_suborganization)
 
-      any_of do
-        with("#{fake_kind}_category", categories.map(&:mb_chars).map(&:downcase))
-        with("#{fake_kind}_feature", priority_suborganization.features.map(&:mb_chars).map(&:downcase)) if priority_suborganization.respond_to?(:features) && priority_suborganization.features.any?
-        with("#{fake_kind}_offer", priority_suborganization.offers.map(&:mb_chars).map(&:downcase)) if priority_suborganization.respond_to?(:offers) && priority_suborganization.offers.any?
-        with("#{fake_kind}_cuisine", priority_suborganization.cuisines.map(&:mb_chars).map(&:downcase)) if priority_suborganization.respond_to?(:cuisines) && priority_suborganization.cuisines.any?
-      end
 
       order_by_geodist(:location, lat, lon) if lat.present? && lon.present?
       with(:status, [:client, :client_economy, :client_standart, :client_premium])
