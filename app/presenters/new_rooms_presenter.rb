@@ -53,7 +53,7 @@ class NewRoomsPresenter < NewOrganizationsPresenter
                                           paginate(:page => 1, :per_page => 10_000)
 
                                           with :organization_category_slugs, category.slug if category
-                                          without :status, :client
+                                          without :status, [:client, :client_economy, :client_standart, :client_premium]
 
                                           query ? keywords(query) : order_by(criterion, directions[criterion])
                                         }

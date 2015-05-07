@@ -296,7 +296,7 @@ class RoomsPresenter
       paginate :page => page, :per_page => per_page
 
       with :context_type,  context_type
-      with :status, :client
+      with :status, [:client, :client_economy, :client_standart, :client_premium]
 
       with(:capacity).greater_than_or_equal_to(capacity_filter.capacity)
       with(:rooms_count).greater_than_or_equal_to(rooms_filter.rooms)
