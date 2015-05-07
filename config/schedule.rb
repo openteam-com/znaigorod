@@ -36,6 +36,10 @@ if dir.root.split('/').include?('znaigorod.ru')
     rake 'organization:update_positive_activity_date'
   end
 
+  every :day, :at => '3:45 am' do
+    rake 'organization:update_positive_activity_date_economy'
+  end
+
   every :day, :at => '4:00 am' do
     rake 'social_likes'
   end

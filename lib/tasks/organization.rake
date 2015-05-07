@@ -27,5 +27,18 @@ namespace :organization do
       bar.increment!
     end
   end
+
+  desc 'Обновление positive_activity_date у организаций с пакетом эконом'
+  task :update_positive_activity_date_economy => :environment do
+    organizations = Organization.search { with :status, [:client_economy] }.results
+    bar = ProgressBar.new(organizations.count)
+    organizations.each do |organization|
+      if organization.positive_activity_date && (organization.positive_activity_date < Time.zone.now - 1.month)
+        organization.update_attribute :positive_activity_date, Time.zone.now
+      end
+
+      bar.increment!
+    end
+  end
 end
 
