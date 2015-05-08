@@ -1,0 +1,34 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'public/application', :media => 'all' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
+  <%= javascript_include_tag 'public/application' %>
+<% end %>
+
+<% content_for :metrics do %>
+  <%= render :partial => 'commons/google_analytics' if Rails.env.production? %>
+<% end %>
+
+<%= content_for :flash_messages do %>
+  <div class='message_wrapper'></div>
+<% end %>
+
+<%= content_for :content do %>
+  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
+  <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
+  <div class='unique_header_wrapper'>
+    <%= render :partial => 'commons/public_header' %>
+  </div>
+  <div class='ocharovanie_content_wrapper'>
+    <div class='ocharovanie_logo'></div>
+    <%= render :partial => 'commons/public_content' %>
+  </div>
+  <%= render :partial => 'commons/public_footer' %>
+  <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
+  <%= yield :yandex_map_scripts %>
+  <%= render :partial => 'commons/public_reformal' %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>
