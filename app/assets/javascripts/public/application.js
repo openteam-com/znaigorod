@@ -106,6 +106,7 @@
  * = require ./my_related_items
  * = require ./my_discount
  * = require ./review_video_preview
+ * = require ./review_stream
  * = require ./my_review_js_submit
  * = require ./my_review_video_help
  * = require ./work_addition

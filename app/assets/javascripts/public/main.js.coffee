@@ -87,6 +87,7 @@ $ ->
   initMyReviews() if $('.review_form').length
   initMyQuestions() if $('.questions_form').length
   initReviewVideoPreview() if $('.reviews_index').length || $('.contests_show').length
+  init_review_stream() if $('.review_stream').length
   init_next_image() if $('.js-next-image').length
   init_toggle() if $('.photogalleries_show').length
   upload_works() if $('.works_add').length
