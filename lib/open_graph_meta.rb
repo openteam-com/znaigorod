@@ -38,7 +38,7 @@ module OpenGraphMeta
   def open_graph_meta
     res = ""
     res << "<meta property='og:description' content='#{meta_description(300)}'/>\n"
-    res << "<meta property='og:site_name' content='#{I18n.t('meta.default.title')}' />\n"
+    res << "<meta property='og:site_name' content='#{I18n.t('meta.' + "#{Settings['app.city']}" + '.default.title')}' />\n"
     res << "<meta property='og:title' content='#{page_og_title || model.title}' />\n"
     res << "<meta property='og:url' content='#{object_url}' />\n"
     res << "<meta property='og:image' content='#{object_image}' />\n"
