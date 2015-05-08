@@ -16,7 +16,7 @@ class Manage::Statistics::ReviewsController < Manage::ApplicationController
       @ends_at = Time.zone.today.end_of_day
     end
 
-    author_ids = %w[4649, 6, 2303, 8581, 18960, 14818, 2932]
+    author_ids = %w[4649, 6, 2303, 8581, 18960, 14818, 2932, 26228]
     @reviews = Review.where(:account_id => author_ids, state: 'published')
                 .where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
                 .without_questions
