@@ -6,8 +6,9 @@
     modal: true
     position: ['center', 'center']
     resizable: false
-    title: 'Укажите Ваше местоположение'
-    width: '450px'
+    title: 'Выбор местоположения'
+    width: 450
+    height: 130
     open: (evt, ui) ->
       $('body').css('overflow', 'hidden')
     close: (event, ui) ->
