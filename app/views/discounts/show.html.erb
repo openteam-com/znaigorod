@@ -20,40 +20,42 @@
 <div class="discount_show margin">
   <div class="left">
     <div class="image">
-      <% if @discount.poster_url? %>
+      <% if @discount.poster_url? && @discount.published? %>
         <%= link_to image_tag(resized_image_url(@discount.poster_url, 200, 149), :size => '200x149', :title => @discount.title, :alt => @discount.title), @discount.poster_image_url %>
       <% else %>
         <%= image_tag('public/stub_poster.png', :size => '200x149', :alt => :poster) %>
       <% end %>
     </div>
 
-    <div class="payment">
-      <div class="wrapper">
-        <%= render :partial => "discounts/#{@discount.model.class.name.underscore}_info", :locals => { :discount => @discount.model } %>
+    <% if @discount.published? %>
+      <div class="payment">
+        <div class="wrapper">
+          <%= render :partial => "discounts/#{@discount.model.class.name.underscore}_info", :locals => { :discount => @discount.model } %>
 
-        <% if @discount.copies.for_sale.any? && @discount.price %>
-          <span class="copies_count"><%= t("#{@discount.model.class.name.underscore}_count", :count => @discount.copies.for_sale.count) %></span>
-          <% if @discount.price.zero? %>
-            <%= link_to 'Получить код', new_discount_copy_payment_path(@discount), :class => 'payment_link', :remote => true, :rel => :nofollow %>
-          <% else %>
-            <%= link_to 'Купить', new_discount_copy_payment_path(@discount), :class => 'payment_link', :remote => true, :rel => :nofollow %>
+          <% if @discount.copies.for_sale.any? && @discount.price %>
+            <span class="copies_count"><%= t("#{@discount.model.class.name.underscore}_count", :count => @discount.copies.for_sale.count) %></span>
+            <% if @discount.price.zero? %>
+              <%= link_to 'Получить код', new_discount_copy_payment_path(@discount), :class => 'payment_link', :remote => true, :rel => :nofollow %>
+            <% else %>
+              <%= link_to 'Купить', new_discount_copy_payment_path(@discount), :class => 'payment_link', :remote => true, :rel => :nofollow %>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <% if @discount.is_a?(AffiliatedCoupon) %>
-          <%= link_to 'Купить', @discount.supplier.try(:link), :target => '_blank' %>
-        <% end %>
+          <% if @discount.is_a?(AffiliatedCoupon) %>
+            <%= link_to 'Купить', @discount.supplier.try(:link), :target => '_blank' %>
+          <% end %>
+        </div>
       </div>
-    </div>
 
-    <% if @discount.is_a?(OfferedDiscount) %>
-      <div class="offers_wrapper">
-        <%= render :partial => 'offers/offers_block', :locals => { :discount => @discount, :show_help => false } %>
-      </div>
-    <% else %>
-      <%= render :partial => 'members/social_block', :locals => { :discount => @discount } %>
+      <% if @discount.is_a?(OfferedDiscount) %>
+        <div class="offers_wrapper">
+          <%= render :partial => 'offers/offers_block', :locals => { :discount => @discount, :show_help => false } %>
+        </div>
+      <% else %>
+        <%= render :partial => 'members/social_block', :locals => { :discount => @discount } %>
+      <% end %>
+
     <% end %>
-
   </div>
 
   <div class="right">
@@ -70,81 +72,87 @@
 
     <h1><%= @discount.title.text_gilensize %></h1>
 
-    <div class="closest">
-      <%= @discount.when_with_price %>
-    </div>
+    <% if @discount.published? %>
+      <div class="closest">
+        <%= @discount.when_with_price %>
+      </div>
 
-    <div class="place">
-      <% if @discount.human_place.present? %>
-        <div class='map_icon'>
-          <%= @discount.human_place  %>
-        </div>
-        <%= @discount.human_place %>
-      <% end %>
-    </div>
+      <div class="place">
+        <% if @discount.human_place.present? %>
+          <div class='map_icon'>
+            <%= @discount.human_place  %>
+          </div>
+          <%= @discount.human_place %>
+        <% end %>
+      </div>
 
-    <% if @discount.afisha %>
-      <div class="afisha">
-        Ссылка на мероприятие: <%= link_to @discount.afisha.title, @discount.afisha %>
+      <% if @discount.afisha %>
+        <div class="afisha">
+          Ссылка на мероприятие: <%= link_to @discount.afisha.title, @discount.afisha %>
       </div>
     <% end %>
 
     <div class="text">
       <%= @discount.actual? ? @discount.description_html : @discount.description_html.gsub(/<div.*<\/div>/,"").html_safe %>
 
-      <% if @discount.model.is_a?(AffiliatedCoupon) %>
-        <h3>Условия</h3>
-        <% if @discount.terms.any? %>
-          <ul>
-            <% @discount.terms.each do |term| %>
-              <li><%= term %></li>
+        <% if @discount.model.is_a?(AffiliatedCoupon) %>
+          <h3>Условия</h3>
+          <% if @discount.terms.any? %>
+            <ul>
+              <% @discount.terms.each do |term| %>
+                <li><%= term %></li>
+              <% end %>
             <% end %>
+          </ul>
+
+          <% if @discount.supplier.logo.present? %>
+            <p class="discount_owner">
+              <%= link_to image_tag(@discount.supplier.logo, :size => '50x50'), @discount.supplier.link, :target => '_blank' %>
+              <%= link_to @discount.supplier.title, @discount.supplier.link, :target => '_blank' %>
+            </p>
+          <% end %>
+        <% else %>
+          <% if @discount.account.present? && ![4, 13, 1936, 2303].include?(@discount.account.id) %>
+            <p class="discount_owner">
+              <span>Автор:</span>
+              <%= link_to(@discount.account.title, @discount.account) %>
+            </p>
+          <% else %>
+            <p class="discount_owner">
+              <span>Автор:</span>
+              <%= link_to('ЗнайГород (Афиша Томска)', 'http://vk.com/znaigorod') %>
+            </p>
+          <% end %>
+          <%= render :partial => 'commons/published_date', :locals => { :published_date => @discount.created_at } %>
+        <% end %>
+      </div>
+
+      <div class="share_and_likes">
+        <%= render :partial => 'commons/share_and_like_this', :locals => { :url => discount_url(@discount.model) } %>
+      </div>
+
+      <div class="tags_and_visits">
+        <ul class="categories">
+          <li class="title">Категории:</li>
+          <% @discount.kind.each do |key| %>
+            <li><%= link_to key.text, discounts_path(:kind => key) %></li>
           <% end %>
         </ul>
 
-        <% if @discount.supplier.logo.present? %>
-          <p class="discount_owner">
-            <%= link_to image_tag(@discount.supplier.logo, :size => '50x50'), @discount.supplier.link, :target => '_blank' %>
-            <%= link_to @discount.supplier.title, @discount.supplier.link, :target => '_blank' %>
-          </p>
-        <% end %>
-      <% else %>
-        <% if @discount.account.present? && ![4, 13, 1936, 2303].include?(@discount.account.id) %>
-          <p class="discount_owner">
-            <span>Автор:</span>
-            <%= link_to(@discount.account.title, @discount.account) %>
-          </p>
-        <% else %>
-          <p class="discount_owner">
-            <span>Автор:</span>
-            <%= link_to('ЗнайГород (Афиша Томска)', 'http://vk.com/znaigorod') %>
-          </p>
-        <% end %>
-        <%= render :partial => 'commons/published_date', :locals => { :published_date => @discount.created_at } %>
-      <% end %>
-    </div>
-
-    <div class="share_and_likes">
-      <%= render :partial => 'commons/share_and_like_this', :locals => { :url => discount_url(@discount.model) } %>
-    </div>
-
-    <div class="tags_and_visits">
-      <ul class="categories">
-        <li class="title">Категории:</li>
-        <% @discount.kind.each do |key| %>
-          <li><%= link_to key.text, discounts_path(:kind => key) %></li>
-        <%end%>
-      </ul>
-
-      <div class="details">
-        <span class="show_tipsy fa fa-users" title="Участники"> <%= @discount.members.count %></span>
-        <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= @discount.comments.count %></span>
-        <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= @discount.likes_count %></span>
-        <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= @discount.page_visits.count %></span>
+        <div class="details">
+          <span class="show_tipsy fa fa-users" title="Участники"> <%= @discount.members.count %></span>
+          <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= @discount.comments.count %></span>
+          <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= @discount.likes_count %></span>
+          <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= @discount.page_visits.count %></span>
+        </div>
       </div>
-    </div>
 
-    <%= render :partial => 'comments/block', :locals => { :parent_obj => @discount } %>
+      <%= render :partial => 'comments/block', :locals => { :parent_obj => @discount } %>
+    <% else %>
+      <div class='archived'>
+        Внимание! Скидка находится в архиве. Обратите внимание на скидки ниже
+      </div>
+    <% end %>
 
     <% if @discount.similar_discount.present? %>
       <div class='discount_info similar_discount'>

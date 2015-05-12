@@ -94,11 +94,12 @@ class DiscountDecorator < ApplicationDecorator
   end
 
   def similar_discount
-    HasSearcher.searcher(:similar_discount).more_like_this(discount).limit(6).results.map { |d| DiscountDecorator.new d }
+    HasSearcher.searcher(:similar_discount).more_like_this(discount).limit(6).results.map { |d| DiscountDecorator.new d } if discount.published?
+    kind_discounts(discount.kind.first) if discount.archive?
   end
 
   def kind_discounts(kind)
-    HasSearcher.searcher(:discounts, :kind => kind).paginate(:per_page => 6).results.map { |d| DiscountDecorator.new d }
+    HasSearcher.searcher(:discounts, :kind => kind).paginate(:per_page => 6).without_archive.results.map { |d| DiscountDecorator.new d }
   end
 
   def type_discounts(type)
