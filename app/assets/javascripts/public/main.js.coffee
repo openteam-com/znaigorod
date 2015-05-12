@@ -116,6 +116,8 @@ $ ->
 
   init_delimiter_on_sections() if $('.js-opener-btn').length
 
+  init_geoip() if $('.js-geoip').length
+
   true
 
 $(window).load ->

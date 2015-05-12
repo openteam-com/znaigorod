@@ -3,7 +3,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :banners, :hot_offers, :page, :per_page, :page_meta,
-    :page_meta_item, :canonical_link
+    :page_meta_item, :canonical_link,
+    :city_name, :country_name, :remote_ip
 
   before_filter :detect_robots_in_development if Rails.env.development?
   before_filter :update_account_last_visit_at
@@ -107,5 +108,17 @@ class ApplicationController < ActionController::Base
     else
       request.url.split('?').first
     end
+  end
+
+  def city_name
+    GeoIP.new(Rails.root.join('GeoLiteCity.dat')).city(remote_ip).try(:city_name) || 'Tomsk'
+  end
+
+  def country_name
+    GeoIP.new(Rails.root.join('GeoLiteCity.dat')).city(remote_ip).try(:country_name) || 'Russian Federation'
+  end
+
+  def remote_ip
+    request.remote_ip || nil
   end
 end

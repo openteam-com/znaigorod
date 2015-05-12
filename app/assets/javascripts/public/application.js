@@ -27,6 +27,7 @@
  * = require flash_detect
  * = require crop
  * = require ajax_delete
+ * = require ./geoip
  * = require attachment_description
  * = require modal_dialog
  * = require popup_window

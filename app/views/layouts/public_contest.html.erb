@@ -29,6 +29,7 @@
     <div class='may_content_wrapper'>
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
       <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless controller_name == 'main_page' || controller_name == 'afishas' || controller_name == 'organizations' || controller_name == 'discounts' || controller_name == 'questions' || controller_name == 'suborganizations' || controller_name == 'saunas' || controller_name == 'hotels' || controller_name == 'contests' %>
       <%= render :partial => 'commons/public_content' %>
       <%= render :partial => 'commons/public_footer' %>

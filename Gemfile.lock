@@ -173,6 +173,7 @@ GEM
     freeze_time (0.1)
     friendly_id (4.0.9)
     fssm (0.2.10)
+    geoip (1.5.0)
     gilenson (1.2.2)
     grape (0.6.0)
       activesupport
@@ -531,6 +532,7 @@ DEPENDENCIES
   font-awesome-sass
   freeze_time
   friendly_id
+  geoip
   gilenson
   grape (~> 0.6.0)
   grape-entity

@@ -32,6 +32,7 @@ group :default do
   gem 'esp-ckeditor'
   gem 'fastimage'
   gem 'friendly_id'
+  gem 'geoip'
   gem 'gilenson'
   gem 'grape',                      '~> 0.6.0'
   gem 'grape-entity'
