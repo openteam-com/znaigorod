@@ -6,7 +6,16 @@ namespace :discounts do
     pb = ProgressBar.new(discounts.count)
 
     discounts.each do |discount|
-      discount.to_archive if discount.published_at + 1.month < Time.zone.now
+      if discount.published_at + 1.month < Time.zone.now
+        discount.to_archive
+
+        if discount.published_at >= Time.zone.now.beginning_of_year
+          if discount.account && discount.account.has_email?
+            ArchiveDiscount.delay(:queue => :mailer).send_archived(discount)
+            break if Rails.env.development?
+          end
+        end
+      end
       pb.increment!
     end
   end
@@ -18,7 +27,10 @@ namespace :discounts do
 
     discounts.each do |discount|
       if discount.published_at + 1.month - 3.days < Time.zone.now && discount.published_at >= Time.zone.now.beginning_of_year
-        ArchiveDiscount.delay(:queue => :mailer).send_info(discount) if discount.account && discount.account.has_email?
+        if discount.account && discount.account.has_email?
+          ArchiveDiscount.delay(:queue => :mailer).send_warning(discount)
+          break if Rails.env.development?
+        end
       end
       pb.increment!
     end
