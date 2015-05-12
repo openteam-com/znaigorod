@@ -27,6 +27,8 @@
       <% end %>
     </div>
 
+    <%= render :partial => 'discounts/promote', :locals => { :discount => @discount } %>
+
     <% if @discount.published? %>
       <div class="payment">
         <div class="wrapper">

@@ -2,7 +2,7 @@
   <h1><%= resource.title %></h1>
   <%= link_to "редактировать", edit_manage_afisha_path(resource), :class => 'edit_link' %>
   <% if resource.published? %>
-    <%= link_to "приподподнять афишу", manage_afisha_path(resource, :afisha => { :promoted_at => Time.zone.now }), :method => 'put', :class => 'edit_link promoted_link', :remote => true %>
+    <%= link_to "приподнять афишу", manage_afisha_path(resource, :afisha => { :promoted_at => Time.zone.now }), :method => 'put', :class => 'edit_link promoted_link', :remote => true %>
   <% end %>
   <%= link_to "посмотреть в публичном виде", afisha_show_path(resource), target: :_blank, :class => 'edit_link floatr' %>
 

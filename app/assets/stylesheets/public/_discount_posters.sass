@@ -55,8 +55,12 @@
 
     li.item_wrapper
       float: left
-      margin: 0 30px 20px 0px
+      margin: 0 27px 20px 0px
       width: 200px
+      position: relative
+
+      &.highlighted
+        border: 1px solid #f60
 
       &.fourth
         margin: 0 0 20px 0
@@ -88,6 +92,7 @@
           position: relative
           width: 198px
           margin: 0 1px 0 1px
+          padding: 0 1px
 
           .origin_url
             position: absolute
@@ -254,6 +259,25 @@
 
             span
               color: #222
+
+        .arrow-up
+          background: transparent image_url('public/arrow-up.png') no-repeat center center
+          height: 21px
+          left: 184px
+          position: absolute
+          bottom: 35px
+          width: 21px
+
+          &:after
+            content: ""
+            width: 0
+            height: 0
+            position: absolute
+            left: 15px
+            bottom: -6px
+            border-width: 3px 3px
+            border-style: solid
+            border-color: #b34800 transparent transparent #b34800
 
         .place
           margin: 13px 0 0 8px

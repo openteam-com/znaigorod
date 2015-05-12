@@ -66,25 +66,36 @@
           <%= t("afisha.pay_attention_discount") %>
         </div>
 
-        <div class="cell dashed_border arrow_box">
-          Закрепление акции на главной странице
-          <p><strong>100 руб./сутки</strong></p>
-        </div>
+        <% if @discount.published? %>
+          <div class="cell dashed_border arrow_box">
+            <%= render :partial => 'discounts/promote', :locals => { :discount => @discount } %>
 
-        <div class="cell dashed_border">
-          Закрепление акции на первой странице раздела &laquo;Скидки&raquo;
-          <p><strong>50 руб./сутки</strong></p>
-        </div>
+            <p><%= "Поднято: #{l(@discount.promoted_at, :format => :long)}" if @discount.promoted_at? %></p>
+          </div>
 
-        <div class="cell dashed_border">
-          Закрепление и увеличение в 4 раза акции на первой странице раздела &laquo;Скидки&raquo;
-          <p><strong>200 руб./сутки</strong></p>
-        </div>
+          <div class="cell dashed_border">
+            Закрепление акции на главной странице
+            <p><strong>100 руб./сутки</strong></p>
+          </div>
 
-        <div class="cell">
-          Продажа купонов, сертификатов с вашими товарами или услугами. Комиссия - <strong>10%</strong>
-        </div>
+          <div class="cell dashed_border">
+            Закрепление акции на первой странице раздела &laquo;Скидки&raquo;
+            <p><strong>50 руб./сутки</strong></p>
+          </div>
 
+          <div class="cell dashed_border">
+            Закрепление и увеличение в 4 раза акции на первой странице раздела &laquo;Скидки&raquo;
+            <p><strong>200 руб./сутки</strong></p>
+          </div>
+
+          <div class="cell">
+            Продажа купонов, сертификатов с вашими товарами или услугами. Комиссия - <strong>10%</strong>
+          </div>
+        <% else %>
+          <div class="cell arrow_box">
+            Рекламные возможности будут доступны после публикации скидки
+          </div>
+        <% end %>
       </div>
 
       <div class="phones">

@@ -1,5 +1,5 @@
 <% #cache("discount_#{discount.id}_#{params[:page]}_#{controller_name}_#{action_name}_#{params[:id]}", expires_in: 10.minutes) do %>
-<li class="item_wrapper <%= cycle('first', 'second', 'third', 'fourth') %>">
+<li class="item_wrapper <%= ' highlighted' if discount.highlighted? %> <%= cycle('first', 'second', 'third', 'fourth') %>">
   <div class="item <%= 'fresh' if controller_name == 'discounts' && action_name != 'show' %>">
     <div class="info">
       <%= render :partial => "discounts/#{discount.model.class.name.underscore}_info", :locals => { :discount => discount.model } %>
@@ -46,6 +46,8 @@
                         <div class="title">
                           <%= link_to truncate(discount.title.text_gilensize, :length => 45), discount.smart_path, :title => discount.title.text_gilensize %>
                         </div>
+
+                        <%= content_tag(:span, '', :class => 'arrow-up show_tipsy', :title => 'Автор хочет обратить внимание на эту скидку') if discount.highlighted? %>
 
                         <div class="place">
                           <%= discount.place_without_map %>

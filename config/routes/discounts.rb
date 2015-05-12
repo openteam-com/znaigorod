@@ -26,6 +26,7 @@ Znaigorod::Application.routes.draw do
 
   resources :discounts, :only => [:index, :show] do
     resources :members,  :only => [:index, :create, :destroy]
+    resources :promote_discount_payments, :only => :create
   end
 
   get 'offered_discount/:id' => 'discounts#show', :as => :offered_discount

@@ -117,4 +117,8 @@ class DiscountDecorator < ApplicationDecorator
   def to_partial_path
     'discounts/discount_poster'
   end
+
+  def highlighted?
+    promoted_at? && (promoted_at + 1.day > Time.zone.now)
+  end
 end
