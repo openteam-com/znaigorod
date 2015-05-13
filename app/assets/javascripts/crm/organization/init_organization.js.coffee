@@ -206,6 +206,27 @@
         true
     false
 
+  $('.form_view form .fast_activity', activities_head_block).live 'ajax:success', (event, data, textStatus, jqXHR) ->
+    if data.isBlank()
+      console.error 'Response is empty!' if console && console.error
+      return false
+    wrapped = $("<div>#{data}</div>")
+    $('h1', wrapped).remove()
+    data = wrapped.html().trim()
+    if data.startsWith('<div class="form_view">')
+      $('.form_view', activities_head_block).remove()
+      activities_head_block.append(data)
+      init_datetime_picker()
+    if data.startsWith('<div class="activities_list">')
+      $('.activities_list', activities_block).remove()
+      activities_block.append(data)
+      $('.form_view', activities_head_block).slideUp 'fast', ->
+        $(this).remove()
+        $('.activities_list', activities_block).effect 'highlight',
+          color: '#ffb400'
+        , 1000
+    false
+
   $('.activities_list .edit a').live 'click', ->
     link = $(this)
     activities_list_block = link.closest('.activities_list')

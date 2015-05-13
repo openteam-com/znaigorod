@@ -17,6 +17,10 @@
 
     <div class='actions'>
       <%= f.button :submit, 'Сохранить', class: 'button submit' %>
+      <%= link_to 'Запланировать звонок', crm_organization_activities_path(:activity => { "activity_at" => Time.zone.now, "state"=>"planned", "status"=>"fresh", "kind"=>"phone",
+                                                                                                      "user_id"=>current_user.id, "contact_id"=>"", "title"=>"Запланированный звонок"},
+                                                                                                      :organization_id => parent.id),
+                                                                                  class: [:button, :fast_activity], remote: true, method: :post %>
       <%= link_to 'Удалить', resource_path, method: :delete, confirm: 'Уверены что хотите удалить?', class: 'button danger destroy', remote: true unless resource.new_record? %>
       <%= link_to 'Отмена', '#', class: 'button cancel' %>
     </div>
