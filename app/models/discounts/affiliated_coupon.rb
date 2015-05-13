@@ -59,5 +59,8 @@ end
 #  discount_type             :string(255)
 #  email_addresses           :text
 #  stale                     :boolean
+#  published_at              :datetime
+#  archived_at               :datetime
+#  promoted_at               :datetime
 #
 

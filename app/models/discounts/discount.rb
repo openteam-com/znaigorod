@@ -65,6 +65,7 @@ class Discount < ActiveRecord::Base
     boolean(:copies_for_sale) { copies_for_sale? }
 
     time :created_at, :trie => true
+    time :promoted_at, :trie => true
 
     float(:rating) { total_rating }
 
@@ -242,5 +243,8 @@ end
 #  discount_type             :string(255)
 #  email_addresses           :text
 #  stale                     :boolean
+#  published_at              :datetime
+#  archived_at               :datetime
+#  promoted_at               :datetime
 #
 

@@ -232,6 +232,7 @@ class DiscountsPresenter
   def searcher
     @searcher ||= HasSearcher.searcher(:discounts, searcher_params).tap { |s|
       order_by_filter.random? ? s.order_by(:random) : s.send("order_by_#{order_by_filter.selected}")
+      s.order_by :promoted_at, :desc
       s.without_archive
 
       s.paginate page: page, per_page: per_page
