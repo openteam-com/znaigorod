@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150506134817) do
+ActiveRecord::Schema.define(:version => 20150514043019) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1009,7 +1009,6 @@ ActiveRecord::Schema.define(:version => 20150506134817) do
     t.boolean  "only_tomsk"
     t.integer  "contest_id"
     t.string   "old_slug"
-    t.boolean  "only_sevastopol"
   end
 
   create_table "roles", :force => true do |t|

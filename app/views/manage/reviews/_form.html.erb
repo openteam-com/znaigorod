@@ -14,7 +14,7 @@
 
   <%= render "manage/reviews/#{@review.useful_type}_fields", :f => f %>
 
-  <%= f.input "only_#{Settings['app.city']}" %>
+  <%= f.input :only_tomsk, :label => "Только #{Settings['app.city_ru']}" %>
 
   <% unless @review.is_a?(Question) %>
   <%= f.input :tag, :as => :string,

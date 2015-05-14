@@ -15,7 +15,7 @@
 
   <%= render "#{@review.useful_type}_fields", :f => f %>
 
-  <%= f.input "only_#{Settings['app.city']}" %>
+  <%= f.input :only_tomsk, :label => "Только #{Settings['app.city_ru']}" %>
 
   <%= f.input :tag, :as => :string,
     :input_html => { :data => { 'autocomplete-source' => tags_available_my_reviews_path } } %>

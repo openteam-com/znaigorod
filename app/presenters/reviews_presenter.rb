@@ -185,7 +185,7 @@ class ReviewsPresenter
 
     def link
       Hashie::Mash.new(
-        :title => 'Только Томск',
+        :title => "Только #{Settings['app.city_ru']}",
         :klass => selected? ? 'only-tomsk selected': 'only-tomsk',
         :path => Parameters.instance.path(only_tomsk: value_for_path)
       )
