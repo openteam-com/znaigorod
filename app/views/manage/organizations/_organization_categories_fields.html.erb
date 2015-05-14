@@ -4,9 +4,14 @@
   </div>
   <% OrganizationCategory.roots.each do |root| %>
     <div class="label">
-      <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
-      <%= label_tag root.title %>
-      <%= check_box_tag 'root', 'root', false, class: 'js-root' %>
+      <% if root.children.any? %>
+        <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
+        <%= label_tag root.title %>
+        <%= check_box_tag 'root', 'root', false, class: 'js-root' %>
+      <% else %>
+        <%= label_tag root.title %>
+        <%= check_box_tag 'organization[organization_category_ids][]', root.id, resource.organization_categories.include?(root) ? true : false %>
+      <% end %>
     </div>
     <div class="children closed">
     <% root.children.each do |child| %>
