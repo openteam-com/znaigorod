@@ -1,6 +1,9 @@
 <div class="show discount">
   <h1><%= resource.title %></h1>
   <%= link_to "редактировать", [:edit, :manage, resource], :class => 'edit_link' unless resource.is_a?(AffiliatedCoupon) %>
+  <% if resource.published? %>
+    <%= link_to "приподнять скидку", manage_discount_path(resource, :discount => { :promoted_at => Time.zone.now }), :method => 'put', :class => 'edit_link promoted_link', :remote => true %>
+  <% end %>
   <%= link_to "посмотреть в публичном виде", discount_path(resource), :target => :_blank, :class => 'edit_link floatr' %>
 
   <div class="logo">

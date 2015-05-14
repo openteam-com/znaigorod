@@ -17,6 +17,8 @@ class Manage::DiscountsController < Manage::ApplicationController
   def update
     update! do |success, failure|
       success.html {
+        render :nothing => true and return if request.xhr?
+
         if params[:crop]
           redirect_to poster_manage_discount_path(resource)
         else
