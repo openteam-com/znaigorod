@@ -31,9 +31,11 @@
             <%= link_to t('my.send_to_public'), 'javascript: void(0)', class: 'flat-btn btn-disabled btn-lg' %>
           <% end %>
         </div>
-      <% else %>
+      <% elsif @discount.published? %>
         <%= link_to t('my.send_to_draft'), draft_my_discount_path(@discount), :method => :put, :class => 'flat-btn btn-orange btn-lg floatr',
           :confirm => 'Вы уверены? После подтверждения информация о скидке будет недоступна пользователям сайта!' %>
+      <% else %>
+        <%= link_to 'Актуализировать', publish_my_discount_path(@discount), method: :put, :class => 'flat-btn btn-orange btn-lg floatr' %>
       <% end %>
     </div>
 
@@ -66,7 +68,7 @@
           <%= t("afisha.pay_attention_discount") %>
         </div>
 
-        <% if @discount.published? %>
+        <% if @discount.published? || @discount.archive? %>
           <div class="cell dashed_border arrow_box">
             <%= render :partial => 'discounts/promote', :locals => { :discount => @discount } %>
 
@@ -81,11 +83,6 @@
           <div class="cell dashed_border">
             Закрепление акции на первой странице раздела &laquo;Скидки&raquo;
             <p><strong>50 руб./сутки</strong></p>
-          </div>
-
-          <div class="cell dashed_border">
-            Закрепление и увеличение в 4 раза акции на первой странице раздела &laquo;Скидки&raquo;
-            <p><strong>200 руб./сутки</strong></p>
           </div>
 
           <div class="cell">

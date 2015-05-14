@@ -2,6 +2,7 @@ class AddPublishedAtArchivedAtToDiscounts < ActiveRecord::Migration
   def change
     add_column :discounts, :published_at, :datetime
     add_column :discounts, :archived_at, :datetime
+    add_column :discounts, :promoted_at, :datetime
 
     Discount.reset_column_information
 

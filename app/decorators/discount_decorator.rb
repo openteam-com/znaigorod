@@ -95,6 +95,7 @@ class DiscountDecorator < ApplicationDecorator
 
   def similar_discount
     HasSearcher.searcher(:similar_discount).more_like_this(discount).limit(6).results.map { |d| DiscountDecorator.new d } if discount.published?
+
     kind_discounts(discount.kind.first) if discount.archive?
   end
 

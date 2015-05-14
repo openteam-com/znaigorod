@@ -152,13 +152,15 @@
       <%= render :partial => 'comments/block', :locals => { :parent_obj => @discount } %>
     <% else %>
       <div class='archived'>
-        Внимание! Скидка находится в архиве. Обратите внимание на скидки ниже
+        Внимание! Скидка находится в архиве. Обратите внимание на другие похожие предложения
       </div>
     <% end %>
 
     <% if @discount.similar_discount.present? %>
       <div class='discount_info similar_discount'>
-        <div class='title'>Похожие скидки</div>
+        <% if @discount.published? %>
+          <div class='title'>Похожие скидки</div>
+        <% end %>
         <ul class='posters'>
           <% @discount.similar_discount.each do |discount| %>
             <%= render :partial => 'discounts/discount_poster', :locals => { :discount => discount, :@width => '196', :@height => '164' } %>

@@ -48,6 +48,7 @@ class My::DiscountsController < My::ApplicationController
 
   def send_to_published
     @discount = current_user.account.discounts.find(params[:id])
+    @discount.published_at = Time.zone.now
     @discount.to_published!
 
     redirect_to discount_path(@discount), :notice => "Информация о скидке «#{@discount.title}» опубликована."

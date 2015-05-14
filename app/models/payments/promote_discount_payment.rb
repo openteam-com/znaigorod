@@ -3,10 +3,11 @@ class PromoteDiscountPayment < Payment
     super
 
     promote_discount
-    create_notification_message
+    #create_notification_message TODO: запилить нотификацию в будущем
+    discount.to_published! if discount.archive?
   end
 
-  default_value_for :amount, Settings['promote_discount.price'] || 50.0
+  default_value_for :amount, Settings['promote_discount.price'] || 30.0
 
   private
 
@@ -17,7 +18,8 @@ class PromoteDiscountPayment < Payment
   alias :discount :paymentable
 
   def promote_discount
-    discount.update_attributes! :promoted_at => Time.zone.now
+    discount.update_attributes! :promoted_at  => Time.zone.now
+    discount.update_attributes! :published_at => Time.zone.now
   end
 
   def create_notification_message

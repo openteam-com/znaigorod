@@ -8,6 +8,7 @@ namespace :discounts do
     discounts.each do |discount|
       if discount.published_at + 1.month < Time.zone.now
         discount.to_archive
+        discount.update_attribute :promoted_at, nil
 
         if discount.published_at >= Time.zone.now.beginning_of_year
           if discount.account && discount.account.has_email?

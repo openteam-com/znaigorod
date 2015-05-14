@@ -22,7 +22,7 @@ module DraftPublishedStates
       end
 
       event :to_published do
-        transition :draft => :published
+        transition [:draft, :archive] => :published
       end
 
       event :to_archive do
