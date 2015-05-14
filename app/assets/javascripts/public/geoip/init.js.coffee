@@ -13,3 +13,6 @@
       $('body').css('overflow', 'hidden')
     close: (event, ui) ->
       $('body').css('overflow', 'auto')
+
+  $('.js-geoip-close-dialog').click ->
+    $('.js-geoip').dialog "close"
