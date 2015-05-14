@@ -28,7 +28,9 @@
       <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
     </div>
 
+    <!-- noindex -->
     <%= render :partial => 'afishas/promote', :locals => { :afisha => @afisha } %>
+    <!-- /noindex -->
 
     <% if @afisha.allow_auction? %>
       <div class='auction'>
