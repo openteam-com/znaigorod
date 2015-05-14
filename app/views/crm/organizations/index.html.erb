@@ -36,7 +36,9 @@
     <%= f.input :suborganizations,
       label: 'Категории',
       as: :select,
-      collection: Organization.available_suborganization_kinds.map { |kind| [kind.classify.constantize.model_name.human, kind] },
+      collection: OrganizationCategory.roots,
+      label_method: :title,
+      value_method: :slug,
       selected: params[:search].try(:[], :suborganizations),
       include_blank: true,
       required: false %>
