@@ -218,40 +218,45 @@ class OrganizationDecorator < ApplicationDecorator
 
   def schedule_today
     klass = "schedule_today "
-    from = schedules.pluck(:from).uniq
-    to   = schedules.pluck(:to).uniq
-    if from.size == to.size && from.size == 1
-      if from[0].blank? && to[0].nil?
-        content = 'Гибкий график работы'
-      elsif from == to
-        content = 'Работает круглосуточно'
-      else
-        content = "Работает ежедневно #{schedule_time(from[0], to[0])}"
-      end
-    else
-      content = "Сегодня "
-      wday = Time.zone.today.wday
-      wday = 7 if wday == 0
-      schedule = organization.schedules.find_by_day(wday)
-      if schedule.holiday?
-        content << "выходной"
-        klass << "closed"
-      elsif schedule.from == schedule.to
-        content << "работает круглосуточно"
-        klass << "twenty_four"
-      else
-        content << "работает #{schedule_time(schedule.from, schedule.to)}"
-        now = Time.zone.now
-        time = Time.utc(2000, "jan", 1, now.hour, now.min)
-        from = schedule.from
-        to = schedule.to
-        to = to + 1.day if to.hour < 12
-        if time.between?(from, to)
-          klass << "opened"
+    if schedules.any?
+      from = schedules.pluck(:from).uniq
+      to   = schedules.pluck(:to).uniq
+      if from.size == to.size && from.size == 1
+        if from[0].blank? && to[0].nil?
+          content = 'Гибкий график работы'
+        elsif from == to
+          content = 'Работает круглосуточно'
         else
+          content = "Работает ежедневно #{schedule_time(from[0], to[0])}"
+        end
+      else
+        content = "Сегодня "
+        wday = Time.zone.today.wday
+        wday = 7 if wday == 0
+        schedule = organization.schedules.find_by_day(wday)
+        if schedule.holiday?
+          content << "выходной"
           klass << "closed"
+        elsif schedule.from == schedule.to
+          content << "работает круглосуточно"
+          klass << "twenty_four"
+        else
+          content << "работает #{schedule_time(schedule.from, schedule.to)}"
+          now = Time.zone.now
+          time = Time.utc(2000, "jan", 1, now.hour, now.min)
+          from = schedule.from
+          to = schedule.to
+          to = to + 1.day if to.hour < 12
+          if time.between?(from, to)
+            klass << "opened"
+          else
+            klass << "closed"
+          end
         end
       end
+    else
+      content = "График работы неизвестен"
+      klass << "closed"
     end
     h.content_tag(:div, content, class: klass) unless content.blank?
   end
