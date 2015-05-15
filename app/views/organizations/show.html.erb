@@ -140,7 +140,12 @@
 
     <% if @organization.contact_links.present? %>
       <ul class='links'>
-        <%= content_tag(:li, "Сайт: #{@organization.site_link}".html_safe, class: 'js-site-link', id: @organization.id) if @organization.site_link.present? %>
+        <li class="js-site-link">
+           Сайт:
+          <% @organization.site.split(',').each do |link| %>
+            <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank' %>
+          <% end %>
+        </li>
         <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email_link.present? %>
       </ul>
     <% end %>

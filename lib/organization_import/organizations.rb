@@ -74,6 +74,11 @@ module OrganizationImport
       street_matched?(org1, org2) && house_matched?(org1, org2)
     end
 
+    def normalize_site(site)
+      return "" if site.blank?
+      site.split(',').map{ |link| link.exclude?('http://') ? "http://" + link.squish : link.squish}.join(',')
+    end
+
     def find_similar
       hash = {}
       pb = ProgressBar.new(Organization.count)
@@ -121,7 +126,7 @@ module OrganizationImport
               organization.title = csv_rows.first.title
               organization.email = csv_rows.map(&:email).compact.uniq.first
               organization.phone = csv_rows.map(&:phone).compact.uniq.first
-              organization.site = csv_rows.map(&:site).compact.uniq.first
+              organization.site = normalize_site(csv_rows.map(&:site).compact.uniq.first)
 
               # address
               if raw_address
