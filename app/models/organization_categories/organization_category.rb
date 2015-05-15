@@ -19,7 +19,7 @@ class OrganizationCategory < ActiveRecord::Base
   validates_presence_of :slug
 
   after_update :reindex_related_organizations, :unless => :sort_flag
-  after_save { Rails.application.reload_routes! }
+  after_save { Znaigorod::Application.reload_routes! }
 
   friendly_id :title, :use => :slugged
 
