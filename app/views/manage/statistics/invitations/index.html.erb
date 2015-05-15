@@ -39,6 +39,20 @@
       </tr>
     </tbody>
   </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Количество поднятия скидок</th>
+        <th>На сумму</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @promote_discount_payments.count %></td>
+        <td><%= @promote_discount_payments.map(&:amount).sum %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <h2>Афиша</h2>
