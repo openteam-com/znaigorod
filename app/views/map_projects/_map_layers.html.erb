@@ -23,8 +23,8 @@
     <%= image_tag asset_path("public/map_projects/#{map_project.slug}_left.png"), :class => 'left_wreath' %>
     <p class='important'>Вас нет на карте?</p>
     <p>Звоните нам:</p>
-    <p class='phone with_icon'><%= t('services.phone').split(',').first.to_s.squish %></p>
-    <p class='phone'><%= t('services.phone').split(',').second.to_s.squish %></p>
+    <p class='phone with_icon'><%= t("services.#{Settings['app.city']}.phone").split(',').first.to_s.squish %></p>
+    <p class='phone'><%= t("services.#{Settings['app.city']}.phone").split(',').second.to_s.squish %></p>
     <p>или пишите на</p>
     <p class='email'><%= mail_to 'office@znaigorod.ru' %></p>
   </div>

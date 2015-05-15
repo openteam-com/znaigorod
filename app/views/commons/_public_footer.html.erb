@@ -10,7 +10,7 @@
       <div class='our_social_link'>
         <h5>Мы в социальных сетях</h5>
         <ul>
-          <li class='vk'><a href='<%= AwayLink.to('http://vk.com/znaigorod') %>' rel='nofollow' title='ВКонтакте' target='_blank'>vk.com/znaigorod</a></li>
+          <li class='vk'><a href='<%= AwayLink.to(Settings['app.socials.vk.link']) %>' rel='nofollow' title='ВКонтакте' target='_blank'><%= Settings['app.socials.vk.url'] %></a></li>
           <li class='fb'><a href='<%= AwayLink.to('https://www.facebook.com/znai.gorod') %>' rel='nofollow' title='Facebook' target='_blank'>facebook.com/znai.gorod</a></li>
           <li class='odnoklassniki'><a href='<%= AwayLink.to('http://odnoklassniki.ru/group/54186972610564') %>' rel='nofollow' title='Одноклассники' target='_blank'>odnoklassniki.ru</a></li>
           <li class='twitter'><a href='<%= AwayLink.to('http://twitter.com/znaigorod') %>' rel='nofollow' title='Twitter' target='_blank'>twitter.com/znaigorod</a></li>
@@ -18,7 +18,7 @@
       </div>
       <div style='clear: both'></div>
       <div class="contacts">
-        Реклама на сайте <%= t('services.phone') %>, <%= mail_to 'office@znaigorod.ru' %>
+      Реклама на сайте: <%= t("services.#{Settings['app.city']}.address") %>, <%= t("services.#{Settings['app.city']}.phone") %>, <%= mail_to t("services.#{Settings['app.city']}.email") %>
     </div>
     <% if Rails.env.production? %>
       <div class='counters'>

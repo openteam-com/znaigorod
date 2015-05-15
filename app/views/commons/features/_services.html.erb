@@ -1,3 +1,3 @@
 <div class="top_headline">
-  <%= link_to 'Реклама на сайте!', services_path %>  <span><%= t('services.phone') %>,</span> <%= mail_to 'office@znaigorod.ru' %>
+  <%= link_to 'Реклама на сайте!', services_path %>  <span><%= t("services.#{Settings['app.city']}.phone") %>,</span> <%= mail_to 'office@znaigorod.ru' %>
 </div>

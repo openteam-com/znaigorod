@@ -1,5 +1,11 @@
 ru:
-  contacts:
-    phone: +7-952-180-22-55, +7-952-800-55-44
   services:
-    phone: +7-952-180-22-55, +7-952-800-55-44
+    tomsk:
+      phone: +7-952-180-22-55, +7-952-800-55-44
+      email: office@znaigorod.ru
+      address: 'г. Томск, ул. Алтайская 161 б, стр. 2'
+
+    sevastopol:
+      phone: +7-978-067-65-47
+      email: infosev@znaigorod.ru
+      address: 'г. Севастополь, ул. Воронина, 10 офис 503'
