@@ -15,20 +15,11 @@ class OrganizationCategory < ActiveRecord::Base
   has_attached_file :default_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
   has_attached_file :hover_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
-  has_many :features, :dependent => :destroy
-
-  has_attached_file :default_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-  has_attached_file :hover_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-
-  has_many :features, :dependent => :destroy
-
-  has_attached_file :default_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-  has_attached_file :hover_image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
-
   validates :title, presence: true, uniqueness: { scope: :ancestry }
   validates_presence_of :slug
 
   after_update :reindex_related_organizations, :unless => :sort_flag
+  after_save { Rails.application.reload_routes! }
 
   friendly_id :title, :use => :slugged
 
