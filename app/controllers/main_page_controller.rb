@@ -23,6 +23,8 @@ class MainPageController < ApplicationController
     @megapolis_review  = ReviewsPresenter.new({:category=>"megapolis"}).collection.take(3)
 
     @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
+
+    render partial: Settings["app.city"]
   end
 
 end

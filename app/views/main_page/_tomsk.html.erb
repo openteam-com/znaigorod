@@ -1,0 +1,22 @@
+<% content_for :extra_meta do %>
+  <% if page_meta %>
+    <%= render :partial => 'commons/page_meta_og' %>
+  <% else %>
+    <%= vk_meta('default', root_url, 'public/vk_logotype.png') %>
+  <% end %>
+<% end %>
+
+<%= render :partial => 'reviews' %>
+<%= render :partial => 'news' %>
+<%= render :partial => 'organizations' %>
+<%= render :partial => 'afisha' %>
+<%= render :partial => 'photogalleries' %>
+<%= render :partial => 'discounts' %>
+<%= render :partial => 'accounts' %>
+<%= render :partial => 'webcams' %>
+
+<% if page_meta %>
+  <div class='introduction'>
+    <%= page_meta.html_introduction %>
+  </div>
+<% end %>

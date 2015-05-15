@@ -55,9 +55,7 @@ class Afisha < ActiveRecord::Base
 
   serialize :kind, Array
   enumerize :kind,
-    in: [:child, :movie, :concert, :party,
-         :spectacle, :exhibition, :training,
-         :masterclass, :sportsevent, :competition, :other],
+    in: AfishaKind.new.send(Settings["app.city"]),
     multiple: true,
     predicates: true
 
@@ -69,6 +67,7 @@ class Afisha < ActiveRecord::Base
   accepts_nested_attributes_for :showings, :allow_destroy => true
 
   default_scope order('afisha.id DESC')
+
 
   scope :latest,           ->(count) { limit(count) }
   scope :with_images,      -> { where('image_url IS NOT NULL') }
