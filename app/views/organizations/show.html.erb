@@ -141,9 +141,11 @@
     <% if @organization.contact_links.present? %>
       <ul class='links'>
         <li class="js-site-link">
-           Сайт:
-          <% @organization.site.split(',').each do |link| %>
-            <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank' %>
+          <% if @organization.site.present? %>
+            Сайт:
+            <% @organization.site.split(',').each do |link| %>
+              <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank' %>
+            <% end %>
           <% end %>
         </li>
         <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email_link.present? %>
