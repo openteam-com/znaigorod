@@ -20,10 +20,14 @@ class ShowingDecorator < ApplicationDecorator
       to_time = ends_at_only_date? ? '' : H_M(ends_at)
 
       if in_one_day?
-        date = today? ? 'Сегодня' : e_B(starts_at)
-        date += " с #{from_time}" unless starts_at_only_date?
-        date += " до #{to_time}" unless ends_at_only_date?
+        if starts_at == ends_at
+          date = 'Круглосуточно'
+        else
+          date = today? ? 'Сегодня' : e_B(starts_at)
+          date += " с #{from_time}" unless starts_at_only_date?
+          date += " до #{to_time}" unless ends_at_only_date?
 
+        end
         return date
       else
         return "#{starts_at.day} &ndash; #{e_B(ends_at)}".html_safe if in_one_month? && starts_at_only_date? && ends_at_only_date?
