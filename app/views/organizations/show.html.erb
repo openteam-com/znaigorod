@@ -1,6 +1,6 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
 <% content_for :meta_title, @organization.page_meta_title if @organization.page_meta_title.present? %>
-<% content_for :page_title, @organization.page_meta_title.blank? ? @organization.title.text_gilensize + " - "  + " Томска" : @organization.page_meta_title %>
+<% content_for :page_title, @organization.page_meta_title.blank? ? @organization.title.text_gilensize + " - "  + current_city_declension : @organization.page_meta_title %>
 <% content_for :meta_keywords, @organization.page_meta_keywords || @organization.meta_keywords %>
 <% content_for :meta_description, @organization.page_meta_description || @organization.meta_description %>
 <% content_for :extra_meta do %>
