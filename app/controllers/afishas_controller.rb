@@ -16,7 +16,7 @@ class AfishasController < ApplicationController
 
         if params[:categories].nil? && params[:page].nil?
           @decorator = AfishaListPoster.where('afisha_id is not null').actual.map{|afisha| AfishaDecorator.new Afisha.find(afisha.afisha_id)}
-          @presenter = AfishaPresenter.new(settings_from_cookie.merge(params).merge(:afisha_list => @decorator.any? ? true : false).merge(:per_page => 20- @decorator.count))
+          @presenter = AfishaPresenter.new(settings_from_cookie.merge(params).merge(:afisha_list => @decorator.any? ? true : false).merge(:per_page => 20 - @decorator.count))
           @decorator += @presenter.decorated_collection
         else
           @presenter = AfishaPresenter.new(settings_from_cookie.merge(params))

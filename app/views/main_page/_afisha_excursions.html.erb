@@ -1,0 +1,18 @@
+<div class="afisha_main_page_list">
+  <div class="filter_header">
+    <h1><%= link_to 'Экскурсии и туры по Севастополю', excursions_index_path %></h1>
+  </div>
+
+  <div style='clear: both'></div>
+
+  <% cache('main_page_afisha_excursions', :expires_in => 10.minutes) do %>
+    <ul class="posters">
+      <% @afisha_excursions_list.each do |afisha| %>
+        <li class="item">
+          <%= render partial: (afisha.is_a?(AfishaDecorator) ? 'main_page/afisha_poster' : afisha.partial), :locals => { :afisha => afisha } %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+</div>

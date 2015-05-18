@@ -1,7 +1,8 @@
 class MainPageController < ApplicationController
 
   def show
-    @afisha_list       = MainPagePoster.where('afisha_id is not null').ordered.actual.map { |afisha| AfishaDecorator.new Afisha.find(afisha.afisha_id) }
+    @afisha_list                  = MainPagePoster.where('afisha_id is not null').ordered.actual.map { |afisha| AfishaDecorator.new Afisha.find(afisha.afisha_id) }
+    @afisha_excursions_list       = AfishaPresenter.new(:per_page => 6, :without_advertisement => true, :order_by => 'creation', :categories => ['excursions']).decorated_collection
 
     other_afishas_list = AfishaPresenter.new(:per_page => 6 - @afisha_list.count, :without_advertisement => true, :order_by => 'creation', main_page: @afisha_list.any? ? true : false).decorated_collection
     @afisha_list += other_afishas_list
@@ -23,8 +24,6 @@ class MainPageController < ApplicationController
     @megapolis_review  = ReviewsPresenter.new({:category=>"megapolis"}).collection.take(3)
 
     @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
-
-    render partial: Settings["app.city"]
   end
 
 end

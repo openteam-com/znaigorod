@@ -3,7 +3,7 @@
       <div class="menu">
         <%= render partial: 'commons/social_likes' %>
         <% cache('footer_navigation', :expires_in => 10.minutes) do %>
-          <%= render_navigation :context => :public, :expand_all => true, :renderer => :list_with_noindex %>
+          <%= render_navigation :context => "public_#{Settings['app.city']}", :expand_all => true, :renderer => :list_with_noindex %>
         <% end %>
       </div>
     <div class="wrapper">
