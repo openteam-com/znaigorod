@@ -1,10 +1,11 @@
 class OrganizationCategory < ActiveRecord::Base
   extend FriendlyId
+  extend Enumerize
 
   attr_accessor :sort_flag
 
   alias_attribute :to_s, :title
-  attr_accessible :title, :parent, :slug, :default_image, :hover_image
+  attr_accessible :title, :parent, :slug, :default_image, :hover_image, :afisha_kind
 
   has_many :organization_category_items, :dependent => :destroy
 
@@ -22,6 +23,11 @@ class OrganizationCategory < ActiveRecord::Base
   after_save { Znaigorod::Application.reload_routes! }
 
   friendly_id :title, :use => :slugged
+
+  serialize :afisha_kind, Array
+  enumerize :afisha_kind,
+    in: AfishaKind.new.send(Settings["app.city"]),
+    multiple: true
 
   has_ancestry
 
@@ -88,5 +94,6 @@ end
 #  hover_image_updated_at     :datetime
 #  hover_image_url            :text
 #  position                   :integer          default(1)
+#  afisha_kind                :text
 #
 

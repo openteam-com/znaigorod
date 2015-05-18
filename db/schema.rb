@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150514043019) do
+ActiveRecord::Schema.define(:version => 20150518030803) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -698,6 +698,7 @@ ActiveRecord::Schema.define(:version => 20150514043019) do
     t.datetime "hover_image_updated_at"
     t.text     "hover_image_url"
     t.integer  "position",                   :default => 1
+    t.text     "afisha_kind"
   end
 
   add_index "organization_categories", ["ancestry"], :name => "index_organization_categories_on_ancestry"

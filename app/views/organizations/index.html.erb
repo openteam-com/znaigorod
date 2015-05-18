@@ -42,6 +42,14 @@
   </div>
 <% end %>
 
+<% if @afishas.present? %>
+  <div class="organization_afisha afisha_content">
+    <ul class='posters js-paginable-list'>
+      <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afishas.decorated_collection, :presenter => @afishas } %>
+    </ul>
+  </div>
+<% end %>
+
 <% if page_meta && !top_introduction? %>
   <div class='introduction suborganization'>
     <%= page_meta.html_introduction %>

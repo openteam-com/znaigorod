@@ -38,6 +38,14 @@
       </ul>
     </span>
   </div>
+  <div>
+    <span class="label">Категории афиш:</span>
+    <% if @organization_category.afisha_kind.present? %>
+      <span class="value"><%= @organization_category.afisha_kind.values.map(&:text).join(', ') %></span>
+    <% else %>
+      Нет категорий
+    <% end %>
+  </div>
   <p><%= link_to 'Удалить', manage_organization_category_path(@organization_category), :method => :delete, :confirm => 'Вы уверены?' %> </p>
   <p><%= link_to 'Назад', manage_organization_categories_path %></p>
 </div>

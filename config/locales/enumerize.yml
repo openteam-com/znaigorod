@@ -234,6 +234,23 @@ ru:
         post_returned: обзор возвращен на доработку
         afisha_promoted: Поднята афиша
 
+    organization_category:
+      afisha_kind:
+        party: Вечеринки
+        other: Другое
+        masterclass: Мастер-классы
+        newyear: Новый год
+        concert: Концерты
+        training: Учеба
+        sportsevent: Спорт
+        exhibition: Выставки
+        movie: Кино
+        competition: Конкурсы
+        spectacle: Спектакли
+        child: Детям
+        all: Вся афиша
+        excursions: Экскурсии
+
       state:
         unread: Новое
         read: Прочитанное
