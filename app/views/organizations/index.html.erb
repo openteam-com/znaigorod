@@ -45,7 +45,7 @@
 <% if @afishas.present? %>
   <div class="organization_afisha afisha_content">
     <div class='afisha_title'>
-      Афиши
+      Афиша
     </div>
     <ul class='posters js-paginable-list'>
       <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afishas.decorated_collection, :presenter => @afishas } %>
