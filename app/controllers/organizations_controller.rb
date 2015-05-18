@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
         @presenter = OrganizationsPresenterBuilder.new(params).build
         @categories = @presenter.category ? @presenter.category.root.children.order(:position) : OrganizationCategory.roots.order(:position)
         @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
-        @afishas = AfishaPresenter.new(per_page: 1_000, :without_advertisement => true, :order_by => 'creation', :categories => @presenter.category.afisha_kind.to_a) if @presenter.category
+        @afishas = AfishaPresenter.new(per_page: 1_000, :without_advertisement => true, :order_by => 'creation', :categories => @presenter.category.afisha_kind.to_a) if @presenter.category.try(:afisha_kind).present?
 
         add_breadcrumb "Все организации", organizations_path
 
