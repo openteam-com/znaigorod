@@ -46,6 +46,14 @@
       Нет категорий
     <% end %>
   </div>
+  <div>
+    <span class="label">Показывать на главной:</span>
+    <% if @organization_category.show_on_main_page %>
+      <span class="value">Показывать</span>
+    <% else %>
+      <span class="value"> Не показывать</span>
+    <% end %>
+  </div>
   <p><%= link_to 'Удалить', manage_organization_category_path(@organization_category), :method => :delete, :confirm => 'Вы уверены?' %> </p>
   <p><%= link_to 'Назад', manage_organization_categories_path %></p>
 </div>

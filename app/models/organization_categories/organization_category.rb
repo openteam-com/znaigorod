@@ -5,7 +5,7 @@ class OrganizationCategory < ActiveRecord::Base
   attr_accessor :sort_flag
 
   alias_attribute :to_s, :title
-  attr_accessible :title, :parent, :slug, :default_image, :hover_image, :afisha_kind
+  attr_accessible :title, :parent, :slug, :default_image, :hover_image, :afisha_kind, :show_on_main_page
 
   has_many :organization_category_items, :dependent => :destroy
 
@@ -56,6 +56,10 @@ class OrganizationCategory < ActiveRecord::Base
     Organization.joins(:organization_categories).where(:organization_categories => { :id => subtree_ids }).uniq
   end
 
+  def self.show_on_main_page
+    where(:show_on_main_page => true).order(:position).take(9)
+  end
+
   def all_features
     is_root? ? features : Feature.where(:id => root.feature_ids + feature_ids)
   end
@@ -95,5 +99,6 @@ end
 #  hover_image_url            :text
 #  position                   :integer          default(1)
 #  afisha_kind                :text
+#  show_on_main_page          :boolean
 #
 

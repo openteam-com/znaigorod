@@ -22,13 +22,12 @@ class NewOrganizationsPresenter
         count: Organization.count
       }
 
-      %w[saunas bary dostavka_edy kafe restorany fitnes vizazh_studii car_washes].each do |item|
-        category = OrganizationCategory.find(item)
+      OrganizationCategory.show_on_main_page.each do |category|
         array << {
           title: category.title,
-          klass: item,
+          klass: category.slug,
           url: "organizations_by_category_path",
-          parameters: {:slug => item},
+          parameters: {:slug => category.slug},
           count: category.organizations.count
         }
       end

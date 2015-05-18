@@ -499,3 +499,4 @@ end
 #  promoted_at               :datetime
 #  bkz_link                  :text
 #
+
