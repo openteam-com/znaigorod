@@ -4,7 +4,7 @@
 
   <h1>
     <%= t("my.edit_model.#{@step}") %>
-    <%= link_to 'помощь', help_path  %>
+    <%= link_to 'помощь', help_path, :target => '_blank' %>
   </h1>
 
   <% if content_for?(:help) %>
