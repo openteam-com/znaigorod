@@ -1,9 +1,11 @@
-<% resource.state_events.each do |state_event| %>
-  <% if resource.is_a? Afisha %>
+<% if resource.is_a? Afisha %>
+  <% (resource.state_events - [:to_archive]).each do |state_event| %>
     <%= link_to t("activerecord.state_machines.state.events.#{state_event}"), polymorphic_path([:fire_state_event, :manage, resource], :event => state_event), :method => :put %>
   <% end %>
+<% end %>
 
-  <% if resource.is_a? Discount  %>
+<% if resource.is_a? Discount  %>
+  <% resource.state_events.each do |state_event| %>
     <%= link_to t("activerecord.state_machines.state.events.#{state_event}"), fire_state_event_manage_discount_path(resource, state_event), :method => :put %>
   <% end %>
 <% end %>
