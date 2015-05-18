@@ -81,7 +81,7 @@ class ReviewDecorator < ApplicationDecorator
   end
 
   def content_for_show
-    @content_for_show ||= cached_content_for_show.try(:html_safe)
+    @content_for_show ||= (URI.unescape(cached_content_for_show.force_encoding('ASCII-8BIT')).force_encoding('utf-8')).try(:html_safe)
   end
 
   def raw_content_for_show
