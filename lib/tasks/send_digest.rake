@@ -50,7 +50,8 @@ namespace :send_digest do
     if ENV['accounts'].present?
       accounts = accounts_form_env
     else
-      accounts = Account.with_email.with_statistics_digest - Role.all.map(&:user).map(&:account).uniq + Account.where(id: 2303)
+      accounts = Account.with_email.with_statistics_digest - Role.all.map(&:user).map(&:account).uniq + Account.where(id: 2303) if Settings['app.city'] == 'tomsk'
+      accounts = Account.with_email.with_statistics_digest - Role.all.map(&:user).map(&:account).uniq if Settings['app.city'] == 'sevastopol'
     end
     accounts.each do |account|
       StatisticsDigestWorker.perform_async(account.id)

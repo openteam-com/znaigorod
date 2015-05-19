@@ -1,7 +1,0 @@
-<%= simple_form_for resource, url: action_name == 'new' ? manage_organization_organization_navigations_path(params[:organization_id]) : manage_organization_organization_navigation_path(params[:organization_id], params[:id]) do |f| %>
-  <%= f.input :title, label: 'Заголовок' %>
-  <%= f.input :href, label: 'Что добавить', :collection => @select_sollection if action_name == 'new' %>
-  <%= f.input :href, label: 'Что добавить', :collection => @select_sollection, :selected => @selected if action_name == 'edit' %>
-  <%= f.input :organization_id, as: :hidden, input_html: { value: @organization.id } %>
-  <%= f.submit 'Сохранить' %>
-<% end %>
