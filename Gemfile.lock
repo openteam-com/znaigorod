@@ -153,6 +153,7 @@ GEM
       formtastic
       rails
     eventmachine (1.0.0)
+    excon (0.45.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (2.5.0)
@@ -235,9 +236,9 @@ GEM
       addressable
       faraday
       multi_json
-    launchy (2.3.0)
+    launchy (2.4.2)
       addressable (~> 2.3)
-    letter_opener (1.1.1)
+    letter_opener (1.2.0)
       launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -248,6 +249,9 @@ GEM
       hashie (~> 2.0)
       httparty (~> 0.10)
       signed_parameters
+    mandrill-api (1.0.53)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.2)
@@ -551,6 +555,7 @@ DEPENDENCIES
   koala (~> 1.7.0rc1)
   letter_opener
   mainsms_api
+  mandrill-api
   mock_redis
   nested_form
   nokogiri

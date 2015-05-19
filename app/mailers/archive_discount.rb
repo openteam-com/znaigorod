@@ -1,15 +1,20 @@
-class ArchiveDiscount < ActionMailer::Base
-  default :from => Settings['mail']['from']
+class ArchiveDiscount < MandrillMailer
+  default :from => "\"znaigorod.ru\" <#{Settings['mail']['from']}>"
+  layout "notice_layout"
 
-  def send_archived(discount)
-    @discount = discount
+  def send_archived(account, discounts)
+    @type = 'archive_discount'
+    @account = account
+    @discounts = discounts
 
-    mail :to => discount.account.email, :subject => "Ваша скидка #{discount.title} перемещена в архив"
+    mail(:to => account.email, :subject => "Ваша скидки перемещены в архив")
   end
 
-  def send_warning(discount)
-    @discount = discount
+  def send_warning(account, discounts)
+    @type = 'archive_discount'
+    @account = account
+    @discounts = discounts
 
-    mail :to => discount.account.email, :subject => "Ваша скидка #{discount.title} скоро будет перемещена в архив"
+    mail(:to => account.email, :subject => "Ваши скидки скоро будут перемещены в архив")
   end
 end

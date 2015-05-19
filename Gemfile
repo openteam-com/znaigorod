@@ -46,6 +46,7 @@ group :default do
   gem 'kinopoisk_parser',           :require => false
   gem 'koala',                      '~> 1.7.0rc1'
   gem 'mainsms_api'
+  gem 'mandrill-api'
   gem 'nested_form'
   gem 'nokogiri'
   gem 'omniauth-facebook'

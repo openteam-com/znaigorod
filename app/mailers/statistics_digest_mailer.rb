@@ -1,4 +1,4 @@
-class StatisticsDigestMailer < ActionMailer::Base
+class StatisticsDigestMailer < MandrillMailer
   default :from => "\"znaigorod.ru\" <#{Settings['mail']['from']}>"
   layout "notice_layout"
   add_template_helper(ImageHelper)
@@ -11,5 +11,4 @@ class StatisticsDigestMailer < ActionMailer::Base
 
     mail(:to => account.email, :subject => t("notice_mailer.statistics_digest")).deliver! unless @digest.flatten.blank?
   end
-
 end

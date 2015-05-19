@@ -2,20 +2,20 @@ require 'progress_bar'
 namespace :discounts do
   desc 'Archive discounts'
   task :archive_discounts => :environment do
-    discounts = Discount.where(state: :published)
-    pb = ProgressBar.new(discounts.count)
+    grouped_discounts = Discount.where(state: :published).group_by(&:account_id)
+    pb = ProgressBar.new(grouped_discounts.count)
 
-    discounts.each do |discount|
-      if discount.published_at + 1.month < Time.zone.now
+    grouped_discounts.each do |account_id, discounts|
+      account = Account.find(account_id)
+      archive_discounts = discounts.delete_if{ |discount| discount.published_at + 1.month > Time.zone.now }
+      archive_discounts.each do |discount|
         discount.to_archive
         discount.update_attribute :promoted_at, nil
+      end
 
-        if discount.published_at >= Time.zone.now.beginning_of_year
-          if discount.account && discount.account.has_email?
-            ArchiveDiscount.delay(:queue => :mailer).send_archived(discount)
-            break if Rails.env.development?
-          end
-        end
+      if archive_discounts.present? && account && account.has_email?
+        ArchiveDiscount.delay(:queue => :mailer, :retry => false).send_archived(account, archive_discounts)
+        break if Rails.env.development?
       end
       pb.increment!
     end
@@ -23,15 +23,16 @@ namespace :discounts do
 
   desc 'Warning for discount owner'
   task :archive_warning => :environment do
-    discounts = Discount.where(state: :published)
-    pb = ProgressBar.new(discounts.count)
+    grouped_discounts = Discount.where(state: :published).group_by(&:account_id)
+    pb = ProgressBar.new(grouped_discounts.count)
 
-    discounts.each do |discount|
-      if discount.published_at + 1.month - 3.days < Time.zone.now && discount.published_at >= Time.zone.now.beginning_of_year
-        if discount.account && discount.account.has_email?
-          ArchiveDiscount.delay(:queue => :mailer).send_warning(discount)
-          break if Rails.env.development?
-        end
+    grouped_discounts.each do |account_id, discounts|
+      account = Account.find(account_id)
+      archive_discounts = discounts.delete_if{ |discount| discount.published_at + 1.month - 3.days > Time.zone.now }
+
+      if archive_discounts.present? && account && account.has_email?
+        ArchiveDiscount.delay(:queue => :mailer, :retry => false).send_warning(account, archive_discounts)
+        break if Rails.env.development?
       end
       pb.increment!
     end
