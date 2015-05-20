@@ -18,7 +18,7 @@
 <% end %>
 
 <%= content_for :content do %>
-  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" if Time.zone.parse('20.05.2015') > Time.zone.now %>
+  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" if Time.zone.parse('26.05.2015') > Time.zone.now %>
   <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
   <%= render :partial => 'commons/public_header' %>
   <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
