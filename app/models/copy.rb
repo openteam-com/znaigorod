@@ -59,6 +59,10 @@ class Copy < ActiveRecord::Base
     update_attributes :state => 'stale' unless sold?
   end
 
+  def for_sale!
+    update_attribute :state, :for_sale unless sold?
+  end
+
   def release!
     inform_purchaser
 

@@ -18,8 +18,8 @@ class PromoteDiscountPayment < Payment
   alias :discount :paymentable
 
   def promote_discount
-    discount.update_attributes! :promoted_at  => Time.zone.now
-    discount.update_attributes! :published_at => Time.zone.now
+    # actualize discount
+    discount.update_attributes! :promoted_at  => Time.zone.now, :published_at => Time.zone.now
   end
 
   def create_notification_message

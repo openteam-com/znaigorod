@@ -74,7 +74,6 @@ class My::DiscountsController < My::ApplicationController
     }
   end
 
-
   private
     alias_method :old_build_resource, :build_resource
 

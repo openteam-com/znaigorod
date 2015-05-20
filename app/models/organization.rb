@@ -372,9 +372,6 @@ class Organization < ActiveRecord::Base
     gallery_images
   end
 
-  def sold_tickets_count
-  end
-
   def navigation_collection
     {}.tap do |hash|
       %w[address photos].each do |prefix|

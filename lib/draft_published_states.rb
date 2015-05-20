@@ -17,6 +17,13 @@ module DraftPublishedStates
         object.feed.destroy if object.is_a?(Afisha) && object.feed
       end
 
+      after_transition :archive => :published do |object, transition|
+        object.send(:update_attribute, :starts_at, Time.zone.now)
+        object.send(:update_attribute, :ends_at, Time.zone.now + 1.month)
+        object.send(:copies).map(&:for_sale!)
+        object.send(:index!)
+      end
+
       after_transition any => :archive do |object, transition|
         object.send(:update_attribute, :archived_at, Time.zone.now)
       end

@@ -4,7 +4,9 @@ class Entertainment < ActiveRecord::Base
   include HasVirtualTour
   include HasServices
 
-  attr_accessible :category, :feature, :offer, :payment, :title, :description
+  attr_accessor :vfs_path
+
+  attr_accessible :category, :feature, :offer, :payment, :title, :description, :vfs_path
 
   belongs_to :organization
 
@@ -16,9 +18,6 @@ class Entertainment < ActiveRecord::Base
 
   validates_presence_of :organization_id
 
-  # OPTIMIZE: <--- similar code
-  attr_accessor :vfs_path
-  attr_accessible :vfs_path
   def vfs_path
     "#{organization.vfs_path}/#{self.class.name.underscore}"
   end
