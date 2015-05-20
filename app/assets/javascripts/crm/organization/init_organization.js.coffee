@@ -206,9 +206,11 @@
         true
     false
 
-  $('#activity_title', activities_head_block).live 'change', (event, xhr, settings) ->
+  $('#activity_title', activities_head_block).live 'change', ->
     href = $('.fast_activity').attr('href')
     $('.fast_activity').attr('href', href + "&activity[title]=" + $('#activity_title').val())
+
+    true
 
   $('.form_view form .fast_activity', activities_head_block).live 'ajax:success', (event, data, textStatus, jqXHR) ->
     if data.isBlank()
