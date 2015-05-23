@@ -17,7 +17,11 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :excursions, 'Экскурсии', organizations_by_category_path('tury_sevastopolya'), highlights_on: -> { controller_name == 'organizations' && params[:slug] == 'tury_sevastopolya' }
+    primary.item :excursions, 'Экскурсии', organizations_by_category_path('tury_sevastopolya') do |excursion|
+      primary.auto_highlight = false
+      excursion.auto_highlight = false
+      excursion.item :afisha, 'Афиша экскурсий', excursions_index_path
+    end
 
     primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> { controller_name == 'organizations' } do |organization|
       OrganizationCategory.roots.order(:position).each do |category|

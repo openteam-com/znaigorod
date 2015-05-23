@@ -4,7 +4,7 @@
   <% else %>
     Нет названия,
   <% end %>
-  <%= @review.categories.map(&:text).join(', ') %> в Томске
+  <%= @review.categories.map(&:text).join(', ') %> в <%= current_city_inclination %>
 <% end %>
 
 <% content_for :meta_keywords, @review.meta_keywords %>
@@ -108,7 +108,7 @@
 
 <div class="right">
   <% if @review.related_reviews.present? || @review.decorated_similar.present? %>
-    <h2>Смотрите так же!</h2>
+    <h2>Смотрите также!</h2>
     <div class="related_posters">
       <ul class="posters related_discounts">
         <% @review.related_reviews.delete_if { |relation| relation.slave.blank? }.each do |relation| %>
@@ -121,7 +121,7 @@
       </ul>
 
       <div class="promotions">
-        <%= render :partial => 'commons/rianovosti' %>
+        <%= render :partial => 'commons/rianovosti' if Settings['app.city'] == 'tomsk' %>
       </div>
     </div>
   <% end %>

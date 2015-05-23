@@ -452,7 +452,7 @@ class Afisha < ActiveRecord::Base
   def self.new_afisha_url
     [ ["child", "deti"], ["movie", "kinoafisha"], ["concert", "concerts"], ["party", "vecherinki"], ["spectacle", "afisha-teatrov"],
       ["exhibition", "vystavki"], ["training", "treningi-i-kursy"], ["masterclass", "masterclasses"], ["sportsevent", "sportsevents"],
-      ["competition", "konkursy"], ["other", "others"], ["excursions", "excursions"] ]
+      ["competition", "konkursy"], ["other", "others"], ["excursions", "ekskursii_sevastopolja"] ]
   end
 end
 

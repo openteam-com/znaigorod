@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :banners, :hot_offers, :page, :per_page, :page_meta,
     :page_meta_item, :canonical_link,
     :city_name, :country_name, :remote_ip,
-    :current_city_declension
+    :current_city_declension, :current_city_inclination
 
   before_filter :detect_robots_in_development if Rails.env.development?
   before_filter :update_account_last_visit_at
@@ -125,5 +125,9 @@ class ApplicationController < ActionController::Base
 
   def current_city_declension
     Settings['app.city'] == 'tomsk' ? 'Томска' : 'Севастополя'
+  end
+
+  def current_city_inclination
+    Settings['app.city'] == 'tomsk' ? 'Томске' : 'Севастополе'
   end
 end
