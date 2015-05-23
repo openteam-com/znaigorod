@@ -16,7 +16,6 @@
 <% end %>
 
 <%= content_for :content do %>
-  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
   <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
   <div class='unique_header_wrapper'>
     <%= render :partial => 'commons/public_header' %>
