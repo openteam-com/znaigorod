@@ -1,4 +1,4 @@
-<% cache "phoogallery_#{photogallery.id}_#{action_name}", expires_in: 10.minutes do %>
+<% cache "phoogallery_#{photogallery.id}_#{controller_name}_#{action_name}", expires_in: 10.minutes do %>
   <div class="title">
     <%= photogallery.truncated_title_link(30) %>
   </div>
