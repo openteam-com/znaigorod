@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
-    xml.title "Обзоры и блоги о жизни в Томске"
-    xml.description "Обзоры и блоги о жизни в Томске"
+    xml.title "Обзоры и блоги о жизни в #{current_city_inclination}"
+    xml.description "Обзоры и блоги о жизни в #{current_city_inclination}"
     xml.link reviews_url
     xml.tag! 'atom:link', :rel => 'self', :type => 'application/rss+xml', :href => reviews_url(:format => :rss)
 

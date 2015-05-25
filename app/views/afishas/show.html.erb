@@ -4,7 +4,7 @@
   <% else %>
     Нет названия,
   <% end %>
-  <%= @afisha.kind.map(&:text).join(', ') %> в Томске
+  <%= @afisha.kind.map(&:text).join(', ') %> <%= current_city_inclination %>
 <% end %>
 
 <% content_for :meta_keywords, @afisha.meta_keywords %>

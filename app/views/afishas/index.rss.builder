@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
-    xml.title "Афиша Томска от ЗнайГород"
-    xml.description "Афиша Томска, все мероприятия и афиша города Томска - ЗнайГород"
+    xml.title "Афиша #{current_city_declension} от ЗнайГород"
+    xml.description "Афиша #{current_city_declension}, все мероприятия и афиша города #{current_city_declension} - ЗнайГород"
     xml.link afisha_index_url
     xml.tag! 'atom:link', :rel => 'self', :type => 'application/rss+xml', :href => afisha_index_url(:format => :rss)
 

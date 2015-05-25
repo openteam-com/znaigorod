@@ -4,7 +4,7 @@
   <% else %>
     Нет названия,
   <% end %>
-  <%= @discount.kind.map(&:text).join(', ') %> в Томске
+  <%= @discount.kind.map(&:text).join(', ') %> в <%= current_city_inclination %>
 <% end %>
 
 <% content_for :meta_keywords, @discount.meta_keywords %>
@@ -122,7 +122,7 @@
           <% else %>
             <p class="discount_owner">
               <span>Автор:</span>
-              <%= link_to('ЗнайГород (Афиша Томска)', 'http://vk.com/znaigorod') %>
+              <%= link_to("ЗнайГород (Афиша #{current_city_declension})", 'http://vk.com/znaigorod') %>
             </p>
           <% end %>
           <%= render :partial => 'commons/published_date', :locals => { :published_date => @discount.created_at } %>

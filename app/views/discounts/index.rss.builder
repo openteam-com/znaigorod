@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
-    xml.title "Скидки, сертификаты и купоны, акции и распродажи Томска"
-    xml.description "Скидки, сертификаты и купоны, акции и распродажи Томска"
+    xml.title "Скидки, сертификаты и купоны, акции и распродажи #{current_city_declension}"
+    xml.description "Скидки, сертификаты и купоны, акции и распродажи #{current_city_declension}"
     xml.link discounts_url
     xml.tag! 'atom:link', :rel => 'self', :type => 'application/rss+xml', :href => discounts_url(:format => :rss)
 
