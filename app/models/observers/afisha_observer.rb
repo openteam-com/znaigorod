@@ -3,7 +3,7 @@
 class AfishaObserver < ActiveRecord::Observer
   def after_to_published(afisha, transition)
     if afisha.user.present?
-      if !afisha.user.is_admin? && afisha.user.email.present?
+      if !afisha.user.roles.any? && afisha.user.email.present?
         MyMailer.delay(:queue => 'mailer').mail_new_published_afisha(afisha)
       end
       Feed.create(
@@ -27,7 +27,7 @@ class AfishaObserver < ActiveRecord::Observer
   end
 
   def before_save(afisha)
-    if afisha.published? && afisha.change_versionable?
+    if afisha.published? && afisha.change_versionable? && !afisha.user.roles.any?
       afisha.save_version
       MyMailer.delay(:queue => 'mailer').send_afisha_diff(afisha.versions.last) if afisha.versions.last.present?
     end
