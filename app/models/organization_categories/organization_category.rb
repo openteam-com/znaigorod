@@ -5,7 +5,7 @@ class OrganizationCategory < ActiveRecord::Base
   attr_accessor :sort_flag
 
   alias_attribute :to_s, :title
-  attr_accessible :title, :parent, :slug, :default_image, :hover_image, :afisha_kind, :show_on_main_page
+  attr_accessible :title, :parent, :slug, :default_image, :hover_image, :afisha_kind, :show_on_main_page, :afisha_per_page
 
   has_many :organization_category_items, :dependent => :destroy
 

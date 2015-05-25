@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController
   has_scope :page, :default => 1
 
-  helper_method :scrolltrack, :top_introduction?
+  helper_method :scrolltrack, :top_introduction?, :category_content
 
   before_filter :allow_cross_domain_access
 
@@ -12,8 +12,8 @@ class OrganizationsController < ApplicationController
       format.html {
         @presenter = OrganizationsPresenterBuilder.new(params).build
         @categories = @presenter.category ? @presenter.category.root.children.order(:position) : OrganizationCategory.roots.order(:position)
-        @reviews = ReviewDecorator.decorate(OrganizationCategory.find(params[:slug]).reviews) if params[:slug]
-        @afishas = AfishaPresenter.new(per_page: 1_000, :without_advertisement => true, :order_by => 'creation', :categories => @presenter.category.afisha_kind.to_a) if @presenter.category.try(:afisha_kind).present?
+        @reviews = ReviewDecorator.decorate(OrganizationCategory.find(@presenter.category.slug).reviews) if @presenter.category
+        @afishas = AfishaPresenter.new(per_page: @presenter.category.afisha_per_page, :without_advertisement => true, :order_by => 'creation', :categories => @presenter.category.afisha_kind.to_a) if @presenter.category.try(:afisha_kind).present?
 
         add_breadcrumb "Все организации", organizations_path
 
@@ -173,6 +173,10 @@ class OrganizationsController < ApplicationController
   end
 
   def top_introduction?
-    %w(kafe_tomska restorany saunas).include? params[:slug]
+    %w(kafe_tomska restorany saunas).include? @presenter.category.try(:slug)
+  end
+
+  def category_content
+    File.exists?(Rails.root.join("app/views/organizations/content/_#{@presenter.category.try(:slug)}.html.erb")) ? "#{@presenter.category.slug}" : 'default'
   end
 end

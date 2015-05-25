@@ -1,0 +1,41 @@
+<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } %>
+
+<%= render partial: 'filters_and_search' %>
+
+<% if @presenter.category %>
+  <%= render :partial => "#{@presenter.view_type}_view" %>
+<% else %>
+  <% if @presenter.query %>
+    <%= render :partial => "#{@presenter.view_type}_view" %>
+  <% else %>
+    <%= render :partial => 'tree_view' %>
+  <% end %>
+<% end %>
+
+<div class="like_this">
+  <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
+</div>
+
+<% if @reviews.present? %>
+  <div class="organization_reviews">
+    <div class='reviews_title'>
+      Обзоры
+    </div>
+    <div class='suborganization_info related-reviews'>
+      <ul class='posters'>
+        <%= render :partial => 'reviews/posters', locals: { collection: @reviews, height: '120', width: '184' } %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<% if @afishas.present? %>
+  <div class="organization_afisha afisha_content">
+    <div class='afisha_title'>
+      Афиша
+    </div>
+    <ul class='posters js-paginable-list'>
+      <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afishas.decorated_collection, :presenter => @afishas } %>
+    </ul>
+  </div>
+<% end %>

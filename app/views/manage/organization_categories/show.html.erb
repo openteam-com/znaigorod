@@ -54,6 +54,10 @@
       <span class="value"> Не показывать</span>
     <% end %>
   </div>
+  <div>
+    <span class="label">Количество афиш:</span>
+    <span class="value"><%= @organization_category.afisha_per_page %></span>
+  </div>
   <p><%= link_to 'Удалить', manage_organization_category_path(@organization_category), :method => :delete, :confirm => 'Вы уверены?' %> </p>
   <p><%= link_to 'Назад', manage_organization_categories_path %></p>
 </div>

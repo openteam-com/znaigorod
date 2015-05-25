@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150518085353) do
+ActiveRecord::Schema.define(:version => 20150525033837) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -684,8 +684,8 @@ ActiveRecord::Schema.define(:version => 20150518085353) do
   create_table "organization_categories", :force => true do |t|
     t.string   "title"
     t.string   "ancestry"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "slug"
     t.string   "default_image_file_name"
     t.string   "default_image_content_type"
@@ -700,6 +700,7 @@ ActiveRecord::Schema.define(:version => 20150518085353) do
     t.integer  "position",                   :default => 1
     t.text     "afisha_kind"
     t.boolean  "show_on_main_page"
+    t.integer  "afisha_per_page",            :default => 1000
   end
 
   add_index "organization_categories", ["ancestry"], :name => "index_organization_categories_on_ancestry"
