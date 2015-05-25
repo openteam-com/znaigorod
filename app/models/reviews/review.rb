@@ -167,7 +167,12 @@ class Review < ActiveRecord::Base
 
     related_items.each do |item|
       slave_type, slave_id = item.split("_")
-
+      if slave_type == 'review'
+        relation = Review.find(slave_id).relations.new
+        relation.slave_type = "Review"
+        relation.slave_id = id
+        relation.save
+      end
       relation = relations.new
       relation.slave_type = slave_type.classify
       relation.slave_id = slave_id
