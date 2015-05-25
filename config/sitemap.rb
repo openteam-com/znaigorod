@@ -24,7 +24,7 @@ SitemapGenerator::Sitemap.create do
     add send("#{item.pluralize}_path"),
       :changefreq => 'daily',
       :priority => 0.8,
-      :lastmod => Afisha.actual.select{|a| a.kind.include?(item)}.last.updated_at
+      :lastmod => Afisha.actual.select{|a| a.kind.include?(item)}.last.try(:updated_at)
   end
 
   # Просмотр афиш
