@@ -17,10 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :excursions, 'Экскурсии', excursions_index_path do |excursion|
-      primary.auto_highlight = false
-      excursion.auto_highlight = false
-    end
+    primary.item :excursions, 'Экскурсии', excursions_index_path, :auto_highlight => false
 
     primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> { controller_name == 'organizations' } do |organization|
       OrganizationCategory.roots.order(:position).each do |category|
