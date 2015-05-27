@@ -14,12 +14,12 @@
 <%= render :partial => 'discounts' %>
 <%= render :partial => 'accounts' %>
 
-<% @megapolis_review.each do |review|%>
-  <span> <%= link_to review.title, review %></span>
-<% end %>
-
 <% if page_meta %>
   <div class='introduction'>
     <%= page_meta.html_introduction %>
   </div>
+<% end %>
+
+<% @megapolis_review.each do |review|%>
+  <span> <%= link_to review.title, review %></span>
 <% end %>
