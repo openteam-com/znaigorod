@@ -13,7 +13,10 @@
 <%= render :partial => 'photogalleries' %>
 <%= render :partial => 'discounts' %>
 <%= render :partial => 'accounts' %>
-<%= render :partial => 'webcams' %>
+
+<% @megapolis_review.each do |review|%>
+  <span> <%= link_to review.title, review %></span>
+<% end %>
 
 <% if page_meta %>
   <div class='introduction'>
