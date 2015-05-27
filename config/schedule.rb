@@ -123,4 +123,16 @@ else
   every :day, :at => '2:10 am' do
     rake 'sitemap:refresh refresh_sitemaps'
   end
+
+  every :day, :at => '5:00 am' do
+    rake 'sync:pobeda'
+  end
+
+  every :day, :at => '5:10 am' do
+    rake 'sync:musson'
+  end
+
+  every :day, :at => '5:20 am' do
+    rake 'sync:apelsin'
+  end
 end

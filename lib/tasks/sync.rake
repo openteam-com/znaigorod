@@ -177,6 +177,37 @@ class GoodwinCinemaGroup
   end
 end
 
+class SevastopolCinema
+  attr_accessor :cinema_name, :schedule_url , :price_min, :price_max
+
+  def initialize(cinema_name, url, price_min, price_max)
+    @cinema_name = cinema_name
+    @schedule_url = url
+    @price_min = price_min
+    @price_max = price_max
+  end
+
+  def sync
+    movies = {}
+
+    timetable = Nokogiri::HTML(Curl.get(schedule_url).body_str).css('.timelist div')
+    bar = ProgressBar.new(timetable.count)
+    puts "#{cinema_name}: парсинг"
+
+    timetable.css('a').map(&:text).uniq.map{ |title| movies[title] = [] }
+
+    timetable.each do |seance|
+      title = seance.css('a').text
+      date = Date.today
+      time = seance.css('span').text
+      hall = seance.css('span').first.attributes['class'].value == 'tech hall' ? 'Зал №1' : '3D зал'
+      movies[title] << {:starts_at => Time.zone.parse("#{date} #{time}"), :hall => hall, :price_min => price_min, :price_max => price_max }
+      bar.increment!
+    end
+
+    MovieSyncer.new(:place => cinema_name, :movies => movies).sync
+  end
+end
 namespace :sync do
 
   desc "Sync movie seances from http://goodwincinema.ru"
@@ -250,7 +281,6 @@ namespace :sync do
       end
       bar.increment!
     end
-
     MovieSyncer.new(:place => 'Киномакс, кинотеатр', :movies => movies).sync
   end
 
@@ -299,10 +329,26 @@ namespace :sync do
 
     MovieSyncer.new(:place => 'Киномир, кинотеатр', :movies => movies).sync
   end
+
+  desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-pobeda"
+  task :pobeda => :environment do
+    SevastopolCinema.new('Кинотеатр «Победа»','http://afisha.sevastopol.press/kinoteatr-pobeda', 100, 150).sync
+  end
+
+  desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-musson"
+  task :musson => :environment do
+    SevastopolCinema.new('Муссон','http://afisha.sevastopol.press/kinoteatr-musson', 110, 300).sync
+  end
+
+  desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-musson"
+  task :apelsin => :environment do
+    SevastopolCinema.new('Апельсин, торгово-развлекательный центр','http://afisha.sevastopol.press/kinoteatr-apelsin', 90, 220).sync
+  end
 end
 
 task :sync => ['sync:goodwin', 'sync:fakel', 'sync:kinomax', 'sync:kinomir', 'sync:kinopolis'] do
-  organiation_ids = Organization.where(:title => ['Goodwin cinema, кинотеатр', '"Fакел", развлекательный комплекс', 'Киномакс, кинотеатр', 'Киномир, кинотеатр', 'Kinopolis, кинотеатр']).map(&:id)
+  organiation_ids = Organization.where(:title => ['Goodwin cinema, кинотеатр', '"Fакел", развлекательный комплекс',
+                                                  'Киномакс, кинотеатр', 'Киномир, кинотеатр', 'Kinopolis, кинотеатр']).map(&:id)
   bad_showings = Showing.where(:afisha_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
   bad_showings.destroy_all
 end
