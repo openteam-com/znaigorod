@@ -6,11 +6,5 @@
         <%= link_to (image_tag 'public/banners/banner_shashlik.jpg', size: '880x80'), contest_path('tvoy-shashlyk-samyy-vkusnyy'), class: 'js-stat-shashlyk' %>
       </li>
     <% end %>
-
-    <% unless params[:id] == 'miss-ofis-2015' %>
-      <li class='js-banner miss-ofis-banner'>
-        <%= link_to (image_tag 'public/banners/banner-miss-ofis.jpg', size: '880x80'), contest_path('miss-ofis-2015'), class: 'js-stat-miss-ofis' %>
-      </li>
-    <% end %>
   </ul>
 </div>
