@@ -54,7 +54,7 @@ group :default do
   gem 'omniauth-mailru',            :git => 'git://github.com/semenyukdmitriy/omniauth-mailru', :ref => 'fbf40e8'
   gem 'omniauth-odnoklassniki'
   gem 'omniauth-twitter'
-  gem 'omniauth-vkontakte',         '~> 1.3'
+  gem 'omniauth-vkontakte'#,         '~> 1.3'
   gem 'omniauth-yandex'
   gem 'openteam-commons'
   gem 'paperclip'
