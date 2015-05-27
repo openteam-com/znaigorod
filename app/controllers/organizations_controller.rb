@@ -81,7 +81,7 @@ class OrganizationsController < ApplicationController
         settings_from_cookie = {}
         settings_from_cookie = Rack::Utils.parse_nested_query(cookie) if cookie.present?
         organization_ids = [@organization.id, @organization.situated_organization_ids].flatten
-        @afisha_presenter = AfishaPresenter.new(organization_ids: organization_ids, order_by: 'starts_at', page: params[:page], :per_page => 9)
+        @afisha_presenter = AfishaPresenter.new(organization_ids: organization_ids, order_by: 'starts_at', page: params[:page], :per_pageage => 9)
         @discount_presenter = DiscountsPresenter.new(organization_id: organization_ids, :type => 'discount', order_by: settings_from_cookie.merge(params)['order_by'], page: params[:page])
         @certificate_presenter = DiscountsPresenter.new(organization_id: organization_ids, :type => 'certificate', :order_by => 'random', :page => params[:page])
         @coupon_presenter = DiscountsPresenter.new(organization_id: organization_ids, :type => 'coupon', :order_by => 'random', :page => params[:page])

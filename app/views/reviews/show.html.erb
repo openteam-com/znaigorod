@@ -54,8 +54,8 @@
         Афиша
       </div>
       <ul class='posters'>
-        <% @review.related_afishas.each do |relation| %>
-          <%= render :partial => "reviews/related_poster_#{relation.slave_type.downcase}", :locals => { :item => "#{relation.slave_type}Decorator".constantize.new(relation.slave) } %>
+        <% @review.related_afishas.each do |afisha| %>
+          <%= render :partial => "reviews/related_poster_afisha", :locals => { :item => AfishaDecorator.new(afisha) } %>
         <% end %>
       </ul>
     </div>
@@ -67,8 +67,8 @@
         Скидки
       </div>
       <ul class='posters'>
-        <% @review.related_discounts.each do |relation| %>
-          <%= render :partial => "reviews/related_poster_#{relation.slave_type.downcase}", :locals => { :item => "#{relation.slave_type}Decorator".constantize.new(relation.slave) } %>
+        <% @review.related_discounts.each do |discount| %>
+          <%= render :partial => "reviews/related_poster_discount", :locals => { :item => DiscountDecorator.new(discount) } %>
         <% end %>
       </ul>
     </div>
