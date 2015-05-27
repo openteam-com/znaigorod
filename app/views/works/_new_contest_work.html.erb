@@ -31,9 +31,14 @@
       <%= f.error :base %>
       <%= f.input :image %>
 
-      <% if @contest.placeholder %>
-        <%= f.input :description, label: false, input_html: { placeholder: @contest.placeholder, cols: 100 } %>
+      <% if @contest.placeholder.present? %>
+        <%= f.input :description, label: false, input_html: { placeholder: @contest.placeholder, cols: 40, rows: 5 } %>
         <%= f.input :author_info, :as => :hidden, :input_html => { :value => "" } %>
+      <% end %>
+
+      <% if @contest.anketa_content.present? %>
+        <p>Анкета:</p>
+        <%= f.input :anketa, label: false, input_html: { value: @contest.anketa_content, cols: 80, rows: 25 } %>
       <% end %>
 
       <div class="agreement_wrapper">

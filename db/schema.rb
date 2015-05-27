@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150525033837) do
+ActiveRecord::Schema.define(:version => 20150527031458) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -291,6 +291,8 @@ ActiveRecord::Schema.define(:version => 20150525033837) do
     t.string   "default_sort",          :default => "by_id"
     t.string   "new_work_text",         :default => "Добавить фотографию"
     t.text     "placeholder"
+    t.string   "email"
+    t.text     "anketa_content"
   end
 
   add_index "contests", ["slug"], :name => "index_contests_on_slug", :unique => true
@@ -1549,6 +1551,7 @@ ActiveRecord::Schema.define(:version => 20150525033837) do
     t.string   "type"
     t.text     "video_content"
     t.integer  "sms_counter",        :default => 0
+    t.text     "anketa"
   end
 
   add_index "works", ["account_id"], :name => "index_works_on_account_id"

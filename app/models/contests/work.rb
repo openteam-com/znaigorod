@@ -5,7 +5,7 @@ class Work < ActiveRecord::Base
   include MakePageVisit
 
   attr_accessor :agree
-  attr_accessible :agree, :author_info, :image_url, :title, :description, :image, :account_id, :sms_counter
+  attr_accessible :agree, :author_info, :image_url, :title, :description, :image, :account_id, :sms_counter, :anketa
 
   belongs_to :account
   belongs_to :context, :polymorphic => true
@@ -18,6 +18,10 @@ class Work < ActiveRecord::Base
   before_validation :check_account_work_uniquness, :on => :create
   before_validation :check_contest_actuality, :on => :create
   after_validation :check_agreement_accepted
+
+  validates_presence_of :anketa, :if => :context_anketa_content?
+
+  after_create :send_anketa, :if => :context_email?
 
   friendly_id :title, :use => :scoped, :scope => :type
 
@@ -76,6 +80,18 @@ class Work < ActiveRecord::Base
     errors[:base] << 'Можно добавить только одну работу для конкурса' if context.accounts.include?(account)
 
     true
+  end
+
+  def context_anketa_content?
+    context.anketa_content?
+  end
+
+  def context_email?
+    context.email?
+  end
+
+  def send_anketa
+    AnketaMailer.delay(:queue => :mailer, :retry => false).send_anketa(self)
   end
 end
 
