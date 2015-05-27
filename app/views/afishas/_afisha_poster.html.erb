@@ -1,4 +1,4 @@
-<% cache("afisha#{afisha.id}_#{controller_name}", expires_in: 10.minutes) do %>
+<% cache("afisha_#{afisha.id}_#{controller_name}_#{action_name}", expires_in: 10.minutes) do %>
   <div class='image'>
     <% if afisha.has_available_tickets? && afisha.actual? %>
       <% if afisha.has_tickets_for_sale? && afisha.max_tickets_discount > 0 %>
