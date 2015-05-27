@@ -38,7 +38,7 @@
 
       <% if @contest.anketa_content.present? %>
         <p>Анкета:</p>
-        <%= f.input :anketa, label: false, input_html: { value: @contest.anketa_content, cols: 80, rows: 25 } %>
+        <%= f.input :anketa, label: false, input_html: { value: @work_anketa, cols: 80, rows: 25 } %>
       <% end %>
 
       <div class="agreement_wrapper">

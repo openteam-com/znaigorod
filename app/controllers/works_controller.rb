@@ -7,6 +7,12 @@ class WorksController < ApplicationController
 
   actions :new, :create, :show
 
+  def new
+    new! {
+      @work_anketa = params[:anketa].present? ? params[:anketa] : @work.context.anketa_content if @work.context.anketa_content.present?
+    }
+  end
+
   def create
     create! { @work.context }
   end
