@@ -57,9 +57,7 @@ class ReviewDecorator < ApplicationDecorator
   end
 
   def related_afishas
-    organization_afishas = relations.where(slave_type: 'Organization').map(&:slave).flat_map(&:afisha).delete_if { |afisha| !afisha.actual? }
-    slave_afishas = relations.where(slave_type: 'Afisha').delete_if { |afisha| afisha.slave.blank? || !afisha.slave.actual? }.map(&:slave)
-    @related_afishas = (organization_afishas + slave_afishas).uniq.sort_by(&:last_showing_time)
+    @related_afishas = relations.where(slave_type: 'Afisha').delete_if { |afisha| afisha.slave.blank? || !afisha.slave.actual? }.map(&:slave)
   end
 
   def related_discounts
