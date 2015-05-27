@@ -61,9 +61,9 @@ class ReviewDecorator < ApplicationDecorator
   end
 
   def related_discounts
-    organization_discounts = relations.where(slave_type: 'Organization').map(&:slave).flat_map(&:discounts).delete_if { |discount| !discount.actual? }
-    slave_disounts = relations.where(slave_type: 'Discount').delete_if { |discount| discount.slave.blank? || !discount.slave.actual? }.map(&:slave)
-    @related_discounts = (organization_discounts + slave_disounts).uniq.sort_by(&:created_at)
+    organization_discounts = relations.where(slave_type: 'Organization').map(&:slave).flat_map(&:discounts)
+    slave_disounts = relations.where(slave_type: 'Discount').map(&:slave)
+    @related_discounts = (organization_discounts + slave_disounts).uniq.select { |discount|  discount.actual? && discount.published? }.sort_by(&:created_at)
   end
 
   def related_organizations
