@@ -4,6 +4,9 @@ app:
   port:                 8080
   url:                  http://host.name # without / at the end
 
+  devise:
+    secret:
+
   city:                 sevastopol
   city_ru:              Севастополь
   region_ru:            Севастопольская область
