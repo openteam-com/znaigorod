@@ -4,10 +4,15 @@
       <table class="custom_column_width columns">
         <tr>
           <td>
-            <%= @work.anketa.as_html %>
+            <%= @work.anketa.try(:as_html) %>
           </td>
         </tr>
-      </table>
-    </td>
-  </tr>
+        <tr>
+          <td>
+            Посмотреть работу можно <%= link_to 'здесь', contest_work_url(@work.context, @work) %>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 <% end %>
