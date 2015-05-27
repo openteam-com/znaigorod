@@ -1,58 +1,57 @@
 <% #cache("discount_#{discount.id}_#{params[:page]}_#{controller_name}_#{action_name}_#{params[:id]}", expires_in: 10.minutes) do %>
-<li class="item_wrapper <%= ' highlighted' if discount.highlighted? %> <%= cycle('first', 'second', 'third', 'fourth') %>">
-  <div class="item <%= 'fresh' if controller_name == 'discounts' && action_name != 'show' %>">
-    <div class="info">
-      <%= render :partial => "discounts/#{discount.model.class.name.underscore}_info", :locals => { :discount => discount.model } %>
+  <li class="item_wrapper <%= ' highlighted' if discount.highlighted? %> <%= cycle('first', 'second', 'third', 'fourth') %>">
+    <div class="item <%= 'fresh' if controller_name == 'discounts' && action_name != 'show' %>">
+      <div class="info">
+        <%= render :partial => "discounts/#{discount.model.class.name.underscore}_info", :locals => { :discount => discount.model } %>
+      </div>
+
+      <div class="image">
+        <% if discount.poster_url? %>
+          <%= link_to image_tag(resized_image_url(discount.poster_url, @width, @height), :size => "#{@width}x#{@height}", :title => discount.title.text_gilensize, :alt => discount.title.text_gilensize, :class => 'stub'), discount.smart_path %>
+        <% else %>
+          <%= image_tag('public/stub_poster.png', :size => "#{@width}x#{@height}", :alt => :poster) %>
+        <% end %>
+
+        <%= content_tag(:div, discount.label_url, :class => :origin_url) if discount.supplier.try(:link).present? %>
+
+        <% unless discount.is_a?(AffiliatedCoupon) %>
+          <% if discount.is_a?(OfferedDiscount) %>
+            <%= link_to 'Предложить свою цену', discount.smart_path(:anchor => :offer_price), :class => 'for_sale offer_price', :rel => 'nofollow' %>
+          <% else %>
+            <% if discount.price.nil? || discount.price.zero? %>
+              <%= link_to 'Участвовать', discount.smart_path(:anchor => :buy_ticket), :class => :for_sale, :rel => 'nofollow' %>
+            <% else %>
+              <%= link_to 'Купить', discount.smart_path(:anchor => :buy_ticket), :class => :for_sale, :rel => 'nofollow' %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if discount.price.nil? || discount.price.zero? %>
+            <%= link_to 'Получить', discount.supplier.try(:link), :target => '_blank', :class => :for_sale, :rel => 'nofollow' %>
+          <% else %>
+            <%= link_to 'Купить', discount.supplier.try(:link), :target => '_blank', :class => :for_sale, :rel => 'nofollow' %>
+          <% end %>
+        <% end %>
+
+        <%= link_to discount_path(discount), :class => :details do %>
+          <span class="first_line">
+            <span class="show_tipsy fa fa-users" title="Участники"> <%= discount.members.count %></span>
+            <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= discount.comments.count %></span>
+            <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= discount.likes_count %></span>
+            <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= discount.page_visits.count %></span>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="title">
+        <%= link_to truncate(discount.title.text_gilensize, :length => 45), discount.smart_path, :title => discount.title.text_gilensize %>
+      </div>
+
+      <%= content_tag(:span, '', :class => 'arrow-up show_tipsy', :title => 'Автор хочет обратить внимание на эту скидку') if discount.highlighted? %>
+
+      <div class="place">
+        <%= discount.place_without_map %>
+      </div>
+
     </div>
-
-    <div class="image">
-      <%= link_to image_tag(resized_image_url(discount.poster_url, @width, @height),
-                            :size => "#{@width}x#{@height}",
-                            :title => discount.title.text_gilensize,
-                            :alt => discount.title.text_gilensize,
-                            :class => 'stub'),
-                            discount.smart_path %>
-
-                          <%= content_tag(:div, discount.label_url, :class => :origin_url) if discount.supplier.try(:link).present? %>
-
-                          <% unless discount.is_a?(AffiliatedCoupon) %>
-                            <% if discount.is_a?(OfferedDiscount) %>
-                              <%= link_to 'Предложить свою цену', discount.smart_path(:anchor => :offer_price), :class => 'for_sale offer_price', :rel => 'nofollow' %>
-                            <% else %>
-                              <% if discount.price.nil? || discount.price.zero? %>
-                                <%= link_to 'Участвовать', discount.smart_path(:anchor => :buy_ticket), :class => :for_sale, :rel => 'nofollow' %>
-                              <% else %>
-                                <%= link_to 'Купить', discount.smart_path(:anchor => :buy_ticket), :class => :for_sale, :rel => 'nofollow' %>
-                              <% end %>
-                            <% end %>
-                          <% else %>
-                            <% if discount.price.nil? || discount.price.zero? %>
-                              <%= link_to 'Получить', discount.supplier.try(:link), :target => '_blank', :class => :for_sale, :rel => 'nofollow' %>
-                            <% else %>
-                              <%= link_to 'Купить', discount.supplier.try(:link), :target => '_blank', :class => :for_sale, :rel => 'nofollow' %>
-                            <% end %>
-                          <% end %>
-
-                          <%= link_to discount_path(discount), :class => :details do %>
-                            <span class="first_line">
-                              <span class="show_tipsy fa fa-users" title="Участники"> <%= discount.members.count %></span>
-                              <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= discount.comments.count %></span>
-                              <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= discount.likes_count %></span>
-                              <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= discount.page_visits.count %></span>
-                            </span>
-                          <% end %>
-                        </div>
-
-                        <div class="title">
-                          <%= link_to truncate(discount.title.text_gilensize, :length => 45), discount.smart_path, :title => discount.title.text_gilensize %>
-                        </div>
-
-                        <%= content_tag(:span, '', :class => 'arrow-up show_tipsy', :title => 'Автор хочет обратить внимание на эту скидку') if discount.highlighted? %>
-
-                        <div class="place">
-                          <%= discount.place_without_map %>
-                        </div>
-
-                      </div>
-                    </li>
-                  <%# end %>
+  </li>
+  <%# end %>
