@@ -60,7 +60,7 @@ class Organization < ActiveRecord::Base
   has_many :offered_discounts, :through => :places, :source => :placeable, :source_type => 'Discount', :conditions => { 'discounts.type' => 'OfferedDiscount' }
   has_many :sauna_halls,       :through => :sauna
 
-  has_many :relations, :as => :slave
+  has_many :relations, :as => :slave, :dependent => :destroy
   has_many :reviews, :through => :relations, :source => :master, :source_type => Review
 
   has_one :address,             :dependent => :destroy

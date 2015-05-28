@@ -6,6 +6,12 @@ class Manage::WorksController < Manage::ApplicationController
   belongs_to :contest, :polymorphic => true, :optional => true
   belongs_to :photogallery, :polymorphic => true, :optional => true
 
+  def new
+    new! {
+      @work_anketa = params[:anketa].present? ? params[:anketa] : @work.context.anketa_content if @work.context.anketa_content.present?
+    }
+  end
+
   def create
     create! { [:manage, @work.context] }
   end

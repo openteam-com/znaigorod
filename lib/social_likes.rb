@@ -70,7 +70,7 @@ class SocialLikes
       data = Curl.get("http://graph.facebook.com/?ids=#{url(item)}").body_str
       return unless data.is_json?
       data = JSON.parse(data)
-      like_count = data.try(:[], url(item)).try(:[], 'shares') || 0
+      like_count = (data.try(:[], url(item)).try(:[], 'shares')).to_i || 0
       item_like_count = item.votes.source(:fb).count
       change_votes(item, like_count, item_like_count, :fb)
     end

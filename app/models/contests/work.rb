@@ -83,10 +83,14 @@ class Work < ActiveRecord::Base
   end
 
   def context_anketa_content?
+    return false if context.is_a? Photogallery
+
     context.anketa_content?
   end
 
   def context_email?
+    return false if context.is_a? Photogallery
+
     context.email?
   end
 

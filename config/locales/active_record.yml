@@ -198,6 +198,7 @@ ru:
         sms_counter: Количество смс
         video_url: Ссылка на видео
         code: Уникальный код участника
+        anketa: Анкета
 
       afisha:
         <<: *common_attributes
