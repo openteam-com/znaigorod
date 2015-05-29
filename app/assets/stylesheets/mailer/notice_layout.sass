@@ -32,12 +32,24 @@ p
   line-height: normal !important
   padding-bottom: 0px !important
 
+  &.margin
+    margin: 5px 0 !important
+
+  &.more
+    margin: 10px 0 !important
+
+  &.last
+    margin: 5px 0 15px 0 !important
+
+.bold
+  font-weight: bold !important
+
 h2
   font-size: 18px !important
   padding-left: 19px !important
   padding-top: 10px !important
 
-h2.by_center
+h2.by_center, p.by_center
   text-align: center !important
 
 #main
@@ -233,3 +245,31 @@ span
 
     span
       padding: 3px 3px 3px 3px
+
+/* for discounts archive */
+td
+  &.image
+    width: 100px
+    height: 100px
+
+  &.link
+    a
+      color: #000
+      font-weight: bold
+tr
+  &.hr
+    display: block !important
+    border-bottom: 1px solid #000 !important
+    margin-bottom: 15px !important
+
+.btn
+  display: block !important
+  padding: 5px 10px !important
+  color: #fff !important
+
+  &.orange
+    background: #f93 !important
+    border: 1px solid #ee8924 !important
+
+  &.inline
+    display: inline-block !important

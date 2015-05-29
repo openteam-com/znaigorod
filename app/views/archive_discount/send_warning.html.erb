@@ -3,25 +3,53 @@
     <td class="padding_center">
       <table class="custom_column_width columns">
         <tr>
-          <h2 class="by_center">
-            Уважаемый(ая) <%= @account.first_name %>  <%= @account.last_name %>, через 3 дня Ваши скидки будут перемещены в архив.
-          </h2>
+          <p class='margin'>
+            Здравствуйте, <span class='bold'><%= @account.title %>!</span>
+          </p>
         </tr>
-        <tr>
-          <ul>
-            <% @discounts.each do |discount| %>
-              <li>
-                <%= link_to discount.title, discount_url(discount) %>
-              </li>
-            <% end %>
-          </ul>
-          <div>Для того чтобы Ваша скидка не оказалась в архиве, Вы можете воспользоваться услугой поднятия скидки за 30 рублей. Ваша скидка будет размещена вверху списка скидок и сутки будет выделена. <%= link_to 'Поднять скидку', my_discounts_url %></div>
-          <div>Также Вы можете воспользоваться дополнительными услугами привлечения внимания к скидке:</div>
-          <div>Закрепление скидки/купона/сертификата на главной странице – 100 рублей в сутки.</div>
-          <div>Закрепление скидки/купона/сертификата в правой части раздела – 300 рублей в сутки.</div>
-          <div>По вопросам обращайтесь к нашим менеджерам <%= mail_to 'discounts@znaigorod.ru' %> или по телефону +7-913-111-83-87.</div>
-          <div>С Уважением, администрация портала ЗнайГород <%= link_to 'http://znaigorod.ru', 'http://znaigorod.ru' %></div>
-        </tr>
+        <p class='margin'>
+          Каждый день на портале ЗнайГород появляется от 10 новых объявлений. Поэтому ваше объявление глубоко опустилось в списке акций и результатов поиска.
+        </p>
+        <p class='margin'>
+          Через 3 дня ваша акция будет перемещена в архив и не будет доступна пользователям.
+        </p>
+
+        <hr />
+
+        <% @discounts.each do |discount| %>
+          <tr class='hr'>
+            <td class='image'>
+              <%= link_to (image_tag resized_image_url(discount.poster_image_url, 90,90), :size => "90x90"), discount_url(discount) %>
+            </td>
+
+            <td class='link'>
+              <%= link_to discount.title, discount_url(discount) %>
+
+              <p class='bold margin'>
+                <%= link_to 'Поднять скидку', discount_promote_discount_payments_url(discount), :class => [:btn, :orange, :inline], :method => :post %>
+              </p>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <table>
+        <p class='bold margin'>Как вернуть акцию на видное место?</p>
+        <p class='margin'>
+          Воспользуйтесь услугой поднятия скидки.
+        </p>
+
+        <p class='margin'>
+          Она будет находиться вверху списка и сутки выделена цветом. Срок размещения объявления будет продлён ещё на 60 дней.
+        </p>
+
+        <p class='margin'>
+          Также Вы можете бесплатно подтвердить, что акция еще актуальна, нажав на кнопку “Актуализировать” в личном кабинете. Но в таком случае она останется внизу списка выдачи.
+        </p>
+
+        <p class='margin last'>
+          Это письмо сгенерировано роботом, отвечать на него не нужно.
+        </p>
       </table>
     </td>
   </tr>
