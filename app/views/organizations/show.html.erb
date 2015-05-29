@@ -35,7 +35,7 @@
 
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
 
-    <% if @organization.navigation_collection.any? %>
+    <% if @organization.navigation_collection.any? && @organization.client? %>
       <div class="organization_show_navs js-menu-sidebar">
         <ul>
           <% @organization.navigation_collection.each do |key, value| %>
