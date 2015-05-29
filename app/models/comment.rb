@@ -15,6 +15,8 @@ class Comment < ActiveRecord::Base
   has_many  :reviews
   has_many  :photogalleries
 
+  after_create :send_new_comment, :if => :organization?
+
   accepts_nested_attributes_for :comments_images
 
   scope :rendereable,  -> { where(:commentable_type => ['Afisha', 'Organization']) }
@@ -47,6 +49,14 @@ class Comment < ActiveRecord::Base
     znaigorod_link :target => "_blank", :rel => 'nofollow'
     external_links_attributes
     external_links_redirect
+  end
+
+  def organization?
+    commentable.is_a? Organization && commentable.email?
+  end
+
+  def send_new_comment
+    OrganizationMailer.delay(:queue => :mailer, :retry => false).new_comment(self)
   end
 
   private

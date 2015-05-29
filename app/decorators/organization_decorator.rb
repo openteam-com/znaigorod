@@ -25,6 +25,14 @@ class OrganizationDecorator < ApplicationDecorator
       organization_url) if organization.logotype_url?
   end
 
+  def logotype_url(width = 178, height = 178)
+    if organization.logotype_url?
+      h.image_tag(h.resized_image_url(organization.logotype_url, width, height), size: "#{width}x#{height}", alt: title)
+    else
+      h.image_tag(h.asset_path('public/organization_stub_poster_kind_big.jpg'), size: "#{width}x#{height}", alt: title)
+    end
+  end
+
   def truncated_address_link(need_city = true)
     return "" if address.to_s.blank?
     address = organization.address

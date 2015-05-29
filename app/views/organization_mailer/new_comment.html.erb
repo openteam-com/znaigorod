@@ -1,0 +1,24 @@
+<% content_for :content do %>
+  <tr class="solid_border">
+    <td class="padding_center">
+      <table class="custom_column_width columns">
+        <tr>
+          <td style='width: 100; height: 100px'>
+            <%= link_to @organization.logotype_url(90, 90), organization_url(@organization) %>
+          </td>
+          <td>
+            К Вашему заведению "<%= link_to @organization.title, organization_url(@organization) %>" оставили новый отзыв:
+            <br /> <br />
+            <div style='font-size: 12px; border-left: 20px solid #fff'>
+              <%= link_to @account.title, account_url(@account) %>:
+            </div>
+
+            <div style='font-size: 12px; border-left: 25px solid #fff'>
+              <%= @comment.body %>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+<% end %>

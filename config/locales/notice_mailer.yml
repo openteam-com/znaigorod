@@ -64,3 +64,5 @@ ru:
     archive_discount_description: 'Ваша скидка может быть перемещена в архив'
     anketa: 'Новая анкета'
     anketa_description: 'Добавлена новая анкета'
+    new_organization_comment: 'Новый отзыв'
+    new_organization_comment_description: ''
