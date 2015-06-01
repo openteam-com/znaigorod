@@ -5,7 +5,7 @@
     <%= f.input :author_info %>
     <%= render :partial => "#{@work.context.type_without_prefix}_field", :locals => { :f => f } %>
 
-    <% if @work.context.anketa_content.present? %>
+    <% if @work.is_contest_work? && @work.context.anketa_content.present? %>
       <%= f.input :anketa, input_html: { value: @work_anketa, cols: 80, rows: 25 } %>
     <% end %>
 
@@ -19,4 +19,3 @@
     </div>
   <% end %>
 </div>
-

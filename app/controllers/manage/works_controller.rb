@@ -8,7 +8,7 @@ class Manage::WorksController < Manage::ApplicationController
 
   def new
     new! {
-      @work_anketa = params[:anketa].present? ? params[:anketa] : @work.context.anketa_content if @work.context.anketa_content.present?
+      @work_anketa = params[:anketa].present? ? params[:anketa] : @work.context.anketa_content if @work.is_contest_work? && @work.context.anketa_content.present?
     }
   end
 

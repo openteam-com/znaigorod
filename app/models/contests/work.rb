@@ -60,6 +60,10 @@ class Work < ActiveRecord::Base
     update_attribute :rating, 1 * votes.liked.count + 0.01 * page_visits.count
   end
 
+  def is_contest_work?
+    context.is_a? Contest
+  end
+
   private
 
   def check_contest_actuality

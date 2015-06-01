@@ -10,7 +10,7 @@ class MainPageController < ApplicationController
 
     @organizations     = NewOrganizationsPresenter.new({})
 
-    @discounts           = DiscountsPresenter.new(:type => 'coupon', :per_page => 5).decorated_collection
+    @discounts           = DiscountsPresenter.new(:type => ['coupon', 'certificate'], :per_page => 5).decorated_collection
     advertisement = Advertisement.new(list: 'main_page_discounts')
     advertisement.places_at(1).compact.each do |adv|
       @discounts[adv.position] = adv
