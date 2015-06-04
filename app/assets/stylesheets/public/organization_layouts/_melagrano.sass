@@ -1,0 +1,165 @@
+.melagrano_content_wrapper
+  +background(image_url('public/melagrano/background.jpg') no-repeat center top #ffedce)
+  $border_background_color: #fff
+  $border_color: #ffe6ba
+  $title_color: #ffdea3
+  $title_text_color: #000
+  $label_color: #eb5f58
+
+  .melagrano_logo
+    width: 1200px
+    height: 110px
+    margin: 0 auto
+
+  .content_wrapper
+    +background(rgba(#fff6e6, .7))
+    +border-top-right-radius(5px)
+    +border-top-left-radius(5px)
+    color: #000
+
+    a
+      color: #439ad3
+
+    .left
+      .image
+        border: 1px solid $border_color
+        margin: 0
+        border-bottom: 0
+
+      .social_actions
+        border: 1px solid $border_color
+        border-top: 0
+        width: 208px
+
+        .user_actions
+          border-bottom: 1px solid $border_color
+          padding: 7px 5px
+
+        .visits_counter
+
+          .floatr
+            color: #000
+
+        .visitors
+          li
+            &:first-child
+              border: 0
+
+    .center
+      .photogallery
+        .title
+          margin: 0 0 10px
+
+      .sections_info
+        .title
+          color: $title_text_color
+          margin: 20px 0 10px
+          background-color: $title_color
+
+          h2
+            background-color: $label_color
+            color: #fff
+
+            &:after
+              border-left-color: $label_color
+
+        .section_page
+          border-bottom: 1px solid #c1001c
+
+        .divider
+          display: none
+
+        .info
+          h2
+            color: $title_text_color
+
+          .section_content
+            tr, td, th
+              border: 1px solid $border_color
+
+            td
+              &:first-child
+                width: 85%
+
+              &:last-child
+                width: auto
+
+            th
+              font-weight: bold
+              color: #000
+
+            span.delimiter
+              color: #0168ca !important
+              border: none !important
+
+      .suborganization_info
+        .title
+          background-color: $title_color
+          color: $title_text_color
+
+          .link
+            a
+              color: #0168ca
+
+        .discount_content
+          .item
+            .info
+              .discount, .coupon
+                strong
+                  color: #000
+
+            .title
+              background-color: #fff
+
+        &.related-reviews
+          .item
+            .annotation
+              color: #000
+
+      .comments
+        h3
+          background-color: $title_color
+          color: $title_text_color
+
+        .body
+          p
+            color: black
+
+      div.title
+        background-color: $title_color
+
+      .services
+        table
+          background-color: #fff
+
+        .details
+          .detail
+            .title
+              background: none
+
+      .share_and_likes
+        border-bottom: 1px solid $border_color
+
+        .share
+          .title
+            background-color: transparent
+
+    .right
+      border: 1px solid $border_color
+      width: 203px
+      padding: 5px
+
+      .wrapper
+        border: 0
+
+        .more_like_this
+          +background(transparent)
+          border-top: 1px solid $border_color
+          margin: 6px -5px -5px
+
+        .certificates
+          .posters
+            .item
+              .coupon
+                strong
+                  color: #000
