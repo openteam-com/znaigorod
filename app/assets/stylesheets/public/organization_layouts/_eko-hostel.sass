@@ -1,8 +1,9 @@
 .eko-hostel_content_wrapper
-  +background(image_url('public/eko-hostel/background.jpg') no-repeat center top linear-gradient(top, #bad00e, #56902a))
+  +background(image_url('public/eko-hostel/background.png') no-repeat center top, linear-gradient(top, #bad00e, #56902a))
   $border_background_color: #fff
-  $border_color: #c1001c
-  $title_color: #fccfe7
+  $border_color: #b0b32f
+  $title_color: #c4c847
+  $label_color: #b1b430
 
   .eko-hostel_logo
     width: 1200px
@@ -10,10 +11,10 @@
     margin: 0 auto
 
   .content_wrapper
-    +background(rgba(#d9e79d, 1))
+    +background(linear-gradient(top, #e0e2a5, #b4c6a2))
     +border-top-right-radius(5px)
     +border-top-left-radius(5px)
-    color: #fff
+    color: #000
 
     a
       color: #439ad3
@@ -43,35 +44,24 @@
             &:first-child
               border: 0
 
-      .organization_show_navs
-        ul
-          li
-            background-color: #fff
-            margin: 5px 0
-
-            a
-              display: block
-              color: #000
-              font-size: 12px
-              border-left: none
-              border: 2px solid transparent
-              padding: 5px 0 5px 5px
-
-            &:hover > a,
-            a.active
-              color: #ff5500
-              text-decoration: none
-              border-left-color: none
-              border: 2px solid #f16231
-
-            li a
-              font-size: 11px
-              padding-left: 15px
-
     .center
       .photogallery
         .title
           margin: 0 0 10px
+
+      .room_info
+        .room_header
+          background-color: $title_color
+
+          .left
+            .title
+              background-color: $label_color
+
+              &:after
+                border-left-color: $label_color
+
+          .right
+            border: none
 
       .sections_info
         .title
@@ -80,10 +70,10 @@
           background-color: $title_color
 
           h2
-            background-color: #a30009
+            background-color: $label_color
 
             &:after
-              border-left-color: #a30009
+              border-left-color: $label_color
 
         .section_page
           border-bottom: 1px solid #c1001c
@@ -93,11 +83,11 @@
 
         .info
           h2
-            color: #fff
+            color: #000
 
           .section_content
             tr, td, th
-              border: 1px solid #c1001c
+              border: 1px solid $border_color
 
             td
               &:first-child
@@ -107,14 +97,14 @@
                 width: auto
 
             th
-              font-weight: normal
-              color: #81817f
+              font-weight: bold
+              color: #000
 
 
       .suborganization_info
         .title
-          background-color: #be001c
-          color: #fff
+          background-color: $title_color
+          color: #000
 
         .discount_content
           .item
@@ -133,7 +123,7 @@
 
       .comments
         h3
-          background-color: #be001c
+          background-color: $title_color
 
         .body
           p
