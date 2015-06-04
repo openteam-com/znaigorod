@@ -1,0 +1,179 @@
+.eko-hostel_content_wrapper
+  +background(image_url('public/eko-hostel/background.jpg') no-repeat center top linear-gradient(top, #bad00e, #56902a))
+  $border_background_color: #fff
+  $border_color: #c1001c
+  $title_color: #fccfe7
+
+  .eko-hostel_logo
+    width: 1200px
+    height: 110px
+    margin: 0 auto
+
+  .content_wrapper
+    +background(rgba(#d9e79d, 1))
+    +border-top-right-radius(5px)
+    +border-top-left-radius(5px)
+    color: #fff
+
+    a
+      color: #439ad3
+
+    .left
+      .image
+        border: 1px solid $border_color
+        margin: 0
+        border-bottom: 0
+
+      .social_actions
+        border: 1px solid $border_color
+        border-top: 0
+        width: 208px
+
+        .user_actions
+          border-bottom: 1px solid $border_color
+          padding: 7px 5px
+
+        .visits_counter
+
+          .floatr
+            color: #fff
+
+        .visitors
+          li
+            &:first-child
+              border: 0
+
+      .organization_show_navs
+        ul
+          li
+            background-color: #fff
+            margin: 5px 0
+
+            a
+              display: block
+              color: #000
+              font-size: 12px
+              border-left: none
+              border: 2px solid transparent
+              padding: 5px 0 5px 5px
+
+            &:hover > a,
+            a.active
+              color: #ff5500
+              text-decoration: none
+              border-left-color: none
+              border: 2px solid #f16231
+
+            li a
+              font-size: 11px
+              padding-left: 15px
+
+    .center
+      .photogallery
+        .title
+          margin: 0 0 10px
+
+      .sections_info
+        .title
+          color: #fff
+          margin: 20px 0 10px
+          background-color: $title_color
+
+          h2
+            background-color: #a30009
+
+            &:after
+              border-left-color: #a30009
+
+        .section_page
+          border-bottom: 1px solid #c1001c
+
+        .divider
+          display: none
+
+        .info
+          h2
+            color: #fff
+
+          .section_content
+            tr, td, th
+              border: 1px solid #c1001c
+
+            td
+              &:first-child
+                width: 85%
+
+              &:last-child
+                width: auto
+
+            th
+              font-weight: normal
+              color: #81817f
+
+
+      .suborganization_info
+        .title
+          background-color: #be001c
+          color: #fff
+
+        .discount_content
+          .item
+            .info
+              .discount, .coupon
+                strong
+                  color: #000
+
+            .title
+              background-color: #fff
+
+        &.related-reviews
+          .item
+            .annotation
+              color: #000
+
+      .comments
+        h3
+          background-color: #be001c
+
+        .body
+          p
+            color: black
+
+      div.title
+        background-color: $title_color
+
+      .services
+        table
+          background-color: #fff
+
+        .details
+          .detail
+            .title
+              background: none
+
+      .share_and_likes
+        border-bottom: 1px solid $border_color
+
+        .share
+          .title
+            background-color: transparent
+
+    .right
+      border: 1px solid $border_color
+      width: 203px
+      padding: 5px
+
+      .wrapper
+        border: 0
+
+        .more_like_this
+          +background(transparent)
+          border-top: 1px solid $border_color
+          margin: 6px -5px -5px
+
+        .certificates
+          .posters
+            .item
+              .coupon
+                strong
+                  color: #000
