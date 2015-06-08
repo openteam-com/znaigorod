@@ -1,13 +1,7 @@
-<% unless Time.zone.now > Time.zone.parse('01.01.2001') %>
+<div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <% unless params[:id] == 'delay-super-selfi-s-monopodom-dlya-smartfona' %>
-      <li class='js-banner selfi-monopode'>
-        <%= link_to (image_tag 'public/banners/monopode_banner.jpg', size: '880x80'), '/away?to=http://selfie.znaigorod.ru/', target: '_blank', class: 'js-stat-monopode' %>
-      </li>
-    <% end %>
-
-    <li class='js-banner zg-talants'>
-      <%= link_to (image_tag 'public/banners/banner_zg_talants.png', :size => '880x80', :alt => 'ЗнайГород ищет таланты!'), '/reviews/2015-03/znaygorod-ischet-talanty', target: '_blank', class: 'js-stat-zg-talants' %>
+    <li class='js-banner selfi-monopode'>
+      <%= image_tag 'public/banners/banner_1_2_prokat.png', size: '880x73' %>
     </li>
   </ul>
-<% end %>
+</div>
