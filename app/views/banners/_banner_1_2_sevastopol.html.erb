@@ -1,7 +1,7 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <li class='js-banner selfi-monopode'>
-      <%= image_tag 'public/banners/banner_1_2_prokat.png', size: '880x73' %>
+    <li class='js-banner banner-prokat'>
+      <%= link_to (image_tag 'public/banners/banner_1_2_prokat.png', size: '880x73'), 'http://vk.com/prokat_velosipedov_v_sevastopole', :target => '_blank', :class => 'js-stat-banner-prokat' %>
     </li>
   </ul>
 </div>
