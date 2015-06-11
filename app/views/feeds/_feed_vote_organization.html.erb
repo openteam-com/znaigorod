@@ -5,7 +5,7 @@
     <% end %>
   <% else %>
     <%= link_to feed_vote_organization.feedable.voteable do %>
-      <%= content_tag( :span, "",:class => "stub_poster " + feed_vote_organization.feedable.voteable.priority_suborganization_kind.first)  %>
+      <%= content_tag( :span, "",:class => "stub_poster")  %>
     <% end %>
   <% end %>
 </div>
