@@ -3,7 +3,7 @@
     <% if feed_visit_organization.feedable.visitable.logotype_url? %>
       <%= image_tag(resized_image_url(feed_visit_organization.feedable.visitable.logotype_url, 100 , 100 ), :size => '100x100', :alt => feed_visit_organization.feedable.visitable.title) %>
     <% else %>
-      <%= link_to content_tag( :span, "",:class => "stub_poster " + feed_visit_organization.feedable.visitable.priority_suborganization_kind.first) %>
+      <%= link_to content_tag(:span, "", :class => "stub_poster") %>
     <% end %>
   <% end %>
 </div>
