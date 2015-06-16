@@ -5,11 +5,5 @@
         <%= link_to (image_tag 'public/banners/banner-miss-ofis.jpg', size: '880x80'), contest_path('miss-ofis-2015'), class: 'js-stat-miss-ofis' %>
       </li>
     <% end %>
-
-    <% unless params[:id] == 'strana-skazok' %>
-      <li class='js-banner strana-skazok-banner'>
-        <%= link_to (image_tag 'public/banners/banner-1.2-strana-skazok.jpg', size: '880x80'), contest_path('strana-skazok'), class: 'js-stat-strana-skazok' %>
-      </li>
-    <% end %>
   </ul>
 </div>
