@@ -128,5 +128,6 @@ end
 #  type               :string(255)
 #  video_content      :text
 #  sms_counter        :integer          default(0)
+#  anketa             :text
 #
 

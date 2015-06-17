@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150527031458) do
+ActiveRecord::Schema.define(:version => 20150617043151) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -760,7 +760,6 @@ ActiveRecord::Schema.define(:version => 20150527031458) do
     t.datetime "positive_activity_date"
     t.text     "og_description"
     t.text     "og_title"
-    t.integer  "phone_show_counter",            :default => 0
     t.integer  "site_link_counter",             :default => 0
     t.string   "photo_block_title",             :default => "Фото"
     t.string   "discounts_block_title",         :default => "Скидки"
@@ -844,6 +843,18 @@ ActiveRecord::Schema.define(:version => 20150527031458) do
   add_index "payments", ["paymentable_type"], :name => "index_payments_on_paymentable_type"
   add_index "payments", ["type"], :name => "index_payments_on_type"
   add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
+
+  create_table "phone_lookups", :force => true do |t|
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "phone_visits", :force => true do |t|
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "photogalleries", :force => true do |t|
     t.string   "title"

@@ -31,7 +31,7 @@
           </li>
           <li class='phone_show'>
             <strong>Количество просмотров телефона:</strong>
-            <%= @organization.phone_show_counter %>
+            <%= @organization.phone_lookups.count %>
           </li>
           <% if @organization.site.present? %>
             <li class='site'>

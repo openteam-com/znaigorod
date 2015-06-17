@@ -51,7 +51,7 @@ class Manage::Statistics::InvitationsController < Manage::ApplicationController
     @comments = Comment.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
     @invitation_states = Invitation.without_invited.where('invitations.created_at >= ? and invitations.created_at <= ?', @starts_at, @ends_at)
 
-    @organization_show_phones = Organization.all.map(&:phone_show_counter).sum
+    @organization_show_phones = PhoneLookup.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at).count
   end
 end
 

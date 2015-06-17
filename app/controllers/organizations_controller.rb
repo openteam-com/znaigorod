@@ -153,9 +153,9 @@ class OrganizationsController < ApplicationController
   def show_phone
     if request.xhr?
       organization = Organization.find(params[:organization_id])
-      organization.increment!(:phone_show_counter)
+      organization.phone_lookups.delay.create!
       phone = params[:single_phone] ? "Тел.: #{organization.phone.split(',').try(:first)}" : "Телефон: #{organization.phone}"
-      render text: phone.html_safe
+      render text: phone.html_safe and return
     else
       render :nothing => true, :status => 200 and return
     end

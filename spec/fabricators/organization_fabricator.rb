@@ -43,7 +43,6 @@ end
 #  positive_activity_date        :datetime
 #  og_description                :text
 #  og_title                      :text
-#  phone_show_counter            :integer          default(0)
 #  site_link_counter             :integer          default(0)
 #  photo_block_title             :string(255)      default("Фото")
 #  discounts_block_title         :string(255)      default("Скидки")

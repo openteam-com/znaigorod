@@ -100,5 +100,6 @@ end
 #  position                   :integer          default(1)
 #  afisha_kind                :text
 #  show_on_main_page          :boolean
+#  afisha_per_page            :integer          default(1000)
 #
 

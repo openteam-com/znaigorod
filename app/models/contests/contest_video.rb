@@ -35,5 +35,7 @@ end
 #  default_sort          :string(255)      default("by_id")
 #  new_work_text         :string(255)      default("Добавить фотографию")
 #  placeholder           :text
+#  email                 :string(255)
+#  anketa_content        :text
 #
 

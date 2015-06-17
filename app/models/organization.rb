@@ -44,6 +44,7 @@ class Organization < ActiveRecord::Base
   has_many :invitations,            :dependent => :destroy, :as => :inviteable
   has_many :organizations
   has_many :page_visits,            :dependent => :destroy, :as => :page_visitable
+  has_many :phone_lookups,          :dependent => :destroy
   has_many :places
   has_many :schedules,              :dependent => :destroy
   has_many :showings,               :dependent => :destroy
@@ -436,7 +437,6 @@ end
 #  positive_activity_date        :datetime
 #  og_description                :text
 #  og_title                      :text
-#  phone_show_counter            :integer          default(0)
 #  site_link_counter             :integer          default(0)
 #  photo_block_title             :string(255)      default("Фото")
 #  discounts_block_title         :string(255)      default("Скидки")
