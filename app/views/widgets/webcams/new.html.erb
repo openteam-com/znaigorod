@@ -27,21 +27,23 @@
       </div>
     </div>
     <div class='widget_wrapper'>
+      <h1>Камеры временно недоступны</h1>
       <%= simple_form_for :widget, :url => new_widgets_webcam_path, :method => :get do |f| %>
         <%= f.input :webcam_id,
           :as => :select,
           :collection => Webcam.our.published.to_a.insert(0, Webcam.new(:title => 'Случайная камера')),
           :include_blank => false,
-          :label => 'Камера' %>
+          :label => 'Камера',
+          :input_html => { :disabled => true } %>
         <%= f.input :width, :as => :integer, :label => 'Ширина' %>
         <div class='submit'>
-          <%= f.button :submit, 'Сгенерировать', class: :button %>
+          <%= f.button :submit, 'Сгенерировать', class: :button, :disabled => true %>
           <%= link_to 'Отмена', widgets_root_path %>
         </div>
       <% end %>
 
-      <h1>Как будет отображаться на сайте</h1>
-      <%= render :partial => 'embded_code', :locals => {:widget => @widget} %>
+      <!-- <h1>Как будет отображаться на сайте</h1> -->
+      <%#= render :partial => 'embded_code', :locals => {:widget => @widget} %>
       <h1>Код для вставки на сайт</h1>
       <div class='simple_form'>
         <%= text_area_tag 'code', @widget.embded_code, :class => 'input', :rows => 8, :cols => 100 %>
