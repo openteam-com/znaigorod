@@ -12,7 +12,7 @@ module OpenGraphMeta
   end
 
   def object_image
-    h.resized_image_url(poster_url, 180, 242) || h.resized_image_url('http://storage.znaigorod.ru/files/331540/128-128/logotype.png', 180, 242)
+    h.resized_image_url(poster_url, 180, 242) || h.resized_image_url('http://storage.znaigorod.ru/files/347546/150-150/organization_stub_poster_kind_big.jpg', 180, 242)
   end
 
   def meta_keywords
