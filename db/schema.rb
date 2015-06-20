@@ -850,12 +850,6 @@ ActiveRecord::Schema.define(:version => 20150617043151) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "phone_visits", :force => true do |t|
-    t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "photogalleries", :force => true do |t|
     t.string   "title"
     t.string   "slug"
