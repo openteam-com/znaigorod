@@ -1,4 +1,7 @@
 .new_feature
+  position: relative
+  background: #fff
+  margin-top: 10px
 
   .top_headline
     background: #019bdb
@@ -9,6 +12,18 @@
     margin: 10px 0 0 0
     position: relative
     text-align: center
+
+    > li
+      +clearfix
+      display: none
+      height: 80px
+      width: 1200px
+      position: absolute
+      top: 0
+      left: 0
+
+      &:first-child
+        display: block
 
     a
       color: #fff
@@ -28,7 +43,9 @@
 
     &.news, &.questions, &.banner
       +clearfix
-      height: auto
+      height: 80px
+      width: 1200px
+      margin: 0 auto
       background-color: #fff
 
       a

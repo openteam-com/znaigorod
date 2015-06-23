@@ -1,5 +1,4 @@
 @init_banners_shuffle = ->
-
   return if $('.banner12 li').length < 2
 
   $('.banner12').shuffle()
