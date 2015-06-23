@@ -33,12 +33,15 @@ namespace :organization do
     organizations = Organization.search { with :status, [:client_economy] }.results
     bar = ProgressBar.new(organizations.count)
     organizations.each do |organization|
-      if organization.positive_activity_date && (organization.positive_activity_date < Time.zone.now - 1.month)
+      unless organization.positive_activity_date
         organization.update_attribute :positive_activity_date, Time.zone.now
+      else
+        if organization.positive_activity_date < Time.zone.now - 1.month
+          organization.update_attribute :positive_activity_date, Time.zone.now
+        end
       end
 
       bar.increment!
     end
   end
 end
-
