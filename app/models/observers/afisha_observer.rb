@@ -29,7 +29,7 @@ class AfishaObserver < ActiveRecord::Observer
   def before_save(afisha)
     if afisha.published? && afisha.change_versionable? && !afisha.user.roles.any?
       afisha.save_version
-      MyMailer.delay(:queue => 'mailer').send_afisha_diff(afisha.versions.last) if afisha.versions.last.present?
+      MyMailer.delay(:queue => 'mailer', :retry => false).send_afisha_diff(afisha.versions.last) if afisha.versions.last.present?
     end
   end
 
