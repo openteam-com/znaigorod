@@ -334,7 +334,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def reindex_showings
-    showings.actual.map(&:index)
+    showings.actual.map(&:index!)
   end
 
   def ignore_fields
