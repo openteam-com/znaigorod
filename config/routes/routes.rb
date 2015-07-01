@@ -116,6 +116,7 @@ Znaigorod::Application.routes.draw do
 
   resources :webcams, :only => [:index, :show]
 
+  match '/' => redirect {|p, req| "#{req.url.sub(req.subdomain+'.', 'sevastopol.')}organizations/#{Organization.find_by_subdomain('hochusushi').slug}"}, :constraints => lambda{|r| r.subdomain.present? && r.subdomain.sub('.sevastopol', '') == 'hochusushi' }
   match '/' => redirect {|p, req| "#{req.url.sub(req.subdomain+'.', '')}organizations/#{Organization.find_by_subdomain(req.subdomain).slug}"}, :constraints => lambda{|r| r.subdomain.present? && Organization.pluck(:subdomain).uniq.delete_if{|s| s.nil? || s.blank?}.include?(r.subdomain) }
 
   match "/auth/:provider/callback" => "manage/sessions#create"
