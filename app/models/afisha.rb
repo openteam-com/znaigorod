@@ -450,9 +450,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def self.new_afisha_url
-    [ ["child", "deti"], ["movie", "kinoafisha"], ["concert", "concerts"], ["party", "vecherinki"], ["spectacle", "afisha-teatrov"],
-      ["exhibition", "vystavki"], ["training", "treningi-i-kursy"], ["masterclass", "masterclasses"], ["sportsevent", "sportsevents"],
-      ["competition", "konkursy"], ["other", "others"], ["excursions", "ekskursii_sevastopolja"] ]
+    AfishaKind.new.send("#{Settings["app.city"]}_url")
   end
 end
 
