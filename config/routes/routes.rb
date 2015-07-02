@@ -138,4 +138,6 @@ Znaigorod::Application.routes.draw do
   root :to => 'main_page#show'
 
   put '/ali.txt' => redirect('http://alihack.com')
+
+  get "/404", :to => "errors#not_found"
 end
