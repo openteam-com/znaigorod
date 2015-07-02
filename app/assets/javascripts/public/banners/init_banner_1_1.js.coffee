@@ -3,13 +3,13 @@
 
   $('.js-banner').shuffle()
 
-  setInterval ->
-    $('.js-banner li:nth-child(1)').fadeOut 'fast'
-    $('.js-banner li:nth-child(2)').fadeIn 'fast', ->
-      $('.js-banner').append($('.js-banner li:nth-child(1)'))
-      return
+  #setInterval ->
+    #$('.js-banner li:nth-child(1)').fadeOut 'fast'
+    #$('.js-banner li:nth-child(2)').fadeIn 'fast', ->
+      #$('.js-banner').append($('.js-banner li:nth-child(1)'))
+      #return
 
-    return
-  , 10000
+    #return
+  #, 10000
 
   return
