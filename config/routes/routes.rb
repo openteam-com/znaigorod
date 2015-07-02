@@ -140,4 +140,5 @@ Znaigorod::Application.routes.draw do
   put '/ali.txt' => redirect('http://alihack.com')
 
   get "/404", :to => "errors#not_found"
+  get "/500", :to => "errors#internal_error"
 end

@@ -10,12 +10,12 @@
 <body class="error">
   <div class="promo_wrapper">
     <div class="promo">
-      <a href="/afisha?has_tickets=true">Неприлично дешевые билеты на все развлечения Томска! Купи в 2 клика! Только на сайте znaigorod.ru</a>
+      <a href="/afisha?has_tickets=true">Неприлично дешевые билеты на все развлечения <%= current_city_declension %>! Купи в 2 клика! Только на сайте <%= Settings['app.host'] %></a>
     </div>
   </div>
   <div class="header_wrapper">
     <div class="header">
-      <div class="logo"><a href="/">Афиша Томска, заведения и мероприятия - ЗнайГород</a></div>
+      <div class="logo"><a href="/">Афиша <%= current_city_declension %>, заведения и мероприятия - ЗнайГород</a></div>
       <div class="tomsk">
         <%= Settings['app.city_ru'] %>
       </div>
@@ -43,16 +43,16 @@
       <div class="contacts">
         <h5>Как с нами связаться</h5>
         <ul>
-          <li>Информацию о предстоящих событиях присылайте на <a href="mailto:afisha@znaigorod.ru">afisha@znaigorod.ru</a></li>
-          <li>Чтобы ваше заведение появилось в каталоге, отправьте письмо на <a href="mailto:info@znaigorod.ru">info@znaigorod.ru</a></li>
-          <li>Если хотите сотрудничать с нами, напишите на <a href="mailto:office@znaigorod.ru">office@znaigorod.ru</a></li>
-          <li class="telephone">+7-909-548-5422</li>
+          <%= render :partial => "footer_content_#{Settings['app.city']}" %>
+          <li class='telephone'>
+            <%= t("services.#{Settings['app.city']}.phone") %>
+          </li>
         </ul>
       </div>
       <div class="our_social_link">
         <h5>Мы в социальных сетях</h5>
         <ul>
-          <li class="vk"><a href="http://vk.com/znaigorod" title="ВКонтакте" target="_blank">vk.com/znaigorod</a></li>
+          <li class='vk'><a href='<%= AwayLink.to(Settings['app.socials.vk.link']) %>' rel='nofollow' title='ВКонтакте' target='_blank'><%= Settings['app.socials.vk.url'] %></a></li>
           <li class="fb"><a href="https://www.facebook.com/znai.gorod" title="Facebook" target="_blank">facebook.com/znai.gorod</a></li>
           <li class="odnoklassniki"><a href="http://odnoklassniki.ru/group/54186972610564" title="Одноклассники" target="_blank">odnoklassniki.ru</a></li>
           <li class="twitter"><a href="http://twitter.com/znaigorod" title="Twitter" target="_blank">twitter.com/znaigorod</a></li>
