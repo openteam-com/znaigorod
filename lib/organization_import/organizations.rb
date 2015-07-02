@@ -83,7 +83,7 @@ module OrganizationImport
       hash = {}
       pb = ProgressBar.new(Organization.count)
       Organization.find_each do |org|
-        results = Organization.search { keywords(org.title) }.results
+        results = Organization.search { keywords(org.gis_title) }.results
           .delete_if { |o| o == org }
           .delete_if { |o| !address_matched?(o, org) }
         hash[org] = results if results.any?
@@ -91,10 +91,10 @@ module OrganizationImport
       end
 
       hash.each do |key, value|
-        puts "#{key.title}; #{key.address}; http://znaigorod.ru/manage/organizations/#{key.slug};"
+        puts "#{key.gis_title}; #{key.address}; http://znaigorod.ru/manage/organizations/#{key.slug};"
         puts "Возможные совпадения;"
         value.each do |org|
-          puts "#{org.title}; #{org.address}; http://znaigorod.ru/manage/organizations/#{org.slug};"
+          puts "#{org.gis_title}; #{org.address}; http://znaigorod.ru/manage/organizations/#{org.slug};"
         end
         puts "<<<<<<<<<<<<<<<<<<<;"
       end
@@ -123,7 +123,8 @@ module OrganizationImport
               organization.new_record? ? statistics[:create] += 1 : statistics[:update] += 1
 
               organization.csv_id = id
-              organization.title = csv_rows.first.title
+              organization.title = csv_rows.first.title if possible_organizations.empty?
+              organization.gis_title = csv_rows.first.title
               organization.email = csv_rows.map(&:email).compact.uniq.first
               organization.phone = csv_rows.map(&:phone).compact.uniq.first
               organization.site = normalize_site(csv_rows.map(&:site).compact.uniq.first)
@@ -156,7 +157,6 @@ module OrganizationImport
               organization.features += extra_features
             else
               statistics[:non_existing_categories] += csv_rows.map(&:category_title)
-
               next
             end
           end

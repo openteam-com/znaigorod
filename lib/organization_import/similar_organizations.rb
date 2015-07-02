@@ -14,7 +14,7 @@ module OrganizationImport
     end
 
     def searched
-      @searched ||= Organization.where(:title => title)
+      @searched ||= Organization.where(:gis_title => title)
     end
 
     def csv_id_matched?(org)

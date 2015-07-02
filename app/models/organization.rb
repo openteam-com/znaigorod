@@ -19,7 +19,7 @@ class Organization < ActiveRecord::Base
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
                   :barter_status,
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
-                  :organization_category_ids, :csv_id
+                  :organization_category_ids, :csv_id, :gis_title
 
   ### <=== CRM
 

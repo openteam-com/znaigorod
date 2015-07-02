@@ -340,6 +340,7 @@ ru:
         reviews_navigation_title: Заголовок обзоров в навигации заведения
         address_navigation_title: Заголовок адреса в навигации заведения
         comments_block_title: Заголовок блока комментариев
+        gis_title: 2-ГИС название
 
       section:
         <<: *common_attributes
