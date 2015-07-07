@@ -60,7 +60,7 @@ ru:
     comments: "Комментарии"
     votes: "Голоса"
     views: "Просмотры"
-    archive_discount: 'Информация о Вашей скидке'
-    archive_discount_description: 'Ваша скидка может быть перемещена в архив'
+    archive_discount: 'Информация о Ваших акциях'
+    archive_discount_description: ''
     anketa: 'Новая анкета'
     anketa_description: 'Добавлена новая анкета'

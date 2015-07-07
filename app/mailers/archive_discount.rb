@@ -1,5 +1,5 @@
 class ArchiveDiscount < MandrillMailer
-  default :from => "no-reply@znaigorod.ru"
+  default :from => "ЗнайГород <no-reply@znaigorod.ru>"
   layout "notice_layout"
 
   def send_archived(account, discounts)
