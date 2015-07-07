@@ -26,7 +26,7 @@
               <%= link_to discount.title, discount_url(discount) %>
 
               <p class='bold margin'>
-                <%= link_to 'Поднять скидку', discount_promote_discount_payments_url(discount), :class => [:btn, :orange, :inline], :method => :post %>
+                <%= link_to 'Поднять скидку', discount_url(discount), :class => [:btn, :orange, :inline] %>
               </p>
             </td>
           </tr>
