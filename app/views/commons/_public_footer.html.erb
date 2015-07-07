@@ -20,7 +20,7 @@
       <div class="contacts">
       Реклама на сайте: <%= t("services.#{Settings['app.city']}.address") %>, <%= t("services.#{Settings['app.city']}.phone") %>, <%= mail_to t("services.#{Settings['app.city']}.email") %>
     </div>
-    <% unless Rails.env.production? %>
+    <% if Rails.env.production? %>
       <div class='counters'>
         <%= render :partial => "commons/#{Settings['app.city']}_metrika" %>
       </div>
