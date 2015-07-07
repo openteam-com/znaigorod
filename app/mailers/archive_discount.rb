@@ -1,5 +1,5 @@
 class ArchiveDiscount < MandrillMailer
-  default :from => "znaigorod.ru"
+  default :from => "no-reply@znaigorod.ru"
   layout "notice_layout"
 
   def send_archived(account, discounts)
@@ -7,7 +7,7 @@ class ArchiveDiscount < MandrillMailer
     @account = AccountDecorator.decorate account
     @discounts = discounts
 
-    mail(:to => account.email, :subject => "Ваша скидки перемещены в архив")
+    mail(:to => account.email, :subject => "Ваши акции недоступны пользователям")
   end
 
   def send_warning(account, discounts)
@@ -15,6 +15,6 @@ class ArchiveDiscount < MandrillMailer
     @account = AccountDecorator.decorate account
     @discounts = discounts
 
-    mail(:to => account.email, :subject => "Ваши скидки скоро будут перемещены в архив")
+    mail(:to => account.email, :subject => "Ваши акции скоро попадут в архив")
   end
 end
