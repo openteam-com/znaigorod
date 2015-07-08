@@ -121,7 +121,7 @@
   <div class='center'>
     <div class='suborganization_content with-toggleable'>
       <% if current_user && (current_user.is_organizations_editor? || current_user.is_admin?) %>
-        <%= link_to 'изменить', manage_organization_path(@slave_organization), :class => :icon_edit %>
+        <%= link_to 'изменить', manage_organization_path(@slave_organization || @organization), :class => :icon_edit %>
       <% end %>
 
       <h1><%= @organization.title %></h1>
