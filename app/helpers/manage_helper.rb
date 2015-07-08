@@ -58,4 +58,12 @@ module ManageHelper
       "<span class='norm'>осталось #{time_ago_in_words place_item.ends_at}</span>".html_safe
     end
   end
+
+  def primary_organization
+    begin
+      Organization.find(params[:organization_id]).id
+    rescue => e
+      nil
+    end
+  end
 end

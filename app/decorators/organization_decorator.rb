@@ -41,16 +41,23 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def address_link(address = organization.address)
-    return "" if address.to_s.blank?
-    return h.link_to "#{address.city}, #{address}#{office}",
+    arr = []
+    ([address] + organization.slave_organizations.map(&:address)).each do |address|
+      arr << "" if address.to_s.blank?
+      if address.latitude? && address.longitude?
+      arr << h.link_to("#{address.city}, #{address}#{office}",
         organization_url,
         :title => 'Показать на карте',
         :'data-latitude' => organization.address.latitude,
         :'data-longitude' => organization.address.longitude,
         :'data-hint' => organization.title.text_gilensize,
         :'data-id' => organization.id,
-        :class => 'show_map_link' if address.latitude? && address.longitude?
-    "#{address}#{office}"
+        :class => 'show_map_link')
+      else
+        arr << "#{address}#{office}"
+      end
+    end
+    arr.join('; ')
   end
 
   def address_without_link(address = organization.address)

@@ -67,6 +67,12 @@ class OrganizationsController < ApplicationController
     else
       @organization = Organization.find_by_subdomain(request.subdomain)
     end
+
+    if @organization.primary_organization
+      @slave_organization = @organization
+      @organization = @organization.primary_organization
+    end
+
     @organization = OrganizationDecorator.decorate @organization
 
     respond_to do |format|

@@ -150,8 +150,8 @@
 <div class="column">
   <div>
     <span class="label">Родительская организация:</span>
-    <% if resource.organization.present? %>
-      <%= link_to resource.organization.title, manage_organization_path(resource.organization) %>
+    <% if resource.primary_organization.present? %>
+      <%= link_to resource.primary_organization.title, manage_organization_path(resource.primary_organization) %>
     <% else %>
       <span class="blank">Не указано</span>
     <% end %>
@@ -159,9 +159,9 @@
 
   <div>
     <span class="label">Вложенные организации:</span>
-    <% if resource.organizations.any? %>
+    <% if resource.slave_organizations.any? %>
       <span class="value">
-        <% resource.organizations.each do |organization| %>
+        <% resource.slave_organizations.each do |organization| %>
           <li><%= link_to organization.title, manage_organization_path(organization) %></li>
         <% end %>
       </span>

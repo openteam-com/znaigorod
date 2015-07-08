@@ -4,7 +4,7 @@ require 'curb'
 
 class YampGeocoder
   def self.get_coordinates(options)
-    options = {:city => "город #{Settings['app.city']}"}.merge(options)
+    options = {:city => "город #{Settings['app.city_ru']}"}.merge(options)
     region = "Томская область" if Settings['app.city'] == 'tomsk'
     address = [options[:city], region, options[:street], options[:house]].join(', ')
     address =  [options[:city], region, options[:address_string]].join(', ') if options[:address_string].present?
