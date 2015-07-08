@@ -32,7 +32,7 @@ class PlaceDecorator
   end
 
   def address_link
-    return organization.address_link if organization?
+    return organization.address_link.html_safe if organization?
     unless latitude.blank? && longitude.blank?
       return link_to('показать на карте', '#', :title => "Показать на карте",
                      :'data-latitude' => latitude,
