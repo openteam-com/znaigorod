@@ -396,6 +396,10 @@ class Organization < ActiveRecord::Base
 
     OrganizationObserver.disabled = false
   end
+
+  def title_and_address
+    "#{title} (#{address.try(:street)}, #{address.try(:house)})"
+  end
 end
 
 # == Schema Information

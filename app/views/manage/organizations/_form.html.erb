@@ -14,7 +14,7 @@
 
   <%= f.input :title %>
   <%= f.input :gis_title %>
-  <%= f.input :primary_organization_id, :collection => Organization.grouped_collection_for_select, :include_blank => true,
+  <%= f.input :primary_organization_id, :collection => Organization.grouped_collection_for_select, :label_method => :title_and_address, :include_blank => true,
     :selected => f.object.primary_organization_id || primary_organization %>
   <%= f.input :situated_at, :collection => Organization.grouped_collection_for_select, :include_blank => true, :selected => f.object.situated_at  %>
   <%= f.input :photo_block_title %>
