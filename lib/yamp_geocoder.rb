@@ -11,7 +11,7 @@ class YampGeocoder
     parameters = { geocode: address, format: :json, results: 1 }
     result = [nil, nil]
 
-    c = Curl::Easy.new("http://geocode-maps.yandex.ru/1.x/?#{parameters.to_query}") do |curl|
+    c = Curl::Easy.new("https://geocode-maps.yandex.ru/1.x/?#{parameters.to_query}") do |curl|
       curl.on_success do |easy|
         response = JSON.parse(easy.body_str)['response']['GeoObjectCollection']['featureMember'].first['GeoObject']
         result = response['Point']['pos'].split(' ')
