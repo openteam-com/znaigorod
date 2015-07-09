@@ -188,7 +188,7 @@ class Organization < ActiveRecord::Base
   end
 
   def map_image_name(slug, image_type = 'default')
-    return resized_image_url(logotype_url, 50, 72) if show_custom_balloon_icon
+    return resized_image_url(logotype_url, 70, 70) if show_custom_balloon_icon
     return most_valueable_organization_category.send("#{image_type}_image_url") unless slug
 
     organization_category = OrganizationCategory.find(slug)
