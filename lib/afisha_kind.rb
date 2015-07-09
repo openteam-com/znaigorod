@@ -10,7 +10,7 @@ class AfishaKind
   def tomsk_url
     [ ["child", "deti"], ["movie", "kinoafisha"], ["concert", "concerts"], ["party", "vecherinki"], ["spectacle", "afisha-teatrov"],
       ["exhibition", "vystavki"], ["training", "treningi-i-kursy"], ["masterclass", "masterclasses"], ["sportsevent", "sportsevents"],
-      ["competition", "konkursy"], ["other", "others"], ["excursions", "ekskursii_tomska"] ]
+      ["competition", "konkursy"], ["excursions", "ekskursii_tomska"], ["other", "others"] ]
   end
 
   def sevastopol_url
