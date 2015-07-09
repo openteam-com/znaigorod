@@ -6,10 +6,6 @@
       </li>
     <% end %>
 
-    <li class='js-banner istoriya-lyubvi-banner'>
-      <%= link_to (image_tag 'public/banners/istoria-lyubvi_banner_1_2.jpg', size: '880x80'), contest_path('fotokonkurs-istoriya-lyubvi'), class: 'js-stat-istoriya-lyubvi' %>
-    </li>
-
     <% if Time.zone.parse('09.07.2015') > Time.zone.now %>
       <li class='js-banner kukolka-banner'>
         <%= link_to (image_tag 'public/banners/kukolka-banner_1_2.gif', size: '880x80'), 'http://kukolka.tomsk.ru/', target: :_blank, class: 'js-stat-kukolka' %>
