@@ -7,4 +7,8 @@ module OrganizationHelper
   def logotype_url(org)
     org.primary_organization.try(:logotype_url) || org.logotype_url
   end
+
+  def status(org)
+    (org.primary_organization.try(:status) || org.status).split('_').first
+  end
 end
