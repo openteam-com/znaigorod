@@ -36,7 +36,7 @@
                   <% if actual_discounts?(item) || actual_discounts?(item.primary_organization) %>
                     <div class='with_discount'><%= link_to 'скидка', organization_path(item) %></div>
                   <% end %>
-                  <% if item.logotype_url? || item.primary_organization.logotype_url? %>
+                  <% if item.logotype_url? || item.primary_organization %>
                     <!-- если логотип есть -->
                     <%= link_to organization_path(item) do %>
                       <%= image_tag(resized_image_url(logotype_url(item), 90, 90, :watermark => false), size: "#{90}x#{90}", alt: item.title) %>
