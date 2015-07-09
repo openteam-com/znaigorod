@@ -11,4 +11,12 @@ module OrganizationHelper
   def status(org)
     (org.primary_organization.try(:status) || org.status).split('_').first
   end
+
+  def icon_width(org)
+    org.show_custom_balloon_icon ? 50 : 35
+  end
+
+  def icon_height(org)
+    org.show_custom_balloon_icon ? 72 : 50
+  end
 end

@@ -4,11 +4,11 @@
     <ul class= "placemark_list">
       <% @presenter.clients.each do |item| %>
         <li class='list_view_organization_item' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
-          data-image="<%= item.logotype_url %>"
+          data-image="<%= logotype_url(item) %>"
           data-icon='<%= item.map_image_name(params[:slug], 'default') ?
             item.map_image_name(params[:slug], 'default') :
             asset_path("/assets/public/organizations_list_view/default.png") %>'
-          data-width='35' data-height='50' data-status=<%= status(item) %> >
+          data-width=<%= icon_width(item) %> data-height=<%= icon_height(item) %> data-status=<%= status(item) %> >
           <div class="info">
             <h1><%= link_to item.title.truncate(30), organization_path(item) %></h1>
           </div>

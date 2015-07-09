@@ -85,6 +85,7 @@
     $('.list_view_organization_item').each (index, item) ->
       link = $('.info h1 a', item)
       title = link.text()
+
       contentBody = if $(item).attr('data-status') == 'client'
                       "<div class='ymaps-2-1-17-b-cluster-content__body'>" + "<a href='#{link.attr('href')}' target='_blank'>" +
                       "<img width='190' height='190' src='#{$(item).attr('data-image')}' />" + "</a>" +
@@ -108,6 +109,9 @@
         iconImageHref: $(item).attr('data-icon')
         iconImageSize: [parseInt($(item).attr('data-width')), parseInt($(item).attr('data-height'))]
         iconImageOffset: [-18, -18]
+        zIndex: 1000 if $(item).attr('data-width') == '50'
+        zIndexHover: 1100
+        zIndexActive: 1100
 
       clusterer.add point
 
@@ -208,10 +212,10 @@
       if $(target).attr('data-slug') == slug
         if state == 'n'
           index.options.set('iconImageHref', $(target).attr('data-icon'))
-          index.options.set('zIndex', 100)
+          index.options.set('zIndex', 650)
         else
           index.options.set('iconImageHref', $(target).attr('data-icon-hover'))
-          index.options.set('zIndex', 1000)
+          index.options.set('zIndex', 1100)
 
     true
 

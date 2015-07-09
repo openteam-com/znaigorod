@@ -4,6 +4,7 @@ class Organization < ActiveRecord::Base
   include HasVirtualTour
   include VkUpload
   include MakePageVisit
+  include ImageHelper
 
   extend FriendlyId
 
@@ -19,7 +20,7 @@ class Organization < ActiveRecord::Base
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
                   :barter_status,
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
-                  :organization_category_ids, :csv_id, :gis_title
+                  :organization_category_ids, :csv_id, :gis_title, :show_custom_balloon_icon
 
   ### <=== CRM
 
@@ -187,6 +188,7 @@ class Organization < ActiveRecord::Base
   end
 
   def map_image_name(slug, image_type = 'default')
+    return resized_image_url(logotype_url, 50, 72) if show_custom_balloon_icon
     return most_valueable_organization_category.send("#{image_type}_image_url") unless slug
 
     organization_category = OrganizationCategory.find(slug)

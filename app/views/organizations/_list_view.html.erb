@@ -21,7 +21,7 @@
               data-icon-hover='<%= item.map_image_name(params[:slug], 'hover') ?
                 item.map_image_name(params[:slug], 'hover') :
                 asset_path("/assets/public/organizations_list_view/default_hover.png") %>'
-              data-width='35' data-height='50' data-status=<%= status(item) %> >
+              data-width=<%= icon_width(item) %> data-height=<%= icon_height(item) %> data-status=<%= status(item) %> >
 
               <% if item.sms_claimable? %>
                 <%= link_to item.priority_sms_claimable_suborganization.reservation_title,

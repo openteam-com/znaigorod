@@ -341,6 +341,7 @@ ru:
         address_navigation_title: Заголовок адреса в навигации заведения
         comments_block_title: Заголовок блока комментариев
         gis_title: 2-ГИС название
+        show_custom_balloon_icon: Показывать логотип на карте
 
       section:
         <<: *common_attributes
