@@ -42,7 +42,7 @@ class OrganizationDecorator < ApplicationDecorator
 
   def address_link(address = organization.address)
     arr = []
-    ([address] + organization.slave_organizations.map(&:address)).each do |address|
+    ([address] + organization.slave_organizations.map(&:address)).compact.each do |address|
       arr << "" if address.to_s.blank?
       if address.latitude? && address.longitude?
       arr << h.link_to("#{address.city}, #{address}#{office}",
