@@ -2,7 +2,7 @@
   <li class="item"><%= render :partial => 'reviews/poster', :locals => { :review => review, :height => height, :width => width } %></li>
 <% end %>
 
-<% unless @presenter.nil? || @presenter.collection.last_page? || controller_name == 'afishas' || controller_name == 'organizations' || controller_name == 'contests' || controller_name == 'map_projects' %> <! -- TODO: fix it -->
+<% unless @presenter.nil? || controller_name == 'organizations' || controller_name == 'afishas' || @presenter.collection.last_page?  || controller_name == 'contests' || controller_name == 'map_projects' %> <! -- TODO: fix it -->
   <li class="pagination">
     <%= link_to_next_page @presenter.collection, "Еще обзоры (#{@presenter.current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
   </li>

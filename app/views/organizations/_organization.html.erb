@@ -9,9 +9,9 @@
         :class => :sms_claim_link %>
     <% end %>
 
-    <% if organization.logotype_url? %>
+    <% if organization.logotype_url? || organization.primary_organization %>
       <%= link_to organization_path(organization) do %>
-        <%= image_tag(resized_image_url(organization.logotype_url, width, height, :watermark => false), size: "#{width}x#{height}", alt: organization.title) %>
+        <%= image_tag(resized_image_url(logotype_url(organization), width, height, :watermark => false), size: "#{width}x#{height}", alt: organization.title) %>
       <% end %>
     <% else %>
       <%= link_to organization_path(organization) do %>

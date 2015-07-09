@@ -174,7 +174,8 @@ class NewOrganizationsPresenter
       paginate :page => not_clients_page, :per_page => not_clients_per_page
       with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
-      without :status, :client
+      without :status, [:client, :client_economy, :client_standart, :client_premium]
+      with :primary_organization_id, nil
 
       query ? keywords(query) : order_by(criterion, directions[criterion])
     }.results
@@ -186,7 +187,11 @@ class NewOrganizationsPresenter
     end
 
     define_method prefix do
-      OrganizationDecorator.decorate send("#{prefix}_results")
+      results = []
+      send("#{prefix}_results").each do |organization|
+        results += [organization, organization.slave_organizations].flatten.compact
+      end
+      OrganizationDecorator.decorate results
     end
 
      define_method "#{prefix}_results_last_page?" do
