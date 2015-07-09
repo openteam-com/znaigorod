@@ -168,7 +168,7 @@
     <% else %>
       <span class="blank">Не указано</span>
     <% end %>
-    <%= link_to 'Добавить вложенную организацию', new_manage_organization_organization_path(resource) if resource.organization_id.nil? %>
+    <%= link_to 'Добавить вложенную организацию', new_manage_organization_organization_path(resource) if resource.primary_organization.nil? %>
   </div>
 
   <div>
