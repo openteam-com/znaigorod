@@ -191,7 +191,7 @@ class NewOrganizationsPresenter
       send("#{prefix}_results").each do |organization|
         results += [organization, organization.slave_organizations].flatten.compact
       end
-      OrganizationDecorator.decorate results
+      OrganizationDecorator.decorate results.uniq
     end
 
      define_method "#{prefix}_results_last_page?" do

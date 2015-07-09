@@ -13,10 +13,10 @@ module OrganizationHelper
   end
 
   def icon_width(org)
-    org.show_custom_balloon_icon ? 70 : 35
+    org.show_custom_balloon_icon || org.primary_organization.try(:show_custom_balloon_icon) ? 70 : 35
   end
 
   def icon_height(org)
-    org.show_custom_balloon_icon ? 70 : 50
+    org.show_custom_balloon_icon || org.primary_organization.try(:show_custom_balloon_icon) ? 70 : 50
   end
 end

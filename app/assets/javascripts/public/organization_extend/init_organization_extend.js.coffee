@@ -109,7 +109,7 @@
         iconImageHref: $(item).attr('data-icon')
         iconImageSize: [parseInt($(item).attr('data-width')), parseInt($(item).attr('data-height'))]
         iconImageOffset: [-18, -18]
-        zIndex: 1000 if $(item).attr('data-width') == '50'
+        zIndex: 1000 if $(item).attr('data-width') == '70'
         zIndexHover: 1100
         zIndexActive: 1100
 
