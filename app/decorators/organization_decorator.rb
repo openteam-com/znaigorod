@@ -48,8 +48,8 @@ class OrganizationDecorator < ApplicationDecorator
       arr << h.link_to("#{address.city}, #{address}#{office}",
         organization_url,
         :title => 'Показать на карте',
-        :'data-latitude' => organization.address.latitude,
-        :'data-longitude' => organization.address.longitude,
+        :'data-latitude' => address.latitude,
+        :'data-longitude' => address.longitude,
         :'data-hint' => organization.title.text_gilensize,
         :'data-id' => organization.id,
         :class => 'show_map_link')
