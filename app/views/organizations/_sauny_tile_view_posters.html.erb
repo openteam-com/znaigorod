@@ -2,11 +2,11 @@
   <li class='sauna_item <%= cycle('item_1', 'item_2', 'item_3', :name => 'sauna_item') %>'>
     <div class='info'>
       <div class='image'>
-        <% if organization.sauna.sms_claimable? %>
+        <% if organization_sauna(organization).sms_claimable? %>
           <div class='sms_claimable'>
-            <%= organization.sauna.reservation_title %>
+            <%= organization_sauna(organization).reservation_title %>
           </div>
-          <%= link_to organization.sauna.reservation_title,
+          <%= link_to organization_sauna(organization).reservation_title,
             send("new_sauna_sms_claim_path", organization.sauna), :class => :sms_claim_link %>
         <% end %>
         <%= link_to organization_path(organization) do %>
@@ -27,7 +27,7 @@
     </div>
 
     <ul class='sauna_halls need_scrolling'>
-      <% organization.sauna.ordered_sauna_halls.each do |sauna_hall| %>
+      <% organization_sauna(organization).ordered_sauna_halls.each do |sauna_hall| %>
         <li<%= ' class=non_suitable' unless @presenter.sauna_hall_ids.include?(sauna_hall.id) %>>
           <%= render :partial => 'sauna_hall', :locals => { :sauna_hall => sauna_hall } %>
         </li>

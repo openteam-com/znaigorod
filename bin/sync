@@ -12,12 +12,12 @@ if [[ -z "$stage" ]]; then
 fi
 
 echo -e "$COLOR-> rake db:drop & db:create $ENDCOLOR"
-bin/rake db:drop db:create
+bundle exec rake db:drop db:create
 
 echo -e "$COLOR-> cap "$stage" db:pull $ENDCOLOR"
-yes | bin/cap "$stage" db:pull
+yes | bundle exec cap "$stage" db:pull
 echo -e "$COLOR-> rake db:migrate $ENDCOLOR"
-bin/rake db:migrate
+bundle exec rake db:migrate
 
 echo -e "$COLOR-> cap "$stage" sunspot:pull $ENDCOLOR"
-bin/cap "$stage" sunspot:pull
+bundle exec cap "$stage" sunspot:pull

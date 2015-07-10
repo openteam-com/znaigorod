@@ -8,6 +8,10 @@ module OrganizationHelper
     org.primary_organization.try(:logotype_url) || org.logotype_url
   end
 
+  def organization_sauna(org)
+    org.primary_organization.try(:sauna) || org.sauna
+  end
+
   def status(org)
     (org.primary_organization.try(:status) || org.status).split('_').first
   end
