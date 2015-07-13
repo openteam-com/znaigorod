@@ -57,7 +57,7 @@ class OrganizationDecorator < ApplicationDecorator
         arr << "#{address}#{office}"
       end
     end
-    arr.join('; ')
+    arr.join('; ').html_safe
   end
 
   def address_without_link(address = organization.address)
