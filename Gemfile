@@ -62,7 +62,7 @@ group :default do
   gem 'pg'
   gem 'progress_bar'
   gem 'rack-utf8_sanitizer'
-  gem 'rails'
+  gem 'rails',                      '~> 3.2'
   gem 'rest-client'
   gem 'roadie'
   gem 'russian'

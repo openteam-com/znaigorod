@@ -1,11 +1,11 @@
 <div class='poster'>
-  <% unless feed_vote_organization.feedable.voteable.logotype_url == "" %>
+  <% if feed_vote_organization.feedable.voteable.logotype_url %>
     <%= link_to feed_vote_organization.feedable.voteable do %>
       <%= image_tag(resized_image_url(feed_vote_organization.feedable.voteable.logotype_url, 100 , 100 ), :size => '100x100')  %>
     <% end %>
   <% else %>
     <%= link_to feed_vote_organization.feedable.voteable do %>
-      <%= content_tag( :span, "",:class => "stub_poster")  %>
+      <%= content_tag(:span, "", :class => "stub_poster")  %>
     <% end %>
   <% end %>
 </div>

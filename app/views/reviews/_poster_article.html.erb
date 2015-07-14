@@ -1,4 +1,4 @@
-<% cache("review_#{review.useful_type}_#{review.id}_#{controller_name}_#{width}_#{height}", expires_in: 10.minutes) do %>
+<% cache("review_#{review.useful_type}_#{review.id}_#{controller_name}_#{action_name}_#{width}_#{height}", expires_in: 10.minutes) do %>
   <%= link_to image_tag(review.annotation_image(width, height), :size => "#{width}x#{height}"), review_path(review) %>
 
   <div class="text">
