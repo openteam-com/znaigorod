@@ -15,14 +15,14 @@
     </div>
   <% else %>
     <div class='avatar'>
-      <%= link_to review.account do %>
+      <%= link_to feed_vote_review_article.feedable.user.account do %>
         <%= image_tag(resized_image_url(feed_vote_review_article.feedable.user.account.avatar.url, 23, 23),
                       :size => '23x23', :alt => feed_vote_review_article.feedable.user.account.title) %>
       <% end %>
     </div>
 
     <div class='type'>
-      <%= link_to feed_vote_review_article.feedable.user.name, review.account %>
+      <%= link_to feed_vote_review_article.feedable.user.name, feed_vote_review_article.feedable.user.account %>
       <%= t "account.rated.#{feed_vote_review_article.feedable.user.account.gender}" %> обзор
     </div>
   <% end %>
