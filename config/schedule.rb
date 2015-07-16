@@ -123,8 +123,17 @@ if dir.root.split('/').include?('znaigorod.ru')
 # tasks for sevastopol.znaigorod.ru
 # ----
 else
-  # ---
+
+  # -------------------------
+  # tasks run one time at week
+  # --------------------------
+  every :monday, :at => '6:30 am' do
+    rake 'generate_yandex_companies_xml_files'
+  end
+
+  # --------------
   # every day tasks
+  # ---------------
   every :day, :at => '2:10 am' do
     rake 'sitemap:refresh refresh_sitemaps'
   end
