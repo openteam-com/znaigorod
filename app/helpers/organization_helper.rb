@@ -12,6 +12,10 @@ module OrganizationHelper
     org.primary_organization.try(:sauna) || org.sauna
   end
 
+  def organization_hotel(org)
+    org.primary_organization.try(:hotel) || org.hotel
+  end
+
   def status(org)
     (org.primary_organization.try(:status) || org.status).split('_').first
   end
