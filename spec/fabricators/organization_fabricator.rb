@@ -56,5 +56,7 @@ end
 #  reviews_navigation_title      :string(255)
 #  address_navigation_title      :string(255)
 #  csv_id                        :integer
+#  gis_title                     :string(255)
+#  show_custom_balloon_icon      :boolean          default(FALSE)
 #
 

@@ -37,5 +37,6 @@ end
 #  placeholder           :text
 #  email                 :string(255)
 #  anketa_content        :text
+#  subject               :string(255)
 #
 

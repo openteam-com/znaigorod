@@ -8,13 +8,15 @@ class Contest < ActiveRecord::Base
   attr_accessible :agreement, :title, :description, :ends_at, :starts_at, :vote_type,
                   :participation_ends_at, :vfs_path, :og_description, :og_image, :contest_type,
                   :sms_prefix, :short_number, :sms_secret, :default_sort, :new_work_text, :placeholder,
-                  :anketa_content, :email
+                  :anketa_content, :email, :subject
 
   has_many :works, :as => :context, :dependent => :destroy
   has_many :accounts, :through => :works, :uniq => true
   has_many :reviews
 
   validates_presence_of :title, :starts_at, :ends_at, :participation_ends_at, :vote_type, :contest_type
+
+  validates_presence_of :subject, :if => :has_email?
 
   scope :available, -> { where('starts_at <= ?', Time.zone.now).order('starts_at desc') }
 
@@ -81,6 +83,11 @@ class Contest < ActiveRecord::Base
   def type_without_prefix
     self.class.name.underscore.gsub prefix, ''
   end
+
+  private
+  def has_email?
+    email.present?
+  end
 end
 
 # == Schema Information
@@ -114,5 +121,6 @@ end
 #  placeholder           :text
 #  email                 :string(255)
 #  anketa_content        :text
+#  subject               :string(255)
 #
 

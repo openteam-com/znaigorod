@@ -20,6 +20,7 @@ class Work < ActiveRecord::Base
   after_validation :check_agreement_accepted
 
   validates_presence_of :anketa, :if => :context_anketa_content?
+  validates_presence_of :description, :if => :context_placeholder?
 
   after_create :send_anketa, :if => :context_email?
 
@@ -96,6 +97,12 @@ class Work < ActiveRecord::Base
     return false if context.is_a? Photogallery
 
     context.email?
+  end
+
+  def context_placeholder?
+    return false if context.is_a? Photogallery
+
+    context.placeholder.present?
   end
 
   def send_anketa

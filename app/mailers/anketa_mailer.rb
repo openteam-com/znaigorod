@@ -6,6 +6,6 @@ class AnketaMailer < MandrillMailer
     @work = work
     @type = 'anketa'
 
-    mail(:to => work.context.email, :subject => 'На сайте ЗнайГород добавлена новая анкета для конкурса "Мисс Офис 2015"')
+    mail(:to => work.context.email, :subject => work.context.subject)
   end
 end
