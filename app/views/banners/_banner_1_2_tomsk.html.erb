@@ -6,14 +6,16 @@
       </li>
     <% end %>
 
-    <% if Time.zone.parse('09.07.2015') > Time.zone.now %>
-      <li class='js-banner kukolka-banner'>
-        <%= link_to (image_tag 'public/banners/kukolka-banner_1_2.gif', size: '880x80'), 'http://kukolka.tomsk.ru/', target: :_blank, class: 'js-stat-kukolka' %>
+    <% unless params[:id] == 'proyti-kvest-put-tomicha' %>
+      <li class='js-banner quest-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_put_tomicha_banner.jpg', size: '880x80'), contest_path('proyti-kvest-put-tomicha'), class: 'js-stat-quest' %>
       </li>
     <% end %>
 
-    <li class='js-banner quest-banner'>
-      <%= link_to (image_tag 'public/banners/banner_1_2_put_tomicha_banner.jpg', size: '880x80'), contest_path('proyti-kvest-put-tomicha'), class: 'js-stat-quest' %>
-    </li>
+    <% unless params[:id] == 'miss-pivovarochka-2015-v-tomske' %>
+      <li class='js-banner pivovarochka-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_miss_pivovarochka.jpg', size: '880x80'), contest_path('miss-pivovarochka-2015-v-tomske'), class: 'js-stat-pivovarochka' %>
+      </li>
+    <% end %>
   </ul>
 </div>
