@@ -6,4 +6,5 @@
   <div class='place' id='place-4'></div>
   <div class='place' id='place-5'></div>
   <div class='place' id='place-6'></div>
+  <%= render :partial => "commons/ads_by_google_right_#{Settings['app.city']}" if File.exist? Rails.root.join("app/views/commons/_ads_by_google_right_#{Settings['app.city']}.html.erb") %>
 </div>

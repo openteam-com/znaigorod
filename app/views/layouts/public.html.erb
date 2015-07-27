@@ -6,6 +6,7 @@
   <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
   <%= javascript_include_tag "#{Settings['faye.url']}/faye/client.js" %>
   <%= javascript_include_tag 'public/application' %>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <% end %>
 
 <% content_for :metrics do %>
@@ -25,6 +26,7 @@
   <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk] %>
   <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014' %>
   <%= render :partial => 'commons/public_content' %>
+  <%= render :partial => "commons/ads_by_google_footer_#{Settings['app.city']}" if File.exist? Rails.root.join("app/views/commons/_ads_by_google_footer_#{Settings['app.city']}.html.erb") %>
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>
