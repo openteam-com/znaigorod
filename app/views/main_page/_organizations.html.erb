@@ -29,9 +29,10 @@
 
     <ul class="posters">
       <% @organizations.promoted_clients.each do |organization| %>
-        <li class="item_organization"><%= render :partial => 'organizations/organization', :locals => { :organization => organization, width: 150, height: 150 } %></li>
+        <li class="item_organization">
+          <%= render :partial => 'organizations/organization', :locals => { :organization => organization, width: 150, height: 150 } %>
+        </li>
       <% end %>
     </ul>
   <% end %>
-
 </div>

@@ -57,7 +57,7 @@ class OrganizationCategory < ActiveRecord::Base
   end
 
   def self.show_on_main_page
-    where(:show_on_main_page => true).order(:position).take(9)
+    where(:show_on_main_page => true).order(:position).take(8)
   end
 
   def all_features
