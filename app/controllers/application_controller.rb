@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     :page_meta_item, :canonical_link,
     :city_name, :country_name, :remote_ip,
     :current_city_declension, :current_city_inclination, :weather,
-    :weather_url
+    :weather_info
 
   before_filter :detect_robots_in_development if Rails.env.development?
   before_filter :update_account_last_visit_at
@@ -138,11 +138,11 @@ class ApplicationController < ActionController::Base
     @weather ||= JSON.load(open("http://pogodavsevastopole.ru/api/v1/now/#{Settings['app.city']}"))
   end
 
-  def weather_url
-    @weather_url = if Settings['app.city'] == 'tomsk'
-                     'http://pogoda.znaigorod.ru/'
-                   else
-                     'http://pogodavsevastopole.ru/'
-                   end
+  def weather_info
+    if Settings['app.city'] == 'tomsk'
+      { :url => 'http://pogoda.znaigorod.ru/', :alt => 'Погода в Томске на сегодня и на неделю', :title => 'Погода в Томске на сегодня и на неделю' }
+    else
+      { :url => 'http://pogodavsevastopole.ru/', :alt => 'Погода в Севастополе на сегодня и на неделю', :title => 'Погода в Севастополе на сегодня и на неделю' }
+    end
   end
 end
