@@ -19,7 +19,7 @@
     </div>
 
     <!-- weather -->
-    <div class="weather_wrapper">
+    <div class="weather_wrapper <%= Settings['app.city'] %>">
       <div class="weather-icon <%= weather['condition']%>">
         <%= link_to weather_url, :target => :_blank do %>
           <div class="weather-temperature">
