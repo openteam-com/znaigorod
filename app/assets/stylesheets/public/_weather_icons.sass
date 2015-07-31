@@ -1,0 +1,77 @@
+.weather_wrapper
+  position: absolute
+  left: 230px
+  top: 4px
+
+  .weather-icon, .weather-text
+    +inline-block
+
+  .weather-icon
+    background: image-url('public/sprite-weather-icons.png') no-repeat
+    height: 65px
+    width: 80px
+    background-size: 540%
+
+    &.clear
+      background-position: 48.92% 47.121%
+
+    &.cloudy,
+    &.overcast
+      background-position: -2.5% -1.25%
+
+    &.cloudy-and-light-rain,
+    &.overcast-and-light-rain
+      background-position: 75.5% -1.25%
+
+    &.cloudy-and-rain,
+    &.cloudy-and-showers,
+    &.overcast-and-light-rain,
+    &.overcast-and-rain,
+    &.overcast-and-showers,
+    &.partly-cloudy-and-light-rain,
+    &.partly-cloudy-and-rain,
+    &.partly-cloudy-and-showers,
+    &.rain
+      background-position: 50% -1.25%
+
+    &.overcast-thunderstorms-with-rain,
+    &.cloudy-thunderstorms-with-rain
+      background-position: 10.5% 4%
+
+    &.mostly-clear,
+    &.partly-cloudy
+      background-position: 49.5% 9.5%
+
+    &.mostly-clear-slight-possibility-of-rain
+      background-position: 10.75% 20.35%
+
+    &.partly-cloudy-possible-thunderstorms-with-rain
+      background-position: 49.5% 31.2%
+
+    &.wind
+      background-position: 62.5% 4.1%
+
+    a
+      display: block
+      padding: 14px 0 2px 75px
+      color: #000
+      width: 100%
+
+      &:hover
+        text-decoration: none
+
+      .weather-temperature
+        font-size: 22px
+
+      .weather-wind-speed
+        width: 100px
+
+  .weather-icon-medium
+    background-size: 600%
+    height: 50px
+    width: 50px
+
+  .weather-icon-small
+    background-size: 550%
+    height: 30px
+    width: 30px

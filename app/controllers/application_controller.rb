@@ -1,11 +1,14 @@
 # encoding: utf-8
 
+require 'open-uri'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :banners, :hot_offers, :page, :per_page, :page_meta,
     :page_meta_item, :canonical_link,
     :city_name, :country_name, :remote_ip,
-    :current_city_declension, :current_city_inclination
+    :current_city_declension, :current_city_inclination, :weather,
+    :weather_url
 
   before_filter :detect_robots_in_development if Rails.env.development?
   before_filter :update_account_last_visit_at
@@ -129,5 +132,17 @@ class ApplicationController < ActionController::Base
 
   def current_city_inclination
     Settings['app.city'] == 'tomsk' ? 'Томске' : 'Севастополе'
+  end
+
+  def weather
+    @weather ||= JSON.load(open("http://pogodavsevastopole.ru/api/v1/now/#{Settings['app.city']}"))
+  end
+
+  def weather_url
+    @weather_url = if Settings['app.city'] == 'tomsk'
+                     'http://pogoda.znaigorod.ru/'
+                   else
+                     'http://pogodavsevastopole.ru/'
+                   end
   end
 end

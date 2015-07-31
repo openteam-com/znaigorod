@@ -18,12 +18,20 @@
       </div>
     </div>
 
-    <% if Settings['app.city'] == 'tomsk' %>
-      <a href='/webcams' title='Веб камеры Томска' class='webcams'>
-        Веб камеры
-        <span class="webcam-icon"></span>
-      </a>
-    <% end %>
+    <!-- weather -->
+    <div class="weather_wrapper">
+      <div class="weather-icon <%= weather['condition']%>">
+        <%= link_to weather_url, :target => :_blank do %>
+          <div class="weather-temperature">
+            <%= weather['temperature'] %>°
+          </div>
+          <div class="weather-wind-speed">
+            Ветер: <%= weather['wind_speed'] %> м/с
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- /weather -->
 
     <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
 
