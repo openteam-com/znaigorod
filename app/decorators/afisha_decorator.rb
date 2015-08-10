@@ -240,7 +240,7 @@ class AfishaDecorator < ApplicationDecorator
   def afisha_title
     title = if afisha.title.present?
               if afisha.showings.any?
-                afisha.title.gsub('<period>', I18n.l(afisha.showings.first.starts_on, :format => '%e %B %Y').squish).text_gilensize + ', '
+                (afisha.title + ' ' + I18n.l(afisha.showings.first.starts_on, :format => '%e %B %Y')).text_gilensize + ', '
               else
                 afisha.title.text_gilensize + ', '
               end
