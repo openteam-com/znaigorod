@@ -85,4 +85,8 @@ module ApplicationHelper
       I18n.l(date, :format => '%e %B %Y года в %H:%M')
     end
   end
+
+  def current_city_inclination
+    Settings['app.city'] == 'tomsk' ? 'Томске' : 'Севастополе'
+  end
 end

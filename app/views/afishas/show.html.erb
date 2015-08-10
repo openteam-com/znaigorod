@@ -1,10 +1,5 @@
 <% content_for :page_title do %>
-  <% if @afisha.title.present? %>
-    <%= @afisha.title.text_gilensize %>,
-  <% else %>
-    Нет названия,
-  <% end %>
-  <%= @afisha.kind.map(&:text).join(', ') %> <%= current_city_inclination %>
+  <%= @afisha.afisha_title %>
 <% end %>
 
 <% content_for :meta_keywords, @afisha.meta_keywords %>

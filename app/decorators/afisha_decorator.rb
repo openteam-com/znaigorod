@@ -3,6 +3,7 @@
 class AfishaDecorator < ApplicationDecorator
   include AutoHtmlFor
   include OpenGraphMeta
+  include ApplicationHelper
 
   decorates :afisha
 
@@ -234,5 +235,18 @@ class AfishaDecorator < ApplicationDecorator
 
   def highlighted?
     promoted_at? && (promoted_at + 1.day > Time.zone.now)
+  end
+
+  def afisha_title
+    title = if afisha.title.present?
+              if afisha.showings.any?
+                afisha.title.gsub('<period>', I18n.l(afisha.showings.first.starts_on, :format => '%e %B %Y').squish).text_gilensize + ', '
+              else
+                afisha.title.text_gilensize + ', '
+              end
+            else
+              'Нет названия, '
+            end
+    title + afisha.kind.map(&:text).join(', ') + " в " + current_city_inclination
   end
 end
