@@ -1,11 +1,5 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <% unless params[:id] == 'proyti-kvest-put-tomicha' %>
-      <li class='js-banner quest-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_put_tomicha_banner.jpg', size: '880x80'), contest_path('proyti-kvest-put-tomicha'), class: 'js-stat-quest' %>
-      </li>
-    <% end %>
-
     <% unless params[:id] == 'detskaya-supermodel' %>
       <li class='js-banner detskaya-sm--banner'>
         <%= link_to (image_tag 'public/banners/banner_1_2_detskaya_sm.jpg', size: '880x80'), contest_path('detskaya-supermodel'), class: 'js-stat-detskaya-sm' %>
