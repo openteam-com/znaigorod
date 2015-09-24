@@ -42,14 +42,20 @@
       <% end %>
 
       <div class="agreement_wrapper">
-        <%= f.input :agree, :as => :boolean %>
-        <%= link_to 'соглашения', '#', :class => 'agreement_link' %>
+        <% if @contest.agreement.present? %>
+          <%= f.input :agree, :as => :boolean %>
+          <%= link_to 'соглашения', '#', :class => 'agreement_link' %>
+        <% else %>
+          <%= f.input :agree, :as => :hidden, :input_html => { :value => 1 } %>
+        <% end %>
 
         <div class="agreement_text">
           <%= @contest.agreement.html_safe %>
         </div>
       </div>
-      <%= f.submit 'Готово', :class => 'submit' %>
+
+      <%= f.submit 'Готово', :class => 'submit' if @contest.agreement.present? %>
+      <%= f.submit 'Готово' unless @contest.agreement.present? %>
     <% end %>
   </div>
 </div>

@@ -11,5 +11,11 @@
         <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_pivovarochka.jpg', size: '880x80'), contest_path('miss-pivovarochka-2015-v-tomske'), class: 'js-stat-miss-pivovarochka' %>
       </li>
     <% end %>
+
+    <% unless params[:id] == 'fotokonkurs-ya-i-moi-podruzhki' %>
+      <li class='js-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_podrujki.jpg', size: '880x80'), contest_path('fotokonkurs-ya-i-moi-podruzhki'), class: 'js-stat-podrujki' %>
+      </li>
+    <% end %>
   </ul>
 </div>
