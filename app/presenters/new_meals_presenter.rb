@@ -21,7 +21,7 @@ class NewMealsPresenter < NewOrganizationsPresenter
                              with :meal_features, features if features.any?
                              with :meal_cuisine, cuisines if cuisines.any?
                              with :organization_category_slugs, category.slug if category
-                             with :status, :client
+                             with :status, [:client, :client_economy, :client_standart, :client_premium]
 
                              query ? keywords(query) : order_by(criterion, directions[criterion])
                            }
@@ -42,7 +42,7 @@ class NewMealsPresenter < NewOrganizationsPresenter
                                  with :meal_features, features if features.any?
                                  with :meal_cuisine, cuisines if cuisines.any?
                                  with :organization_category_slugs, category.slug if category
-                                 without :status, :client
+                                 without :status, [:client, :client_economy, :client_standart, :client_premium]
 
                                  query ? keywords(query) : order_by(criterion, directions[criterion])
                                }
