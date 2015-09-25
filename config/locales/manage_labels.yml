@@ -77,6 +77,7 @@ ru:
       new: Создать нового пользователя
       roles: Роли
       sales_manager: Менеджер по продажам
+      discounts_editor: Редактор скидок
       without_role: Без роли
 
       editor:

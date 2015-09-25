@@ -63,6 +63,7 @@ ru:
       organizations_editor:    Редактор организаций
       posts_editor:            Редактор статей
       sales_manager:           Менеджер продаж
+      discounts_editor:        Редактор скидок
 
     status:
       fresh:                   Новый

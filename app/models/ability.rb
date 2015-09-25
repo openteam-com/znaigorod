@@ -52,9 +52,12 @@ class Ability
     when 'manage'
       can :manage, Afisha if user.is_afisha_editor?
 
+      can :manage, Discount if user.is_discounts_editor?
+
       if user.is_organizations_editor?
         can :manage, [Organization] + Organization.available_suborganization_classes
       end
+
     when 'my'
       can :show, Account do |account|
         user.account == account
