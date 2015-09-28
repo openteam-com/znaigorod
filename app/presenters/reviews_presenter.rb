@@ -101,6 +101,10 @@ class ReviewsPresenter
       selected == 'megapolis'
     end
 
+    def inform?
+      selected == 'megapolis'
+    end
+
     def adv_plus?
       selected == 'adv_plus'
     end
@@ -267,6 +271,7 @@ class ReviewsPresenter
 
       s.without_questions
       s.without_megapolis             unless category_filter.megapolis?
+      s.without_inform                unless category_filter.inform?
       s.without_eighteen_plus         unless category_filter.eighteen_plus?
       s.without_adv_plus              unless category_filter.adv_plus?
       s.only_tomsk                    if     only_tomsk_filter.selected?

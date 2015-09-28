@@ -19,14 +19,16 @@
 <% end %>
 
 <%= content_for :content do %>
-  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
+  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" unless request.path.split('/').include? 'inform' %>
   <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
   <%= render :partial => 'commons/public_header' %>
   <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
+
   <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk] %>
-  <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014' %>
+
+  <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless (controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014') || request.path.split('/').include?('inform') %>
   <%= render :partial => 'commons/public_content' %>
-  <%= render :partial => "commons/ads_by_google_footer_#{Settings['app.city']}" if File.exist? Rails.root.join("app/views/commons/_ads_by_google_footer_#{Settings['app.city']}.html.erb") %>
+  <%= render :partial => "commons/ads_by_google_footer_#{Settings['app.city']}" if File.exist?(Rails.root.join("app/views/commons/_ads_by_google_footer_#{Settings['app.city']}.html.erb")) && !request.path.split('/').include?('inform') %>
   <%= render :partial => 'commons/public_footer' %>
   <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
   <%= yield :yandex_map_scripts %>

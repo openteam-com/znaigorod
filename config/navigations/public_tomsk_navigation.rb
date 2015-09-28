@@ -17,11 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :questions, 'Спрашивай', questions_path, highlights_on: -> { controller_name == 'questions' } do |questions|
-      Hash[Question.categories.options].invert.each do |category, title|
-        questions.item category, title, [:questions, category]
-      end
-    end
+    primary.item :coupons, 'Купоны', '/discounts/coupon', highlights_on: -> { controller_name == false }
 
     primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> {controller_name == 'organizations'} do |organization|
       OrganizationCategory.roots.order(:position).each do |category|

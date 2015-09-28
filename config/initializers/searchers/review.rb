@@ -26,6 +26,10 @@ HasSearcher.create_searcher :reviews do
     without :category, :megapolis
   end
 
+  scope :without_inform do
+    without :category, :inform
+  end
+
   scope :without_questions do
     without :type, 'question'
   end

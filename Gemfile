@@ -88,7 +88,7 @@ group :development do
   gem 'mock_redis',                 :require => false
   gem 'hirb'
   gem 'letter_opener'
-  gem 'openteam-capistrano'
+  gem 'openteam-capistrano'#,        :path => '/Users/peoneerko/workspace/openteam/openteam-capistrano'
   gem 'capistrano',                 '2.15.4'
   gem 'pry'
   gem 'quiet_assets'
