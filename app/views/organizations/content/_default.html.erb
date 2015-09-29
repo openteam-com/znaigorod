@@ -1,4 +1,4 @@
-<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].present? %>
+<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].blank? %>
 
 <%= render partial: 'filters_and_search' %>
 
@@ -35,6 +35,6 @@
     </ul>
   </div>
 
-<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].blank? %>
-
 <% end %>
+
+<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].present? %>
