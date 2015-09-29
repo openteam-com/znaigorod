@@ -87,9 +87,11 @@ Znaigorod::Application.routes.draw do
   end
 
   # /reviews/[auto|beauty|sport|...]
-  Review.categories.values.each do |category|
+  (Review.categories.values.to_a - ['inform']).each do |category|
     get "reviews/#{category}" => 'reviews#index', :constraints => { :category => category }, :defaults => { :category => category }
   end
+
+  get "inform" => 'reviews#index', :constraints => { :category => 'inform' }, :defaults => { :category => 'inform' }, :as => :reviews_inform
 
   # /reviews/:year-:month/:id support
   ([Review.name.underscore] + Review.descendant_names).map(&:pluralize).each do |type|
