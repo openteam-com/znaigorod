@@ -27,6 +27,8 @@
   </div>
 <% end %>
 
+<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].present? %>
+
 <% if @afishas.present? %>
   <div class='organization_afisha afisha_content'>
     <div class='afisha_title'>Афиша</div>
@@ -34,7 +36,4 @@
       <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afishas.decorated_collection, :presenter => @afishas } %>
     </ul>
   </div>
-
 <% end %>
-
-<%= render partial: 'promo_block', :locals => { :promoted_clients => @presenter.promoted_clients, :sub_class => 'organization' } if params[:slug].present? %>
