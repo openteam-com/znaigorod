@@ -2,6 +2,8 @@ Znaigorod::Application.routes.draw do
   get 'api/review_collection' => 'reviews#review_collection', :as => :review_collection_api
   get 'api/single_review' => 'reviews#single_review', :as => :single_review_api
 
+  get '/reviews/inform' => redirect { Rails.application.routes.url_helpers.reviews_inform_path } # legacy
+
   namespace :my do
     resources :reviews do
       get 'add'                   => 'reviews#add',                   :on => :collection
