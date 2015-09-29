@@ -20,6 +20,8 @@ class Review < ActiveRecord::Base
   before_save :store_cached_content_for_index
   before_save :store_cached_content_for_show
 
+  before_save :set_allow_external_links # for inform category
+
   before_validation :set_categories, :if => :category_flag
 
   after_save :parse_related_items, :if => :need_change
@@ -206,6 +208,12 @@ class Review < ActiveRecord::Base
     form_categories = tagit_categories.split(',').map(&:squish).map(&:mb_chars).map(&:downcase).map(&:to_s)
 
     self.categories = form_categories.map { |e| reverted_options[e] }.compact
+  end
+
+  def set_allow_external_links
+    if categories.to_a.include?('inform')
+      self.allow_external_links = true
+    end
   end
 end
 

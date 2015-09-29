@@ -93,20 +93,10 @@ class ReviewsPresenter
       available.index(selected).to_i > 6
     end
 
-    def eighteen_plus?
-      selected == 'eighteen_plus'
-    end
-
-    def megapolis?
-      selected == 'megapolis'
-    end
-
-    def inform?
-      selected == 'megapolis'
-    end
-
-    def adv_plus?
-      selected == 'adv_plus'
+    %w(eighteen_plus megapolis inform adv_plus).each do |item|
+      define_method "#{item}?" do
+        selected == item
+      end
     end
 
     def human_titles
