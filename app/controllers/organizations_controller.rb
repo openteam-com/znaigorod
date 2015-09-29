@@ -162,9 +162,9 @@ class OrganizationsController < ApplicationController
       organization.phone_lookups.delay.create!
       phone = params[:single_phone] ? "Тел.: #{organization.phone.split(',').try(:first)}" : "Телефон: #{organization.phone}"
       render text: phone.html_safe and return
-    else
-      render :nothing => true, :status => 200 and return
     end
+
+    render :nothing => true, :status => 404 and return
   end
 
   def increment_site_link_counter
@@ -172,6 +172,8 @@ class OrganizationsController < ApplicationController
       Organization.find(params[:organization_id]).increment!(:site_link_counter)
       render :nothing => true, :status => 200
     end
+
+    render :nothing => true, :status => 404
   end
 
   def scrolltrack(key)
