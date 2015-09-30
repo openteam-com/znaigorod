@@ -45,7 +45,7 @@ class Ability
     can :read, SmsClaim if user.is_sales_manager?
 
     can :edit, Discount do |discount|
-      discount.account == user.account && discount.account.present? && user.account.present?
+      (discount.account == user.account && discount.account.present? && user.account.present?) || user.is_discounts_editor?
     end
 
     case namespace
