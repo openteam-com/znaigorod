@@ -24,6 +24,9 @@ class Discount < ActiveRecord::Base
   has_many :places,         :dependent => :destroy, :as => :placeable
   has_many :votes,          :dependent => :destroy, :as => :voteable
   has_many :promote_discount_payments,              :as => :paymentable
+  has_many :gallery_images,        :as => :attachable,     :dependent => :destroy
+  has_many :all_images,            :as => :attachable, :class_name => 'Attachment', :conditions => { :type => %w[GalleryImage GallerySocialImage] }
+  has_many :gallery_social_images, :as => :attachable,     :dependent => :destroy
 
   has_many :accounts, :through => :members
   has_many :organizations, :through => :places
