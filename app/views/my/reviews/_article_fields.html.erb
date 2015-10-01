@@ -1,4 +1,8 @@
-<%= f.input :content, :as => :text, :input_html => { :id => 'html', :class => 'markitup with-preview' }  %>
+<div class="input">
+  <%= f.label :content %>
+  <%= f.label "После заполнения и сохранения формы будет возможность загрузить галерею фотографий" %>
+</div>
+<%= f.input :content, :as => :text, :label => false, :input_html => { :id => 'html', :class => 'markitup with-preview' }  %>
 <%= f.input :generate_poster, :as => :hidden, :input_html => { :value => true } %>
 
 <%= content_for :review_preview do %>

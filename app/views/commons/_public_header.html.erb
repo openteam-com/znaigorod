@@ -41,7 +41,6 @@
     <div class='dashboard'>
       <% if user_signed_in? %>
         <p class='user'>
-          <%= link_to 'Задать вопрос', new_my_question_path, class: :my_new_action, :rel => 'nofollow' %>
           <%= link_to 'Добавить обзор', add_my_reviews_path, class: :my_new_action, :rel => 'nofollow' %>
           <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action, :rel => 'nofollow' %>
           <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action, :rel => 'nofollow' %>
