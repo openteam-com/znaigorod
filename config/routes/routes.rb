@@ -19,6 +19,8 @@ Znaigorod::Application.routes.draw do
     get method => "cooperation##{method}"
   end
 
+  get 'ostav_svoi_sled_na_znaigorode' => 'sled#index', :as => :sled
+
   get 'feedback' => 'feedback#show'
   get 'help' => 'help#show'
 

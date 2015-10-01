@@ -1,0 +1,67 @@
+<div class='contest sled'>
+  <div class="left">
+    <%= image_tag "public/sled/poster.jpg"%>
+    <div class="sponsors">
+      <%= link_to "https://vk.com/powerclubtomsk", :target => :_blank, :class => "power"  do %>
+        <%= image_tag "public/sled/power-club.png", :alt => "Power club", :title => "Power club" %>
+      <% end %>
+      <%= link_to "http://xn--j1adfnc.xn--b1agnktfhj.xn--p1ai/", :target => :_blank, :class => "quest" do %>
+        <%= image_tag "public/sled/questroom.png", :alt => "Квеструм", :title => "Квеструм"%>
+      <% end %>
+      <%= link_to "https://vk.com/maxumd", :target => :_blank, :class => "dm" do %>
+        <%= image_tag "public/sled/dm.png", :alt => "Максим Двуреченский", :title => "Максим Двуреченский" %>
+      <% end %>
+      <%= link_to "http://vk.com/atmosfera_tomsk", :target => :_blank, :class => "atmosfera" do %>
+        <%= image_tag "public/sled/atmosfera.png", :alt => "Атмосфера", :title => "Атмосфера" %>
+      <% end %>
+      <%= link_to "http://freshroll-tomsk.ru/", :target => :_blank, :class => "fresh-roll" do %>
+        <%= image_tag "public/sled/fresh-roll.png", :alt => "Fresh roll", :title => "Fresh roll" %>
+      <% end %>
+      <%= link_to "http://vk.com/club_yulianadance", :target => :_blank, :class => "dance" do %>
+        <%= image_tag "public/sled/dance.png", :alt => "Yuliana Dance", :title => "Yuliana Dance" %>
+      <% end %>
+      <%= link_to "http://melagrano.tomsk.ru/", :target => :_blank, :class => "melagrano" do %>
+        <%= image_tag "public/sled/melagrano.png", :alt => "Melagrano", :title => "Melagrano" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="right">
+    <h1>Конкурс &laquo;Оставь свой след на ЗнайГороде!&raquo;</h1>
+
+    <p>Всегда интересно читать истории, смотреть репортажи, сделанные обычными людьми, а не представителями СМИ. Такие статьи яркие, необычные, интересные. Мы решили поощрить активных томичей, которые с помощью нашего портала рассказывают о мероприятиях, событиях в городе. Для этого мы запускаем <strong>конкурс «Оставь свой след на ЗнайГороде»!</strong></p>
+
+    <p>Узнал что-то интересное? Напиши об этом в разделе Томск. Обзоры, блоги, мнения. <strong>14 самых активных и интересных участников</strong> по результатам месяца будут награждены призами от наших партнеров. Рейтинг участников будет определяться исходя из количества обзоров, количества их просмотров, «лайков» и комментариев и будет публиковаться на этой странице.</p>
+
+    <p class="highlighted">О чем можно писать?</p>
+    <ul>
+      <li> о достопримечательностях и красивых местах в Томске; </li>
+      <li> о радостях и проблемах в городе; </li>
+      <li> о прошедших событиях; </li>
+      <li> об успехах томичей (помните, бывших томичей не бывает); </li>
+      <li> об истории Томска и томичей; </li>
+      <li> обо всем, за что вы любите и не любите Томск.  </li>
+    </ul>
+
+    <p><strong>Фото и видео приветствуются!</strong></p>
+
+    <p class="highlighted">Партнеры конкурса приготовили приятные и полезные подарки для самых активных участников</p>
+    <ul>
+      <li> Сертификаты на посещение увлекательного квеста от одного из старейших томских квеструмов <%= link_to "Квеструм.рф", "http://xn--j1adfnc.xn--b1agnktfhj.xn--p1ai/", :target => :_blank  %> </li>
+      <li> Яркие фотосессии от талантливого томского фотографа <%= link_to "Максима Двуреченского", "https://vk.com/maxumd", :target => :_blank%> </li>
+      <li> Праздник для женских ручек от Центра косметологии и коррекции фигуры <%= link_to "Melagrano", "http://melagrano.tomsk.ru/", :target => :_blank %> </li>
+      <li> Абонементы на тренировки от крутой сети спортивных клубов <%= link_to "Power club", "https://vk.com/powerclubtomsk", :target => :_blank %> </li>
+      <li> Сертификаты на незабываемое посещение уютной кальянной <%= link_to  "Атмосфера", "http://vk.com/atmosfera_tomsk", :target => :_blank%> </li>
+      <li> Вкуснейшие и свежайшие суши от службы доставки <%= link_to "Fresh roll", "http://freshroll-tomsk.ru/", :target => :_blank%> </li>
+      <li> Сертификаты на зажигательные занятия от танцевальной студии <%= link_to "Yuliana Dance", "http://vk.com/club_yulianadance", :taget => :_blank %> </li>
+    </ul>
+
+    <p><strong>Внимание! У нас действует разумная цензура!</strong></p>
+    <p><strong>Победители будут определены 1 ноября.</strong></p>
+  </div>
+  <div class='share_and_likes'>
+    <%= render :partial => 'commons/share_and_like_this', :locals => { :url => sled_url } %>
+  </div>
+
+  <div class="rating">
+  </div>
+</div>
