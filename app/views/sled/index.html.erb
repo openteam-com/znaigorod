@@ -80,7 +80,7 @@
                 <%= link_to account.title, account_path(account), :class => :name %>
               </td>
               <td><%= account.sled_rating.round(2) %></td>
-              <td><%= account.reviews.published.count %></td>
+              <td><%= account.sled_reviews.count %></td>
               <td>
                 <span class='show_tipsy fa fa-comments' title='Комментарии'></span>
                 <span><%= account.sled_comments %></span>
@@ -106,7 +106,7 @@
             <%= link_to current_user.account.title, account_path(current_user.account), :class => :name %>
           </td>
           <td><%= current_user.account.sled_rating.round(2) %></td>
-          <td><%= current_user.account.reviews.published.count %></td>
+          <td><%= current_user.account.sled_reviews.count %></td>
           <td>
             <span class='show_tipsy fa fa-comments' title='Комментарии'></span>
             <span><%= current_user.account.sled_comments %></span>

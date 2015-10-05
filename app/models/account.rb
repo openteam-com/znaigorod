@@ -375,20 +375,24 @@ class Account < ActiveRecord::Base
     email.present?
   end
 
+  def sled_reviews
+    @sled_reviews ||= reviews.published.where("reviews.created_at > ?", Time.zone.parse("01.10.2015").beginning_of_day)
+  end
+
   def sled_rating
-    @sled_rating ||= reviews.published.count + sled_comments * 0.5 + sled_votes * 0.2 + sled_page_visits * 0.1
+    @sled_rating ||= sled_reviews.count + sled_comments * 0.5 + sled_votes * 0.2 + sled_page_visits * 0.1
   end
 
   def sled_comments
-    @sled_comments ||= reviews.published.joins(:comments).count
+    @sled_comments ||= sled_reviews.joins(:comments).count
   end
 
   def sled_votes
-    @sled_votes ||= reviews.published.joins(:votes).where("votes.like =?",true).count
+    @sled_votes ||= sled_reviews.joins(:votes).where("votes.like =?",true).count
   end
 
   def sled_page_visits
-    @sled_page_visits ||= reviews.published.joins(:page_visits).count
+    @sled_page_visits ||= sled_reviews.joins(:page_visits).count
   end
 end
 
