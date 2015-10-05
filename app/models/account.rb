@@ -374,6 +374,22 @@ class Account < ActiveRecord::Base
   def has_email?
     email.present?
   end
+
+  def sled_rating
+    @sled_rating ||= reviews.published.count + sled_comments * 0.5 + sled_votes * 0.2 + sled_page_visits * 0.1
+  end
+
+  def sled_comments
+    @sled_comments ||= reviews.published.joins(:comments).count
+  end
+
+  def sled_votes
+    @sled_votes ||= reviews.published.joins(:votes).where("votes.like =?",true).count
+  end
+
+  def sled_page_visits
+    @sled_page_visits ||= reviews.published.joins(:page_visits).count
+  end
 end
 
 # == Schema Information

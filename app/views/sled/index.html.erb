@@ -63,5 +63,64 @@
   </div>
 
   <div class="rating">
+    <table>
+      <thead>
+        <th>Пользователь</th>
+        <th>Общий рейтинг</th>
+        <th>Обзоры</th>
+        <th>Комментарии</th>
+        <th>"Лайки"</th>
+        <th>Просмотры</th>
+      </thead>
+      <tbody>
+          <% @accounts.take(20).each do |account| %>
+            <tr>
+              <td>
+                <%= link_to (image_tag resized_image_url(account.avatar.url, 50, 50), :size => "50x50"),account_path(account), :class => :avatar %>
+                <%= link_to account.title, account_path(account), :class => :name %>
+              </td>
+              <td><%= account.sled_rating.round(2) %></td>
+              <td><%= account.reviews.published.count %></td>
+              <td>
+                <span class='show_tipsy fa fa-comments' title='Комментарии'></span>
+                <span><%= account.sled_comments %></span>
+              </td>
+              <td>
+                <span class='show_tipsy fa fa-heart' title='Понравилось'></span>
+                <span><%= account.sled_votes %></span>
+              </td>
+              <td>
+                <span class='show_tipsy fa fa-eye' title='Просмотры'></span>
+                <span><%= account.sled_page_visits %></span>
+              </td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <% if current_user %>
+      <h3>Ваш рейтинг</h3>
+      <table>
+        <tr>
+          <td>
+            <%= link_to (image_tag resized_image_url(current_user.account.avatar.url, 50, 50), :size => "50x50"),account_path(current_user.account), :class => :avatar %>
+            <%= link_to current_user.account.title, account_path(current_user.account), :class => :name %>
+          </td>
+          <td><%= current_user.account.sled_rating.round(2) %></td>
+          <td><%= current_user.account.reviews.published.count %></td>
+          <td>
+            <span class='show_tipsy fa fa-comments' title='Комментарии'></span>
+            <span><%= current_user.account.sled_comments %></span>
+          </td>
+          <td>
+            <span class='show_tipsy fa fa-heart' title='Понравилось'></span>
+            <span><%= current_user.account.sled_votes %></span>
+          </td>
+          <td>
+            <span class='show_tipsy fa fa-eye' title='Просмотры'></span>
+            <span><%= current_user.account.sled_page_visits %></span>
+          </td>
+        </tr>
+      </table>
+    <% end %>
   </div>
 </div>
