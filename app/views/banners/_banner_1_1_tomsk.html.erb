@@ -5,12 +5,5 @@
         <%= image_tag 'public/banners/banner_sled.jpg', :size => '1200x80', :alt => 'Оставь свой след на ЗнайГороде', :title => 'Оставь свой след на ЗнайГороде' %>
       <% end %>
     </li>
-    <% if DateTime.now < Date.parse("12.10.2015").end_of_day %>
-      <li>
-        <%= link_to "http://xn--70-9kcqjfc6ag5akmpp.xn--p1ai/", :target => :_blank do %>
-          <%= image_tag 'public/banners/banner_1_1_business70.jpg', :size => '1200x80', :alt => 'Бизнес триумф', :title => 'Бизнес триумф' %>
-        <% end %>
-      </li>
-    <% end %>
   </ul>
 </div>
