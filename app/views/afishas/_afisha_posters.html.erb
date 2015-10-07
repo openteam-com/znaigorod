@@ -1,7 +1,10 @@
-<% afishas.each do |afisha| %>
-  <li class="item fresh<%= ' highlighted' if afisha.highlighted? %> <%= cycle('first', 'second', 'third', 'fourth') %>">
-    <%= render :partial => 'afishas/afisha_poster', :locals => { :afisha => afisha } %>
-  </li>
+<% afishas.each_slice(4).with_index do |afisha_slice, index| %>
+  <% afisha_slice.each do |afisha| %>
+    <li class="item fresh<%= ' highlighted' if afisha.highlighted? %> <%= cycle('first', 'second', 'third', 'fourth') %>">
+      <%= render :partial => 'afishas/afisha_poster', :locals => { :afisha => afisha } %>
+    </li>
+  <% end %>
+  <%= render :partial => 'commons/promo_discounts', :locals => {:type => 'afisha' } if index == 1 %>
 <% end %>
 
 <% unless presenter.collection.last_page? || controller_name == 'organizations'%>
