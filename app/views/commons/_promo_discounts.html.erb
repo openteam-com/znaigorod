@@ -1,11 +1,13 @@
 <% unless params[:page] %>
   <div class="promo_discounts <%= type %>">
     <div class="text">
-      <p><span>Купоны</span></p>
-      <p><span>на товары и</span></p>
-      <p><span>услуги <%= current_city_declension %>.</span></p>
-      <p><span>Экономь со</span> </p>
-      <p><span>Знайгород.</span></p>
+      <%= link_to discounts_coupon_path do %>
+        <p><span>Купоны</span></p>
+        <p><span>на товары и</span></p>
+        <p><span>услуги <%= current_city_declension %>.</span></p>
+        <p><span>Экономь со</span> </p>
+        <p><span>Знайгород.</span></p>
+      <% end %>
     </div>
 
     <div class="discount_content">
