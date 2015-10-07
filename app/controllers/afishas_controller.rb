@@ -24,7 +24,7 @@ class AfishasController < ApplicationController
         end
 
         @organizations = NewOrganizationsPresenter.new({:promoted_clients_per_page => 5})
-        @discounts = DiscountsPresenter.new(params.merge(:per_page => 3)).decorated_collection
+        @discounts = DiscountsPresenter.new(params.merge({:per_page => 3, :type => "coupon"})).decorated_collection
 
 
         if request.xhr?
