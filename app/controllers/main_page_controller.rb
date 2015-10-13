@@ -21,7 +21,6 @@ class MainPageController < ApplicationController
     @photogalleries    = Photogallery.order('id desc').limit(3)
     @photo_decorator   = PhotogalleryDecorator.decorate(@photogalleries)
     @webcams           = Webcam.our.published.shuffle.take(4)
-    @megapolis_review  = ReviewsPresenter.new({:category=>"megapolis"}).collection.take(3)
 
     @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
   end

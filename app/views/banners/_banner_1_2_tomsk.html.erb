@@ -19,6 +19,13 @@
         <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_podrujki.jpg', size: '880x80'), contest_path('fotokonkurs-ya-i-moi-podruzhki'), class: 'js-stat-podrujki' %>
       </li>
     <% end %>
+
+    <% unless params[:id] == 'kraevedcheskiy-proekt-iz-antresoley' %>
+      <li class='js-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_kraevedcheskiy.jpg', size: '880x80'), contest_path('kraevedcheskiy-proekt-iz-antresoley'), class: 'js-stat-kraevedcheskiy' %>
+      </li>
+    <% end %>
+
     <% if DateTime.now < Date.parse("12.10.2015").end_of_day %>
       <li>
         <%= link_to "http://xn--70-9kcqjfc6ag5akmpp.xn--p1ai/", :target => :_blank do %>

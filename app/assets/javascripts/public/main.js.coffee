@@ -141,7 +141,5 @@ $(window).load ->
   init_webcam_map() if $('.webcams .webcam_map').length
   init_map_project() if $('.map_wrapper .map').length
   init_organization_list_view_map() if $('.suborganizations_map_wrapper .map').length
-  init_resize_google_ads_footer()
-  init_resize_google_ads_right()
 
   true

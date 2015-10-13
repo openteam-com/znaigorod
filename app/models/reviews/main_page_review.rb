@@ -22,7 +22,7 @@ class MainPageReview < ActiveRecord::Base
       with :state, :published
       without used.map(&:review)
       without :type, :question
-      without :category, [:adv_plus, :megapolis]
+      without :category, [:adv_plus, :megapolis, :inform]
     end
 
     search.results
