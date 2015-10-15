@@ -22,7 +22,7 @@
     <%= render :partial => 'commons/share_and_like_this', :locals => { :url => contest_url(@contest) } %>
   </div>
 
-  <%= render :partial => 'reviews' if @reviews.any? %>
-
   <%= render :partial => "works_#{@contest.type_without_prefix}" %>
+
+  <%= render :partial => 'reviews' if @reviews.any? %>
 </div>

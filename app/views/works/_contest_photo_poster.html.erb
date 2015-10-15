@@ -1,4 +1,4 @@
-<li class='<%= cycle('first', 'second', 'third', 'fourth') unless work.context.is_a?(ContestVideo) %>'>
+<li>
   <div class='title'>
     <% if work.title.present? %>
       <%= link_to(work.title, [work.context, work.becomes(Work)]) %>
@@ -22,11 +22,10 @@
       <% end %>
     <% end %>
   </div>
-  <%
-      contest_description = work.author_info
-  contest_description += '. ' + work.description.squish if work.description.present?
-  contest_description = truncate(contest_description, :length => 140)
-  %>
+  <% contest_description = work.author_info %>
+  <% contest_description += '. ' + work.description.squish if work.description.present? %>
+  <% contest_description = truncate(contest_description, :length => 140) %>
+  <% unless work.archive %>
     <% if @contest.starts_at <= Time.zone.now %>
       <% if @contest.ends_at >= Time.zone.now %>
         <% if @contest.vote_type == "like" %>
@@ -34,7 +33,8 @@
             <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => work } %>
           </div>
         <% else %>
-          Код для голосования: <%= work.code %>
+          Код для голосования:
+          <%= work.code %>
         <% end %>
       <% else %>
         <div class='contest_work_vk_like_on_list'>
@@ -43,7 +43,9 @@
       <% end %>
     <% else %>
       <div class='contest_work_vk_like_on_list'>
-        Голосование начнётся <%= l @contest.starts_at %>
-    </div>
+        Голосование начнётся
+        <%= l @contest.starts_at %>
+      </div>
+    <% end %>
   <% end %>
 </li>

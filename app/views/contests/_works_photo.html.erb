@@ -11,7 +11,7 @@
 <%= render :partial => 'winners_photo' %>
 
 <% if @works.any? %>
-  <h2>Участники (<%= @contest.works.count %>)</h2>
+  <h2>Участники (<%= @works.count %>)</h2>
   <div class="presentation_filters photo">
     <div class='order_by'>
       <p>Сортировать по:</p>
@@ -22,9 +22,20 @@
     </div>
   </div>
   <div style="clear:both"> </div>
+  <div class='works'>
+    <ul>
+      <% @works.each do |work| %>
+        <%= render :partial => "works/contest_#{work.context.type_without_prefix}_poster", :locals => { :work => work, :width => 278, :height => 278 } %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @archived_works.present? %>
+  <h2>Все участники (<%= @contest.works.archived.count %>)</h2>
   <div class='works ajaxed_voteable js-button-pagination'>
     <ul class='js-paginable-list'>
-      <%= render :partial => 'works/contest_list', :locals => { :width => 278, :height => 278 } %>
+        <%= render :partial => 'works/contest_list', :locals => { :width => 278, :height => 278 } %>
     </ul>
   </div>
 <% end %>

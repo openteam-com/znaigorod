@@ -367,11 +367,12 @@
           max-height: 342px
           padding-bottom: 10px
 
-          &.first
-            clear: left
-
-          &.fourth
+          &:nth-child(4n)
             margin-right: 0
+
+          &.pagination
+            width: 1190px
+            padding-bottom: 0
 
           .image
             position: relative

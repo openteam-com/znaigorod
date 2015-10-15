@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150721043348) do
+ActiveRecord::Schema.define(:version => 20151015042021) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1544,8 +1544,8 @@ ActiveRecord::Schema.define(:version => 20150721043348) do
     t.integer  "context_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "slug"
     t.integer  "vk_likes"
     t.integer  "account_id"
@@ -1560,6 +1560,7 @@ ActiveRecord::Schema.define(:version => 20150721043348) do
     t.text     "video_content"
     t.integer  "sms_counter",        :default => 0
     t.text     "anketa"
+    t.boolean  "archive",            :default => false
   end
 
   add_index "works", ["account_id"], :name => "index_works_on_account_id"

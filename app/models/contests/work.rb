@@ -35,6 +35,8 @@ class Work < ActiveRecord::Base
   scope :ordered_by_likes,       order('vk_likes desc')
   scope :ordered_by_zg_likes,    joins("LEFT JOIN votes ON votes.voteable_id=works.id AND votes.voteable_type='Work'").group("works.id").order('count(case votes.like when true then 1 end) desc')
   scope :ordered_by_rating,      order('rating desc')
+  scope :archived,               where(:archive => true)
+  scope :not_archived,           where(:archive => false)
 
   def should_generate_new_friendly_id?
     return true if !self.slug?

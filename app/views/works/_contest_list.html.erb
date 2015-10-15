@@ -1,9 +1,8 @@
-<% @works.each do |work| %>
+<% @archived_works.each do |work| %>
   <%= render :partial => "works/contest_#{work.context.type_without_prefix}_poster", :locals => { :work => work, :width => width, :height => height } %>
 <% end %>
-
-<% unless @works.last_page? %>
+<% unless @archived_works.last_page? %>
   <li class="item pagination">
-    <%= link_to_next_page @works, "Еще работы (#{current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
+    <%= link_to_next_page @archived_works, "Еще работы (#{current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
   </li>
 <% end %>
