@@ -11,7 +11,7 @@
 <%= render :partial => 'winners_photo' %>
 
 <% if @works.any? %>
-  <h2>Участники (<%= @works.count %>)</h2>
+  <h2>Участники (<%= @contest.works.not_archived.count %>)</h2>
   <div class="presentation_filters photo">
     <div class='order_by'>
       <p>Сортировать по:</p>

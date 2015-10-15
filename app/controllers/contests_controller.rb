@@ -29,7 +29,7 @@ class ContestsController < ApplicationController
   end
 
   def total_count
-    @contest.works.count
+    @contest.works.archived.count
   end
 
   protected
