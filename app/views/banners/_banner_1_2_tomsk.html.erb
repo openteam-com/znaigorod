@@ -1,13 +1,5 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <% unless params[:id] == 'detskaya-supermodel' %>
-      <% if DateTime.now > Date.parse("12.10.2015").end_of_day %>
-        <li class='js-banner detskaya-sm--banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_detskaya_sm.jpg', size: '880x80'), contest_path('detskaya-supermodel'), class: 'js-stat-detskaya-sm' %>
-        </li>
-      <% end %>
-    <% end %>
-
     <% unless params[:id] == 'miss-pivovarochka-2015-v-tomske' %>
       <li class='js-banner'>
         <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_pivovarochka.jpg', size: '880x80'), contest_path('miss-pivovarochka-2015-v-tomske'), class: 'js-stat-miss-pivovarochka' %>
