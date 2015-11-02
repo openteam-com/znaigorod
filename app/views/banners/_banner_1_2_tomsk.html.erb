@@ -6,9 +6,9 @@
       </li>
     <% end %>
 
-    <% unless params[:id] == 'fotokonkurs-ya-i-moi-podruzhki' %>
+    <% if DateTime.now < Date.parse("09.11.2015").end_of_day %>
       <li class='js-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_podrujki.jpg', size: '880x80'), contest_path('fotokonkurs-ya-i-moi-podruzhki'), class: 'js-stat-podrujki' %>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_forum.jpg', size: '880x80'), '/away?to=http://xn--70-1lchakbomhjj.xn--p1ai/', :target => :_blank, class: 'js-stat-podrujki' %>
       </li>
     <% end %>
 
