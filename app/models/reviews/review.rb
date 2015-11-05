@@ -92,7 +92,9 @@ class Review < ActiveRecord::Base
   normalize_attribute :title, :with => [:strip, :squish]
   normalize_attribute :categories, :with => :blank_array
 
-  searchable do
+  searchable :include => [
+    :comments,
+  ] do
     boolean :only_tomsk
 
     float :rating

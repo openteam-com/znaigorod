@@ -143,7 +143,14 @@ class Afisha < ActiveRecord::Base
   alias_attribute :title_translit,  :title
   alias_attribute :rating, :total_rating
 
-  searchable do
+  searchable :include => [
+    :gallery_images,
+    :gallery_social_images,
+    :invitations,
+    :showings,
+    :addresses,
+    :comments,
+  ] do
     boolean :has_images, :using => :has_images?
 
     float :rating
@@ -284,7 +291,7 @@ class Afisha < ActiveRecord::Base
   end
 
   def destroy_showings
-    showings.destroy_all
+    showings.map(&:destroy)
   end
 
   def accounts_for_lottery

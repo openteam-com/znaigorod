@@ -197,7 +197,15 @@ class Organization < ActiveRecord::Base
       organization_category.send("#{image_type}_image_url")
   end
 
-  searchable do
+  searchable :include => [
+    :discounts,
+    :invitations,
+    :organization_categories,
+    :features,
+    :address,
+    :entertainment,
+    :meal,
+  ] do
     boolean(:logotyped) { logotype_url? }
     boolean(:sms_claimable) { suborganizations.select {|s| s.respond_to?(:sms_claimable?)}.select {|s| s.sms_claimable?}.any? }
     boolean(:with_discounts) { discounts.actual.any? }

@@ -21,7 +21,10 @@ class Showing < ActiveRecord::Base
   default_value_for :price_max, nil
   default_value_for :price_min, nil
 
-  searchable do
+  searchable :include => [
+    :afisha,
+    :organization,
+  ] do
     date :starts_on
 
     float :afisha_rating
