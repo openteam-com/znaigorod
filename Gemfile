@@ -83,7 +83,7 @@ end
 group :development do
   gem 'annotate',                   :require => false
   gem 'brakeman'
-  gem 'capistrano-db-tasks',        :git => 'git@github.com:openteam/capistrano-db-tasks.git'
+  gem 'capistrano-db-tasks',        :require => false
   gem 'capistrano-unicorn',         '~> 0.1.10'
   gem 'mock_redis',                 :require => false
   gem 'hirb'
