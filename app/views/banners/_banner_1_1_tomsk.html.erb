@@ -1,9 +1,11 @@
-<div class="new_feature">
-  <ul class='top_headline banner js-banner'>
-    <li>
-      <%= link_to sled_path do %>
-        <%= image_tag 'public/banners/banner_sled.jpg', :size => '1200x80', :alt => 'Оставь свой след на ЗнайГороде', :title => 'Оставь свой след на ЗнайГороде' %>
-      <% end %>
-    </li>
-  </ul>
-</div>
+<% if Time.zone.now < Time.zone.parse('10.10.10').end_of_day %>
+  <div class="new_feature">
+    <ul class='top_headline banner js-banner'>
+      <li>
+        <%= link_to sled_path do %>
+          <%= image_tag 'public/banners/banner_sled.jpg', :size => '1200x80', :alt => 'Оставь свой след на ЗнайГороде', :title => 'Оставь свой след на ЗнайГороде' %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+<% end %>
