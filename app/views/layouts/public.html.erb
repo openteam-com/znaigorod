@@ -24,7 +24,7 @@
   <%= render :partial => 'commons/public_header' %>
   <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
 
-  <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk] %>
+  <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk organization_requests] %>
 
   <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless (controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014') || request.path.split('/').include?('inform') %>
   <%= render :partial => 'commons/public_content' %>
