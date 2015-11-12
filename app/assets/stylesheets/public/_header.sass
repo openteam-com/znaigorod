@@ -116,6 +116,7 @@
         background: transparent image_url('public/sign_in.png') no-repeat right center
         margin: 0 5px
         padding-right: 18px
+
       .user
         .avatar
           height: 22px
@@ -123,6 +124,41 @@
 
           img
             +border-radius
+
+        .user_navigation
+          width: 140px
+          position: absolute
+          left: -145px
+          z-index: 2
+
+          .my_action
+            p
+              cursor: pointer
+              text-align: left
+              padding: 2px 8px 4px
+              background: #ff7f1a image_url('public/icon_arrow.png') no-repeat 125px center
+
+              &:hover
+                background: #ff9933 image_url('public/icon_arrow.png') no-repeat 125px center
+
+            &:hover
+              .actions
+                display: block
+
+          a
+            display: block
+            float: left
+            width: 100%
+            border: 0
+            padding: 2px 8px 4px
+
+            &:hover
+              border: 0
+
+          .actions
+            display: none
+            +clearfix
+
         .sign_out
           border-left: 1px solid #000
           background: transparent image_url('public/sign_out.png') no-repeat right center

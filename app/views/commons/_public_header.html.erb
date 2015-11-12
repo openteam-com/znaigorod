@@ -40,17 +40,30 @@
     <!--noindex-->
     <div class='dashboard'>
       <% if user_signed_in? %>
-        <p class='user'>
-          <%= link_to 'Добавить обзор', add_my_reviews_path, class: :my_new_action, :rel => 'nofollow' %>
-          <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action, :rel => 'nofollow' %>
-          <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action, :rel => 'nofollow' %>
+        <div class='user'>
+
+          <div class='user_navigation'>
+            <div class='my_action'>
+              <p class='my_new_action'>
+                Добавить свое
+              </p>
+
+              <div class='actions'>
+                <%= link_to 'Добавить обзор', add_my_reviews_path, class: :my_new_action, :rel => 'nofollow' %>
+                <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action, :rel => 'nofollow' %>
+                <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action, :rel => 'nofollow' %>
+                <%= link_to 'Добавить заведение', organizations_add_path, class: :my_new_action, :rel => 'nofollow' %>
+              </div>
+            </div>
+          </div>
 
           <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
             <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
           <% end %>
+
           <%= link_to(current_user.account, my_root_path, class: :user_name) %>
           <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %>
-        </p>
+        </div>
         <p class='messages'>
           <% if current_user.account.private_messages.unread.any? %>
             <%= link_to "+#{current_user.account.messages.unread.count}", my_dialogs_path, class: :new, title: 'Есть новые сообщения' %>
