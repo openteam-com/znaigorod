@@ -2,7 +2,7 @@
   <% review_slice.each do |review| %>
     <li class="item"><%= render :partial => 'reviews/poster', :locals => { :review => review, :height => height, :width => width } %></li>
   <% end %>
-  <%= render :partial => 'commons/promo_discounts', :locals => {:type => 'review'} if index == 1 && controller_name == 'reviews' && Settings['app.city'] == 'tomsk' %>
+  <%= render :partial => 'commons/promo_discounts', :locals => {:type => 'review'} if index == 1 && controller_name == 'reviews' && is_tomsk? %>
 <% end %>
 
 <% unless @presenter.nil? || controller_name == 'organizations' || controller_name == 'afishas' || @presenter.collection.last_page?  || controller_name == 'contests' || controller_name == 'map_projects' %>

@@ -93,4 +93,8 @@ module ApplicationHelper
   def days_to_new_year
     Time.zone.now.end_of_year.yday - Time.zone.now.yday
   end
+
+  def is_tomsk?
+    Settings['app.city'] == 'tomsk'
+  end
 end
