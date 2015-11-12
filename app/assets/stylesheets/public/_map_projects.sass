@@ -195,7 +195,7 @@ body
   +map_projects_wrapper
 
 .wrapper_novyj_god_2016_v_tomske
-  background: #ffffff image_url('public/map_projects/novyj_god_2015_v_tomske_background.jpg') no-repeat center top
+  background: #ffffff image_url('public/map_projects/novyj_god_2016_v_tomske_background.png') no-repeat center top
   +map_projects_wrapper
   .map_projects_wrapper
     .map_projects_content
@@ -203,6 +203,16 @@ body
         .left
           .map_banner
             display: none
+
+          ul
+            li
+              a
+                &:hover
+                  color: #609fbf
+
+              &.selected a
+                color: #609fbf
+                border: 2px solid #7fbbda
 
           .text_block
             .left_wreath
@@ -212,7 +222,7 @@ body
       .map_project_reviews
         .reviews_title
           margin-top: 80px
-          background-color: #74c9de
+          background-color: #92c8dc
 
 .wrapper_8_marta_tomsk
   background: #f9d8df image_url('public/map_projects/8_marta_tomsk_background.jpg') no-repeat center top
