@@ -89,4 +89,8 @@ module ApplicationHelper
   def current_city_inclination
     Settings['app.city'] == 'tomsk' ? 'Томске' : 'Севастополе'
   end
+
+  def days_to_new_year
+    Time.zone.now.end_of_year.yday - Time.zone.now.yday
+  end
 end
