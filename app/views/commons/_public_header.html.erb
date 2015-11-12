@@ -86,9 +86,21 @@
           <%= link_to('Личный кабинет', my_root_path) %>
         </p>
       <% else %>
-        <%= link_to 'Добавить обзор', add_my_reviews_path, class: :my_new_action %>
-        <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action %>
-        <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action %>
+        <div class="user">
+          <div class='user_navigation'>
+            <div class='my_action'>
+              <p class='my_new_action'>
+                Добавить свое
+              </p>
+
+              <div class='actions'>
+                <%= link_to 'Добавить обзор', add_my_reviews_path, class: :my_new_action, :rel => 'nofollow' %>
+                <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action, :rel => 'nofollow' %>
+                <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action, :rel => 'nofollow' %>
+              </div>
+            </div>
+          </div>
+        </div>
         <span class='sign_in'>Войти:</span>
         <%= render :partial => 'commons/social_auth' %>
       <% end %>
