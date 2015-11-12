@@ -43,8 +43,8 @@
 
     <div class='scheduled'>
       <div class='scheduled_header'>Расписание</div>
-      <div class='price'>Стоимость: <%= @afisha.schedule.human_price %></div>
-      <ul><%= @afisha.schedule.days.each{ |li| li }.join("\n").html_safe %></ul>
+      <div class='price' itemprop="offers" itemscope itemtype="http://schema.org/Offer">Стоимость: <span itemprop="price"><%= @afisha.schedule.human_price %></span></div>
+      <ul itemprop="startDate"><%= @afisha.schedule.days.each{ |li| li }.join("\n").html_safe %></ul>
     </div>
 
   <% else %>
