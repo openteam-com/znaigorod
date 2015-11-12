@@ -119,3 +119,8 @@
     visit:      Посещения
     vote:       Нравится
     question:     Вопросы/Ответы
+
+  new_year:
+    one: ' день'
+    few: ' дня'
+    many: ' дней'
