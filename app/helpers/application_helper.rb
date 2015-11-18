@@ -97,4 +97,12 @@ module ApplicationHelper
   def is_tomsk?
     Settings['app.city'] == 'tomsk'
   end
+
+  def current_city
+    Settings['app.city']
+  end
+
+  def current_city_ru
+    Settings['app.city_ru']
+  end
 end

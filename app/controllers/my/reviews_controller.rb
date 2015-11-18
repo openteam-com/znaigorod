@@ -79,6 +79,10 @@ class My::ReviewsController < My::ApplicationController
     end
   end
 
+  def add_related_items
+
+  end
+
   protected
 
   def begin_of_association_chain
@@ -86,9 +90,7 @@ class My::ReviewsController < My::ApplicationController
   end
 
   def build_resource
-    klass = Reviews::VerifiedClass.new(type: params[:type]).klass
-
-    @review = klass.new(params[:review]) do |review|
+    @review = ReviewArticle.new(params[:review]) do |review|
       review.account = current_user.account
     end
   end
