@@ -17,6 +17,8 @@
                 <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/organizations' %>
               <% elsif request.original_fullpath.split('/').include?('reviews') %>
                 <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/reviews' %>
+              <% else %>
+                <%= link_to 'Томск', 'http://sevastopol.znaigorod.ru' %>
               <% end %>
             <% else %>
               <% if request.original_fullpath.split('/').include?('afisha') %>
@@ -27,6 +29,8 @@
                 <%= link_to 'Томск', 'http://znaigorod.ru/organizations' %>
               <% elsif request.original_fullpath.split('/').include?('reviews') %>
                 <%= link_to 'Томск', 'http://znaigorod.ru/reviews' %>
+              <% else %>
+                <%= link_to 'Томск', 'http://znaigorod.ru' %>
               <% end %>
             <% end %>
           </li>
