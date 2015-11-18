@@ -5,7 +5,7 @@
 <%= simple_nested_form_for @question,
   :as => :question,
   :url => @question.new_record? ? my_questions_path : my_question_path(@question.id),
-  :html => { :class => "my_review_form default_simple_form review_article_form" } do |f| %>
+  :html => { :class => "my_review_form default_simple_form review_article_form my_form" } do |f| %>
 
   <span class='red_star'>*</span> <span class='text_help'> - поля, обязательные для заполнения</span>
 
@@ -16,24 +16,21 @@
   <%= f.input :only_tomsk, :label => "Только #{Settings['app.city_ru']}" %>
 
   <div class="select_categories">
-    <%= select_tag :cat, options_for_select(Question.categories.options), :class => 'select_type', :prompt => 'Выберите категорию' %><span class="red_star for_categories" title='Обязательное поле'>*</span>
+    <div class="categories_title">
+      <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+    </div>
+
+    <%= select_tag :cat, options_for_select(Question.categories.options), :class => 'select_type', :prompt => 'Выберите категорию' %>
     <%= f.input :tagit_categories, :as => :string, :label => false, :input_html => { :class => 'tagit_categories' } %>
     <%= hidden_field_tag "question[category_flag]", true %>
   </div>
 
   <div class='submit'>
-    <%= f.submit 'Отправить', :class => 'btn btn-lg btn-grey' %>
+    <%= f.submit 'Отправить', :class => 'flat-btn btn-lg btn-orange' %>
     <%= link_to 'Отмена', :back %>
   </div>
 <% end %>
 
-<%= render :partial => 'my/afishas/textile_syntax' %>
-
-<div class="preview_wrapper">
-  <h1>Предварительный просмотр</h1>
-  <div class="reviews_show">
-    <%= render :partial => 'my/questions/question', :locals => { :question => QuestionDecorator.new(@question) } %>
-  </div>
-</div>
+<%= render :partial => 'my/commons/textile_syntax' %>
 
 <div class="loader"></div>

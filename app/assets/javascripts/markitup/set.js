@@ -31,7 +31,7 @@ mySettings = {
           return true;
         }
         var textile_dialog_height = $(window).innerHeight() * 90 / 100;
-        $('.textile_syntax').dialog({
+        $('.js-textile_syntax').dialog({
           title: 'Синтаксис Textile',
           width: '1000',
           height: textile_dialog_height,

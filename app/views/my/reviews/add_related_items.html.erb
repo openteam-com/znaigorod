@@ -1,0 +1,56 @@
+<div class='my_wrapper'>
+
+  <%= render :partial => 'steps', :locals => { :resource => @review } %>
+
+  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+
+  <div class='my_reviews_wrapper review_form default_form'>
+    <%= simple_nested_form_for @review,
+      :as => :review,
+      :url => my_review_path(@review),
+      :html => { :class => "my_review_form default_simple_form my_form"  } do |f| %>
+
+      <div class='relations'>
+        <p>Этот пост связан с</p>
+
+        <div class='sticky_elements'>
+          <% @review.relations.each do |item| %>
+            <div class="element">
+              <% if item.slave.is_a? Afisha %>
+                <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
+              <% elsif item.slave.is_a? Discount %>
+                <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
+              <% else %>
+                <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
+              <% end %>
+              <span class="del_icon"></span>
+              <%= hidden_field_tag "review[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= hidden_field_tag "review[need_change]", true %>
+        <div style='clear: both'></div>
+
+        <div class='select_and_search'>
+          <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Обзор', '/my/related_reviews'], ['Фотогалерея', '/my/related_photogalleries'], ['Скидки', '/my/related_discounts']], 'Афиша'), { class: 'type_select' }  %>
+          <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
+          <%= text_field_tag :search, '', { class: 'related_search' } %>
+        </div>
+
+        <div style='clear: both'></div>
+
+        <div class='results infinite_list'>
+          <ul class='posters'></ul>
+        </div>
+        <input type="hidden" value="review[related_items][]" class="params_name">
+
+        <div style='clear: both'></div>
+
+        <div class='submit'>
+          <%= f.submit 'Сохранить', :class => 'flat-btn btn-lg btn-orange' %>
+          <%= link_to 'Отмена', :back %>
+        </div>
+      <% end %>
+    </div>
+  </div>

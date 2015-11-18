@@ -8,6 +8,7 @@ Znaigorod::Application.routes.draw do
     resources :reviews do
       get 'add'                   => 'reviews#add',                   :on => :collection
       get 'images/add'            => 'reviews#add_images',            :on => :member
+      get 'add_related_items'     => 'reviews#add_related_items',     :on => :member
       get 'linked_with/available' => 'reviews#available_linked_with', :on => :collection
       get 'poster/edit'           => 'reviews#edit_poster',           :on => :member
       get 'tags/available'        => 'reviews#available_tags',        :on => :collection

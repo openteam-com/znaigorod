@@ -64,6 +64,8 @@
   margin: 0
   padding: 0
   text-align: center
+  cursor: pointer
+  border: 0
 
   &:active, &:hover
     outline: none
@@ -90,18 +92,27 @@
       border-color: #00ad7a
 
   &.btn-orange
-    background: #f93
-    border: 1px solid #ee8924
+    background: #ff6600
+    border-bottom: 2px solid #ca4500 !important
 
     &:active, &:hover
-      background: #f60
-      border-color: #f60
+      background: #ca4500
+
+  &.btn-grey
+    background-color: #e9e9e9
+    color: #222
+    border-bottom: 2px solid #999
+    padding: 0 15px
+
+    &:hover, &:active
+      background-color: #999
 
   &.btn-disabled
     background: #e9e9e9
-    border: 1px solid #ccc
+    border-bottom: 2px solid #a9a9a9
     color: #999
+    cursor: not-allowed
 
     &:active, &:hover
-      background: #eee
-      border-color: #aaa
+      background: #a9a9a9
+      color: #fff

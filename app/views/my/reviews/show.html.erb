@@ -1,26 +1,14 @@
-<div class="my_wrapper">
-  <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
+<div class='my_wrapper <%= auto_content_class %>'>
 
-  <% if @review.draft? %>
-    <div class="publication-warning review">
-      <h2>Ваш обзор еще не размещен на сайте. Чтобы он появился, нажмите кнопку опубликовать.</h2>
-      <%= link_to t('my.send_to_public'), publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg floatr',
-        :confirm => 'Вы уверены? После публикации обзор будет доступен всем пользователям сайта!' %>
-    </div>
-  <% else %>
-    <div class="publication-warning review">
-      <%= link_to 'В черновики', draft_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg floatr',
-                    :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>
-    </div>
-  <% end %>
+  <%= render :partial => 'steps', :locals => { :resource => @review } %>
 
   <div class="left">
     <div class="separator">
-      Так обзор будет выглядеть при просмотре
+      Так пост будет выглядеть при просмотре
+      <div class='arrow'></div>
       <span class="icons floatr">
-        <%= link_to '', poster_edit_my_review_path(@review.id), :class => 'icon-flat icon-poster show_tipsy', :title => 'Изменить постер' %>
-        <%= link_to '', edit_my_review_path(@review.id), :class => 'icon-flat icon-pencil show_tipsy', :title => 'Редактировать обзор' %>
-        <%= link_to '', my_review_path(@review.id), :class => 'icon-flat icon-delete show_tipsy', :method => :delete, :confirm => 'Вы уверены? Информация будет удалена без возможности восстановления!', :title => 'Удалить обзор' %>
+        <%= link_to '', edit_my_review_path(@review), :class => 'icon-flat icon-pencil show_tipsy', :title => 'Редактировать обзор' %>
+        <%= link_to '', my_review_path(@review), :class => 'icon-flat icon-delete show_tipsy', :method => :delete, :confirm => 'Вы уверены? Информация будет удалена без возможности восстановления!', :title => 'Удалить обзор' %>
       </span>
     </div>
 
@@ -36,15 +24,12 @@
   <div class="right">
     <div class="separator">
       Так обзор будет выглядеть на списке
+      <div class='arrow'></div>
     </div>
 
     <ul class="posters">
-      <li class="item"><%= render :partial => "reviews/poster", :locals => { :review => @review, :height => '200', :width => '354' } %></li>
+      <li class="item_review"><%= render :partial => 'reviews/poster', :locals => { :review => @review, :height => 104, :width => 214 } %></li>
     </ul>
 
-    <ul class="review_help">
-      <%= render :partial => "help_#{@review.useful_type}" %>
-    </ul>
   </div>
-
 </div>

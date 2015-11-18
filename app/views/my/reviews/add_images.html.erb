@@ -1,12 +1,26 @@
-<div class="my_wrapper">
+<div class='my_wrapper'>
+
+  <%= render :partial => 'steps', :locals => { :resource => @review } %>
+
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <div class="my_reviews_wrapper review_form">
-    <h1>Добавление фотографий</h1>
+  <div class='my_reviews_wrapper review_form default_form'>
+    <h1>Добавить фотографии</h1>
 
-    <div class="info_wrapper">
-      <span class='info'></span>
-      <span>Фотографии можно отсортировать, просто перетащив их в нужном порядке.</span>
+    <div class="gallery_info">
+      <p class='marker'>Фотографии можно загрузить двумя способами:</p>
+      <ol>
+        <li>1) Загрузить непосредственно с компьютера, выбрав одну или несколько фотографий сразу.</li>
+        <li>2) Указать ссылку на альбом Вконтакте или на Яндекс.Фотки
+          <ul>
+            <li>Ссылка на альбом Вконтакте имеет вид: <a target="_blank" rel="nofollow" href="http://vk.com/album-35689602_173541663">http://vk.com/album-35689602_173541663</a> (можно добавить только из открытых альбомов)</li>
+            <li>Ссылка на альбом Яндекс.Фотки имеет вид: <a target="_blank" rel="nofollow" href="http://fotki.yandex.ru/users/s-s-nega/album/131256/">http://fotki.yandex.ru/users/s-s-nega/album/131256</a></li>
+          </ul>
+        </li>
+        <li>При необходимости можно добавить несколько альбомов по очереди.</li>
+      </ol>
+      <p class='marker'>Фотографии можно отсортировать, просто перетащив их в нужном порядке</p>
+      <p class='marker'>Можно выбрать сразу несколько файлов</p>
     </div>
 
     <div class="gallery_images_wrapper">
@@ -16,14 +30,11 @@
 
       <%= simple_form_for @review.gallery_images.new,
         :url => my_review_gallery_images_path(@review.id),
-        :html => { :multipart => true, :class => 'file_upload default_simple_form' } do |f| %>
+        :html => { :multipart => true, :class => 'file_upload default_simple_form my_form' } do |f| %>
 
         <%= hidden_field_tag :review_gallery, true %>
 
         <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' }, :label => t('my.add_images') %>
-        <div class="info_wrapper">
-          <span class='info'></span> <span>Можно выбрать сразу несколько файлов</span>
-        </div>
       <% end %>
 
       <div class="upload_wrapper">
@@ -35,38 +46,18 @@
         </script>
       </div>
 
-      <%= simple_form_for @review, :url => download_album_my_review_path(@review.id) do |f| %>
+      <%= simple_form_for @review, :url => download_album_my_review_path(@review), :html => { :class => 'my_form' } do |f| %>
         <div class="input">
           <%= label_tag :album_url, 'Адрес альбома из Вконтакте или Яндекс.Фотки:' %>
           <%= text_field_tag :album_url, nil, :class => 'string' %>
         </div>
 
-        <%= f.submit 'Сохранить', :class => 'btn btn-lg btn-orange' %>
+        <%= f.submit 'Сохранить', :class => 'flat-btn btn-lg btn-orange' %>
+        <%= link_to 'Отмена', :back %>
       <% end %>
 
     </div>
 
-    <div class="preview_wrapper">
-      <div class="gallery_images_help">
-        <div class="orange cell">
-          Помощь
-        </div>
-
-        <div class="arrow_box cell">
-          <h4>Фотографии можно загрузить двумя способами:</h4>
-          <ol>
-            <li>Загрузить непосредственно с компьютера, выбрав одну или несколько фотографий сразу.</li>
-            <li>Указать ссылку на альбом Вконтакте или на Яндекс.Фотки
-            <ul>
-              <li>Ссылка на альбом Вконтакте имеет вид: <a target="_blank" rel="nofollow" href="http://vk.com/album-35689602_173541663">http://vk.com/album-35689602_173541663</a> (можно добавить только из открытых альбомов)</li>
-              <li>Ссылка на альбом Яндекс.Фотки имеет вид: <a target="_blank" rel="nofollow" href="http://fotki.yandex.ru/users/s-s-nega/album/131256/">http://fotki.yandex.ru/users/s-s-nega/album/131256</a></li>
-            </ul>
-            </li>
-            <li>При необходимости можно добавить несколько альбомов по очереди.</li>
-          </ol>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 

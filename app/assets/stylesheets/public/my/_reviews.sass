@@ -1,0 +1,149 @@
+.my_wrapper
+  &.my_reviews_show
+    .breadcrumbs
+      margin: 10px 0
+      padding: 0 !important
+
+    h3
+      background: #e9e9e9
+      font-size: 14px
+      line-height: 27px
+      padding: 0 0 0 7px
+
+    .header_with_marker
+      background: image-url('public/blue_marker.png') no-repeat
+      height: 40px
+      margin-bottom: 5px
+      padding-left: 28px
+
+    .left
+      float: left
+      padding: 0 40px 0 0
+      width: 900px
+      position: relative
+      overflow: visible
+      margin-bottom: 40px
+
+      &:after
+        display: block
+        height: 100%
+        width: 1px
+        content: ''
+        position: absolute
+        top: 88px
+        right: -20px
+        border-right: 1px solid #ccc
+
+      .header_with_marker
+        .to_right
+          +clearfix
+          background: #fff
+          float: right
+          height: 27px
+          padding: 0 0 0 3px
+
+        a
+          float: left
+          font-size: 12px
+          height: 21px
+          line-height: 21px
+          margin: 0 0 0 5px
+          padding: 1px 0 2px
+          text-align: center
+          width: 28px
+
+          &:first-child
+            margin: 0
+
+          span
+            background: image_url('public/my_post_icons.png') no-repeat
+            display: block
+            height: 24px
+            margin: 0 auto
+
+          &.change_state
+            padding: 1px 8px 2px
+            width: 120px
+
+          &.change_poster
+            span
+              background-position: -9px 0
+              width: 14px
+
+          &.change_post
+            span
+              background-position: -45px 0
+              margin: 0 8px 0 10px
+              width: 10px
+
+          &.remove_post
+            span
+              background-position: -73px 0
+              margin: 0 auto
+              width: 18px
+
+    .left, .right
+      .separator
+        color: #999
+        font-size: 13px
+        line-height: 14px
+        margin: 20px 0 40px 0
+        position: relative
+        text-align: left
+        padding-left: 60px
+
+        &:before, &:after
+          display: block
+          content: ''
+          border: 1px dashed #999
+          position: absolute
+          top: 8px
+
+        &:before
+          left: 5px
+          width: 45px
+
+        &:after
+          right: 60px
+          width: 490px
+
+        .arrow
+          position: absolute
+          left: 5px
+          top: 12px
+          border-left: 1px dashed #999
+          width: 1px
+          height: 30px
+
+          &:before
+            display: block
+            content: '▼'
+            width: 5px
+            height: 5px
+            position: absolute
+            left: -6px
+            top: 28px
+
+    .right
+      float: right
+      width: 240px
+      border: 0
+
+      .posters
+        margin-left: 5px
+
+      .separator
+        &:before, &:after
+          width: 45px
+
+        &:before
+          left: 0px
+
+        &:after
+          right: 0px
+
+        .arrow
+          left: -1px
+
+          &:before
+            left: -6px

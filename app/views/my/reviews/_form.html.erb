@@ -5,62 +5,22 @@
 <%= simple_nested_form_for @review,
   :as => :review,
   :url => @review.new_record? ? my_reviews_path : my_review_path(@review.id),
-  :html => { :class => "my_review_form default_simple_form review_#{@review.useful_type}_form" } do |f| %>
+  :html => { :class => "my_review_form default_simple_form my_form" } do |f| %>
 
-  <span class='red_star'>*</span> <span class='text_help'> - поля, обязательные для заполнения</span>
+  <%= f.input :title %>
 
-  <%= hidden_field_tag :type, @review.useful_type %>
+  <%= f.input :content, :as => :text, :input_html => { :id => 'html', :class => 'markitup with-preview' }  %>
 
-  <%= f.input :title, :as => :text, :input_html => { :placeholder => 'Укажите название обзора' } %>
-
-  <%= render "#{@review.useful_type}_fields", :f => f %>
-
-  <%= f.input :only_tomsk, :label => "Только #{Settings['app.city_ru']}" %>
-
-  <%= f.input :tag, :as => :string,
-    :input_html => { :data => { 'autocomplete-source' => tags_available_my_reviews_path } } %>
-
-  <div class='relations'>
-    <p>Этот пост связан с</p>
-
-    <div class='sticky_elements'>
-      <% @review.relations.each do |item| %>
-        <div class="element">
-            <% if item.slave.is_a? Afisha %>
-              <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
-            <% elsif item.slave.is_a? Discount %>
-              <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
-            <% else %>
-              <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
-            <% end %>
-          <span class="del_icon"></span>
-          <%= hidden_field_tag "review[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
-        </div>
-      <% end %>
-    </div>
-
-    <%= hidden_field_tag "review[need_change]", true %>
-    <div style='clear: both'></div>
-
-    <div class='select_and_search'>
-      <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Обзор', '/my/related_reviews'], ['Фотогалерея', '/my/related_photogalleries'], ['Скидки', '/my/related_discounts']], 'Афиша'), { class: 'type_select' }  %>
-      <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
-      <%= text_field_tag :search, '', { class: 'related_search' } %>
-    </div>
-
-    <div style='clear: both'></div>
-
-    <div class='results infinite_list'>
-      <ul class='posters'></ul>
-    </div>
-    <input type="hidden" value="review[related_items][]" class="params_name">
+  <div class='only_tomsk_wrapper'>
+    <%= f.input :only_tomsk, :label => "Только #{current_city_ru}" %>
   </div>
 
-  <div style='clear: both'></div>
-
   <div class="select_categories">
-    <%= select_tag :cat, options_for_select(Review.categories.options - [["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]), :class => 'select_type', :prompt => 'Выберите категорию' %> <span class="red_star for_categories" title='Обязательное поле'>*</span>
+    <div class="categories_title">
+      <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+    </div>
 
+    <%= select_tag :cat, options_for_select(Review.categories.options - [["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]), :class => 'select_type', :prompt => '' %>
     <%= f.input :tagit_categories,
       :as => :string,
       :label => false,
@@ -69,12 +29,13 @@
     <%= hidden_field_tag "review[category_flag]", true %>
   </div>
 
+  <%= f.input :tag, :as => :string,
+    :input_html => { :data => { 'autocomplete-source' => tags_available_my_reviews_path } } %>
+
   <div class='submit'>
-    <%= f.submit 'Сохранить', :class => 'btn btn-lg btn-grey' %>
+    <%= f.submit 'Сохранить', :class => 'flat-btn btn-lg btn-orange' %>
     <%= link_to 'Отмена', :back %>
   </div>
 <% end %>
 
-<%= render :partial => 'my/afishas/textile_syntax' %>
-
-<%= yield(:review_preview) %>
+<%= render :partial => 'my/commons/textile_syntax' %>

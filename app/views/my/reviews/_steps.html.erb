@@ -1,0 +1,81 @@
+<div class='steps_wrapper'>
+  <div class='step first <%= "complete" if resource.first_step_complete? || params[:step] == 'first' %>'>
+    <% if resource.first_step_complete? %>
+      <div class='number'>&#10004;</div>
+    <% else %>
+      <div class='number'>1</div>
+    <% end %>
+    <div class='text'>Добавить обзор</div>
+  </div>
+
+  <div class='step second <%= "complete" if resource.second_step_complete? || params[:step] == 'second' %>'>
+    <% if resource.second_step_complete? %>
+      <%= link_to poster_edit_my_review_path(resource, :step => :second) do %>
+        <div class='number'>&#10004;</div>
+        <div class='text'>Добавить постер</div>
+      <% end %>
+    <% else %>
+      <% if resource.persisted? %>
+        <%= link_to poster_edit_my_review_path(resource, :step => :second) do %>
+          <div class='number'>2</div>
+          <div class='text'>Добавить постер</div>
+        <% end %>
+      <% else %>
+        <div class='number'>2</div>
+        <div class='text'>Добавить постер</div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class='step third <%= "complete" if resource.third_step_complete? || params[:step] == 'third' %>'>
+    <% if resource.third_step_complete? %>
+      <%= link_to images_add_my_review_path(resource, :step => :third) do %>
+        <div class='number'>&#10004;</div>
+        <div class='text'>Добавить фотографии</div>
+      <% end %>
+    <% else %>
+      <% if resource.persisted? %>
+        <%= link_to images_add_my_review_path(resource, :step => :third) do %>
+          <div class='number'>3</div>
+          <div class='text'>Добавить фотографии</div>
+        <% end %>
+      <% else %>
+        <div class='number'>3</div>
+        <div class='text'>Добавить фотографии</div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class='step fourth <%= "complete" if resource.fourth_step_complete? || params[:step] == 'fourth' %>'>
+    <% if resource.fourth_step_complete? %>
+      <%= link_to add_related_items_my_review_path(@review, :step => :fourth) do %>
+        <div class='number'>&#10004;</div>
+        <div class='text'>Связать обзор с чем-либо</div>
+      <% end %>
+    <% else %>
+      <% if resource.persisted? %>
+        <%= link_to add_related_items_my_review_path(@review, :step => :fourth) do %>
+          <div class='number'>4</div>
+          <div class='text'>Связать обзор с чем-либо</div>
+        <% end %>
+      <% else %>
+        <div class='number'>4</div>
+        <div class='text'>Связать обзор с чем-либо</div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="controls">
+    <% if resource.persisted? %>
+      <% if resource.draft? %>
+        <%= link_to t('my.send_to_public'), publish_my_review_path(@review), :method => :put, :class => 'flat-btn btn-orange btn-lg',
+          :confirm => 'Вы уверены? После публикации обзор будет доступен всем пользователям сайта!' %>
+      <% else %>
+        <%= link_to 'В черновики', draft_my_review_path(@review), :method => :put, :class => 'flat-btn btn-grey btn-lg',
+          :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>
+      <% end %>
+    <% else %>
+      <%= link_to t('my.send_to_public'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
+    <% end %>
+  </div>
+</div>

@@ -1,22 +1,23 @@
 <h1><%= review.title %></h1>
 
-<div class="details">
-  <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= review.comments.count %></span>
-  <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= review.likes_count %></span>
-  <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= review.page_visits.count %></span>
+<div class='details'>
+  <span class='show_tipsy fa fa-comments' title='Комментарии'> <%= review.comments.count %></span>
+  <span class='show_tipsy fa fa-heart' title='Понравилось'> <%= review.likes_count %></span>
+  <span class='show_tipsy fa fa-eye' title='Просмотры'> <%= review.page_visits.count %></span>
 </div>
 
+<div class='date'>
+  <%= review.date %>
+</div>
 
-<div class="description">
+<div class='description'>
   <%= review.raw_content_for_show %>
 
-  <%= review.date %>
-
-  <ul class="gallery close js-gallery">
+  <ul class='gallery close js-gallery'>
     <% render :partial => 'my/reviews/gallery', :locals => { :review => @review } %>
   </ul>
 </div>
 
-<div class="author">
+<div class='author'>
   <%= render :partial => 'commons/author', :locals => { :account => review.account } %>
 </div>
