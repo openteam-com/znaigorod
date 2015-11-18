@@ -4,14 +4,30 @@
     <div class="<%= Settings['app.city'] %>">
       <div class='select_menu'>
         <span>
-          <%= Settings['app.city_ru'] %>
+          <%= current_city_ru %>
         </span>
         <ul>
           <li>
-            <% if Settings['app.city'] == 'tomsk' %>
-              <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru' %>
+            <% if current_city == 'tomsk' %>
+              <% if request.original_fullpath.split('/').include?('afisha') %>
+                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/afisha' %>
+              <% elsif request.original_fullpath.split('/').include?('discounts') %>
+                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/discounts' %>
+              <% elsif request.original_fullpath.split('/').include?('organizations') %>
+                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/organizations' %>
+              <% elsif request.original_fullpath.split('/').include?('reviews') %>
+                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/reviews' %>
+              <% end %>
             <% else %>
-              <%= link_to 'Томск', 'http://znaigorod.ru' %>
+              <% if request.original_fullpath.split('/').include?('afisha') %>
+                <%= link_to 'Томск', 'http://znaigorod.ru/afisha' %>
+              <% elsif request.original_fullpath.split('/').include?('discounts') %>
+                <%= link_to 'Томск', 'http://znaigorod.ru/discounts' %>
+              <% elsif request.original_fullpath.split('/').include?('organizations') %>
+                <%= link_to 'Томск', 'http://znaigorod.ru/organizations' %>
+              <% elsif request.original_fullpath.split('/').include?('reviews') %>
+                <%= link_to 'Томск', 'http://znaigorod.ru/reviews' %>
+              <% end %>
             <% end %>
           </li>
         </ul>
@@ -36,17 +52,15 @@
     <!-- /weather -->
 
     <!-- new year  -->
-    <% if is_tomsk? %>
-      <div class='new_year_wrapper'>
-        <%= link_to map_project_show_path('novyj_god_2016_v_tomske') do %>
-          <p class='big'><span><%= days_to_new_year %></span><%= I18n.t('new_year', count: days_to_new_year) %></p>
-          <p class='small'>до Нового года</p>
-        <% end %>
+    <div class='new_year_wrapper'>
+      <%= link_to map_project_show_path(current_city == "tomsk" ? 'novyj_god_2016_v_tomske' : 'novyj_god_2016_v_sevastopole') do %>
+        <p class='big'><span><%= days_to_new_year %></span><%= I18n.t('new_year', count: days_to_new_year) %></p>
+        <p class='small'>до Нового года</p>
+      <% end %>
       </div>
-    <% end %>
-    <!-- /new year -->
+      <!-- /new year -->
 
-    <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
+      <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
 
     <!--noindex-->
     <div class='dashboard'>
