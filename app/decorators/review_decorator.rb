@@ -165,4 +165,8 @@ class ReviewDecorator < ApplicationDecorator
   def object_image
     annotation_image(242, 180)
   end
+
+  def first_step_complete?
+    draft? || published?
+  end
 end

@@ -1,0 +1,103 @@
+.default_form
+  margin-bottom: 30px
+
+  h1
+    font-size: 22px
+    margin: 0 0 10px 0
+
+  .upload_gallery_images
+    display: none
+
+  .textile_syntax
+    display: none
+
+  .my_form
+    margin: 0 0 30px 0
+
+    label
+      display: block
+      font-size: 14px
+      margin: 0 0 5px 0
+
+      abbr
+        color: red
+        cursor: help
+        font-size: 20px
+
+    input, textarea, select
+      +border-radius(5px)
+      border: 1px solid #909090
+      outline: none
+
+    .submit
+      input
+        margin-right: 25px
+
+    .input
+      margin: 0 0 10px 0
+
+      input
+        padding: 5px
+
+      input[type='file']
+        padding: 0 !important
+
+    input[type='submit'], input[type='file']
+      border: 0
+      +border-radius(0)
+
+    .error
+      display: block
+      color: red
+
+    .text
+      .markItUp
+        .markItUpHeader
+          width: 760px
+
+        textarea
+          width: 750px
+          height: 150px
+
+        .markItUpFooter
+          width: 750px
+
+    .only_tomsk_wrapper
+      label, input
+        +inline-block
+
+      label.checkbox
+        margin: 0 !important
+
+    .select_categories
+      .select_type
+        +clearfix
+        +border-radius(3px)
+        +appearance(none)
+        background: #fff image_url('public/down_arrow.jpg') no-repeat center right
+        border: 1px solid #909090
+        cursor: pointer
+        height: 28px
+        padding-left: 4px
+        width: 300px
+
+      .categories_title
+        margin-bottom: 5px
+
+        label
+          font-size: 14px
+
+      ul.tagit
+        +border-radius(0)
+        border: 0
+        padding: 0
+
+    .review_tag
+      ul
+        background-color: #fff
+
+        input
+          padding: 5px
+
+    div.submit
+      margin: 20px 0

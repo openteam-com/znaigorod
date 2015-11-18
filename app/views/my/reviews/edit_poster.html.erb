@@ -1,18 +1,17 @@
 <div class='my_wrapper'>
+
+  <%= render :partial => 'steps', :locals => { :resource => @review } %>
+
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <div class='my_posts_wrapper'>
+  <div class='default_form'>
     <h1>
-      Загрузка постера.
-      <%= link_to 'помощь', '#', :class => 'show_help' %>
+      Добавить постер
     </h1>
 
-    <div class='help_wrapper'>
-      <div class='help'>
-        <p>Выберете картинку для постера. Файл загрузится автоматически.</p>
-        <p>После этого можно будет выделить необходимый фрагмент картинки для отображения в виде постера.</p>
-      </div>
-    </div>
+    <p><strong>Для изменения постера - просто загрузи новый или измени область!</strong></p>
+    <p>Выберете картинку для постера. Файл загрузится автоматически.</p>
+    <p class='margin'>После этого можно будет выделить необходимый фрагмент картинки для отображения в виде постера.</p>
 
     <% if resource.poster_image_url? %>
       <% crop_opt = resource.poster_url ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
@@ -21,11 +20,10 @@
       <%= simple_form_for resource,
         :as => :review,
         :url => my_review_path(resource.id),
-        :html => { :class => 'default_simple_form' } do |f| %>
+        :html => { :class => 'default_simple_form my_form' } do |f| %>
 
-        <p><strong>Для изменения постера - просто загрузи новый или измени область!</strong></p>
 
-        <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
+        <%= f.input :poster_image, label: false, required: true, class: :button %>
         <%= f.error :poster_image_content_type %>
 
         <div>
@@ -45,7 +43,7 @@
         </div>
 
         <div class='submit'>
-          <%= f.button :submit, 'Обрезать постер', :class => 'btn btn-lg btn-grey' %>
+          <%= f.button :submit, 'Обрезать постер', :class => 'flat-btn btn-lg btn-orange' %>
           <%= link_to 'Отмена', my_review_path(resource) %>
         </div>
       <% end %>
@@ -53,11 +51,11 @@
       <%= simple_form_for resource,
         :as => :review,
         :url => my_review_path(resource.id),
-        :html => { :class => 'default_simple_form' } do |f| %>
+        :html => { :class => 'default_simple_form my_form' } do |f| %>
 
         <%= hidden_field_tag :crop, true %>
 
-        <%= f.input :poster_image, label: 'Выберите изображение', required: true, class: :button %>
+        <%= f.input :poster_image, label: false, required: true, class: :button %>
 
         <%= f.error :poster_image_content_type %>
 

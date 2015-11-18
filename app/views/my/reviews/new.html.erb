@@ -1,8 +1,11 @@
-<div class="my_wrapper">
+<div class='my_wrapper'>
+
+  <%= render :partial => 'steps', :locals => { :resource => @review } %>
+
   <%= render_navigation context: 'my', :renderer => :breadcrumbs %>
 
-  <div class="my_reviews_wrapper review_form">
-    <h1>Добавить <%= t("#{@review.class.model_name.human}") %></h1>
+  <div class='my_reviews_wrapper review_form default_form'>
+    <h1>Добавить обзор</h1>
 
     <%= render 'form' %>
   </div>
