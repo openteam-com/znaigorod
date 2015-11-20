@@ -1,11 +1,5 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <% unless params[:id] == 'malenkaya-krasavitsa-2015' %>
-      <li class='js-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_malenkaya_2015.jpg', size: '880x80'), contest_path('malenkaya-krasavitsa-2015'), class: 'js-stat-malenkaya-2015' %>
-      </li>
-    <% end %>
-
     <% if DateTime.now < Date.parse("09.11.2015").end_of_day %>
       <li class='js-banner'>
         <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_forum.jpg', size: '880x80'), '/away?to=http://xn--70-1lchakbomhjj.xn--p1ai/', :target => :_blank, class: 'js-stat-podrujki' %>
