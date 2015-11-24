@@ -104,6 +104,46 @@
       </ul>
     </div>
   <% end %>
+
+  <% if @review.like_this_reviews.any? %>
+    <div class= 'suborganization_info related-reviews reviews_list'>
+      <div class='title'>
+        Похожие обзоры
+      </div>
+      <ul class='posters'>
+        <% @review.like_this_reviews.each do |review| %>
+          <li class="item"><%= render :partial => 'reviews/poster', :locals => { :review => review, :height => '120', :width => '184' } %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @review.last_reviews.any? %>
+    <div class='suborganization_info related-reviews reviews_list'>
+      <div class='title'>
+        Последние обзоры
+      </div>
+      <ul class='posters'>
+        <% @review.last_reviews.each do |review| %>
+          <li class="item"><%= render :partial => 'reviews/poster', :locals => { :review => review, :height => '120', :width => '184' } %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @review.last_afishas.any? %>
+    <div class='suborganization_info similar_afisha related_afishas reviews_afishas'>
+      <div class='title'>
+        Афиша
+      </div>
+      <ul class='posters'>
+        <% @review.last_afishas.each do |afisha| %>
+          <%= render :partial => "reviews/related_poster_afisha", :locals => { :item => afisha } %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 </div>
 
 <div class="right">

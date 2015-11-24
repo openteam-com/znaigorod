@@ -56,6 +56,7 @@ class ReviewDecorator < ApplicationDecorator
     @related_reviews = relations.where(slave_type: 'Review').delete_if { |review| review.slave && similar_ids.include?(review.slave.id) }
   end
 
+
   def related_afishas
     @related_afishas = relations.where(slave_type: 'Afisha').delete_if { |afisha| afisha.slave.blank? || !afisha.slave.actual? }.map(&:slave)
   end
@@ -73,6 +74,7 @@ class ReviewDecorator < ApplicationDecorator
   def related_photogalleries
     @related_photogalleries = relations.where(slave_type: 'Photogallery')
   end
+
 
   def tags
     tag.split(',').map(&:squish).map(&:mb_chars).map(&:downcase)
@@ -137,8 +139,21 @@ class ReviewDecorator < ApplicationDecorator
                  end
   end
 
+
   def decorated_similar
     @decorated_similar ||= ReviewDecorator.decorate(similar)
+  end
+
+  def like_this_reviews
+    @like_this_reviews = ReviewDecorator.decorate(HasSearcher.searcher(:reviews).paginate(:page => 1, :per_page => 8).more_like_this(review))
+  end
+
+  def last_reviews
+    @last_reviews = ReviewsPresenter.new(:page => 1, :per_page => 8).decorated_collection
+  end
+
+  def last_afishas
+    @last_afishas = AfishaPresenter.new(:page => 1, :per_page => 8).decorated_collection
   end
 
   # overrides OpenGraphMeta.meta_keywords
