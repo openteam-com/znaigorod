@@ -8,12 +8,12 @@
   <%= @organization.twitter_cards_meta %>
 <% end %>
 
-<div class='organization_show'>
+<div class='organization_show' itemscope itemtype="http://schema.org/Organization">
   <div class='left js-fixed-menu'>
-    <div class='image'>
+    <div class='image'  itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
       <% if @organization.client? %>
         <% if @organization.logotype_url? %>
-          <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200, :watermark => false), :size => '200x200', :alt => @organization.title), @organization.logotype_url) %>
+          <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200, :watermark => false), :size => '200x200', :itemprop => "contentUrl", :alt => @organization.title), @organization.logotype_url) %>
         <% else %>
           <span class='stub_poster'></span>
         <% end %>
@@ -124,15 +124,20 @@
         <%= link_to 'изменить', manage_organization_path(@slave_organization || @organization), :class => :icon_edit %>
       <% end %>
 
-      <h1><%= @organization.title %></h1>
-      <%= content_tag(:div, "Адрес: #{@organization.address_link}".html_safe,
-                      class: [:place, scrolltrack(@organization.address_navigation_title)], id: @organization.address_navigation_title.try(:from_russian_to_param)) if @organization.address_link.present? %>
-      <%= @organization.work_schedule %>
-
+      <h1 itemprop="name"><%= @organization.title %></h1>
+      <%= content_tag(:div, class: [:place, scrolltrack(@organization.address_navigation_title)],
+        id: @organization.address_navigation_title.try(:from_russian_to_param)) do %>
+            <%  content_tag(:span, "Адрес: ") +
+                content_tag(:span, "#{@organization.address_link}".html_safe, itemprop:"address")%>
+            <% end if @organization.address_link.present? %>
+      <span itemprop="department" itemscope itemtype="http://schema.org/LocalBusiness">
+        <div itemprop="openingHours"><%= @organization.work_schedule %></div>
+      </span>
       <div class='phone_wrapper'>
         <% if @organization.phone.present? %>
+          <meta content="<%= @organization.phone %>"/>
           Телефон: <%= @organization.phone.truncate(5) %>
-        <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id, rel: :nofollow %>
+          <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id, rel: :nofollow%>
       <% else %>
         нет телефона
       <% end %>
@@ -144,14 +149,14 @@
           <% if @organization.site.present? %>
             Сайт:
             <% @organization.site.split(',').each do |link| %>
-              <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank' %>
+              <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank', :itemprop => "sameAs" %>
             <% end %>
           <% end %>
         </li>
         <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email_link.present? %>
+        <%= content_tag(:div, "#{@organization.email_link}".html_safe, itemprop:"email", style:"display: none") if @organization.email_link.present? %>
       </ul>
     <% end %>
-
     <% if @organization.social_links.present? %>
       <ul class='social_links'>
         <% @organization.social_links.each do |link| %>
@@ -162,7 +167,7 @@
 
     <% if @organization.client? %>
       <% if @organization.description.present? %>
-        <div class='description'>
+        <div class='description' itemprop="description">
           <%= @organization.description_html %>
         </div>
       <% end %>
