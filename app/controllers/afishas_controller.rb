@@ -59,6 +59,7 @@ class AfishasController < ApplicationController
         @bet = @afisha.bets.build
         @certificates = @afisha.organization ? DiscountsPresenter.new(:organization_id => @afisha.organization.id, :type => 'certificate').decorated_collection : []
         @reviews = ReviewDecorator.decorate(@afisha.reviews.published.ordered)
+        @last_reviews = ReviewsPresenter.new(:page => 1, :per_page => 6).decorated_collection
       }
 
       format.promotion do
