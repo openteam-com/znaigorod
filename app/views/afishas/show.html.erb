@@ -237,14 +237,6 @@
       </div>
     <% end %>
 
-    <% if @reviews.any? %>
-      <div class='suborganization_info related-reviews afisha_reviews'>
-        <div class='title'>Обзоры</div>
-        <ul class='posters'>
-          <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '120', :width => '184' } %>
-        </ul>
-      </div>
-    <% end %>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha } %>
 
@@ -259,6 +251,26 @@
           <% end %>
         </ul>
       </div>
+    <% end %>
+
+    <% if @reviews.any? %>
+      <div class='suborganization_info related-reviews afisha_reviews'>
+        <div class='title'>Обзоры</div>
+        <ul class='posters'>
+          <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '120', :width => '184' } %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @last_reviews.any? %>
+    <div class='suborganization_info related-reviews afisha_reviews'>
+      <div class='title'>
+        Последние обзоры
+      </div>
+      <ul class='posters'>
+          <%= render :partial => 'reviews/posters', :locals => { :collection => @last_reviews, :height => '120', :width => '184' } %>
+      </ul>
+    </div>
     <% end %>
   </div>
 </div>

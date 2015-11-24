@@ -353,6 +353,11 @@
 .suborganization_info
   +clearfix
 
+  &.reviews_afishas
+    .title
+      font-size: 14px
+      font-weight: normal
+
   &.related-reviews
     .title
       font-size: 14px
@@ -425,6 +430,36 @@
         li:first-child
           height: 82px
           width: 122px
+
+
+    &.reviews_list
+      .posters
+        +clearfix
+        padding: 10px 0
+
+        .item
+          margin: 0 21px 0 0
+          height: 290px
+
+          .title
+            padding: 1px 2px 2px
+            margin: 0
+
+          &:nth-child(4n)
+            margin: 0
+
+          &:nth-child(5n)
+            margin: 0 21px 0 0
+
+          &:last-child
+            margin: 0
+
+          .date
+            line-height: 29px
+
+          .annotation
+            font-size: 11px
+            line-height: 16px
 
     &.afisha_reviews
       .posters
