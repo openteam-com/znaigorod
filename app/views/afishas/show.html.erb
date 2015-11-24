@@ -16,7 +16,7 @@
   <div class='left'>
     <div class='image' itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
       <% if @afisha.poster_url.present? %>
-        <%= link_to(image_tag(resized_image_url(@afisha.poster_url, 200, 269), size: '200x269', alt: @afisha.title), @afisha.poster_url) %>
+        <%= link_to(image_tag(resized_image_url(@afisha.poster_url, 200, 269), size: '200x269', alt: @afisha.title, itemprop:"contentUrl"), @afisha.poster_url) %>
       <% else %>
         <%= image_tag('public/stub_poster.png', size: '200x269', alt: :poster) %>
       <% end %>
@@ -152,13 +152,11 @@
   <div class='center'>
     <%= link_to 'изменить', edit_manage_afisha_path(@afisha), :class => 'icon_edit' if can? :edit, @afisha %>
 
-  <div itemprop="name">
     <% if @afisha.title.present? %>
-      <%= content_tag :h1, @afisha.title.text_gilensize %>
+      <%= content_tag(:h1, @afisha.title.text_gilensize, itemprop:"name")%>
     <% else %>
       <%= content_tag :h1, 'Нет названия' %>
     <% end %>
-  </div>
     <%= content_tag :p, @afisha.original_title.text_gilensize, :class => 'original_title' if @afisha.original_title? %>
 
     <div class='closest' itemprop="startDate">
@@ -170,8 +168,10 @@
         <div class='place' itemprop="location" itemscope itemtype="http://schema.org/Place">
           <div class='map_icon'>
            <%= place.place  %>
-          </div>
-            <span itemprop="name"><%= place.place %></span>
+         </div>
+         <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="addressLocality"><%= place.place %></span>
+         </span>
         </div>
       <% end %>
     <% end %>
@@ -191,7 +191,7 @@
       <% end %>
 
       <%= @afisha.html_attachments %>
-      <span itemprop="organizer"><%= render :partial => 'commons/author', :locals => { :account => @afisha.user.account } if @afisha.user.present? %></span>
+      <span><%= render :partial => 'commons/author', :locals => { :account => @afisha.user.account } if @afisha.user.present? %></span>
       <%= render :partial => 'commons/published_date', :locals => { :published_date => @afisha.created_at } %>
     </div>
 
