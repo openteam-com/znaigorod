@@ -1,22 +1,8 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-    <% if DateTime.now < Date.parse("09.11.2015").end_of_day %>
+    <% if Time.zone.now < Time.zone.parse('31.12.2015').end_of_day %>
       <li class='js-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_forum.jpg', size: '880x80'), '/away?to=http://xn--70-1lchakbomhjj.xn--p1ai/', :target => :_blank, class: 'js-stat-podrujki' %>
-      </li>
-    <% end %>
-
-    <% unless params[:id] == 'kraevedcheskiy-proekt-iz-antresoley' %>
-      <li class='js-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_kraevedcheskiy.jpg', size: '880x80'), contest_path('kraevedcheskiy-proekt-iz-antresoley'), class: 'js-stat-kraevedcheskiy' %>
-      </li>
-    <% end %>
-
-    <% if DateTime.now < Date.parse("12.10.2015").end_of_day %>
-      <li>
-        <%= link_to "http://xn--70-9kcqjfc6ag5akmpp.xn--p1ai/", :target => :_blank do %>
-          <%= image_tag 'public/banners/banner_1_2_business70.jpg', :size => '880x80', :alt => 'Бизнес триумф', :title => 'Бизнес триумф' %>
-        <% end %>
+        <%= link_to (image_tag 'public/banners/banner_1_2_new_year_2016.jpg', size: '880x80'), map_project_show_path('novyj_god_2016_v_tomske'), class: 'js-stat-new-year-2016' %>
       </li>
     <% end %>
   </ul>
