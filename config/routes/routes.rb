@@ -129,7 +129,9 @@ Znaigorod::Application.routes.draw do
   get '/link_counters/create' => 'link_counters#create'
 
   get '/:id' => 'map_projects#show', as: 'map_project_show', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) }
-  get '/:id/my' => 'map_placemarks#index', as: 'map_placemarks', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) } # FIXME
+  get '/:id/placemarks' => 'map_placemarks#index', as: 'map_placemarks', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) } # FIXME
+
+  resource :map_placemarks, except: :index
 
   resources :teasers, only: [:show]
 
