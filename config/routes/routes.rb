@@ -133,6 +133,9 @@ Znaigorod::Application.routes.draw do
 
   resource :map_placemarks, except: [:index, :create] do
     post 'create', as: :create_map_placemark
+    #get  ':map_placemark_id/payment' => 'map_placemarks_payment#create'
+    post  ':map_placemark_id/payment' => 'map_placemarks_payment#create', :as => 'map_placemark_payment'
+    #resources :placemarks_payment, :only => :create, :on => :member
   end
 
   resources :teasers, only: [:show]

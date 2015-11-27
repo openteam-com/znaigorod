@@ -50,4 +50,6 @@
     <%= f.submit %>
     <%= link_to 'Назад', manage_map_project_path(@map_project) %>
   <% end %>
+
+  <%= link_to 'Поднять скидку', map_placemark_payment_map_placemarks_path(1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
 </div>

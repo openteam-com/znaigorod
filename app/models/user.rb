@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :page_visits
   has_many :payments
   has_many :events, :class_name => 'Afisha'
+  has_many :map_placemarks
 
   belongs_to :account
 

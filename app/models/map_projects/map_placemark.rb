@@ -4,14 +4,14 @@ class MapPlacemark < ActiveRecord::Base
   attr_accessor :related_items, :placemark_type # placemark_type = manual | relation
 
   attr_accessible :title, :map_layer_ids, :related_items, :latitude, :longitude, :url, :address,
-                  :image, :kind, :expires_at, :placemark_type
+                  :image, :kind, :expires_at, :placemark_type, :user_id
 
   validates_presence_of :map_layer_ids, :expires_at
   validates :related_items, presence: true, :if => :relation?
   validates :title, :latitude, :longitude, :url, :image, presence: true, :if => :manual?
 
   default_value_for :kind, 'custom'
-  default_value_for :placemark_type, 'manual'
+  default_value_for :placemark_type, 'relation'
 
   scope :actual,    -> { where('expires_at > ?', Time.zone.now) }
   scope :published, -> { where(:state => :published) }
@@ -20,8 +20,10 @@ class MapPlacemark < ActiveRecord::Base
   before_save :parse_related_items
   before_destroy :delete_map_layers
 
+  belongs_to :user
   has_many :map_relations, :dependent => :destroy
   has_many :map_layers, :through => :map_relations
+  has_many :map_placemarks_payment, :as => :paymentable
 
   has_many :relations,      :as => :master,         :dependent => :destroy
   has_many :afishas,        :through => :relations, :source => :slave, :source_type => Afisha
@@ -77,8 +79,8 @@ class MapPlacemark < ActiveRecord::Base
       if relation.is_a? Afisha
         afisha_organization = relation.try(:organization)
         self.title = relation.title
-        self.latitude = afisha_organization.try(:latitude) || relation.showings.first.latitude
-        self.longitude = afisha_organization.try(:longitude) || relation.showings.first.longitude
+        self.latitude = afisha_organization.try(:latitude) || relation.showings.first.try(:latitude)
+        self.longitude = afisha_organization.try(:longitude) || relation.showings.first.try(:longitude)
         self.image_url = resized_image_url(relation.poster_url, 190, 260, { :magnify => nil, :orientation => nil })
         self.when = AfishaDecorator.new(relation).human_when
         self.url = "/afisha/#{relation.slug}"
