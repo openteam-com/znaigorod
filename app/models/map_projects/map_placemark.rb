@@ -1,12 +1,17 @@
 include ImageHelper
 
 class MapPlacemark < ActiveRecord::Base
-  attr_accessor :related_items
+  attr_accessor :related_items, :placemark_type # placemark_type = manual | relation
+
   attr_accessible :title, :map_layer_ids, :related_items, :latitude, :longitude, :url, :address,
-                  :image, :kind, :expires_at
+                  :image, :kind, :expires_at, :placemark_type
 
   validates_presence_of :map_layer_ids, :expires_at
+  validates :related_items, presence: true, :if => :relation?
+  validates :title, :latitude, :longitude, :url, :image, presence: true, :if => :manual?
+
   default_value_for :kind, 'custom'
+  default_value_for :placemark_type, 'manual'
 
   before_save :parse_related_items
   before_destroy :delete_map_layers
@@ -82,6 +87,14 @@ class MapPlacemark < ActiveRecord::Base
         self.organization_url = "/organizations/#{discount_organization.slug}" if discount_organization
       end
     end
+  end
+
+  def manual?
+    placemark_type == 'manual'
+  end
+
+  def relation?
+    placemark_type == 'relation'
   end
 end
 
