@@ -112,8 +112,6 @@ Znaigorod::Application.routes.draw do
     resources :comments, :only => [:new, :create, :show]
   end
 
-  resources :adverts, :only => [:index, :show]
-
   resources :service_payments, :only => [:new, :create]
 
   resources :webcams, :only => [:index, :show]
@@ -130,6 +128,7 @@ Znaigorod::Application.routes.draw do
 
   get '/link_counters/create' => 'link_counters#create'
 
+  get '/:id/my' => 'map_projects#index', as: 'map_project_show', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) }
   get '/:id' => 'map_projects#show', as: 'map_project_show', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) }
 
   resources :teasers, only: [:show]

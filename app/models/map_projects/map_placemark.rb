@@ -11,7 +11,6 @@ class MapPlacemark < ActiveRecord::Base
   before_save :parse_related_items
   before_destroy :delete_map_layers
 
-
   has_many :map_relations, :dependent => :destroy
   has_many :map_layers, :through => :map_relations
 
