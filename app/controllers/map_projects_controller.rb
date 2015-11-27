@@ -1,7 +1,7 @@
 class MapProjectsController < ApplicationController
   inherit_resources
 
-  actions :all
+  actions :show
 
   layout 'map_projects'
 
