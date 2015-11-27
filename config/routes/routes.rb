@@ -131,7 +131,9 @@ Znaigorod::Application.routes.draw do
   get '/:id' => 'map_projects#show', as: 'map_project_show', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) }
   get '/:id/placemarks' => 'map_placemarks#index', as: 'map_placemarks', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) } # FIXME
 
-  resource :map_placemarks, except: :index
+  resource :map_placemarks, except: [:index, :create] do
+    post 'create', as: :create_map_placemark
+  end
 
   resources :teasers, only: [:show]
 

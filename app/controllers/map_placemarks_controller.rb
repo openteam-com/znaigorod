@@ -12,8 +12,10 @@ class MapPlacemarksController < ApplicationController
     }
   end
 
-  def new
-
+  def create
+    create! { |success, failure|
+      success.html { render :nothing => true and return }
+      failure.html { raise 'error' }
+    }
   end
-
 end

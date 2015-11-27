@@ -1,7 +1,7 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
 <div class="map_placemark_form">
   <h1>Отметка на карте:</h1>
-  <%= simple_form_for @map_placemark, url: new_map_placemarks_path do |f| %>
+  <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path, remote: true do |f| %>
     <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes %>
     <div class='relations'>
       <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
