@@ -119,4 +119,5 @@
  * = require ./map_project
  * = require ./shuffle
  * = require ./collapse
+ * = require ./map_placemarks
  */

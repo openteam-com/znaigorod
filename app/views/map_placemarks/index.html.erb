@@ -1,75 +1,73 @@
-<div class="map_projects_wrapper">
-<div class="map_projects_content">
-
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
+<div class="map_projects_wrapper">
+  <div class="map_projects_content">
+    <div class="map_placemark_form">
+      <h1>Новая метка:</h1>
 
-<div class="map_placemark_form">
-  <h1>Новая метка:</h1>
+      <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path, remote: true do |f| %>
 
-  <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path, remote: true do |f| %>
-
-    <div class="select_categories">
-      <div class="categories_title">
-        <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
-      </div>
-      <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '' %>
-      <%= f.input :tagit_categories,
-        :as => :string,
-        :label => false,
-        :input_html => { :class => 'tagit_categories', :value => @map_project.map_layers.map(&:title).join(', ') }%>
-
-      <%= hidden_field_tag "map_placemarks[placemark_flag]", true %>
-    </div>
-
-    <div class="not_zg_object">
-      <%= f.input :title, as: :text, required: true, :label => 'Описание', :input_html => { :class=> 'markitup with-preview' } %>
-      <%= f.input :latitude, as: :hidden %>
-      <%= f.input :longitude, as: :hidden %>
-      <%= f.input :url, as: :string, required: true, label: "URL адрес"%>
-      <%= f.input :image, required: true, label: "Постер" %>
-      <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
-    </div>
-    <div class='relations'>
-      <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
-      <p class="title">Эта метка связана с:</p>
-      <div class='sticky_elements'>
-        <% resource.relations.each do |item| %>
-          <div class="element">
-            <% if item.slave.is_a? Afisha %>
-              <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
-            <% elsif item.slave.is_a? Discount %>
-              <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
-            <% else %>
-              <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
-            <% end %>
-            <span class="del_icon"></span>
-            <%= hidden_field_tag "map_placemark[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
+        <div class="select_categories">
+          <div class="categories_title">
+            <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
           </div>
-        <% end %>
-      </div>
 
-      <div class='select_and_search'>
-        <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Скидки', '/my/related_discounts']]), { class: 'type_select' }  %>
-        <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
-        <%= text_field_tag :search, '', { class: 'related_search' } %>
-      </div>
+          <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '' %>
+          <%= f.input :tagit_categories,
+            :as => :string,
+            :label => false,
+            :input_html => { :class => 'tagit_categories', :value => @map_placemark.map_layers.map(&:title).join(', ') }%>
 
-      <div class='results infinite_list'>
-        <span class='js-just-one' style='display: none'></span>
-        <ul class='posters'></ul>
-      </div>
-      <input type="hidden" value="map_placemark[related_items][]" class="params_name">
+          <%= hidden_field_tag "map_placemarks[placemark_flag]", true %>
+        </div>
+
+        <div class='not_zg_object js-form-one'>
+          <%= f.input :title, as: :string, required: true, :label => 'Описание', :input_html => { :class=> 'with-preview' } %>
+          <%= f.input :latitude, as: :hidden %>
+          <%= f.input :longitude, as: :hidden %>
+          <%= f.input :url, as: :string, required: true, label: 'URL адрес'%>
+          <%= f.input :image, required: true, label: 'Постер' %>
+          <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
+        </div>
+
+        <div class='relations js-form-two'>
+          <p class="title">Связать метку с:</p>
+          <div class='sticky_elements'>
+            <% resource.relations.each do |item| %>
+              <div class="element">
+                <% if item.slave.is_a? Afisha %>
+                  <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
+                <% elsif item.slave.is_a? Discount %>
+                  <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
+                <% else %>
+                  <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
+                <% end %>
+                <span class="del_icon"></span>
+                <%= hidden_field_tag "map_placemark[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class='select_and_search'>
+            <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Скидки', '/my/related_discounts']]), { class: 'type_select' }  %>
+            <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
+            <%= text_field_tag :search, '', { class: 'related_search' } %>
+          </div>
+
+          <div class='results infinite_list'>
+            <span class='js-just-one' style='display: none'></span>
+            <ul class='posters'></ul>
+          </div>
+          <input type="hidden" value="map_placemark[related_items][]" class="params_name">
+        </div>
+
+        <%= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
+        <div class="submit">
+          <%= f.submit "Сохранить", class: "flat-btn btn-lg btn-orange" %>
+          <%= link_to 'Назад', manage_map_project_path(@map_project) %>
+        </div>
+      <% end %>
+
+      <%= link_to 'Поднять скидку', map_placemark_payment_map_placemarks_path(1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
     </div>
-
-      <%= link_to 'Указать местоположение на карте', '#', :class => 'choose_coordinates' %>
-      <%= link_to 'Выбрать из списка', '#', :class => 'toggle_forms' %>
-    <div class="submit">
-      <%= f.submit "Сохранить", class: "flat-btn btn-lg btn-orange" %>
-      <%= link_to 'Назад', manage_map_project_path(@map_project) %>
-    </div>
-  <% end %>
-
-  <%= link_to 'Поднять скидку', map_placemark_payment_map_placemarks_path(1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
-</div>
-</div>
+  </div>
 </div>
