@@ -1,0 +1,50 @@
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
+<div class="map_placemark_form">
+  <h1>Отметка на карте:</h1>
+  <%= simple_form_for @map_placemark, url: new_map_placemarks_path do |f| %>
+    <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes %>
+    <div class='relations'>
+      <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
+      <p class="title">Эта метка связана с:</p>
+      <div class='sticky_elements'>
+        <% resource.relations.each do |item| %>
+          <div class="element">
+            <% if item.slave.is_a? Afisha %>
+              <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
+            <% elsif item.slave.is_a? Discount %>
+              <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
+            <% else %>
+              <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
+            <% end %>
+            <span class="del_icon"></span>
+            <%= hidden_field_tag "map_placemark[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class='select_and_search'>
+        <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Скидки', '/my/related_discounts']]), { class: 'type_select' }  %>
+        <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
+        <%= text_field_tag :search, '', { class: 'related_search' } %>
+      </div>
+
+      <div class='results infinite_list'>
+        <span class='js-just-one' style='display: none'></span>
+        <ul class='posters'></ul>
+      </div>
+      <input type="hidden" value="map_placemark[related_items][]" class="params_name">
+    </div>
+    <div class="not_zg_object">
+      <%= link_to 'Выбрать из списка', '#', :class => 'toggle_forms' %>
+      <%= f.input :title, as: :string %>
+      <%= f.input :latitude, as: :hidden %>
+      <%= f.input :longitude, as: :hidden %>
+      <%= f.input :url, as: :string %>
+      <%= f.input :image %>
+      <%= link_to 'Указать местоположение на карте', '#', :class => 'choose_coordinates' %>
+    </div>
+    <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
+    <%= f.submit %>
+    <%= link_to 'Назад', manage_map_project_path(@map_project) %>
+  <% end %>
+</div>

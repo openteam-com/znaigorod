@@ -2,7 +2,7 @@
 <div class="map_placemark_form">
   <h1>Отметка на карте:</h1>
   <%= simple_form_for [:manage, @map_project, resource] do |f| %>
-    <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes%>
+    <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes %>
     <div class='relations'>
       <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
       <p class="title">Эта метка связана с:</p>

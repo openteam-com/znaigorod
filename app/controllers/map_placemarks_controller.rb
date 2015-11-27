@@ -8,7 +8,12 @@ class MapPlacemarksController < ApplicationController
   def index
     index! {
       @map_project = MapProject.find(params[:id])
+      @map_placemark = MapPlacemark.new
     }
+  end
+
+  def new
+
   end
 
 end
