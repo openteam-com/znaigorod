@@ -51,5 +51,6 @@ end
 #  video_content      :text
 #  sms_counter        :integer          default(0)
 #  anketa             :text
+#  archive            :boolean          default(FALSE)
 #
 

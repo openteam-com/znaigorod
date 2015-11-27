@@ -24,5 +24,6 @@ end
 #  organization_title :text
 #  organization_url   :text
 #  expires_at         :datetime
+#  state              :string(255)
 #
 

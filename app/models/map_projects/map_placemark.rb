@@ -13,6 +13,10 @@ class MapPlacemark < ActiveRecord::Base
   default_value_for :kind, 'custom'
   default_value_for :placemark_type, 'manual'
 
+  scope :actual,    -> { where('expires_at > ?', Time.zone.now) }
+  scope :published, -> { where(:state => :published) }
+  scope :draft,     -> { where(:state => :draft) }
+
   before_save :parse_related_items
   before_destroy :delete_map_layers
 
@@ -26,7 +30,15 @@ class MapPlacemark < ActiveRecord::Base
 
   has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
-  scope :actual, -> { where('expires_at > ?', Time.zone.now) }
+  state_machine :initial => :draft do
+    event :to_published do
+      transition :draft => :published
+    end
+
+    event :to_draft do
+      transition :published => :draft
+    end
+  end
 
   def delete_map_layers
     self.map_layers.delete_all
@@ -96,6 +108,14 @@ class MapPlacemark < ActiveRecord::Base
   def relation?
     placemark_type == 'relation'
   end
+
+  def published?
+    state == 'published'
+  end
+
+  def draft?
+    state == 'draft'
+  end
 end
 
 # == Schema Information
@@ -118,5 +138,6 @@ end
 #  organization_title :text
 #  organization_url   :text
 #  expires_at         :datetime
+#  state              :string(255)
 #
 
