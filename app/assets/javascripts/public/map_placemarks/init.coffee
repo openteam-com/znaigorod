@@ -15,4 +15,12 @@
   $('.js-switch-form').click ->
     $('.js-form-one').toggle()
     $('.js-form-two').toggle()
+
+    if $('.js-placemark_type').val() == 'manual'
+      $('.js-placemark_type').val('relation')
+      $(this).text('Добавить самостоятельно')
+    else
+      $('.js-placemark_type').val('manual')
+      $(this).text('Или связать метку с...')
+
     false

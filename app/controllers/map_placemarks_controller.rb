@@ -14,6 +14,7 @@ class MapPlacemarksController < ApplicationController
 
   def create
     create! { |success, failure|
+      @map_placemark.save!
       success.html { render :nothing => true and return }
       failure.html { raise 'error' }
     }

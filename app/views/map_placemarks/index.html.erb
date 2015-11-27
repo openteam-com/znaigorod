@@ -4,7 +4,7 @@
     <div class="map_placemark_form">
       <h1>Новая метка:</h1>
 
-      <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path, remote: true do |f| %>
+      <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path do |f| %>
 
         <div class="select_categories">
           <div class="categories_title">
@@ -17,7 +17,7 @@
             :label => false,
             :input_html => { :class => 'tagit_categories', :value => @map_placemark.map_layers.map(&:title).join(', ') }%>
 
-          <%= hidden_field_tag "map_placemarks[placemark_flag]", true %>
+          <%= hidden_field_tag "map_placemark[placemark_flag]", true %>
         </div>
 
         <div class='not_zg_object js-form-one'>
@@ -26,7 +26,6 @@
           <%= f.input :longitude, as: :hidden %>
           <%= f.input :url, as: :string, required: true, label: 'URL адрес'%>
           <%= f.input :image, required: true, label: 'Постер' %>
-          <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
         </div>
 
         <div class='relations js-form-two'>
@@ -61,6 +60,8 @@
         </div>
 
         <%= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
+        <%= f.input :placemark_type, as: :hidden, input_html: { value: 'manual', class: 'js-placemark_type' } %>
+
         <div class="submit">
           <%= f.submit "Сохранить", class: "flat-btn btn-lg btn-orange" %>
           <%= link_to 'Назад', manage_map_project_path(@map_project) %>

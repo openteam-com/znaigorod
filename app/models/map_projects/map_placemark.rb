@@ -1,24 +1,27 @@
 include ImageHelper
 
 class MapPlacemark < ActiveRecord::Base
-  attr_accessor :related_items, :placemark_type # placemark_type = manual | relation
+  attr_accessor :related_items, :placemark_type, # placemark_type = manual | relation
+                :tagit_categories,  :placemark_flag
 
   attr_accessible :title, :map_layer_ids, :related_items, :latitude, :longitude, :url, :address,
-                  :image, :kind, :expires_at, :placemark_type, :user_id
+                  :image, :kind, :expires_at, :placemark_type, :user_id, :tagit_categories, :placemark_flag
 
-  validates_presence_of :map_layer_ids, :expires_at
   validates :related_items, presence: true, :if => :relation?
+  before_save :parse_related_items, :if => :relation?
+
   validates :title, :latitude, :longitude, :url, :image, presence: true, :if => :manual?
+  validates_presence_of :map_layer_ids
 
   default_value_for :kind, 'custom'
-  default_value_for :placemark_type, 'relation'
+  default_value_for :placemark_type, 'manual'
 
   scope :actual,    -> { where('expires_at > ?', Time.zone.now) }
   scope :published, -> { where(:state => :published) }
   scope :draft,     -> { where(:state => :draft) }
 
-  before_save :parse_related_items
   before_destroy :delete_map_layers
+  before_validation :set_layers, :if => :placemark_flag
 
   belongs_to :user
   has_many :map_relations, :dependent => :destroy
@@ -117,6 +120,12 @@ class MapPlacemark < ActiveRecord::Base
 
   def draft?
     state == 'draft'
+  end
+
+  def set_layers
+    array = tagit_categories.split(',').inject([]) { |a, c| a << MapProject.last.map_layers.where(title: c).first.id; a }
+
+    self.map_layer_ids = array.flatten
   end
 end
 
