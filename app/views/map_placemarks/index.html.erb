@@ -1,10 +1,34 @@
+<div class="map_projects_wrapper">
+<div class="map_projects_content">
+
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
 
 <div class="map_placemark_form">
-  <h1>Отметка на карте:</h1>
+  <h1>Новая метка:</h1>
 
   <%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path, remote: true do |f| %>
-    <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes %>
+
+    <div class="select_categories">
+      <div class="categories_title">
+        <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+      </div>
+      <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '' %>
+      <%= f.input :tagit_categories,
+        :as => :string,
+        :label => false,
+        :input_html => { :class => 'tagit_categories', :value => @map_project.map_layers.map(&:title).join(', ') }%>
+
+      <%= hidden_field_tag "map_placemarks[placemark_flag]", true %>
+    </div>
+
+    <div class="not_zg_object">
+      <%= f.input :title, as: :text, required: true, :label => 'Описание', :input_html => { :class=> 'markitup with-preview' } %>
+      <%= f.input :latitude, as: :hidden %>
+      <%= f.input :longitude, as: :hidden %>
+      <%= f.input :url, as: :string, required: true, label: "URL адрес"%>
+      <%= f.input :image, required: true, label: "Постер" %>
+      <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
+    </div>
     <div class='relations'>
       <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
       <p class="title">Эта метка связана с:</p>
@@ -37,19 +61,15 @@
       <input type="hidden" value="map_placemark[related_items][]" class="params_name">
     </div>
 
-    <div class="not_zg_object">
-      <%= link_to 'Выбрать из списка', '#', :class => 'toggle_forms' %>
-      <%= f.input :title, as: :string %>
-      <%= f.input :latitude, as: :hidden %>
-      <%= f.input :longitude, as: :hidden %>
-      <%= f.input :url, as: :string %>
-      <%= f.input :image %>
       <%= link_to 'Указать местоположение на карте', '#', :class => 'choose_coordinates' %>
+      <%= link_to 'Выбрать из списка', '#', :class => 'toggle_forms' %>
+    <div class="submit">
+      <%= f.submit "Сохранить", class: "flat-btn btn-lg btn-orange" %>
+      <%= link_to 'Назад', manage_map_project_path(@map_project) %>
     </div>
-    <%= f.input :expires_at, :as => :datetime_picker, :label => 'Показывать до' %>
-    <%= f.submit %>
-    <%= link_to 'Назад', manage_map_project_path(@map_project) %>
   <% end %>
 
   <%= link_to 'Поднять скидку', map_placemark_payment_map_placemarks_path(1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
+</div>
+</div>
 </div>
