@@ -1,4 +1,4 @@
-<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
+<% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU') %>
 <div class="map_projects_wrapper">
   <div class="map_projects_content">
     <div class="map_placemark_form">
@@ -22,8 +22,8 @@
 
         <div class='not_zg_object js-form-one'>
           <%= f.input :title, as: :string, required: true, :label => 'Описание', :input_html => { :class=> 'with-preview' } %>
-          <%= f.input :latitude, as: :hidden %>
-          <%= f.input :longitude, as: :hidden %>
+          <%= f.input :latitude, as: :hidden, input_html: { class: "js-ymaps-latitude" } %>
+          <%= f.input :longitude, as: :hidden, input_html: { class: "js-ymaps-longitude" } %>
           <%= f.input :url, as: :string, required: true, label: 'URL адрес'%>
           <%= f.input :image, required: true, label: 'Постер' %>
         </div>
@@ -70,5 +70,10 @@
 
       <%= link_to 'Поднять скидку', map_placemark_payment_map_placemarks_path(1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
     </div>
+  </div>
+  <div class="map_wrapper">
+    <input type="text" class="js-ymaps-address" id="address" />
+    <input type="button" class="js-ymaps-direct-geocode" value="Найти" />
+    <div class='map' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></div>
   </div>
 </div>
