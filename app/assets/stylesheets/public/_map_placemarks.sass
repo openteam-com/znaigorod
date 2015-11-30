@@ -1,7 +1,10 @@
 .wrapper_novyj_god_2016_v_tomske
-  .map_placemark_form
+
+  .map_projects_content
     background-color: #f6f6f6
     padding: 15px
+
+  .map_placemark_form
 
     label
       display: block
@@ -26,7 +29,27 @@
     .link-to-switch
       font-size: 14px
 
+    .left, .right
+      float: left
+
+    .left
+      margin: 0 30px 0 0
+
+    .right
+      margin-top: 35px
+
+      input[type='button']
+        width: 100px
+        padding: 0
+
+      .map
+        height: 600px
+        width: 800px
+        margin-top: 34px
+
     .not_zg_object, .map_placemark_expires_at
+      +clearfix
+
       .markItUpFooter
         width: 50%
 
@@ -76,8 +99,21 @@
   .relations
     display: none
 
-  .map_wrapper
-    .map
-      height: 500px
-      width: 500px
-      margin-left: 100px
+  .map_placemarks_list
+    border-top: 1px solid #ccc
+
+    h2
+      font-size: 18px
+      font-weight: bold
+      margin: 10px 0
+
+    .item
+      clear: both
+      +clearfix
+      margin: 10px 0
+
+      .left, .right
+        float: left
+
+      .left
+        margin: 0 20px 0 0

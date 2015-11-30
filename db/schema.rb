@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151127052846) do
+ActiveRecord::Schema.define(:version => 20151130053946) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -578,12 +578,13 @@ ActiveRecord::Schema.define(:version => 20151127052846) do
   create_table "map_projects", :force => true do |t|
     t.string   "title"
     t.string   "slug"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "cluster_icon_url"
     t.string   "cluster_icon_file_name"
     t.string   "cluster_icon_content_type"
     t.string   "cluster_icon_file_size"
+    t.integer  "amount",                    :default => 300
   end
 
   create_table "map_relations", :id => false, :force => true do |t|

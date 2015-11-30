@@ -24,3 +24,8 @@
       $(this).text('Или связать метку с...')
 
     false
+
+   $(document).on 'ajax:success', '.new_map_placemark', (event, data, textStatus, jqXHR) ->
+     $('.js-placemarks-list').slideUp('slow').html(data).slideDown('slow')
+
+     true

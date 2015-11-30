@@ -17,5 +17,6 @@ end
 #  cluster_icon_file_name    :string(255)
 #  cluster_icon_content_type :string(255)
 #  cluster_icon_file_size    :string(255)
+#  amount                    :integer          default(300)
 #
 

@@ -14,9 +14,11 @@ class MapPlacemarksController < ApplicationController
 
   def create
     create! { |success, failure|
-      @map_placemark.save!
-      success.html { render :nothing => true and return }
-      failure.html { raise 'error' }
+      success.html { render :partial => 'placemarks' and return }
+      failure.html do
+        @map_project = MapProject.find(params[:map_project_id])
+        render :partial => 'form', :locals => { :@map_placemark => @map_placemark, :@map_project => @map_project } and return
+      end
     }
   end
 

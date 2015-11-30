@@ -25,5 +25,6 @@ end
 #  organization_url   :text
 #  expires_at         :datetime
 #  state              :string(255)
+#  user_id            :integer
 #
 

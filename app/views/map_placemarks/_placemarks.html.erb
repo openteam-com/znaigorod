@@ -1,0 +1,20 @@
+<h2>Ваши метки</h2>
+<% if current_user && current_user.map_placemarks.any? %>
+  <% current_user.map_placemarks.each do |placemark| %>
+    <div class='item'>
+      <div class="left">
+        <div class="image">
+          <%= image_tag placemark.image_url %>
+        </div>
+      </div>
+      <div class="right">
+        <div class="title">
+          <%= placemark.title %>
+        </div>
+        <div class="pay">
+          <%= placemark.draft? ? link_to('Оплатить', map_placemark_payment_map_placemarks_path(placemark.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange btn-lg') : 'Оплачено' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
