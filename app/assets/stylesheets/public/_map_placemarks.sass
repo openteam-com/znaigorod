@@ -1,119 +1,125 @@
 .wrapper_novyj_god_2016_v_tomske
-
   .map_projects_content
     background-color: #f6f6f6
     padding: 15px
 
-  .map_placemark_form
+    .map_placemark_form
+      .input
+        .error
+          display: block
+          color: red
 
-    label
-      display: block
-      font-size: 14px
-      margin-bottom: 5px
+        &.hidden
+          display: none
 
-    abbr
-      color: red
-      cursor: help
-      font-size: 20px
+      label
+        display: block
+        font-size: 14px
+        margin-bottom: 5px
 
-    h1
-      font-size: 22px
-      margin-bottom: 10px
+      abbr
+        color: red
+        cursor: help
+        font-size: 20px
 
-    ul.tagit
-      border: 0
+      h1
+        font-size: 22px
+        margin-bottom: 10px
 
-      input.ui-widget-content
+      ul.tagit
         border: 0
 
-    .link-to-switch
-      font-size: 14px
+        input.ui-widget-content
+          border: 0
 
-    .left, .right
-      float: left
-
-    .left
-      margin: 0 30px 0 0
-
-    .right
-      margin-top: 35px
-
-      input[type='button']
-        width: 100px
-        padding: 0
-
-      .map
-        height: 600px
-        width: 800px
-        margin-top: 34px
-
-    .not_zg_object, .map_placemark_expires_at
-      +clearfix
-
-      .markItUpFooter
-        width: 50%
-
-      .markItUpHeader
-        width: 560px
-
-      input
-        +border-radius(3px)
-        +inline-block
-        border: 1px solid #909090
-        outline: none
-        padding: 4px
-        width: 300px
-
-    .select_categories
-      .select_type
-        +border-radius(3px)
-        +inline-block
-        border: 1px solid #909090
-        outline: none
-        padding: 4px
-
-      .select_type
-        +appearance(none)
-        background: image_url('public/down_arrow.jpg') no-repeat right
-        border: 1px solid #909090
-        cursor: pointer
-        overflow: hidden
-        width: 300px
-        background-color: #FFF
-
-      .tagit_categories
-        display: none
-
-
-    #map_placemark_title
-      +border-radius(3px)
-
-    .submit
-      font-size: 12px
-      margin-top: 15px
-      margin-bottom: 20px
-
-      a
-        padding-left: 20px
-
-  .relations
-    display: none
-
-  .map_placemarks_list
-    border-top: 1px solid #ccc
-
-    h2
-      font-size: 18px
-      font-weight: bold
-      margin: 10px 0
-
-    .item
-      clear: both
-      +clearfix
-      margin: 10px 0
+      .link-to-switch
+        font-size: 14px
 
       .left, .right
         float: left
 
       .left
-        margin: 0 20px 0 0
+        margin: 0 30px 0 0
+
+      .right
+        margin-top: 35px
+
+        input[type='button']
+          width: 100px
+          padding: 0
+
+        .map
+          height: 600px
+          width: 800px
+          margin-top: 34px
+
+      .not_zg_object, .map_placemark_expires_at
+        +clearfix
+
+        .markItUpFooter
+          width: 50%
+
+        .markItUpHeader
+          width: 560px
+
+        input
+          +border-radius(3px)
+          +inline-block
+          border: 1px solid #909090
+          outline: none
+          padding: 4px
+          width: 300px
+
+      .select_categories
+        .select_type
+          +border-radius(3px)
+          +inline-block
+          border: 1px solid #909090
+          outline: none
+          padding: 4px
+
+        .select_type
+          +appearance(none)
+          background: image_url('public/down_arrow.jpg') no-repeat right
+          border: 1px solid #909090
+          cursor: pointer
+          overflow: hidden
+          width: 300px
+          background-color: #FFF
+
+        .tagit_categories
+          display: none
+
+
+      #map_placemark_title
+        +border-radius(3px)
+
+      .submit
+        font-size: 12px
+        margin-top: 15px
+        margin-bottom: 20px
+
+        a
+          padding-left: 20px
+
+    .relations
+      display: none
+
+    .map_placemarks_list
+      border-top: 1px solid #ccc
+
+      h2
+        font-size: 18px
+        font-weight: bold
+        margin: 10px 0
+
+      .item
+        clear: both
+        +clearfix
+        margin: 10px 0
+
+        .left, .right
+          float: left
+
+        .left
+          margin: 0 20px 0 0

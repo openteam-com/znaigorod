@@ -127,6 +127,10 @@ class MapPlacemark < ActiveRecord::Base
 
     self.map_layer_ids = array.flatten
   end
+
+  def custom?
+    kind == 'custom'
+  end
 end
 
 # == Schema Information

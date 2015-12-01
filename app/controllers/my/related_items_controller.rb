@@ -1,9 +1,14 @@
 class My::RelatedItemsController < ApplicationController
-  def afishas
-    searcher = HasSearcher.searcher(:afishas, :q => search_param, :state => 'published')
-      .paginate(:page => page, :per_page => per_page)
+  helper_method :placemarks?
 
-    @related_afishas = searcher.results
+  def afishas
+    if placemarks? && current_user
+      @related_afishas = current_user.afisha.where(:state => :published)
+    else
+      searcher = HasSearcher.searcher(:afishas, :q => search_param, :state => 'published').paginate(:page => page, :per_page => per_page)
+      @related_afishas = searcher.results
+    end
+
     @related_items = related_items("afisha")
 
     render :partial => 'my/related_items/afishas' if request.xhr?
@@ -44,11 +49,14 @@ class My::RelatedItemsController < ApplicationController
   end
 
   def discounts
-    searcher = HasSearcher.searcher(:discounts, :q => search_param)
-      .paginate(page: page, per_page: per_page)
+    if placemarks? && current_user
+      @related_discounts = current_user.account.discounts.where(:state => 'published')
+    else
+      searcher = HasSearcher.searcher(:discounts, :q => search_param).paginate(page: page, per_page: per_page)
+      @related_discounts = searcher.results
+    end
 
-    @related_items=related_items("discount")
-    @related_discounts = searcher.results
+    @related_items = related_items("discount")
 
     render :partial => 'my/related_items/discounts' if request.xhr?
   end
@@ -76,5 +84,9 @@ class My::RelatedItemsController < ApplicationController
 
   def page
     params[:page]
+  end
+
+  def placemarks?
+    request.referrer.split('/').include? 'placemarks'
   end
 end

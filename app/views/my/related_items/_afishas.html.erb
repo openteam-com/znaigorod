@@ -1,20 +1,22 @@
-<% @related_afishas.each do |afisha| %>
-  <li class="poster">
-    <div class="image">
-      <%= image_tag resized_image_url(afisha.poster_url, 66, 87), size: "66x87"  %>
-    </div>
-    <div class="details">
-      <%= link_to afisha.title.truncate(25), afisha_show_path(afisha), :target => '_blank' %>
-      <div>
-        <% if @related_items.include? afisha.id %>
-          <%= button_tag "Добавлено", type: 'button', class: "js-button-add-related-item add_button", remote: true, disabled: true %>
-        <% else %>
-          <%= button_tag "Добавить", type: 'button', class: "js-button-add-related-item add_button", remote: true %>
-        <% end %>
+<% if @related_afishas.any? %>
+  <% @related_afishas.each do |afisha| %>
+    <li class="poster">
+      <div class="image">
+        <%= image_tag resized_image_url(afisha.poster_url, 66, 87), size: "66x87"  %>
       </div>
-      <%= hidden_field_tag "hidden_id","afisha_#{afisha.id}" %>
-    </div>
-  </li>
+      <div class="details">
+        <%= link_to afisha.title.truncate(25), afisha_show_path(afisha), :target => '_blank' %>
+        <div>
+          <% if @related_items.include? afisha.id %>
+            <%= button_tag "Добавлено", type: 'button', class: "js-button-add-related-item add_button", remote: true, disabled: true %>
+          <% else %>
+            <%= button_tag "Добавить", type: 'button', class: "js-button-add-related-item add_button", remote: true %>
+          <% end %>
+        </div>
+        <%= hidden_field_tag "hidden_id","afisha_#{afisha.id}" %>
+      </div>
+    </li>
+  <% end %>
+<% else %>
+  <p>У Вас нет опубликованных афиш</p>
 <% end %>
-
-<%= paginate @related_afishas %>

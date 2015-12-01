@@ -1,13 +1,8 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU') %>
 <div class="map_projects_wrapper">
   <div class="map_projects_content">
-    <div class="map_placemark_form">
-      <h1>Новая метка:</h1>
-      <%= render :partial => 'form', :locals => { :@map_placemark => @map_placemark } %>
-    </div>
-
-    <div class='map_placemarks_list js-placemarks-list'>
-      <%= render :partial => 'placemarks' %>
+    <div class='map_placemark_form js-map_placemark_form'>
+      <%= render :partial => 'content', :locals => { :@map_placemarks => @map_placemarks } %>
     </div>
   </div>
 </div>

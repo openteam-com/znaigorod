@@ -1,20 +1,22 @@
-<% @related_discounts.each do |discount| %>
-  <li class="poster">
-    <div class="image">
-      <%= image_tag resized_image_url(discount.image_url, 66, 87), size: "66x87"  %>
-    </div>
-    <div class="details">
-      <%= link_to discount.title.truncate(25), discount_path(discount), :target => '_blank' %>
-      <div>
-        <% if @related_items.include? discount.id %>
-          <%= button_tag "Добавлено", type: 'button', class: "js-button-add-related-item add_button", remote: true, disabled: true %>
-        <% else %>
-          <%= button_tag "Добавить", type: 'button', class: "js-button-add-related-item add_button", remote: true %>
-        <% end %>
+<% if @related_discounts.any? %>
+  <% @related_discounts.each do |discount| %>
+    <li class="poster">
+      <div class="image">
+        <%= image_tag resized_image_url(discount.image_url, 66, 87), size: "66x87"  %>
       </div>
-      <%= hidden_field_tag "hidden_id","discount_#{discount.id}" %>
-    </div>
-  </li>
+      <div class="details">
+        <%= link_to discount.title.truncate(25), discount_path(discount), :target => '_blank' %>
+        <div>
+          <% if @related_items.include? discount.id %>
+            <%= button_tag "Добавлено", type: 'button', class: "js-button-add-related-item add_button", remote: true, disabled: true %>
+          <% else %>
+            <%= button_tag "Добавить", type: 'button', class: "js-button-add-related-item add_button", remote: true %>
+          <% end %>
+        </div>
+        <%= hidden_field_tag "hidden_id","discount_#{discount.id}" %>
+      </div>
+    </li>
+  <% end %>
+<% else %>
+  <p>У Вас нет опубликованных скидок</p>
 <% end %>
-
-<%= paginate @related_discounts %>
