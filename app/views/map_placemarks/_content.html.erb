@@ -1,5 +1,12 @@
 <div class='left'>
   <h1>Новая метка:</h1>
+  <div class='interlude'>
+    <p>
+      Для того, чтобы добавить метку на новогоднюю карту, укажите место проведения, добавьте ссылку и изображение либо выберите афишу или скидку из вашего личного кабинета.         </p>
+    <p>
+      Метка будет добавлена без ограничения срока размещения. Стоимость самостоятельного добавления метки на карте - <strong>300 рублей</strong>.
+    </p>
+  </div>
   <%= simple_form_for @map_placemark, :html => { :class => 'js-simple-form' } do |f| %>
     <div class='select_categories'>
       <div class='categories_title'>
@@ -57,7 +64,7 @@
       <input type='hidden' value='map_placemark[related_items][]' class='params_name'>
     </div>
 
-    <%= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
+    <%#= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
     <%= f.input :placemark_type, as: :hidden, input_html: { value: 'manual', class: 'js-placemark_type' } %>
     <%= hidden_field_tag 'map_project_id', @map_project.id %>
 
@@ -117,10 +124,6 @@
               </ul>
             </div>
           <% end %>
-          <div>
-            <%= placemark.title if placemark.custom? %>
-          </div>
-          <%= link_to 'Редактировать', edit_map_placemark_path(placemark, :map_project_id => @map_project.id), :remote => true %>
         </div>
 
         <div class='right'>
@@ -129,6 +132,7 @@
           </div>
           <div class='pay'>
             <%= placemark.draft? ? link_to('Оплатить', map_placemark_map_placemark_payment_path(placemark.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange btn-lg') : '' %>
+            <%= link_to 'Редактировать', edit_map_placemark_path(placemark, :map_project_id => @map_project.id), :remote => true %>
           </div>
         </div>
       </div>

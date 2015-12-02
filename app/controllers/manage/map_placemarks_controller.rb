@@ -16,7 +16,8 @@ class Manage::MapPlacemarksController < Manage::ApplicationController
   def create
     create! do |success, failure|
       @map_project = MapProject.find(params[:map_project_id])
-      success.html { redirect_to manage_map_project_path(@map_project)}
+      @map_placemark.save :validate => false
+      success.html { resource.to_published!; redirect_to manage_map_project_path(@map_project)}
       failure.html { render :new }
     end
   end
@@ -33,5 +34,11 @@ class Manage::MapPlacemarksController < Manage::ApplicationController
     destroy!{
       redirect_to manage_map_project_path(params[:map_project_id]) and return
     }
+  end
+
+  def toggle_states
+    @map_placemark = MapPlacemark.find(params[:map_placemark_id])
+    @map_placemark.draft? ? @map_placemark.to_published! : @map_placemark.to_draft!
+    redirect_to manage_map_project_path(params[:map_project_id]) and return
   end
 end

@@ -26,7 +26,9 @@
         <%= link_to map_placemark.title, map_placemark.url %>
         (<%= link_to "Редактировать", edit_manage_map_project_map_placemark_path(@map_project, map_placemark)  %>
         <%= link_to "Удалить", manage_map_project_map_placemark_path(@map_project, map_placemark), method: 'DELETE', confirm: "Вы уверены?"  %>)
-        <%= content_tag :span, map_placemark.expires_at.strftime('Действителен до %d.%m.%Y %H:%M'), class: map_placemark.actual? ? 'normal' : 'stale' %>
+        <%= content_tag :span, map_placemark.expires_at.strftime('Действителен до %d.%m.%Y %H:%M'), class: map_placemark.actual? ? 'normal' : 'stale' if map_placemark.expires_at.present?%>
+        <%= I18n.t("my.#{map_placemark.state}") %>
+        <%= link_to map_placemark.draft? ? 'Опубликовать' : 'В Черновики', manage_map_project_map_placemark_toggle_states_path(@map_project, map_placemark), :method => :post %>
       </p>
     <% end %>
   </div>

@@ -187,7 +187,9 @@ Znaigorod::Application.routes.draw do
 
     resources :map_projects do
       resources :map_layers, :except => [:index]
-      resources :map_placemarks, :except =>[:index, :show]
+      resources :map_placemarks, :except =>[:index, :show] do
+        post 'toggle_states' => 'map_placemarks#toggle_states', :as => :toggle_states
+      end
     end
 
     resources :teasers do

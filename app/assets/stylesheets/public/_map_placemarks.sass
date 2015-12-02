@@ -172,6 +172,28 @@
           margin: 0 20px 0 0
           width: auto
 
+          .item_wrapper
+            width: 192px
+            height: 250px
+
+            .image
+              border: 1px solid #ccc
+
+            .title
+              width: 190px
+              margin: 10px 0
+              border-bottom: 1px dashed #ccc
+              padding-bottom: 4px
+              overflow: hidden
+              white-space: normal
+              height: 36px
+              text-overflow: ellipsis
+              -webkit-line-clamp: 2
+              +display-box
+              +box-orient(vertical)
+              font-size: 13px
+              font-family: 'Arial', sans-serif
+
           .afisha_content
             abbr
               color: #000

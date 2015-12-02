@@ -1,5 +1,9 @@
-<div class='item'>
+<div class='item_wrapper'>
   <div class="image">
-    <%= image_tag(resized_image_url(placemark.image_url, 190, 260), :size => '190x260') %>
+    <%= image_tag(resized_image_url(placemark.image_url, 190, 190), :size => '190x190') %>
+  </div>
+
+  <div class='title'>
+    <%= link_to placemark.title, placemark.url, :target => :_blank, :title => placemark.title, :alt => placemark.title %>
   </div>
 </div>

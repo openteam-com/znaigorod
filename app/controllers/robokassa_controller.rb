@@ -27,6 +27,8 @@ class RobokassaController < ApplicationController
       redirect_to my_root_path
     when nil
       redirect_to cooperation_path
+    when MapPlacemark
+      redirect_to map_placemarks_index_path(payment.paymentable.map_layers.first.map_project, :anchor => payment.paymentable.id)
     else
       redirect_to root_path
     end

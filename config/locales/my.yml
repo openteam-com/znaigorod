@@ -14,6 +14,8 @@ ru:
     archive:            Прошедшие мероприятия
     help:               Правила публикации
     social_gallery_url: Добавить альбом ВКонтакте или Яндекс.Фотки
+    draft:              Черновик
+    published:          Опубликована
 
     button:
       concert:      Концерт
