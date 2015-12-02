@@ -29,7 +29,7 @@
       <%= f.input :url, as: :url, required: true, label: 'URL адрес'%>
       <%= f.input :image, required: true, label: 'Постер' %>
       <% if @map_placemark.image_url? %>
-        <%= image_tag @map_placemark.custom? ? resized_image_url(@map_placemark.image_url, 190, 260) : @map_placemark.image_url %>
+        <%= image_tag @map_placemark.custom? ? resized_image_url(@map_placemark.image_url, 190, 190) : @map_placemark.image_url %>
       <% end %>
     </div>
 

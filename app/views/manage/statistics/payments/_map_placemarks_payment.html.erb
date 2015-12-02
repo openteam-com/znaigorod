@@ -3,7 +3,7 @@
   <td><%= payment.amount %></td>
   <td></td>
   <td></td>
-  <td>Покупка метки <%= link_to payment.paymentable, [:manage, payment.paymentable] if payment.paymentable %></td>
-  <td><%= payment.state %></td>
+  <td>Покупка метки </td>
+  <td><%= link_to payment.state_text, edit_manage_map_project_map_placemark_path(payment.paymentable.map_layers.first.map_project, payment.paymentable) if payment.paymentable.present?%></td>
   <td><%= l payment.created_at %></td>
 </tr>

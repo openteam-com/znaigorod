@@ -16,8 +16,7 @@ class Manage::MapPlacemarksController < Manage::ApplicationController
   def create
     create! do |success, failure|
       @map_project = MapProject.find(params[:map_project_id])
-      @map_placemark.save :validate => false
-      success.html { resource.to_published!; redirect_to manage_map_project_path(@map_project)}
+      success.html { @map_placemark.to_published!; redirect_to manage_map_project_path(@map_project)}
       failure.html { render :new }
     end
   end

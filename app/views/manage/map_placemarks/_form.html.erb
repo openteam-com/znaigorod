@@ -2,8 +2,20 @@
 <div class="map_placemark_form">
   <h1>Отметка на карте:</h1>
   <%= simple_form_for [:manage, @map_project, resource] do |f| %>
-    <%= f.input :tagit_categories, :as => :hidden, :input_html => { :value => '' } %>
-    <%= f.association :map_layers, collection: @map_project.map_layers, prompt: 'Выберите слой', as: :check_boxes %>
+    <%= f.input :tagit_categories, :as => :hidden, :input_html => { :value => nil } %>
+    <div class='select_categories'>
+      <div class='categories_title'>
+        <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+      </div>
+
+      <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '', :required => true %>
+      <%= f.input :tagit_categories,
+        :as => :string,
+        :label => false,
+        :input_html => { :class => 'tagit_categories', :value => @map_placemark.map_layers.map(&:title).join(', ') }%>
+
+      <%= hidden_field_tag 'map_placemark[placemark_flag]', true %>
+    </div>
     <div class='relations'>
       <p><%= link_to 'Указать местоположение вручную', '#', :class => 'toggle_forms' %> </p>
       <p class="title">Эта метка связана с:</p>

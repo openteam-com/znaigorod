@@ -187,6 +187,32 @@
   $('.toggle_forms').click ->
     $('.relations').toggle()
     $('.not_zg_object').toggle()
+    if $('.js-placemark_type').val() == 'manual'
+      $('.js-placemark_type').val('relation')
+    else
+      $('.js-placemark_type').val('manual')
+
+    true
+
+  init_tagit()
+
+  $(document).on 'change', '.select_type', ->
+    $('.tagit_categories').tagit('createTag', $(' option:selected', this).text())
+    $(this).val($('option:first', this).val())
+
+    true
+
+init_tagit = ->
+  console.log 'init'
+  $('.tagit_categories').tagit
+    fieldName:        'categories',
+    allowDuplicates:  false,
+    readOnly:         true,
+    placeholderText:  ''
+    beforeTagAdded: (event, ui) ->
+      if ui.tagLabel == $('.select_type option:first').text()
+        return false
+
+    true
 
   true
-
