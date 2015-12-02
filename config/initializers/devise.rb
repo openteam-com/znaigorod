@@ -219,7 +219,13 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, Settings['google.app_id'],   Settings['google.app_secret'],   {:scope => 'https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile'}
 
   config.omniauth :twitter,       Settings['twitter.app_id'],  Settings['twitter.app_secret'],  display: 'popup'
-  config.omniauth :vkontakte,     Settings['vk.app_id'],       Settings['vk.app_secret'],       scope: 'offline,photos', display: 'popup'
+  config.omniauth :vkontakte,
+    Settings['vk.app_id'],
+    Settings['vk.app_secret'],
+    scope: 'offline,photos',
+    display: 'popup',
+    provider_ignores_state: true
+
   config.omniauth :yandex,        Settings['yandex.app_id'],   Settings['yandex.app_secret']
 
   # f*cking bullshit

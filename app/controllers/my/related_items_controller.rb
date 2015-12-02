@@ -3,7 +3,7 @@ class My::RelatedItemsController < ApplicationController
 
   def afishas
     if placemarks? && current_user
-      @related_afishas = current_user.afisha.where(:state => :published)
+      @related_afishas = current_user.afisha.where(:state => :published).limit(30)
     else
       searcher = HasSearcher.searcher(:afishas, :q => search_param, :state => 'published').paginate(:page => page, :per_page => per_page)
       @related_afishas = searcher.results
@@ -50,7 +50,7 @@ class My::RelatedItemsController < ApplicationController
 
   def discounts
     if placemarks? && current_user
-      @related_discounts = current_user.account.discounts.where(:state => 'published')
+      @related_discounts = current_user.account.discounts.where(:state => 'published').limit(30)
     else
       searcher = HasSearcher.searcher(:discounts, :q => search_param).paginate(page: page, per_page: per_page)
       @related_discounts = searcher.results

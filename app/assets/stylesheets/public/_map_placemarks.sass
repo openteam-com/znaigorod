@@ -1,9 +1,53 @@
 .wrapper_novyj_god_2016_v_tomske
-  .map_projects_content
-    background-color: #f6f6f6
-    padding: 15px
+  .map_projects_wrapper
+    &.placemarks
+      background: #f6f6f6
 
+  .map_projects_content
     .map_placemark_form
+      padding: 15px
+
+      .interlude
+        font-size: 14px
+
+      .left, .right
+        float: left
+
+      .left
+        margin: 0 30px 0 0
+        width: 440px
+
+      .map_wrapper
+        margin: 42px 0 30px 0
+
+        .map
+          height: 400px
+          width: 600px
+          margin-top: 15px
+
+        .error
+          display: block
+          color: red
+
+        input
+          +border-radius(3px)
+          +inline-block
+          border: 1px solid #909090
+          outline: none
+          padding: 5px
+          width: 492px
+
+          &.valid
+            background-color: rgba(#7fff7f, .5)
+
+        input[type='button']
+          width: 100px
+          padding: 0 5px
+          +border-radius(0)
+          border: 0
+          margin-left: -7px
+          height: 27px
+
       .input
         .error
           display: block
@@ -11,6 +55,10 @@
 
         &.hidden
           display: none
+
+        &.map_placemark_image
+          input
+            border: 0
 
       label
         display: block
@@ -34,26 +82,10 @@
 
       .link-to-switch
         font-size: 14px
+        display: block
+        margin: 20px 0
 
-      .left, .right
-        float: left
-
-      .left
-        margin: 0 30px 0 0
-
-      .right
-        margin-top: 35px
-
-        input[type='button']
-          width: 100px
-          padding: 0
-
-        .map
-          height: 600px
-          width: 800px
-          margin-top: 34px
-
-      .not_zg_object, .map_placemark_expires_at
+      .not_zg_object
         +clearfix
 
         .markItUpFooter
@@ -67,8 +99,11 @@
           +inline-block
           border: 1px solid #909090
           outline: none
-          padding: 4px
+          padding: 5px
           width: 300px
+
+        input[type='file']
+          padding: 10px 0 0 0
 
       .select_categories
         .select_type
@@ -77,19 +112,16 @@
           border: 1px solid #909090
           outline: none
           padding: 4px
-
-        .select_type
           +appearance(none)
           background: image_url('public/down_arrow.jpg') no-repeat right
           border: 1px solid #909090
           cursor: pointer
           overflow: hidden
-          width: 300px
+          width: 312px
           background-color: #FFF
 
         .tagit_categories
           display: none
-
 
       #map_placemark_title
         +border-radius(3px)
@@ -106,6 +138,8 @@
       display: none
 
     .map_placemarks_list
+      clear: both
+      +clearfix
       border-top: 1px solid #ccc
 
       h2
@@ -113,13 +147,37 @@
         font-weight: bold
         margin: 10px 0
 
-      .item
+      .left, .right
+        float: left
+        +clearfix
+
+      .right
+        width: 70%
+
+        .title
+          font-size: 14px
+          margin: 0 0 10px 0
+          +inline-block
+
+      div.item
         clear: both
         +clearfix
-        margin: 10px 0
+        padding: 15px 0
+        border-top: 1px solid #ccc
 
-        .left, .right
-          float: left
+        &:first-child
+          border: 0
 
         .left
           margin: 0 20px 0 0
+          width: auto
+
+          .afisha_content
+            abbr
+              color: #000
+              font-size: 11px
+              cursor: auto
+
+          .organization_content
+            .info
+              width: 190px

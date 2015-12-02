@@ -20,7 +20,27 @@
 
     false
 
-  $(document).on 'submit', '.new_map_placemark', ->
+  $(document).on 'ajax:beforeSend', '.item', (event, data, textStatus, jqXHR) ->
+    $('.ajax_blocking').show()
+
+    true
+
+  $(document).on 'ajax:success', '.item', (event, data, textStatus, jqXHR) ->
+    $('.ajax_blocking').hide()
+    $('.js-map_placemark_form').html(data)
+    init_tagit()
+    loadRelatedAfishas()
+    init_map_project()
+    hash = '#' + $('.js-placemark-item').last().attr('id')
+
+    unless $('.error').length
+      setTimeout ->
+        $.scrollTo(0, 300)
+      , 1000
+
+    true
+
+  $(document).on 'submit', '.js-simple-form', ->
     $('.ajax_blocking').show()
     form = $(this)
     formData = new FormData(this)
@@ -33,10 +53,17 @@
       processData: false
       success: (data, textStatus, jqXHR) ->
         $('.ajax_blocking').hide()
-        $('.js-map_placemark_form').slideUp('slow').html(data).slideDown('slow')
+        $('.js-map_placemark_form').html(data)
         init_tagit()
         loadRelatedAfishas()
         init_map_project()
+        hash = '#' + $('.js-placemark-item').last().attr('id')
+
+        unless $('.error').length
+          setTimeout ->
+            $.scrollTo(hash, 500)
+          , 1000
+
         true
     false
 

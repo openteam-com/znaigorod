@@ -7,10 +7,10 @@ class MapPlacemark < ActiveRecord::Base
   attr_accessible :title, :map_layer_ids, :related_items, :latitude, :longitude, :url, :address,
                   :image, :kind, :expires_at, :placemark_type, :user_id, :tagit_categories, :placemark_flag
 
-  validates :related_items, presence: true, :if => :relation?
+  validates :related_items, :tagit_categories, presence: true, :if => :relation?
   before_save :parse_related_items, :if => :relation?
 
-  validates :title, :latitude, :longitude, :url, :image, presence: true, :if => :manual?
+  validates :title, :latitude, :longitude, :url, :image, :tagit_categories, presence: true, :if => :manual?
   validates_presence_of :map_layer_ids
 
   default_value_for :kind, 'custom'
@@ -128,8 +128,10 @@ class MapPlacemark < ActiveRecord::Base
     self.map_layer_ids = array.flatten
   end
 
-  def custom?
-    kind == 'custom'
+  %w( afisha discount organization custom ).each do |k|
+    define_method "#{k}?" do
+      self.kind == k
+    end
   end
 end
 

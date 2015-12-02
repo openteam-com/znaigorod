@@ -25,17 +25,15 @@
         related_items_ids: getRelatedItems()
         search_param: getSearchParam()
       success: (response) ->
-        $('.posters').empty() if need_empty
-        $('.posters').append(response)
-        $('.posters').find('button').prop('disabled', true) if $('.element').length && just_one()
+        $('.posters:eq(0)').empty() if need_empty
+        $('.posters:eq(0)').append(response)
+        $('.posters:eq(0)').find('button').prop('disabled', true) if $('.element').length && just_one()
     false
 
   # on page load
   performAjax()
 
-  #$('body').on 'click', '.js-button-add-related-item', ->
   $('.relations').on 'click', '.js-button-add-related-item', ->
-    console.log 'click!'
     url = $(this).closest('.details').find('a')
     item_id = $(this).closest('.details').find('#hidden_id').val()
     params_name = $('.relations').find('.params_name').val()
@@ -45,16 +43,15 @@
                                   <span class="del_icon"></span>
                                   <input name="'+params_name+'" type="hidden" value="' + item_id  + '" class="hidden_ids">
                                 </div>')
-    $('.posters').find('button').prop('disabled', true) if just_one()
+    $('.posters:eq(0)').find('button').prop('disabled', true) if just_one()
 
     return
 
-  #$('body').on 'click', '.del_icon', ->
   $('.relations').on 'click', '.del_icon', ->
     $('input[value="'+$(this).parent().find('.hidden_ids').val()+'"]').closest('div').find('button').prop('disabled', false).text('Добавить')
     $(this).closest(".element").remove()
 
-    $('.posters').find('button').prop('disabled', false) if just_one()
+    $('.posters:eq(0)').find('button').prop('disabled', false) if just_one()
 
     return
 

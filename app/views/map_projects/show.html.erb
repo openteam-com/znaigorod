@@ -5,6 +5,9 @@
 
     <div class='map_projects_header'>
       <h1 class='lobster_font'><%= page_meta.try(:og_title) %></h1>
+      <div class="link">
+        <%= link_to 'Добавить метку на карту', map_placemarks_index_path, :class => 'flat-btn btn-red btn-lg' %>
+      </div>
     </div>
 
     <div class='map_projects_main'>

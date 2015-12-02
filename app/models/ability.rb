@@ -11,6 +11,10 @@ class Ability
     can :manage, :all     if user.is_admin?
     can :manage, :crm     if user.is_admin? || user.is_sales_manager?
 
+    can [:edit, :update], MapPlacemark do |placemark|
+      placemark.user == user
+    end
+
     can [:new, :create], Invitation if user.persisted?
     can [:edit, :update, :destroy], Invitation do |invitation|
       invitation.account == user.account

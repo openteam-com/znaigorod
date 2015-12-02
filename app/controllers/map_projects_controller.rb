@@ -9,9 +9,9 @@ class MapProjectsController < ApplicationController
     show! {
       if params[:layer]
         @map_layer = MapLayer.find(params[:layer])
-        @map_placemarks = @map_layer.map_placemarks.actual
+        @map_placemarks = @map_layer.map_placemarks.published
       else
-        @map_placemarks = MapProject.find(params[:id]).map_layers.flat_map { |layer| layer.map_placemarks.actual }.uniq
+        @map_placemarks = MapProject.find(params[:id]).map_layers.flat_map { |layer| layer.map_placemarks.published }.uniq
       end
       @reviews = ReviewDecorator.decorate(MapProject.find(params[:id]).relations.map(&:slave).sort_by(&:created_at).reverse)
     }

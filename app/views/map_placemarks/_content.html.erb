@@ -1,94 +1,137 @@
-<h1>Новая метка:</h1>
+<div class='left'>
+  <h1>Новая метка:</h1>
+  <%= simple_form_for @map_placemark, :html => { :class => 'js-simple-form' } do |f| %>
+    <div class='select_categories'>
+      <div class='categories_title'>
+        <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+      </div>
 
-<%= simple_form_for @map_placemark, url: create_map_placemark_map_placemarks_path  do |f| %>
-  <div class="select_categories">
-    <div class="categories_title">
-      <%= label_tag :cat, "Категория <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+      <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '', :required => true %>
+      <%= f.input :tagit_categories,
+        :as => :string,
+        :label => false,
+        :input_html => { :class => 'tagit_categories', :value => @map_placemark.map_layers.map(&:title).join(', ') }%>
+
+      <%= hidden_field_tag 'map_placemark[placemark_flag]', true %>
     </div>
 
-    <%= select_tag :cat, options_for_select(@map_project.map_layers.map(&:title)), :class => 'select_type', :prompt => '', :required => true %>
-    <%= f.input :tagit_categories,
-      :as => :string,
-      :label => false,
-      :input_html => { :class => 'tagit_categories', :value => @map_placemark.map_layers.map(&:title).join(', ') }%>
-
-    <%= hidden_field_tag "map_placemark[placemark_flag]", true %>
-  </div>
-
-  <div class='not_zg_object js-form-one'>
-    <div class='left'>
+    <div class='not_zg_object js-form-one'>
       <%= f.input :title, as: :string, required: true, :label => 'Описание', :input_html => { :class=> 'with-preview' } %>
-      <%= f.input :latitude, as: :hidden, input_html: { class: "js-ymaps-latitude" } %>
-      <%= f.input :longitude, as: :hidden, input_html: { class: "js-ymaps-longitude" } %>
+      <%= f.input :latitude, as: :hidden, input_html: { class: 'js-ymaps-latitude' } %>
+      <%= f.input :longitude, as: :hidden, input_html: { class: 'js-ymaps-longitude' } %>
       <%= f.input :url, as: :url, required: true, label: 'URL адрес'%>
       <%= f.input :image, required: true, label: 'Постер' %>
-    </div>
-    <div class='map_wrapper right'>
-      <input type="text" class='js-ymaps-address' id="address", placeholder='Введите здесь адрес' />
-      <input type="button" class='js-ymaps-direct-geocode flat-btn btn-orange btn-large' value="Найти" />
-      <div class='map' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></div>
-    </div>
-  </div>
-
-  <div class='relations js-form-two'>
-    <p class="title">Связать метку с:</p>
-    <div class='sticky_elements'>
-      <% resource.relations.each do |item| %>
-        <div class="element">
-          <% if item.slave.is_a? Afisha %>
-            <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
-          <% elsif item.slave.is_a? Discount %>
-            <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
-          <% else %>
-            <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
-          <% end %>
-          <span class="del_icon"></span>
-          <%= hidden_field_tag "map_placemark[related_items][]","#{item.slave_type.underscore}_#{item.slave_id}", class: "hidden_ids" %>
-        </div>
+      <% if @map_placemark.image_url? %>
+        <%= image_tag @map_placemark.custom? ? resized_image_url(@map_placemark.image_url, 190, 260) : @map_placemark.image_url %>
       <% end %>
     </div>
 
-    <div class='select_and_search'>
-      <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Скидки', '/my/related_discounts']]), { class: 'type_select' }  %>
-      <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
-      <%= text_field_tag :search, '', { class: 'related_search' } %>
+    <div class='relations js-form-two'>
+      <p class='title'>Связать метку с:</p>
+      <div class='sticky_elements'>
+        <% resource.relations.each do |item| %>
+          <div class='element'>
+            <% if item.slave.is_a? Afisha %>
+              <%= link_to item.slave.title.truncate(30), afisha_show_path(item.slave), :target => '_blank' %>
+            <% elsif item.slave.is_a? Discount %>
+              <%= link_to item.slave.title.truncate(30), discount_path(item.slave), :target => '_blank' %>
+            <% else %>
+              <%= link_to item.slave.title.truncate(30), item.slave, :target => '_blank' %>
+            <% end %>
+            <span class='del_icon'></span>
+            <%= hidden_field_tag 'map_placemark[related_items][]', "#{item.slave_type.underscore}_#{item.slave_id}", class: 'hidden_ids' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class='select_and_search'>
+        <%= select_tag 'type_select', options_for_select([ ['Афиша', '/my/related_afishas'], ['Организация', '/my/related_organizations'], ['Скидки', '/my/related_discounts']]), { class: 'type_select' }  %>
+        <%= button_tag '', type: 'button', remote: true, class: 'sbm' %>
+        <%= text_field_tag :search, '', { class: 'related_search' } %>
+      </div>
+
+      <div class='results infinite_list'>
+        <span class='js-just-one' style='display: none'></span>
+        <ul class='posters'></ul>
+      </div>
+      <input type='hidden' value='map_placemark[related_items][]' class='params_name'>
     </div>
 
-    <div class='results infinite_list'>
-      <span class='js-just-one' style='display: none'></span>
-      <ul class='posters'></ul>
+    <%= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
+    <%= f.input :placemark_type, as: :hidden, input_html: { value: 'manual', class: 'js-placemark_type' } %>
+    <%= hidden_field_tag 'map_project_id', @map_project.id %>
+
+    <div class='submit'>
+      <%= f.submit 'Сохранить', class: 'flat-btn btn-lg btn-orange' %>
+      <%= link_to 'Назад', :back %>
     </div>
-    <input type="hidden" value="map_placemark[related_items][]" class="params_name">
   </div>
 
-  <%= link_to 'Или связать метку с...', '#', class: ['js-switch-form', 'link-to-switch'] %>
-  <%= f.input :placemark_type, as: :hidden, input_html: { value: 'manual', class: 'js-placemark_type' } %>
-  <%= hidden_field_tag "map_project_id", @map_project.id %>
-
-  <div class="submit">
-    <%= f.submit "Сохранить", class: "flat-btn btn-lg btn-orange" %>
-    <%= link_to 'Назад', :back %>
+  <div class='map_wrapper right js-form-one'>
+    <div class='address_label'>
+      <%= label_tag :address, "Адрес <abbr title='Обязательное поле'>*</abbr>".html_safe %>
+    </div>
+    <input type='text' class='js-ymaps-address' id='address' required />
+    <input type='button' class='js-ymaps-direct-geocode flat-btn btn-orange btn-large' value='Найти' />
+    <%= f.error :latitude %>
+    <div class='map' data-latitude='<%= Settings['app.coords.latitude'] %>' data-longitude='<%= Settings['app.coords.longitude'] %>'></div>
   </div>
 <% end %>
 
-    <div class='map_placemarks_list'>
-      <h2>Ваши метки</h2>
-      <% if current_user && current_user.map_placemarks.any? %>
-        <% current_user.map_placemarks.each do |placemark| %>
-          <div class='item'>
-            <div class="left">
-              <div class="image">
-                <%= placemark.custom? ? image_tag(resized_image_url(placemark.image_url, 190, 260), :size => '190x260')  : image_tag(placemark.image_url) %>
+<div class='map_placemarks_list'>
+  <h2>Ваши метки</h2>
+
+  <% if current_user && current_user.map_placemarks.any? %>
+    <% current_user.map_placemarks.order('updated_at').each do |placemark| %>
+      <div class='item js-placemark-item' id='<%= placemark.id %>'>
+        <div class='left'>
+
+          <% if placemark.custom? %>
+            <%= render :partial => 'custom_poster', :locals => { :placemark => placemark } %>
+          <% end %>
+
+          <% if placemark.afisha? %>
+            <div class='afisha_content'>
+              <div class='posters'>
+                <li class='item'>
+                  <%= render :partial => 'afishas/afisha_poster', :locals => { :afisha => AfishaDecorator.decorate(placemark.afishas.first) } %>
+                </li>
               </div>
             </div>
-            <div class="right">
-              <div class="title">
-                <%= placemark.title %>
-              </div>
-              <div class="pay">
-                <%= placemark.draft? ? link_to('Оплатить', map_placemark_payment_map_placemarks_path(placemark.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange btn-lg') : 'Оплачено' %>
+          <% end %>
+
+          <% if placemark.discount? %>
+            <div class='discount_content'>
+              <div class='posters'>
+                <%= render :partial => 'discounts/discount_poster', :locals => { :discount => DiscountDecorator.decorate(placemark.discounts.first) } %>
               </div>
             </div>
+          <% end %>
+
+          <% if placemark.organization? %>
+            <div class='organization_content'>
+              <ul class='posters'>
+                <li class='item_organization'>
+                  <%= render partial: 'organizations/organization', locals: { organization: OrganizationDecorator.decorate(placemark.organizations.first), width: 200, height: 200 } %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+          <div>
+            <%= placemark.title if placemark.custom? %>
           </div>
-        <% end %>
-      <% end %>
+          <%= link_to 'Редактировать', edit_map_placemark_path(placemark, :map_project_id => @map_project.id), :remote => true %>
+        </div>
+
+        <div class='right'>
+          <div class='title'>
+            <%= placemark.draft? ? 'Информация сохранена, но ваша метка еще не доступна пользователям. Для того, чтобы метка была опубликована, необходимо оплатить размещение.' : 'Оплата получена. Ваша метка опубликована.' %>
+          </div>
+          <div class='pay'>
+            <%= placemark.draft? ? link_to('Оплатить', map_placemark_map_placemark_payment_path(placemark.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange btn-lg') : '' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

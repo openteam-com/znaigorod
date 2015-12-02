@@ -1,7 +1,15 @@
 <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU') %>
-<div class="map_projects_wrapper">
+
+<div class='map_projects_wrapper placemarks'>
   <div class="map_projects_content">
     <div class='map_placemark_form js-map_placemark_form'>
+      <div class='interlude'>
+        <p>
+          Для того, чтобы добавить метку на новогоднюю карту, укажите место проведения, добавьте ссылку и изображение либо выберите афишу или скидку из вашего личного кабинета.         </p>
+        <p>
+          Метка будет добавлена без ограничения срока размещения. Стоимость самостоятельного добавления метки на карте - <strong>300 рублей</strong>.
+        </p>
+      </div>
       <%= render :partial => 'content', :locals => { :@map_placemarks => @map_placemarks } %>
     </div>
   </div>

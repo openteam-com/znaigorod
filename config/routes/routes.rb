@@ -129,10 +129,10 @@ Znaigorod::Application.routes.draw do
   get '/link_counters/create' => 'link_counters#create'
 
   get '/:id' => 'map_projects#show', as: 'map_project_show', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) }
-  get '/:id/placemarks' => 'map_placemarks#index', as: 'map_placemarks', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) } # FIXME
+  get '/:id/placemarks' => 'map_placemarks#index', as: 'map_placemarks_index', :constraints => { :id => Regexp.new(MapProject.pluck(:slug).join('|')) } # FIXME
 
-  resource :map_placemarks, except: [:index, :create] do
-    post 'create', as: :create_map_placemark
+  resources :map_placemarks, except: [:index] do
+    #post 'create', as: :create_map_placemark
     #get  ':map_placemark_id/payment' => 'map_placemarks_payment#create'
     post  ':map_placemark_id/payment' => 'map_placemarks_payment#create', :as => 'map_placemark_payment'
     #resources :placemarks_payment, :only => :create, :on => :member

@@ -36,34 +36,42 @@
     }]
 
     create_new_placemark = (coords) ->
-      map.geoObjects.each (geoObject) ->
-        map.geoObjects.remove geoObject
-        return
+      map.geoObjects.removeAll()
 
       placemark = new ymaps.Placemark coords
       map.geoObjects.add placemark
       $('.js-ymaps-latitude').val(coords[0])
       $('.js-ymaps-longitude').val(coords[1])
 
+      return
 
     if $('.map_placemark_form').length
-     #$('.coords').each (index, item) ->
-       #coords = [$(item).find('.latitude').val(), $(item).find('.longitude').val()]
-       #create_new_placemark(coords)
+     coords = [$('.js-ymaps-latitude').val(), $('.js-ymaps-longitude').val()]
+     if coords && map.geoObjects.getLength() == 0
+       create_new_placemark(coords)
+       ymaps.geocode(coords).then (res) ->
+         address = res.geoObjects.get(0)
+         $('.js-ymaps-address').val(address.properties.get('name'))
+         $('.js-ymaps-address').addClass('valid') unless $('.js-ymaps-address').hasClass('valid')
 
-      map.events.add 'click', (e) ->
-        coords = e.get('coords')
-        create_new_placemark(coords)
+     map.events.add 'click', (e) ->
+       coords = e.get('coords')
+       create_new_placemark(coords)
 
-        ymaps.geocode(coords).then (res) ->
-          address = res.geoObjects.get(0)
-          $('.js-ymaps-address').val(address.properties.get('name'))
+       ymaps.geocode(coords).then (res) ->
+         address = res.geoObjects.get(0)
+         $('.js-ymaps-address').val(address.properties.get('name'))
+         $('.js-ymaps-address').addClass('valid') unless $('.js-ymaps-address').hasClass('valid')
 
      $('.js-ymaps-direct-geocode').click ->
        ymaps.geocode("Томск, " + $('.js-ymaps-address').val(), results: 1).then (res) ->
          result = res.geoObjects.get(0)
-         coords = result.geometry.getCoordinates()
-         create_new_placemark(coords)
+         if result
+           coords = result.geometry.getCoordinates()
+           create_new_placemark(coords)
+           $('.js-ymaps-address').addClass('valid') unless $('.js-ymaps-address').hasClass('valid')
+           if $('.js-ymaps-address').val() == ''
+              $('.js-ymaps-address').val('Центр Томска')
 
     clusterer = new ymaps.Clusterer
       clusterDisableClickZoom: true
