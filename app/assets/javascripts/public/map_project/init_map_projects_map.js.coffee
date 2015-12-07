@@ -121,7 +121,7 @@
         iconLayout: 'default#image'
         iconImageHref: $(item).attr('data-icon')
         iconImageSize: [35, 50]
-        iconImageOffset: [-18, -18]
+        iconImageOffset: [-35, -50]
 
       clusterer.add point
 
