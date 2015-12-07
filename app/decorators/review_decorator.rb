@@ -64,7 +64,7 @@ class ReviewDecorator < ApplicationDecorator
   def related_discounts
     organization_discounts = relations.where(slave_type: 'Organization').map(&:slave).flat_map(&:discounts)
     slave_disounts = relations.where(slave_type: 'Discount').map(&:slave)
-    @related_discounts = (organization_discounts + slave_disounts).uniq.select { |discount|  discount.actual? && discount.published? }.sort_by(&:created_at)
+    @related_discounts = (organization_discounts + slave_disounts).uniq.select { |discount|  discount.try(:actual?) && discount.try(:published?) }.sort_by(&:created_at)
   end
 
   def related_organizations
