@@ -7,8 +7,8 @@
       Так пост будет выглядеть при просмотре
       <div class='arrow'></div>
       <span class="icons floatr">
-        <%= link_to '', edit_my_review_path(@review), :class => 'icon-flat icon-pencil show_tipsy', :title => 'Редактировать обзор' %>
-        <%= link_to '', my_review_path(@review), :class => 'icon-flat icon-delete show_tipsy', :method => :delete, :confirm => 'Вы уверены? Информация будет удалена без возможности восстановления!', :title => 'Удалить обзор' %>
+        <%= link_to '', edit_my_review_path(@review.id), :class => 'icon-flat icon-pencil show_tipsy', :title => 'Редактировать обзор' %>
+        <%= link_to '', my_review_path(@review.id), :class => 'icon-flat icon-delete show_tipsy', :method => :delete, :confirm => 'Вы уверены? Информация будет удалена без возможности восстановления!', :title => 'Удалить обзор' %>
       </span>
     </div>
 
