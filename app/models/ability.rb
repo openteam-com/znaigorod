@@ -149,6 +149,10 @@ class Ability
         review.published? && review.account == user.account
       end
 
+      can :add_related_items, Review do |review|
+        review.account == user.account
+      end
+
       can [:new, :create], Invitation if user.persisted?
       can :destroy, Invitation do |invitation|
         invitation.account == user.account

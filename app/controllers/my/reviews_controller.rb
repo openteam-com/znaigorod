@@ -3,7 +3,7 @@ class My::ReviewsController < My::ApplicationController
 
   actions :all
 
-  custom_actions :resource => [:add_images, :download_album, :edit_poster, :send_to_published, :send_to_draft, :sort_images]
+  custom_actions :resource => [:add_images, :download_album, :edit_poster, :send_to_published, :send_to_draft, :sort_images, :add_related_items]
 
   def index
     render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '156', :width => '280' }, :layout => false and return if request.xhr?
