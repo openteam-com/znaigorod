@@ -1,6 +1,5 @@
 afisha:
   places:
-
     '1.0':
       from: '2014-04-09 11:00'
       to: '2014-04-11 11:00'
@@ -106,10 +105,10 @@ main_page_afisha:
 main_page_discounts:
   places:
     '1.0':
-      from: '2014-01-15 12:30'
-      to: '2015-01-16 18:30'
+      from: '2015-12-11 15:30'
+      to: '2015-12-12 15:30'
       content_type: 'discount'
-      discount_slug: 'podbor-sauny-po-vashemu-zhelaniyu'
+      discount_slug: 'abonement-so-skidkoy'
       replaced_count: 1
     '1.1':
       from: '2014-06-19 18:30'
