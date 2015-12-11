@@ -5,5 +5,11 @@
         <%= link_to (image_tag 'public/banners/banner_1_2_new_year_2016.jpg', size: '880x80'), map_project_show_path('novyj_god_2016_v_tomske'), class: 'js-stat-new-year-2016' %>
       </li>
     <% end %>
+
+    <% if Time.zone.now < Time.zone.parse('10.01.2016').end_of_day && params[:id] != 'fotokonkurs-koroleva-korporativa' %>
+      <li class='js-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_fotokonkurs-koroleva-korporativa.jpg', size: '880x80', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»'), contest_path('fotokonkurs-koroleva-korporativa'), class: 'js-stat-fotokonkurs-koroleva-korporativa', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»' %>
+      </li>
+    <% end %>
   </ul>
 </div>
