@@ -598,3 +598,6 @@ DEPENDENCIES
   uglifier
   validates_email_format_of
   vkontakte_api
+
+BUNDLED WITH
+   1.10.6

@@ -193,9 +193,36 @@
               width: 930px
               margin-bottom: 10px
 
-          .introduction
-            color: #858388
-            font-size: 11px
+          .latest_questions
+            +clearfix
+            +background(rgba(#fff, .5))
+            padding: 10px
+            margin: 20px 0
+
+            .left
+              margin-right: 30px
+
+              h3
+                font-size: 20px
+                margin: 10px 0
+
+            .right
+              width: 600px
+
+            .item
+              float: left
+              +clearfix
+              width: 270px
+              margin-right: 30px
+
+              .avatar
+                .title
+                  padding: 5px 0 0 0
+
+      .introduction
+        color: #858388
+        font-size: 11px
+        margin: 15px 0
 
 body
   +map_projects_styles
@@ -237,6 +264,7 @@ body
         .reviews_title
           margin-top: 80px
           background-color: #92c8dc
+
 
 .wrapper_8_marta_tomsk
   background: #f9d8df image_url('public/map_projects/8_marta_tomsk_background.jpg') no-repeat center top

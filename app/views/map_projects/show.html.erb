@@ -24,15 +24,34 @@
           </div>
           <div class='map' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></div>
         </div>
-        <% if page_meta %>
-          <div class='introduction'>
-            <%= page_meta.html_introduction %>
+        <div class='latest_questions'>
+          <div class="left">
+          <h3>Вопросы и ответы на все случаи жизни</h3>
+          <p><%= link_to 'Задать вопрос', new_my_question_path, :class => 'flat-btn btn-lg btn-orange' %></p>
           </div>
-        <% end %>
+
+          <div class="right">
+            <% @questions.each do |question| %>
+              <div class='item'>
+                <div class="avatar">
+                  <%= render :partial => 'accounts/avatar',
+                    :locals => { :account => question.account, :width => 50, :height => 50, :title => question.account } %>
+                  <div class="title"><%= link_to question.title, question_path(question) %></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
 
     </div>
 
     <%= render :partial => 'related_reviews' %>
+
+    <% if page_meta %>
+      <div class='introduction'>
+        <%= page_meta.html_introduction %>
+      </div>
+    <% end %>
   </div>
 </div>
