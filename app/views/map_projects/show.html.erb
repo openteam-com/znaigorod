@@ -24,24 +24,26 @@
           </div>
           <div class='map' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></div>
         </div>
-        <div class='latest_questions'>
-          <div class="left">
-          <h3>Вопросы и ответы на все случаи жизни</h3>
-          <p><%= link_to 'Задать вопрос', new_my_question_path, :class => 'flat-btn btn-lg btn-orange' %></p>
-          </div>
+        <% if params[:id] == 'novyj_god_2016_v_tomske' || params[:id] == 'novyj_god_2016_v_sevastopole'%>
+          <div class='latest_questions'>
+            <div class="left">
+              <h3>Вопросы и ответы на все случаи жизни</h3>
+              <p><%= link_to 'Задать вопрос', new_my_question_path, :class => 'flat-btn btn-lg btn-orange' %></p>
+            </div>
 
-          <div class="right">
-            <% @questions.each do |question| %>
-              <div class='item'>
-                <div class="avatar">
-                  <%= render :partial => 'accounts/avatar',
-                    :locals => { :account => question.account, :width => 50, :height => 50, :title => question.account } %>
-                  <div class="title"><%= link_to question.title, question_path(question) %></div>
+            <div class="right">
+              <% @questions.each do |question| %>
+                <div class='item'>
+                  <div class="avatar">
+                    <%= render :partial => 'accounts/avatar',
+                      :locals => { :account => question.account, :width => 50, :height => 50, :title => question.account } %>
+                    <div class="title"><%= link_to question.title, question_path(question) %></div>
+                  </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
 
     </div>
