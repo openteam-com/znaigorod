@@ -18,15 +18,14 @@
 <% end %>
 
 <%= content_for :content do %>
-  <div class='may_wrapper'>
+  <div class='fair_wrapper'>
     <div class='links'>
       <ul class='may_links'>
-        <li><%= link_to 'Конкурс детского рисунка "Дети рисуют победу"', contest_path('deti-risuyut-pobedu') %></li>
-        <li><%= link_to 'Программа празднования Дня Победы', review_path('2015-04/9-maya-v-tomske-plan-meropriyatiy') %></li>
-        <li><%= link_to 'Фотоальбом праздника', photogallery_path('bessmertnyy-polk-na-znaygorod') %></li>
+        <li><%= link_to 'Новогодняя Ярмарка подарков', 'http://xn--80aagmwcjerocrk8o.xn--p1ai/b50', :target => :_blank %></li>
       </ul>
     </div>
-    <div class='may_content_wrapper'>
+
+    <div class='fair_content_wrapper'>
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/public_header' %>
       <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
