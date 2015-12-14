@@ -8,7 +8,7 @@ class ContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
-    @works = @contest.works.send("ordered_#{order_by(@contest)}").not_archived
+    @works = @contest.works.send("ordered_#{order_by(@contest)}").not_archived.page(page).per(@contest.is_a?(ContestVideo) ? 200 : per_page)
     @archived_works = @contest.works.send("ordered_#{order_by(@contest)}").archived.page(page).per(@contest.is_a?(ContestVideo) ? 200 : per_page)
     @winners = winner_array(@contest.slug)
     @reviews = ReviewDecorator.decorate(@contest.reviews.order('id desc'))
