@@ -19,17 +19,25 @@ module Yandex
     end
 
     def admn_area
-      'Томская область'
+      if Settings['app.city'] == 'tomsk'
+        'Томская область'
+      else
+        'Севастопольская область'
+      end
     end
 
     def locality_name
-      'город Томск'
+      if Settings['app.city'] == 'tomsk'
+        'город Томск'
+      else
+        'город Севастополь'
+      end
     end
 
     def info_page
       organization.subdomain? ?
         "http://#{organization.subdomain}.#{Settings['app.host']}" :
-        organization_url(organization, :host => Settings['app.host'])
+                                                     organization_url(organization, :host => Settings['app.host'])
     end
 
     def phones
@@ -56,7 +64,7 @@ module Yandex
           "#{schedules.first.short_human_day}-#{schedules.last.short_human_day} #{working_time}" :
           "#{schedules.first.short_human_day} #{working_time}"
 
-        str.mb_chars.downcase.to_s
+          str.mb_chars.downcase.to_s
       end
 
       array.join(', ')
