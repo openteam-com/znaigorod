@@ -7,7 +7,7 @@
   <div class='my_reviews_wrapper review_form default_form'>
     <%= simple_nested_form_for @review,
       :as => :review,
-      :url => my_review_path(@review),
+      :url => my_review_path(@review.id),
       :html => { :class => "my_review_form default_simple_form my_form"  } do |f| %>
 
       <div class='relations'>

@@ -46,7 +46,7 @@
         </script>
       </div>
 
-      <%= simple_form_for @review, :url => download_album_my_review_path(@review), :html => { :class => 'my_form' } do |f| %>
+      <%= simple_form_for @review, :url => download_album_my_review_path(@review.id), :html => { :class => 'my_form' } do |f| %>
         <div class="input">
           <%= label_tag :album_url, 'Адрес альбома из Вконтакте или Яндекс.Фотки:' %>
           <%= text_field_tag :album_url, nil, :class => 'string' %>
