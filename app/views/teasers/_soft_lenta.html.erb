@@ -1,0 +1,22 @@
+<div class='teasers_znaigorod' style='background-color: #fff !important; border: 1px solid #ccc !important; max-height: 385px !important; overflow: hidden !important; width: 598px !important; height: 148px !important'>
+
+  <div class='table_wrapper'>
+    <table style='width: 600px !important'>
+      <tbody>
+        <tr style='width: 600px !important'>
+          <% @teaser.teaser_items.order_by_id.each do |item| %>
+            <td style='width: 140px !important; height: 150px !important; text-align: center; vertical-align: middle'>
+              <div class="image" style='display: inline-block !important;margin: 0 5px 0 0 !important '>
+                <%= link_to (image_tag item.image_url? ? resized_image_url(item.image_url, 90, 70) : asset_path('public/default_image.png'), :size => '90x70'), item.url, :target => '_blank', :rel => 'nofollow' %>
+              </div>
+
+              <div class="link" style='display: inline-block !important;vertical-align: top !important;width: 85% !important'>
+                <%= link_to item.link_text.present? ? item.link_text : 'Здесь будет ссылка', item.url, :target => '_blank', style: 'text-decoration: none !important; color: #000 !important;', :rel => 'nofollow' %>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

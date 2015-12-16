@@ -7,11 +7,17 @@ class Teaser < ActiveRecord::Base
   validates_presence_of :items_quantity
   has_many :teaser_items, :dependent => :destroy
 
+  after_create :create_items
+
   friendly_id :title, :use => :slugged
   def should_generate_new_friendly_id?
     return true if !self.slug?
 
     false
+  end
+
+  def create_items
+    items_quantity.times { teaser_items.create! }
   end
 end
 
