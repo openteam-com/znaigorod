@@ -4,7 +4,7 @@ class Manage::TeasersController < Manage::ApplicationController
   def clear
     item = @teaser.teaser_items.find(params[:teaser_item_id])
     item.image_url = nil
-    item.text = ''
+    item.link_text = ''
     item.url = ''
     item.save!
 

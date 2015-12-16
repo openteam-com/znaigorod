@@ -47,5 +47,6 @@ end
 #  only_tomsk                :boolean
 #  contest_id                :integer
 #  old_slug                  :string(255)
+#  as_collage                :boolean          default(FALSE)
 #
 

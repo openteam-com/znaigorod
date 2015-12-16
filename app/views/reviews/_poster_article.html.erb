@@ -1,7 +1,11 @@
-<% cache("review_#{review.useful_type}_#{review.id}_#{controller_name}_#{action_name}_#{width}_#{height}", expires_in: 10.minutes) do %>
-  <%= link_to image_tag(review.annotation_image(width, height), :size => "#{width}x#{height}"), review_path(review) %>
+<% if review.show_as_collage? %>
+  <%= render :partial => 'poster_photo', :locals => { :review => review, :width => width, :height => height } %>
+<% else %>
+  <% cache("review_#{review.useful_type}_#{review.id}_#{controller_name}_#{action_name}_#{width}_#{height}", expires_in: 10.minutes) do %>
+    <%= link_to image_tag(review.annotation_image(width, height), :size => "#{width}x#{height}"), review_path(review) %>
 
-  <div class="text">
-    <%= review.content_for_index.truncate(100) %>
-  </div>
+    <div class="text">
+      <%= review.content_for_index.truncate(100) %>
+    </div>
+  <% end %>
 <% end %>

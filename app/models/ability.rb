@@ -52,6 +52,10 @@ class Ability
       (discount.account == user.account && discount.account.present? && user.account.present?) || user.is_discounts_editor?
     end
 
+    can :edit, Review do |review|
+      user.account == review.account
+    end
+
     case namespace
     when 'manage'
       can :manage, Afisha if user.is_afisha_editor?
@@ -137,7 +141,7 @@ class Ability
       end
 
       can [:add, :new, :create, :index, :available_tags, :preview], Review if user.persisted?
-      can [:show, :edit, :update, :destroy, :add_images, :edit_poster], Review do |review|
+      can [:show, :edit, :update, :destroy, :add_images, :edit_poster, :add_related_items, :sort_images, :download_album], Review do |review|
         review.account == user.account
       end
 
@@ -147,10 +151,6 @@ class Ability
 
       can :send_to_draft, Review do |review|
         review.published? && review.account == user.account
-      end
-
-      can :add_related_items, Review do |review|
-        review.account == user.account
       end
 
       can [:new, :create], Invitation if user.persisted?

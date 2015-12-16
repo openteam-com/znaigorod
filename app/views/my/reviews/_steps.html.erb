@@ -78,4 +78,14 @@
       <%= link_to t('my.send_to_public'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
     <% end %>
   </div>
+
+  <% if resource.has_annotation_gallery? %>
+    <div class='switch_wrapper js-switch-wrapper'>
+      <div class='label'>Отображать, как коллаж фотографий</div>
+      <div class='onoffswitch <%= "active" if resource.show_as_collage? %> js-switch' id='<%= resource.id %>'>
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -1,7 +1,7 @@
 <% if review.has_annotation_gallery? %>
   <ul class="images">
-    <% if controller_path == 'my/reviews' && action_name == 'index' %>
-      <%= review.annotation_gallery(184, 104) %>
+    <% if controller_path == 'my/reviews' && (action_name == 'show' || action_name == 'update') %>
+      <%= review.annotation_gallery(140, 80) %>
     <% elsif controller_path == 'reviews' && action_name == 'show' %>
       <%= review.annotation_gallery(142, 80) %>
     <% else %>

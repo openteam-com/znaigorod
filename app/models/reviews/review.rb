@@ -29,7 +29,7 @@ class Review < ActiveRecord::Base
   attr_accessible :content, :title, :tag, :categories,
                   :allow_external_links, :only_tomsk,
                   :related_items, :tagit_categories, :need_change, :category_flag,
-                  :organization_category_ids
+                  :organization_category_ids, :as_collage
 
   belongs_to :account
   belongs_to :contest
@@ -154,22 +154,6 @@ class Review < ActiveRecord::Base
     users.first
   end
 
-  def first_step_complete?
-    draft? || published?
-  end
-
-  def second_step_complete?
-    poster_url.present?
-  end
-
-  def third_step_complete?
-    gallery_images.any?
-  end
-
-  def fourth_step_complete?
-    relations.any?
-  end
-
   private
 
   def self.prefix
@@ -265,5 +249,6 @@ end
 #  only_tomsk                :boolean
 #  contest_id                :integer
 #  old_slug                  :string(255)
+#  as_collage                :boolean          default(FALSE)
 #
 

@@ -21,15 +21,7 @@
     </ul>
   </div>
 
-  <div class="right">
-    <div class="separator">
-      Так обзор будет выглядеть на списке
-      <div class='arrow'></div>
-    </div>
-
-    <ul class="posters">
-      <li class="item_review"><%= render :partial => 'reviews/poster', :locals => { :review => @review, :height => 104, :width => 214 } %></li>
-    </ul>
-
+  <div class='right js-right-side-my-reviews'>
+    <%= render :partial => 'right_side', :locals => { :review => @review } %>
   </div>
 </div>

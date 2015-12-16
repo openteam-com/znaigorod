@@ -10,5 +10,4 @@
       $.post(gallery.data('sort-url'), data).done ->
         gallery.effect('highlight', {}, 1000)
 
-
-
+        true

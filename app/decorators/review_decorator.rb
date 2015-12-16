@@ -184,4 +184,20 @@ class ReviewDecorator < ApplicationDecorator
   def first_step_complete?
     draft? || published?
   end
+
+  def second_step_complete?
+    poster_url.present?
+  end
+
+  def third_step_complete?
+    all_images.any?
+  end
+
+  def fourth_step_complete?
+    relations.any?
+  end
+
+  def show_as_collage?
+    as_collage
+  end
 end

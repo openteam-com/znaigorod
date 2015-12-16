@@ -1,0 +1,54 @@
+.switch_wrapper
+  margin: 20px 0 0 0
+  +clearfix
+
+  .label
+    margin: 0 15px 10px 0
+    float: left
+
+.onoffswitch
+  position: relative
+  width: 40px
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  float: left
+  margin-top: 6px
+
+.onoffswitch-checkbox
+  display: none
+
+.onoffswitch-label
+  display: block
+  overflow: hidden
+  cursor: pointer
+  height: 5px
+  padding: 0
+  line-height: 5px
+  border: 0px solid #FFFFFF
+  border-radius: 15px
+  background-color: #9E9E9E
+  &:before
+    content: ""
+    display: block
+    width: 15px
+    margin: -5px
+    background: #FFFFFF
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 31px
+    border-radius: 15px
+    box-shadow: 0 6px 12px 0px #757575
+
+.onoffswitch-checkbox:checked + .onoffswitch-label
+  background-color: #42A5F5
+  border-color: #42A5F5
+  &:before
+    border-color: #42A5F5
+  .onoffswitch-inner
+    margin-left: 0
+  &:before
+    right: 0px
+    background-color: #2196F3
+    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2)

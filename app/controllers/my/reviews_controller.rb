@@ -5,6 +5,8 @@ class My::ReviewsController < My::ApplicationController
 
   custom_actions :resource => [:add_images, :download_album, :edit_poster, :send_to_published, :send_to_draft, :sort_images, :add_related_items]
 
+  helper_method :clear_cache
+
   def index
     render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '156', :width => '280' }, :layout => false and return if request.xhr?
   end
@@ -15,14 +17,46 @@ class My::ReviewsController < My::ApplicationController
     }
   end
 
+  def edit
+    @review = ReviewDecorator.new(@review)
+  end
+
+  def edit_poster
+    @review = ReviewDecorator.new(@review)
+  end
+
+  def add_images
+    @review = ReviewDecorator.new(@review)
+  end
+
+  def add_related_items
+    @review = ReviewDecorator.new(@review)
+  end
+
   def update
     update! do |success, failure|
+      if request.xhr?
+        @review = Review.find(params[:id])
+        @review.as_collage = params[:as_collage]
+        @review.save
+      end
+
       success.html {
-        redirect_to params[:crop] ? poster_edit_my_review_path(resource.id) : my_review_path(resource.id)
+        clear_cache
+
+        if request.xhr?
+          render :partial => 'my/reviews/right_side', :locals => { :review => ReviewDecorator.new(@review) } and return
+        else
+          redirect_to params[:crop] ? poster_edit_my_review_path(resource.id) : my_review_path(resource.id)
+        end
       }
 
       failure.html {
-        render params[:crop] ? :edit_poster : :edit
+        if request.xhr?
+          render :nothing => true and return
+        else
+          render params[:crop] ? :edit_poster : :edit
+        end
       }
     end
   end
@@ -79,10 +113,6 @@ class My::ReviewsController < My::ApplicationController
     end
   end
 
-  def add_related_items
-
-  end
-
   protected
 
   def begin_of_association_chain
@@ -93,11 +123,17 @@ class My::ReviewsController < My::ApplicationController
     @review = ReviewArticle.new(params[:review]) do |review|
       review.account = current_user.account
     end
+
+    @review = ReviewDecorator.new(@review)
   end
 
   def resource_url
     @review.is_a?(ReviewPhoto) ?
       images_add_my_review_path(@review.id) :
       my_review_path(@review.id)
+  end
+
+  def clear_cache
+    ["review#{@review.id}_reviews_index", "review_article_#{@review.id}_reviews_index_354_200"].each { |key| Rails.cache.delete(key) }
   end
 end

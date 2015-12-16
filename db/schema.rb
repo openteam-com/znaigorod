@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151130053946) do
+ActiveRecord::Schema.define(:version => 20151216061335) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1004,8 +1004,8 @@ ActiveRecord::Schema.define(:version => 20151130053946) do
 
   create_table "reviews", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "type"
     t.text     "content"
     t.string   "slug"
@@ -1028,6 +1028,7 @@ ActiveRecord::Schema.define(:version => 20151130053946) do
     t.boolean  "only_tomsk"
     t.integer  "contest_id"
     t.string   "old_slug"
+    t.boolean  "as_collage",                :default => false
   end
 
   create_table "roles", :force => true do |t|

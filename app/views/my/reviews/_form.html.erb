@@ -32,6 +32,8 @@
   <%= f.input :tag, :as => :string,
     :input_html => { :data => { 'autocomplete-source' => tags_available_my_reviews_path } } %>
 
+  <%= f.input :generate_poster, :as => :hidden, :input_html => { :value => true } %>
+
   <div class='submit'>
     <%= f.submit 'Сохранить', :class => 'flat-btn btn-lg btn-orange' %>
     <%= link_to 'Отмена', :back %>
