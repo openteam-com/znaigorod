@@ -21,6 +21,7 @@
     </div>
 
     <%= select_tag :cat, options_for_select(Review.categories.options - [["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]), :class => 'select_type', :prompt => '' %>
+    <%= f.error :categories %>
     <%= f.input :tagit_categories,
       :as => :string,
       :label => false,

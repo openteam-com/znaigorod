@@ -66,7 +66,7 @@ class Review < ActiveRecord::Base
   scope :ordered,           order('created_at desc')
   scope :with_period,       -> { where created_at: (Time.zone.now - 1.month)..Time.zone.now }
 
-  validates_presence_of :title, :categories
+  validates_presence_of :title, :categories, :tag
 
   default_value_for :allow_external_links, false
   default_value_for :only_tomsk,           false
