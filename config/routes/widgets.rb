@@ -1,5 +1,5 @@
 Znaigorod::Application.routes.draw do
-  #get '/widgets/webcams' => redirect('/')
+  get '/widgets/webcams' => redirect('/services')
 
   namespace :widgets  do
     resources :webcams, :only => :new do

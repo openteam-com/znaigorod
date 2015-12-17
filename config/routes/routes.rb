@@ -29,7 +29,8 @@ Znaigorod::Application.routes.draw do
   get 'geo_info'        => 'geocoder#geo_info'
   get 'geocoder'        => 'geocoder#get_coordinates'
   get 'search'          => 'search#search',                :as => :search
-  get 'webcams'         => 'webcams#index'
+  #get 'webcams'         => 'webcams#index'
+  get 'webcams'         => redirect('/services')
   get 'yamp_geocoder'   => 'geocoder#get_yamp_coordinates'
   get '/paradnevest2014'    => redirect('/photogalleries/parad-nashestvie-nevest-2014')
   get '/%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%BD%D0%B5%D0%B2%D0%B5%D1%81%D1%822014'    => redirect('/photogalleries/parad-nashestvie-nevest-2014')
