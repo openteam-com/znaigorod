@@ -55,19 +55,16 @@
     <% end %>
     <!-- /weather -->
 
-<<<<<<< HEAD
-=======
     <!-- new year  -->
     <div class='new_year_wrapper'>
       <%= link_to map_project_show_path(current_city == "tomsk" ? 'novyj_god_2016_v_tomske' : 'novyj_god_2016_v_sevastopole') do %>
         <p class='big'><span><%= days_to_new_year %></span><%= I18n.t('new_year', count: days_to_new_year) %></p>
         <p class='small'>до Нового года</p>
       <% end %>
-      </div>
-      <!-- /new year -->
->>>>>>> 893f2715e7eb10e96966d848bbfa1f754a628d27
+    </div>
+    <!-- /new year -->
 
-      <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
+    <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
 
     <!--noindex-->
     <div class='dashboard'>
