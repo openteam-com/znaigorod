@@ -90,6 +90,7 @@
  * = require ./services
  * = require ./sms_claims
  * = require ./my_afisha
+ * = require ./my_organization
  * = require ./select_tags
  * = require ./discount_map
  * = require ./discount_info_filter
@@ -119,5 +120,4 @@
  * = require ./map_project
  * = require ./shuffle
  * = require ./collapse
- * = require manage/organizations
  */

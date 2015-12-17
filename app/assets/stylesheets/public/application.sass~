@@ -41,7 +41,6 @@
 @import 'my_review'
 @import 'my_afisha'
 @import 'my_organizations'
-@import 'new_my_organization'
 @import 'my_discount'
 @import 'my_related_items'
 @import 'tagit'

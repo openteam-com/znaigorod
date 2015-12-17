@@ -1,0 +1,107 @@
+<div class='feeds'>
+  <% content_for :account_content do %>
+    <div class="invitations header">
+      <div class='clear'>
+        <span class="panel"></span>
+      </div>
+      <h3>
+        <%= link_to "Мои организации", new_my_organization_path, class: 'add_link' %>
+      </h3>
+      <%= link_to 'Добавить организацию', new_my_organization_path, class: :invitation_link if can? :new, Organization %>
+    </div>
+    <div class="my_organizations">
+    <div class="organization_wrapper">
+    <div class="organization_content js-button-pagination sauna_housing_content">
+
+    <ul class="posters js-paginable-list sauna_posters" data-item-width="220">
+      <% @presenter.user_organizations.each do |item| %>
+      <% cache("organization_#{params[:kind]}_#{params[:categories].try(:first).try(:underscore)}_#{params[:page]}_#{@presenter.view_type}_#{item.id}", expires_in: 10.minutes) do %>
+      <li class='item_organization' data-longitude="<%= item.longitude %>" data-latitude="<%= item.latitude %>"
+        data-image="<%= logotype_url(item) %>" data-slug="<%= item.slug %>"
+        data-icon='<%= item.map_image_name(params[:slug], 'default') ?
+          item.map_image_name(params[:slug], 'default') :
+          asset_path("/assets/public/organizations_list_view/default.png") %>'
+          data-icon-hover='<%= item.map_image_name(params[:slug], 'hover') ?
+            item.map_image_name(params[:slug], 'hover') :
+            asset_path("/assets/public/organizations_list_view/default_hover.png") %>'
+            data-width=<%= icon_width(item) %> data-height=<%= icon_height(item) %> data-status=<%= status(item) %> >
+
+            <% if item.sms_claimable? %>
+              <%= link_to item.priority_sms_claimable_suborganization.reservation_title,
+                send("new_#{item.priority_sms_claimable_suborganization.class.name.underscore}_sms_claim_path", item.priority_sms_claimable_suborganization),
+                :class => :sms_claim_link,
+                :title => item.priority_sms_claimable_suborganization.reservation_title %>
+            <% end %>
+
+            <div class="list_view_organization_poster">
+              <!-- логотип -->
+                            <!-- информация о заведении -->
+              <div class="info">
+              <div class="image">
+                <% if actual_discounts?(item) || actual_discounts?(item.primary_organization) %>
+                  <div class='with_discount'><%= link_to 'скидка', organization_path(item) %></div>
+                <% end %>
+                <% if item.logotype_url? || item.primary_organization %>
+                  <!-- если логотип есть -->
+                  <%= link_to organization_path(item) do %>
+                    <%= image_tag(resized_image_url(logotype_url(item), 90, 90, :watermark => false), size: "#{90}x#{90}", alt: item.title) %>
+                  <% end %>
+                <% else %>
+                  <!-- иначе -->
+                  <%= link_to organization_path(item) do %>
+                    <span class='stub_poster'></span>
+                  <% end %>
+                <% end %>
+                <a class="details" href="<%= organization_path(item) %>">
+                  <span class='first_line'>
+                    <span class='show_tipsy fa fa-users' title='Участники'> <%= item.visits.count %></span>
+                    <span class='show_tipsy fa fa-user' title='Приглашения'> 0</span> <!-- TODO change this -->
+                    <span class='show_tipsy fa fa-comments' title='Комментарии'> <%= item.comments.count %></span>
+                  </span>
+                  <span class='second_line'>
+                    <span class='show_tipsy fa fa-heart' title='Понравилось'> <%= item.likes_count %></span>
+                    <span class='show_tipsy fa fa-eye' title='Просмотры'> <%= item.page_visits.count %></span>
+                  </span>
+                  </a>
+              </div>
+                <div class='title'>
+                  <%= link_to item.title.truncate(30), organization_path(item) %>
+                  <%= content_tag :span,'' , :title => "#{item.work_schedule_for_list_view}".html_safe,
+                    :class => (!item.schedules.first.try(:holiday?) || item.work_schedule_for_list_view == 'Гибкий график работы') ? 'open' : 'close' %>
+                </div>
+
+
+                <!-- адрес -->
+                <%= content_tag(:div, "#{item.address_without_link}".html_safe, class: :place) if item.address_link.present? %>
+
+                <!-- телефон -->
+                <span class='phone'>
+                  <%= item.phone.truncate(5)%>
+                  <%= link_to "Показать телефон", "#", class: "js-show-phone", id: item.id %>
+                </span>
+
+                <!-- категории и остальная информация -->
+                <div class='categories_and_visits'>
+                  <ul class='categories'>
+                    <%= item.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+                  </ul>
+
+               </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+
+      <% if @presenter.clients.empty? && @presenter.not_clients.empty? %>
+        <div class="nothing_find">
+          По Вашему запросу ничего не найдено :(
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</div>
+</div>
+  <% end %>
+</div>
+<%= render file: "my/accounts/wrapper" %>

@@ -1,0 +1,3 @@
+<%= simple_nested_form_for @organization  do |f| %>
+  <%= f.input :title %>
+<% end %>

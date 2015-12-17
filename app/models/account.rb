@@ -46,6 +46,7 @@ class Account < ActiveRecord::Base
   has_many :showings,                 :through => :users
   has_many :visits,                   :through => :users,                :order => 'visits.created_at DESC'
   has_many :votes,                    :through => :users,                :order => 'votes.id DESC'
+  has_many :organizations,            :through => :users
 
   has_many :friendable,      :as => :friendable,     :class_name => 'Friend'
   has_many :my_page_visits,  :as => :page_visitable, :class_name => 'PageVisit'

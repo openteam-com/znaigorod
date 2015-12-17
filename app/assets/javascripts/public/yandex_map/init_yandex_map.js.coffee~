@@ -1,9 +1,12 @@
 @init_my_organization_yandex_map = () ->
-  ymaps.ready ->
+   alert "ser"
+   ymaps.ready ->
     $map = $('.yandex_map_organization')
     map = new ymaps.Map $map[0],
       center: [$map.attr('data-latitude'), $map.attr('data-longitude')]
       zoom: 15
+      behaviors: []
+
   true
 true
 
@@ -27,7 +30,7 @@ true
       yaCounter14923525.reachGoal('affiche_map_click') if yaCounter14923525?
       true
 
-
+	
 
     magnifier_layout = ymaps.templateLayoutFactory.createClass("<div class='magnifier_button'></div>")
 
@@ -325,6 +328,7 @@ build_placemark = (item) ->
   point
 
 generate_item_description = (item) ->
+  alert "Sg"
   item_description = "" +
     "<div class='organization_description'>" +
     "<div class='image'>" +

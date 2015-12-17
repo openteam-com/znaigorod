@@ -63,6 +63,10 @@ class Ability
         user.account == account
       end
 
+      can :manage, Organization do |org|
+        org.user_id == user.id
+      end
+
       can [:index, :archive, :new, :create, :available_tags, :preview_video], Afisha if user.persisted?
 
       can [:edit, :update, :destroy_image], Afisha do |afisha|

@@ -4,6 +4,8 @@ Znaigorod::Application.routes.draw do
   namespace :my do
     resources :sessions,  :only => [:new, :destroy]
 
+    resources :organizations
+
     get '/afisha/available_tags' => 'afishas#available_tags', :as => :available_tags, :controller => 'afishas'
 
     put 'read_all_notifications' => 'notification_messages#read_all_notifications'

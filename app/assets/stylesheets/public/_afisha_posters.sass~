@@ -1,0 +1,254 @@
+.afishas_index
+  margin: 0
+
+  li.pagination
+    border: none !important
+    height: 30px !important
+    padding: 0 0 20px 0 !important
+    width: 886px !important
+    background: none !important
+
+    a
+      &.disabled
+        color: #999
+
+.content
+
+  .afisha_left
+    float: left
+    padding: 0 40px 25px 5px
+    width: 890px
+
+    .filter_header
+      +clearfix
+      border-bottom: 1px solid #e5e5e5
+      font-size: 22px
+      line-height: 40px
+      margin: 30px 0 0 0
+      float: none
+
+    .filter_and_share
+      +likes
+      .likes
+        margin: 15px 0 15px 0
+
+  .afisha_right
+    border-left: 1px solid #e5e5e5
+    float: right
+    margin: 0 0 0 -1px
+    padding: 10px 0
+    width: 240px
+
+.afisha_content, .similar_afisha, .related_posters
+  clear: both
+
+  &.organization_afisha
+    .afisha_title
+      background-color: #e8e8e8
+      font-size: 14px
+      padding: 5px 10px
+      margin: 10px 0
+
+    .posters
+      padding-left: 40px
+
+      .item
+        &.fourth
+          margin: 0 26px 25px 0
+
+  &.related_afishas
+    .title
+      background-color: #ccc
+      padding: 0 10px
+      margin: 15px 0
+
+    .posters
+      padding: 0 7px
+
+      .item_afisha
+        height: 365px
+        margin: 0 25px 25px 0
+
+        .image
+          .has_items_for_sale
+            padding: 0
+            font-size: 13px
+
+        .title
+          background-color: #fff
+
+        &:nth-child(4n)
+          margin: 0 0 25px 0
+
+  .posters
+    position: relative
+
+    .item, .item_afisha
+      +inline-block
+      +transition(all 750ms ease-out)
+      background-color: #fff
+      height: 352px
+      margin: 0 26px 25px 0px
+      position: relative
+      width: 198px
+
+      &.fourth
+        margin: 0 0 25px 0
+
+      &.fresh
+        +opacity(0)
+
+      &.highlighted
+        border: 1px solid #f60
+
+      .title
+        border-bottom: 1px dashed #ccc
+        display: table-cell
+        font-size: 11px
+        height: 44px
+        line-height: 18px
+        margin: 0
+        min-height: 45px
+        padding: 0 10px
+        vertical-align: middle
+        width: 200px
+
+      .image
+        height: 260px
+        margin: 2px 0 0 2px
+        position: relative
+        width: 194px
+
+        .has_items_for_sale
+          +as_green_ribbon
+          left: -9px
+          position: absolute
+          top: -3px
+          width: 212px
+
+        .ribbon
+          position: absolute
+          left: 0
+          bottom: 0
+          color: #fff
+          background-color: #f60
+          padding: 2px 8px 3px
+
+        .for_sale
+          background: #00bb84
+          border: 1px solid #00ad7a
+          color: #fff
+          display: none
+          font-size: 12px
+          height: 28px
+          left: 27px
+          line-height: 28px
+          margin: 0
+          padding: 0
+          position: absolute
+          text-align: center
+          top: 40px
+          width: 140px
+
+          &:active, &:hover
+            background: #00ad7a
+            border-color: #00ad7a
+            text-decoration: none
+
+          &.ponominalu
+            background: none
+            border: none
+            left: 24px
+
+        .bkz-link
+          background: image_url('public/bkz_logo.png') 7px 4px no-repeat #a42d22
+          border: 1px solid #8f2318
+          left: 14px
+          padding-left: 55px
+          width: 110px
+
+          &:active, &:hover
+            background: image_url('public/bkz_logo.png') 7px 4px no-repeat #8f2318
+            border: 1px solid #8f2318
+
+        .promote_afisha_wrapper
+          display: none
+
+          a
+            background: #f93 image_url('public/arrow-up-white.png') no-repeat 10px center
+            bottom: 70px
+            left: 26px
+            margin: 0
+            padding: 0 0 0 9px
+            position: absolute
+            width: 129px
+
+            &:hover
+              background: #f60 image_url('public/arrow-up-white.png') no-repeat 10px center
+              border-color: #f60
+              margin: 0
+              padding: 0 0 0 9px
+              text-decoration: none
+
+        .details
+          color: #999
+          font-size: 12px
+
+        .first_line,
+        .second_line
+          display: none
+          left: 0
+          padding: 0 10px
+          position: absolute
+          width: 175px
+
+          span
+            cursor: help
+            display: inline-block
+            text-align: center
+            width: 55px
+
+        .first_line
+          bottom: 35px
+
+        .second_line
+          bottom: 10px
+
+        &:hover
+          .ribbon
+            display: none
+          img:not(.link)
+            +opacity(0.15)
+          .for_sale,
+          .first_line,
+          .second_line,
+          .promote_afisha_wrapper
+            display: block
+
+      .arrow-up
+        background: transparent image_url('public/arrow-up.png') no-repeat center center
+        height: 21px
+        left: 184px
+        position: absolute
+        bottom: 35px
+        width: 21px
+
+        &:after
+          content: ""
+          width: 0
+          height: 0
+          position: absolute
+          left: 15px
+          bottom: -6px
+          border-width: 3px 3px
+          border-style: solid
+          border-color: #b34800 transparent transparent #b34800
+
+      .place
+        font-size: 11px
+        margin: 5px 10px 0 10px
+        max-height: 16px
+
+      .human_when
+        font-size: 11px
+        margin: 2px 10px 3px 10px

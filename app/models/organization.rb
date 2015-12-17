@@ -30,6 +30,7 @@ class Organization < ActiveRecord::Base
   belongs_to :organization
   belongs_to :placement,            :class_name => 'Organization', :foreign_key => 'situated_at'
   belongs_to :primary_organization, :class_name => 'Organization', :foreign_key => 'primary_organization_id'
+  belongs_to :user
 
   has_many :organization_category_items, :dependent => :destroy
   has_many :organization_categories, :through => :organization_category_items

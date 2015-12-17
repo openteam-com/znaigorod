@@ -1,5 +1,5 @@
 class NewOrganizationsPresenter
-  attr_accessor :params, :category, :view_type, :query, :features, :latitude, :longitude, :radius
+  attr_accessor :params, :category, :view_type, :query, :features, :latitude, :longitude, :radius, :current_user
 
   def initialize(params)
     @params = params
@@ -10,6 +10,7 @@ class NewOrganizationsPresenter
     @latitude ||= params[:latitude]
     @longitude ||= params[:longitude]
     @radius ||= params[:radius]
+    @current_user ||= params[:current_user]
   end
 
   def categories_links
@@ -169,6 +170,15 @@ class NewOrganizationsPresenter
     }.results
   end
 
+  def user_organizations
+    @user_organizations ||= Organization.search {
+      paginate :page => 1, :per_page => 10
+      with :user_id, current_user.id
+    }.results
+
+    OrganizationDecorator.decorate @user_organizations
+  end
+
   def not_clients_results
     @not_clients_results ||= Organization.search {
       paginate :page => not_clients_page, :per_page => not_clients_per_page
@@ -198,6 +208,7 @@ class NewOrganizationsPresenter
        send("#{prefix}_results").last_page?
      end
   end
+
   alias_method :collection, :clients
 
   def minimal_clients_results_total_count

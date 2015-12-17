@@ -1,0 +1,25 @@
+<div class="organization_organization_categories">
+  <div class="error_message">
+    <%= resource.errors[:organization_category_ids][0] %>
+  </div>
+  <% OrganizationCategory.roots.each do |root| %>
+    <div class="label">
+      <% if root.children.any? %>
+        <span><%= link_to "+", "#", :class => "js-open-list open_list plus" %></span>
+        <%= label_tag root.title %>
+        <%= check_box_tag 'root', 'root', false, class: 'js-root' %>
+      <% else %>
+        <%= label_tag root.title %>
+        <%= check_box_tag 'organization[organization_category_ids][]', root.id, resource.organization_categories.include?(root) ? true : false %>
+      <% end %>
+    </div>
+    <div class="children closed">
+    <% root.children.each do |child| %>
+      <div class="label">
+        <%= label_tag child.title %>
+        <%= check_box_tag 'organization[organization_category_ids][]', child.id, resource.organization_categories.include?(child) ? true : false %>
+      </div>
+    <% end %>
+    </div>
+  <% end %>
+</div>

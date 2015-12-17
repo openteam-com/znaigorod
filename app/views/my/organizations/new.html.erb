@@ -1,0 +1,25 @@
+<%= javascript_include_tag 'esp-ckeditor/application' %>
+<div class="new_my_organization">
+  <%= simple_nested_form_for resource, :url => [:my, resource], :html => { :novalidate => true } do |f| %>
+    <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
+    <div class="yandex_map_organization_container">
+      <div class="info">
+        <span>Адрес</span><br>
+        <input type="text" size="38" name="organization_address" id="oganization_address"/>
+      </div>
+      <div class='yandex_map_organization' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></div>
+
+    </div>
+    <%= f.input :title  %>
+    <%= f.input :email %>
+    <%= f.input :phone, :hint => false %>
+    <div class='hint'>Номера указываются через запятую в одной из следующих форм: 22-33-44, (3822)11-22-33, 333-444, (3822)333-444, 8-333-444-55-66</div>
+    <%= f.input :site %>
+    <div class="schedules_fields">
+      <h3>Расписание работы:</h3>
+      <%= f.simple_fields_for :schedules %>
+    </div>
+    <%= render :partial => 'organization_categories_fields' %>
+    <%= f.submit %>
+  <% end %>
+</div>

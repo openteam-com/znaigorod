@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151015042021) do
+ActiveRecord::Schema.define(:version => 20151210051408) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -776,6 +776,7 @@ ActiveRecord::Schema.define(:version => 20151015042021) do
     t.integer  "csv_id"
     t.string   "gis_title"
     t.boolean  "show_custom_balloon_icon",      :default => false
+    t.boolean  "published",                     :default => false
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true

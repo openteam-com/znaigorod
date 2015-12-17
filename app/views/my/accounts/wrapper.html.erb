@@ -64,7 +64,7 @@
               </a>
             </div>
             <div class="show_friends <%= "selected" if params[:controller] == "my/friends" %>">
-              <a href="<%= my_account_friends_path() %>">
+              <a href="friends<%= my_account_friends_path() %>">
                 <span id="friends_counter"><%= current_user.account.friends_count %></span>
                 <span class="menu_text">Друзья</span>
               </a>
@@ -82,6 +82,13 @@
                 <% end %>
                 <span class="menu_text">Мои афиши</span>
               </a>
+            </div>
+            <div class="show_button <%= "selected" if params[:controller] == "my/organizations" %>">
+              <a href="<%= my_organizations_path %>">
+                <span class="menu_text">
+                Мои организации
+                </span>
+                </a>
             </div>
             <div class="show_button <%= "selected" if params[:controller] == "my/discounts" %>">
               <a href="<%= my_discounts_path() %>">
