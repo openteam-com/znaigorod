@@ -40,25 +40,17 @@
 
   <p>Сгрупированные по IP голоса</p>
   <ul>
-    <% resource.votes.liked.map(&:user).group_by(&:current_sign_in_ip).each do |ip, users| %>
-      <% if users.size > 1 %>
-        <li>
-          <%= ip %> - <%= users.map { |user| "#{link_to user, account_path(user.account), :target => :_blank}" }.join(', ').html_safe %>
-          <%= link_to 'Удалить голоса', delete_stranded_votes_manage_contest_works_path(resource.context, :ip => ip), :method => :delete, :confirm => 'Точно?' %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-
-  <hr />
-  <p>Все голоса</p>
-  <ul>
     <%= simple_form_for resource, :url => delete_stranded_grouped_votes_manage_contest_works_path, :method => :delete do |f| %>
-      <% resource.votes.liked.each do |vote| %>
-        <li>
-          <%= check_box_tag 'delete[]', vote.id, false, :id => vote.id %>
-          <%= label_tag vote.id, "#{link_to vote.user, account_path(vote.user.account), :target => :_blank} - #{vote.user.current_sign_in_ip}".html_safe %>
-      </li>
+      <% resource.votes.liked.map(&:user).group_by(&:current_sign_in_ip).each do |ip, users| %>
+        <% if users.size > 1 %>
+          <li>
+            <%= ip %> -
+            <% users.each do |user| %>
+              <%= check_box_tag 'delete[]', user.id, false, :id => user.id %>
+              <%= label_tag user.id, "#{link_to user, account_path(user.account), :target => :_blank}".html_safe %>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
       <%= f.submit 'Удалить выбранное', :data => { :confirm => 'Точно?' } %>
     <% end %>
