@@ -86,6 +86,7 @@ Znaigorod::Application.routes.draw do
     resources :contests do
       resources :works, :except => [:index] do
         delete 'delete_stranded_votes', :on => :collection
+        delete 'delete_stranded_grouped_votes', :on => :collection
       end
     end
 

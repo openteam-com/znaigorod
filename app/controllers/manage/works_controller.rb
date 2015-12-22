@@ -26,6 +26,17 @@ class Manage::WorksController < Manage::ApplicationController
     votes = users.flat_map(&:votes)
     votes.map(&:destroy)
     users.map(&:destroy)
+
+    redirect_to :back
+  end
+
+  def delete_stranded_grouped_votes
+    for_delete = params[:delete]
+    Vote.where(:id => for_delete).each do |vote|
+      vote.user.destroy
+      vote.destroy
+    end
+
     redirect_to :back
   end
 
