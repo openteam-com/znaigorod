@@ -65,11 +65,11 @@ ru:
       review_video:                       видеообзор
       question:                           вопросы
 
-      #review:
+      review:
         #article:                          Все обзоры
         #photo:                            Все фотообзоры
         #video:                            Все видеообзоры
-        #question:                         Все вопросы
+        question:                         Все вопросы
 
       room:                               Номера/квартиры/загородные дома
       map_project:                        Картопроект

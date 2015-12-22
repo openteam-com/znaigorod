@@ -22,7 +22,7 @@
   <div class="filters reviews">
     <div class="by_category">
       <ul>
-        <% @presenter.category_filter.links.take(8).each do |link| %>
+        <% @presenter.category_filter.links.delete_if{|link| link.klass == "inform"}.take(8).each do |link| %>
           <li class="<%= link.klass %>">
             <%= link_to link.path do %>
               <span class="name"><%= link.title %></span>
