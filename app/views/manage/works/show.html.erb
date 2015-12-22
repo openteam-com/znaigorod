@@ -44,6 +44,7 @@
       <% if users.size > 1 %>
         <li>
           <%= ip %> - <%= users.map { |user| "#{link_to user, account_path(user.account), :target => :_blank}" }.join(', ').html_safe %>
+          <%= link_to 'Удалить голоса', delete_stranded_votes_manage_contest_works_path(resource.context, :ip => ip), :method => :delete, :confirm => 'Точно?' %>
         </li>
       <% end %>
     <% end %>
