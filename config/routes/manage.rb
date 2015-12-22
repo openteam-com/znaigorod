@@ -84,7 +84,9 @@ Znaigorod::Application.routes.draw do
     get '/movie_info_from_kinopoisk/:movie_id' => 'afishas#movie_info_from_kinopoisk', :as => :movie_info_from_kinopoisk
 
     resources :contests do
-      resources :works, :except => [:index, :show]
+      resources :works, :except => [:index] do
+        delete 'delete_stranded_votes', :on => :collection
+      end
     end
 
     resources :photogalleries do

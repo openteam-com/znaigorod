@@ -65,6 +65,7 @@ GEM
     auto_html (1.6.0)
       redcarpet (~> 2.0)
       rinku (~> 1.5.0)
+    awesome_print (1.6.1)
     backports (3.6.2)
     bcrypt (3.1.10)
     brakeman (2.3.1)
@@ -512,6 +513,7 @@ DEPENDENCIES
   annotate
   attribute_normalizer
   auto_html
+  awesome_print
   brakeman
   breadcrumbs_on_rails
   cancan
@@ -598,6 +600,3 @@ DEPENDENCIES
   uglifier
   validates_email_format_of
   vkontakte_api
-
-BUNDLED WITH
-   1.10.6

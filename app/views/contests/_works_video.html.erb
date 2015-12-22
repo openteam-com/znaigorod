@@ -7,7 +7,7 @@
         <p>Сортировать по:</p>
         <ul>
           <li<%= " class=selected" if order_by(@contest) == "by_id" %>><%= link_to "Обновлению", contest_path(params[:id], order_by: 'by_id')  %></li>
-          <li<%= " class=selected" if order_by(@contest) == "by_sms_counter" %>><%= link_to "Голосам", contest_path(params[:id], order_by: @contest.vote_sort_value)  %></li>
+          <li<%= " class=selected" if order_by(@contest) == "by_zg_likes" %>><%= link_to "Голосам", contest_path(params[:id], order_by: @contest.vote_sort_value)  %></li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,49 @@
+<%= image_tag(resized_image_url(resource.image_url, 250, 200, options = { :crop => '!', :magnify => 'm', :orientation => '' } ), :size => '250x200') %>
+
+<div>
+  <span class="label">Название:</span>
+  <% if resource.title? %>
+    <span class="value"><%= resource.title %></span>
+  <% else %>
+    <span class="value">Не указано</span>
+  <% end %>
+</div>
+<div>
+  <span class="label">Описание:</span>
+  <% if resource.description? %>
+    <span class="value"><%= simple_format resource.description %></span>
+  <% else %>
+    <span class="value">Не указано</span>
+  <% end %>
+</div>
+<div>
+  <span class="label">Информация об авторе:</span>
+  <% if resource.author_info? %>
+    <span class="value"><%= resource.author_info %></span>
+  <% else %>
+    <span class="value">Не указано</span>
+  <% end %>
+</div>
+<div>
+  <span class="label">Код</span>
+  <% if resource.code? %>
+    <span class="value"><%= resource.code %></span>
+  <% else %>
+    <span class="value">Не указано</span>
+  <% end %>
+</div>
+<div>
+  <span class="label">Голоса:</span>
+  <p>Количество: <%= resource.votes.liked.count %></p>
+  <p>Уникальных: <%= resource.votes.liked.map(&:user).map(&:current_sign_in_ip).uniq.size %></p>
+  <hr />
+
+  <p>Сгрупированные по IP голоса</p>
+  <ul>
+    <% resource.votes.liked.map(&:user).group_by(&:current_sign_in_ip).each do |ip, users| %>
+      <% if users.size > 1 %>
+        <li><%= ip %> - <%= users.map(&:to_s).join(', ') %> <%= link_to 'Удалить голоса', delete_stranded_votes_manage_contest_works_path(resource.context, :ip => ip), :method => :delete, :confirm => 'Точно?' %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

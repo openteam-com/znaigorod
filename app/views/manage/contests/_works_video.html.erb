@@ -5,7 +5,7 @@
       <div>
         <span class="label">Название:</span>
         <% if work.title? %>
-          <span class="value"><%= work.title %></span>
+          <span class="value"><%= link_to work.title, manage_contest_work_path(resource, work) %></span>
         <% else %>
           <span class="value">Не указано</span>
         <% end %>

@@ -1,7 +1,7 @@
 class Manage::WorksController < Manage::ApplicationController
   load_and_authorize_resource
 
-  actions :all, :except => [:index, :show]
+  actions :all, :except => [:index]
 
   belongs_to :contest, :polymorphic => true, :optional => true
   belongs_to :photogallery, :polymorphic => true, :optional => true
@@ -18,6 +18,15 @@ class Manage::WorksController < Manage::ApplicationController
 
   def update
     update! { [:manage, @work.context] }
+  end
+
+  def delete_stranded_votes
+    ip = params[:ip]
+    users = User.where(:current_sign_in_ip => ip)
+    votes = users.flat_map(&:votes)
+    votes.map(&:destroy)
+    users.map(&:destroy)
+    redirect_to :back
   end
 
   private
