@@ -24,7 +24,7 @@ class Manage::WorksController < Manage::ApplicationController
     for_delete = params[:delete]
     User.where(:id => for_delete).each do |user|
       user.votes.map(&:destroy)
-      user.destroy
+      user.account.destroy
     end
 
     redirect_to :back
