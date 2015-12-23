@@ -1,7 +1,7 @@
 class My::ReviewsController < My::ApplicationController
   load_and_authorize_resource
 
-  actions :all
+  actions :all, :except => :create
 
   custom_actions :resource => [:add_images, :download_album, :edit_poster, :send_to_published, :send_to_draft, :sort_images, :add_related_items]
 
@@ -9,6 +9,14 @@ class My::ReviewsController < My::ApplicationController
 
   def index
     render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '156', :width => '280' }, :layout => false and return if request.xhr?
+  end
+
+  def create
+    if @review.save
+      redirect_to my_review_path(@review.id)
+    else
+      render 'new'
+    end
   end
 
   def show
