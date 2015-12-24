@@ -105,10 +105,10 @@ main_page_afisha:
 main_page_discounts:
   places:
     '1.0':
-      from: '2015-12-11 15:30'
-      to: '2015-12-12 15:30'
+      from: '2015-12-24 11:50'
+      to: '2015-12-29 11:50'
       content_type: 'discount'
-      discount_slug: 'abonement-so-skidkoy'
+      discount_slug: 'novogodnie-podarochnye-sertifikaty-so-skidkoy-10'
       replaced_count: 1
     '1.1':
       from: '2014-06-19 18:30'
