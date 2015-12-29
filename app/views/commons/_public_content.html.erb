@@ -1,7 +1,7 @@
 <div class='content_wrapper'>
   <% unless (controller_name == 'organizations' || controller_name == 'suborganizations') && action_name == 'show'  %>
-    <div class='left_links'><%= link_to 'Медицинское объединение "Здоровье"', 'http://mo-zdorovie.tomsk.ru/newdirections', :target => :_blank %></div>
-    <div class='right_links'><%= link_to 'Медицинское объединение "Здоровье"', 'http://mo-zdorovie.tomsk.ru/newdirections', :target => :_blank %></div>
+    <div class='left_links'><%= link_to 'Медицинское объединение "Здоровье"', 'http://mo-zdorovie.tomsk.ru', :target => :_blank %></div>
+    <div class='right_links'><%= link_to 'Медицинское объединение "Здоровье"', 'http://mo-zdorovie.tomsk.ru', :target => :_blank %></div>
   <% end %>
 
   <div class='content <%= auto_content_class %>'>
