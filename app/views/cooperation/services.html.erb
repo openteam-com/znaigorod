@@ -199,19 +199,19 @@
             <td>Разработка и публикация обзора (до 2000 знаков)</td>
             <td class='center'>3500</td>
             <td class='center'>Входит в пакет</td>
-            <td class='center'>Разово</td>
+            <td class='center'>Неограничен</td>
           </tr>
           <tr>
-            <td>Участие в тематических агрегированных обзоров (несколько заведений)</td>
+            <td>Участие в тематических агрегированных обзорах (несколько заведений)</td>
             <td class='center'>1000</td>
             <td class='center'>Входит в пакет</td>
-            <td class='center'>Разово</td>
+            <td class='center'>Неограничен</td>
           </tr>
           <tr>
             <td>Публикация рекламных обзоров (с открытыми ссылками, до 2000 знаков)<%= link_to 'Добавить обзор', new_my_review_path, :class => :discount_link %></td>
             <td class='center'>900</td>
             <td class='center'>Входит в пакет</td>
-            <td class='center'>Разово</td>
+            <td class='center'>Неограничен</td>
           </tr>
           <tr>
             <td>Закрепление обзора на главной</td>
@@ -250,7 +250,7 @@
               <%= link_to 'ВК', 'http://vk.com/znaigorod', :target => '_blank', :class => :discount_link %>,
               <%= link_to 'Одноклассниках', 'http://ok.ru/group/54186972610564', :target => '_blank', :class => :discount_link %>,
               <%= link_to 'Facebook','https://ru-ru.facebook.com/znai.gorod', :target => '_blank', :class => :discount_link %>,
-              <%= link_to 'Twitter', 'https://twitter.com/znaigorod', :target => '_blank', :class => :discount_link %>)
+              <%= link_to 'Twitter', 'https://twitter.com/znaigorod', :target => '_blank', :class => :discount_link %>,
               <%= link_to 'Instagram', 'https://www.instagram.com/znaigorod/', :target => '_blank', :class => :discount_link %>)
             </td>
             <td class='center'>600</td>
@@ -278,7 +278,7 @@
             <th class='center'>Период размещения</th>
           </tr>
           <tr>
-            <td >Брендирование портала.<%= link_to '(примеры)', '#brand_examples', :class => :discount_link %></td>
+            <td >Брендирование портала<%= link_to '(примеры)', '#brand_examples', :class => :discount_link %></td>
             <td class='center'>7000</td>
             <td class='center'>Неделя</td>
           </tr>
@@ -347,7 +347,6 @@
 
     <div class='stars'>
       <p> <a name='one_star'></a>* - Если под брендом одного заведения действуют несколько заведений, то основное оплачивается 100%, все последующие - со скидкой 50%.</p>
-      <p>Если у одного клиента несколько заведений, то основное оплачивается 100%, за каждое последующее — скидка 25%.</p>
       <p><a name='two_stars'></a>** - Клиентом считается заведение у которого оформлена страница в соответствии с п.1</p>
     </div>
 
@@ -362,12 +361,8 @@
         <li>
           <%= link_to image_tag('public/cooperation/brand-2.jpg', :size => '400x440'), asset_path('public/cooperation/brand-2-big.jpg') %>
         </li>
-      </ul>
-
-      <p>Схема банеров на портале ЗнайГород</p>
-      <ul>
         <li>
-          <%= link_to image_tag('public/cooperation/schema-3.png', :size => '450x398'), asset_path('public/cooperation/schema-3-big.png') %>
+          <%= link_to image_tag('public/cooperation/brand-3.jpg', :size => '400x215'), asset_path('public/cooperation/brand-3-big.jpg') %>
         </li>
       </ul>
 
