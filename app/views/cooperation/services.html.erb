@@ -29,9 +29,9 @@
       <div class="icon">
       </div>
       <div class="body">
-      <% t("services.#{Settings['app.city']}.phone").split(',').each do |p| %>
-        <strong><%= p %></strong> <br />
-      <% end %>
+        <% t("services.#{Settings['app.city']}.phone").split(',').each do |p| %>
+          <strong><%= p %></strong> <br />
+        <% end %>
       </div>
     </div>
 
@@ -53,94 +53,10 @@
   <div class='service_right'>
     <div class="toggable">
       <div class="toggler">
-        <h2>1. Страница заведения<%= link_to '*', '#one_star', :class => 'example_link' %></h2>
-        <p>Подробное описание специфики заведения и предоставляемых услуг, особое внимание уникальным особенностям, фото и видео интерьера, виртуальный тур. В комплекс услуг входит продвижение страницы заведения (регистрация в справочниках, контекстная реклама, продвижение в поисковых системах и социальных сетях). (Примеры Вы можете посмотреть <%= link_to 'в списке наших клиентов', our_customers_path(), :class => 'example_link' %>)</p>
-      </div>
-      <div class="info">
-        <table>
-          <tr>
-            <th class='center'>Наименование услуги</th>
-            <th class='center'>Цена, руб.<%= link_to '**', '#two_stars' %></th>
-            <th class='center'>Период размещения</th>
-          </tr>
-          <tr>
-            <td>Кафе, бары, рестораны, банкетные залы и т. д.</td>
-            <td class='center'>4800</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Службы доставки (пицца, суши, цветы и пр.)</td>
-            <td class='center'>2400</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Сауны</td>
-            <td class='center'>5000</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Ночные клубы</td>
-            <td class='center'>5000</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Бильярдные залы</td>
-            <td class='center'>2400</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Стриптиз-бары</td>
-            <td class='center'>5000</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Развлекательные комплексы</td>
-            <td class='center'>от 9600</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Спортивные заведения (фитнес, тренажерные залы, танцы, йога)</td>
-            <td class='center'>3600</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Детское творчество и развитие</td>
-            <td class='center'>3600</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Салоны красоты, оздоровительные центры</td>
-            <td class='center'>2400</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Базы отдыха, загородные дома</td>
-            <td class='center'>6000</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Гостиницы</td>
-            <td class='center'>3600</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Хостелы</td>
-            <td class='center'>2400</td>
-            <td class='center'>в год</td>
-          </tr>
-          <tr>
-            <td>Фотостудии</td>
-            <td class='center'>3600</td>
-            <td class='center'>в год</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="toggable">
-      <div class="toggler">
-        <h2>2. Страница заведения с уникальным дизайном</h2>
-        <p>Разрабатывается уникальный дизайн страницы заведения с выделением отдельного доменного имени *.znaigorod.ru и *.знайгород.рф (например, <%= link_to 'http://relax.znaigorod.ru', 'http://relax.znaigorod.ru', :target => '_blank', :class => 'example_link' %>, <%= link_to 'http://lazertag.znaigorod.ru', 'http://lazertag.znaigorod.ru', :target => '_blank', :class => 'example_link' %>, <%= link_to 'http://nezabudka.znaigorod.ru', 'http://nezabudka.znaigorod.ru', :target => '_blank', :class => 'example_link' %>, <%= link_to 'http://sauna-dvorcovaya.znaigorod.ru', 'http://sauna-dvorcovaya.znaigorod.ru', :target => '_blank', :class => 'example_link' %>, <%= link_to 'http://strekoza.znaigorod.ru', 'http://strekoza.znaigorod.ru', :target => '_blank', :class => 'example_link' %>)</p>
+        <h2>1. Страницы заведений<%= link_to '*', '#one_star', :class => 'example_link' %></h2>
+        <p>
+          Подробное описание специфики заведения и предоставляемых услуг, особое внимание уделяется уникальным особенностям, фото и видео интерьера, виртуальный тур. В комплекс услуг входит продвижение страницы заведения (регистрация в справочниках, контекстная реклама, продвижение в поисковых системах и социальных сетях). Возможно создание страниц заведений с индивидуальным дизайном и выделением отдельного доменного имени. (Примеры Вы можете посмотреть <%= link_to 'в списке наших клиентов', our_customers_path, class: :example_link %>)
+        </p>
       </div>
       <div class="info">
         <table>
@@ -150,13 +66,8 @@
             <th class='center'>Период размещения</th>
           </tr>
           <tr>
-            <td>Создание уникального дизайна</td>
-            <td class='center'>2900</td>
-            <td class='center'>разово</td>
-          </tr>
-          <tr>
-            <td>Ежегодное продление</td>
-            <td class='center'>200</td>
+            <td>Оформление и продвижение страницы заведения</td>
+            <td class='center'>От 6800</td>
             <td class='center'>в год</td>
           </tr>
         </table>
@@ -165,37 +76,18 @@
 
     <div class="toggable">
       <div class='toggler'>
-        <h2>3. SMS клиент</h2>
-        <p>На странице заведения появляется возможность записи или бронирования услуг. Сообщение клиента с контактным телефоном отправляется на указанный сотовый телефон</p>
-      </div>
-      <div class="info">
-        <table>
-          <tr>
-            <th class='center'>Цена, руб.</th>
-            <th class='center'>Количество</th>
-          </tr>
-          <tr>
-            <td class='center'>5</td>
-            <td class='center'>1 SMS</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="toggable">
-      <div class='toggler'>
-        <h2>4. Афиша</h2>
+        <h2>2. Афиша</h2>
       </div>
       <div class="info">
         <table>
           <tr>
             <th class='center'>Название услуги</th>
             <th class='center'>Цена, руб.</th>
-            <th class='center'>Цена, руб. (для клиентов<%= link_to '***', '#third_starts' %>)</th>
+            <th class='center'>Цена, руб. (для клиентов<%= link_to '**', '#two_stars' %>)</th>
             <th class='center'>Период</th>
           </tr>
           <tr>
-            <td>Размещение афиши пользователем<%= link_to "Добавить афишу", new_my_afisha_path(), :class => :discount_link %></td>
+            <td>Размещение афиши пользователем<%= link_to 'Добавить афишу', new_my_afisha_path, :class => :discount_link %></td>
             <td class='center' colspan='2'>Бесплатно</td>
             <td class='center'></td>
           </tr>
@@ -227,7 +119,7 @@
           </tr>
           <tr>
             <td>Упоминание афиши в еженедельном обзоре мероприятий на выходные</td>
-            <td class="center" colspan='2'>50</td>
+            <td class="center" colspan='2'>200</td>
             <td class="center">Раз в неделю</td>
           </tr>
         </table>
@@ -236,25 +128,25 @@
 
     <div class="toggable">
       <div class='toggler'>
-        <h2>5. Скидки</h2>
+        <h2>3. Скидки/Купоны</h2>
       </div>
       <div class="info">
         <table>
           <tr>
             <th class='center'>Название услуги</th>
             <th class='center'>Цена, руб.</th>
-            <th class='center'>Цена, руб. (для клиентов<%= link_to '***', '#third_starts' %>)</th>
+            <th class='center'>Цена, руб. (для клиентов<%= link_to '**', '#two_stars' %>)</th>
             <th class='center'>Период</th>
           </tr>
           <tr>
-            <td>Размещение информации о скидке, акции пользователем <%= link_to "Добавить скидку", help_my_discounts_path(), :class => :discount_link %></td>
+            <td>Размещение информации о скидке, акции пользователем <%= link_to "Добавить скидку", help_my_discounts_path, :class => :discount_link %></td>
             <td class='center' colspan='2'>Бесплатно</td>
             <td class='center'></td>
           </tr>
           <tr>
             <td>Размещение информации о скидке, акции менеджером портала</td>
+            <td class='center'>200</td>
             <td class='center'>100</td>
-            <td class='center'>50</td>
             <td class='center'>Разово</td>
           </tr>
           <tr>
@@ -279,7 +171,7 @@
           </tr>
           <tr>
             <td>Закрепление скидки/купона/сертификата на главной странице</td>
-            <td class="center" colspan='2'>100</td>
+            <td class="center" colspan='2'>200</td>
             <td class="center"></td>
           </tr>
           <tr>
@@ -293,44 +185,38 @@
 
     <div class="toggable">
       <div class='toggler'>
-        <h2>6. Обзоры</h2>
+        <h2>4. Обзоры</h2>
       </div>
       <div class="info">
         <table>
           <tr>
             <th class='center'>Название услуги</th>
             <th class='center'>Цена, руб.</th>
-            <th class='center'>Цена, руб. (для клиентов<%= link_to '***', '#third_stars' %>)</th>
+            <th class='center'>Цена, руб. (для клиентов<%= link_to '**', '#two_stars' %>)</th>
             <th class='center'>Период</th>
           </tr>
           <tr>
-           <td>Разработка и публикация обзора (до 2000 знаков)</td>
-            <td class='center'>1900</td>
-            <td class='center'>1140</td>
+            <td>Разработка и публикация обзора (до 2000 знаков)</td>
+            <td class='center'>3500</td>
+            <td class='center'>Входит в пакет</td>
             <td class='center'>Разово</td>
           </tr>
           <tr>
             <td>Участие в тематических агрегированных обзоров (несколько заведений)</td>
-            <td class='center'>500</td>
-            <td class='center'>300</td>
+            <td class='center'>1000</td>
+            <td class='center'>Входит в пакет</td>
             <td class='center'>Разово</td>
           </tr>
           <tr>
-            <td>Публикация рекламных обзоров (с открытыми ссылками, до 2000 знаков)</td>
+            <td>Публикация рекламных обзоров (с открытыми ссылками, до 2000 знаков)<%= link_to 'Добавить обзор', new_my_review_path, :class => :discount_link %></td>
             <td class='center'>900</td>
-            <td class='center'>450</td>
+            <td class='center'>Входит в пакет</td>
             <td class='center'>Разово</td>
           </tr>
           <tr>
             <td>Закрепление обзора на главной</td>
             <td class="center" colspan='2'>200</td>
             <td class="center">Сутки</td>
-          </tr>
-          <tr>
-            <td>Видеообзор</td>
-            <td class="center">2300</td>
-            <td class="center">1380</td>
-            <td class="center">Разово</td>
           </tr>
         </table>
       </div>
@@ -339,7 +225,7 @@
     <div class='toggable'>
       <div class='toggler'>
         <a href='#'>&uarr; свернуть</a>
-        <h2>7. Реклама</h2>
+        <h2>5. Реклама в группах ЗнайГород</h2>
       </div>
       <div class='info'>
         <table>
@@ -347,31 +233,6 @@
             <th class='center'>Наименование услуги</th>
             <th class='center'>Цена, руб.</th>
             <th class='center'>Период размещения</th>
-          </tr>
-          <tr>
-            <td >Баннер 1.1</td>
-            <td class='center'>5000</td>
-            <td class='center'>Неделя</td>
-          </tr>
-          <tr>
-            <td >Баннер 1.2</td>
-            <td class='center'>3000</td>
-            <td class='center'>Неделя</td>
-          </tr>
-          <tr>
-            <td >Баннер 1.3 в афише</td>
-            <td class='center'>300</td>
-            <td class='center'>Сутки</td>
-          </tr>
-          <tr>
-            <td >Баннер 1.3 в заведениях</td>
-            <td class='center'>200</td>
-            <td class='center'>Сутки</td>
-          </tr>
-          <tr>
-            <td >Баннер 1.3 в скидках</td>
-            <td class='center'>200</td>
-            <td class='center'>Сутки</td>
           </tr>
           <tr>
             <td >Пост в группе ВК <%= link_to 'http://vk.com/znaigorod', 'http://vk.com/znaigorod', :target => '_blank', :class => :discount_link %></td>
@@ -390,27 +251,64 @@
               <%= link_to 'Одноклассниках', 'http://ok.ru/group/54186972610564', :target => '_blank', :class => :discount_link %>,
               <%= link_to 'Facebook','https://ru-ru.facebook.com/znai.gorod', :target => '_blank', :class => :discount_link %>,
               <%= link_to 'Twitter', 'https://twitter.com/znaigorod', :target => '_blank', :class => :discount_link %>)
+              <%= link_to 'Instagram', 'https://www.instagram.com/znaigorod/', :target => '_blank', :class => :discount_link %>)
             </td>
-            <td class='center'>550</td>
-            <td class='center'>Разово</td>
-          </tr>
-          <tr>
-            <td >Пост в ВК с закреплением <%= link_to 'http://vk.com/znaigorod', 'http://vk.com/znaigorod', :target => '_blank', :class => :discount_link %></td>
             <td class='center'>600</td>
-            <td class='center'>Сутки</td>
+            <td class='center'>Разово</td>
           </tr>
           <tr>
             <td >Рассылка по ВК <%= link_to 'http://vk.com/znaigorod', 'http://vk.com/znaigorod', :target => '_blank', :class => :discount_link %></td>
-            <td class='center'>950</td>
-            <td class='center'>Разово</td>
-          </tr>
-          <tr>
-            <td >Посты в группе в Одноклассниках <%= link_to 'http://odnoklassniki.ru/group/54186972610564', 'http://odnoklassniki.ru/group/54186972610564', :target => '_blank', :class => :discount_link %></td>
-            <td class='center'>200</td>
+            <td class='center'>1000</td>
             <td class='center'>Разово</td>
           </tr>
         </table>
-        <p>Схема банеров на портале ЗнайГород. Обычное и зеркальное расположение.</p>
+      </div>
+    </div>
+
+    <div class='toggable'>
+      <div class='toggler'>
+        <a href='#'>&uarr; свернуть</a>
+        <h2>6. Медийная реклама</h2>
+      </div>
+      <div class='info'>
+        <table>
+          <tr>
+            <th class='center'>Наименование услуги</th>
+            <th class='center'>Цена, руб.</th>
+            <th class='center'>Период размещения</th>
+          </tr>
+          <tr>
+            <td >Брендирование портала.<%= link_to '(примеры)', '#brand_examples', :class => :discount_link %></td>
+            <td class='center'>7000</td>
+            <td class='center'>Неделя</td>
+          </tr>
+          <tr>
+            <td >Баннер 1.1</td>
+            <td class='center'>5000</td>
+            <td class='center'>Неделя</td>
+          </tr>
+          <tr>
+            <td >Баннер 1.2</td>
+            <td class='center'>3000</td>
+            <td class='center'>Неделя</td>
+          </tr>
+          <tr>
+            <td >Баннер 1.3 в афише</td>
+            <td class='center'>1500</td>
+            <td class='center'>Неделя</td>
+          </tr>
+          <tr>
+            <td >Баннер 1.3 в заведениях</td>
+            <td class='center'>1000</td>
+            <td class='center'>Неделя</td>
+          </tr>
+          <tr>
+            <td >Баннер 1.3 в скидках</td>
+            <td class='center'>1000</td>
+            <td class='center'>Неделя</td>
+          </tr>
+        </table>
+        <p>Схема банеров на портале ЗнайГород.</p>
         <p>
           <%= link_to image_tag('public/cooperation/schema-3.png', :size => '450x398'), asset_path('public/cooperation/schema-3-big.png') %>
         </p>
@@ -419,7 +317,7 @@
 
     <div class="toggable">
       <div class='toggler'>
-        <h2>8. Конкурсы</h2>
+        <h2>7. Конкурсы</h2>
       </div>
       <div class="info">
         <table>
@@ -447,36 +345,32 @@
       </div>
     </div>
 
-    <div class="toggable">
-      <div class='toggler'>
-        <h2>9. Другие услуги</h2>
-      </div>
-      <div class="info">
-        <table>
-          <tr>
-            <th class='center'>Название услуги</th>
-            <th class='center'>Цена, руб.</th>
-          </tr>
-          <tr>
-            <td>Изготовление 3D-тура</td>
-            <td class='center'>650</td>
-          </tr>
-          <tr>
-            <td>Фотосъемка интерьера</td>
-            <td class='center'>2000</td>
-          </tr>
-          <tr>
-            <td>Фотосъемка мероприятия</td>
-            <td class='center'>2000</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="stars">
+    <div class='stars'>
       <p> <a name='one_star'></a>* - Если под брендом одного заведения действуют несколько заведений, то основное оплачивается 100%, все последующие - со скидкой 50%.</p>
       <p>Если у одного клиента несколько заведений, то основное оплачивается 100%, за каждое последующее — скидка 25%.</p>
-      <p><a name='two_stars'></a>** - Возможен бартерный обмен (при этом стоимость услуг увеличивается на 30%)</p>
-      <p><a name='third_starts'></a>*** - Клиентом считается заведение у которого оформлена страница в соответствии с п.1</p>
+      <p><a name='two_stars'></a>** - Клиентом считается заведение у которого оформлена страница в соответствии с п.1</p>
+    </div>
+
+    <div class='brand_examples'>
+      <a name='brand_examples'></a>
+      <p>Примеры брендирования</p>
+
+      <ul>
+        <li>
+          <%= link_to image_tag('public/cooperation/brand-1.jpg', :size => '400x250'), asset_path('public/cooperation/brand-1-big.jpg') %>
+        </li>
+        <li>
+          <%= link_to image_tag('public/cooperation/brand-2.jpg', :size => '400x440'), asset_path('public/cooperation/brand-2-big.jpg') %>
+        </li>
+      </ul>
+
+      <p>Схема банеров на портале ЗнайГород</p>
+      <ul>
+        <li>
+          <%= link_to image_tag('public/cooperation/schema-3.png', :size => '450x398'), asset_path('public/cooperation/schema-3-big.png') %>
+        </li>
+      </ul>
+
     </div>
   </div>
 </div>
