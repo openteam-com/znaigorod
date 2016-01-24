@@ -1,8 +1,9 @@
 require 'progress_bar'
+
 namespace :discounts do
   desc 'Archive discounts'
   task :archive_discounts => :environment do
-    grouped_discounts = Discount.where(state: :published).group_by(&:account_id)
+    grouped_discounts = Discount.published.group_by(&:account_id)
     pb = ProgressBar.new(grouped_discounts.count)
     counter = 0
 
@@ -28,7 +29,7 @@ namespace :discounts do
 
   desc 'Warning for discount owner'
   task :archive_warning => :environment do
-    grouped_discounts = Discount.where(state: :published).group_by(&:account_id)
+    grouped_discounts = Discount.published.group_by(&:account_id)
     pb = ProgressBar.new(grouped_discounts.count)
     counter = 0
 
@@ -46,5 +47,17 @@ namespace :discounts do
       pb.increment!
     end
     p "Mails with archive warning information - #{counter}"
+  end
+
+  desc 'Установка published_at для опубликованных скидок без published_at'
+  task :fix_published_at => :environment do
+    discounts = Discount.published.where(:published_at => nil)
+    pb = ProgressBar.new discounts.count
+
+    discounts.map do |discount|
+      discount.update_attribute :published_at, discount.updated_at
+
+      pb.increment!
+    end
   end
 end
