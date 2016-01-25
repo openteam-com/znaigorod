@@ -55,13 +55,7 @@
     <% end %>
     <!-- /weather -->
 
-    <!-- new year  -->
-    <div class='new_year_wrapper'>
-      <%= link_to 'Новый Год 2016 в Томске', map_project_show_path(current_city == "tomsk" ? 'novyj_god_2016_v_tomske' : 'novyj_god_2016_v_sevastopole')%>
-      </div>
-      <!-- /new year -->
-
-      <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
+    <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
 
     <!--noindex-->
     <div class='dashboard'>
