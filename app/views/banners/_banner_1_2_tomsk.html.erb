@@ -7,6 +7,12 @@
         </li>
       <% end %>
 
+      <% if Time.zone.now < Time.zone.parse('13.02.2015').end_of_day %>
+        <li class='js-banner'>
+          <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_gubi.jpg', size: '880x80'), 'http://zefirmaster.ru/slepki-gub', class: 'js-stat-bugi', target: :_blank %>
+        </li>
+      <% end %>
+
       <% if Time.zone.now < Time.zone.parse('10.01.2016').end_of_day && params[:id] != 'fotokonkurs-koroleva-korporativa' %>
         <li class='js-banner'>
           <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_fotokonkurs-koroleva-korporativa.jpg', size: '880x80', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»'), contest_path('fotokonkurs-koroleva-korporativa'), class: 'js-stat-fotokonkurs-koroleva-korporativa', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»' %>
