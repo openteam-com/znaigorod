@@ -19,12 +19,6 @@
         </li>
       <% end %>
 
-      <% if Time.zone.now < Time.zone.parse('29.02.2016').end_of_day && params[:id] != 'top-model-po-detski-2016' %>
-        <li class='js-banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_top_model_po_detski.jpg', size: '880x80', :alt => 'ТОП-МОДЕЛЬ ПО-ДЕТСКИ – 2016', :title => 'ТОП-МОДЕЛЬ ПО-ДЕТСКИ – 2016'), contest_path('top-model-po-detski-2016'), class: 'js-stat-top-model-po-detski-2016', :alt => 'ТОП-МОДЕЛЬ ПО-ДЕТСКИ - 2016', :title => 'ТОП-МОДЕЛЬ ПО-ДЕТСКИ – 2016' %>
-        </li>
-      <% end %>
-
     </ul>
   <% end %>
 </div>
