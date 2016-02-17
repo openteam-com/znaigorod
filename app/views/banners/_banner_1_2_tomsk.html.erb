@@ -1,5 +1,5 @@
-<div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
-  <% unless params[:id] == 'top-model-po-detski-2016' %>
+<% if false %>
+  <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
     <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
       <% if Time.zone.now < Time.zone.parse('31.12.2015').end_of_day %>
         <li class='js-banner'>
@@ -20,5 +20,5 @@
       <% end %>
 
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>
