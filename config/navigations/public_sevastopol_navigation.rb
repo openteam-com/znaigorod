@@ -47,7 +47,7 @@ SimpleNavigation::Configuration.run do |navigation|
       more.item :photogalleries, 'Фотостримы', photogalleries_path, highlights_on: -> { controller_name == 'photogalleries' }
       more.item :accounts, 'Знакомства', accounts_path, highlights_on: -> { controller_name == 'accounts' }
       more.item :tickets, 'Распродажа билетов', afisha_with_tickets_index_path, highlights_on: -> { controller_name == nil }
-      more.item :news_of_tomsk, 'Новости Томска', 'http://news.znaigorod.ru' if Settings['app.city'] == 'tomsk'
+      more.item :news_of_sevastopol, 'Новости Севастополя', 'http://news.znaigorod.ru/sevastopol'
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { controller_name == 'webcams' } if Settings['app.city'] == 'tomsk'
       more.item :contests, 'Конкурсы', contests_path, highlights_on: -> { %w[contests works].include? controller_name }
       more.item :services, 'Реклама', services_path, highlights_on: -> { controller_name == 'cooperation' }
