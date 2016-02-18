@@ -17,7 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :accounts, 'Знакомства', accounts_path, highlights_on: -> { controller_name == false  }
+    primary.item :accounts, 'Знакомства', accounts_path(:with_avatar => true), highlights_on: -> { controller_name == false  }
 
     primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> {controller_name == 'organizations'} do |organization|
       OrganizationCategory.roots.order(:position).each do |category|
