@@ -1,30 +1,11 @@
-<% if false %>
-  <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
-    <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
-      <% if Time.zone.now < Time.zone.parse('31.12.2015').end_of_day %>
-        <li class='js-banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_new_year_2016.jpg', size: '880x80'), map_project_show_path('novyj_god_2016_v_tomske'), class: 'js-stat-new-year-2016' %>
-        </li>
-      <% end %>
+<div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
+  <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
 
-      <% if Time.zone.now < Time.zone.parse('13.02.2016').end_of_day %>
-        <li class='js-banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_gubi.jpg', size: '880x80'), 'http://zefirmaster.ru/slepki-gub', class: 'js-stat-bugi', target: :_blank %>
-        </li>
-      <% end %>
+    <% if Time.zone.now < Time.zone.parse('13.03.2016').end_of_day %>
+      <li class='js-banner'>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_ohota.jpg', size: '880x80'), '/away?to=http://ohotanaprazdnik.ru/tomsk/project/yarmarka-ohota-na-prazdnik-2016-prizovoj-fond-1-000-000-rublej', class: 'js-stat-bugi', target: :_blank %>
+      </li>
+    <% end %>
 
-      <% if Time.zone.now < Time.zone.parse('10.01.2015').end_of_day && params[:id] != 'fotokonkurs-koroleva-korporativa' %>
-        <li class='js-banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_fotokonkurs-koroleva-korporativa.jpg', size: '880x80', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»'), contest_path('fotokonkurs-koroleva-korporativa'), class: 'js-stat-fotokonkurs-koroleva-korporativa', :alt => 'Фотоконкурс «Королева корпоратива»', :title => 'Фотоконкурс «Королева корпоратива»' %>
-        </li>
-      <% end %>
-
-      <% if Time.zone.now < Time.zone.parse('13.03.2016').end_of_day %>
-        <li class='js-banner'>
-          <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_ohota.jpg', size: '880x80'), '/away?to=http://ohotanaprazdnik.ru/tomsk/project/yarmarka-ohota-na-prazdnik-2016-prizovoj-fond-1-000-000-rublej', class: 'js-stat-bugi', target: :_blank %>
-        </li>
-      <% end %>
-
-    </ul>
-  </div>
-<% end %>
+  </ul>
+</div>
