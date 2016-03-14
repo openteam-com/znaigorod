@@ -1,11 +1,9 @@
 <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
 
-    <% if Time.zone.now < Time.zone.parse('13.03.2016').end_of_day %>
       <li class='js-banner'>
-        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_ohota.jpg', size: '880x80'), '/away?to=http://ohotanaprazdnik.ru/tomsk/project/yarmarka-ohota-na-prazdnik-2016-prizovoj-fond-1-000-000-rublej', class: 'js-stat-bugi', target: :_blank %>
+        <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_miss_tomsk_2016.jpg', size: '880x80'), contest_path('miss-tomsk-2016'), class: 'js-stat-miss-tomsk-2016' %>
       </li>
-    <% end %>
 
   </ul>
 </div>
