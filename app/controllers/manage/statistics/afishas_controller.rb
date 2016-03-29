@@ -14,7 +14,7 @@ class Manage::Statistics::AfishasController < Manage::ApplicationController
       @ends_at = Time.zone.today.end_of_day
     end
 
-    author_ids = %w[4650, 6, 2304, 8590, 18969, 14827, 18815, 30203]
+    author_ids = %w[4650, 6, 2304, 8590, 18969, 14827, 18815, 30203, 2110, 30061]
 
     @afishas = Afisha.where(:user_id => author_ids)
                 .where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)

@@ -32,7 +32,7 @@ class Manage::Statistics::DiscountsController < Manage::ApplicationController
       @ends_at = Time.zone.today.end_of_day
     end
 
-    author_ids = %w[4649, 6, 2303, 8581, 18960, 14818, 15669, 26228, 30563, 30194]
+    author_ids = %w[4649, 6, 2303, 8581, 18960, 14818, 15669, 26228, 30563, 30194, 2109, 30052]
 
     @discounts = Discount.where(:account_id => author_ids, state: 'published')
                 .where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
