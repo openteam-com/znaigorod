@@ -17,11 +17,12 @@ class String
 end
 
 class MovieSyncer
-  attr_accessor :movies, :place
+  attr_accessor :movies, :place, :date
 
   def initialize(options)
     self.place = options.delete(:place)
     self.movies = options.delete(:movies)
+    self.date = options[:date]
   end
 
   def self.now
@@ -73,34 +74,16 @@ class MovieSyncer
       end
     end
 
-    message = I18n.localize(Time.now, :format => :short) + " Импорт сеансов '#{place}' выполнен."
-    Airbrake.notify(:error_class => "Rake Task", :error_message => message)
+    message = I18n.localize(Time.now, :format => :short) + " Импорт сеансов '#{place}'"
+    message += " на #{date}" if date.present?
+    message += " выполнен."
+    MyMailer.delay(:queue => 'mailer').send_movie_sync_complete(message)
   end
 
   private
 
     def find_movie_by(title)
       title.squish!
-      title.gsub!('Одноклассники.ru: НаCLICKай удачу', 'Одноклассники.ru')
-      title.gsub!('Пришествие дъявола', 'Пришествие Дьявола')
-      title.gsub!('300 спартанцев: Рассвет империи', '300 спартанцев: Расцвет империи')
-      title.gsub!('Первый мститель 2: Другая война', 'Первый мститель: Другая война')
-      title.gsub!('Новый человек-паук: Высокое напряжение', 'Новый Человек-паук: Высокое напряжение')
-      title.gsub!('Барбара субтитры!', 'Барбара (С субтитрами!)')
-      title.gsub!('Турецкий для начинающих субтитры!', 'Турецкий для начинающих (С субтитрами!)')
-      title.gsub!('Экстремистки. Combat Girls субтитры!', 'Экстремистки. Combat Girls (С субтитрами!)')
-      title.gsub!('Окно в лето субтитры!', 'Окно в лето (С субтитрами!)')
-      title.gsub!('Семейка вампиров субтитры!', 'Семейка вампиров (С субтитрами!)')
-      title.gsub!('Газгольдер: Фильм', 'Газгольдер')
-      title.gsub!('Новый Человек-паук. Высокое напряжение', 'Новый Человек-паук: Высокое напряжение')
-      title.gsub!('Букашки. Приключения в долине муравьев', 'Букашки. Приключение в Долине Муравьев')
-      title.gsub!('Трансформеры 4', 'Трансформеры: Эпоха истребления')
-      title.gsub!('Неудержимые 3 спецверсия', 'Неудержимые 3')
-      title.gsub!('Голодные игры: Сойка-пересмешница. Часть 1', 'Голодные игры: Сойка-пересмешница. Часть I')
-      title.gsub!('Голодные игры: Сойка-пересмешница ', 'Голодные игры: Сойка-пересмешница. Часть I')
-      title.gsub!('Чародей равновесия.Тайна Сухаревой башни', 'Чародей равновесия. Тайна Сухаревой башни')
-      title.gsub!('Вверх ногами или где-то в том лесу', 'Вверх ногами, или Где-то в том лесу')
-      title.gsub!('Упс…Ной уплыл!', 'Упс… Ной уплыл!')
       Afisha.find_by_title(title) || find_similar_movie_by(title)
     end
 
@@ -113,13 +96,13 @@ class MovieSyncer
         text = "Не могу найти фильм '#{title}': [#{place}]"
         puts text
         message = I18n.localize(Time.now, :format => :short) + " " + text
-        Airbrake.notify(Exception.new(message))
+        MyMailer.delay(:queue => 'mailer').send_movie_sync_error(message)
       end
       if similar_movies.many?
         text = "Нашел больше одной афиши для фильма '#{title}': [#{place}]"
         puts text
         message = I18n.localize(Time.now, :format => :short) + " " + text
-        Airbrake.notify(Exception.new(message))
+        MyMailer.delay(:queue => 'mailer').send_movie_sync_error(message)
       end
       similar_movies.first
     end
@@ -171,7 +154,7 @@ class GoodwinCinemaGroup
           bar.increment!
         end
         puts "Импорт информации от #{date}"
-        MovieSyncer.new(:place => cinema_name, :movies => movies).sync
+        MovieSyncer.new(:place => cinema_name, :movies => movies, :date => date).sync
       else
         Airbrake.notify(:error_class => "Rake Task", :error_message => " Неверный формат ответа от кинотеатра #{cinema_name}")
       end
@@ -219,7 +202,7 @@ namespace :sync do
 
   desc "Sync movie seances from http://kino-polis.ru"
   task :kinopolis => :environment do
-    GoodwinCinemaGroup.new('Kinopolis, кинотеатр','http://kino-polis.ru/schedule/?ajax=1&date=' ).sync
+    GoodwinCinemaGroup.new('Kinopolis, кинотеатр', 'http://kino-polis.ru/schedule/?ajax=1&date=' ).sync
   end
 
   desc "Sync movie seances from http://fakel.net.ru"

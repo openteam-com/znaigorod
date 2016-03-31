@@ -18,6 +18,16 @@ class MyMailer < ActionMailer::Base
     mail(:to => Settings['mail']['to_afisha'], :subject => 'В ЗнайГород изменилась афиша')
   end
 
+  def send_movie_sync_complete(message)
+    @message = message
+    mail(:to => Settings['mail']['to_afisha'], :subject => 'Импорт сеансов выполнен')
+  end
+
+  def send_movie_sync_error(message)
+    @message = message
+    mail(:to => Settings['mail']['to_afisha'], :subject => 'При импорте сеансов возникла ошибка')
+  end
+
   def mail_new_published_discount(discount)
     @discount = discount
     mail(:to => Settings['mail']['to_discount'], :subject => 'В ЗнайГород опубликована новая скидка')
