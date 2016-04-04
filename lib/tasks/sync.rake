@@ -77,7 +77,7 @@ class MovieSyncer
     message = I18n.localize(Time.now, :format => :short) + " Импорт сеансов '#{place}'"
     message += " на #{date}" if date.present?
     message += " выполнен."
-    MyMailer.delay(:queue => 'mailer').send_movie_sync_complete(message)
+    #MyMailer.delay(:queue => 'mailer').send_movie_sync_complete(message)
   end
 
   private
