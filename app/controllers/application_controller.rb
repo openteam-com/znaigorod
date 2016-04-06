@@ -135,14 +135,14 @@ class ApplicationController < ActionController::Base
   end
 
   def weather
-    @weather ||= JSON.load(open("http://pogodavsevastopole.ru/api/v1/now/#{Settings['app.city']}"))
+    @weather ||= JSON.load(open("http://pogoda.znaigorod.ru/api/v1/now/#{Settings['app.city']}"))
   end
 
   def weather_info
     if Settings['app.city'] == 'tomsk'
       { :url => 'http://pogoda.znaigorod.ru/', :alt => 'Погода в Томске на сегодня и на неделю', :title => 'Погода в Томске на сегодня и на неделю' }
     else
-      { :url => 'http://pogodavsevastopole.ru/', :alt => 'Погода в Севастополе на сегодня и на неделю', :title => 'Погода в Севастополе на сегодня и на неделю' }
+      { :url => 'http://pogoda.znaigorod.ru/', :alt => 'Погода в Севастополе на сегодня и на неделю', :title => 'Погода в Севастополе на сегодня и на неделю' }
     end
   end
 end
