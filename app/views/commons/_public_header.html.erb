@@ -39,19 +39,22 @@
     </div>
 
     <!-- weather -->
-    <% cache("weather", expires_in: 1.hour) do %>
-      <div class="weather_wrapper weather-<%= Settings['app.city'] %>">
-        <div class="weather-icon <%= weather['condition']%>">
-          <%= link_to weather_info[:url], :target => :_blank, :alt => weather_info[:alt], :title => weather_info[:title] do %>
-            <div class="weather-temperature">
-              <%= weather['temperature'] %>°
-            </div>
-            <div class="weather-wind-speed">
-              Ветер: <%= weather['wind_speed'] %> м/с
-            </div>
-          <% end %>
+    <% begin %>
+      <% cache("weather", expires_in: 1.hour) do %>
+        <div class="weather_wrapper weather-<%= Settings['app.city'] %>">
+          <div class="weather-icon <%= weather['condition']%>">
+            <%= link_to weather_info[:url], :target => :_blank, :alt => weather_info[:alt], :title => weather_info[:title] do %>
+              <div class="weather-temperature">
+                <%= weather['temperature'] %>°
+              </div>
+              <div class="weather-wind-speed">
+                Ветер: <%= weather['wind_speed'] %> м/с
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
+    <% rescue %>
     <% end %>
     <!-- /weather -->
 
