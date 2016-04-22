@@ -84,6 +84,9 @@ class MovieSyncer
 
     def find_movie_by(title)
       title.squish!
+      MovieFixer.all.each do |movie_fixer|
+        title.gsub!(movie_fixer.from, movie_fixer.to)
+      end
       Afisha.find_by_title(title) || find_similar_movie_by(title)
     end
 
