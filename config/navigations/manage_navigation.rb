@@ -32,8 +32,8 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :afisha, 'Мероприятия', manage_afisha_index_path,
-      :highlights_on => ->(){ controller_name == 'afisha' },
-      :if => -> { can?(:manage, Afisha) } do |afisha_item|
+      :highlights_on => ->(){ controller_name == 'afisha' || controller_name == 'movie_fixers' },
+      :if => -> { can?(:manage, [Afisha, MovieFixer]) } do |afisha_item|
         Afisha.kind.values.each do |kind|
           afisha_item.item kind, kind.text, by_kind_manage_afisha_index_path(kind.pluralize)
         end

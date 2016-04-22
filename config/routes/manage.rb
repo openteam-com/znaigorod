@@ -77,6 +77,8 @@ Znaigorod::Application.routes.draw do
       end
     end
 
+    resources :movie_fixers
+
     get "/afisha" => "afishas#index", :as => :afisha_index, :controller => 'afishas'
     get "/afisha/:id" => "afishas#show", :as => :afisha_show, :controller => 'afishas'
 

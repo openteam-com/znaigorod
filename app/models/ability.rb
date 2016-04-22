@@ -58,7 +58,7 @@ class Ability
 
     case namespace
     when 'manage'
-      can :manage, Afisha if user.is_afisha_editor?
+      can :manage, [Afisha, MovieFixer] if user.is_afisha_editor?
 
       can :manage, Discount if user.is_discounts_editor?
 

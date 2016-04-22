@@ -1,0 +1,24 @@
+<%= render :partial => 'manage/afishas/kind_links' %>
+
+<div class='new_link'>
+  <%= link_to 'Добавить новое соответствие', new_manage_movie_fixer_path, :class => 'new_resource' %>
+</div>
+
+<div class="clearfix"></div>
+
+<ul class='collection'>
+  <% collection.each do |item| %>
+    <li>
+      Меняем с
+      &laquo;<strong><%= item.from %></strong>&raquo;
+      на
+      &laquo;<strong><%= item.to %></strong>&raquo;
+      |
+      <%= link_to 'редактировать', edit_manage_movie_fixer_path(item), style: 'float: none; width: auto' %>
+      |
+      <%= link_to 'удалить', manage_movie_fixer_path(item), method: :delete, confirm: 'Удалить без возможности восстановления?',style: 'float: none; width: auto' %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate collection %>

@@ -1,0 +1,6 @@
+<%= simple_form_for resource, :url => [:manage, resource] do |f| %>
+  <%= f.input :from %>
+  <%= f.input :to %>
+  <%= f.submit 'Сохранить' %>
+  <%= link_to 'Отмена', manage_movie_fixers_path %>
+<% end %>

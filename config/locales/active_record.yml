@@ -220,6 +220,10 @@ ru:
         yandex_fotki_url: URL альбома из Фотки.Яндекс
         bkz_link: URL на мероприятие в БКЗ
 
+      movie_fixer:
+        from: Меняем с
+        to: на
+
       afisha_schedule:
         ends_at: Время окончания
         ends_on: Дата окончания
