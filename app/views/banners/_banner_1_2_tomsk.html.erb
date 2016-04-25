@@ -2,13 +2,6 @@
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
 
     <li class='js-banner'>
-      <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_megapolis_megazvezda.jpg', size: '880x80'),
-        '/away?to=http://megapolistk.ru',
-        target: :_blank,
-        class: 'js-stat-megapolis-megazvezda' %>
-    </li>
-
-    <li class='js-banner'>
       <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_miss_tomsk_2016.jpg', size: '880x80'),
         contests_path('miss-tomsk-2016'),
         target: :_blank %>
