@@ -334,9 +334,13 @@ namespace :sync do
   end
 end
 
-task :sync => ['sync:goodwin', 'sync:fakel', 'sync:kinomax', 'sync:kinomir', 'sync:kinopolis'] do
-  organiation_ids = Organization.where(:title => ['Goodwin cinema, кинотеатр', '"Fакел", развлекательный комплекс',
-                                                  'Киномакс, кинотеатр', 'Киномир, кинотеатр', 'Kinopolis, кинотеатр']).map(&:id)
+task :sync => ['sync:goodwin', 'sync:kinomax', 'sync:kinomir', 'sync:kinopolis'] do
+  organiation_ids = Organization.where(:title => [
+    'Goodwin cinema, кинотеатр',
+    '"Fакел", развлекательный комплекс',
+    'Киномакс, кинотеатр', 'Киномир, кинотеатр',
+    'Kinopolis, кинотеатр'
+  ]).map(&:id)
   bad_showings = Showing.where(:afisha_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
   bad_showings.destroy_all
 end
