@@ -61,9 +61,9 @@ if dir.root.split('/').include?('znaigorod.ru')
     rake 'send_digest:statistics'
   end
 
-  every :day, :at => '7:15 am' do
-    rake 'sync:fakel'
-  end
+  #every :day, :at => '7:15 am' do
+    #rake 'sync:fakel'
+  #end
 
   every :day, :at => '7:20 am' do
     rake 'sync:kinomax'
