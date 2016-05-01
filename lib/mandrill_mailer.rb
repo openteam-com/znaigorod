@@ -5,7 +5,7 @@ class MandrillMailer < ActionMailer::Base
       :domain               => Settings['mandrill.domain'],
       :user_name            => Settings['mandrill.login'],
       :password             => Settings['mandrill.password'],
-      :authentication       => "plain",
+      :authentication       => 'login',
       :enable_starttls_auto => true
     }
   end
