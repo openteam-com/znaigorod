@@ -1,5 +1,5 @@
-class StatisticsDigestMailer < MandrillMailer
-  default :from => "\"znaigorod.ru\" <#{Settings['mail']['from']}>"
+class StatisticsDigestMailer < SparkPostMailer
+  default :from => Settings['mail']['from']
   layout "notice_layout"
   add_template_helper(ImageHelper)
   add_template_helper(EmailDigestHelper)

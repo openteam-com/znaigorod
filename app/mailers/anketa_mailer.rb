@@ -1,5 +1,5 @@
-class AnketaMailer < MandrillMailer
-  default :from => "\"znaigorod.ru\" <#{Settings['mail']['from']}>"
+class AnketaMailer < SparkPostMailer
+  default :from => Settings['mail']['from']
   layout "notice_layout"
 
   def send_anketa(work)
