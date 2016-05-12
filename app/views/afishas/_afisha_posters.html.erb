@@ -4,7 +4,9 @@
       <%= render :partial => 'afishas/afisha_poster', :locals => { :afisha => afisha } %>
     </li>
   <% end %>
-  <%= render :partial => 'commons/promo_discounts', :locals => {:type => 'afisha' } if index == 1 && controller_name == 'afishas'%>
+
+  <%#= render :partial => 'commons/promo_discounts', :locals => {:type => 'afisha' } if index == 1 && controller_name == 'afishas'%>
+
 <% end %>
 
 <% unless presenter.collection.last_page? || controller_name == 'organizations'%>
