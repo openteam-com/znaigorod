@@ -5,16 +5,16 @@ class Contest < ActiveRecord::Base
 
   attr_accessor :contest_type
 
-  attr_accessible :agreement, :title, :description, :ends_at, :starts_at, :vote_type,
+  attr_accessible :agreement, :title, :description, :ends_at, :starts_at, :vote_type, :vote_start_at,
                   :participation_ends_at, :vfs_path, :og_description, :og_image, :contest_type,
                   :sms_prefix, :short_number, :sms_secret, :default_sort, :new_work_text, :placeholder,
-                  :anketa_content, :email, :subject
+                  :anketa_content, :email, :subject, :type
 
   has_many :works, :as => :context, :dependent => :destroy
   has_many :accounts, :through => :works, :uniq => true
   has_many :reviews
 
-  validates_presence_of :title, :starts_at, :ends_at, :participation_ends_at, :vote_type, :contest_type
+  validates_presence_of :title, :starts_at, :ends_at, :vote_start_at, :participation_ends_at, :vote_type, :contest_type
 
   validates_presence_of :subject, :if => :has_email?
 

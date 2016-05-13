@@ -28,12 +28,14 @@
             <%= render :partial => 'votes/vote_wrapper', :locals => { :voteable => work } %>
           </div>
         <% else %>
-          <div class="sms_vote">
-            SMS на номер <span class='colored'><%= @contest.short_number %></span> с текстом <span class='colored'><%= @contest.sms_prefix %> <%= work.code %></span>
-          </div>
-          <div class="sms_votes_counter">
-            <%= t 'work.sms', :count => work.sms_counter %>
-          </div>
+          <% if @contest.vote_start_at <= Time.zone.now  %>
+            <div class="sms_vote">
+              SMS на номер <span class='colored'><%= @contest.short_number %></span> с текстом <span class='colored'><%= @contest.sms_prefix %> <%= work.code %></span>
+            </div>
+            <div class="sms_votes_counter">
+              <%= t 'work.sms', :count => work.sms_counter %>
+            </div>
+          <% end %>
         <% end %>
       <% else %>
         <% if @contest.vote_type == "like" %>

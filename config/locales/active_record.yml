@@ -175,6 +175,7 @@ ru:
         <<: *common_attributes
         agreement: Пользовательское соглашение
         ends_at: Окончание голосования
+        vote_start_at: Начало голосования
         participation_ends_at: Окончание приема работ
         published: Опубликован
         starts_at: Начало
