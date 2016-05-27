@@ -237,6 +237,7 @@
       </div>
     <% end %>
 
+    <%= render partial: 'commons/ads_by_google_footer_tomsk' if current_city == 'tomsk' %>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha } %>
 
