@@ -3,9 +3,9 @@ class AddOrganizationRequest
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :title, :address, :phone
+  attr_accessor :title, :address, :email
 
-  validates_presence_of :title, :address, :phone
+  validates_presence_of :title, :address, :email
 
   def initialize(attributes = {})
     attributes.each { |name, value| send "#{name}=", value }

@@ -8,7 +8,7 @@
   <%= simple_form_for @request, url: '/organizations/send_mail', :html => { class: 'default_simple_form add_organization' } do |f| %>
     <%= f.input :title, :label => 'Название', :as => :text %>
     <%= f.input :address, :label => 'Адрес', :as => :text %>
-    <%= f.input :phone, :label => 'Контактный телефон', :as => :text %>
+    <%= f.input :email, :label => 'Контактный e-mail', :as => :text %>
     <%= f.submit 'Отправить', :class => 'submit btn btn-orange' %>
   <% end %>
 </div>
