@@ -237,7 +237,7 @@
       </div>
     <% end %>
 
-    <%= render partial: 'commons/ads_by_google_footer_tomsk' if current_city == 'tomsk' %>
+    <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '690', height: '90' if current_city == 'tomsk' %>
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha } %>
 
