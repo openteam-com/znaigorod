@@ -13,6 +13,7 @@ group :assets do
 end
 
 group :default do
+  gem 'ads-rails'
   gem 'awesome_print'
   gem 'RedCloth'
   gem 'active_attr'
