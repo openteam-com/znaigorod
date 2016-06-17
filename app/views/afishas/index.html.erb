@@ -35,8 +35,6 @@
         <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @decorator, :presenter => @presenter } %>
       </ul>
 
-      <%= render partial: 'commons/ads_by_google_footer_tomsk' if current_city == 'tomsk' %>
-
       <% if defined?(@organizations) %>
         <%= render :partial => 'organizations/promo_block', :locals => { :promoted_clients => @organizations.promoted_clients, :sub_class => 'afisha' } %>
       <% end %>
@@ -44,6 +42,8 @@
       <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
     <% end %>
   </div>
+
+  <%= render partial: 'commons/ads_by_google_footer_tomsk' if current_city == 'tomsk' %>
 
   <% unless params_exist? %>
     <% if page_meta %>
