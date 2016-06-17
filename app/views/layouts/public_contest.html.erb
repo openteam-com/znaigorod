@@ -3,10 +3,10 @@
 <% end %>
 
 <% content_for :javascripts do %>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
   <%= javascript_include_tag "#{Settings['faye.url']}/faye/client.js" %>
   <%= javascript_include_tag 'public/application' %>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <% end %>
 
 <% content_for :metrics do %>
