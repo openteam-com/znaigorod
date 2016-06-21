@@ -22,7 +22,5 @@ class MainPageController < ApplicationController
     @webcams           = Webcam.our.published.shuffle.take(4)
 
     @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
-    @placed_banner_first = PlacedBanner.first_place.actual.first
-    @placed_banners_second = PlacedBanner.second_place.actual
   end
 end
