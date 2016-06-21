@@ -1,12 +1,14 @@
-<% if !placed_banners.nil? %>
+<% if placed_banners.present? %>
   <div class="banner12_contest_wrapper <%= params['controller'].to_s.split('/').try(&:first) %>">
     <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
+
       <% placed_banners.each do |banner| %>
         <li class='js-banner'>
           <%= link_to (image_tag banner.image_url, size: "880x80"), banner.url,
             :target => banner.target %>
         </li>
       <% end %>
+
     </ul>
   </div>
 <% end %>
