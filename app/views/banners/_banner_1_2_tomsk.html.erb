@@ -2,7 +2,12 @@
   <ul class='banner12 <%= params['controller'].to_s.split('/').try(&:first) %>'>
 
     <li class='js-banner'>
-      <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_stomatolog.jpg', size: '880x80'),
+      <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_smg1.jpg', size: '880x80'),
+        'http://cl-sib.tomsk.ru', target: :_blank %>
+    </li>
+
+    <li class='js-banner'>
+      <%= link_to (image_tag 'public/banners/banner_1_2_tomsk_smg2.jpg', size: '880x80'),
         'http://cl-sib.tomsk.ru', target: :_blank %>
     </li>
 
