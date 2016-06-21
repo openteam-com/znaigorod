@@ -1,5 +1,4 @@
 class MainPageController < ApplicationController
-
   def show
     @afisha_list                  = MainPagePoster.where('afisha_id is not null').ordered.actual.map { |afisha| AfishaDecorator.new Afisha.find(afisha.afisha_id) }
     @afisha_excursions_list       = AfishaPresenter.new(:per_page => 6, :without_advertisement => true, :order_by => 'creation', :categories => ['excursions']).decorated_collection
@@ -26,5 +25,4 @@ class MainPageController < ApplicationController
     @placed_banner_first = PlacedBanner.first_place.actual.first
     @placed_banners_second = PlacedBanner.second_place.actual
   end
-
 end
