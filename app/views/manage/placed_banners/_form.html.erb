@@ -1,0 +1,15 @@
+<div class='placed_banner_new_form'>
+  <%= simple_form_for [:manage, @placed_banner], html: {class: 'form_view'} do |f| %>
+    <%= f.input :title, label: 'Название' %>
+    <%= f.input :url %>
+    <%= f.input :target %>
+    <%= f.input :image, label: 'Картинка' %>
+    <%= f.input :time_from, label: 'Показывать с' %>
+    <%= f.input :time_to, label: 'По' %>
+    <%= f.input :place, label: 'Позиция'%>
+    <div class="buttons">
+      <br><%= f.submit 'Сохранить' %><br>
+      <%= link_to 'Отмена', :back %>
+    </div>
+  <% end %>
+</div>

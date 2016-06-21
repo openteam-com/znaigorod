@@ -39,6 +39,7 @@ Znaigorod::Application.routes.draw do
 
   resources :invitations
   resources :banners, :only => [:show]
+  resources :placed_banners
   resources :comments_images, :only => [:create, :destroy]
 
   resources :afisha, :only => [], :controller => 'afishas' do

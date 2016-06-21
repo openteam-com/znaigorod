@@ -1,3 +1,4 @@
+<%= raise params.inspect %>
 <% if %w(entertainment meal organization).include?(resource.class.name.underscore) %>
   <%= render :partial => 'organizations/organization' %>
 <% else %>

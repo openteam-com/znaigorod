@@ -5,6 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :adv_and_seo,           'Реклама и SEO', '#', :highlights_on => ->() { ['page_metas', 'banners', 'place_items'].include?(controller_name) } do |secondary|
       secondary.item :banners,           'Баннеры',               manage_banners_path
+      secondary.item :placed_banners,    'Размещаемые баннеры',   manage_placed_banners_path
       secondary.item :page_metas,        'Мета-описания страниц', manage_page_metas_path
       secondary.item :place_items,       'Продвигаемые элементы', manage_place_items_path
       secondary.item :promotions,        'Рекламные места',       manage_promotions_path

@@ -1,11 +1,5 @@
-<% if Time.zone.now < Time.zone.parse('2015-12-27').end_of_day %>
-  <div class="new_feature">
-    <ul class='top_headline banner js-banner'>
-      <li>
-        <%= link_to 'http://xn--80aagmwcjerocrk8o.xn--p1ai/b50', :target => :_blank do %>
-          <%= image_tag 'public/banners/banner_1_1_tomsk_new_year_fair_2015.jpg', :size => '1200x138', :alt => 'Городская новогодняя ярмарка подарков', :title => 'Городская новогодняя ярмарка подарков' %>
-        <% end %>
-      </li>
-    </ul>
+<% if !placed_banner.nil? %>
+  <div class="placed_banner_wrapper placed_banner11">
+    <%= link_to (image_tag placed_banner.image_url, size: "1200x100"), placed_banner.url, :target => placed_banner.target, :class => "placed_banner #{placed_banner.title}"%>
   </div>
 <% end %>
