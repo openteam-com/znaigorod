@@ -1,0 +1,10 @@
+<h1><%= @placed_banner.title %></h1>
+<%= link_to @placed_banner.url, :title => @placed_banner.title, :alt => @placed_banner.title, :target => @placed_banner.target do %>
+  <%= image_tag resized_image_url(@placed_banner.image_url, @placed_banner.place == 'first' ? 1200 : 880, @placed_banner.place == 'first' ? 100 : 80), :alt => @placed_banner.title, :title => @placed_banner.title, :width => @placed_banner.place == 'first' ? 1200 : 880, :height => @placed_banner.place == 'first' ? 100 : 80 %>
+<% end %>
+<p>Показ: <%= @placed_banner.time_from %> - <%= @placed_banner.time_to %></p>
+<p>Место: <%= @placed_banner.place %></p>
+
+<%= link_to 'Редактировать баннер', edit_manage_placed_banner_path(@placed_banner) %><br>
+<%= link_to 'Удалить', manage_placed_banner_path(@placed_banner), :method => :delete, :confirm => 'Вы точно хотите удалить это баннер?' %><br><br>
+<%= link_to 'К списку', manage_placed_banners_path %><br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160513093934) do
+ActiveRecord::Schema.define(:version => 20160621051639) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -895,6 +895,22 @@ ActiveRecord::Schema.define(:version => 20160513093934) do
   create_table "place_items_promotion_places", :force => true do |t|
     t.integer "place_item_id"
     t.integer "promotion_place_id"
+  end
+
+  create_table "placed_banners", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_url"
+    t.string   "place"
+    t.datetime "time_from"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.datetime "time_to"
+    t.string   "target"
   end
 
   create_table "places", :force => true do |t|

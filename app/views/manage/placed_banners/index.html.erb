@@ -1,0 +1,20 @@
+<h3>Баннеры</h3>
+<% if @placed_banners.any? %>
+  <table style="width:100%">
+  <% @placed_banners.each do |rb| %>
+    <tr>
+      <td><%= link_to rb.title, manage_placed_banner_path(rb) %></td>
+      <td><%= rb.place %></td>
+      <td><%= DateTime.now.between?(rb.time_from, rb.time_to) ? 'Актуален' : ''%></td>
+      <td><%= rb.time_from.to_date %></td>
+      <td><%= rb.time_to.to_date %></td>
+      <td><%= link_to "Редактировать", edit_manage_placed_banner_path(rb) %></td>
+      <td><%= link_to 'Удалить', manage_placed_banner_path(rb), :method => :delete, :confirm => 'Вы точно хотите удалить это баннер?' %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <h1>Нет ни одного баннера</h1>
+<% end %>
+<br>
+<%= link_to 'Добавить баннер', new_manage_placed_banner_path %>
