@@ -20,7 +20,14 @@
 
 <%= content_for :content do %>
   <div class='health_wrapper'>
+    <div class='links'>
+      <ul class='health_links'>
+        <li><%= link_to 'Медицинское объединение "Здоровье"', 'http://mo-zdorovie.tomsk.ru', :target => :_blank %></li>
+      </ul>
+    </div>
+
     <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}", locals: { placed_banner: @placed_banner_first } %>
+
     <div class='health_content_wrapper'>
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/public_header' %>
