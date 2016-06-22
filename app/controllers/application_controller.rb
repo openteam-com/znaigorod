@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   before_filter :update_account_last_visit_at
   before_filter :sape_init
   before_filter :placed_banners
+  before_filter :exepted_controllers
 
   layout :resolve_layout
 
@@ -24,11 +25,11 @@ class ApplicationController < ActionController::Base
 
   def placed_banners
     @placed_banner_first = PlacedBanner.first_place.actual.first
-    @placed_banners_second = exepted_controllers.include?(controller_name) ? nil : PlacedBanner.second_place.actual
+    @placed_banners_second = PlacedBanner.second_place.actual
   end
 
   def exepted_controllers
-    %w(afishas organizations discounts suborganizations questions saunas contest hotels)
+    @exepted_controllers = %w(afishas organizations discounts suborganizations questions saunas contests hotels)
   end
 
   private
