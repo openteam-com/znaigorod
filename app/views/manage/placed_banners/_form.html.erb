@@ -2,11 +2,11 @@
   <%= simple_form_for [:manage, @placed_banner], html: {class: 'form_view'} do |f| %>
     <%= f.input :title, label: 'Название' %>
     <%= f.input :url %>
-    <%= f.input :target %>
+    <%= f.input :target, label: 'Открыть в', include_blank: false, promt: :translate %>
     <%= f.input :image, label: 'Картинка' %>
     <%= f.input :time_from, label: 'Показывать с' %>
     <%= f.input :time_to, label: 'По' %>
-    <%= f.input :place, label: 'Позиция'%>
+    <%= f.input :place, label: 'Позиция', include_blank: false %>
     <div class="buttons">
       <br><%= f.submit 'Сохранить' %><br>
       <%= link_to 'Отмена', :back %>
