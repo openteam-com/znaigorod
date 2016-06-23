@@ -39,6 +39,7 @@ Znaigorod::Application.routes.draw do
 
     resources :banners,     :except => [:show]
     resources :placed_banners
+    resources :brands,      :except => [:new, :destroy, :create]
     resources :place_items, :except => [:show]
     resources :promotions,  :except => [:show]
 
