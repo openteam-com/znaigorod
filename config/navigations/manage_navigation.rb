@@ -13,6 +13,7 @@ SimpleNavigation::Configuration.run do |navigation|
       secondary.item :main_page_reviews, 'Обзоры на главной',     manage_main_page_reviews_path
       secondary.item :main_page_posters, 'Афиши на главной',      manage_main_page_posters_path
       secondary.item :afisha_list_posters, 'Афиши на списочном виде',      manage_afisha_list_posters_index_path
+      secondary.item :main_page_discounts, 'Скидки на главной',   manage_main_page_discounts_path
       secondary.item :teasers, 'Тизеры',      manage_teasers_path
     end
 

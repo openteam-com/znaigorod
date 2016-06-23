@@ -31,7 +31,6 @@ class MainPageController < ApplicationController
           render :partial => 'promotions/main_page_discounts'
         end
       }
-
     end
   end
 end
