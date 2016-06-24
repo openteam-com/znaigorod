@@ -9,6 +9,10 @@
     <%= f.input :title, :label => 'Название', :as => :text %>
     <%= f.input :address, :label => 'Адрес', :as => :text %>
     <%= f.input :email, :label => 'Контактный e-mail', :as => :text %>
+    <%= f.input :payment_method, label: 'Безналичный расчет', as: :select, options: ['Есть', 'Нет'] %>
+    <%= f.input :phone, label: 'Телефон', as: :text %>
+    <%= f.input :open_time, label: 'Время работы', as: :text %>
+    <%= f.input :site, label: 'Сайт / группа ВК', as: :text %>
     <%= f.submit 'Отправить', :class => 'submit btn btn-orange' %>
   <% end %>
 </div>
