@@ -10,7 +10,7 @@ class DiscountDecorator < ApplicationDecorator
     h.discount_url(model)
   end
 
-  def discount_with_link(width, height, options = {})
+  def poster_with_link(width, height, options = {})
     h.link_to h.discount_path(discount), options do
       if discount.poster_url.present?
         h.image_tag(h.resized_image_url(discount.poster_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: discount.title)

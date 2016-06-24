@@ -7,6 +7,7 @@ class AfishasController < ApplicationController
   helper_method :params_exist?
 
   def index
+    raise params.inspect
 
     respond_to do |format|
       format.html {
