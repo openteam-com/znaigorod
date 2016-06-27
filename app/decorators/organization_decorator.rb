@@ -79,11 +79,13 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def email_link
-    content = []
-    email.squish.split(',').map(&:strip).each do |e|
-      content << h.mail_to(e)
+    if email.present?
+      content = []
+      email.squish.split(',').map(&:strip).each do |e|
+        content << h.mail_to(e)
+      end
+      content.join(', ').html_safe
     end
-    content.join(', ').chomp(',').html_safe
   end
 
   def site_link

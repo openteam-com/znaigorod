@@ -153,8 +153,8 @@
             <% end %>
           <% end %>
         </li>
-        <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email.present? %>
-        <%= content_tag(:div, "#{@organization.email_link}".html_safe, itemprop:"email", style:"display: none") if @organization.email.present? %>
+        <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email_link.present? %>
+        <%= content_tag(:div, "#{@organization.email_link}".html_safe, itemprop:"email", style:"display: none") if @organization.email_link.present? %>
       </ul>
     <% end %>
     <% if @organization.social_links.present? %>
