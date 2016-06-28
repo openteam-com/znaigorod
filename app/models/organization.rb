@@ -128,15 +128,10 @@ class Organization < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :organization_category_ids, :message => "* Категория не может быть пустой"
 
-  #validates  :email, :email_format => {
-    #:message => I18n.t('activerecord.errors.messages.invalid'),
-    #:allow_nil => true,
-    #:allow_blank => true
-  #}
   validate :validate_email
 
   def validate_email
-    return errors.add :email, 'не может быть пустым' if email.blank?
+    return true if email.blank?
     email.squish.split(',').map(&:strip).each do |e|
       errors.add :email, I18n.t('activerecord.errors.messages.invalid') unless
       e =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
