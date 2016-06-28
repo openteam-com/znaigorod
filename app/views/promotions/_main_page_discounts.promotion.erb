@@ -1,0 +1,37 @@
+<div class="filter_header">
+  <h2><%= link_to t("meta.#{Settings['app.city']}.discount.page_header"), discounts_path %></h2>
+</div>
+
+<% cache('main_page_discounts', :expires_in => 10.minutes) do %>
+  <div class="by_type">
+    <ul>
+      <% @discount_filter.type_filter.links.each do |link| %>
+        <li><%= link_to link.title, link.path %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="filters_wrapper">
+    <div class="filters discount">
+      <div class="by_kind">
+        <ul>
+          <% @discount_filter.kind_filter.links.take(9).each do |link| %>
+            <li class="<%= link.klass.gsub('selected', '') %>">
+              <%= link_to link.path do %>
+                <span class="name"><%= link.title %></span>
+                <span class="count"><%= link.results_count %></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<ul class="posters tiny">
+  <% @discounts.each do |discount| %>
+    <%= render :partial => 'discounts/discount_poster', :locals => { :discount => discount, :@width => '218', :@height => '164' } %>
+  <% end %>
+</ul>

@@ -1,0 +1,36 @@
+<div class="filter_header">
+  <h1><%= link_to t("meta.#{Settings['app.city']}.afisha.page_header"), afisha_index_path %></h1>
+</div>
+
+<div class="by_tickets">
+  <ul>
+    <li><%= link_to 'Распродажа билетов', afisha_with_tickets_index_path %></li>
+  </ul>
+</div>
+
+<% cache('main_page_afishas', :expires_in => 10.minutes) do %>
+  <div class="filters_wrapper">
+    <div class="filters afisha">
+      <div class="by_kind">
+        <ul>
+          <% @afisha_filter.categories_links.each do |category_link| %>
+            <li class='<%= category_link[:klass] %>'>
+              <%= link_to send(category_link[:url]) do %>
+                <%= content_tag :span,  category_link[:title], :class => :name %>
+                <%= content_tag :span, category_link[:count], :class => :count %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <ul class="posters">
+    <% @afisha_list.each do |afisha| %>
+      <li class="item">
+        <%= render partial: (afisha.is_a?(AfishaDecorator) ? 'main_page/afisha_poster' : afisha.partial), :locals => { :afisha => afisha } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
