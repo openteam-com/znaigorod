@@ -9,7 +9,7 @@
       :placeholder => 'Введите название скидки',
       :data => { 'autocomplete-source' => manage_main_page_discounts_path, :target => '#main_page_discount_discount_id' } %>
 
-    <%= f.input :discount_id %>
+    <%= f.input :discount_id, as: :hidden %>
   </div>
 
   <%= f.input :expires_at, :as => :datetime_picker, :label => 'Действительна до' %>

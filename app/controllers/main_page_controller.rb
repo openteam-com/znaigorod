@@ -23,7 +23,9 @@ class MainPageController < ApplicationController
           @photo_decorator   = PhotogalleryDecorator.decorate(@photogalleries)
           render :partial => 'promotions/main_page_photogalleries'
         elsif params['content'] == 'discounts'
-          @discounts         = DiscountsPresenter.new(:type => 'coupon', :per_page => 5).decorated_collection
+          @discount_list     = MainPageDiscount.where('discount_id is not null').ordered.actual.map { |discount| DiscountDecorator.new Discount.find(discount.discount_id) }
+          @discounts         = DiscountsPresenter.new(:type => 'coupon', :per_page => 5 - @discount_list.count).decorated_collection
+          @discounts = @discount_list + @discounts
           advertisement      = Advertisement.new(list: 'main_page_discounts')
           advertisement.places_at(1).compact.each do |adv|
             @discounts[adv.position] = adv

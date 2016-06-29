@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   before_filter :sape_init
   before_filter :placed_banners
   before_filter :exepted_controllers
-  before_filter :brand if Brand.is_actual?
+  before_filter :brand
 
   layout :resolve_layout
 
