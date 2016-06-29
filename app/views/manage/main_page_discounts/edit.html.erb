@@ -1,0 +1,18 @@
+<h3>Скидки на главной странице <%= "№#{@main_page_discount.position}" %></h3>
+
+<%= simple_form_for [:manage, @main_page_discount] do |f| %>
+  <div>
+    <%= label_tag :q, 'Поиск скидки' %>
+    <%= text_field_tag :main_page_discount_autocomplete,
+      nil,
+      :class => 'js-afisha_list_posters_autocomplete main_page_afishas_autocomplete',
+      :placeholder => 'Введите название скидки',
+      :data => { 'autocomplete-source' => manage_main_page_discounts_path, :target => '#main_page_discount_discount_id' } %>
+
+    <%= f.input :discount_id %>
+  </div>
+
+  <%= f.input :expires_at, :as => :datetime_picker, :label => 'Действительна до' %>
+
+  <%= f.submit 'Сохранить' %> или <%= link_to 'Отмена', manage_main_page_discounts_path %>
+<% end %>

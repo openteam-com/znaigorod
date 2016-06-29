@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160621051639) do
+ActiveRecord::Schema.define(:version => 20160624031702) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -198,6 +198,21 @@ ActiveRecord::Schema.define(:version => 20160621051639) do
   add_index "bets", ["afisha_id"], :name => "index_bets_on_afisha_id"
   add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
 
+  create_table "brands", :force => true do |t|
+    t.string   "title"
+    t.boolean  "show"
+    t.datetime "time_from"
+    t.datetime "time_to"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.text     "background_url"
+    t.string   "url"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
   create_table "car_sales_centers", :force => true do |t|
     t.text     "category"
     t.text     "description"
@@ -374,6 +389,14 @@ ActiveRecord::Schema.define(:version => 20160621051639) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "discount_list_posters", :force => true do |t|
+    t.integer  "position"
+    t.datetime "expires_at"
+    t.integer  "discount_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "discounts", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -520,6 +543,14 @@ ActiveRecord::Schema.define(:version => 20160621051639) do
     t.string   "link"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+  end
+
+  create_table "main_page_discounts", :force => true do |t|
+    t.integer  "discount_id"
+    t.integer  "position"
+    t.datetime "expires_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "main_page_posters", :force => true do |t|

@@ -28,7 +28,13 @@
   <div>
     <span class="label">Электронная почта:</span>
     <% if resource.email.present? %>
-      <span class="value"><%= mail_to resource.email %></span>
+      <span class="value">
+        <ul>
+          <% resource.email.split(',').map(&:strip).each do |e| %>
+            <li><%= mail_to e %></li>
+          <% end %>
+        </ul>
+      </span>
     <% else %>
       <span class="blank">Не указано</span>
     <% end %>

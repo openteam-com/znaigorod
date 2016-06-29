@@ -1,7 +1,7 @@
 <div class='placed_banner_new_form'>
-  <%= simple_form_for [:manage, @placed_banner], html: {class: 'form_view'} do |f| %>
+  <%= simple_form_for [:manage, @placed_banner] do |f| %>
     <%= f.input :title, label: 'Название' %>
-    <%= f.input :url %>
+    <%= f.input :url, label: 'Ссылка' %>
     <%= f.input :target, label: 'Открыть в', include_blank: false, promt: :translate %>
     <%= f.input :image, label: 'Картинка' %>
     <%= f.input :time_from, label: 'Показывать с' %>

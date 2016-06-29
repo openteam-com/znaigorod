@@ -1,0 +1,18 @@
+<h3>Скидки в списочном виде  <%= "№#{@discount_list_poster.position}" %></h3>
+
+<%= simple_form_for [:manage, @discount_list_poster] do |f| %>
+  <div>
+    <%= label_tag :q, 'Поиск скидки' %>
+    <%= text_field_tag :discount_list_discounts_autocomplete,
+      nil,
+      :class => 'js-afisha_list_posters_autocomplete discount_list_posters_autocomplete',
+      :placeholder => 'Введите название скидки',
+      :data => { 'autocomplete-source' => manage_discount_list_posters_path, :target => '#discount_list_poster_discount_id' } %>
+
+    <%= f.input :discount_id, :as => :hidden %>
+  </div>
+
+  <%= f.input :expires_at, :as => :datetime_picker %>
+
+  <%= f.submit 'Сохранить' %> или <%= link_to 'Отмена', manage_discount_list_posters_path %>
+<% end %>

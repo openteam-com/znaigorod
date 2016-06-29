@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   before_filter :sape_init
   before_filter :placed_banners
   before_filter :exepted_controllers
+  before_filter :brand if Brand.is_actual?
 
   layout :resolve_layout
 
@@ -32,6 +33,10 @@ class ApplicationController < ActionController::Base
     @exepted_controllers = %w(afishas organizations discounts suborganizations questions saunas contests hotels)
   end
 
+  def brand
+    @brand = Brand.first
+  end
+
   private
 
   def detect_robots_in_development
@@ -43,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    return request.xhr? ? false : 'public_contest' if Settings['app.city'] == 'tomsk'
+    return request.xhr? ? false : Brand.is_actual? ? 'public_contest' : 'public' if Settings['app.city'] == 'tomsk'
 
     return request.xhr? ? false : 'public' if Settings['app.city'] == 'sevastopol'
   end

@@ -2,7 +2,7 @@ class Manage::AfishaListPostersController < Manage::ApplicationController
   authorize_resource
 
   def index
-    @afisha_list_posters = AfishaListPoster.all
+    @afisha_list_posters = AfishaListPoster.ordered
 
     search = Afisha.search { fulltext params[:term]; with :state, :published }
     afishas = search.results

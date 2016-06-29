@@ -1,0 +1,32 @@
+<h3>Скидки на списочном виде</h3>
+
+<ul class="discount_list_posters">
+  <% @discount_list_posters.each do |discount_list_poster| %>
+    <li>
+      <% if discount_list_poster.discount %>
+        <% decorated_discount = DiscountDecorator.new(discount_list_poster.discount) %>
+          <div class="image">
+            <%= decorated_discount.poster_with_link(100, 100) %>
+          </div>
+
+          <div>
+            <%= link_to decorated_discount.title %>
+          </div>
+
+          <div>
+            Действительна до <%= l discount_list_poster.expires_at, :format => :long %>
+          </div>
+
+          <div>
+            <%= link_to 'Выбрать другую скидку', edit_manage_discount_list_poster_path(discount_list_poster) %>
+            <%= link_to 'Освободить место', manage_discount_list_poster_path(discount_list_poster, 'discount_list_poster[discount_id]' => ''), :method => :put %>
+          </div>
+      <% else %>
+        <div>
+          Скидка не выбрана
+          <%= link_to 'Выбрать скидку', edit_manage_discount_list_poster_path(discount_list_poster) %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

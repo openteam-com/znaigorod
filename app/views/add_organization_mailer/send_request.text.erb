@@ -3,3 +3,7 @@
 Название: <%= @request.title %>
 Адрес: <%= @request.address %>
 E-mail: <%= @request.email %>
+Безналичный расчет: <%= @request.payment_method ? 'Есть' : 'Нет' %>
+Телефон: <%= @request.phone %>
+Время работы: <%= @request.open_time %>
+Сайт / группа ВК: <%= @request.site %>

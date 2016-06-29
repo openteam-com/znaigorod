@@ -3,6 +3,7 @@ class AfishaListPoster < ActiveRecord::Base
 
   belongs_to :afisha
 
+  scope :ordered, -> { order :position }
   scope :actual, -> { where 'expires_at > ?', Time.zone.now }
 end
 

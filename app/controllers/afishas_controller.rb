@@ -7,7 +7,6 @@ class AfishasController < ApplicationController
   helper_method :params_exist?
 
   def index
-
     respond_to do |format|
       format.html {
         cookie = cookies['_znaigorod_afisha_list_settings'].to_s

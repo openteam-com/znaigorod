@@ -1,0 +1,32 @@
+<h3>Скидки на главной странице</h3>
+
+<ul class="main_page_afishas">
+  <% @main_page_discounts.each do |main_page_discount| %>
+    <li>
+      <% if main_page_discount.discount %>
+        <% decorated_discount = DiscountDecorator.new(main_page_discount.discount) %>
+          <div class="image">
+            <%= decorated_discount.poster_with_link(100, 100) %>
+          </div>
+
+          <div>
+            <%= link_to decorated_discount.title %>
+          </div>
+
+          <div>
+            Действительна до <%= l main_page_discount.expires_at, :format => :long %>
+          </div>
+
+          <div>
+            <%= link_to 'Выбрать другую скидку', edit_manage_main_page_discount_path(main_page_discount) %>
+            <%= link_to 'Освободить место', manage_main_page_discount_path(main_page_discount, 'main_page_discount[discount_id]' => ''), :method => :put %>
+          </div>
+      <% else %>
+        <div>
+          Скидка не выбрана
+          <%= link_to 'Выбрать скидку', edit_manage_main_page_discount_path(main_page_discount) %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
