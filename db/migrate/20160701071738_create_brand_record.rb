@@ -1,6 +1,7 @@
 class CreateBrandRecord < ActiveRecord::Migration
   def up
-    Brand.create(:time_from=>Time.zone.now, :time_to=>Time.zone.now)
+    brand = Brand.new(:time_from=>Time.zone.now, :time_to=>Time.zone.now)
+    brand.save(:validate => false)
   end
 
   def down
