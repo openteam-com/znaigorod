@@ -39,6 +39,7 @@ Znaigorod::Application.routes.draw do
 
   resources :invitations
   resources :banners, :only => [:show]
+  resources :placed_banners
   resources :comments_images, :only => [:create, :destroy]
 
   resources :afisha, :only => [], :controller => 'afishas' do
@@ -144,6 +145,10 @@ Znaigorod::Application.routes.draw do
   resources :rss, :only => [:index]
 
   root :to => 'main_page#show'
+
+  get 'main_page_afisha' => 'main_page#show'
+  get 'main_page_photogalleries' => 'main_page#show'
+  get 'main_page_discounts' => 'main_page#show'
 
   put '/ali.txt' => redirect('http://alihack.com')
 

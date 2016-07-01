@@ -7,13 +7,13 @@ class DiscountsController < ApplicationController
 
     respond_to do |format|
       format.html {
+        @discounts = DiscountListPoster.where('discount_id is not null').actual.ordered.map{|discount| DiscountDecorator.new Discount.find(discount.discount_id)}
         @presenter = DiscountsPresenter.new(params)
-        @discounts = @presenter.decorated_collection
+        @discounts += @presenter.decorated_collection
 
         render partial: 'discounts/discount_posters', layout: false and return if request.xhr?
 
         @organizations = NewOrganizationsPresenter.new({:promoted_clients_per_page => 5})
-
       }
 
       format.rss {

@@ -38,6 +38,8 @@ Znaigorod::Application.routes.draw do
     resources :sessions,  :only => [:new, :create, :destroy]
 
     resources :banners,     :except => [:show]
+    resources :placed_banners
+    resources :brands,      :except => [:new, :destroy, :create]
     resources :place_items, :except => [:show]
     resources :promotions,  :except => [:show]
 
@@ -47,6 +49,8 @@ Znaigorod::Application.routes.draw do
 
     resources :main_page_posters, :except => [:new, :create, :show, :destroy]
     resources :afisha_list_posters, :except => [:new, :create, :show, :destroy]
+    resources :main_page_discounts, :except => [:new, :create, :show, :destroy]
+    resources :discount_list_posters, :except => [:new, :create, :show, :destroy]
 
     resources :reviews do
       get ':by_category' =>'reviews#index', :on => :collection, :as => :by_category, :constraints => {:by_category => /#{Review.categories.values.map(&:value).join('|')}/}

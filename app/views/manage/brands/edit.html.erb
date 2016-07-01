@@ -1,0 +1,18 @@
+<div class='brand_new_form'>
+  <%= simple_form_for [:manage, @brand] do |f| %>
+    <%= f.input :title, label: 'Название' %>
+    <%= f.input :url, label: 'Ссылка' %>
+    <%= f.input :background, label: 'Изображение' %>
+    <%= f.input :show, label: 'Отображать' %>
+    <%= f.input :time_from, label: 'Показывать с' %>
+    <%= f.input :time_to, label: 'по' %>
+    <div class="buttons">
+      <br><%= f.submit 'Сохранить' %><br>
+      <%= link_to 'Отмена', :back %>
+    </div>
+  <% end %>
+</div>
+
+
+
+

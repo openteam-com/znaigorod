@@ -10,6 +10,16 @@ class DiscountDecorator < ApplicationDecorator
     h.discount_url(model)
   end
 
+  def poster_with_link(width, height, options = {})
+    h.link_to h.discount_path(discount), options do
+      if discount.poster_url.present?
+        h.image_tag(h.resized_image_url(discount.poster_url, width, height, { crop: '!', orientation: 'n' }), size: "#{width}x#{height}", alt: discount.title)
+      else
+        h.image_tag('public/stub_poster.png', size: '178x240', alt: :discount)
+      end
+    end
+  end
+
   def goes_now?
     starts_at < Time.zone.now && ends_at > Time.zone.now
   end

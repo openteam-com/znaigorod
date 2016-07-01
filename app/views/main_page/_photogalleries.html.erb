@@ -1,11 +1,4 @@
 <div class="photogalleries_main_page_list">
-  <div class="filter_header">
-    <h2><%= link_to t("meta.#{Settings['app.city']}.photogalleries.page_header"), photogalleries_path %></h2>
-  </div>
-
-  <div class="photogalleries-paginator">
-    <ul class="posters" data-item-width="392">
-      <%= render :partial => 'photogalleries/posters', :locals => { :decorator => @photo_decorator, :height => '200', :width => '354' } %>
-    </ul>
+  <div class="place" id="place-3">
   </div>
 </div>

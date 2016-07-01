@@ -13,12 +13,28 @@ class ApplicationController < ActionController::Base
   before_filter :detect_robots_in_development if Rails.env.development?
   before_filter :update_account_last_visit_at
   before_filter :sape_init
+  before_filter :placed_banners
+  before_filter :exepted_controllers
+  before_filter :brand
 
   layout :resolve_layout
 
   rescue_from CanCan::AccessDenied do |exception|
     render :partial => 'commons/social_auth', layout: false and return unless current_user
     redirect_to :back, :notice => "У вас не хватает прав для выполнения этого действия"
+  end
+
+  def placed_banners
+    @placed_banner_first = PlacedBanner.first_place.actual.first
+    @placed_banners_second = PlacedBanner.second_place.actual
+  end
+
+  def exepted_controllers
+    @exepted_controllers = %w(afishas organizations discounts suborganizations questions saunas contests hotels)
+  end
+
+  def brand
+    @brand = Brand.first
   end
 
   private

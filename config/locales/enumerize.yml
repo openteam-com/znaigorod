@@ -1,5 +1,12 @@
 ru:
   enumerize:
+    placed_banner:
+      place:
+        first: Первая
+        second: Вторая
+      target:
+        _blank: В новой вкладке
+        _self: В текущей вкладке
     payment_system:
       robokassa: Robokassa
       rbkmoney: RBK Money
