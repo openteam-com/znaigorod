@@ -1,6 +1,6 @@
 <% @brands.each do |brand| %>
   <h1><%= brand.title %></h1>
-  <p><%= image_tag brand.background_url, height: '350px' %></p>
+  <p><%= image_tag brand.background_url, height: '350px' if brand.background.present? %></p>
   <p><%= link_to brand.url, brand.url, target: '_blank' %></p>
   <p>Отображён: <%= brand.show == true ? 'Да' : 'Нет' %></p>
   <p>Показ: <%= brand.time_from.to_date %> - <%= brand.time_to.to_date %></p>
