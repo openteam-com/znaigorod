@@ -1,0 +1,30 @@
+<p>Похожие афиши уже есть на нашем сайте.</p>
+
+<ul align='center'>
+  <% @afishas.each do |afisha| %>
+    <li class='item'>
+      <div class='image'>
+        <%= afisha.poster_with_link(194, 260, :target => '_blank') %>
+      </div>
+
+      <div class='title'>
+        <%= afisha.truncated_title_link(35, :target => '_blank', :separator => nil) %>
+      </div>
+
+      <div class='place'>
+        <%= afisha.afisha_place(:length => 25, :separator => nil, :target => '_blank') %>
+      </div>
+
+      <div class='human_when'>
+        <%= afisha.human_when ? afisha.human_when : "&nbsp;".html_safe %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<div class="bottom_info" align='center'>
+  <div class='confirm'>Хотите продолжить создание афиши?</div>
+  <div class="buttons">
+    <%= button_tag 'Да', class: 'yes' %> <%= link_to 'Нет', afisha_index_path, class: 'no' %>
+  </div>
+</div>

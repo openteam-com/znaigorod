@@ -1,0 +1,24 @@
+<% content_for :help do %>
+  <p>Выберете один или несколько файлов для добавления. Файлы загрузятся автоматически.</p>
+<% end %>
+
+<div class="upload_wrapper">
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      <div class="progress">{%=o.name%}</div>
+    </div>
+  </script>
+</div>
+
+<ul class="gallery_files">
+  <%= render @afisha.gallery_files %>
+</ul>
+
+<%= simple_form_for @afisha.gallery_files.new, :url => my_afisha_gallery_files_path(@afisha.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+  <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' }, :label => t('my.add_files') %>
+<% end %>
+
+<div class='submit'>
+  <%= link_to 'Сохранить', my_afisha_show_path(@afisha), class: :button %>
+  <%= link_to 'Отмена', my_afisha_show_path(@afisha) %>
+</div>

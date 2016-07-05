@@ -1,0 +1,10 @@
+<% content_for :my_content do %>
+    <div class='form_wrapper'>
+      <%= render partial: "form_#{@step}" %>
+    </div>
+    <div class='preview'>
+      <%= render partial: "preview_#{@step}" %>
+    </div>
+<% end %>
+
+<%= render :template => 'my/afishas/wrapper' %>

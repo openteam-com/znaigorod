@@ -83,6 +83,15 @@
                 <span class="menu_text">Мои афиши</span>
               </a>
             </div>
+            <div class="show_button <%= "selected" if params[:controller] == "my/organizations" %>">
+              <a href="<%= my_organizations_path() %>">
+                <% if current_user.account.organizations.count > 0 %>
+                  <span id="afisha_counter"><%= current_user.account.discounts.count %></span>
+                <% end %>
+                <span class="menu_text">Мои организации</span>
+              </a>
+            </div>
+
             <div class="show_button <%= "selected" if params[:controller] == "my/discounts" %>">
               <a href="<%= my_discounts_path() %>">
                 <% if current_user.account.discounts.count > 0 %>

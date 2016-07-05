@@ -86,6 +86,8 @@ Znaigorod::Application.routes.draw do
       put 'draft' => 'discounts#send_to_draft', :on => :member, :as => :draft
     end
 
+    resources :organizations
+
     get 'related_afishas' => 'related_items#afishas',             :as => 'related_afishas'
     get 'related_reviews' => 'related_items#reviews',             :as => 'related_reviews'
     get 'related_organizations' => 'related_items#organizations', :as => 'related_organizations'

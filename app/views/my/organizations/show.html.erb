@@ -1,0 +1,257 @@
+<% content_for :page_title do %>
+  <% if @afisha.title.present? %>
+    <%= @afisha.title.text_gilensize %>,
+  <% else %>
+    Нет названия,
+  <% end %>
+  <%= @afisha.kind.map(&:text).join(', ') %> в <%= current_city_inclination %>
+<% end %>
+
+<div class='my_wrapper'>
+  <%= render_navigation context: 'my', renderer: :breadcrumbs %>
+
+  <div class='afisha_show'>
+    <div class="publication-warning afisha">
+      <% if @afisha.draft? %>
+        <h2>Для того, чтобы опубликовать созданное мероприятие, необходимо заполнить следующие поля:</h2>
+
+        <ul class="requirements">
+          <%= content_tag(:li, content_tag(:span, ' Название заполнено', :class => 'fa fa-check'), :class => 'enabled') if @afisha.title? %>
+          <%= content_tag(:li, content_tag(:span, ' Описание заполнено', :class => 'fa fa-check'), :class => 'enabled') if @afisha.description? %>
+
+          <% if @afisha.poster_url.present? %>
+            <%= content_tag(:li, content_tag(:span, ' Постер добавлен', :class => 'fa fa-check'), :class => 'enabled') %>
+          <% else %>
+            <li class="not-enabled">
+              <span class="fa fa-times"> Нет постера</span>
+              <%= link_to ' Добавить постер', edit_step_my_afisha_path(@afisha, :step => :second) if can? :edit, @afisha %>
+            </li>
+          <% end %>
+
+          <% if @afisha.showings.any? %>
+            <%= content_tag(:li, content_tag(:span, ' Время проведения заполнено', :class => 'fa fa-check'), :class => 'enabled') %>
+          <% else %>
+            <li class="not-enabled">
+              <span class="fa fa-times"> Время проведения неизвестно</span>
+              <%= link_to 'Добавить', new_my_afisha_showing_path(@afisha) if can? :new, @afisha.showings.new %></li>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="actions floatr">
+        <% if can? :send_to_published, @afisha %>
+          <%= link_to t('my.destroy'), my_afisha_path(@afisha), method: :delete, class: :destroy, confirm: 'Вы уверены? Афиша будет удалена без возможности восстановления' if @afisha.can_be_deleted? %>
+
+          <% if @afisha.ready_for_publication? %>
+            <%= link_to t('my.send_to_public'), publish_my_afisha_path(@afisha), :method => :put, :class => 'flat-btn btn-orange btn-lg', :confirm => 'Вы уверены? После публикации афишу, она будет доступна всем пользователям сайта!' %>
+          <% else %>
+            <%= link_to t('my.send_to_public'), 'javascript: void(0)', :class => 'flat-btn btn-disabled btn-lg' %>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <% if @afisha.can_be_send_to_drafts? %>
+        <%= link_to t('my.send_to_draft'), draft_my_afisha_path(@afisha), :method => :put, :class => 'flat-btn btn-orange btn-lg floatr', :confirm => 'Вы уверены? После подтверждения афиша будет недоступна пользователям сайта!'%>
+      <% else %>
+        Афиша опубликована и не может быть удалена или перенесена в черновики
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class='left'>
+    <div class='image'>
+      <% if @afisha.poster_url.present? %>
+        <%= link_to(image_tag(resized_image_url(@afisha.poster_url, 200, 269), size: '200x269', alt: @afisha.title), @afisha.poster_url) %>
+      <% else %>
+        <% if can? :edit, @afisha %>
+          <%= link_to image_tag('public/stub_poster.png', size: '200x269', alt: :poster, class: :stub), edit_step_my_afisha_path(@afisha, step: :second) %>
+        <% else %>
+          <%= image_tag('public/stub_poster.png', size: '200x269', alt: :poster) %>
+        <% end %>
+        <span class='alert'>Нет</span> постера
+      <% end %>
+      <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :second) if can? :edit, @afisha %>
+    </div>
+  </div>
+
+  <div class='right'>
+
+    <div class="advertisement">
+
+      <div class="orange cell">
+        <%= t("afisha.pay_attention") %>
+      </div>
+
+      <% if @afisha.published? %>
+        <div class="cell dashed_border arrow_box">
+          <%= render :partial => 'afishas/promote', :locals => { :afisha => @afisha } %>
+
+          <p><%= "Поднято: #{l(@afisha.promoted_at, :format => :long)}" if @afisha.promoted_at? %></p>
+        </div>
+        <div class="cell dashed_border">
+          Закрепление афиши на главной странице
+          <p><strong>200 руб./сутки</strong></p>
+        </div>
+        <div class="cell dashed_border">
+          Закрепление афиши в правой части раздела
+          <p><strong>300 руб./сутки</strong></p>
+        </div>
+      <% else %>
+        <div class="cell dashed_border arrow_box">
+          Рекламные возможности будут доступны после публикации афиши.
+        </div>
+      <% end %>
+
+      <div class="cell">
+        Можем предложить различные варианты <%= link_to 'реализации билетов', ticket_sales_path %>.
+      </div>
+
+    </div>
+
+    <div class="phones">
+      <div class="icon">
+      </div>
+      <div class="body">
+        <strong>
+          +7-953-918-34-74
+        </strong>
+        <br />
+        <strong>
+          +7-952-800-55-44
+        </strong>
+      </div>
+    </div>
+
+    <div class="emails">
+      <div class="icon">
+      </div>
+      <div class="body">
+        <%= mail_to 'office@znaigorod.ru' %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='center'>
+
+    <% if @afisha.title.present? %>
+      <h1>
+        <%= @afisha.title.to_s.text_gilensize %>
+        <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+      </h1>
+    <% else %>
+      <h1>
+        <span class='alert'>Нет</span> названия
+        <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+      </h1>
+    <% end %>
+
+    <%= content_tag :p, @afisha.original_title.text_gilensize, class: 'original_title' if @afisha.original_title? %>
+
+    <div class='closest'>
+      <%= @afisha.when_with_price %>
+      <% if @afisha.showings.any? %>
+        <%= link_to 'изменить', edit_my_afisha_showing_path(@afisha, @afisha.showings.first) if can? :edit, @afisha.showings.first %>
+        <%= link_to 'добавить ещё сеанс', new_my_afisha_showing_path(@afisha), class: :add_more_schedule if can? :new, @afisha.showings.new %>
+      <% else %>
+        <%= link_to 'добавить сеанс', new_my_afisha_showing_path(@afisha) if can? :new, @afisha.showings.new %>
+      <% end %>
+    </div>
+
+    <div class='text'>
+      <% if @afisha.description.present? %>
+        <%= @afisha.description_html %>
+      <% else %>
+        <p><span class='alert'>Нет</span> описания</p>
+      <% end %>
+      <p><%= link_to 'изменить описание', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
+      <% if @afisha.vk_event_url? %>
+        <p><%= link_to "Страница события ВКонтакте", @afisha.vk_event_url, target: '_blank', rel: 'nofollow' %></p>
+      <% else %>
+        <p><span class='alert'>Нет</span> ссылки на событие ВКонтакте</p>
+      <% end %>
+      <p><%= link_to 'изменить ссылку на событие ВКонтакте', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %></p>
+      <% if @afisha.html_attachments.present? %>
+        <%= @afisha.html_attachments %>
+      <% else %>
+        <p><span class='alert'>Нет</span> файлов</p>
+      <% end %>
+      <p><%= link_to 'изменить файлы', edit_step_my_afisha_path(@afisha, step: :sixth) if can? :edit, @afisha %></p>
+      <% if @afisha.user.present? %>
+        <p class='afisha_owner'>
+          <span>Автор:</span>
+          <%= link_to @afisha.user.name, @afisha.user.profile %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="tags_and_visits">
+      <ul class='tags'>
+        <% if @afisha.tags.any? %>
+          <% @afisha.tags.each do |tag| %>
+            <li><%= tag %></li>
+          <%end%>
+          <li class='transparent'>
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+          </li>
+        <% else %>
+          <li class='transparent'>
+            <span class='alert'>Нет</span> тэгов
+            <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :first) if can? :edit, @afisha %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class='trailer_header'>
+      <% if @afisha.trailer_code.present? %>
+        <%= @afisha.kind.include?('movie') ? 'Трейлер' : 'Видео' %>
+      <% else %>
+        <span class='alert'>Нет</span>
+        <%= @afisha.kind.include?('movie') ? 'трейлера' : 'видео' %>
+      <% end %>
+      <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fifth) if can? :edit, @afisha %>
+    </div>
+    <% if @afisha.trailer_code.present? %>
+      <div class='trailer'>
+        <%= @afisha.trailer_code_html %>
+      </div>
+    <% end %>
+
+    <div class='photogallery_header'>
+      <% if @afisha.images.present? %>
+        <%= @afisha.kind.include?('movie') ? 'Кадры' : 'Фотографии' %>
+      <% else %>
+        <span class='alert'>Нет</span>
+        <%= @afisha.kind.include?('movie') ? 'кадров' : 'фотографий' %>
+      <% end %>
+      <%= link_to 'изменить', edit_step_my_afisha_path(@afisha, step: :fourth) if can? :edit, @afisha %>
+    </div>
+    <% if @afisha.images.present? %>
+      <div class='photogallery'>
+        <ul>
+          <% @afisha.images.each do |image| %>
+            <%= render partial: image.partial_for_render_object, object: image, :locals => { :rel => "my_afisha_images_gallery_#{@afisha.id}" } %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='many_showings'>
+      <div class='many_showing_header'>
+        Место, время проведения и стоимость участия
+        <%= link_to 'добавить', new_my_afisha_showing_path(@afisha) if can? :new, @afisha.showings.new %>
+      </div>
+      <ul>
+        <% @afisha.showings.each do |showing| %>
+          <li>
+            <%= showing.for_schedule %>
+            <p class='edit'><%= link_to 'изменить', edit_my_afisha_showing_path(@afisha, showing) if can? :edit, showing %></p>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</div>

@@ -3,6 +3,7 @@
 class Organization < ActiveRecord::Base
   include HasVirtualTour
   include VkUpload
+  include DraftPublishedStates
   include MakePageVisit
   include ImageHelper
 
@@ -13,7 +14,7 @@ class Organization < ActiveRecord::Base
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
-                  :social_links_attributes, :user_id, :ability_to_comment,
+                  :social_links_attributes, :state, :state_event, :user_id, :ability_to_comment,
                   :vkontakte_likes, :fb_likes, :odn_likes, :poster_vk_id,
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
@@ -79,6 +80,10 @@ class Organization < ActiveRecord::Base
 
   def client?
     status.client? || status.client_economy? || status.client_standart? || status.client_premium?
+  end
+
+  def self.steps
+    %w[first second third fourth fifth sixth]
   end
 
   def update_slave_organization_statuses

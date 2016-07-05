@@ -1,0 +1,22 @@
+<li>
+  <div class="item">
+    <div class="poster">
+      <%= link_to my_afisha_show_path(afisha) do %>
+        <%= image_tag (afisha.poster_url? ? resized_image_url(afisha.poster_url, 65, 88) : 'public/stub_poster.png'), :size => '65x88' %>
+      <% end %>
+    </div>
+
+    <div class="title">
+      <%= afisha.title.present? ? afisha : 'Нет названия' %>
+    </div>
+
+    <div class="kind">
+      <%= afisha.kind.map(&:text).join(', ') %>
+    </div>
+
+    <div class="actions">
+      <%= link_to 'Редактировать', my_afisha_show_path(afisha) if (can? :edit, afisha) && (afisha.draft? || afisha.published? ) %>
+      <%= link_to 'Удалить', my_afisha_show_path(afisha), method: :delete, confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, afisha) && afisha.draft? %>
+    </div>
+  </div>
+</li>

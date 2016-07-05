@@ -1,0 +1,50 @@
+<% content_for :account_content do %>
+  <div class='feeds'>
+    <div class="invitations header">
+      <div class='clear'>
+        <span class="panel"></span>
+      </div>
+      <h3>
+        <%= link_to "Мои заведения", new_my_organization_path, class: 'add_link' %>
+      </h3>
+      <%= link_to 'Добавить заведение', new_my_organization_path, class: :invitation_link if can? :new, Organization %>
+    </div>
+    <div id='events_filter'>
+      <ul>
+        <% %w[all draft published].each do |state| %>
+          <li>
+            <%= link_to "##{state}" do %>
+              <% unless state == 'all' %>
+                <%= t(state, count: @events.by_state(state).total_count) %>
+              <% else %>
+                <%= t(state, count: current_user.organizations.count) %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+    <div class='content'>
+      <% %w[all draft published].each do |state| %>
+        <div id='<%= state %>' class='list'>
+          <div class='organizations_main_page_list'>
+            <% if @events.any? %>
+              <ul class='posters'>
+                <% unless state == 'all' %>
+                  <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
+                <% else %>
+                  <%= render partial: 'events/account_events', locals: { collection: @events, state: state.to_sym } %>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <%= paginate @events %>
+    </div>
+    </div>
+  </div>
+<% end %>
+<%= render file: "my/accounts/wrapper" %>

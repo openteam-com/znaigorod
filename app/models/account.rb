@@ -36,6 +36,7 @@ class Account < ActiveRecord::Base
   has_many :produced_messages, :as => :producer, :class_name => 'PrivateMessage'
 
   has_many :afisha,                   :through => :users
+  has_many :organizations,            :through => :users
   has_many :comments,                 :through => :users,                :order => 'comments.created_at DESC'
   has_many :events,                   :through => :users,                :order => 'afisha.created_at DESC'
   has_many :invite_messages,          :through => :invitations,          :order => 'messages.created_at DESC'
