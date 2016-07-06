@@ -1,0 +1,388 @@
+<div class="logo">
+  <% if resource.logotype_url.present? %>
+    <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
+  <% else %>
+    <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+  <% end %>
+</div>
+
+<div class="column">
+  <div>
+    <span class="label">Адрес заведения:</span>
+    <% if resource.address.present? %>
+      <span class="value"><%= resource.address %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Телефон:</span>
+    <% if resource.phone.present? %>
+      <span class="value"><%= resource.phone %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Электронная почта:</span>
+    <% if resource.email.present? %>
+      <span class="value">
+        <ul>
+          <% resource.email.split(',').map(&:strip).each do |e| %>
+            <li><%= mail_to e %></li>
+          <% end %>
+        </ul>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Сайт:</span>
+    <% if resource.site.present? %>
+      <span class="value"><%= link_to resource.site, resource.site %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Ссылки:</span>
+    <% if resource.social_links.present? %>
+      <ul>
+        <% resource.social_links.each do |link| %>
+          <li><span class="value"><%= link_to link.title, link.url, :target => '_blank' %></span></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Поддомен:</span>
+    <% if resource.subdomain.present? %>
+      <span class="value"><%= link_to "http://#{resource.subdomain}.znaigorod.ru", "http://#{resource.subdomain}.znaigorod.ru", :target => '_blank' %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <%= render resource.virtual_tour %>
+
+  <div>
+    <span class="label">Безналичный расчет:</span>
+    <% if resource.non_cash.present? %>
+      <span class="value"><%= resource.non_cash ? 'да' : 'нет' %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Возможность комментирования:</span>
+    <% if resource.ability_to_comment? %>
+      <span class="value">Комментирование разрешено</span>
+    <% else %>
+      <span class="blank">Комментирование запрещено</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Залы заведения:</span>
+    <% if resource.halls.any? %>
+      <span class="value">
+        <ul>
+          <% resource.halls.each do |hall| %>
+            <li><%= hall %></li>
+          <% end %>
+        </ul>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Приоритетная подорганизация:</span>
+    <% if resource.priority_suborganization_kind.present? %>
+      <span class="value"><%= t("organization.kind.#{resource.priority_suborganization_kind}") %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Парковка:</span>
+    <% if resource.organization_stand %>
+      <span class="value">
+        <ul>
+          <% if resource.organization_stand.places? %>
+            <li>Количество мест: <%= resource.organization_stand.places %></li>
+          <% end %>
+          <li>Охраняемая: <%= resource.organization_stand.guarded ? 'да' : 'нет' %></li>
+          <li>С видеонаблюдением: <%= resource.organization_stand.video_observation ? 'да' : 'нет' %></li>
+        </ul>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+</div>
+
+<div class="column">
+  <div>
+    <span class="label">Расписание работы:</span>
+    <% if true %>
+      <span class="value">
+        <ul>
+          <% resource.schedules.each do |schedule| %>
+            <li <%= "class=holiday" if schedule.holiday %>>
+              <span class='day'><%= schedule.short_human_day %></span>
+              <%= "#{l(schedule.from, :format => "%H:%M")} &mdash; #{l(schedule.to, :format => "%H:%M")}".html_safe unless schedule.holiday %>
+            </li>
+          <% end %>
+        </ul>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+</div>
+
+<div class="column">
+  <div>
+    <span class="label">Родительская организация:</span>
+    <% if resource.primary_organization.present? %>
+      <%= link_to resource.primary_organization.title, manage_organization_path(resource.primary_organization) %>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Вложенные организации:</span>
+    <% if resource.slave_organizations.any? %>
+      <span class="value">
+        <% resource.slave_organizations.each do |organization| %>
+          <li><%= link_to organization.title, manage_organization_path(organization) %></li>
+        <% end %>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+    <%= link_to 'Добавить вложенную организацию', new_manage_organization_organization_path(resource) if resource.primary_organization.nil? %>
+  </div>
+
+  <div>
+    <span class="label">Общий рейтинг:</span>
+    <span class="value">
+      <%= resource.total_rating.to_f.round(2) %>
+    </span>
+  </div>
+</div>
+
+<div class="column">
+  <div>
+    <span class="label">Расположено в:</span>
+    <% if resource.placement %>
+      <%= link_to resource.placement.title, manage_organization_path(resource.placement) %>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Расположенные организации:</span>
+    <% if resource.situated_organizations.any? %>
+      <span class="value">
+        <% resource.situated_organizations.each do |organization| %>
+          <li><%= link_to organization.title, manage_organization_path(organization) %></li>
+        <% end %>
+      </span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Meta - description:</span>
+    <% if resource.page_meta_description.present? %>
+      <span class="value"><%= resource.page_meta_description %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Meta - keywords:</span>
+    <% if resource.page_meta_keywords.present? %>
+      <span class="value"><%= resource.page_meta_keywords %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Title:</span>
+    <% if resource.page_meta_title.present? %>
+      <span class="value"><%= resource.page_meta_title %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Og-title:</span>
+    <% if resource.og_title.present? %>
+      <span class="value"><%= resource.og_title %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Og-description:</span>
+    <% if resource.og_description.present? %>
+      <span class="value"><%= resource.og_description %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
+    <span class="label">Категории:</span>
+    <% if resource.organization_categories.present? %>
+      <% resource.organization_categories.each do |category| %>
+        <span class="value"><%= category.downcased_title %></span>
+      <% end %>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+</div>
+
+<div class='types'>
+  <h3 class="label">Комментарий:</h3>
+  <% if resource.comment? %>
+    <p class="comment">
+      <%= resource.comment %>
+    </p>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div class='types'>
+  <h3 class="label">Описание:</h3>
+  <% if resource.description.present? %>
+    <span class="value"><%= resource.html_description %></span>
+  <% else %>
+    <span class="blank">Не указано</span>
+  <% end %>
+</div>
+
+<div class="types">
+  <% Organization.available_suborganization_kinds.each do |kind| %>
+    <%= render resource.send(kind) if resource.send(kind) %>
+  <% end %>
+
+  <ul class="create_links">
+    <% Organization.available_suborganization_kinds.each do |kind| %>
+      <% unless resource.send(kind) %>
+        <li>
+          <%= link_to "добавить #{t("organization.singularize_title.#{kind}")}", [:new, :manage, resource, kind], :class => 'create_link' %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="sections_wrapper">
+  <h3>Разделы</h3>
+  <%= link_to "Новый раздел", "#", class: "new_section_link" %>
+
+  <div class="new_section">
+    <%= text_field_tag  'new_section', nil , placeholder: 'Название раздела' %>
+    <%= button_tag 'Создать', class: "new_section_button" %>
+  </div>
+
+  <form class='js-sortable' data-sort='<%= sort_manage_organization_sections_path(resource) %>'>
+    <div class='sections'>
+      <ul>
+        <% if resource.sections.any? %>
+          <% resource.sections.order_by_position.each do |section| %>
+            <%= render :partial => 'section', :locals => { :resource => resource, :section => section } %>
+          <% end %>
+        <% else %>
+          <span class="blank">Нет разделов</span>
+        <% end %>
+      </ul>
+    </div>
+  </form>
+</div>
+</div>
+
+<div class='images'>
+  <h3>Галерея изображений</h3>
+
+  <form class='js-sortable' data-sort='<%= sort_manage_organizations_path %>'>
+    <div class="gallery_images">
+      <span class="value">
+        <ul>
+          <%= render resource.gallery_images.order('id') %>
+        </ul>
+      </span>
+    </div>
+  </form>
+
+  <%= simple_form_for resource.gallery_images.new, :url => manage_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
+  <% end %>
+</div>
+
+<div class="upload_wrapper">
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
+</div>
+
+<div class='attachments'>
+  <h3>Прикрепленные файлы</h3>
+
+  <div class="gallery_files">
+    <ul>
+      <%= render resource.gallery_files %>
+    </ul>
+  </div>
+
+  <%= simple_form_for resource.gallery_files.new, :url => manage_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
+  <% end %>
+</div>
+
+<div>
+  <h3>Афиша мероприятий:</h3>
+  <% if resource.showings.any? %>
+    <span class="value">
+      <ul>
+        <% resource.showings.group_by(&:afisha).each do |afisha, showings| %>
+          <li <%= "class=gone" if DateTime.now >= showings.last.starts_at && (showings.last.ends_at.present? ? DateTime.now >= showings.last.ends_at : true) %>>
+            <%= link_to afisha.title, [:manage, afisha] %> (<%= l showings.first.starts_at, :format => :long %>
+            <% if showings.last.ends_at? %>
+              &mdash; <%= l showings.last.ends_at, :format => :long %>
+            <% end %>)
+          </li>
+        <% end %>
+      </ul>
+    </span>
+  <% else %>
+    <span class="blank">Нет мероприятий</span>
+  <% end %>
+</div>

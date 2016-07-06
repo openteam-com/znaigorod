@@ -1,0 +1,9 @@
+<%= f.simple_fields_for :schedules do %>
+  <div class="day">
+    <%= Schedule.days_for_select[f.object.day-1][0] %>
+  </div>
+  <%= f.input :day, :as => :hidden %>
+  <%= f.input :holiday %>
+  <%= f.input :from, :as => :string, :input_html => {:value => f.object.from ? l(f.object.from, :format => '%H:%M') : '' } %>
+  <%= f.input :to, :as => :string, :input_html => { :value => f.object.to ? l(f.object.to, :format => '%H:%M') : '' } %>
+<% end %>

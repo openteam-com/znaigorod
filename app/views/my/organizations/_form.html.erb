@@ -1,0 +1,89 @@
+<%= javascript_include_tag 'esp-ckeditor/application' %>
+
+<%= simple_nested_form_for resource, :url => [:my, resource], :html => { :novalidate => true } do |f| %>
+  <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
+
+  <div class="addres_form">
+    <div class="address_fields">
+      <%= f.simple_fields_for :address %>
+      <%= f.link_to_add 'Добавить адрес', :address, :class => 'add_address' %>
+    </div>
+  </div>
+
+  <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
+
+  <%= f.input :title %>
+  <%= f.input :gis_title %>
+  <%= f.input :show_custom_balloon_icon %>
+  <%= f.input :primary_organization_id, :collection => Organization.grouped_collection_for_select, :label_method => :title_and_address, :include_blank => true,
+    :selected => f.object.primary_organization_id || primary_organization %>
+  <%= f.input :situated_at, :collection => Organization.grouped_collection_for_select, :include_blank => true, :selected => f.object.situated_at  %>
+  <%= f.input :photo_block_title %>
+  <%= f.input :photos_navigation_title %>
+  <%= f.input :discounts_block_title %>
+  <%= f.input :discounts_navigation_title %>
+  <%= f.input :afisha_block_title %>
+  <%= f.input :afishas_navigation_title %>
+  <%= f.input :reviews_block_title %>
+  <%= f.input :reviews_navigation_title %>
+  <%= f.input :address_navigation_title %>
+  <%= f.input :comments_block_title %>
+  <%= f.input :comment %>
+  <%= f.input :description, :as => :ckeditor, :label => false %>
+  <%= f.input :phone %>
+  <%= f.input :email %>
+  <%= f.input :site %>
+  <%= f.input :page_meta_description %>
+  <%= f.input :page_meta_keywords %>
+  <%= f.input :page_meta_title %>
+  <%= f.input :og_title %>
+  <%= f.input :og_description %>
+  <%= f.input :ability_to_comment %>
+  <%= render :partial => 'organization_categories_fields' %>
+
+  <fieldset class='organization_social_links'>
+    <legend>Ссылки</legend>
+    <%= f.simple_fields_for :social_links %>
+    <%= f.link_to_add t('add_social_links'), :social_links %>
+  </fieldset>
+
+  <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+
+  <%= f.input :subdomain %>
+  <%= f.input :non_cash %>
+  <%= f.input :additional_rating %>
+
+  <fieldset class='organization_stand'>
+    <legend>Парковка</legend>
+    <%= f.simple_fields_for :organization_stand %>
+  </fieldset>
+
+  <div class='logotype'>
+    <h3>Логотип заведения:</h3>
+    <%= f.input :logotype_url, :as => :hidden %>
+    <div class="choose_file_wrapper">
+      <div class="uploaded_file_wrapper image">
+        <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
+      </div>
+      <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+      <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+    </div>
+  </div>
+
+  <div class="halls_fields">
+    <h3>Залы:</h3>
+    <%= f.simple_fields_for :halls %>
+    <%= f.link_to_add t('add_hall'), :halls %>
+  </div>
+
+  <div class="schedules_fields">
+    <h3>Расписание работы:</h3>
+    <%= f.simple_fields_for :schedules %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Удалить'.html_safe, manage_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+  </div>
+<% end %>

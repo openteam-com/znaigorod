@@ -1,0 +1,6 @@
+<%= f.simple_fields_for :halls do %>
+  <%= f.input :title %>
+  <%= f.input :seating_capacity %>
+<% end %>
+
+<%= f.link_to_remove t('remove_this_hall') %>

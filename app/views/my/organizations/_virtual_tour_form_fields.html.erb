@@ -1,0 +1,12 @@
+<fieldset class='virtual_tour virtual_tour_fields'>
+  <legend>3D-тур</legend>
+  <%= f.simple_fields_for :virtual_tour do |vtf| %>
+    <div class="virtual_tour_image">
+      <%= image_tag(resized_image_url(vtf.object.attachment_url, 334, 164), :size => '334x164') if vtf.object.attachment_url? %>
+    </div>
+    <%= vtf.input :link %>
+    <%= vtf.input :attachment %>
+    <%= vtf.link_to_remove t('remove_virtual_tour'), :class => 'remove_virtual_tour' %>
+  <% end %>
+  <%= f.link_to_add t('add_virtual_tour'), :virtual_tour, :class => 'add_virtual_tour' %>
+</fieldset>

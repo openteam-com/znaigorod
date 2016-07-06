@@ -28,6 +28,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :primary_organization_id, :balance_delta
 
   belongs_to :manager,              :class_name => 'User',         :foreign_key => 'user_id'
+  belongs_to :user
   belongs_to :organization
   belongs_to :placement,            :class_name => 'Organization', :foreign_key => 'situated_at'
   belongs_to :primary_organization, :class_name => 'Organization', :foreign_key => 'primary_organization_id'

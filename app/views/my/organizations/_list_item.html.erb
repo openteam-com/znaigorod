@@ -1,0 +1,18 @@
+<li>
+  <div class="item">
+    <div class="poster">
+      <%= link_to my_organization_path(organization) do %>
+        <%= image_tag (organization.poster_url? ? resized_image_url(orgnization.poster_url, 65, 88) : 'public/stub_poster.png'), :size => '65x88' %>
+      <% end %>
+    </div>
+
+    <div class="title">
+      <%= organization.title.present? ? organization : 'Нет названия' %>
+    </div>
+
+    <div class="actions">
+      <%= link_to 'Редактировать', edit_my_organization_path(organization) if (can? :edit, organization) && (organization.draft? || organization.published? ) %>
+      <%= link_to 'Удалить', my_organization_path(organization), method: :delete, confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, organization) && organization.draft? %>
+    </div>
+  </div>
+</li>

@@ -15,6 +15,10 @@ $ ->
 
   init_show_tipsy() if $('.show_tipsy') && $.fn.tipsy
 
+  init_organization() if $('.sections').length || $('.js-section-show') || $('.organization_organization_categories').length
+  init_organization_form() if $('.organization_organization_categories').length
+  init_organization_categories() if $('.root').length
+  initMarkitup() if $('.markitup').length
   init_invitations()
   init_invitation_list_popup()
   init_additional_info()

@@ -5,6 +5,7 @@ class My::OrganizationsController < My::ApplicationController
   defaults :resource_class => Organization
 
   before_filter :current_step
+  before_filter :build_nested_objects, :only => [:new, :edit]
 
   actions :all
 
@@ -12,7 +13,7 @@ class My::OrganizationsController < My::ApplicationController
     index! {
       @account = AccountDecorator.new(current_user.account)
 
-      @events = @account.organizations.page(1).per(16)
+      @organizations = @account.organizations.page(1).per(16)
     }
   end
 
@@ -22,12 +23,12 @@ class My::OrganizationsController < My::ApplicationController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to my_organization_show_path(resource) }
+      success.html { redirect_to my_organization_path(resource) }
     end
   end
 
   def edit
-    @organization = current_user.organization.find(params[:id])
+    @organization = current_user.organizations.find(params[:id])
   end
 
   def update
@@ -38,7 +39,7 @@ class My::OrganizationsController < My::ApplicationController
       if params[:crop]
         redirect_to edit_my_organization_path(@organization.id)
       else
-        redirect_to my_organization_show_path(@organization.id)
+        redirect_to my_organization_path(@organization.id)
       end
     else
       render :edit
@@ -107,6 +108,15 @@ class My::OrganizationsController < My::ApplicationController
   private
 
   alias_method :old_build_resource, :build_resource
+
+  def build_nested_objects
+    resource.organization_stand || resource.build_organization_stand
+    resource.address || resource.build_address
+
+    (1..7).each do |day|
+      resource.schedules.build(:day => day)
+    end unless resource.schedules.any?
+  end
 
   def build_resource
     old_build_resource.tap do |object|

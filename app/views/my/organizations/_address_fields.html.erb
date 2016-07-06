@@ -1,0 +1,13 @@
+<%= f.input :city %>
+<%= f.input :street %>
+<%= f.input :house %>
+<%= f.input :office %>
+<%= link_to 'Получить координаты'.html_safe, '#', :class => 'get_coordinates' %>
+<%= f.input :latitude, wrapper_html: { class: 'clear_left' } %>
+<%= f.input :longitude %>
+
+<div class='map_wrapper'>
+  <div id='map'></div>
+</div>
+
+<%= f.link_to_remove 'Удалить адрес', :class => 'remove_virtual_tour' %>

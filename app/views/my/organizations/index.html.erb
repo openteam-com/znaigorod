@@ -15,7 +15,7 @@
           <li>
             <%= link_to "##{state}" do %>
               <% unless state == 'all' %>
-                <%= t(state, count: @events.by_state(state).total_count) %>
+                <%= t(state, count: @organizations.by_state(state).total_count) %>
               <% else %>
                 <%= t(state, count: current_user.organizations.count) %>
               <% end %>
@@ -28,12 +28,15 @@
       <% %w[all draft published].each do |state| %>
         <div id='<%= state %>' class='list'>
           <div class='organizations_main_page_list'>
-            <% if @events.any? %>
+            <% if @organizations.any? %>
               <ul class='posters'>
                 <% unless state == 'all' %>
-                  <%= render partial: 'events/account_events', locals: { collection: @events.by_state(state), state: state.to_sym } %>
+                  <% organization_list = @organizations.by_state(state) %>
                 <% else %>
-                  <%= render partial: 'events/account_events', locals: { collection: @events, state: state.to_sym } %>
+                  <% organization_list = @organizations %>
+                <% end %>
+                <% organization_list.each do |organization| %>
+                  <%= render :partial => 'list_item', locals: { organization: organization }  %>
                 <% end %>
               </ul>
             <% else %>
@@ -42,7 +45,7 @@
           </div>
         </div>
       <% end %>
-      <%= paginate @events %>
+      <%= paginate @organizations %>
     </div>
     </div>
   </div>

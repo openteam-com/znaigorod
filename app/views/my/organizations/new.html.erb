@@ -1,14 +1,6 @@
-<% content_for :my_content do %>
+<div class='form_view'>
+  <h1><%= t 'new_organization' %></h1>
 
-  <div class='clearfix'>
-    <div class='form_wrapper'>
-      <%= render partial: "form_#{@step}" %>
-    </div>
-    <div class='similar_afishas'></div>
-    <div class='preview'>
-      <%= render partial: "preview_#{@step}" %>
-    </div>
-  </div>
-<% end %>
+  <%= render 'form' %>
+</div>
 
-<%= render :template => 'my/afishas/wrapper' %>
