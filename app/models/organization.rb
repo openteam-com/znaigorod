@@ -83,10 +83,6 @@ class Organization < ActiveRecord::Base
     status.client? || status.client_economy? || status.client_standart? || status.client_premium?
   end
 
-  def self.steps
-    %w[first second third fourth fifth sixth]
-  end
-
   def update_slave_organization_statuses
     slave_organizations.update_all :status => status
 

@@ -5,9 +5,10 @@
         <span class="panel"></span>
       </div>
       <h3>
-        <%= link_to "Мои заведения", new_my_organization_path, class: 'add_link' %>
+        <% vfs_path = "/znaigorod/organizations/#{Time.now.strftime('%Y/%m/%d/%H-%M')}-#{SecureRandom.hex(4)}" %>
+        <%= link_to "Мои заведения", new_my_organization_path(:params => {'organization[vfs_path]' => "#{vfs_path}"}), class: 'add_link' %>
       </h3>
-      <%= link_to 'Добавить заведение', new_my_organization_path, class: :invitation_link if can? :new, Organization %>
+      <%= link_to 'Добавить заведение', new_my_organization_path(:params => {'organization[vfs_path]' => "#{vfs_path}"}), class: :invitation_link if can? :new, Organization %>
     </div>
     <div id='events_filter'>
       <ul>
@@ -29,7 +30,7 @@
         <div id='<%= state %>' class='list'>
           <div class='organizations_main_page_list'>
             <% if @organizations.any? %>
-              <ul class='posters'>
+              <ul class='posters_organizations'>
                 <% unless state == 'all' %>
                   <% organization_list = @organizations.by_state(state) %>
                 <% else %>

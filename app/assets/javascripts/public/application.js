@@ -6,6 +6,9 @@
  * = require jquery-ui/jquery.ui.datepicker-ru.js
  * = require jquery-ui/jquery-ui-timepicker-addon.js
  * = require jquery-ui/jquery-ui-timepicker-ru.js
+ * = require manage/geocoder/index.js
+ * = require manage/choose_file/index.js
+ * = require manage/info_plugin/index.js
  * = require ./promotions
  * = require sugar
  * = require infinitescroll.min

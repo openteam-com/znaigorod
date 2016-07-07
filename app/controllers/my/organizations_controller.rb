@@ -4,7 +4,6 @@ class My::OrganizationsController < My::ApplicationController
   load_and_authorize_resource
   defaults :resource_class => Organization
 
-  before_filter :current_step
   before_filter :build_nested_objects, :only => [:new, :edit]
 
   actions :all
@@ -122,15 +121,5 @@ class My::OrganizationsController < My::ApplicationController
     old_build_resource.tap do |object|
       object.user = current_user
     end
-  end
-
-  def current_step
-    @step ||= Organization.steps.include?(params[:step]) ? params[:step] : Organization.steps.first
-  end
-
-  def next_step
-    return @step if @organization.second_step? && !@organization.set_region?
-
-    Organization.steps[Organization.steps.index(current_step) + 1] || Organization.steps.last
   end
 end
