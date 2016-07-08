@@ -1,4 +1,5 @@
 <li>
   <%= link_to gallery_file.file_file_name, gallery_file.file_url %>
-  <%= link_to "Удалить", my_afisha_gallery_file_path(@afisha, gallery_file), :method => :delete, :remote => true, :class => 'ajax_delete' %>
+  <%= link_to "Удалить", my_afisha_gallery_file_path(@afisha, gallery_file), :method => :delete, :remote => true, :class => 'ajax_delete' if @afisha.present? %>
+  <%= link_to "Удалить", my_organization_gallery_file_path(resource, gallery_file), :method => :delete, :remote => true, :class => 'ajax_delete' if resource.class.name == 'OrganizationDecorator' %>
 </li>

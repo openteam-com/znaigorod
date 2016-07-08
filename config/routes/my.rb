@@ -86,7 +86,17 @@ Znaigorod::Application.routes.draw do
       put 'draft' => 'discounts#send_to_draft', :on => :member, :as => :draft
     end
 
-    resources :organizations
+    resources :organizations do
+      resources :gallery_files, :only => [:create, :destroy] do
+        delete 'destroy_all', :on => :collection, :as => :destroy_all
+      end
+      delete 'destroy_image', :on => :member, :as => :destroy_image
+
+      resources :gallery_images, :only => [:create, :destroy] do
+        delete 'destroy_all', :on => :collection, :as => :destroy_all
+      end
+
+    end
 
     get 'related_afishas' => 'related_items#afishas',             :as => 'related_afishas'
     get 'related_reviews' => 'related_items#reviews',             :as => 'related_reviews'

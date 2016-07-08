@@ -358,11 +358,11 @@
 
     <div class="gallery_files">
       <ul>
-        <%= render resource.gallery_files %>
+        <%= render resource.gallery_files, locales: {:resource => resource} %>
       </ul>
     </div>
 
-    <%= simple_form_for resource.gallery_files.new, :url => manage_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= simple_nested_form_for resource.gallery_files.new, :url => my_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
       <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
     <% end %>
   </div>
