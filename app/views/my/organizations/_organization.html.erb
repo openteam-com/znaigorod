@@ -157,7 +157,7 @@
     <div>
       <span class="label">Родительская организация:</span>
       <% if resource.primary_organization.present? %>
-        <%= link_to resource.primary_organization.title, manage_organization_path(resource.primary_organization) %>
+        <%= link_to resource.primary_organization.title, organization_path(resource.primary_organization) %>
       <% else %>
         <span class="blank">Не указано</span>
       <% end %>
@@ -168,13 +168,13 @@
       <% if resource.slave_organizations.any? %>
         <span class="value">
           <% resource.slave_organizations.each do |organization| %>
-            <li><%= link_to organization.title, manage_organization_path(organization) %></li>
+            <li><%= link_to organization.title, organization_path(organization) %></li>
           <% end %>
         </span>
       <% else %>
         <span class="blank">Не указано</span>
       <% end %>
-      <%= link_to 'Добавить вложенную организацию', new_manage_organization_organization_path(resource) if resource.primary_organization.nil? %>
+      <%= link_to 'Добавить вложенную организацию', new_my_organization_organization_path(resource) if resource.primary_organization.nil? %>
     </div>
 
     <div>
@@ -187,7 +187,7 @@
     <div>
       <span class="label">Расположено в:</span>
       <% if resource.placement %>
-        <%= link_to resource.placement.title, manage_organization_path(resource.placement) %>
+        <%= link_to resource.placement.title, organization_path(resource.placement) %>
       <% else %>
         <span class="blank">Не указано</span>
       <% end %>
@@ -198,7 +198,7 @@
       <% if resource.situated_organizations.any? %>
         <span class="value">
           <% resource.situated_organizations.each do |organization| %>
-            <li><%= link_to organization.title, manage_organization_path(organization) %></li>
+            <li><%= link_to organization.title, organization_path(organization) %></li>
           <% end %>
         </span>
       <% else %>
@@ -339,7 +339,7 @@
       </div>
     </form>
 
-    <%= simple_form_for resource.gallery_images.new, :url => manage_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= simple_form_for resource.gallery_images.new, :url => my_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
       <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
     <% end %>
   </div>

@@ -5,7 +5,7 @@ class My::GalleryImagesController < My::ApplicationController
 
   belongs_to :account, :optional => true
   belongs_to :afisha,  :optional => true
-  belongs_to :organizations,  :optional => true
+  belongs_to :organization,  :optional => true
   belongs_to :review,  :optional => true
   belongs_to :advert,  :optional => true
 
@@ -18,6 +18,10 @@ class My::GalleryImagesController < My::ApplicationController
       @images = Kaminari.paginate_array(current_user.account.gallery_images).page(params[:page]).per(15)
       render :partial => 'account_gallery_images' and return if request.xhr?
     }
+  end
+
+  def create
+    @gallery_image = parent.gallery_images.create(:file => params[:gallery_images][:file])
   end
 
   def destroy
