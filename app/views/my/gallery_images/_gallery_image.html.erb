@@ -14,6 +14,11 @@
 <% else %>
   <li>
     <div class='image_wrapper'>
+      <% if gallery_image.attachable.is_a?(Organization) %>
+        <div class='sortable_handle'>&#8597;</div>
+        <%= hidden_field :position, gallery_image.id, :class => :position, :value => gallery_image.position %>
+        <%= link_to gallery_image.to_s, edit_my_attachment_path(gallery_image), :remote => true, :class => 'js-edit-attachment-description' %>
+      <% end %>
       <%= image_tag resized_image_url(gallery_image.file.url, 130, 100), :size => '130x100', :alt => gallery_image.description  %>
     </div>
     <%= link_to "Удалить", my_gallery_image_path(gallery_image), :method => :delete, :remote => true, :class => 'ajax_delete' %>

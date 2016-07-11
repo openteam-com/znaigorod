@@ -330,7 +330,7 @@
   <h3>Галерея изображений</h3>
 
   <form class='js-sortable' data-sort='<%= sort_manage_organizations_path %>'>
-    <div class="gallery_images">
+    <div class="gallery_images js-gallery">
       <span class="value">
         <ul>
           <%= render resource.gallery_images.order('id') %>

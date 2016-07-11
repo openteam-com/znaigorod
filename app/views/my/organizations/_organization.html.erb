@@ -330,13 +330,13 @@
     <h3>Галерея изображений</h3>
 
     <form class='js-sortable' data-sort='<%= sort_manage_organizations_path %>'>
-      <div class="gallery_images">
-        <span class="value">
-          <ul>
+      <span class="value">
+        <ul>
+          <div class="gallery_images js-gallery">
             <%= render resource.gallery_images.order('id') %>
-          </ul>
-        </span>
-      </div>
+          </div>
+        </ul>
+      </span>
     </form>
 
     <%= simple_form_for resource.gallery_images.new, :url => my_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
@@ -356,11 +356,11 @@
   <div class='attachments'>
     <h3>Прикрепленные файлы</h3>
 
-    <div class="gallery_files">
-      <ul>
-        <%= render resource.gallery_files, locales: {:resource => resource} %>
-      </ul>
-    </div>
+    <ul>
+      <div class="gallery_files">
+        <%= render resource.gallery_files %>
+      </div>
+    </ul>
 
     <%= simple_nested_form_for resource.gallery_files.new, :url => my_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
       <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
@@ -386,4 +386,10 @@
     <span class="blank">Нет мероприятий</span>
   <% end %>
 </div>
+  <div class="actions">
+    <%= link_to "&larr; Назад".html_safe, :back %>
+    <%= link_to 'Редактировать', edit_my_organization_path(resource) %>
+    <%= link_to 'К заведениям', my_organizations_path %>
+  </div>
+
 </div>
