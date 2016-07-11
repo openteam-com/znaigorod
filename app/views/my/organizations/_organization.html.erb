@@ -4,7 +4,7 @@
 <div class="main_block">
   <div class="logo">
     <% if resource.logotype_url.present? %>
-      <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
+      <%= image_tag resized_image_url(resource.logotype_url, 250, 250, { crop: '!', orientation: 'n' }) %>
     <% else %>
       <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
     <% end %>
@@ -157,7 +157,7 @@
     <div>
       <span class="label">Родительская организация:</span>
       <% if resource.primary_organization.present? %>
-        <%= link_to resource.primary_organization.title, organization_path(resource.primary_organization) %>
+        <%= link_to resource.primary_organization.title, my_organization_path(resource.primary_organization) %>
       <% else %>
         <span class="blank">Не указано</span>
       <% end %>
@@ -168,7 +168,7 @@
       <% if resource.slave_organizations.any? %>
         <span class="value">
           <% resource.slave_organizations.each do |organization| %>
-            <li><%= link_to organization.title, organization_path(organization) %></li>
+            <li><%= link_to organization.title, my_organization_path(organization) %></li>
           <% end %>
         </span>
       <% else %>
@@ -187,7 +187,7 @@
     <div>
       <span class="label">Расположено в:</span>
       <% if resource.placement %>
-        <%= link_to resource.placement.title, organization_path(resource.placement) %>
+        <%= link_to resource.placement.title, my_organization_path(resource.placement) %>
       <% else %>
         <span class="blank">Не указано</span>
       <% end %>
@@ -198,7 +198,7 @@
       <% if resource.situated_organizations.any? %>
         <span class="value">
           <% resource.situated_organizations.each do |organization| %>
-            <li><%= link_to organization.title, organization_path(organization) %></li>
+            <li><%= link_to organization.title, my_organization_path(organization) %></li>
           <% end %>
         </span>
       <% else %>

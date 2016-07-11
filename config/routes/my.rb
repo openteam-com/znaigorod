@@ -96,6 +96,8 @@ Znaigorod::Application.routes.draw do
         delete 'destroy_all', :on => :collection, :as => :destroy_all
       end
 
+      resources :organizations,  :only => [:new, :create, :destroy]
+
     end
 
     get 'related_afishas' => 'related_items#afishas',             :as => 'related_afishas'
