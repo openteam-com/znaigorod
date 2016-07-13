@@ -164,7 +164,7 @@ class Ability
     when 'crm'
       return false if user.new_record?
 
-      return false unless user.is_admin? && user.is_sales_manager?
+      return false if !user.is_admin? && !user.is_sales_manager?
 
       can :manage, Organization do |organization|
         organization.manager.nil? || user.manager_of?(organization)
