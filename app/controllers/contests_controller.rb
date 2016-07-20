@@ -25,7 +25,7 @@ class ContestsController < ApplicationController
   end
 
   def per_page
-    12
+    24
   end
 
   def total_count
