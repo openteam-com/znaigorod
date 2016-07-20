@@ -1,6 +1,6 @@
 class AddPromotionPlaceItemsForMainPage < ActiveRecord::Migration
   def up
-    main_page_promo_id = Setting['app.city'] == 'sevastopol' ? 13 : 15
+    main_page_promo_id = Settings['app.city'] == 'sevastopol' ? 13 : 15
     Promotion.find(main_page_promo_id)
       .promotion_places.second
       .place_items
