@@ -9,6 +9,9 @@
       </h3>
       <%= link_to 'Добавить скидку', help_my_discounts_path, class: :invitation_link if can? :new, Discount %>
     </div>
+
+    <%= render partial: 'my/black_list' unless can? :new, Discount %>
+
     <div id='discounts_filter'>
       <ul>
         <% %w[all draft published archive].each do |state| %>

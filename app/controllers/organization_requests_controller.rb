@@ -1,6 +1,7 @@
 class OrganizationRequestsController < ApplicationController
   def new
     @request = AddOrganizationRequest.new
+    authorize! :new, @request
   end
 
   def send_mail

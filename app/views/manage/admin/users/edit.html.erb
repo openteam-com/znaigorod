@@ -1,6 +1,7 @@
 <h1><%= @user %></h1>
 
 <%= simple_nested_form_for [:manage, :admin, @user] do |f| %>
+  <%= f.input :black_list, :label => 'Чёрный список' %>
   <%= f.simple_fields_for :roles do |role_form| %>
     <%= role_form.input :role %>
     <%= role_form.link_to_remove 'Удалить' %>

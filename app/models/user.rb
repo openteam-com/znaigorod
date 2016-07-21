@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
-  attr_accessible :uid, :provider, :auth_raw_info, :roles_attributes, :account
+  attr_accessible :black_list, :uid, :provider, :auth_raw_info, :roles_attributes, :account
 
   devise :trackable, :omniauthable, :rememberable,
     omniauth_providers: [:vkontakte, :google_oauth2, :yandex, :facebook, :twitter, :odnoklassniki, :mailru]

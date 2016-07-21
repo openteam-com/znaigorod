@@ -20,6 +20,8 @@ class Ability
       invitation.account == user.account
     end
 
+    cannot :new, AddOrganizationRequest if user.black_list?
+
     can [:new, :create], Offer if user.persisted?
 
     can [:new, :create], Work do |work|
@@ -161,10 +163,18 @@ class Ability
       can [:new, :create], PrivateMessage if user.persisted?
       can [:create], InviteMessage if user.persisted?
 
+      if user.black_list?
+        cannot :new, Review
+        cannot :new, Afisha
+        cannot :new, Discount
+        cannot :help, Discount
+        cannot :new, Coupon
+        cannot :new, Certificate
+      end
     when 'crm'
       return false if user.new_record?
 
-      return false unless user.is_admin? && user.is_sales_manager?
+      return false if !user.is_admin? && !user.is_sales_manager?
 
       can :manage, Organization do |organization|
         organization.manager.nil? || user.manager_of?(organization)

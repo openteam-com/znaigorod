@@ -2,6 +2,7 @@
 <p>Id: <%= @user.id %></p>
 <p>Name: <%= @user.name %></p>
 <p>UID: <%= @user.uid %></p>
+<p>BlackList: <%= @user.black_list %></p>
 <p>Roles: <%= @user.roles.join(", ") %></p>
 <p>Oauth: <%= @user.oauth_key %></p>
 <%= link_to I18n.t("edit"), edit_manage_admin_user_path(@user) %>

@@ -20,6 +20,9 @@ class ApplicationController < ActionController::Base
   layout :resolve_layout
 
   rescue_from CanCan::AccessDenied do |exception|
+    if current_user.black_list? && [:new, :help].include?(exception.action) && [Class, ReviewDecorator, Afisha, Coupon, Certificate, Review, AddOrganizationRequest, Discount].include?(exception.subject.class)
+      redirect_to my_message_black_list_path and return
+    end
     render :partial => 'commons/social_auth', layout: false and return unless current_user
     redirect_to :back, :notice => "У вас не хватает прав для выполнения этого действия"
   end

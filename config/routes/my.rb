@@ -2,6 +2,8 @@
 
 Znaigorod::Application.routes.draw do
   namespace :my do
+
+    get 'message_black_list' => 'errors#black_list'
     resources :sessions,  :only => [:new, :destroy]
 
     get '/afisha/available_tags' => 'afishas#available_tags', :as => :available_tags, :controller => 'afishas'

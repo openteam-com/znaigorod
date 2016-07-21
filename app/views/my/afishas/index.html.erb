@@ -9,6 +9,7 @@
       </h3>
       <%= link_to 'Добавить афишу', new_my_afisha_path, class: :invitation_link if can? :new, Afisha %>
     </div>
+    <%= render partial: 'my/black_list' unless can? :new, Afisha %>
     <div id='events_filter'>
       <ul>
         <% %w[all draft published].each do |state| %>

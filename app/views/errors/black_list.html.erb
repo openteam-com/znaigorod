@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Вы в чёрном списке!</title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link href="/assets/public/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body class="error">
+    <div class="promo_wrapper">
+      <div class="promo">
+        <a href="/afisha?has_tickets=true">Неприлично дешевые билеты на все развлечения <%= current_city_declension %>! Купи в 2 клика! Только на сайте <%= Settings['app.host'] %></a>
+      </div>
+    </div>
+    <div class="header_wrapper">
+      <div class="header">
+        <div class="logo"><a href="/">Афиша <%= current_city_declension %>, заведения и мероприятия - ЗнайГород</a></div>
+        <div class="tomsk">
+          <%= Settings['app.city_ru'] %>
+        </div>
+
+        <div class='main_menu'>
+          <div class='search_form'>
+            <form accept-charset="UTF-8" action="/search" method="get">
+              <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+              <input class="search" id="q" name="q" placeholder="Поиск" type="text" />
+              <input class="submit" type="submit" value="" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content_wrapper">
+      <div class="content error_404">
+        <h1>Вы в чёрном списке!</h1>
+        <p>Страница, которую Вы ищете, не найдена. Возможно она была удалена или перемещена.</p>
+        <p>Попробуйте начать с <a href="/">главной страницы</a> или воспользоваться общим поиском по сайту.</p>
+      </div>
+    </div>
+    <div class="footer_wrapper">
+      <div class="footer">
+        <div class="contacts">
+          <h5>Как с нами связаться</h5>
+          <ul>
+            <%= render :partial => "footer_content_#{Settings['app.city']}" %>
+            <li class='telephone'>
+              <%= t("services.#{Settings['app.city']}.phone") %>
+            </li>
+          </ul>
+        </div>
+        <div class="our_social_link">
+          <h5>Мы в социальных сетях</h5>
+          <ul>
+            <li class='vk'><a href='<%= AwayLink.to(Settings['app.socials.vk.link']) %>' rel='nofollow' title='ВКонтакте' target='_blank'><%= Settings['app.socials.vk.url'] %></a></li>
+            <li class="fb"><a href="https://www.facebook.com/znai.gorod" title="Facebook" target="_blank">facebook.com/znai.gorod</a></li>
+            <li class="odnoklassniki"><a href="http://odnoklassniki.ru/group/54186972610564" title="Одноклассники" target="_blank">odnoklassniki.ru</a></li>
+            <li class="twitter"><a href="http://twitter.com/znaigorod" title="Twitter" target="_blank">twitter.com/znaigorod</a></li>
+          </ul>
+        </div>
+        <div class="counters">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

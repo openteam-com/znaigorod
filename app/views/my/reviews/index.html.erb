@@ -5,9 +5,10 @@
         <span class="panel"></span>
       </div>
       <h3><%= link_to 'Мои обзоры', add_my_reviews_path, :class => 'add_link' %></h3>
-      <%= link_to 'Добавить обзор', add_my_reviews_path, :class => 'invitation_link' %>
+      <%= link_to 'Добавить обзор', add_my_reviews_path, :class => 'invitation_link' if can? :new, Review %>
     </div>
 
+    <%= render partial: 'my/black_list' unless can? :new, Review %>
     <div id="reviews_filter">
       <ul>
         <% %w[all draft published].each do |state| %>

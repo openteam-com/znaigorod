@@ -8,4 +8,7 @@ class ErrorsController < ApplicationController
   def internal_error
     render :status => 500
   end
+
+  def black_list
+  end
 end
