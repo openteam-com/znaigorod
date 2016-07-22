@@ -13,6 +13,11 @@ class MyMailer < ActionMailer::Base
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Опубликована новая афиша')
   end
 
+  def send_to_published_organization(organization)
+    @organization = organization
+    mail(:to => Settings['mail']['to_organization'], :subject => '[ZnaiGorod] Подана заявка на публикацию заведения')
+  end
+
   def send_afisha_diff(version)
     @version = version
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Изменилась афиша')

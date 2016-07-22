@@ -83,17 +83,12 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def send_to_published
-    @organization = current_user.organization.find(params[:id])
-    @organization.to_published!
-
-    redirect_to my_organizations_path, :notice => "Заведение «#{@organization.title}» опубликовано."
+    @organization = current_user.organizations.find(params[:id])
+    MyMailer.send_to_published_organization(@organization).deliver
+    redirect_to my_organizations_path
   end
 
   def send_to_draft
-    @organization = current_user.organizations.find(params[:id])
-    @organization.to_draft!
-
-    redirect_to [:my, @organization], :notice => "Заведение «#{@organization.title}» возвращено в черновики."
   end
 
   def social_gallery
