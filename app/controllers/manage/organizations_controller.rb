@@ -34,6 +34,10 @@ class Manage::OrganizationsController < Manage::ApplicationController
     render :nothing => true, :status => 200
   end
 
+  def requests_to_published
+    @organizations = Organization.where(:request_to_published => true)
+  end
+
   private
 
   def build_nested_objects

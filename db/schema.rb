@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160704103640) do
+ActiveRecord::Schema.define(:version => 20160722054545) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -819,6 +819,7 @@ ActiveRecord::Schema.define(:version => 20160704103640) do
     t.string   "gis_title"
     t.boolean  "show_custom_balloon_icon",      :default => false
     t.string   "state"
+    t.boolean  "request_to_published",          :default => false
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
@@ -1499,8 +1500,8 @@ ActiveRecord::Schema.define(:version => 20160704103640) do
 
   create_table "users", :force => true do |t|
     t.integer  "roles_mask"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "uid"
     t.integer  "sign_in_count",       :default => 0
     t.datetime "current_sign_in_at"
@@ -1513,6 +1514,7 @@ ActiveRecord::Schema.define(:version => 20160704103640) do
     t.string   "remember_token"
     t.string   "rating"
     t.integer  "account_id"
+    t.boolean  "black_list",          :default => false
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"

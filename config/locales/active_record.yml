@@ -309,6 +309,11 @@ ru:
 
       organization:
         <<: *common_attributes
+        state: Статус
+        request_to_published: Заявка на публикацию
+        #state:
+          #draft: Черновик
+          #published: Опубликованная
         ability_to_comment: Возможность комментирования
         additional_rating: Дополнительный рейтинг
         address: Адрес организации

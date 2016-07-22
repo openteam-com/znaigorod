@@ -84,6 +84,7 @@ class My::OrganizationsController < My::ApplicationController
 
   def send_to_published
     @organization = current_user.organizations.find(params[:id])
+    @organization.update_attributes(:request_to_published => true)
     MyMailer.send_to_published_organization(@organization).deliver
     redirect_to my_organizations_path
   end

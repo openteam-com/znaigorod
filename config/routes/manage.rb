@@ -124,6 +124,8 @@ Znaigorod::Application.routes.draw do
 
       post 'sort', :on => :collection
 
+      get 'requests_to_published', :on => :collection
+
       resource :meal do
         resources :menus, :except => [:index, :show]
       end
