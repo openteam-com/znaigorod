@@ -80,12 +80,6 @@
     <h3>Расписание работы:</h3>
     <%= f.simple_fields_for :schedules %>
   </div>
-  <hr>
-  <div class="state_fields">
-    <%= f.input :request_to_published %>
-    <%= f.input :state, as: :select, collection: [:draft, :published], include_blank: false %>
-  </div>
-
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>
     <%= f.submit 'Сохранить' %>

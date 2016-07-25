@@ -34,6 +34,7 @@ SimpleNavigation::Configuration.run do |navigation|
         org_item.item :rated, 'Рейтинг организаций', manage_organizations_rated_path
         org_item.item :categories, 'Категории организаций', manage_organization_categories_path
         org_item.item :requests_to_published, 'Заявки на публикацию', requests_to_published_manage_organizations_path
+        org_item.item :closed, 'Удалённые пользователем', closed_manage_organizations_path
     end
 
     primary.item :afisha, 'Мероприятия', manage_afisha_index_path,

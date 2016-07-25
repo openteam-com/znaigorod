@@ -11,9 +11,10 @@
     </div>
 
     <div class="actions">
-      <%= link_to 'На модерацию', publish_my_organization_path(organization), :method => :put %>
+      <%= link_to 'Публиковать', publish_my_organization_path(organization), :method => :put if organization.draft? %>
+      <%= 'На модерации' if ['moderation_to_published', 'moderation_to_draft'].include? organization.state %>
       <%= link_to '', edit_my_organization_path(organization), class: 'edit_button' if (can? :edit, organization) && (organization.draft? || organization.published? ) %>
-      <%= link_to '', my_organization_path(organization), class: 'trash', method: :delete, confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, organization) && organization.draft? %>
+      <%= link_to '', close_my_organization_path(organization), method: 'put', class: 'trash', confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, organization)  %>
     </div>
   </div>
 </li>

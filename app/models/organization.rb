@@ -9,7 +9,7 @@ class Organization < ActiveRecord::Base
 
   extend FriendlyId
 
-  attr_accessible :address_attributes, :request_to_published, :description, :email, :halls_attributes,
+  attr_accessible :address_attributes, :description, :email, :halls_attributes,
                   :images_attributes, :organization_id, :phone, :schedules_attributes,
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,

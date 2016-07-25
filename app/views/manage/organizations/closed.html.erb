@@ -1,0 +1,8 @@
+<ul class='collection'>
+  <% @organizations.each do |item| %>
+    <li>
+      <%= link_to item.title, [:manage, item] %>
+    </li>
+  <% end %>
+</ul>
+

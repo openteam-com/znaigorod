@@ -35,7 +35,11 @@ class Manage::OrganizationsController < Manage::ApplicationController
   end
 
   def requests_to_published
-    @organizations = Organization.where(:request_to_published => true)
+    @organizations = Organization.where(:state => :moderation_to_published)
+  end
+
+  def closed
+    @organizations = Organization.where(:state => :close)
   end
 
   private

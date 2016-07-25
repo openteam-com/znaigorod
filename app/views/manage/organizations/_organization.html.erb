@@ -5,7 +5,13 @@
     <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
   <% end %>
 </div>
-
+<div class="change_state">
+  <%= simple_form_for [:manage, resource]  do |f| %>
+    <%= f.input :state, as: :select, collection: [:published, :draft, :close, :moderation_to_published], :include_blank => false %>
+    <%= f.button :submit, 'Сохранить статус', :id => 'submit_state' %>
+  <% end %>
+</div>
+<br>
 <div class="column">
   <div>
     <span class="label">Адрес заведения:</span>

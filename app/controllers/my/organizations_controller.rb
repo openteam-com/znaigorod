@@ -12,7 +12,7 @@ class My::OrganizationsController < My::ApplicationController
     index! {
       @account = AccountDecorator.new(current_user.account)
 
-      @organizations = @account.organizations.page(1).per(16)
+      @organizations = @account.organizations.where(Organization.arel_table[:state].not_eq(:close)).page(1).per(16)
     }
   end
 
@@ -84,12 +84,15 @@ class My::OrganizationsController < My::ApplicationController
 
   def send_to_published
     @organization = current_user.organizations.find(params[:id])
-    @organization.update_attributes(:request_to_published => true)
+    @organization.update_attribute(:state, :moderation_to_published)
     MyMailer.send_to_published_organization(@organization).deliver
     redirect_to my_organizations_path
   end
 
-  def send_to_draft
+  def close
+    @organization = current_user.organizations.find(params[:id])
+    @organization.update_attribute(:state, 'close')
+    redirect_to my_organizations_path
   end
 
   def social_gallery

@@ -18,7 +18,7 @@
               <% unless state == 'all' %>
                 <%= t(state, count: @organizations.by_state(state).total_count) %>
               <% else %>
-                <%= t(state, count: current_user.organizations.count) %>
+                <%= t(state, count: @organizations.count) %>
               <% end %>
             <% end %>
           </li>

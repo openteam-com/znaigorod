@@ -90,7 +90,7 @@ Znaigorod::Application.routes.draw do
     resources :organizations do
 
       put 'publish'  => 'organizations#send_to_published', :on => :member, :as => :publish
-      put 'draft' => 'organizations#send_to_draft', :on => :member
+      put 'close' => 'organizations#close', :on => :member, :as => :close
 
       resources :gallery_files, :only => [:create, :destroy] do
         delete 'destroy_all', :on => :collection, :as => :destroy_all
