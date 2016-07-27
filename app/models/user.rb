@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :payments
   has_many :events, :class_name => 'Afisha'
   has_many :map_placemarks
+  has_many :make_their_organization_requests
 
   belongs_to :account
 

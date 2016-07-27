@@ -38,6 +38,15 @@ class Manage::OrganizationsController < Manage::ApplicationController
     @organizations = Organization.where(:state => :moderation_to_published)
   end
 
+  def update
+    @organization.update_attributes(params['organization'])
+    if params['organization']['state'].present?
+      ManageMailer.message_about_publication(@organization).deliver if params['organization']['state'] == 'published'
+    end
+    redirect_to manage_organization_path(@organization)
+
+  end
+
   def closed
     @organizations = Organization.where(:state => :close)
   end

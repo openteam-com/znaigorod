@@ -12,12 +12,13 @@ class My::OrganizationsController < My::ApplicationController
     index! {
       @account = AccountDecorator.new(current_user.account)
 
-      @organizations = @account.organizations.where(Organization.arel_table[:state].not_eq(:close)).page(1).per(16)
+      @organizations = @account.organizations.where("state != ?", 'close').page(1).per(16)
     }
   end
 
   def show
     @organization = OrganizationDecorator.new(current_user.organizations.find(params[:id]))
+    redirect_to '/404' if @organization.close?
   end
 
   def create

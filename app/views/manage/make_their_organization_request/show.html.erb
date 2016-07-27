@@ -1,0 +1,8 @@
+<p><%= link_to @request.user, account_path(@request.user.account) %></p>
+<p><%= link_to @request.organization, organization_path(@request.organization) %></p>
+<p><%= @request.email %></p>
+<p><%= @request.phone %></p>
+<br>
+<%= link_to 'Разрешить', manage_make_their_organization_request_allow_path(@request) %>
+<%= link_to 'Запретить', manage_make_their_organization_request_disallow_path(@request) %>
+<%= link_to 'К заявкам', manage_make_their_organization_request_index_path %>

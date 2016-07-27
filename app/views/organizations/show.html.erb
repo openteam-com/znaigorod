@@ -126,194 +126,202 @@
 
       <h1 itemprop="name"><%= @organization.title %></h1>
       <%= content_tag(:div, class: [:place, scrolltrack(@organization.address_navigation_title)],
-        id: @organization.address_navigation_title.try(:from_russian_to_param)) do %>
-            <%  content_tag(:span, "Адрес: ") +
-                content_tag(:span, "#{@organization.address_link}".html_safe, itemprop:"address")%>
-            <% end if @organization.address_link.present? %>
-      <span itemprop="department" itemscope itemtype="http://schema.org/LocalBusiness">
-        <div itemprop="openingHours"><%= @organization.work_schedule %></div>
-      </span>
-      <div class='phone_wrapper'>
-        <% if @organization.phone.present? %>
-          <meta content="<%= @organization.phone %>"/>
-          Телефон: <%= @organization.phone.truncate(5) %>
-          <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id, rel: :nofollow%>
-      <% else %>
-        нет телефона
-      <% end %>
-    </div>
-
-    <% if @organization.contact_links.present? %>
-      <ul class='links'>
-        <li class="js-site-link">
-          <% if @organization.site.present? %>
-            Сайт:
-            <% @organization.site.split(',').each do |link| %>
-              <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank', :itemprop => "sameAs" %>
-            <% end %>
-          <% end %>
-        </li>
-        <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email.present? %>
-        <%= content_tag(:div, "#{@organization.email_link}".html_safe, itemprop:"email", style:"display: none") if @organization.email.present? %>
-      </ul>
-    <% end %>
-    <% if @organization.social_links.present? %>
-      <ul class='social_links'>
-        <% @organization.social_links.each do |link| %>
-          <li><%= link_to link.title, AwayLink.to(link.url), :target => '_blank' %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <% if @organization.client? %>
-      <% if @organization.description.present? %>
-        <div class='description' itemprop="description">
-          <%= @organization.description_html %>
-        </div>
-      <% end %>
-    <% end %>
-
-
-    <div class='photogallery suborganization_info'>
-      <div class="title <%= scrolltrack(@organization.photos_navigation_title) %>" id='<%= @organization.photos_navigation_title.try(:from_russian_to_param) %>'>
-        <%= @organization.photo_block_title %>
-      </div>
-      <% if @organization.client? %>
-        <% if @organization.has_photogallery? %>
-          <ul>
-            <% @organization.gallery_images.order('position').each do |image| %>
-              <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "organization_gallery_#{@organization.id}" } %>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class='share_and_likes'>
-      <%= render :partial => 'commons/share_and_like_this', :locals => { :url => organization_url(@organization) } %>
-    </div>
-
-    <div class='categories_and_visits'>
-      <ul class='categories'>
-        <li class='title'>Категории:</li>
-        <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
-      </ul>
-      <div class='details'>
-        <span class='show_tipsy fa fa-users' title='Участники'> <%= @organization.visits.count %></span>
-        <span class='show_tipsy fa fa-user' title='Приглашения'> 0</span> <!-- TODO change this -->
-        <span class='show_tipsy fa fa-comments' title='Комментарии'> <%= @organization.comments.count %></span>
-        <span class='show_tipsy fa fa-heart' title='Понравилось'> <%= @organization.likes_count %></span>
-        <span class='show_tipsy fa fa-eye' title='Просмотры'> <%= @organization.page_visits.count %></span>
-      </div>
-    </div>
-  </div>
-
-  <% if @organization.client? %>
-    <% @organization.decorated_suborganizations.each do |suborganization| %>
-      <%= render suborganization if suborganization.viewable? %>
-    <% end %>
-
-    <div class="sections_info suborganization_info">
-      <% if @organization.sections.any? %>
-        <% @organization.sections.order_by_position.each do |section| %>
-          <% if section.section_pages.any? %>
-            <div class="section <%= scrolltrack(section.navigation_title) %> <%= section.title.from_russian_to_param %>">
-              <div class="title" id='<%= section.navigation_title.try(:from_russian_to_param) %>'><%= content_tag :h2, section.title %></div>
-              <% section.section_pages.order_by_position.each do |page| %>
-                <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>" id='<%= page.title.from_russian_to_param %>'>
-                  <% if page.poster_image? %>
-                    <div class="image js-section-colorbox">
-                      <%= link_to (image_tag resized_image_url(page.poster_image_url, 150, 100), size: '150x100', title: section.title, alt: section.title), page.poster_image_url, alt: section.title %>
+                      id: @organization.address_navigation_title.try(:from_russian_to_param)) do %>
+                      <%  content_tag(:span, "Адрес: ") +
+                        content_tag(:span, "#{@organization.address_link}".html_safe, itemprop:"address")%>
+                      <% end if @organization.address_link.present? %>
+                      <span itemprop="department" itemscope itemtype="http://schema.org/LocalBusiness">
+                        <div itemprop="openingHours"><%= @organization.work_schedule %></div>
+                      </span>
+                      <div class='phone_wrapper'>
+                        <% if @organization.phone.present? %>
+                          <meta content="<%= @organization.phone %>"/>
+                          Телефон: <%= @organization.phone.truncate(5) %>
+                        <%= link_to "Показать телефон","javascript:void()", class: "js-show-phone", id: @organization.id, rel: :nofollow%>
+                      <% else %>
+                        нет телефона
+                      <% end %>
                     </div>
-                  <% end %>
-                  <div class='info'>
-                    <h2><%= page.title %></h2>
-                    <div class='section_content'>
-                      <%= page.content.as_html %>
-                      <span class="js-closer-btn delimiter hidden">Спрятать</span>
+
+                    <% if @organization.contact_links.present? %>
+                      <ul class='links'>
+                        <li class="js-site-link">
+                          <% if @organization.site.present? %>
+                            Сайт:
+                            <% @organization.site.split(',').each do |link| %>
+                              <%= link_to link.squish, AwayLink.to(link.squish), :target => '_blank', :itemprop => "sameAs" %>
+                            <% end %>
+                          <% end %>
+                        </li>
+                        <%= content_tag(:li, "Email: #{@organization.email_link}".html_safe) if @organization.email.present? %>
+                        <%= content_tag(:div, "#{@organization.email_link}".html_safe, itemprop:"email", style:"display: none") if @organization.email.present? %>
+                      </ul>
+                    <% end %>
+                    <% if @organization.user.present? %>
+                      <%= "Владелец: #{link_to @organization.user, account_path(@organization.user.account)}".html_safe %>
+                    <% elsif current_user.make_their_organization_requests.where(:organization_id => @organization.id).present? %>
+                      <%= 'Заявка на присвоение организации отправлена модераторам' %>
+                      <%= link_to 'Отменить', delete_make_their_request_organization_path(current_user.make_their_organization_requests.where(:organization_id => @organization.id).first, :organization_id => @organization.id) %>
+                    <% else %>
+                      <%= link_to 'Сделать своей', make_their_organization_path(@organization) %>
+                    <% end %>
+
+
+                    <% if @organization.social_links.present? %>
+                      <ul class='social_links'>
+                        <% @organization.social_links.each do |link| %>
+                          <li><%= link_to link.title, AwayLink.to(link.url), :target => '_blank' %></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+
+                    <% if @organization.client? %>
+                      <% if @organization.description.present? %>
+                        <div class='description' itemprop="description">
+                          <%= @organization.description_html %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                    <div class='photogallery suborganization_info'>
+                      <div class="title <%= scrolltrack(@organization.photos_navigation_title) %>" id='<%= @organization.photos_navigation_title.try(:from_russian_to_param) %>'>
+                        <%= @organization.photo_block_title %>
+                      </div>
+                      <% if @organization.client? %>
+                        <% if @organization.has_photogallery? %>
+                          <ul>
+                            <% @organization.gallery_images.order('position').each do |image| %>
+                              <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "organization_gallery_#{@organization.id}" } %>
+                            <% end %>
+                          </ul>
+                        <% end %>
+                      <% end %>
+                    </div>
+
+                    <div class='share_and_likes'>
+                      <%= render :partial => 'commons/share_and_like_this', :locals => { :url => organization_url(@organization) } %>
+                    </div>
+
+                    <div class='categories_and_visits'>
+                      <ul class='categories'>
+                        <li class='title'>Категории:</li>
+                        <%= @organization.category_links.map { |link| content_tag :li, link }.join.mb_chars.downcase.html_safe %>
+                      </ul>
+                      <div class='details'>
+                        <span class='show_tipsy fa fa-users' title='Участники'> <%= @organization.visits.count %></span>
+                        <span class='show_tipsy fa fa-user' title='Приглашения'> 0</span> <!-- TODO change this -->
+                        <span class='show_tipsy fa fa-comments' title='Комментарии'> <%= @organization.comments.count %></span>
+                        <span class='show_tipsy fa fa-heart' title='Понравилось'> <%= @organization.likes_count %></span>
+                        <span class='show_tipsy fa fa-eye' title='Просмотры'> <%= @organization.page_visits.count %></span>
+                      </div>
                     </div>
                   </div>
+
+                  <% if @organization.client? %>
+                    <% @organization.decorated_suborganizations.each do |suborganization| %>
+                      <%= render suborganization if suborganization.viewable? %>
+                    <% end %>
+
+                    <div class="sections_info suborganization_info">
+                      <% if @organization.sections.any? %>
+                        <% @organization.sections.order_by_position.each do |section| %>
+                          <% if section.section_pages.any? %>
+                            <div class="section <%= scrolltrack(section.navigation_title) %> <%= section.title.from_russian_to_param %>">
+                              <div class="title" id='<%= section.navigation_title.try(:from_russian_to_param) %>'><%= content_tag :h2, section.title %></div>
+                              <% section.section_pages.order_by_position.each do |page| %>
+                                <div class="section_page <%= page.poster_image? ? 'with_image' : 'without_image' %>" id='<%= page.title.from_russian_to_param %>'>
+                                  <% if page.poster_image? %>
+                                    <div class="image js-section-colorbox">
+                                      <%= link_to (image_tag resized_image_url(page.poster_image_url, 150, 100), size: '150x100', title: section.title, alt: section.title), page.poster_image_url, alt: section.title %>
+                                    </div>
+                                  <% end %>
+                                  <div class='info'>
+                                    <h2><%= page.title %></h2>
+                                    <div class='section_content'>
+                                      <%= page.content.as_html %>
+                                      <span class="js-closer-btn delimiter hidden">Спрятать</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+
+                  <div class="suborganization_info discount_details">
+                    <div class="title <%= scrolltrack(@organization.discounts_navigation_title) %>" id='<%= @organization.discounts_navigation_title.try(:from_russian_to_param) %>'>
+                      <%= @organization.discounts_block_title %>
+                      <span class='link'><%= link_to 'Добавить скидку', help_my_discounts_path %></span>
+                    </div>
+                    <div class="discount_content pagination_none">
+                      <% if @discount_presenter.collection.any? || @certificate_presenter.collection.any? || @coupon_presenter.collection.any? %>
+                        <ul class="posters">
+                          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @discount_presenter.decorated_collection, :@width => '220', :@height => '164' } if @discount_presenter.collection.any? %>
+                          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @certificate_presenter.decorated_collection, :@height => '120', :@width => '184' } if @certificate_presenter.collection.any? %>
+                          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @coupon_presenter.decorated_collection, :@width => '183', :@height => '120' } if @coupon_presenter.collection.any? %>
+                        </ul>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class='suborganization_info afisha_content js-button-pagination'>
+                    <div class='title <%= scrolltrack(@organization.afishas_navigation_title) %>' id='<%= @organization.afishas_navigation_title.try(:from_russian_to_param) %>'>
+                      <%= @organization.afisha_block_title %>
+                      <span class='link'><%= link_to 'Добавить афишу', new_my_afisha_path %></span>
+                    </div>
+                    <% if @afisha_presenter.collection.any? %>
+                      <ul class='posters js-paginable-list' data-item-width="220">
+                        <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afisha_presenter.decorated_collection, :presenter => @afisha_presenter } %>
+                      </ul>
+                    <% end %>
+                  </div>
+
+                  <div class='suborganization_info related-reviews organization_reviews'>
+                    <div class='title <%= scrolltrack(@organization.reviews_navigation_title) %>' id='<%= @organization.reviews_navigation_title.try(:from_russian_to_param) %>'>
+                      <%= @organization.reviews_block_title %>
+                      <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>
+                    </div>
+                    <% if @reviews.any? %>
+                      <ul class='posters'>
+                        <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '120', :width => '184' } %>
+                      </ul>
+                    <% end %>
+                  </div>
+
+                  <% if @organization.grouped_situated_organizations.any? %>
+                    <div class='suborganization_info situated_items'>
+                      <% @organization.grouped_situated_organizations.each do |category, organizations| %>
+                        <div class='title'><%= category %></div>
+                        <ul class='posters'>
+                          <% organizations.each do |item| %>
+                            <li class="item">
+                              <%= render :partial => 'organizations/suborganization',
+                                :locals => { :suborganization => OrganizationDecorator.new(item), :height => '194', :width => '190' } %>
+                            </li>
+                          <% end %>
+                          <div style="clear: both"></div>
+                        </ul>
+                      <% end %>
+                    </div>
+                  <% end %>
+
+                  <% if @presenter.nearest_clients.any? && !@organization.client? %>
+                    <div class='suborganization_info next_organization'>
+                      <div class='title'>Рекомендуем</div>
+                      <ul class='posters js-paginable-list' data-item-width="220">
+                        <% @presenter.nearest_clients.each do |item| %>
+                          <li class="item_organization">
+                            <%= render partial: 'organizations/organization', locals: { organization: item, width: 150, height: 150 } %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization, :comments_block_title => @organization.comments_block_title } if @organization.ability_to_comment? %>
+
+                  <div class="js-scrolltrack"> </div>
                 </div>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div class="suborganization_info discount_details">
-    <div class="title <%= scrolltrack(@organization.discounts_navigation_title) %>" id='<%= @organization.discounts_navigation_title.try(:from_russian_to_param) %>'>
-      <%= @organization.discounts_block_title %>
-      <span class='link'><%= link_to 'Добавить скидку', help_my_discounts_path %></span>
-    </div>
-    <div class="discount_content pagination_none">
-      <% if @discount_presenter.collection.any? || @certificate_presenter.collection.any? || @coupon_presenter.collection.any? %>
-        <ul class="posters">
-          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @discount_presenter.decorated_collection, :@width => '220', :@height => '164' } if @discount_presenter.collection.any? %>
-          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @certificate_presenter.decorated_collection, :@height => '120', :@width => '184' } if @certificate_presenter.collection.any? %>
-          <%= render :partial => 'discounts/discount_posters', :locals => { :@discounts => @coupon_presenter.decorated_collection, :@width => '183', :@height => '120' } if @coupon_presenter.collection.any? %>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-
-  <div class='suborganization_info afisha_content js-button-pagination'>
-    <div class='title <%= scrolltrack(@organization.afishas_navigation_title) %>' id='<%= @organization.afishas_navigation_title.try(:from_russian_to_param) %>'>
-      <%= @organization.afisha_block_title %>
-      <span class='link'><%= link_to 'Добавить афишу', new_my_afisha_path %></span>
-    </div>
-    <% if @afisha_presenter.collection.any? %>
-      <ul class='posters js-paginable-list' data-item-width="220">
-        <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @afisha_presenter.decorated_collection, :presenter => @afisha_presenter } %>
-      </ul>
-    <% end %>
-  </div>
-
-  <div class='suborganization_info related-reviews organization_reviews'>
-    <div class='title <%= scrolltrack(@organization.reviews_navigation_title) %>' id='<%= @organization.reviews_navigation_title.try(:from_russian_to_param) %>'>
-      <%= @organization.reviews_block_title %>
-      <span class='link'><%= link_to 'Добавить обзор', add_my_reviews_path %></span>
-    </div>
-    <% if @reviews.any? %>
-      <ul class='posters'>
-        <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '120', :width => '184' } %>
-      </ul>
-    <% end %>
-  </div>
-
-  <% if @organization.grouped_situated_organizations.any? %>
-    <div class='suborganization_info situated_items'>
-      <% @organization.grouped_situated_organizations.each do |category, organizations| %>
-        <div class='title'><%= category %></div>
-        <ul class='posters'>
-          <% organizations.each do |item| %>
-            <li class="item">
-              <%= render :partial => 'organizations/suborganization',
-                :locals => { :suborganization => OrganizationDecorator.new(item), :height => '194', :width => '190' } %>
-            </li>
-          <% end %>
-          <div style="clear: both"></div>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @presenter.nearest_clients.any? && !@organization.client? %>
-    <div class='suborganization_info next_organization'>
-      <div class='title'>Рекомендуем</div>
-      <ul class='posters js-paginable-list' data-item-width="220">
-        <% @presenter.nearest_clients.each do |item| %>
-          <li class="item_organization">
-            <%= render partial: 'organizations/organization', locals: { organization: item, width: 150, height: 150 } %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization, :comments_block_title => @organization.comments_block_title } if @organization.ability_to_comment? %>
-
-  <div class="js-scrolltrack"> </div>
-</div>
-</div>
+              </div>

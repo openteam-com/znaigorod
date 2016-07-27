@@ -36,7 +36,10 @@ Znaigorod::Application.routes.draw do
     resources :page_metas
     resources :search,    :only => :index
     resources :sessions,  :only => [:new, :create, :destroy]
-
+    resources :make_their_organization_request do
+      get 'allow'
+      get 'disallow'
+    end
     resources :banners,     :except => [:show]
     resources :placed_banners
     resources :brands,      :except => [:new, :destroy, :create]

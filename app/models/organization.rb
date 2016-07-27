@@ -83,6 +83,14 @@ class Organization < ActiveRecord::Base
     status.client? || status.client_economy? || status.client_standart? || status.client_premium?
   end
 
+  def close?
+    state == 'close'
+  end
+
+  def published?
+    state == 'published'
+  end
+
   def update_slave_organization_statuses
     slave_organizations.update_all :status => status
 
@@ -234,7 +242,7 @@ class Organization < ActiveRecord::Base
     string(:inviteable_categories, :multiple => true) { ::Inviteables.instance.categories_for_organization self }
     string(:kind, :multiple => true)                  { ['organization'] }
     string(:organization_category_slugs, :multiple => true) { organization_category_uniq_slugs }
-    string(:state)                                    { :published }
+    string(:state)
     string(:suborganizations, :multiple => true)      { suborganizations.map(&:class).map(&:name).map(&:underscore) }
     string(:organization_features, :multiple => true) { features.pluck(:title).uniq }
 

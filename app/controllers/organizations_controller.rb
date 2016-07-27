@@ -68,6 +68,8 @@ class OrganizationsController < ApplicationController
       @organization = Organization.find_by_subdomain(request.subdomain)
     end
 
+    redirect_to '/404' unless @organization.published?
+
     if @organization.primary_organization
       @slave_organization = @organization
       @organization = @organization.primary_organization
@@ -107,6 +109,24 @@ class OrganizationsController < ApplicationController
 
   def photogallery
     @organization = OrganizationDecorator.find(params[:id])
+  end
+
+  def make_their
+    @request = MakeTheirOrganizationRequest.new
+    @request.organization = Organization.find(params[:id])
+    @request.user = current_user
+  end
+
+  def create_request_for_make_their
+    @request = MakeTheirOrganizationRequest.new(params['make_their_organization_request'])
+    @request.save
+    redirect_to organization_path(@request.organization)
+  end
+
+  def delete_make_their_request
+    MakeTheirOrganizationRequest.find(params['id']).destroy
+    @organization = Organization.find(params['organization_id'])
+    redirect_to organization_path(@organization)
   end
 
   def affiche

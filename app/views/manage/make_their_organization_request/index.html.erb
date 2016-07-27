@@ -1,0 +1,8 @@
+<ul class='collection'>
+  <% @requests.each do |item| %>
+    <li>
+      <%= link_to item.user.to_s + ' - ' + item.organization.to_s, [:manage, item] %>
+    </li>
+  <% end %>
+</ul>
+

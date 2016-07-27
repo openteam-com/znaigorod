@@ -1,0 +1,11 @@
+<h1>Заявка на присвоение организации</h1>
+<%= simple_form_for @request, :url => create_request_for_make_their_organization_path(@request.organization) do |f| %>
+  <%= f.input :user_id, as: :hidden %>
+  <p><%= "Пользователь: #{@request.user}".html_safe %></p>
+  <%= f.input :organization_id, as: :hidden %>
+  <p><%= "Организация: #{@request.organization}".html_safe %></p>
+  <p><%= "Как с вами связаться" %></p>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.button :submit, 'Отправить заявку' %>
+<% end %>

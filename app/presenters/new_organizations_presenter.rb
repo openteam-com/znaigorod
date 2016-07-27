@@ -163,6 +163,7 @@ class NewOrganizationsPresenter
       paginate :page => clients_page, :per_page => clients_per_page
       with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
+      with :state, :published
       with :status, [:client, :client_economy, :client_standart, :client_premium]
 
       query ? keywords(query) : order_by(criterion, directions[criterion])
@@ -175,6 +176,7 @@ class NewOrganizationsPresenter
       with :organization_features, features if features.any?
       with :organization_category_slugs, category.slug if category
       without :status, [:client, :client_economy, :client_standart, :client_premium]
+      with :state, :published
       with :primary_organization_id, nil
 
       query ? keywords(query) : order_by(criterion, directions[criterion])
