@@ -13,6 +13,49 @@
   <%= f.input :phone %>
   <%= f.input :email %>
   <%= f.input :site %>
+  <% if resource.client? %>
+    <%= f.input :description, :as => :ckeditor, :label => false %>
+    <div class='images'>
+      <h3>Галерея изображений</h3>
+
+      <form class='js-sortable' data-sort='<%= sort_my_organizations_path %>'>
+        <div class="gallery_images js-gallery">
+          <span class="value">
+            <ul>
+              <%= render resource.gallery_images.order('id') %>
+            </ul>
+          </span>
+        </div>
+      </form>
+
+      <%= simple_form_for resource.gallery_images.new, :url => my_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |ff| %>
+        <%= ff.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
+      <% end %>
+    </div>
+
+    <div class="upload_wrapper">
+      <script id="template-upload" type="text/x-tmpl">
+        <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+      </script>
+    </div>
+
+    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
+    <div class='logo'>
+      <h3>Логотип заведения:</h3>
+      <%= f.input :logotype_url, :as => :hidden %>
+      <div class="choose_file_wrapper">
+        <div class="uploaded_file_wrapper image">
+          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
+        </div>
+        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+      </div>
+    </div>
+  <% end %>
+
   <%= render :partial => 'organization_categories_fields' %>
 
   <fieldset class='organization_social_links'>

@@ -12,7 +12,6 @@
 
     <div class="actions">
       <%= link_to 'Публиковать', publish_my_organization_path(organization), :method => :put if organization.draft? %>
-      <%= 'На модерации' if ['moderation_to_published', 'moderation_to_draft'].include? organization.state %>
       <%= link_to '', edit_my_organization_path(organization), class: 'edit_button' if (can? :edit, organization) && (organization.draft? || organization.published? ) %>
       <%= link_to '', close_my_organization_path(organization), method: 'put', class: 'trash', confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, organization)  %>
     </div>

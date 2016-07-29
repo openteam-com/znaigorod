@@ -207,6 +207,11 @@ ru:
     other: "Опубликованные (%{count})"
     zero:  "Опубликованные"
 
+  moderation_to_published:
+    one:   "На модерации (%{count})"
+    other: "На модерации (%{count})"
+    zero: "На модерации"
+
   archive:
     one:   "В архиве (%{count})"
     few:   "В архиве (%{count})"

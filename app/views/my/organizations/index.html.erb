@@ -12,7 +12,7 @@
     </div>
     <div id='events_filter'>
       <ul>
-        <% %w[all draft published].each do |state| %>
+        <% %w[all moderation_to_published draft published].each do |state| %>
           <li>
             <%= link_to "##{state}" do %>
               <% unless state == 'all' %>
@@ -26,7 +26,7 @@
       </ul>
 
     <div class='content'>
-      <% %w[all draft published].each do |state| %>
+      <% %w[all moderation_to_published draft published].each do |state| %>
         <div id='<%= state %>' class='list'>
           <div class='organizations_main_page_list'>
             <% if @organizations.any? %>

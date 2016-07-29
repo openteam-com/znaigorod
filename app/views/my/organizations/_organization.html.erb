@@ -1,3 +1,12 @@
+<% if resource.client? %>
+  <div class="logo">
+    <% if resource.logotype_url.present? %>
+      <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
+    <% else %>
+      <%= image_tag "public/organization_stub_poster_kind.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+    <% end %>
+  </div>
+<% end %>
 <div class='title'>
   <%= resource.title %>
 </div>
@@ -87,19 +96,41 @@
       <% end %>
     </div>
 
-    <div class='tarief'>
+    <% if resource.client? %>
+      <div>
+        <h3 class="label">Описание:</h3>
+        <% if resource.description.present? %>
+          <span class="value"><%= resource.html_description %></span>
+        <% else %>
+          <span class="blank">Не указано</span>
+          <%= link_to 'Добавить описание', change_description_my_organization_path(resource) %>
+        <% end %>
+      </div>
 
+      <div class='images'>
+        <h3>Галерея изображений</h3>
 
-    </div>
+        <form class='js-sortable' data-sort='<%= sort_my_organizations_path %>'>
+          <div class="gallery_images js-gallery">
+            <span class="value">
+              <ul>
+                <%= render resource.gallery_images.order('id') %>
+              </ul>
+            </span>
+          </div>
+        </form>
 
-  </div>
-  <div>
-    <% if defined?(params['controller']) %>
-      <div class="actions">
-        <%= link_to "&larr; Назад".html_safe, :back %>
-        <%= link_to 'Редактировать', edit_my_organization_path(resource) %>
-        <%= link_to 'К заведениям', my_organizations_path %>
       </div>
     <% end %>
   </div>
+</div>
+
+<div>
+  <% if defined?(params['controller']) %>
+    <div class="actions">
+      <%= link_to "&larr; Назад".html_safe, :back %>
+      <%= link_to 'Редактировать', edit_my_organization_path(resource) %>
+      <%= link_to 'К заведениям', my_organizations_path %>
+    </div>
+  <% end %>
 </div>

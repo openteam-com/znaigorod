@@ -104,6 +104,18 @@ class My::OrganizationsController < My::ApplicationController
     redirect_to edit_step_my_organization_path(@afisha.id, :step => :fourth)
   end
 
+  def sort
+    begin
+      params[:position].each do |id, position|
+        GalleryImage.find(id).update_attribute :position, position
+      end
+    rescue Exception => e
+      render :text => e.message, :status => 500 and return
+    end
+
+    render :nothing => true, :status => 200
+  end
+
   private
 
   alias_method :old_build_resource, :build_resource
