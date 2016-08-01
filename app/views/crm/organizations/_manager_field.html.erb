@@ -1,6 +1,6 @@
-<%= f.input :user_id,
+<%= f.input :manager_id,
   as: :select,
   collection: User.sales_managers,
-  selected: @organization.manager ? @organization.user_id : current_user.id,
+  selected: @organization.manager ? @organization.manager_id : current_user.id,
   include_blank: true
 %>

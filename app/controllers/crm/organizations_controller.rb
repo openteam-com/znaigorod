@@ -9,7 +9,7 @@ class Crm::OrganizationsController < Crm::ApplicationController
     @organizations = Organization.search{
       paginate :page => params[:page], :per_page => 10
       with :organization_category_slugs, search_field('suborganizations') if search_field('suborganizations').present?
-      with :user_id, search_field('user_id') if search_field('user_id').present?
+      with :manager_id, search_field('manager_id') if search_field('manager_id').present?
       with :barter_status, search_field('barter_status') if search_field('barter_status').present?
       with :status, search_field('status') if search_field('status').present?
       keywords search_field('q') if search_field('q').present?
