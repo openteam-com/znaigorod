@@ -69,6 +69,7 @@ class Organization < ActiveRecord::Base
 
   has_one :address,             :dependent => :destroy
   has_one :organization_stand,  :dependent => :destroy
+  has_one :feed, :as => :feedable, :dependent => :destroy
 
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :client_economy, :client_standart, :client_premium, :non_cooperation, :debtor],
@@ -89,6 +90,15 @@ class Organization < ActiveRecord::Base
 
   def published?
     state == 'published'
+  end
+
+  def create_feed
+    Feed.create(
+      :feedable => self,
+      :account => self.user.account,
+      :created_at => self.created_at,
+      :updated_at => self.updated_at
+    )
   end
 
   def update_slave_organization_statuses

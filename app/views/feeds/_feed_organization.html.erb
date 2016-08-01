@@ -1,0 +1,33 @@
+<div class='poster'>
+  <%= link_to feed_organization.feedable do %>
+    <% if feed_organization.feedable.poster_url.present? %>
+      <%= image_tag(resized_image_url(feed_organization.feedable.poster_url, 100 , 135), :size => '100x135', :alt => feed_organization.feedable.title) %>
+    <% else %>
+      <%= image_tag(resized_image_url('public/stub_poster.png', 100 , 135), :size => '100x135', :alt => feed_organization.feedable.title) %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class='main'>
+
+  <div class='time'><%= time_ago_in_words(feed_organization.updated_at) %> назад</div>
+
+  <div class='type'>Опубликовано заведение</div>
+
+  <div class='title'>
+    <%= link_to feed_organization.feedable.title, organization_path(feed_organization.feedable) %>
+  </div>
+
+  <div class='text'>
+    <div class="place">
+      <p><%= feed_organization.feedable.address.present? ? feed_organization.feedable.address : "&nbsp;".html_safe %></p>
+    </div>
+
+    <% if feed_organization.feedable.phone.present? %>
+      <div class='phone'>
+        Тел.:
+        <%= link_to "#{feed_organization.feedable.phone.truncate(6)}", "#", class: "js-show-phone", id: feed_organization.feedable.id, single_phone: true %>
+      </div>
+    <% end %>
+  </div>
+</div>

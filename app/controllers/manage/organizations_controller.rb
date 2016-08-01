@@ -39,10 +39,13 @@ class Manage::OrganizationsController < Manage::ApplicationController
   end
 
   def update
-    @organization.update_attributes(params['organization'])
     if params['organization']['state'].present?
-      ManageMailer.message_about_publication(@organization).deliver if params['organization']['state'] == 'published' && @organization.email.present?
+      if params['organization']['state'] == 'published'
+        ManageMailer.message_about_publication(@organization).deliver if @organization.email.present?
+        @organization.create_feed if @organization.state != 'published'
+      end
     end
+    @organization.update_attributes(params['organization'])
     redirect_to manage_organization_path(@organization)
 
   end
