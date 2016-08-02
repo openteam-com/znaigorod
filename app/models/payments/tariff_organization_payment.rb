@@ -6,7 +6,7 @@ class TariffOrganizationPayment < Payment
 
   def set_tariff_and_duration
     set_price
-    amont = @price
+    self.amount = @price
   end
 
   def approve!
@@ -28,7 +28,7 @@ class TariffOrganizationPayment < Payment
     @price = case @duration
             when 'month'
               Tariff.find(@tariff_id).price_for_month
-            when 'six_month'
+            when 'six_months'
               Tariff.find(@tariff_id).price_for_six_months
             when 'year'
               Tariff.find(@tariff_id).price_for_year
