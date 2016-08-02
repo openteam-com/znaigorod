@@ -1,16 +1,15 @@
 class TariffOrganizationPayment < Payment
-  attr_accessor :tariff
-  attr_accessible :tariff
+  attr_accessor :tariff_id, :duration
 
-  def init(tariff)
-    @tariff = tariff
-    self.amont = Settings["organizations.tariffs.#{@tariff}.price"] || 50
+  def initialize(tariff_id, duration)
+    @tariff_id = tariff_id
+    @duration = duration
   end
 
   def approve!
     super
 
-    set_tariff
+    set_tariff_organization
     create_notification_message
   end
 
@@ -24,8 +23,8 @@ class TariffOrganizationPayment < Payment
 
   alias :organization :paymentable
 
-  def set_tariff
-    organization.update_attributes! :status => @tariff
+  def set_tariff_organization
+    OrganizationsTariffs
   end
 
   def create_notification_message

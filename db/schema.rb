@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160802044119) do
+ActiveRecord::Schema.define(:version => 20160802073026) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -776,6 +776,13 @@ ActiveRecord::Schema.define(:version => 20160802044119) do
   end
 
   add_index "organization_stands", ["organization_id"], :name => "index_organization_stands_on_organization_id"
+
+  create_table "organization_tariffs", :id => false, :force => true do |t|
+    t.integer "organization_id"
+    t.integer "tariff_id"
+    t.string  "duration"
+    t.integer "price"
+  end
 
   create_table "organizations", :force => true do |t|
     t.text     "title"

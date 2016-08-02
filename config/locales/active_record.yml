@@ -120,7 +120,7 @@ ru:
       tariff:
         title: Название
         price_for_month: Цена за месяц
-        price_for_six_months: Цена за пол года
+        price_for_six_months: Цена за полгода
         price_for_year: Цена за год
         description: Описание
 

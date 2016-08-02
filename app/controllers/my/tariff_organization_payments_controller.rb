@@ -21,7 +21,7 @@ class My::TariffOrganizationPaymentsController < My::ApplicationController
 
   def build_resource
     @organization = Organization.find(params['organization_id'])
-    @tariff_organization_payment = @organization.tariff_organization_payments.create(:tariff => params['tariff'])
+    @tariff_organization_payment = @organization.tariff_organization_payments.new(params['tariff_id'], params['duration'])
     @tariff_organization_payment.user = current_user
 
     @tariff_organization_payment
