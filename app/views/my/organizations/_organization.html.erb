@@ -6,6 +6,30 @@
       <%= image_tag "public/organization_stub_poster_kind.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
     <% end %>
   </div>
+<% else %>
+  <div class='tariffs'>
+    <div class='tariff'>
+      <div class='text'>
+        Тариф эконом, <%= Settings['organizations.tariffs.econom.price'].to_s %> руб.
+      </div>
+      <%= link_to 'Оплатить', my_organization_tariff_organization_payments_path(resource, :tariff => 'econom'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
+    </div>
+
+    <div class='tariff'>
+      <div class='text'>
+        Тариф мастер, <%= Settings['organizations.tariffs.master.price'] %> руб.
+      </div>
+      <%= link_to 'Оплатить', my_organization_tariff_organization_payments_path(resource, :tariff => 'master'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
+    </div>
+
+    <div class='tariff'>
+      <div class='text'>
+        Тариф магнат, <%= Settings['organizations.tariffs.magnat.price'] %> руб.
+      </div>
+      <%= link_to 'Оплатить', my_organization_tariff_organization_payments_path(resource, :tariff => 'magnat'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %>
+    </div>
+
+  </div>
 <% end %>
 <div class='title'>
   <%= resource.title %>

@@ -1,0 +1,15 @@
+<h3>Тарифы для огранизаций</h1>
+<div class="new_link">
+  <%= link_to 'Добавить тариф', new_manage_tariff_path, :class => 'new_resource' %>
+</div>
+
+<ul class='collection'>
+  <% @tariffs.each do |item| %>
+    <li>
+      <%= link_to item.title, edit_manage_tariff_path(item) %>
+      <span><%= item.description %></span>
+      <span><%= "(#{item.price_for_month}/#{item.price_for_six_months}/#{item.price_for_year})" %></span>
+    </li>
+  <% end %>
+</ul>
+

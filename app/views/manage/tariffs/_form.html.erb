@@ -1,0 +1,10 @@
+<%= simple_form_for [:manage, @tariff] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price_for_month %>
+  <%= f.input :price_for_six_months %>
+  <%= f.input :price_for_year %>
+  <%= f.button :submit, 'Сохранить тариф' %>
+<% end %>
+<%= link_to 'Все тарифы', manage_tariffs_path %>
+<%= link_to 'Удалить', manage_tariff_path(@tariff), method: :delete, confirm: 'Вы уверены?' %>

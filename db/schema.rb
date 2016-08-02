@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160728091010) do
+ActiveRecord::Schema.define(:version => 20160802044119) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1439,6 +1439,17 @@ ActiveRecord::Schema.define(:version => 20160728091010) do
     t.text     "description"
     t.text     "category"
     t.text     "feature"
+  end
+
+  create_table "tariffs", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "price_for_month"
+    t.integer  "price_for_six_months"
+    t.integer  "price_for_year"
+    t.integer  "organization_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "teaser_items", :force => true do |t|

@@ -36,6 +36,7 @@ SimpleNavigation::Configuration.run do |navigation|
         org_item.item :requests_to_published, 'Заявки на публикацию', requests_to_published_manage_organizations_path
         org_item.item :closed, 'Удалённые пользователем', closed_manage_organizations_path
         org_item.item :make_their_request, 'Заявки на присвоение', manage_make_their_organization_request_index_path
+        org_item.item :tariffs, 'Тарифы', manage_tariffs_path
     end
 
     primary.item :afisha, 'Мероприятия', manage_afisha_index_path,

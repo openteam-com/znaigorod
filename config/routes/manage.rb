@@ -31,6 +31,7 @@ Znaigorod::Application.routes.draw do
 
     post 'red_cloth' => 'red_cloth#show'
 
+    resources :tariffs
     resources :attachments, :only => [:edit, :update]
     resources :comments,  :only => [:index, :destroy]
     resources :page_metas

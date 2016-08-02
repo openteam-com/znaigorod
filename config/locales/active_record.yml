@@ -117,6 +117,13 @@ ru:
         gender: Пол
         birthday: Дата рождения
 
+      tariff:
+        title: Название
+        price_for_month: Цена за месяц
+        price_for_six_months: Цена за пол года
+        price_for_year: Цена за год
+        description: Описание
+
       account_settings:
         personal_digest: Мои обновления
         site_digest: Еженедельный дайджест
