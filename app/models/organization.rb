@@ -57,6 +57,7 @@ class Organization < ActiveRecord::Base
   has_many :visits,                 :dependent => :destroy, :as => :visitable
   has_many :votes,                  :dependent => :destroy, :as => :voteable
   has_many :sections,               :dependent => :destroy
+  has_many :tariff_organization_payments, :dependent => :destroy, :as => :paymentable
 
   has_many :afisha,            :through => :showings, :uniq => true
   has_many :certificates,      :through => :places, :source => :placeable, :source_type => 'Discount', :conditions => { 'discounts.type' => 'Certificate' }
@@ -71,7 +72,6 @@ class Organization < ActiveRecord::Base
 
   has_one :address,             :dependent => :destroy
   has_one :organization_stand,  :dependent => :destroy
-  has_many :tariff_organization_payments,                          :as => :paymentable
   has_one :feed, :as => :feedable, :dependent => :destroy
 
   extend Enumerize

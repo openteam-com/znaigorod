@@ -1,9 +1,12 @@
 class TariffOrganizationPayment < Payment
   attr_accessor :tariff_id, :duration
+  attr_accessible :tariff_id, :duration
 
-  def initialize(tariff_id, duration)
-    @tariff_id = tariff_id
-    @duration = duration
+  after_initialize :set_tariff_and_duration, only: :new
+
+  def set_tariff_and_duration
+    set_price
+    amont = @price
   end
 
   def approve!
@@ -13,8 +16,6 @@ class TariffOrganizationPayment < Payment
     create_notification_message
   end
 
-  default_value_for :amount, Settings["organizations.tariffs.#{@tariff}.price"]
-
   private
 
   def payment_system
@@ -23,8 +24,23 @@ class TariffOrganizationPayment < Payment
 
   alias :organization :paymentable
 
+  def set_price
+    @price = case @duration
+            when 'month'
+              Tariff.find(@tariff_id).price_for_month
+            when 'six_month'
+              Tariff.find(@tariff_id).price_for_six_months
+            when 'year'
+              Tariff.find(@tariff_id).price_for_year
+            end
+  end
+
   def set_tariff_organization
-    OrganizationsTariffs
+    OrganizationTariff.create(
+      :organization_id => organization.id,
+      :tariff_id => @tariff_id,
+      :duration => @duration,
+      :price => @price )
   end
 
   def create_notification_message
