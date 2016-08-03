@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160802073026) do
+ActiveRecord::Schema.define(:version => 20160803093525) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -900,6 +900,8 @@ ActiveRecord::Schema.define(:version => 20160802073026) do
     t.text     "details"
     t.string   "state"
     t.string   "email"
+    t.string   "duration"
+    t.integer  "tariff_id"
   end
 
   add_index "payments", ["paymentable_id"], :name => "index_payments_on_paymentable_id"

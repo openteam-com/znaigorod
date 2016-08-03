@@ -19,7 +19,6 @@ class RobokassaController < ApplicationController
   def success
     notification = Robokassa::Notification.new(request.raw_post, secret: Settings['robokassa.secret_1'])
     payment = Payment.find(notification.item_id)
-
     case payment.paymentable
     when Ticket
       redirect_to afisha_index_path(:has_tickets => true)
@@ -29,6 +28,8 @@ class RobokassaController < ApplicationController
       redirect_to cooperation_path
     when MapPlacemark
       redirect_to map_placemarks_index_path(payment.paymentable.map_layers.first.map_project, :anchor => payment.paymentable.id)
+    when Organization
+      redirect_to my_organizations_path(payment.paymentable_id)
     else
       redirect_to root_path
     end
@@ -46,6 +47,8 @@ class RobokassaController < ApplicationController
     if paymentable
       if paymentable.is_a?(Ticket)
         redirect_to afisha_index_path(:has_tickets => true)
+      elsif paymentable.is_a?(Organization)
+        redirect_to my_organizations_path(payment.paymentable_id)
       end
 
       return
