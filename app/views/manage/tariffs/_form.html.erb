@@ -4,7 +4,12 @@
   <%= f.input :price_for_month %>
   <%= f.input :price_for_six_months %>
   <%= f.input :price_for_year %>
+  <h4>Разрешить услуги</h4>
+  <%= f.input :logotype, as: :boolean %>
+  <%= f.input :tour3d, as: :boolean%>
+  <%= f.input :description_field, as: :boolean%>
+  <%= f.input :gallery, as: :boolean%>
+  <%= f.input :attachment_files, as: :boolean%>
   <%= f.button :submit, 'Сохранить тариф' %>
 <% end %>
 <%= link_to 'Все тарифы', manage_tariffs_path %>
-<%= link_to 'Удалить', manage_tariff_path(@tariff), method: :delete, confirm: 'Вы уверены?' %>

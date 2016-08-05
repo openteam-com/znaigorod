@@ -123,6 +123,11 @@ ru:
         price_for_six_months: Цена за полгода
         price_for_year: Цена за год
         description: Описание
+        logotype: Логотип
+        tour3d: 3D-тур
+        description_field: Описание
+        attachment_files: Прикреплённые файлы
+        gallery: Галерея изображений
 
       account_settings:
         personal_digest: Мои обновления

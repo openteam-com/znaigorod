@@ -1,3 +1,4 @@
 <h1>Редактирование тарифа</h1>
 <%= render :partial => 'form' %>
+<%= link_to 'Удалить', manage_tariff_path(@tariff), method: :delete, confirm: 'Вы уверены?' %>
 

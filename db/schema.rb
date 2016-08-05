@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160803093525) do
+ActiveRecord::Schema.define(:version => 20160805071951) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1459,8 +1459,13 @@ ActiveRecord::Schema.define(:version => 20160803093525) do
     t.integer  "price_for_six_months"
     t.integer  "price_for_year"
     t.integer  "organization_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.boolean  "logotype",             :default => false
+    t.boolean  "tour3d",               :default => false
+    t.boolean  "gallery",              :default => false
+    t.boolean  "description_field",    :default => false
+    t.boolean  "attachment_files",     :default => false
   end
 
   create_table "teaser_items", :force => true do |t|
