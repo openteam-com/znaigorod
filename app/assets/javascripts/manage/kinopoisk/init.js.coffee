@@ -64,6 +64,7 @@
           $('#afisha_age_min', form).val(data.minimal_age)
           $('span', link.closest('li')).remove()
           link.closest('li').append(" <span>(<a class='link_to_poster' href='#{data.poster}' target='_blank'>ссылка на постер</a>)</span>")
+          link.closest('li').append(" <span>(<a class='link_to_poster' href='#{data.url}' target='_blank'>просмотр на сайте</a>)</span>")
         return
     return false
 

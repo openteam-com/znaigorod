@@ -94,8 +94,9 @@ class Manage::AfishasController < Manage::ApplicationController
     description += "|возраст|#{movie.minimal_age}|\n" if movie.minimal_age.present?
     description += "|время|#{movie.duration}|\n" if movie.duration.present?
     description += "|в главных ролях|#{movie.actors.join(', ')}|\n\n"
-    description += movie.description
+    description += movie.description.gsub(/\u0097/, '—')
     hash = {}
+    hash.merge!({ :url => movie.url })
     hash.merge!({ :title => movie.title })
     hash.merge!({ :original_title => movie.title_en })
     hash.merge!({ :poster => movie.poster_big })
