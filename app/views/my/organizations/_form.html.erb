@@ -1,5 +1,3 @@
-<%= javascript_include_tag 'esp-ckeditor/application' %>
-
 <%= simple_nested_form_for resource, :url => [:my, resource], :html => { :novalidate => true } do |f| %>
   <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
 
@@ -9,12 +7,45 @@
       <%= f.link_to_add 'Добавить адрес', :address, :class => 'add_address' %>
     </div>
   </div>
+  <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
+  <% if resource.can_service? 'logotype' %>
+    <div class='logo'>
+      <h3>Логотип заведения:</h3>
+      <%= f.input :logotype_url, :as => :hidden %>
+      <div class="choose_file_wrapper">
+        <div class="uploaded_file_wrapper image">
+          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
+        </div>
+        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+      </div>
+    </div>
+  <% end %>
   <%= f.input :title %>
   <%= f.input :phone %>
   <%= f.input :email %>
   <%= f.input :site %>
-  <% if resource.client? %>
+
+  <% if resource.can_service? 'description_field' %>
+    <%= javascript_include_tag 'esp-ckeditor/application' %>
     <%= f.input :description, :as => :ckeditor, :label => false %>
+  <% end %>
+
+
+  <%= render :partial => 'organization_categories_fields' %>
+
+  <fieldset class='organization_social_links'>
+    <legend>Ссылки</legend>
+    <%= f.simple_fields_for :social_links %>
+    <%= f.link_to_add t('add_social_links'), :social_links %>
+  </fieldset>
+
+  <div class="schedules_fields">
+    <h3>Расписание работы:</h3>
+    <%= f.simple_fields_for :schedules %>
+  </div>
+
+  <% if resource.can_service? 'gallery' %>
     <div class='images'>
       <h3>Галерея изображений</h3>
 
@@ -36,38 +67,12 @@
     <div class="upload_wrapper">
       <script id="template-upload" type="text/x-tmpl">
         <div class="upload">
-      {%=o.name%}
-      <div class="progress"><div class="bar" style="width: 0%"></div></div>
-    </div>
+          {%=o.name%}
+          <div class="progress"><div class="bar" style="width: 0%"></div></div>
+        </div>
       </script>
     </div>
-
-    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
-    <div class='logo'>
-      <h3>Логотип заведения:</h3>
-      <%= f.input :logotype_url, :as => :hidden %>
-      <div class="choose_file_wrapper">
-        <div class="uploaded_file_wrapper image">
-          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
-        </div>
-        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
-        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
-      </div>
-    </div>
   <% end %>
-
-  <%= render :partial => 'organization_categories_fields' %>
-
-  <fieldset class='organization_social_links'>
-    <legend>Ссылки</legend>
-    <%= f.simple_fields_for :social_links %>
-    <%= f.link_to_add t('add_social_links'), :social_links %>
-  </fieldset>
-
-  <div class="schedules_fields">
-    <h3>Расписание работы:</h3>
-    <%= f.simple_fields_for :schedules %>
-  </div>
 
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>

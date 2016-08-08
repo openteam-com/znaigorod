@@ -1,4 +1,5 @@
-<% if resource.client? %>
+<%= render :partial => 'tariffs', locals: { :resource => resource } %>
+<% if resource.can_service? 'logotype' %>
   <div class="logo">
     <% if resource.logotype_url.present? %>
       <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
@@ -6,8 +7,6 @@
       <%= image_tag "public/organization_stub_poster_kind.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
     <% end %>
   </div>
-<% else %>
-  <%= render :partial => 'tariffs', locals: { :resource => resource } if resource.published? %>
 <% end %>
 <div class='title'>
   <%= resource.title %>
@@ -98,17 +97,19 @@
       <% end %>
     </div>
 
-    <% if resource.client? %>
+    <% if resource.can_service? 'description_field' %>
       <div>
         <h3 class="label">Описание:</h3>
         <% if resource.description.present? %>
           <span class="value"><%= resource.html_description %></span>
         <% else %>
           <span class="blank">Не указано</span>
-          <%= link_to 'Добавить описание', change_description_my_organization_path(resource) %>
         <% end %>
       </div>
 
+    <% end %>
+
+    <% if resource.can_service? 'gallery' %>
       <div class='images'>
         <h3>Галерея изображений</h3>
 
@@ -121,7 +122,6 @@
             </span>
           </div>
         </form>
-
       </div>
     <% end %>
   </div>

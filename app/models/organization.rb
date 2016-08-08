@@ -293,6 +293,18 @@ class Organization < ActiveRecord::Base
     visits.where(:user_id => user).any?
   end
 
+  def can_service?(service_name)
+    if Tariff.column_names.include? service_name
+      tariffs.each do |t|
+        if t.send(service_name) == true
+          return true
+        end
+      end
+    end
+
+    false
+  end
+
   def visit_for(user)
     visits.find_by_user_id(user)
   end
