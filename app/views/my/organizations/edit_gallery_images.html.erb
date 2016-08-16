@@ -1,0 +1,28 @@
+<div class='images'>
+  <h3>Галерея изображений</h3>
+
+  <form class='js-sortable' data-sort='<%= sort_my_organizations_path %>'>
+    <span class="value">
+      <ul>
+        <div class="gallery_images js-gallery">
+          <div class='js-edit-attachment-description'></div>
+          <%= render resource.gallery_images.order('id') %>
+        </div>
+      </ul>
+    </span>
+  </form>
+
+  <%= simple_form_for resource.gallery_images.new, :url => my_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
+  <% end %>
+</div>
+
+<div class="upload_wrapper">
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
+</div>
+<%= link_to 'Готово', edit_my_organization_path(resource.id) %>

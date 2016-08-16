@@ -27,17 +27,13 @@ class My::OrganizationsController < My::ApplicationController
     end
   end
 
-  def edit
-    @organization = current_user.organizations.find(params[:id])
-  end
-
   def update
     @organization = current_user.organizations.find(params[:id])
     @organization.attributes = params[:organization]
 
     if @organization.save
-      if params[:crop]
-        redirect_to edit_my_organization_path(@organization.id)
+      if params[:edit_gallery_images]
+        redirect_to edit_gallery_images_my_organization_path(@organization.id)
       else
         redirect_to my_organization_path(@organization.id)
       end

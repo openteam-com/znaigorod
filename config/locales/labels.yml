@@ -209,6 +209,8 @@ ru:
 
   moderation_to_published:
     one:   "На модерации (%{count})"
+    few:   "На модерации (%{count})"
+    many:  "На модерации (%{count})"
     other: "На модерации (%{count})"
     zero: "На модерации"
 

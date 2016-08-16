@@ -1,13 +1,4 @@
-<%= render :partial => 'tariffs', locals: { :resource => resource } %>
-<% if resource.can_service? 'logotype' %>
-  <div class="logo">
-    <% if resource.logotype_url.present? %>
-      <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
-    <% else %>
-      <%= image_tag "public/organization_stub_poster_kind.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
-    <% end %>
-  </div>
-<% end %>
+<%= render :partial => 'tariffs', locals: { :resource => resource }  if defined?(params['controller']) %>
 <div class='title'>
   <%= resource.title %>
 </div>
@@ -97,6 +88,16 @@
       <% end %>
     </div>
 
+    <% if resource.can_service? 'logotype' %>
+      <div class="logo">
+        <% if resource.logotype_url.present? %>
+          <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
+        <% else %>
+          <%= image_tag "public/organization_stub_poster_kind.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+        <% end %>
+      </div>
+    <% end %>
+
     <% if resource.can_service? 'description_field' %>
       <div>
         <h3 class="label">Описание:</h3>
@@ -106,22 +107,31 @@
           <span class="blank">Не указано</span>
         <% end %>
       </div>
+    <% end %>
 
+    <% if resource.can_service? 'tour3d' %>
+      <%= render resource.virtual_tour %>
+    <% end %>
+
+    <% if resource.can_service? 'attachment_files' %>
+      <div class='attachments'>
+        <h3>Прикрепленные файлы</h3>
+
+        <div class="gallery_files">
+          <ul>
+            <%= render resource.gallery_files %>
+          </ul>
+        </div>
+
+      </div>
     <% end %>
 
     <% if resource.can_service? 'gallery' %>
       <div class='images'>
         <h3>Галерея изображений</h3>
-
-        <form class='js-sortable' data-sort='<%= sort_my_organizations_path %>'>
-          <div class="gallery_images js-gallery">
-            <span class="value">
-              <ul>
-                <%= render resource.gallery_images.order('id') %>
-              </ul>
-            </span>
-          </div>
-        </form>
+          <% resource.gallery_images.each do |g| %>
+            <%= image_tag g.file.url, :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+          <% end %>
       </div>
     <% end %>
   </div>

@@ -6,7 +6,7 @@
 
     <div class="poster">
       <%= link_to my_organization_path(organization) do %>
-        <%= image_tag (organization.poster_url? ? resized_image_url(organization.poster_url, 178, 240) : 'public/stub_poster.png'), :size => '178x240' %>
+        <%= image_tag (organization.poster_url? && organization.can_service?('logotype') ? resized_image_url(organization.poster_url, 178, 240) : 'public/stub_poster.png'), :size => '178x240' %>
       <% end %>
     </div>
 

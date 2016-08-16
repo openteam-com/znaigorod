@@ -11,7 +11,7 @@
 <div class='organization_show' itemscope itemtype="http://schema.org/Organization">
   <div class='left js-fixed-menu'>
     <div class='image'  itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-      <% if @organization.client? %>
+      <% if @organization.client? || @organization.can_service?('logotype') %>
         <% if @organization.logotype_url? %>
           <%= link_to(image_tag(resized_image_url(@organization.logotype_url, 200, 200, :watermark => false), :size => '200x200', :itemprop => "contentUrl", :alt => @organization.title), @organization.logotype_url) %>
         <% else %>
@@ -49,7 +49,7 @@
 
   <div class='right'>
     <div class='wrapper'>
-      <% if @organization.client? %>
+      <% if @organization.client? || @organization.can_service?('tour3d') %>
         <% if @organization.has_tour? %>
           <div class='virtual_tour'>
             <%= link_to('#', :class => :virtual_tour_link, :'data-link' => @organization.virtual_tour.link, title: '3D-тур') do %>
@@ -175,7 +175,7 @@
                       </ul>
                     <% end %>
 
-                    <% if @organization.client? %>
+                    <% if @organization.client? || @organization.can_service?('description_field') %>
                       <% if @organization.description.present? %>
                         <div class='description' itemprop="description">
                           <%= @organization.description_html %>
@@ -186,7 +186,7 @@
                       <div class="title <%= scrolltrack(@organization.photos_navigation_title) %>" id='<%= @organization.photos_navigation_title.try(:from_russian_to_param) %>'>
                         <%= @organization.photo_block_title %>
                       </div>
-                      <% if @organization.client? %>
+                      <% if @organization.client? || @organization.can_service?('gallery') %>
                         <% if @organization.has_photogallery? %>
                           <ul>
                             <% @organization.gallery_images.order('position').each do |image| %>

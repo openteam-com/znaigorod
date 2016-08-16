@@ -8,29 +8,10 @@
     </div>
   </div>
   <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
-  <% if resource.can_service? 'logotype' %>
-    <div class='logo'>
-      <h3>Логотип заведения:</h3>
-      <%= f.input :logotype_url, :as => :hidden %>
-      <div class="choose_file_wrapper">
-        <div class="uploaded_file_wrapper image">
-          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
-        </div>
-        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
-        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
-      </div>
-    </div>
-  <% end %>
   <%= f.input :title %>
   <%= f.input :phone %>
   <%= f.input :email %>
   <%= f.input :site %>
-
-  <% if resource.can_service? 'description_field' %>
-    <%= javascript_include_tag 'esp-ckeditor/application' %>
-    <%= f.input :description, :as => :ckeditor, :label => false %>
-  <% end %>
-
 
   <%= render :partial => 'organization_categories_fields' %>
 
@@ -45,38 +26,60 @@
     <%= f.simple_fields_for :schedules %>
   </div>
 
+  <% if resource.can_service? 'logotype' %>
+    <div class='logo'>
+      <h3>Логотип заведения:</h3>
+      <%= f.input :logotype_url, :as => :hidden %>
+      <div class="choose_file_wrapper">
+        <div class="uploaded_file_wrapper image">
+          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
+        </div>
+        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if resource.can_service? 'description_field' %>
+    <%= javascript_include_tag 'esp-ckeditor/application' %>
+    <%= f.input :description, :as => :ckeditor, :label => false %>
+  <% end %>
+
+  <% if resource.can_service? 'tour3d' %>
+    <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+  <% end %>
+
+  <% if resource.can_service? 'attachment_files' %>
+    <div class='attachments'>
+      <h3>Прикрепленные файлы</h3>
+
+      <div class="gallery_files">
+        <ul>
+          <%= render resource.gallery_files %>
+        </ul>
+      </div>
+
+      <%= simple_form_for resource.gallery_files.new, :url => manage_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |ff| %>
+        <%= ff.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
+      <% end %>
+    </div>
+  <% end %>
+
+
   <% if resource.can_service? 'gallery' %>
     <div class='images'>
       <h3>Галерея изображений</h3>
+        <% resource.gallery_images.each do |g| %>
+          <%= image_tag g.file.url, :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+        <% end %>
 
-      <form class='js-sortable' data-sort='<%= sort_my_organizations_path %>'>
-        <div class="gallery_images js-gallery">
-          <span class="value">
-            <ul>
-              <%= render resource.gallery_images.order('id') %>
-            </ul>
-          </span>
-        </div>
-      </form>
-
-      <%= simple_form_for resource.gallery_images.new, :url => my_organization_gallery_images_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |ff| %>
-        <%= ff.input :file, :input_html => { :multiple => true, :name => 'gallery_images[file]' } %>
-      <% end %>
-    </div>
-
-    <div class="upload_wrapper">
-      <script id="template-upload" type="text/x-tmpl">
-        <div class="upload">
-          {%=o.name%}
-          <div class="progress"><div class="bar" style="width: 0%"></div></div>
-        </div>
-      </script>
+        <p><%= f.submit 'Редактировать галерею изображений', name: 'edit_gallery_images' %></p>
     </div>
   <% end %>
 
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>
     <%= f.submit 'Сохранить' %>
-    <%= link_to 'Удалить'.html_safe, manage_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
+    <%= link_to 'Удалить'.html_safe, my_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
   </div>
 <% end %>
