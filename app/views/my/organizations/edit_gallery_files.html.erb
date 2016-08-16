@@ -1,0 +1,23 @@
+<div class='attachments'>
+  <h3>Прикрепленные файлы</h3>
+
+  <ul>
+    <div class="gallery_files">
+      <%= render resource.gallery_files %>
+    </div>
+  </ul>
+
+  <%= simple_form_for resource.gallery_files.new, :url => my_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |f| %>
+    <%= f.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
+  <% end %>
+</div>
+<div class="upload_wrapper">
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
+</div>
+
+<%= link_to 'Готово', edit_my_organization_path(resource.id) %>

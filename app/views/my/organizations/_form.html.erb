@@ -38,31 +38,28 @@
         <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
       </div>
     </div>
+    <hr>
   <% end %>
 
   <% if resource.can_service? 'description_field' %>
     <%= javascript_include_tag 'esp-ckeditor/application' %>
     <%= f.input :description, :as => :ckeditor, :label => false %>
+    <hr>
   <% end %>
 
   <% if resource.can_service? 'tour3d' %>
     <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+    <hr>
   <% end %>
 
   <% if resource.can_service? 'attachment_files' %>
     <div class='attachments'>
       <h3>Прикрепленные файлы</h3>
-
-      <div class="gallery_files">
-        <ul>
-          <%= render resource.gallery_files %>
-        </ul>
-      </div>
-
-      <%= simple_form_for resource.gallery_files.new, :url => manage_organization_gallery_files_path(resource.id), :html => { :multipart => true, :class => 'file_upload' } do |ff| %>
-        <%= ff.input :file, :input_html => { :multiple => true, :name => 'gallery_files[file]' } %>
-      <% end %>
-    </div>
+       <% resource.gallery_files.each do |g| %>
+          <%= link_to g.file_file_name, g.file_url, target: '_blank' %>
+        <% end %>
+      <p><%= f.submit 'Редактировать галерею файлов', name: 'edit_gallery_files' %></p>
+    <hr>
   <% end %>
 
 
@@ -75,6 +72,7 @@
 
         <p><%= f.submit 'Редактировать галерею изображений', name: 'edit_gallery_images' %></p>
     </div>
+    <hr>
   <% end %>
 
   <div class="actions">

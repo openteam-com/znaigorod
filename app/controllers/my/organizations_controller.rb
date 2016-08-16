@@ -34,6 +34,8 @@ class My::OrganizationsController < My::ApplicationController
     if @organization.save
       if params[:edit_gallery_images]
         redirect_to edit_gallery_images_my_organization_path(@organization.id)
+      elsif params[:edit_gallery_files]
+        redirect_to edit_gallery_files_my_organization_path(@organization.id)
       else
         redirect_to my_organization_path(@organization.id)
       end

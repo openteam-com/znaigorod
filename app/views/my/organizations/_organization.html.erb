@@ -116,13 +116,9 @@
     <% if resource.can_service? 'attachment_files' %>
       <div class='attachments'>
         <h3>Прикрепленные файлы</h3>
-
-        <div class="gallery_files">
-          <ul>
-            <%= render resource.gallery_files %>
-          </ul>
-        </div>
-
+          <% resource.gallery_files.each do |g| %>
+            <%= link_to g.file_file_name, g.file_url, target: '_blank' %>
+          <% end %>
       </div>
     <% end %>
 

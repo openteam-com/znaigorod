@@ -94,6 +94,7 @@ Znaigorod::Application.routes.draw do
       put 'close' => 'organizations#close', :on => :member, :as => :close
       post 'sort', :on => :collection
       get 'edit_gallery_images', :on => :member
+      get 'edit_gallery_files', :on => :member
 
       resources :gallery_files, :only => [:create, :destroy] do
         delete 'destroy_all', :on => :collection, :as => :destroy_all
