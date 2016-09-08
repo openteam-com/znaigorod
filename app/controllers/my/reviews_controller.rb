@@ -94,9 +94,14 @@ class My::ReviewsController < My::ApplicationController
 
   def send_to_moderating
     @review = current_user.account.reviews.draft.find(params[:id])
-    @review.to_moderating!
+    unless current_user.account.email.nil?
+      @review.to_moderating!
 
-    redirect_to my_review_path(@review.id), :notice => "Обзор «#{@review.title}» отправлен на модерацию."
+      redirect_to my_review_path(@review.id), :notice => "Обзор «#{@review.title}» отправлен на модерацию."
+    else
+      redirect_to edit_my_account_path(:review_id => @review.id)
+      flash[:notice] = "Заполните поле Email. Это необходимо для публикации обзора '#{@review.title}'"
+    end
   end
 
   def send_to_draft

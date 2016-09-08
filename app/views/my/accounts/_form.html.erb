@@ -8,6 +8,12 @@
       <span>Дата рождения</span>
       <%= f.input :birthday, label: false, as: :date_picker %>
     </div>
+    <% if params.has_key?('review_id') %>
+      <div class='notice_message'>
+        <%= flash[:notice] %>
+        <%= f.hidden_field :review_id, value: params['review_id'] %>
+      </div>
+    <% end %>
     <div class="line">
       <span>E-mail</span>
       <%= f.input :email, label: false, as: :string, :input_html => {:size => 30} %>

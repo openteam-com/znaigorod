@@ -22,6 +22,7 @@ Znaigorod::Application.routes.draw do
       put 'publish' => 'reviews#send_to_published',           :on => :member
       put 'draft'   => 'reviews#send_to_draft',               :on => :member
       put 'moderating'   => 'reviews#send_to_moderating',     :on => :member
+      get 'moderating'   => 'reviews#send_to_moderating',     :on => :member
 
       Review.descendant_names_without_prefix.each do |name|
         get 'new/:type' => 'reviews#new',

@@ -14,7 +14,11 @@ class My::AccountsController < My::ApplicationController
   def update
     update!{
       render nothing: true, :status => 200 and return if request.xhr?
-      redirect_to my_root_path and return
+      if params['account'].has_key?('review_id')
+        redirect_to moderating_my_review_path(params['account']['review_id']) and return
+      else
+        redirect_to my_root_path and return
+      end
     }
   end
 
