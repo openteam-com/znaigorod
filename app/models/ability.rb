@@ -146,11 +146,15 @@ class Ability
       end
 
       can :send_to_published, Review do |review|
+        review.moderating? && review.account == user.account
+      end
+
+      can :send_to_moderating, Review do |review|
         review.draft? && review.account == user.account
       end
 
       can :send_to_draft, Review do |review|
-        review.published? && review.account == user.account
+        Review.can_draft.include?(review)  && review.account == user.account
       end
 
       can [:new, :create], Invitation if user.persisted?

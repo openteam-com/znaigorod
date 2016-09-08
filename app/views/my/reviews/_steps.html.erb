@@ -68,14 +68,14 @@
   <div class="controls">
     <% if resource.persisted? %>
       <% if resource.draft? %>
-        <%= link_to t('my.send_to_public'), publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
-          :confirm => 'Вы уверены? После публикации обзор будет доступен всем пользователям сайта!' %>
+        <%= link_to t('my.send_to_moderating'), moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
+          :confirm => 'Отправить на модерацию?' %>
       <% else %>
         <%= link_to 'В черновики', draft_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-grey btn-lg',
           :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>
       <% end %>
     <% else %>
-      <%= link_to t('my.send_to_public'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
+      <%= link_to t('my.send_to_moderating'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
     <% end %>
   </div>
 

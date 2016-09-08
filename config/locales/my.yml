@@ -6,6 +6,7 @@ ru:
     add_files:          Выберите файлы
     afisha:             Мои афиши
     send_to_moderation: Отправить на модерацию
+    send_to_moderating: На модерацию
     send_to_public:     Опубликовать
     send_to_draft:      Вернуть в черновики
     destroy:            Удалить

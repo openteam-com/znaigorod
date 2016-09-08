@@ -61,6 +61,7 @@ class Review < ActiveRecord::Base
 
   scope :by_state,          -> (state) { where :state => state }
   scope :draft,             -> { where :state => :draft }
+  scope :can_draft,         -> { where("state = 'published' OR state = 'moderating'") }
   scope :published,         -> { where :state => :published }
   scope :without_questions, -> { where "type != 'Question'" }
   scope :ordered,           order('created_at desc')
