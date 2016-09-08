@@ -282,6 +282,10 @@
     <% end %>
   </div>
 
+  <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '100%', height: '90' if current_city == 'tomsk' %>
+
+  <br>
+
   <% if @organization.grouped_situated_organizations.any? %>
     <div class='suborganization_info situated_items'>
       <% @organization.grouped_situated_organizations.each do |category, organizations| %>

@@ -149,6 +149,8 @@
         </div>
       </div>
 
+      <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '100%', height: '90' if current_city == 'tomsk' %>
+
       <%= render :partial => 'comments/block', :locals => { :parent_obj => @discount } %>
     <% else %>
       <div class='archived'>
