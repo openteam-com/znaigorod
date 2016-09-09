@@ -6,6 +6,7 @@ Znaigorod::Application.routes.draw do
 
   namespace :my do
     resources :reviews do
+      resources :review_payments, :only => :create
       get 'add'                   => 'reviews#add',                   :on => :collection
       get 'images/add'            => 'reviews#add_images',            :on => :member
       get 'add_related_items'     => 'reviews#add_related_items',     :on => :member

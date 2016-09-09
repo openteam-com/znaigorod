@@ -24,7 +24,8 @@ class Payment < ActiveRecord::Base
   end
 
   def service_url
-    "#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
+    #"#{integration_module.service_url}?#{integration_helper.form_fields.to_query}"
+    "http://auth.robokassa.ru/Merchant/Index.aspx?IsTest=1&#{integration_helper.form_fields.to_query}"
   end
 
   private
