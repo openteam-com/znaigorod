@@ -26,6 +26,7 @@ class Review < ActiveRecord::Base
 
   after_save :parse_related_items, :if => :need_change
 
+  attr_accessor :comment
   attr_accessible :content, :title, :tag, :categories,
                   :allow_external_links, :only_tomsk,
                   :related_items, :tagit_categories, :need_change, :category_flag,

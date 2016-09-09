@@ -3,7 +3,7 @@ class Manage::ReviewsController < Manage::ApplicationController
 
   actions :all, :except => [:new, :create]
 
-  custom_actions :resource => [:add_images, :send_to_published, :send_to_draft, :edit_poster]
+  custom_actions :resource => [:add_images, :send_to_payment, :send_to_published, :send_to_draft, :edit_poster]
 
   has_scope :page, :default => 1
 
@@ -34,8 +34,19 @@ class Manage::ReviewsController < Manage::ApplicationController
 
   def send_to_draft
     send_to_draft!{
+      @review.comment = params[:review][:comment]
       @review.to_draft!
+      ReviewMailer.send_to_draft(@review).deliver
       redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» возвращен в черновики." and return
+    }
+  end
+
+  def send_to_payment
+    send_to_payment!{
+      @review.price = params[:review][:price]
+      @review.to_payment!
+      ReviewMailer.send_to_payment(@review).deliver
+      redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» допущен к оплате." and return
     }
   end
 

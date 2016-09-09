@@ -70,6 +70,8 @@
       <% if resource.draft? %>
         <%= link_to t('my.send_to_moderating'), moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
           :confirm => 'Отправить на модерацию?' %>
+      <% elsif resource.payment?  %>
+        <%= link_to "Оплатить (#{@review.price} руб.)", draft_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-green btn-lg' %>
       <% else %>
         <%= link_to 'В черновики', draft_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-grey btn-lg',
           :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>

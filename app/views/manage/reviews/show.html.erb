@@ -1,4 +1,5 @@
 <div class="reviews_show">
+  <%= @review.state %>
   <%= render 'actions' %>
 
   <div class="left">
@@ -13,5 +14,16 @@
     <% end %>
 
     <%= render @review.webanketas.actual %>
+  <% if @review.moderating? %>
+  <div>
+    <%= simple_form_for @review, url: payment_manage_review_path(@review.id) do |f| %>
+      <%= f.input :price %>
+      <%= f.submit 'Разрешить' %>
+    <% end %>
+    <%= simple_form_for @review, url: draft_manage_review_path(@review.id) do |f| %>
+      <%= f.input :comment, as: :text %>
+      <%= f.submit 'Запретить' %>
+    <% end %>
   </div>
+  <% end %>
 </div>

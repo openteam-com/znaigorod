@@ -10,7 +10,7 @@
 
     <div id="reviews_filter">
       <ul>
-        <% %w[all draft published].each do |state| %>
+        <% %w[all draft published moderating payment].each do |state| %>
           <li>
             <%= link_to "##{state}" do %>
               <% unless state == 'all' %>
@@ -23,7 +23,7 @@
         <% end %>
       </ul>
 
-      <% %w[all draft published].each do |state| %>
+      <% %w[all draft published moderating payment].each do |state| %>
         <div id='<%= state %>' class='reviews-paginator'>
           <% if collection.any? %>
             <ul class="posters">

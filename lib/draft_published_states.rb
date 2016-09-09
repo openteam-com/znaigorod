@@ -30,7 +30,7 @@ module DraftPublishedStates
       end
 
       event :to_published do
-        transition [:draft, :archive] => :published
+        transition [:moderating, :draft, :archive] => :published
       end
 
       event :to_archive do
@@ -39,6 +39,10 @@ module DraftPublishedStates
 
       event :to_moderating do
         transition :draft => :moderating
+      end
+
+      event :to_payment do
+        transition :moderating => :payment
       end
 
       event :to_draft do

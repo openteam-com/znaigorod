@@ -17,6 +17,8 @@ ru:
     social_gallery_url: Добавить альбом ВКонтакте или Яндекс.Фотки
     draft:              Черновик
     published:          Опубликована
+    moderating:         На модерации
+    payment:            Ждёт оплаты
 
     button:
       concert:      Концерт

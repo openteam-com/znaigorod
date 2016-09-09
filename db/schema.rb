@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160701071738) do
+ActiveRecord::Schema.define(:version => 20160909152837) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1084,6 +1084,7 @@ ActiveRecord::Schema.define(:version => 20160701071738) do
     t.integer  "contest_id"
     t.string   "old_slug"
     t.boolean  "as_collage",                :default => false
+    t.integer  "price"
   end
 
   create_table "roles", :force => true do |t|
