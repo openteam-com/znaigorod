@@ -1,5 +1,9 @@
 <div class="reviews_show">
-  <%= @review.state %>
+
+  <div class="state">
+    <%= @review.state %>
+  </div>
+
   <%= render 'actions' %>
 
   <div class="left">
@@ -14,16 +18,21 @@
     <% end %>
 
     <%= render @review.webanketas.actual %>
-  <% if @review.moderating? %>
-  <div>
-    <%= simple_form_for @review, url: payment_manage_review_path(@review.id) do |f| %>
-      <%= f.input :price %>
-      <%= f.submit 'Разрешить' %>
-    <% end %>
-    <%= simple_form_for @review, url: draft_manage_review_path(@review.id) do |f| %>
-      <%= f.input :comment, as: :text %>
-      <%= f.submit 'Запретить' %>
+    <% if @review.moderating? %>
+      <div class="decision">
+        <div class="allow">
+          <%= simple_form_for @review, url: payment_manage_review_path(@review.id) do |f| %>
+            <%= f.input :price, label: 'Цена', input_html: {value: 50} %>
+            <%= f.submit 'Разрешить', class:'flat-btn btn-green btn-lg' %>
+          <% end %>
+        </div>
+        <div class="disallow">
+          <%= simple_form_for @review, url: draft_manage_review_path(@review.id) do |f| %>
+            <%= f.input :comment, as: :text, label: 'Комментарий' %>
+            <%= f.submit 'Запретить',class:'flat-btn btn-red btn-lg' %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
-  <% end %>
 </div>
