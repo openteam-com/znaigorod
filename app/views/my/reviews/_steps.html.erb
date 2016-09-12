@@ -71,7 +71,7 @@
         <% if current_user.review_manager? %>
           <%= link_to 'Опубликовать', publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg', :confirm => 'Вы уверены что хотите опубликовать обзор?' %>
         <% else %>
-          <%= link_to t('my.send_to_moderating'), moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
+          <%= link_to 'Опубликовать', moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
             :confirm => 'Отправить на модерацию?' %>
         <% end %>
       <% elsif resource.payment?  %>
@@ -81,8 +81,11 @@
           :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>
       <% end %>
     <% else %>
-      <%= link_to t('my.send_to_moderating'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
+      <%= link_to 'Опубликовать', '#',  :class => 'flat-btn btn-disabled btn-lg' %>
     <% end %>
+
+    <span class='state'><%= t("review.state.#{@review.state}") %></span>
+
   </div>
 
   <% if resource.has_annotation_gallery? %>

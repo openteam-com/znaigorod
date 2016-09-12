@@ -1,5 +1,6 @@
 <div class="reviews_show">
   <span class='state'><%= t("review.state.#{@review.state}") %></span>
+
   <%= render 'actions' %>
 
   <div class="left">
@@ -19,7 +20,7 @@
         <div class="allow">
           <%= simple_form_for @review, url: payment_manage_review_path(@review.id) do |f| %>
             <%= f.input :price, label: 'Цена', input_html: {value: 50} %>
-            <%= f.submit 'Разрешить', class:'flat-btn btn-green btn-lg' %>
+            <%= f.submit 'Запросить оплату', class:'flat-btn btn-green btn-lg' %>
           <% end %>
         </div>
         <div class="disallow">
