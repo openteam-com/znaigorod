@@ -96,6 +96,7 @@ class My::ReviewsController < My::ApplicationController
     @review = current_user.account.reviews.draft.find(params[:id])
     unless current_user.account.email.nil?
       @review.to_moderating!
+      MyMailer.mail_send_review_to_moderating(@review).deliver
 
       redirect_to my_review_path(@review.id), :notice => "Обзор «#{@review.title}» отправлен на модерацию."
     else

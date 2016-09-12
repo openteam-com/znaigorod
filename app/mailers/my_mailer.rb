@@ -8,6 +8,11 @@ class MyMailer < ActionMailer::Base
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Добавлена новая афиша')
   end
 
+  def mail_send_review_to_moderating(review)
+    @review = review
+    mail(:to => Settings['mail']['to_review'], :from => @review.user.account.email, :subject => '[ZnaiGorod] Обзор на модерацию')
+  end
+
   def mail_new_published_afisha(afisha)
     @afisha = afisha
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Опубликована новая афиша')

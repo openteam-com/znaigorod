@@ -68,8 +68,12 @@
   <div class="controls">
     <% if resource.persisted? %>
       <% if resource.draft? %>
-        <%= link_to t('my.send_to_moderating'), moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
-          :confirm => 'Отправить на модерацию?' %>
+        <% if current_user.review_manager? %>
+          <%= link_to 'Опубликовать', publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg', :confirm => 'Вы уверены что хотите опубликовать обзор?' %>
+        <% else %>
+          <%= link_to t('my.send_to_moderating'), moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
+            :confirm => 'Отправить на модерацию?' %>
+        <% end %>
       <% elsif resource.payment?  %>
         <%= link_to "Оплатить (#{@review.price} руб.)", my_review_review_payments_path(@review.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-green btn-lg' %>
       <% else %>

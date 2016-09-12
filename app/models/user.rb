@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
   after_create :create_account
   after_save :update_email
 
+  def review_manager?
+    roles.where(:role => 'review_manager').present?
+  end
+
   def update_email
     if self.account.email.blank? && self.email.present?
       self.account.email = self.email
