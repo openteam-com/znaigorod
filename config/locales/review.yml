@@ -1,5 +1,11 @@
 ru:
   review:
+    state:
+      published: Опубликован
+      payment: Ждёт оплаты
+      moderating: На модерации
+      draft: В черновиках
+
     title:
       article: Обзор
       photo: Фотообзор

@@ -1,9 +1,5 @@
 <div class="reviews_show">
-
-  <div class="state">
-    <%= @review.state %>
-  </div>
-
+  <span class='state'><%= t("review.state.#{@review.state}") %></span>
   <%= render 'actions' %>
 
   <div class="left">
