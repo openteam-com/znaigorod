@@ -1,1 +1,2 @@
 <%= "Добавлена заявка на модерацию обзора '#{@review.title}'." %>
+<%= link_to 'Посмотреть в manage', "#{Settings['app']['url']}/manage/reviews/#{@review.id}" %>

@@ -145,6 +145,10 @@ class Ability
         review.account == user.account
       end
 
+      cannot [:edit, :update, :destroy, :edit_poster, :add_related_items], Review do |review|
+        review.moderating?
+      end
+
       can :send_to_published, Review do |review|
         review.moderating? && review.account == user.account
       end

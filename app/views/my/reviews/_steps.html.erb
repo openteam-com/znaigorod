@@ -98,3 +98,6 @@
     </div>
   <% end %>
 </div>
+<% if resource.moderating? %>
+  <span class='message_edit'>Вы не можете редактировать обзор пока он находится в процессе модерации!</span>
+<% end %>
