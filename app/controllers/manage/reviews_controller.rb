@@ -3,7 +3,7 @@ class Manage::ReviewsController < Manage::ApplicationController
 
   actions :all, :except => [:new, :create]
 
-  custom_actions :resource => [:add_images, :send_to_payment, :send_to_published, :send_to_draft, :edit_poster]
+  custom_actions :resource => [:add_images, :send_to_payment, :updated, :send_to_published, :send_to_draft, :edit_poster]
 
   has_scope :page, :default => 1
 
@@ -52,6 +52,11 @@ class Manage::ReviewsController < Manage::ApplicationController
         redirect_to manage_review_path(@review.id) and return
       end
     }
+  end
+
+  def updated
+    @reviews = Review.select { |r| !r.versions.blank? }
+
   end
 
   private

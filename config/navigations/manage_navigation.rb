@@ -69,6 +69,7 @@ SimpleNavigation::Configuration.run do |navigation|
         end
         review_item.item 'draft', "Черновики (#{Review.draft.count})", by_state_manage_reviews_path(:draft)
         review_item.item 'requests_to_moderating', "Модерация (#{Review.moderating.count})", by_state_manage_reviews_path(:moderating)
+        review_item.item 'updated', "Изменены (#{PaperVersion.for_reviews.count})", updated_manage_reviews_path
       end
 
     primary.item :payments, 'Вебкамеры', manage_webcams_path

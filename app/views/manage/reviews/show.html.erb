@@ -31,5 +31,9 @@
         </div>
       </div>
     <% end %>
+
+    <% @review.versions.each do |version| %>
+      <%= render :partial => 'manage/reviews/review', :locals => { :review => ReviewDecorator.decorate(version.reify) } %>
+    <% end %>
   </div>
 </div>
