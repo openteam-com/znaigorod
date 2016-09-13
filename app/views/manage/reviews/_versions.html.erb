@@ -1,0 +1,12 @@
+<% review.versions.reverse.each do |version| %>
+  <hr>
+
+  <%= "Изменено #{version.created_at}" %>
+  <%= render :partial => 'manage/reviews/review', :locals => { :review => ReviewDecorator.decorate(version.reify) } %>
+  <ul class="tags">
+    <% ReviewDecorator.decorate(version.reify).tags.each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
+<% end %>
+

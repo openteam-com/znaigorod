@@ -4,6 +4,7 @@
   <%= render 'actions' %>
 
   <div class="left">
+  <%= image_tag(@review.annotation_image(200, 200)) %>
     <%= render :partial => 'manage/reviews/review', :locals => { :review => @review } %>
 
     <% if @review.tag %>
@@ -31,9 +32,6 @@
         </div>
       </div>
     <% end %>
-
-    <% @review.versions.each do |version| %>
-      <%= render :partial => 'manage/reviews/review', :locals => { :review => ReviewDecorator.decorate(version.reify) } %>
-    <% end %>
+    <%= render :partial => 'manage/reviews/versions', :locals => { :review => @review } %>
   </div>
 </div>
