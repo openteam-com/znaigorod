@@ -39,7 +39,7 @@ class Review < ActiveRecord::Base
 
   has_many :review_category_items, :dependent => :destroy
   has_many :organization_categories, :through => :review_category_items
-
+  has_paper_trail :class_name => 'PaperVersion'
   has_many :review_payments, :as => :paymentable, :dependent => :destroy
   has_many :all_images,            :as => :attachable, :class_name => 'Attachment', :conditions => { :type => %w[GalleryImage GallerySocialImage] }
   has_many :comments,              :as => :commentable,    :dependent => :destroy
