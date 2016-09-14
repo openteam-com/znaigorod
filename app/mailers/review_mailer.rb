@@ -10,4 +10,9 @@ class ReviewMailer < ActionMailer::Base
     @review = review
     mail :to => @review.account.email, :subject => "Ваш обзор #{@review.title} допущен к публикации."
   end
+
+  def message_about_update(review)
+    @review = review
+    mail :to => Settings['mail']['to_review'], :from => @review.user.account.email, :subject => "Обзор #{@review.title} был изменён."
+  end
 end

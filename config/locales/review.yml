@@ -1,5 +1,15 @@
 ru:
   review:
+    for_message:
+      title: Название
+      type: Тип
+      content: Содержание
+      slug: Служба
+      tag: Тэги
+      categories: Категории
+      video_url: Видео
+      poster_image_url: Постер
+
     state:
       published: Опубликован
       payment: Ждёт оплаты

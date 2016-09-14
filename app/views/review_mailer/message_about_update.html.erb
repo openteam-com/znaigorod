@@ -1,0 +1,7 @@
+В обзор
+'<%= @review.title %>'
+были изменёны аттрибуты:
+<br>
+<% @review.versions.last.changeset.keys.each do |key| %>
+  <br><br><%= t("review.for_message.#{key}") %> (<%= "#{@review.versions.last.changeset[key][0]} -> #{@review.versions.last.changeset[key][1]}" %>)
+<% end %>
