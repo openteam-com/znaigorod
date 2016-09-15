@@ -4,7 +4,6 @@
   <%= render 'actions' %>
 
   <div class="left">
-  <%= image_tag(@review.annotation_image(200, 200)) %>
     <%= render :partial => 'manage/reviews/review', :locals => { :review => @review } %>
 
     <% if @review.tag %>
@@ -32,6 +31,5 @@
         </div>
       </div>
     <% end %>
-    <%= render :partial => 'manage/reviews/versions', :locals => { :review => @review } %>
   </div>
 </div>
