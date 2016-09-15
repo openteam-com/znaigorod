@@ -44,7 +44,7 @@ class Manage::ReviewsController < Manage::ApplicationController
   def send_to_payment
     send_to_payment!{
       if !params[:review].nil? && !params[:review][:price].nil?
-        @review.price = params[:review][:price]
+        @review.update_attribute(:price, params[:review][:price])
         @review.to_payment!
         ReviewMailer.send_to_payment(@review).deliver
         redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» допущен к оплате." and return
