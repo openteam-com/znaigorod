@@ -11,7 +11,7 @@
     </td>
     <td>
       <div class="title old">
-        <%= review.versions.last.reify.title %>
+        <%= review.versions.last.reify.title if review.versions.last.object.present? %>
       </div>
     </td>
   </tr>
@@ -23,7 +23,7 @@
     </td>
     <td>
       <div class="description old">
-        <%= review.versions.last.reify.content %>
+        <%= review.versions.last.reify.content if review.versions.last.object.present? %>
       </div>
     </td>
   </tr>
