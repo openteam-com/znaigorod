@@ -15,6 +15,7 @@ class Review < ActiveRecord::Base
   alias_attribute :description_ru, :content
   alias_attribute :title_ru,       :title
 
+  after_update :delete_old_versions
   before_save :set_poster
 
   before_save :store_cached_content_for_index
@@ -88,6 +89,10 @@ class Review < ActiveRecord::Base
   alias :old_normalize_friendly_id :normalize_friendly_id
   def normalize_friendly_id(string)
     I18n.l(created_at, :format => '%Y-%m') + '/' + old_normalize_friendly_id(string)
+  end
+
+  def delete_old_versions
+    versions.map(&:delete)
   end
 
   has_croped_poster min_width: 353, min_height: 199, :default_url => 'public/post_poster_stub.jpg'
