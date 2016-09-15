@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <th>Последняя версия</th>
+    <th>Актуальная</th>
     <th>Предыдущая версия</th>
   </tr>
   <tr>
@@ -11,7 +11,7 @@
     </td>
     <td>
       <div class="title old">
-        <%= review.versions.last.reify.title if review.versions.last.object.present? %>
+        <%= review.versions.last.reify.title if review.versions.last.try(:object).present? %>
       </div>
     </td>
   </tr>
@@ -23,7 +23,7 @@
     </td>
     <td>
       <div class="description old">
-        <%= review.versions.last.reify.content if review.versions.last.object.present? %>
+        <%= review.versions.last.reify.content if review.versions.last.try(:object).present? %>
       </div>
     </td>
   </tr>

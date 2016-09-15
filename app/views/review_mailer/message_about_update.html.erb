@@ -1,9 +1,10 @@
-В обзор
+<%= link_to 'Посмотреть в manage.', "#{Settings['app']['url']}/manage/reviews/#{@review.id}" %>
+В обзорe
 '<%= @review.title %>'
 были изменёны аттрибуты:
 <br>
 <% @review.versions.last.changeset.keys.each do |key| %>
-  <% if ["content_for_index", "content_for_show", "updated_at"].include? key  %>
+  <% unless ["cached_content_for_show", "cached_content_for_index", "updated_at"].include? key  %>
     <br><br>"<%= t("review.for_message.#{key}") %>"
     <hr>
     <%= "#{@review.versions.last.changeset[key][0]}" %>
