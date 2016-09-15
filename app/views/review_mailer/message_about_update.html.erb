@@ -3,10 +3,12 @@
 были изменёны аттрибуты:
 <br>
 <% @review.versions.last.changeset.keys.each do |key| %>
-  <br><br>"<%= t("review.for_message.#{key}") %>"
-          <hr>
-          <%= "#{@review.versions.last.changeset[key][0]}" %>
-          <hr>
-          <%= "#{@review.versions.last.changeset[key][1]}" %>
-          <br>
+  <% if ["content_for_index", "content_for_show", "updated_at"].include? key  %>
+    <br><br>"<%= t("review.for_message.#{key}") %>"
+    <hr>
+    <%= "#{@review.versions.last.changeset[key][0]}" %>
+    <hr>
+    <%= "#{@review.versions.last.changeset[key][1]}" %>
+    <br>
+  <% end %>
 <% end %>
