@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160913085516) do
+ActiveRecord::Schema.define(:version => 20160909152837) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -853,18 +853,6 @@ ActiveRecord::Schema.define(:version => 20160913085516) do
 
   add_index "page_visits", ["page_visitable_id"], :name => "index_page_visits_on_page_visitable_id"
   add_index "page_visits", ["user_id"], :name => "index_page_visits_on_user_id"
-
-  create_table "paper_versions", :force => true do |t|
-    t.string   "item_type",      :null => false
-    t.integer  "item_id",        :null => false
-    t.string   "event",          :null => false
-    t.string   "whodunnit"
-    t.text     "object"
-    t.datetime "created_at"
-    t.text     "object_changes"
-  end
-
-  add_index "paper_versions", ["item_type", "item_id"], :name => "index_paper_versions_on_item_type_and_item_id"
 
   create_table "paperclip_attachments", :force => true do |t|
     t.integer  "attacheable_id"

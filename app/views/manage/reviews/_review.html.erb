@@ -1,3 +1,4 @@
+<% changes = YAML.load(review.versions.last.body) if review.versions.present? %>
 <table>
   <tr>
     <th>Актуальная</th>
@@ -11,7 +12,7 @@
     </td>
     <td>
       <div class="title old">
-        <%= review.versions.last.reify.title if review.versions.last.try(:object).present? %>
+        <%= changes['title'][0] if changes && changes['title'] %>
       </div>
     </td>
   </tr>
@@ -23,12 +24,13 @@
     </td>
     <td>
       <div class="description old">
-        <%= review.versions.last.reify.content if review.versions.last.try(:object).present? %>
+        <%= changes['content'][0] if changes && changes['content'] %>
       </div>
     </td>
   </tr>
 
 </table>
+
 
 <%= review.date %>
 <div class="author">

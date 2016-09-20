@@ -55,7 +55,6 @@ class My::ReviewsController < My::ApplicationController
         if request.xhr?
           render :partial => 'my/reviews/right_side', :locals => { :review => ReviewDecorator.new(@review) } and return
         else
-          ReviewMailer.message_about_update(@review).deliver
           redirect_to params[:crop] ? poster_edit_my_review_path(resource.id) : my_review_path(resource.id)
         end
       }

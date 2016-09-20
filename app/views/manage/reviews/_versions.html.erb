@@ -1,14 +1,12 @@
-<% review.versions.reverse.each do |version| %>
-  <% if version.event != 'create' %>
+<% changes = YAML.load(review.versions.last.body) %>
+<% changes.keys.each do |key| %>
+  <br><br>"<%= t("review.for_message.#{key}") %>"
+  <% if key != 'poster_url' %>
     <hr>
-
-    <%= "Изменено #{version.created_at}" %>
-    <%= render :partial => 'manage/reviews/review', :locals => { :review => ReviewDecorator.decorate(version.reify) } %>
-    <ul class="tags">
-      <% ReviewDecorator.decorate(version.reify).tags.each do |item| %>
-        <li><%= item %></li>
-      <% end %>
-    </ul>
+    <%= "Было:  #{changes[key][0]}" %>
+    <hr>
+    <%= "Стало: #{changes[key][1]}" %>
   <% end %>
+  <br>
 <% end %>
-
+<br>

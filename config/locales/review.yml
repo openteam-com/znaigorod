@@ -8,7 +8,7 @@ ru:
       tag: Тэги
       categories: Категории
       video_url: Видео
-      poster_image_url: Постер
+      poster_url: Постер
 
     state:
       published: Опубликован

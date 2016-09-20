@@ -61,7 +61,6 @@ group :default do
   gem 'openteam-commons'
   gem 'paperclip'
   gem 'paperclip-elvfs'
-  gem 'paper_trail'
   gem 'pg'
   gem 'progress_bar'
   gem 'rack-utf8_sanitizer'
