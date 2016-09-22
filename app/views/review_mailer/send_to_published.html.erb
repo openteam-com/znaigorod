@@ -1,0 +1,14 @@
+<% content_for :content do %>
+  <div class='mail_review_wrapper'>
+    <table>
+      <tr><td class='mail_review_header'><h2>Здравствуйте, <%= @review.user.name %>!</h2></td></tr>
+      <tr><td>Поздравляем! Теперь Вы стали частью информационного портала «ЗнайГород».</td></tr>
+      <tr><td>Ваш обзор <b>'<%= @review.title %>'</b> успешно опубликован.</td></tr>
+      <tr><td>Для Вашего удобства была сгенерирована ссылка на обзор:</td></tr>
+      <tr><td><%= link_to @review.title, "#{Settings['app']['url']}/my/reviews/#{@review.id}" %></td></tr>
+      <tr><td>Используя данную ссылку, Вы можете поделиться своим обзором с друзьями в социальных сетях.</td></tr>
+      <tr><td class='mail_review_ps'>Успехов! «ЗнайГород» любит Вас!</td></tr>
+    </table>
+  </div>
+<% end %>
+

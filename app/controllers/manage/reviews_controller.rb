@@ -28,6 +28,7 @@ class Manage::ReviewsController < Manage::ApplicationController
   def send_to_published
     send_to_published!{
       @review.to_published!
+      ReviewMailer.send_to_published(@review).deliver if !@review.user.account.email.nil?
       redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» опубликован." and return
     }
   end
