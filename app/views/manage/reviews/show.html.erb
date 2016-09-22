@@ -15,7 +15,6 @@
     <% end %>
 
     <%= render @review.webanketas.actual %>
-    <%= render :partial => 'versions', :locals => { :review => @review } if @review. versions.present?%>
     <% if @review.moderating? %>
       <div class="decision">
         <div class="allow">
@@ -32,5 +31,8 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="changes">
+    <%= render :partial => 'versions', :locals => { :review => @review } if @review. versions.present?%>
   </div>
 </div>

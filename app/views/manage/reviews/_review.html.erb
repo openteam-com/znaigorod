@@ -1,38 +1,19 @@
-<% changes = YAML.load(review.versions.last.body) if review.versions.present? %>
-<table>
-  <tr>
-    <th>Актуальная</th>
-    <th>Предыдущая версия</th>
-  </tr>
-  <tr>
-    <td>
-      <div class="title">
-        <%= review.title %>
-      </div>
-    </td>
-    <td>
-      <div class="title old">
-        <%= changes['title'][0] if changes && changes['title'] %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div class="description">
-        <%= review.content %>
-      </div>
-    </td>
-    <td>
-      <div class="description old">
-        <%= changes['content'][0] if changes && changes['content'] %>
-      </div>
-    </td>
-  </tr>
+<div class="title">
+  <%= review.title %>
+</div>
 
-</table>
-
+<div class="details">
+  <span class="show_tipsy fa fa-comments" title="Комментарии"> <%= review.comments.count %></span>
+  <span class="show_tipsy fa fa-heart" title="Понравилось"> <%= review.likes_count %></span>
+  <span class="show_tipsy fa fa-eye" title="Просмотры"> <%= review.page_visits.count %></span>
+</div>
 
 <%= review.date %>
+
+<div class="description">
+  <%= review.content_for_show %>
+</div>
+
 <div class="author">
   <%= render :partial => 'commons/author', :locals => { :account => @review.account } %>
 </div>

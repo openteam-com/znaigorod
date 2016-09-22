@@ -1,12 +1,16 @@
 <% changes = YAML.load(review.versions.last.body) %>
-<% changes.keys.each do |key| %>
-  <br><br>"<%= t("review.for_message.#{key}") %>"
-  <% if key != 'poster_url' %>
-    <hr>
-    <%= "Было:  #{changes[key][0]}" %>
-    <hr>
-    <%= "Стало: #{changes[key][1]}" %>
-  <% end %>
-  <br>
-<% end %>
+<table>
+  <tr>
+    <th style="width: 20%">Измененный аттрибут</th><th>Стало</th><th>Было</th>
+  </tr>
+  <% changes.keys.each do |key| %>
+    <tr>
+      <td>"<%= t("review.for_message.#{key}") %>"</td>
+      <% if key != 'poster_url' %>
+        <td><%= "#{changes[key][1]}" %></td>
+        <td><%= "#{changes[key][0]}" %></td>
+      <% end %>
+    <% end %>
+  </tr>
+</table>
 <br>

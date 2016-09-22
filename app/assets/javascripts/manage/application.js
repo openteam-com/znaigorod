@@ -42,6 +42,7 @@
  * = require ./main_page_posters
  * = require ./afisha_list_posters
  * = require ./kinopoisk
+ * = require ./review
  * = require ../public/my_reviews
  * = require ../public/my_related_items
  * = require ../public/my_discount
