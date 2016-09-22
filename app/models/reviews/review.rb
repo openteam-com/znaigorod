@@ -15,7 +15,6 @@ class Review < ActiveRecord::Base
   alias_attribute :description_ru, :content
   alias_attribute :title_ru,       :title
 
-  #after_update :delete_old_versions
   before_save :set_poster
 
   before_save :store_cached_content_for_index

@@ -3,6 +3,11 @@
 class MyMailer < ActionMailer::Base
   default :from => Settings['mail']['from']
 
+  def message_about_update(review)
+    @review = review
+    mail :to => Settings['mail']['to_review'], :from => @review.user.account.email, :subject => "Обзор #{@review.title} был изменён."
+  end
+
   def mail_new_pending_afisha(afisha)
     @afisha = afisha
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Добавлена новая афиша')

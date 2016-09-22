@@ -16,8 +16,9 @@ class ReviewObserver < ActiveRecord::Observer
 
   def before_save(review)
     if review.published? && review.change_versionable? && !review.user.review_manager?
+      review.delete_old_versions
       review.save_version
-      ReviewMailer.message_about_update(review).deliver
+      MyMailer.message_about_update(review).deliver
     end
   end
 
