@@ -63,8 +63,7 @@
                             	<tr>
                                 <td class="center without-padding" align="center">
                                   <center>
-                                    <span><%= t "notice_mailer.you_can_unsubscribe_in" %><a href="<%= edit_my_account_path(:only_path => false, :utm_campaign => "znaigorod", :utm_medium => "email", :utm_source => "email") %>"><%= t "notice_mailer.private_settings" %></a></span><br />
-                                    <span> <%= t "notice_mailer.on_the_site" %> <a href="<%= Settings['app']['url'] %>?utm_source=email&utm_medium=email&utm_campaign=znaigorod">znaigorod.ru</a></span>
+                                    <span><a href="<%= Settings['app']['url'] %>?utm_source=email&utm_medium=email&utm_campaign=znaigorod">znaigorod.ru</a></span>
                                   </center>
                                 </td>
                             	</tr>

@@ -14,7 +14,6 @@
       </ul>
     <% end %>
 
-    <%= link_to 'Последние изменения', '#', class: 'link_to_display' if @review.versions.present? %>
     <%= render @review.webanketas.actual %>
     <% if @review.moderating? %>
       <div class="decision">
@@ -32,6 +31,7 @@
         </div>
       </div>
     <% end %>
+  <%= link_to 'Последние изменения', '#', class: 'link_to_display' if @review.versions.present? %>
   </div>
   <div class="changes" style='display:none;'>
     <%= render :partial => 'versions', :locals => { :review => @review } if @review. versions.present?%>
