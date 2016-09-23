@@ -53,6 +53,20 @@
       </tr>
     </tbody>
   </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Количество оплаченных обзоров</th>
+        <th>На сумму</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @published_review_payments.count %></td>
+        <td><%= @published_review_payments.map(&:amount).sum %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <h2>Афиша</h2>

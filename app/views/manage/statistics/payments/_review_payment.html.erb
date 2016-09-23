@@ -1,0 +1,9 @@
+<tr>
+  <td><%= payment.id %></td>
+  <td><%= payment.amount %></td>
+  <td></td>
+  <td><%= Review.find(payment.paymentable_id).user.account.try(:email) if Review.exists?(payment.paymentable_id) %></td>
+  <td><%= "Оплачена публикация обзора #{ Review.exists?(payment.paymentable_id) ? link_to(Review.find(payment.paymentable_id).title, manage_review_path(payment.paymentable_id)) : '-Обзор удалён-'}".html_safe %></td>
+  <td><%= payment.state_text %></td>
+  <td><%= l payment.created_at %></td>
+</tr>
