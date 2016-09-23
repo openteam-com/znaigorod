@@ -5,6 +5,7 @@ class ReviewPayment < Payment
     super
 
     paymentable.to_published!
+    ReviewMailer.send_to_published(Review.find(paymentable.id)).deliver
     create_notification_message
   end
 
