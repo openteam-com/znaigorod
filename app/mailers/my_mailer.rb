@@ -5,7 +5,7 @@ class MyMailer < ActionMailer::Base
 
   def message_about_update(review)
     @review = review
-    mail :to => Settings['mail']['to_review'], :from => @review.user.account.email, :subject => "Обзор #{@review.title} был изменён."
+    mail :to => Settings['mail']['to_review'], :subject => "Обзор #{@review.title} был изменён."
   end
 
   def mail_new_pending_afisha(afisha)
@@ -15,7 +15,7 @@ class MyMailer < ActionMailer::Base
 
   def mail_send_review_to_moderating(review)
     @review = review
-    mail(:to => Settings['mail']['to_review'], :from => @review.user.account.email, :subject => '[ZnaiGorod] Обзор на модерацию')
+    mail(:to => Settings['mail']['to_review'], :subject => '[ZnaiGorod] Обзор на модерацию')
   end
 
   def mail_new_published_afisha(afisha)
