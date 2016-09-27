@@ -84,7 +84,6 @@
       <%= link_to 'Опубликовать', '#',  :class => 'flat-btn btn-disabled btn-lg' %>
     <% end %>
 
-    <span class='state'><%= t("review.state.#{@review.state}") %></span>
 
   </div>
 
@@ -98,6 +97,10 @@
     </div>
   <% end %>
 </div>
-<% if resource.moderating? %>
-  <span class='message_edit'>Вы не можете редактировать обзор пока он находится в процессе модерации!</span>
-<% end %>
+<div class="state_wrapper">
+  <p  class="image"><%= image_tag "public/review_state_#{@review.state}.png" %></p>
+  <p class='state' style='<%= "color: #{@review.state == 'published' ? '#00a83f' : @review.state == 'draft' ? '#774b33' : @review.state == 'payment' ? '#005cca' : '#ff6600' };".html_safe %>' ><%= t("review.state.#{@review.state}") %></p>
+  <% if resource.moderating? %>
+    <span class='message_edit'>(Вы не можете редактировать обзор пока он находится в процессе модерации!)</span>
+  <% end %>
+</div>
