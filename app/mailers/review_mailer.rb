@@ -7,7 +7,7 @@ class ReviewMailer < ActionMailer::Base
   end
 
   def send_to_published(review)
-    @review = review
+    @review = ReviewDecorator.decorate(review)
     mail :to => @review.account.email, :subject => "Ваш обзор '#{@review.title}' опубликован"
   end
 

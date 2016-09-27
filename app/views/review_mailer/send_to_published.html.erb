@@ -4,7 +4,7 @@
     <tr><td>Поздравляем! Теперь Вы стали частью информационного портала «ЗнайГород».</td></tr>
     <tr><td>Ваш обзор <b>'<%= @review.title %>'</b> успешно опубликован.</td></tr>
     <tr><td>Для Вашего удобства была сгенерирована ссылка на обзор:</td></tr>
-    <tr><td><%= link_to @review.title, "#{Settings['app']['url']}/my/reviews/#{@review.id}" %></td></tr>
+    <tr><td><%= link_to "#{Settings['app']['url']}/#{@review.slug}", review_path(@review) %></td></tr>
     <tr><td>Используя данную ссылку, Вы можете поделиться своим обзором с друзьями в социальных сетях.</td></tr>
     <tr><td class='mail_review_ps'>Успехов! «ЗнайГород» любит Вас!</td></tr>
   </table>
