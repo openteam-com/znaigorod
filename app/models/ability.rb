@@ -150,7 +150,7 @@ class Ability
       end
 
       can :send_to_published, Review do |review|
-        review.moderating? && review.account == user.account
+        review.user.review_manager? && review.account == user.account
       end
 
       can :send_to_moderating, Review do |review|
