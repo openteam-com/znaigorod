@@ -1,6 +1,7 @@
 *.pid
 *.sql
 *.swp
+.ruby-version
 .DS_Store
 .sass-cache/
 /.bundle
