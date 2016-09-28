@@ -15,4 +15,15 @@ class ReviewMailer < ActionMailer::Base
     @review = review
     mail :to => @review.account.email, :subject => "Ваш обзор '#{@review.title}' допущен к публикации."
   end
+
+  def send_to_draft_again(review)
+    @review = review
+    mail :to => @review.account.email, :subject => "Ваш обзор '#{@review.title}' отправлен в черновики."
+  end
+
+  def send_to_payment_again(review)
+    @review = review
+    mail :to => @review.account.email, :subject => "Ваш обзор '#{@review.title}' необходимо оплатить."
+  end
+
 end

@@ -124,6 +124,7 @@ class Review < ActiveRecord::Base
       :price,
       :contest_id,
       :state,
+      :rating,
       :total_rating,
       :updated_at,
       :user_id,

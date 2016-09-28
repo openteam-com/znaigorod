@@ -42,7 +42,7 @@ module DraftPublishedStates
       end
 
       event :to_payment do
-        transition :moderating => :payment
+        transition [:published, :moderating] => :payment
       end
 
       event :to_draft do

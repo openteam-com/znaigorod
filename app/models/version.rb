@@ -13,7 +13,7 @@ class Version < ActiveRecord::Base
   end
 
   def self.count_for(name)
-    where(:versionable_type => name).count
+    where(:versionable_type => name).pluck('versionable_id').uniq.count
   end
 end
 

@@ -15,7 +15,8 @@
     <% end %>
 
     <%= render @review.webanketas.actual %>
-    <% if @review.moderating? %>
+    <% if @review.moderating? || @review.published? %>
+      <%= link_to 'Модерация', 'javascript:;', class: 'link_to_display_moderating' %>
       <div class="decision">
         <div class="allow">
           <%= simple_form_for @review, url: payment_manage_review_path(@review.id) do |f| %>
@@ -25,15 +26,18 @@
         </div>
         <div class="disallow">
           <%= simple_form_for @review, url: draft_manage_review_path(@review.id) do |f| %>
-            <%= f.input :comment, as: :text, label: 'Комментарий' %>
+            <%= f.input :comment, as: :text, label: 'Комментарий', input_html: { cols: '60', rows: '3' } %>
             <%= f.submit 'Запретить',class:'flat-btn btn-red btn-lg' %>
           <% end %>
         </div>
       </div>
     <% end %>
-  <%= link_to 'Последние изменения', '#', class: 'link_to_display' if @review.versions.present? %>
+  <br>
+  <%= link_to 'Последние изменения', 'javascript:;', class: 'link_to_display_changes' if @review.versions.present? %>
   </div>
   <div class="changes" style='display:none;'>
-    <%= render :partial => 'versions', :locals => { :review => @review } if @review. versions.present?%>
+    <% @review.versions.reverse.each do |version| %>
+      <%= render :partial => 'version', :locals => { :version => version } %>
+    <% end %>
   </div>
 </div>

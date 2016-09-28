@@ -3,4 +3,4 @@
 '<%= @review.title %>'
 были изменёны аттрибуты:
 <br>
-<%= render :partial => 'manage/reviews/versions', :locals => { :review => @review } %>
+<%= render :partial => 'manage/reviews/version', :locals => { :version => @review.versions.last } %>

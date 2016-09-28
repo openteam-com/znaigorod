@@ -36,8 +36,12 @@ class Manage::ReviewsController < Manage::ApplicationController
   def send_to_draft
     send_to_draft!{
       @review.comment = params[:review][:comment] if params[:review] && params[:review][:comment]
+      if @review.moderating?
+        ReviewMailer.send_to_draft(@review).deliver if !@review.comment.nil? && !@review.user.account.email.nil?
+      else
+        ReviewMailer.send_to_draft_again(@review).deliver if !@review.comment.nil? && !@review.user.account.email.nil?
+      end
       @review.to_draft!
-      ReviewMailer.send_to_draft(@review).deliver if !@review.comment.nil? && !@review.user.account.email.nil?
       redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» возвращен в черновики." and return
     }
   end
@@ -46,8 +50,12 @@ class Manage::ReviewsController < Manage::ApplicationController
     send_to_payment!{
       if !params[:review].nil? && !params[:review][:price].nil?
         @review.update_attribute(:price, params[:review][:price])
+        if @review.moderating?
+          ReviewMailer.send_to_payment(@review).deliver
+        else
+          ReviewMailer.send_to_payment_again(@review).deliver
+        end
         @review.to_payment!
-        ReviewMailer.send_to_payment(@review).deliver
         redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» допущен к оплате." and return
       else
         redirect_to manage_review_path(@review.id) and return
@@ -56,8 +64,8 @@ class Manage::ReviewsController < Manage::ApplicationController
   end
 
   def updated
-    @reviews = Review.select { |r| !r.versions.blank? }
-
+    @reviews = []
+    Version.where(:versionable_type => 'Review').pluck('versionable_id').uniq.each { |r| @reviews << Review.find(r) }
   end
 
   private

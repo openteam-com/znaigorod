@@ -2,6 +2,7 @@ $ ->
   init_datetime_picker()
 
   init_display_changes_table() if $('.changes').length
+  init_display_moderating() if $('.decision').length
   init_new_affiche() if $('.dropdown').length
   init_choose_file() if $('.choose_file').length
   init_autosuggest_handler() if $('.autosuggest').length

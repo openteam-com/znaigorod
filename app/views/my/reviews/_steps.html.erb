@@ -104,5 +104,8 @@
     <% if resource.moderating? %>
       <span class='message_edit'>(Вы не можете редактировать обзор пока он находится в процессе модерации!)</span>
     <% end %>
+    <% if resource.payment? %>
+      <span class='message_edit'>(Вы не можете редактировать обзор пока он ожидает оплаты!)</span>
+    <% end %>
   </div>
 <% end %>

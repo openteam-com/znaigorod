@@ -146,7 +146,7 @@ class Ability
       end
 
       cannot [:edit, :update, :destroy, :edit_poster, :add_related_items], Review do |review|
-        review.moderating?
+        review.moderating? || review.payment?
       end
 
       can :send_to_published, Review do |review|
