@@ -1,6 +1,8 @@
 $ ->
   init_datetime_picker()
 
+  init_display_changes_table() if $('.changes').length
+  init_display_moderating() if $('.decision').length
   init_new_affiche() if $('.dropdown').length
   init_choose_file() if $('.choose_file').length
   init_autosuggest_handler() if $('.autosuggest').length
@@ -37,6 +39,7 @@ $ ->
 
 $(window).load ->
   init_organization_map() if $('.edit_organization, .new_organization').length
+  init display_changes_table() if $('.changes').length
   init_discount_map() if $('.discount').length
   init_map_project() if $('.map_project_wrapper .map_project_map').length
   init_map_placemark() if $('.map_placemark_form').length

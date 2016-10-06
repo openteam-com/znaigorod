@@ -5,12 +5,12 @@ class Account < ActiveRecord::Base
 
   include CropedPoster
 
-  attr_accessor :poster_image_url, :poster_image_content_type
+  attr_accessor :review_id, :poster_image_url, :poster_image_content_type
 
   alias_attribute :file_url, :avatar_url
   alias_attribute :to_s,     :title
 
-  attr_accessible :avatar, :birthday, :email, :badge,
+  attr_accessible :review_id, :avatar, :birthday, :email, :badge,
                   :first_name, :gender, :last_name, :patronymic,
                   :rating, :nickname, :location,
                   :account_settings_attributes,

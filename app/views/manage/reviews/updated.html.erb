@@ -1,0 +1,12 @@
+<div class="clearfix"></div>
+
+<ul class="collection">
+  <% @reviews.each do |item| %>
+    <li>
+      <span class="title"><%= link_to item.title, manage_review_path(item.id) %></span>
+      <span class="author"><%= item.account if item.account %></span>
+      <span class="type"><%= item.is_a?(Question) ? 'Вопрос' : 'Обзор' %></span>
+      <span class="status"><%= item.published? ? 'Опубликован' : 'Не опубликован' %></span>
+    </li>
+  <% end %>
+</ul>

@@ -186,6 +186,22 @@ ru:
     other: "Черновики (%{count})"
     zero:  "Черновики"
 
+  moderating:
+    one:   "На модерации (%{count})"
+    few:   "На модерации (%{count})"
+    many:  "На модерации (%{count})"
+    other: "На модерации (%{count})"
+    zero:  "На модерации"
+
+  payment:
+    one:   "Ждёт оплаты (%{count})"
+    few:   "Ждёт оплаты (%{count})"
+    many:  "Ждёт оплаты (%{count})"
+    other: "Ждёт оплаты (%{count})"
+    zero:  "Ждёт оплаты"
+
+
+
   all:
     one:   "Все (%{count})"
     few:   "Все (%{count})"

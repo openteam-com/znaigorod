@@ -9,9 +9,19 @@ class MyMailer < ActionMailer::Base
     mail(:to => @organization.email.split(',')[0], :subject => '[ZnaiGorod] Срок действия тарифа истёк') if @organization.email.present?
   end
 
+  def message_about_update(review)
+    @review = review
+    mail :to => Settings['mail']['to_review'], :subject => "Обзор #{@review.title} был изменён."
+  end
+
   def mail_new_pending_afisha(afisha)
     @afisha = afisha
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Добавлена новая афиша')
+  end
+
+  def mail_send_review_to_moderating(review)
+    @review = review
+    mail(:to => Settings['mail']['to_review'], :subject => '[ZnaiGorod] Обзор на модерацию')
   end
 
   def mail_new_published_afisha(afisha)

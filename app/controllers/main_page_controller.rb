@@ -8,12 +8,12 @@ class MainPageController < ApplicationController
         @accounts          = AccountsPresenter.new(:per_page => 6, :acts_as => ['inviter', 'invited'], :with_avatar => true)
         @webcams           = Webcam.our.published.shuffle.take(4)
         @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
+        @afisha_excursions_list   = AfishaPresenter.new(:per_page => 6, :without_advertisement => true, :order_by => 'creation', :categories => ['excursions']).decorated_collection
       }
 
       format.promotion {
         if params['content'] == 'afisha'
           @afisha_list              = MainPagePoster.where('afisha_id is not null').ordered.actual.map { |afisha| AfishaDecorator.new Afisha.find(afisha.afisha_id) }
-          @afisha_excursions_list   = AfishaPresenter.new(:per_page => 6, :without_advertisement => true, :order_by => 'creation', :categories => ['excursions']).decorated_collection
           other_afishas_list        = AfishaPresenter.new(:per_page => 6 - @afisha_list.count, :without_advertisement => true, :order_by => 'creation', main_page: @afisha_list.any? ? true : false).decorated_collection
           @afisha_list              += other_afishas_list
           @afisha_filter            = AfishaPresenter.new(:has_tickets => false)

@@ -5,6 +5,7 @@ module DraftPublishedStates
     scope :by_kind,   -> (kind) { where(:kind => kind) }
     scope :by_state,  -> (state) { where(:state => state) }
     scope :draft,     -> { with_state(:draft) }
+    scope :moderating,-> { with_state(:moderating) }
     scope :published, -> { with_state(:published) }
     scope :archive,   -> { with_state(:archive) }
 
@@ -29,15 +30,23 @@ module DraftPublishedStates
       end
 
       event :to_published do
-        transition [:draft, :archive] => :published
+        transition [:payment, :moderating, :draft, :archive] => :published
       end
 
       event :to_archive do
         transition :published => :archive
       end
 
+      event :to_moderating do
+        transition :draft => :moderating
+      end
+
+      event :to_payment do
+        transition [:published, :moderating] => :payment
+      end
+
       event :to_draft do
-        transition :published => :draft
+        transition [:published, :moderating] => :draft
       end
 
       state :published do

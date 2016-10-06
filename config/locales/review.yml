@@ -1,5 +1,21 @@
 ru:
   review:
+    for_message:
+      title: Название
+      type: Тип
+      content: Содержание
+      slug: Служба
+      tag: Тэги
+      categories: Категории
+      video_url: Видео
+      poster_url: Постер
+
+    state:
+      published: Опубликован
+      payment: Ждёт оплаты
+      moderating: На модерации
+      draft: В черновиках
+
     title:
       article: Обзор
       photo: Фотообзор

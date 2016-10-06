@@ -1,10 +1,6 @@
 <div class="actions">
-  <% if @review.draft? %>
-    <%= link_to 'Опубликовать', publish_manage_review_path(@review.id), :method => :put %>
-  <% else %>
-    <%= link_to 'В черновики', draft_manage_review_path(@review.id), :method => :put %>
-  <% end %>
-
+  <%= link_to 'Опубликовать', publish_manage_review_path(@review.id), :method => :put if @review.draft? || @review.moderating? %>
+  <%= link_to 'В черновики', draft_manage_review_path(@review.id), :method => :put unless @review.draft? %>
   <%= link_to 'Удалить', manage_review_path(@review.id), :confirm => 'Вы уверены?', :method => :delete %>
   <%= link_to 'Редактировать', edit_manage_review_path(@review.id) %>
   <%= link_to 'Изменить постер', poster_edit_manage_review_path(@review.id) %>

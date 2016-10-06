@@ -59,6 +59,7 @@ Znaigorod::Application.routes.draw do
     resources :reviews do
       get ':by_category' =>'reviews#index', :on => :collection, :as => :by_category, :constraints => {:by_category => /#{Review.categories.values.map(&:value).join('|')}/}
       get ':by_state' => 'reviews#index', :on => :collection, :as => :by_state, :constraints => { :by_state => /#{Review.state_machine.states.map(&:name).join('|')}/ }
+      get 'updated' => 'reviews#updated', :on => :collection, :as => :updated
     end
 
     resources :afisha, :except => [:index, :show], :controller => 'afishas' do

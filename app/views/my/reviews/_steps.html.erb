@@ -68,15 +68,23 @@
   <div class="controls">
     <% if resource.persisted? %>
       <% if resource.draft? %>
-        <%= link_to t('my.send_to_public'), publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
-          :confirm => 'Вы уверены? После публикации обзор будет доступен всем пользователям сайта!' %>
+        <% if current_user.review_manager? %>
+          <%= link_to 'Опубликовать', publish_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg', :confirm => 'Вы уверены что хотите опубликовать обзор?' %>
+        <% else %>
+          <%= link_to 'Опубликовать', moderating_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-orange btn-lg',
+            :confirm => 'Вы уверены?' %>
+        <% end %>
+      <% elsif resource.payment?  %>
+        <%= link_to "Оплатить (#{@review.price} руб.)", my_review_review_payments_path(@review.id), :method => :post, :target => '_blank', :class => 'flat-btn btn-green btn-lg' %>
       <% else %>
         <%= link_to 'В черновики', draft_my_review_path(@review.id), :method => :put, :class => 'flat-btn btn-grey btn-lg',
           :confirm => 'Вы уверены? После подтверждения обзор будет недоступен пользователям сайта!' %>
       <% end %>
     <% else %>
-      <%= link_to t('my.send_to_public'), '#',  :class => 'flat-btn btn-disabled btn-lg' %>
+      <%= link_to 'Опубликовать', '#',  :class => 'flat-btn btn-disabled btn-lg' %>
     <% end %>
+
+
   </div>
 
   <% if resource.has_annotation_gallery? %>
@@ -89,3 +97,15 @@
     </div>
   <% end %>
 </div>
+<% if resource.persisted? %>
+  <div class="state_wrapper">
+    <p  class="image"><%= image_tag "public/review_state_#{@review.state}.png" %></p>
+    <p class='state' style='<%= "color: #{@review.state == 'published' ? '#00a83f' : @review.state == 'draft' ? '#774b33' : @review.state == 'payment' ? '#005cca' : '#ff6600' };".html_safe %>' ><%= t("review.state.#{@review.state}") %></p>
+    <% if resource.moderating? %>
+      <span class='message_edit'>(Вы не можете редактировать обзор пока он находится в процессе модерации!)</span>
+    <% end %>
+    <% if resource.payment? %>
+      <span class='message_edit'>(Вы не можете редактировать обзор пока он ожидает оплаты!)</span>
+    <% end %>
+  </div>
+<% end %>

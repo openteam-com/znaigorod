@@ -1106,6 +1106,7 @@ ActiveRecord::Schema.define(:version => 20160805071951) do
     t.integer  "contest_id"
     t.string   "old_slug"
     t.boolean  "as_collage",                :default => false
+    t.integer  "price"
   end
 
   create_table "roles", :force => true do |t|

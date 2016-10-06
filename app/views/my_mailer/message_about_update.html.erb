@@ -1,0 +1,6 @@
+<%= link_to 'Посмотреть в manage.', "#{Settings['app']['url']}/manage/reviews/#{@review.id}" %>
+В обзорe
+'<%= @review.title %>'
+были изменёны аттрибуты:
+<br>
+<%= render :partial => 'manage/reviews/version', :locals => { :version => @review.versions.last } %>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <%= stylesheet_link_tag 'mailer/ink', :media => 'all' %>
+    <%= stylesheet_link_tag 'mailer/notice_layout', :media => 'all' %>
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td class="center" align="center" valign="top">
+          <center>
+
+            <table class="row" id="header" >
+              <tr>
+                <td class="center" align="center">
+                  <center>
+
+                    <table class="container">
+                      <tr>
+                        <td class="border_grey wrapper last">
+
+                          <table class="custom_column_width columns">
+                            <tr>
+                              <td class="five sub-columns">
+                                <a href="<%= Settings['app']['url'] %>?utm_source=email&utm_medium=email&utm_campaign=znaigorod">
+                                  <img src="<%= Settings['app']['url'] %>/assets/public/logo.png" width="109px" height="56px" alt="znaigorod" title="znaigorod" />
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+
+                        </td>
+                      </tr>
+                    </table>
+
+                  </center>
+                </td>
+              </tr>
+            </table>
+
+            <table class="row ">
+              <tr>
+                <td class="center" align="center">
+                  <center>
+
+                    <table id="main" class="middle ten columns container">
+                      <tr>
+                        <td class="without-padding">
+                          <table class="custom_column_width columns" id="middle">
+
+                                    <%= yield :content %>
+
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="center" align="center">
+                          <center>
+                            <table class="ten columns container">
+                            	<tr>
+                                <td class="center without-padding" align="center">
+                                  <center>
+                                    <span><a href="<%= Settings['app']['url'] %>?utm_source=email&utm_medium=email&utm_campaign=znaigorod">znaigorod.ru</a></span>
+                                  </center>
+                                </td>
+                            	</tr>
+                            </table>
+                          </center>
+                        </td>
+                      </tr>
+                    </table>
+                  </center>
+                </td>
+              </tr>
+            </table>
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -26,6 +26,7 @@ class Review < ActiveRecord::Base
 
   after_save :parse_related_items, :if => :need_change
 
+  attr_accessor :comment
   attr_accessible :content, :title, :tag, :categories,
                   :allow_external_links, :only_tomsk,
                   :related_items, :tagit_categories, :need_change, :category_flag,
@@ -38,9 +39,10 @@ class Review < ActiveRecord::Base
 
   has_many :review_category_items, :dependent => :destroy
   has_many :organization_categories, :through => :review_category_items
-
+  has_many :review_payments, :as => :paymentable, :dependent => :destroy
   has_many :all_images,            :as => :attachable, :class_name => 'Attachment', :conditions => { :type => %w[GalleryImage GallerySocialImage] }
   has_many :comments,              :as => :commentable,    :dependent => :destroy
+  has_many :versions,              :dependent => :destroy, :as => :versionable, :order => 'id ASC'
   has_many :gallery_images,        :as => :attachable,     :dependent => :destroy
   has_many :gallery_social_images, :as => :attachable,     :dependent => :destroy
   has_many :messages,              :as => :messageable,    :dependent => :destroy
@@ -61,6 +63,7 @@ class Review < ActiveRecord::Base
 
   scope :by_state,          -> (state) { where :state => state }
   scope :draft,             -> { where :state => :draft }
+  scope :can_draft,         -> { where("state = 'published' OR state = 'moderating'") }
   scope :published,         -> { where :state => :published }
   scope :without_questions, -> { where "type != 'Question'" }
   scope :ordered,           order('created_at desc')
@@ -87,6 +90,49 @@ class Review < ActiveRecord::Base
     I18n.l(created_at, :format => '%Y-%m') + '/' + old_normalize_friendly_id(string)
   end
 
+  def delete_old_versions
+    versions.map(&:delete)
+  end
+
+  def change_versionable?
+    self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
+  end
+
+  def check_poster_changed?
+    version = JSON.parse(self.versions.last.body) if self.versions.any?
+
+    return true if version && version.has_key?('poster_url')
+
+    false
+  end
+
+
+  def save_version
+    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
+  end
+
+  def ignore_fields
+    [ :created_at,
+      :id,
+      :cached_content_for_show,
+      :cached_content_for_index,
+      :poster_image_content_type,
+      :poster_image_file_name,
+      :poster_image_file_size,
+      :poster_image_updated_at,
+      :slug,
+      :price,
+      :contest_id,
+      :state,
+      :rating,
+      :total_rating,
+      :updated_at,
+      :user_id,
+      :vkontakte_likes,
+      :yandex_metrika_page_views,
+      :vfs_path
+    ]
+  end
   has_croped_poster min_width: 353, min_height: 199, :default_url => 'public/post_poster_stub.jpg'
 
   normalize_attribute :title, :with => [:strip, :squish]

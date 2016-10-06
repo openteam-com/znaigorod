@@ -6,6 +6,7 @@ Znaigorod::Application.routes.draw do
 
   namespace :my do
     resources :reviews do
+      resources :review_payments, :only => :create
       get 'add'                   => 'reviews#add',                   :on => :collection
       get 'images/add'            => 'reviews#add_images',            :on => :member
       get 'add_related_items'     => 'reviews#add_related_items',     :on => :member
@@ -19,8 +20,10 @@ Znaigorod::Application.routes.draw do
 
       put :download_album, :on => :member
 
-      put 'publish' => 'reviews#send_to_published', :on => :member
-      put 'draft'   => 'reviews#send_to_draft',     :on => :member
+      put 'publish' => 'reviews#send_to_published',           :on => :member
+      put 'draft'   => 'reviews#send_to_draft',               :on => :member
+      put 'moderating'   => 'reviews#send_to_moderating',     :on => :member
+      get 'moderating'   => 'reviews#send_to_moderating',     :on => :member
 
       Review.descendant_names_without_prefix.each do |name|
         get 'new/:type' => 'reviews#new',
@@ -60,6 +63,7 @@ Znaigorod::Application.routes.draw do
       get 'images/add'  => 'reviews#add_images',        :on => :member
       put 'publish'     => 'reviews#send_to_published', :on => :member
       put 'draft'       => 'reviews#send_to_draft',     :on => :member
+      put 'payment'     => 'reviews#send_to_payment',     :on => :member
     end
 
     # TODO: Used at app/views/manage/gallery_images/_gallery_image.html.erb:5

@@ -48,6 +48,10 @@
       <%= render :partial => 'discounts/discount_posters', :locals => { :collection => @presenter.collection } %>
     </ul>
 
+    <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '886', height: '90' if current_city == 'tomsk' %>
+
+    <br>
+
     <% if defined?(@organizations) %>
       <%= render :partial => 'organizations/promo_block', :locals => { :promoted_clients => @organizations.promoted_clients, :sub_class => 'discounts' } %>
     <% end %>

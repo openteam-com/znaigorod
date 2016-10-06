@@ -19,6 +19,7 @@ class Manage::Statistics::InvitationsController < Manage::ApplicationController
     @service_payments = ServicePayment.approved.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
 
     @promote_afisha_payments = PromoteAfishaPayment.approved.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
+    @published_review_payments = ReviewPayment.approved.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
     @promote_discount_payments = PromoteDiscountPayment.approved.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)
 
     @afishas = Afisha.published.where('created_at >= ? and created_at <= ?', @starts_at, @ends_at)

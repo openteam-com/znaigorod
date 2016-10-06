@@ -11,6 +11,10 @@ class Version < ActiveRecord::Base
   def what_changed
     body
   end
+
+  def self.count_for(name)
+    where(:versionable_type => name).pluck('versionable_id').uniq.count
+  end
 end
 
 # == Schema Information

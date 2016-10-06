@@ -6,11 +6,15 @@ ru:
           to_draft:     В черновики
           to_published: Опубликовать
           to_archive:   В архив
+          to_moderating: На модерацию
+          to_payment:    Разрешить оплату
 
         states:
           draft:      Черновик
           published:  Опубликовано
           archive:    В архиве
+          moderating: На модерации
+          payment:    Готово к оплате
 
       bet:
         state:

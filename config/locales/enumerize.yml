@@ -65,8 +65,9 @@ ru:
 
     role:
       admin:                   Администратор
-      afisha_editor:         Редактор афиши
-      afisha_trusted_editor: Проверенный редактор афиши
+      afisha_editor:           Редактор афиши
+      review_manager:          Редактор обзоров
+      afisha_trusted_editor:   Проверенный редактор афиши
       organizations_editor:    Редактор организаций
       posts_editor:            Редактор статей
       sales_manager:           Менеджер продаж

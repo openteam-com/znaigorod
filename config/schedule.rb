@@ -103,6 +103,11 @@ if dir.root.split('/').include?('znaigorod.ru')
 
   # ------------------------------------------
 
+  every 3.day do
+    rake 'review_delete_old_versions'
+  end
+
+
   # Commented for future
 
   #every :thursday, :at => '8:00 am' do

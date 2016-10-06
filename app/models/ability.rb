@@ -145,12 +145,20 @@ class Ability
         review.account == user.account
       end
 
+      cannot [:edit, :update, :destroy, :edit_poster, :add_related_items], Review do |review|
+        review.moderating? || review.payment?
+      end
+
       can :send_to_published, Review do |review|
+        review.user.review_manager? && review.account == user.account
+      end
+
+      can :send_to_moderating, Review do |review|
         review.draft? && review.account == user.account
       end
 
       can :send_to_draft, Review do |review|
-        review.published? && review.account == user.account
+        Review.can_draft.include?(review)  && review.account == user.account
       end
 
       can [:new, :create], Invitation if user.persisted?
@@ -164,7 +172,7 @@ class Ability
     when 'crm'
       return false if user.new_record?
 
-      return false unless user.is_admin? && user.is_sales_manager?
+      return false if !user.is_admin? && !user.is_sales_manager?
 
       can :manage, Organization do |organization|
         organization.manager.nil? || user.manager_of?(organization)
