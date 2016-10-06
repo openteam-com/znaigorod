@@ -60,6 +60,15 @@
     </div>
 
     <div>
+      <span class="label">Безналичный расчёт:</span>
+      <% if resource.non_cash.present? %>
+        <span class="value"><%= resource.non_cash ? 'Есть' : 'Отсутствует'  %></span>
+      <% else %>
+        <span class="blank">Не указано</span>
+      <% end %>
+    </div>
+
+    <div>
       <span class="label">Расписание работы:</span>
       <% if true %>
         <span class="value">
