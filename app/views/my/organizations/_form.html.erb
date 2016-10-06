@@ -53,13 +53,10 @@
     <hr>
   <% end %>
 
-  <% if resource.can_service? 'attachment_files' %>
-    <div class='attachments'>
-      <h3>Прикрепленные файлы</h3>
-       <% resource.gallery_files.each do |g| %>
-          <%= link_to g.file_file_name, g.file_url, target: '_blank' %>
-        <% end %>
-      <p><%= f.submit 'Редактировать галерею файлов', name: 'edit_gallery_files' %></p>
+  <% if resource.can_service? 'small_comment' %>
+    <div class='comment'>
+      <h3>Короткий комментарий</h3>
+       <%= f.input :comment %>
     <hr>
   <% end %>
 
@@ -75,6 +72,22 @@
     </div>
     <hr>
   <% end %>
+
+  <% if resource.can_service? 'price_list' %>
+      <div class="sections_wrapper">
+        <span>Разделы</span>
+        <div class="new_section">
+          <%= link_to 'Добавить раздел', new_my_organization_section_path(resource.id), target: '_blank' %>
+        </div>
+          <div class='sections'>
+              <% if resource.sections.any? %>
+                <% resource.sections.order_by_position.each do |section| %>
+                  <%= link_to section.title, my_organization_section_path(resource, section) %>
+                <% end %>
+              <% end %>
+          </div>
+      </div>
+    <% end %>
 
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>

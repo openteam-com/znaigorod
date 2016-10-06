@@ -216,7 +216,7 @@
                     </div>
                   </div>
 
-                  <% if @organization.client? %>
+                  <% if @organization.client? || @organization.can_service?('price_list') %>
                     <% @organization.decorated_suborganizations.each do |suborganization| %>
                       <%= render suborganization if suborganization.viewable? %>
                     <% end %>

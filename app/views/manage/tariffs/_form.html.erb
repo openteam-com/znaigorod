@@ -6,10 +6,11 @@
   <%= f.input :price_for_year %>
   <h4>Разрешить услуги</h4>
   <%= f.input :logotype, as: :boolean %>
-  <%= f.input :tour3d, as: :boolean%>
+  <%= f.input :small_comment, as: :boolean%>
   <%= f.input :description_field, as: :boolean%>
   <%= f.input :gallery, as: :boolean%>
-  <%= f.input :attachment_files, as: :boolean%>
+  <%= f.input :price_list, as: :boolean%>
+  <%= f.input :brand, as: :boolean%>
   <%= f.button :submit, 'Сохранить тариф' %>
 <% end %>
 <%= link_to 'Все тарифы', manage_tariffs_path %>

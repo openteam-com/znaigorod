@@ -118,17 +118,30 @@
       </div>
     <% end %>
 
-    <% if resource.can_service? 'tour3d' %>
-      <%= render resource.virtual_tour %>
+    <% if resource.can_service? 'small_comment' %>
+      <div>
+        <h3 class="label">Краткое описание:</h3>
+        <% if resource.comment.present? %>
+          <span class="value"><%= resource.comment %></span>
+        <% else %>
+          <span class="blank">Не указано</span>
+        <% end %>
+      </div>
     <% end %>
 
-    <% if resource.can_service? 'attachment_files' %>
-      <div class='attachments'>
-        <h3>Прикрепленные файлы</h3>
-          <% resource.gallery_files.each do |g| %>
-            <%= link_to g.file_file_name, g.file_url, target: '_blank' %>
-          <% end %>
+    <% if resource.can_service? 'price_list' %>
+      <div class="sections_wrapper">
+        <span>Раздел с расценками</span>
+
+          <div class='sections'>
+              <% if resource.sections.any? %>
+                <% resource.sections.order_by_position.each do |section| %>
+                  <%= link_to section.title, my_organization_section_path(resource, section) %>
+                <% end %>
+              <% end %>
+          </div>
       </div>
+
     <% end %>
 
     <% if resource.can_service? 'gallery' %>

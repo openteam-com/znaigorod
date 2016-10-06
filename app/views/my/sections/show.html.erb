@@ -1,0 +1,35 @@
+<span class="value"><%= link_to 'Назад к организации', my_organization_path(params[:organization_id])%></span>
+<div class="section_show js-section-show">
+  <div class='title'>
+    <%= simple_form_for [:my, :organization, @section], :remote => true do |f| %>
+      <%= f.input :title %>
+      <%= f.input :navigation_title, :input_html => { :placeholder => 'Заголовок в блоке навигации' } %>
+      <%= f.submit %>
+
+      <%= link_to 'Удалить', my_organization_section_path(params[:organization_id], resource), method: 'DELETE',
+        data: { confirm: "Вы уверены что хотите удалить раздел?" } %>
+    <% end %>
+  </div>
+
+  <%= link_to 'Новая страница', new_my_organization_section_section_page_path(params[:organization_id], resource), class: 'new_section_page' %>
+
+  <form class='js-sortable' data-sort='<%= sort_my_organization_section_section_pages_path(params[:organization_id], @section) %>'>
+    <ul class='section_pages_wrapper'>
+      <% if resource.section_pages.any? %>
+        <% resource.section_pages.order_by_position.each do |section_page| %>
+          <li>
+            <div class='sortable_handle'>&#8597;</div>
+            <%= hidden_field :position, section_page.id, :class => :position, :value => section_page.position %>
+            <%= link_to section_page.title, edit_my_organization_section_section_page_path(params[:organization_id], resource, section_page) %>
+            (<%= link_to "Удалить", my_organization_section_section_page_path(params[:organization_id], resource, section_page), method: 'DELETE', data: { confirm: 'Вы уверены что хотите удалить?' } %>)
+            <div class='section_page_content'>
+              <%= section_page.content.as_html %>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
+        <p>Нет страниц</p>
+      <% end %>
+    </ul>
+  </form>
+</div>

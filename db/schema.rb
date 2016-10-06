@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160909152837) do
+ActiveRecord::Schema.define(:version => 20161006080046) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -1463,10 +1463,11 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.boolean  "logotype",             :default => false
-    t.boolean  "tour3d",               :default => false
     t.boolean  "gallery",              :default => false
     t.boolean  "description_field",    :default => false
-    t.boolean  "attachment_files",     :default => false
+    t.boolean  "small_comment"
+    t.boolean  "price_list"
+    t.boolean  "brand"
   end
 
   create_table "teaser_items", :force => true do |t|
