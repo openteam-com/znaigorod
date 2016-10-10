@@ -1,0 +1,105 @@
+.malenkaya-krasavitsa-2016
+  margin-top: 25px !important
+  .new_work_wrapper
+    display: none
+
+  > h1
+    display: none
+
+  .description
+    font-size: 14px
+
+    ul
+      li
+        ul
+          margin-top: -15px
+
+    p
+      margin-bottom: 0px
+
+      &.no_margin
+        margin: 0
+
+      &.strong
+        font-weight: bold
+
+      &.underline
+        text-decoration: underline
+
+    // div && p
+    .paragraph
+      margin-left: 15px
+
+    .red-string
+      text-indent: 15px
+
+    .left-block
+      border-left: 3px solid #ccc
+      margin-left: 15px
+      padding: 10px 0 10px 15px
+      margin-top: 10px
+
+    .left
+      float: left
+      width: 375px
+
+      .contest_logo
+        background: transparent image_url('public/malenkaya-krasavitsa-2016/poster.jpg') no-repeat left center
+        width: 350px
+        height: 388px
+        background-size: cover
+
+        p
+          margin: 0
+
+      .partners
+        +clearfix
+
+        p
+          font-weight: bold
+          margin: 0 0 -17px
+
+        div
+          +inline-block
+          margin: 10px 15px 0 0
+
+          a
+            display: block
+            height: 100%
+            text-indent: -9999px
+            width: 100%
+
+        .pivovarnya
+          background: image_url('public/kubok-sodruzhestva-po-karaoke/pivovarnya_partner.png') no-repeat center center
+          height: 200px
+          width: 200px
+
+    .right
+      float: left
+      width: 755px
+
+      h1, h2
+        color: #e4097f
+
+      ul
+        list-style: disc outside
+        padding-left: 17px
+
+      .highlight
+        background-color: #67a6fe
+        color: #fff
+        margin: 15px 0
+        padding: 5px 10px
+        font-weight: bold
+
+      .highlight_pink
+        background-color: #67a6fe
+        color: #fff
+        margin: 15px 0
+        padding: 5px 10px
+        font-weight: bold
+        a
+          color: white
+
+  .new_work_wrapper
+    clear: both !important
