@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161006080046) do
+ActiveRecord::Schema.define(:version => 20161010080112) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -197,6 +197,28 @@ ActiveRecord::Schema.define(:version => 20161006080046) do
 
   add_index "bets", ["afisha_id"], :name => "index_bets_on_afisha_id"
   add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
+
+  create_table "brand_for_contents", :force => true do |t|
+    t.string   "content_type"
+    t.integer  "content_id"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.text     "background_url"
+    t.string   "logotype_file_name"
+    t.string   "logotype_content_type"
+    t.integer  "logotype_file_size"
+    t.datetime "logotype_updated_at"
+    t.text     "logotype_url"
+    t.string   "color"
+    t.string   "url"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "brand_for_contents", ["content_id"], :name => "index_brand_for_contents_on_content_id"
+  add_index "brand_for_contents", ["content_type"], :name => "index_brand_for_contents_on_content_type"
 
   create_table "brands", :force => true do |t|
     t.string   "title"

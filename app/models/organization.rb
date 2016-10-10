@@ -9,7 +9,7 @@ class Organization < ActiveRecord::Base
 
   extend FriendlyId
 
-  attr_accessible :address_attributes, :description, :email, :halls_attributes,
+  attr_accessible :address_attributes, :brand_for_content_attributes, :description, :email, :halls_attributes,
                   :images_attributes, :organization_id, :phone, :schedules_attributes,
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
@@ -46,6 +46,7 @@ class Organization < ActiveRecord::Base
   has_many :halls,                  :dependent => :destroy
   has_many :invitations,            :dependent => :destroy, :as => :inviteable
   has_many :organizations
+  has_one  :brand_for_content,     :dependent => :destroy, :as => :content
   has_many :page_visits,            :dependent => :destroy, :as => :page_visitable
   has_many :phone_lookups,          :dependent => :destroy
   has_many :places
@@ -166,6 +167,7 @@ class Organization < ActiveRecord::Base
   validates :phone, :phone => true, :if => :phone?
 
   accepts_nested_attributes_for :address,             :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :brand_for_content,   :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :halls,               :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :organization_stand,  :reject_if => :all_blank
   accepts_nested_attributes_for :schedules,           :reject_if => :all_blank, :allow_destroy => true

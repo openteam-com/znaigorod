@@ -89,6 +89,14 @@
       </div>
     <% end %>
 
+  <% if resource.can_service? 'brand' %>
+    <div class="brand_form">
+      <div class="brand_fields">
+        <%= f.simple_fields_for :brand_for_content %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= link_to "&larr; Назад".html_safe, :back %>
     <%= f.submit 'Сохранить' %>

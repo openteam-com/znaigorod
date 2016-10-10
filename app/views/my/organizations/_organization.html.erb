@@ -152,6 +152,17 @@
           <% end %>
       </div>
     <% end %>
+
+    <% if resource.can_service? 'brand' %>
+      <div class='brand'>
+        <h3>Брендинг страницы</h3>
+        <%= image_tag resource.brand_for_content.background_url, :width => '300' %>
+        <br><%= image_tag resource.brand_for_content.logotype_url, :width => '137' %>
+        <br><%= resource.brand_for_content.color %>
+        <br><%= resource.brand_for_content.url %>
+      </div>
+    <% end %>
+
   </div>
 </div>
 
