@@ -4,9 +4,7 @@ class CreateBrandForContents < ActiveRecord::Migration
       t.string       :content_type
       t.integer      :content_id
       t.attachment   :background
-      t.attachment   :logotype
       t.string       :color
-      t.string       :url
 
       t.timestamps
     end

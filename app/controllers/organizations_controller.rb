@@ -99,6 +99,7 @@ class OrganizationsController < ApplicationController
           locals: { afishas: @afisha_presenter.decorated_collection, :presenter => @afisha_presenter },
           layout: false and return if request.xhr?
         render layout: "organization_layouts/#{@organization.subdomain}" if @organization.client? && @organization.subdomain? && template_exists?(@organization.subdomain, 'layouts/organization_layouts')
+        render layout: "organization_layouts/with_brand" if @organization.can_service?('brand') && @organization.brand_for_content.present?
       end
 
       format.promotion do

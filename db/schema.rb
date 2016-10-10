@@ -206,13 +206,7 @@ ActiveRecord::Schema.define(:version => 20161010080112) do
     t.integer  "background_file_size"
     t.datetime "background_updated_at"
     t.text     "background_url"
-    t.string   "logotype_file_name"
-    t.string   "logotype_content_type"
-    t.integer  "logotype_file_size"
-    t.datetime "logotype_updated_at"
-    t.text     "logotype_url"
     t.string   "color"
-    t.string   "url"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
