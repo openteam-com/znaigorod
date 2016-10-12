@@ -94,6 +94,5 @@ ru:
 
     state_label:
       draft: 'В черновиках'
-      close: 'Скрыто'
       published: 'Опубликован'
       moderation_to_published: 'На модерации'

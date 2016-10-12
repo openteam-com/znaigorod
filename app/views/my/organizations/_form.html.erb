@@ -60,8 +60,6 @@
     <hr>
   <% end %>
 
-
-  <% if resource.can_service? 'gallery' %>
     <div class='images'>
       <h3>Галерея изображений</h3>
         <% resource.gallery_images.each do |g| %>
@@ -71,7 +69,6 @@
         <p><%= f.submit 'Редактировать галерею изображений', name: 'edit_gallery_images' %></p>
     </div>
     <hr>
-  <% end %>
 
   <% if resource.can_service? 'price_list' %>
       <div class="sections_wrapper">

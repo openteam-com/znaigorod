@@ -434,4 +434,13 @@
 <% else %>
   <span class="blank">Нет мероприятий</span>
 <% end %>
+
+<div class='organization_changes'>
+  <br><%= link_to 'Последние изменения', 'javascript:;', class: 'link_to_display_changes' if @organization.versions.present? %>
+    <div class="changes" style='display:none;'>
+      <% @organization.versions.reverse.each do |version| %>
+        <%= render :partial => 'version', :locals => { :version => version } %>
+      <% end %>
+    </div>
+  </div>
 </div>

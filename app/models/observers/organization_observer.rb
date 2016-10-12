@@ -17,4 +17,11 @@ class OrganizationObserver < ActiveRecord::Observer
     organization.delay.update_slave_organization_statuses
     organization.delay.index_suborganizations
   end
+
+  def before_save(organization)
+    if organization.published? && organization.change_versionable?
+      organization.save_version
+      MyMailer.update_organization(organization).deliver
+    end
+  end
 end

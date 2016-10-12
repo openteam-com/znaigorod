@@ -16,10 +16,20 @@ class MyMailer < ActionMailer::Base
     mail(:to => Settings['mail.to_organization'], :subject => '[ZnaiGorod] Добавлена заявка на присвоение организации')
   end
 
-
   def message_about_update(review)
     @review = review
     mail :to => Settings['mail']['to_review'], :subject => "Обзор #{@review.title} был изменён."
+  end
+
+  def update_organization(organization)
+    @organization = organization
+    mail :to => Settings['mail']['to_organization'], :subject => "Огранизация #{@organization.title} была изменена."
+  end
+
+  def associated_changes(organization, str)
+    @organization = organization
+    @string = str
+    mail :to => Settings['mail']['to_organization'], :subject => "Огранизация #{@organization.title} была изменена."
   end
 
   def mail_new_pending_afisha(afisha)

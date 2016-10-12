@@ -1,4 +1,11 @@
 ru:
+  organization:
+    for_message:
+      title: Название
+      comment: Комментарий
+      description: Описание
+      logotype_url: Логотип
+
   review:
     for_message:
       title: Название

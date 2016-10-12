@@ -35,6 +35,7 @@ class Organization < ActiveRecord::Base
   belongs_to :primary_organization, :class_name => 'Organization', :foreign_key => 'primary_organization_id'
 
   has_many :organization_category_items, :dependent => :destroy
+  has_many :versions,              :dependent => :destroy, :as => :versionable, :order => 'id ASC'
   has_many :organization_categories, :through => :organization_category_items
   has_many :feature_organizations, :dependent => :destroy
   has_many :features, :through => :feature_organizations
@@ -87,6 +88,41 @@ class Organization < ActiveRecord::Base
 
   def client?
     status.client? || status.client_economy? || status.client_standart? || status.client_premium?
+  end
+
+  def change_versionable?
+    self.changed? && (self.changes.keys.map(&:to_sym) - ignore_fields).any?
+  end
+
+  def save_version
+    self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
+  end
+
+  def ignore_fields
+    [ :created_at,
+      :id,
+      :cached_content_for_show,
+      :cached_content_for_index,
+      :poster_image_content_type,
+      :poster_image_file_name,
+      :poster_image_file_size,
+      :poster_image_updated_at,
+      :slug,
+      :price,
+      :phone,
+      :non_cash,
+      :site,
+      :associated_changes,
+      :contest_id,
+      :state,
+      :rating,
+      :total_rating,
+      :updated_at,
+      :user_id,
+      :vkontakte_likes,
+      :yandex_metrika_page_views,
+      :vfs_path
+    ]
   end
 
   def close?
@@ -298,6 +334,7 @@ class Organization < ActiveRecord::Base
 
   def can_service?(service_name)
     if Tariff.column_names.include? service_name
+      return true if created_at < Date.new(2016, 10, 13)
       tariffs.each do |t|
         if t.send(service_name) == true
           return true

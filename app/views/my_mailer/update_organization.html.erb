@@ -1,0 +1,6 @@
+<%= link_to 'Посмотреть в manage.', "#{Settings['app']['url']}/manage/organizations/#{@organization.id}" %>
+В организации
+'<%= @organization.title %>'
+были изменёны аттрибуты:
+<br>
+<%= render :partial => 'manage/organizations/version', :locals => { :version => @organization.versions.last } %>

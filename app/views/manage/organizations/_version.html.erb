@@ -1,0 +1,16 @@
+<% changes = YAML.load(version.body) %>
+<table>
+  <tr>
+    <th style="width: 20%">Атрибут</th>
+    <th>Стало (<%= version.created_at.to_date %>)</th>
+    <th>Было</th>
+  </tr>
+  <% changes.keys.each do |key| %>
+    <tr>
+      <td>"<%= t("organization.for_message.#{key}") %>"</td>
+      <td><%= "#{changes[key][1]}" %></td>
+      <td><%= "#{changes[key][0]}" %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
