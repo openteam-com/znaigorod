@@ -47,18 +47,23 @@ class Manage::OrganizationsController < Manage::ApplicationController
     end
 
     if params['organization']['clone_id'].present?
-      original = Organization.find(params['organization']['clone_id'])
-      original.update_attribute(:user_id, @organization.user.id) if @organization.user.present?
-      ManageMailer.about_clone_remove(@organization, original).deliver if @organization.user.try(:account).try(:email).present?
-      @organization.destroy
-      original.create_feed unless original.feed.present? if original.user.present?
-      redirect_to manage_organization_path(original) and return
+      original = Organization.where(:slug => params['organization']['clone_id']).last
+      if original.present?
+        original.update_attribute(:user_id, @organization.user.id) if @organization.user.present?
+        ManageMailer.about_clone_remove(@organization, original).deliver if @organization.user.try(:account).try(:email).present?
+        redirect_to delete_old_version_manage_organization_path(@organization, :original_id => original) and return
+      end
     end
 
 
     @organization.update_attributes(params['organization'])
     redirect_to manage_organization_path(@organization) and return
 
+  end
+
+  def delete_old_version
+    Organization.find(params['id']).destroy
+    redirect_to manage_organization_path(Organization.find(params[:original_id]))
   end
 
   def closed

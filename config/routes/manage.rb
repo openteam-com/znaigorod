@@ -172,6 +172,7 @@ Znaigorod::Application.routes.draw do
         delete 'destroy_file', :on => :member, :as => :destroy_file
       end
 
+      get 'delete_old_version', :on => :member
       resources :organizations,  :only => [:new, :create, :destroy]
 
       resources :sections, :only => [:show, :destroy, :edit, :update] do
