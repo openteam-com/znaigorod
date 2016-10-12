@@ -15,6 +15,8 @@ ru:
           archive:    В архиве
           moderating: На модерации
           payment:    Готово к оплате
+          close:      Закрыта
+          moderation_to_published: На модерации
 
       bet:
         state:

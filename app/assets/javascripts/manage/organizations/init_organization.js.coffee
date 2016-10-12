@@ -59,6 +59,11 @@ init_sort = (wrapper) ->
             true
   true
 
+@init_display_moderating = ->
+  $('.show_hidden_moderating').on 'click', ->
+    $('.moderating').toggle()
+
+
 @init_organization_form = () ->
   # при инициализации скрипта пометить корни согласно правилам
   $('.js-root').each (index, item) ->

@@ -91,3 +91,9 @@ ru:
         coupon: Купон
         affiliated_coupon: Купон от P&K
         offered_discount: Предложение цены
+
+    state_label:
+      draft: 'В черновиках'
+      close: 'Скрыто'
+      published: 'Опубликован'
+      moderation_to_published: 'На модерации'

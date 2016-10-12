@@ -11,7 +11,7 @@ class Organization < ActiveRecord::Base
 
   attr_accessible :address_attributes, :brand_for_content_attributes, :description, :email, :halls_attributes,
                   :images_attributes, :organization_id, :phone, :schedules_attributes,
-                  :site, :subdomain, :title, :vfs_path, :attachments_attributes,
+                  :clone_id, :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes, :state, :state_event, :manager_id, :user_id, :ability_to_comment,
@@ -23,6 +23,7 @@ class Organization < ActiveRecord::Base
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
                   :organization_category_ids, :csv_id, :gis_title, :show_custom_balloon_icon
 
+  attr_accessor :clone_id
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta

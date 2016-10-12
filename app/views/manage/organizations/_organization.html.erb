@@ -1,18 +1,41 @@
 <div class="logo">
+  <p class='state_label'><%= t("manage.state_label.#{resource.state}") %></p>
   <% if resource.logotype_url.present? %>
     <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
   <% else %>
     <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
   <% end %>
-</div>
-<div class="change_state">
-  <%= simple_form_for [:manage, resource]  do |f| %>
-    <%= f.input :state, as: :select, collection: [:published, :draft, :close, :moderation_to_published], :include_blank => false %>
-    <%= f.button :submit, 'Сохранить статус', :id => 'submit_state' %>
-  <% end %>
+
+  <br><span><%= link_to 'Модерация', 'javascript:;', class: 'show_hidden_moderating' %></span>
+  <div class='moderating' style='display:none'>
+    <div class="change_state">
+      <%= simple_form_for [:manage, resource]  do |f| %>
+        <%= f.input :state, label: 'Действие', as: :select, collection: [:published, :draft], :include_blank => false %>
+        <%= f.button :submit, 'Выполнить', :id => 'submit_state', class:'flat-btn btn-green btn-lg' %>
+      <% end %>
+    </div>
+    <br>
+    <div class='remove_clone'>
+      <%= simple_form_for [:manage, resource]  do |f| %>
+        <%= f.input :clone_id, label: 'ID оригинала', input_html: { :size => '37' } %>
+        <%= f.button :submit, 'Удалить клона и публиковать оригинал', :id => 'remove_clone', class:'flat-btn btn-red btn-lg' %>
+      <% end %>
+    </div>
+  </div>
+
 </div>
 <br>
 <div class="column">
+  <div>
+    <span class="label">Владелец:</span>
+    <% if resource.user.present? %>
+      <span class="value"><%= link_to resource.user.name, account_path(resource.user.account) %></span>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+
   <div>
     <span class="label">Адрес заведения:</span>
     <% if resource.address.present? %>

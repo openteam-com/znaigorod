@@ -1,5 +1,12 @@
 ru:
   simple_form:
+    options:
+      organization:
+        state:
+          draft: 'В черновики'
+          close: 'Скрыть'
+          published: 'Опубликовать'
+          moderation_to_published: 'На модерацию'
     "yes": 'Да'
     "no": 'Нет'
 

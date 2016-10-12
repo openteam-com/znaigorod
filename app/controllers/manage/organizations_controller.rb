@@ -41,12 +41,22 @@ class Manage::OrganizationsController < Manage::ApplicationController
   def update
     if params['organization']['state'].present?
       if params['organization']['state'] == 'published' && !@organization.published?
-        @organization.create_feed unless @organization.feed.present?
+        @organization.create_feed unless @organization.feed.present? || @organization.user.nil?
         ManageMailer.message_about_publication(@organization).deliver if @organization.email.present?
       end
     end
+
+    if params['organization']['clone_id'].present?
+      original = Organization.find(params['organization']['clone_id'])
+      original.update_attribute(:user_id, @organization.user.id) if @organization.user.present?
+      @organization.destroy
+      original.create_feed unless original.feed.present? if original.user.present?
+      redirect_to manage_organization_path(original) and return
+    end
+
+
     @organization.update_attributes(params['organization'])
-    redirect_to manage_organization_path(@organization)
+    redirect_to manage_organization_path(@organization) and return
 
   end
 
