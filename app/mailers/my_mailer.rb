@@ -9,6 +9,14 @@ class MyMailer < ActionMailer::Base
     mail(:to => @organization.email.split(',')[0], :subject => '[ZnaiGorod] Срок действия тарифа истёк') if @organization.email.present?
   end
 
+  def about_make_thier_request(request)
+    @request = request
+    @user = User.find(request.user_id)
+    @organization = Organization.find(request.organization_id)
+    mail(:to => Settings['mail.to_organization'], :subject => '[ZnaiGorod] Добавлена заявка на присвоение организации')
+  end
+
+
   def message_about_update(review)
     @review = review
     mail :to => Settings['mail']['to_review'], :subject => "Обзор #{@review.title} был изменён."

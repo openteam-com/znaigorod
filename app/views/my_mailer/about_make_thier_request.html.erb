@@ -1,0 +1,6 @@
+<h3>Заявка на присвоение существующей огранизации</h3>
+<br>Пользователь: <%= @user.name %>
+<br>Организация: <%= @organization.title %>
+<br>Телефон: <%= @request.phone %>
+<br>Email: <%= @request.email %>
+<br><%= link_to 'В manage', "#{Settings['app.url']}/manage/make_their_organization_request/#{@request.id}" %>

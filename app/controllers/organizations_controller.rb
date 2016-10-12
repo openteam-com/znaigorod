@@ -121,6 +121,7 @@ class OrganizationsController < ApplicationController
   def create_request_for_make_their
     @request = MakeTheirOrganizationRequest.new(params['make_their_organization_request'])
     @request.save
+    MyMailer.about_make_thier_request(@request).deliver
     redirect_to organization_path(@request.organization)
   end
 
