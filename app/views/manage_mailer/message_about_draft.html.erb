@@ -1,0 +1,6 @@
+<div>
+  Ваша организация <%= @organization %> теперь в черновиках.
+  <% if @organization.comment_for_draft.present? %>
+    Вот такой комментарий оставил для вас модератор<%= @organization.comment_for_draft %>
+  <% end %>
+</div>

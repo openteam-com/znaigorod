@@ -11,6 +11,8 @@
     <div class="change_state">
       <%= simple_form_for [:manage, resource]  do |f| %>
         <%= f.input :state, label: 'Действие', as: :select, collection: [:published, :draft], :include_blank => false %>
+        <br>
+        <%= f.input :comment_for_draft, label: 'Комментарий для черновика', as: :text, input_html: { cols: '30', rows: '1' }, label_html: { style: 'font-size: 12px' }%>
         <%= f.button :submit, 'Выполнить', :id => 'submit_state', class:'flat-btn btn-green btn-lg' %>
       <% end %>
     </div>

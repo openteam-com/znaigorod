@@ -7,6 +7,13 @@ class ManageMailer < ActionMailer::Base
     mail :to => @organization.email.split(',')[0], :subject => 'Ваша организация опубликована'
   end
 
+  def message_about_draft(organization)
+    @organization = organization
+
+    mail :to => @organization.email.split(',')[0], :subject => 'Ваша организация ушла в черновики'
+  end
+
+
   def make_thier_allow(request)
     @request = request
 

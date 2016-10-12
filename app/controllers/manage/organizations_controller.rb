@@ -44,6 +44,12 @@ class Manage::OrganizationsController < Manage::ApplicationController
         @organization.create_feed unless @organization.feed.present? || @organization.user.nil?
         ManageMailer.message_about_publication(@organization).deliver if @organization.email.present?
       end
+
+      if params['organization']['state'] == 'draft'
+        @organization.comment_for_draft = params['organization']['comment_for_draft']
+        ManageMailer.message_about_draft(@organization).deliver if @organization.email.present?
+      end
+
     end
 
     if params['organization']['clone_id'].present?
@@ -55,10 +61,8 @@ class Manage::OrganizationsController < Manage::ApplicationController
       end
     end
 
-
     @organization.update_attributes(params['organization'])
     redirect_to manage_organization_path(@organization) and return
-
   end
 
   def delete_old_version
