@@ -1,5 +1,10 @@
 ru:
   enumerize:
+    tariff:
+      tag:
+        min: Минимальный
+        base: Базовый
+        full: Полный
     placed_banner:
       place:
         first: Первая

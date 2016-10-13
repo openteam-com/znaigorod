@@ -1,0 +1,17 @@
+<% if @minimal && @middle && @premium %>
+  <div class='js-price-tariffs'>
+    <% [@minimal, @middle, @premium].each_with_index do |tariff, index| %>
+      <input <%= 'checked' if index == 0 %> id="t<%= index %>" data-year="<%= tariff.price_for_year %>" data-sixmonths="<%= tariff.price_for_six_months %>" data-month="<%= tariff.price_for_month %>" class='tariffs' type="radio" name="tariffs" value="<%= tariff.id %>"><%= tariff.title %><br>
+    <% end %>
+    <div class='js-filters-wrapper'>
+      <div class='input_price'>
+        <h3 class='calculated_price'><%= @minimal.price_for_month %></h3>
+      </div>
+
+      <div class='filter_slider_wrapper amount'>
+        <div class='filter_slider' data-range='false' data-min='1' data-max='12' data-step='1'></div>
+      </div>
+    </div>
+  </div>
+  <span><%= link_to "Оплатить", my_organization_tariff_organization_payments_path(resource, :tariff_id => @minimal.id, :duration => 1), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange', data: { slug: resource.slug, tariff: 't0', duration: '1'}, id: 'link_to_payment' %></span>
+<% end %>

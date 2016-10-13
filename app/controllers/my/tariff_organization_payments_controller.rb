@@ -17,13 +17,17 @@ class My::TariffOrganizationPaymentsController < My::ApplicationController
 
   def get_price
     tariff = Tariff.find(params['tariff_id'])
-    case params['duration']
-    when 'month'
-      tariff.price_for_month
-    when 'six_months'
-      tariff.price_for_six_months
-    when 'year'
-      tariff.price_for_year
+    duration = params['duration'].to_i
+    if duration >= 1 && duration < 6
+      return tariff.price_for_month * duration
+    elsif duration == 6
+      return tariff.price_for_six_months
+    elsif duration > 6 && duration < 12
+      return tariff.price_for_six_months + (duration - 6) * tariff.price_for_month
+    elsif duration == 12
+      return tariff.price_for_year
+    else
+      return ''
     end
   end
 end

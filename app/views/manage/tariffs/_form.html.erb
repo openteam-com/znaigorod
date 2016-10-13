@@ -1,6 +1,7 @@
 <%= simple_form_for [:manage, @tariff] do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= f.input :tag, as: :select, include_blank: false %>
   <%= f.input :price_for_month %>
   <%= f.input :price_for_six_months %>
   <%= f.input :price_for_year %>

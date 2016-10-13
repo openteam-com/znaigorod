@@ -30,6 +30,7 @@ $ ->
   init_main_page_reviews_toggler() if $('.reviews_main_page .reviews_toggler').length
   init_main_page_reviews_carousel() if $('.reviews_main_page .reviews_carousel').length
   init_afisha_extend() if $('.afisha_show .trailer')
+  init_price_calculation() if $('.js-price_tariffs')
   init_afisha_filter() if $('.filters .by_date .daily').length
   init_social_actions() if $('.afisha_show').length
   init_social_actions() if $('.organization_show').length

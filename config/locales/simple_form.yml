@@ -1,12 +1,14 @@
 ru:
   simple_form:
+    labels:
+      tariff:
+        tag: Метка
+
     options:
       organization:
         state:
           draft: 'В черновики'
-          close: 'Скрыть'
           published: 'Опубликовать'
-          moderation_to_published: 'На модерацию'
     "yes": 'Да'
     "no": 'Нет'
 

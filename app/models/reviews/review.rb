@@ -136,6 +136,7 @@ class Review < ActiveRecord::Base
       :yandex_metrika_page_views,
       :vfs_path
     ]
+
   end
   has_croped_poster min_width: 353, min_height: 199, :default_url => 'public/post_poster_stub.jpg'
 

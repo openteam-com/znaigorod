@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161010080112) do
+ActiveRecord::Schema.define(:version => 20161013150142) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -854,6 +854,7 @@ ActiveRecord::Schema.define(:version => 20161010080112) do
     t.boolean  "show_custom_balloon_icon",      :default => false
     t.string   "state"
     t.integer  "manager_id"
+    t.string   "associated_changes"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
@@ -1484,6 +1485,7 @@ ActiveRecord::Schema.define(:version => 20161010080112) do
     t.boolean  "small_comment"
     t.boolean  "price_list"
     t.boolean  "brand"
+    t.string   "tag"
   end
 
   create_table "teaser_items", :force => true do |t|

@@ -56,6 +56,12 @@ class My::OrganizationsController < My::ApplicationController
     }
   end
 
+  def subscriptions
+    @minimal = Tariff.minimal.first
+    @middle = Tariff.middle.first
+    @premium = Tariff.premium.first
+  end
+
   def available_tags
     @tags = Organization.available_tags(params[:term])
 
