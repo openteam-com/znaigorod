@@ -44,6 +44,8 @@ class Organization < ActiveRecord::Base
   has_many :comments,               :dependent => :destroy, :as => :commentable
   has_many :contacts,               :dependent => :destroy
   has_many :gallery_files,          :dependent => :destroy, :as => :attachable
+  has_many :organization_managers
+  has_many :managers, through: :organization_managers, class_name: 'User'
   has_many :gallery_images,         :dependent => :destroy, :as => :attachable
   has_many :halls,                  :dependent => :destroy
   has_many :invitations,            :dependent => :destroy, :as => :inviteable

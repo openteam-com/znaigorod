@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :showings,        through: :afisha
   has_many :activities,      dependent: :destroy
   has_many :comments,        order: 'comments.created_at DESC'
+  has_many :organization_managers
+  has_many :managed_organizations, through: :organization_managers, :source => :organization
   has_many :comments_images, :dependent => :destroy, :conditions => { :attachable_type => 'Comment' }
   has_many :organizations
   has_many :roles,           dependent: :destroy
