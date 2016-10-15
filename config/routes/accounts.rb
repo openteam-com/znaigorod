@@ -5,6 +5,7 @@ Znaigorod::Application.routes.draw do
     match '/*path' => redirect {|p, req| "#{req.url.gsub(req.subdomain+'.', '')}"}, :constraints => lambda{|r| r.subdomain.present? && Rails.env.production?}
   end
 
+  get 'find_users' => 'accounts#users'
   get '/znakomstva' => 'accounts#index', :as => :accounts
 
   get '/accounts', :to => redirect { |_, request|

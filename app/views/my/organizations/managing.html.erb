@@ -1,0 +1,25 @@
+<%= "Главный менеджер: #{resource.user.name}" %>
+<div class='js-users_auto_complete'>
+  <%= simple_nested_form_for [:my, resource] do |f| %>
+    <%= f.simple_fields_for :organization_managers do |m| %>
+      <div class='manager'>
+        <%= label_tag :q, 'Имя пользователя' %>
+        <% if m.object.manager.present? %>
+          <%= label_tag :q, m.object.manager.name %>
+        <% else %>
+        <%= text_field_tag :user_name,
+          nil,
+          :class => 'js-input_user',
+          :placeholder => 'Введите имя пользователя',
+          :data => { 'autocomplete-source' => find_users_path } %>
+        <% end %>
+
+        <%= m.input :user_id, input_html: { class: 'target_user_id' }, as: :hidden %>
+        <%= m.link_to_remove 'Удалить из управляющих' %>
+        <%= link_to 'Передать права главного менеджера', transfer_main_role_my_organization_path(resource.id, :user_id => m.object.user_id), data: {:organizationid => resource.id}, class: 'js-transfer_link' %>
+      </div>
+    <% end %>
+    <%= f.link_to_add 'Добавить управляющего', :organization_managers %>
+    <%= f.submit %>
+  <% end %>
+</div>

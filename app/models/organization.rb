@@ -11,7 +11,7 @@ class Organization < ActiveRecord::Base
 
   attr_accessible :address_attributes, :brand_for_content_attributes, :description, :email, :halls_attributes,
                   :images_attributes, :organization_id, :phone, :schedules_attributes,
-                  :clone_id, :site, :subdomain, :title, :vfs_path, :attachments_attributes,
+                  :organization_managers_attributes, :clone_id, :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :comment_for_draft, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes, :state, :state_event, :manager_id, :user_id, :ability_to_comment,
@@ -44,7 +44,7 @@ class Organization < ActiveRecord::Base
   has_many :comments,               :dependent => :destroy, :as => :commentable
   has_many :contacts,               :dependent => :destroy
   has_many :gallery_files,          :dependent => :destroy, :as => :attachable
-  has_many :organization_managers
+  has_many :organization_managers,  :dependent => :destroy
   has_many :managers, through: :organization_managers, class_name: 'User'
   has_many :gallery_images,         :dependent => :destroy, :as => :attachable
   has_many :halls,                  :dependent => :destroy
@@ -223,6 +223,7 @@ class Organization < ActiveRecord::Base
   validates :phone, :phone => true, :if => :phone?
 
   accepts_nested_attributes_for :address,             :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :organization_managers,  :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :brand_for_content,   :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :halls,               :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :organization_stand,  :reject_if => :all_blank

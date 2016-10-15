@@ -23,6 +23,14 @@ class AccountsController < ApplicationController
     end
   end
 
+  def users
+    search = User.search { fulltext params['term'] }
+    users = search.results
+    respond_to do |format|
+      format.json { render :json => users.map { |r|  { :label => r.name, :value => r.id } } }
+    end
+  end
+
   def show
     show! {
       @presenter = AccountsPresenter.new(params)

@@ -89,8 +89,9 @@ Znaigorod::Application.routes.draw do
 
     resources :organizations do
 
-
       get 'subscriptions', :on => :member
+      get 'managing', :on => :member
+      get 'transfer_main_role', :on => :member
       resources :tariff_organization_payments, :only => :create
       put 'publish'  => 'organizations#send_to_published', :on => :member, :as => :publish
       put 'close' => 'organizations#close', :on => :member, :as => :close

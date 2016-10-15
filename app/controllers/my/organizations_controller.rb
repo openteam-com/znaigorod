@@ -62,6 +62,22 @@ class My::OrganizationsController < My::ApplicationController
     @premium = Tariff.premium.first
   end
 
+  def managing
+  end
+
+  def transfer_main_role
+    @organization = Organization.find(params[:id])
+    @user = User.where(:id => params[:user_id]).first
+    if @organization && @user
+      @organization.update_attribute(:user_id, @user.id)
+      OrganizationManager.create(:organization_id => @organization.id, :user_id => @user.id)
+      OrganizationManager.create(:organization_id => @organization.id, :user_id => current_user.id)
+      redirect_to my_organizations_path
+    else
+      redirect_to managing_my_organization_path(params[:id])
+    end
+  end
+
   def available_tags
     @tags = Organization.available_tags(params[:term])
 

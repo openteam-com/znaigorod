@@ -77,6 +77,10 @@ class Ability
         afisha.state != 'pending' && afisha.user == user
       end
 
+      can :manage, Organization do |organization|
+        organization.user == user
+      end
+
       can [:destroy, :send_to_published], Afisha do |afisha|
         afisha.draft? &&
           afisha.user == user &&
