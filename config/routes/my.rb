@@ -90,6 +90,7 @@ Znaigorod::Application.routes.draw do
 
       get 'subscriptions', :on => :member
       get 'send_about_confirm_role', :on => :member
+      get 'close_role', :on => :member
       get 'managing', :on => :member
       get 'transfer_main_role', :on => :member
       resources :tariff_organization_payments, :only => :create

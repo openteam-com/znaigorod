@@ -22,7 +22,8 @@
         <% else %>
           <%= m.input :email, input_html: { class: 'target_email' }  %>
         <% end %>
-        <%= m.link_to_remove 'Удалить' %>
+        <%= m.link_to_remove 'Удалить' if m.object.status == nil %>
+        <%= link_to 'Удалить', close_role_my_organization_path(resource.id, :organization_manager_id => m.object) unless m.object.status == nil %>
 
         <%= link_to 'Передать права главного менеджера', transfer_main_role_my_organization_path(resource.id, :user_id => m.object.user_id), data: {:organizationid => resource.id}, class: 'js-transfer_link' if m.object.status == 'true' %>
         <%= link_to 'Отправить письмо для подтверждения роли', send_about_confirm_role_my_organization_path(resource.id, :user_id => m.object.user_id, :user_email => m.object.email), class: 'js-confirm_role_link' if m.object.status == nil %>

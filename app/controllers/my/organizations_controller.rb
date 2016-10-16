@@ -70,6 +70,13 @@ class My::OrganizationsController < My::ApplicationController
     redirect_to :back
   end
 
+  def close_role
+    @om = OrganizationManager.find(params[:organization_manager_id])
+    MyMailer.close_role(@om).deliver
+    @om.destroy
+    redirect_to :back
+  end
+
   def managing
   end
 
@@ -77,9 +84,10 @@ class My::OrganizationsController < My::ApplicationController
     @organization = Organization.find(params[:id])
     @user = User.where(:id => params[:user_id]).first
     if @organization && @user
+      OrganizationManager.where(["organization_id = ? and user_id = ?", @organization.id,  @user.id]).destroy
+      OrganizationManager.create(:email => current_user.email, :organization_id => @organization.id, :user_id => current_user.id)
+
       @organization.update_attribute(:user_id, @user.id)
-      OrganizationManager.create(:organization_id => @organization.id, :user_id => @user.id)
-      OrganizationManager.create(:organization_id => @organization.id, :user_id => current_user.id)
       redirect_to my_organizations_path
     else
       redirect_to managing_my_organization_path(params[:id])

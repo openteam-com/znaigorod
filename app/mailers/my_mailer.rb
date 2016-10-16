@@ -5,11 +5,16 @@ class MyMailer < ActionMailer::Base
 
   def send_confirm_role(organization_manager)
     @om = organization_manager
-    @user = @om.manager
-    @organization = @om.organization
     @email = @om.email
 
     mail(:to => @email, :subject => '[ZnaiGorod] Подтвердите роль')
+  end
+
+  def close_role(organization_manager)
+    @om = organization_manager
+    @email = @om.email
+
+    mail(:to => @email, :subject => '[ZnaiGorod] Ваша роль удалена')
   end
 
   def mail_tariff_expired(organization_tariff)

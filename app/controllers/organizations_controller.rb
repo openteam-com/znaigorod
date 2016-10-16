@@ -109,8 +109,9 @@ class OrganizationsController < ApplicationController
   end
 
   def i_agree_on_the_role
-    raise params.inspect
-
+    @om = OrganizationManager.find(params[:organization_manager_id])
+    @om.update_attribute(:status, 'true')
+    redirect_to organization_path(@om.organization)
   end
 
   def photogallery
