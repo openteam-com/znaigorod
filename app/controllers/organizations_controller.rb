@@ -108,6 +108,11 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def i_agree_on_the_role
+    raise params.inspect
+
+  end
+
   def photogallery
     @organization = OrganizationDecorator.find(params[:id])
   end

@@ -62,6 +62,14 @@ class My::OrganizationsController < My::ApplicationController
     @premium = Tariff.premium.first
   end
 
+  def send_about_confirm_role
+    @om = OrganizationManager.new(:user_id => params[:user_id], :organization_id => params[:id], :email => params[:user_email], :status => 'waiting')
+    if @om.save
+      MyMailer.send_confirm_role(@om).deliver
+    end
+    redirect_to :back
+  end
+
   def managing
   end
 

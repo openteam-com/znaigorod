@@ -1,9 +1,11 @@
+<%= text_field_tag :js_organization_id, resource.id, style: 'display:none' %>
 <%= "Главный менеджер: #{resource.user.name}" %>
 <div class='js-users_auto_complete'>
   <%= simple_nested_form_for [:my, resource] do |f| %>
     <%= f.simple_fields_for :organization_managers do |m| %>
       <div class='manager'>
         <%= label_tag :q, 'Имя пользователя' %>
+
         <% if m.object.manager.present? %>
           <%= label_tag :q, m.object.manager.name %>
         <% else %>
@@ -15,8 +17,16 @@
         <% end %>
 
         <%= m.input :user_id, input_html: { class: 'target_user_id' }, as: :hidden %>
-        <%= m.link_to_remove 'Удалить из управляющих' %>
-        <%= link_to 'Передать права главного менеджера', transfer_main_role_my_organization_path(resource.id, :user_id => m.object.user_id), data: {:organizationid => resource.id}, class: 'js-transfer_link' %>
+        <% if m.object.manager.present? %>
+          <%= label_tag :q, m.object.email %>
+        <% else %>
+          <%= m.input :email, input_html: { class: 'target_email' }  %>
+        <% end %>
+        <%= m.link_to_remove 'Удалить' %>
+
+        <%= link_to 'Передать права главного менеджера', transfer_main_role_my_organization_path(resource.id, :user_id => m.object.user_id), data: {:organizationid => resource.id}, class: 'js-transfer_link' if m.object.status == 'true' %>
+        <%= link_to 'Отправить письмо для подтверждения роли', send_about_confirm_role_my_organization_path(resource.id, :user_id => m.object.user_id, :user_email => m.object.email), class: 'js-confirm_role_link' if m.object.status == nil %>
+        <%= 'Письмо на подтверждение роли отправлено' if m.object.status == 'waiting' %>
       </div>
     <% end %>
     <%= f.link_to_add 'Добавить управляющего', :organization_managers %>

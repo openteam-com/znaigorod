@@ -29,7 +29,6 @@ Znaigorod::Application.routes.draw do
       resources :feeds, :only => :index
 
       put 'change_friendship' => 'friends#change_friendship', :as => :change_friendship
-
       get 'gallery_image/:gallery_image_id/as_avatar' => 'accounts#set_avatar', :as => :set_avatar
     end
 
@@ -90,6 +89,7 @@ Znaigorod::Application.routes.draw do
     resources :organizations do
 
       get 'subscriptions', :on => :member
+      get 'send_about_confirm_role', :on => :member
       get 'managing', :on => :member
       get 'transfer_main_role', :on => :member
       resources :tariff_organization_payments, :only => :create

@@ -3,6 +3,15 @@
 class MyMailer < ActionMailer::Base
   default :from => Settings['mail']['from']
 
+  def send_confirm_role(organization_manager)
+    @om = organization_manager
+    @user = @om.manager
+    @organization = @om.organization
+    @email = @om.email
+
+    mail(:to => @email, :subject => '[ZnaiGorod] Подтвердите роль')
+  end
+
   def mail_tariff_expired(organization_tariff)
     @organization = organization_tariff.organization
     @organization_tariff = organization_tariff

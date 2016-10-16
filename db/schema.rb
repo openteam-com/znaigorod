@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161014024816) do
+ActiveRecord::Schema.define(:version => 20161016060501) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -787,6 +787,8 @@ ActiveRecord::Schema.define(:version => 20161014024816) do
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "email"
+    t.string   "status"
   end
 
   create_table "organization_stands", :force => true do |t|

@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
     search = User.search { fulltext params['term'] }
     users = search.results
     respond_to do |format|
-      format.json { render :json => users.map { |r|  { :label => r.name, :value => r.id } } }
+      format.json { render :json => users.map { |r|  { :email => r.account.email, :label => r.name, :value => r.id } } }
     end
   end
 
