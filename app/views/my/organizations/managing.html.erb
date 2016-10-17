@@ -6,8 +6,8 @@
       <div class='manager'>
         <%= label_tag :q, 'Имя пользователя' %>
 
-        <% if m.object.manager.present? %>
-          <%= label_tag :q, m.object.manager.name %>
+        <% if m.object.persisted? %>
+          <%= label_tag :q, m.object.user_name %>
         <% else %>
         <%= text_field_tag :user_name,
           nil,
@@ -17,7 +17,7 @@
         <% end %>
 
         <%= m.input :user_id, input_html: { class: 'target_user_id' }, as: :hidden %>
-        <% if m.object.manager.present? %>
+        <% if m.object.persisted? %>
           <%= label_tag :q, m.object.email %>
         <% else %>
           <%= m.input :email, input_html: { class: 'target_email' }  %>

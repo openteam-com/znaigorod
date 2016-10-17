@@ -86,7 +86,7 @@
             <div class="show_button <%= "selected" if params[:controller] == "my/organizations" %>">
               <a href="<%= my_organizations_path() %>">
                 <% if current_user.account.organizations.count > 0 %>
-                  <span id="afisha_counter"><%= current_user.account.organizations.where(Organization.arel_table[:state].not_eq(:close)).count %></span>
+                  <span id="afisha_counter"><%= current_user.account.organizations.where(Organization.arel_table[:state].not_eq(:close)).count + current_user.managed_organizations.count %></span>
                 <% end %>
                 <span class="menu_text">Мои заведения</span>
               </a>

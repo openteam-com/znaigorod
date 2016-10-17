@@ -111,6 +111,7 @@ class OrganizationsController < ApplicationController
   def i_agree_on_the_role
     @om = OrganizationManager.find(params[:organization_manager_id])
     @om.update_attribute(:status, 'true')
+    @om.update_attribute(:user_id, params[:user_id])
     redirect_to organization_path(@om.organization)
   end
 

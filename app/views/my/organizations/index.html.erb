@@ -16,9 +16,9 @@
           <li>
             <%= link_to "##{state}" do %>
               <% unless state == 'all' %>
-                <%= t(state, count: @organizations.by_state(state).total_count) %>
+                <%= t(state, count: @organizations.by_state(state).total_count + @managed_organizations.by_state(state).count) %>
               <% else %>
-                <%= t(state, count: @organizations.count) %>
+                <%= t(state, count: @organizations.count + @managed_organizations.count) %>
               <% end %>
             <% end %>
           </li>
@@ -34,7 +34,7 @@
                 <% unless state == 'all' %>
                   <% organization_list = @organizations.by_state(state) %>
                 <% else %>
-                  <% organization_list = @organizations %>
+                  <% organization_list = @organizations + @managed_organizations %>
                 <% end %>
                 <% organization_list.each do |organization| %>
                   <%= render :partial => 'list_item', locals: { organization: organization }  %>

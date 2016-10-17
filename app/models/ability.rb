@@ -78,7 +78,11 @@ class Ability
       end
 
       can :manage, Organization do |organization|
-        organization.user == user
+        organization.user == user || user.manager?(organization)
+      end
+
+      cannot [:close, :destroy, :subscriptions, :managing], Organization do |organization|
+        user.manager?(organization)
       end
 
       can [:destroy, :send_to_published], Afisha do |afisha|
@@ -113,6 +117,8 @@ class Ability
           gallery_image.attachable.users.first == user
         when Review
           gallery_image.attachable.account == user.account
+        when Organization
+          user == gallery_image.attachable.user ||  user.manager?(gallery_image.attachable)
         else
           gallery_image.attachable.state != 'pending' && gallery_image.attachable.user == user
         end

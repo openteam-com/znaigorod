@@ -1,3 +1,3 @@
 Для подтверждения роли перейдите по ссылке:
 <br>
-<%= link_to "Я согласен на роль управляющего '#{@om.organization.title}'", "#{Settings['app']['url']}/organizations/i_agree_on_the_role?organization_manager_id=#{@om.id}" %>
+<%= link_to "Я согласен на роль управляющего '#{@om.organization.title}'", "#{Settings['app']['url']}/organizations/i_agree_on_the_role?organization_manager_id=#{@om.id}&user_id=#{@om.user_id_temp}" %>

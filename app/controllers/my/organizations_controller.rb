@@ -13,11 +13,12 @@ class My::OrganizationsController < My::ApplicationController
       @account = AccountDecorator.new(current_user.account)
 
       @organizations = @account.organizations.where("state != ?", 'close').page(1).per(16)
+      @managed_organizations = current_user.managed_organizations.where("state != ?", 'close').page(1).per(16)
     }
   end
 
   def show
-    @organization = OrganizationDecorator.new(current_user.organizations.find(params[:id]))
+    @organization = OrganizationDecorator.new(Organization.find(params[:id]))
     redirect_to '/404' if @organization.close?
   end
 
@@ -28,7 +29,7 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def update
-    @organization = current_user.organizations.find(params[:id])
+    @organization = Organization.find(params[:id])
     @organization.attributes = params[:organization]
 
     if @organization.save
@@ -63,8 +64,10 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def send_about_confirm_role
-    @om = OrganizationManager.new(:user_id => params[:user_id], :organization_id => params[:id], :email => params[:user_email], :status => 'waiting')
+    @om = OrganizationManager.new(:organization_id => params[:id], :email => params[:user_email], :status => 'waiting')
+    @om.user_name = User.find(params[:user_id]).name
     if @om.save
+      @om.user_id_temp = params[:user_id]
       MyMailer.send_confirm_role(@om).deliver
     end
     redirect_to :back
@@ -84,9 +87,8 @@ class My::OrganizationsController < My::ApplicationController
     @organization = Organization.find(params[:id])
     @user = User.where(:id => params[:user_id]).first
     if @organization && @user
-      OrganizationManager.where(["organization_id = ? and user_id = ?", @organization.id,  @user.id]).destroy
-      OrganizationManager.create(:email => current_user.email, :organization_id => @organization.id, :user_id => current_user.id)
-
+      OrganizationManager.where("organization_id = ? and user_id = ?", @organization.id,  @user.id).map(&:destroy)
+      OrganizationManager.create(:user_name => @user.current_user.name, :email => current_user.email, :organization_id => @organization.id, :user_id => current_user.id, :status => 'true')
       @organization.update_attribute(:user_id, @user.id)
       redirect_to my_organizations_path
     else
@@ -111,7 +113,7 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def destroy_image
-    @organization = current_user.organizations.find(params[:id])
+    @organization = Organization.find(params[:id])
     @organization.poster_url = nil
     @organization.poster_image.destroy
     @organization.poster_image_url = nil
@@ -120,7 +122,7 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def send_to_published
-    @organization = current_user.organizations.find(params[:id])
+    @organization = Organization.find(params[:id])
     @organization.update_attribute(:state, :moderation_to_published)
     MyMailer.send_to_published_organization(@organization).deliver
     redirect_to my_organizations_path
@@ -133,7 +135,7 @@ class My::OrganizationsController < My::ApplicationController
   end
 
   def social_gallery
-    @organization = current_user.organizations.find(params[:id])
+    @organization = Organization.find(params[:id])
 
     @organization.download_album(params[:organization][:social_gallery_url])
 

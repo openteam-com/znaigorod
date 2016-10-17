@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     text :name
   end
 
+  def manager?(organization)
+    managed_organizations.include?(organization)
+  end
+
   def name
     return 'Mister X' if auth_raw_info.is_a?(String)
     auth_raw_info.try(:info).try(:name) || 'Mister X'
