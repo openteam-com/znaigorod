@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def placed_banners
-    @placed_banner_first = PlacedBanner.first_place.actual.first
+    @placed_banners_first = PlacedBanner.first_place.actual
     @placed_banners_second = PlacedBanner.second_place.actual
   end
 

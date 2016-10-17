@@ -1,5 +1,15 @@
-<% if @placed_banner_first.present? %>
+<% if @placed_banners_first.present? %>
+
   <div class="placed_banner_wrapper placed_banner11">
-    <%= link_to (image_tag @placed_banner_first.image_url, size: "1200x100"), @placed_banner_first.url, :target => @placed_banner_first.target, :class => "placed_banner #{@placed_banner_first.title}"%>
+    <ul class='banner11'>
+
+      <% @placed_banners_first.each do |banner| %>
+        <li class='js-banner'>
+          <%= link_to (image_tag banner.image_url, size: "1200x100"), banner.url, :target => banner.target %>
+        </li>
+      <% end %>
+
+    </ul>
   </div>
+
 <% end %>

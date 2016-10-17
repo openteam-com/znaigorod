@@ -110,8 +110,8 @@ $ ->
   init_banner_stat() if $('.js-banner a').length
   init_right_block_stat()
 
+  init_banner_1_1_shuffle() if $('.banner11').length
   init_banners_shuffle() if $('.banner12').length
-  init_banner_1_1_shuffle() if $('.js-banner').length
   init_collapse() if $('.js-slider').length
 
   init_focus_for_search_button() if $('.js-search-field').length
