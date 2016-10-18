@@ -1,0 +1,16 @@
+<%= f.input :from %>
+<%= f.input :to %>
+<%= f.input :monday %>
+<%= f.input :tuesday %>
+<%= f.input :wednesday %>
+<%= f.input :thursday %>
+<%= f.input :friday %>
+<%= f.input :saturday %>
+<%= f.input :sunday %>
+<%= f.simple_fields_for :breaks do |b| %>
+  <%= b.input :from %>
+  <%= b.input :to %>
+  <%= b.link_to_remove 'Удалить перерыв' %>
+<% end  %>
+<%= f.link_to_add 'Добавить перерыв', :breaks %>
+<%= f.link_to_remove 'Удалить режим' %>

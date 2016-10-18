@@ -10,7 +10,7 @@ class Organization < ActiveRecord::Base
   extend FriendlyId
 
   attr_accessible :address_attributes, :brand_for_content_attributes, :description, :email, :halls_attributes,
-                  :images_attributes, :organization_id, :phone, :schedules_attributes,
+                  :images_attributes, :organization_id, :phone, :full_schedules_attributes, :schedules_attributes,
                   :organization_managers_attributes, :clone_id, :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :comment_for_draft, :organization_stand_attributes, :additional_rating,
@@ -71,6 +71,7 @@ class Organization < ActiveRecord::Base
   has_many :sauna_halls,       :through => :sauna
   has_many :organization_tariffs, dependent: :destroy
   has_many :tariffs, :through => :organization_tariffs
+  has_many :full_schedules, as: :schedulable
 
   has_many :relations, :as => :slave, :dependent => :destroy
   has_many :reviews, :through => :relations, :source => :master, :source_type => Review
@@ -229,6 +230,7 @@ class Organization < ActiveRecord::Base
   accepts_nested_attributes_for :organization_stand,  :reject_if => :all_blank
   accepts_nested_attributes_for :schedules,           :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :social_links,        :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :full_schedules,        :reject_if => :all_blank, :allow_destroy => true
 
   delegate :category, :cuisine, :feature, :offer, :payment,
            :to => :meal, :allow_nil => true, :prefix => true
@@ -354,7 +356,7 @@ class Organization < ActiveRecord::Base
 
   def can_service?(service_name)
     if Tariff.column_names.include? service_name
-      return true if created_at < Date.new(2016, 10, 13)
+      #return true if created_at < Date.new(2016, 10, 13)
       tariffs.each do |t|
         if t.send(service_name) == true
           return true

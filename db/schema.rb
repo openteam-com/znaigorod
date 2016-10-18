@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161017154117) do
+ActiveRecord::Schema.define(:version => 20161018090048) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -227,6 +227,14 @@ ActiveRecord::Schema.define(:version => 20161017154117) do
     t.string   "url"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+  end
+
+  create_table "breaks", :force => true do |t|
+    t.time     "from"
+    t.time     "to"
+    t.integer  "full_schedule_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "car_sales_centers", :force => true do |t|
@@ -511,6 +519,26 @@ ActiveRecord::Schema.define(:version => 20161017154117) do
 
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
   add_index "friends", ["friendable_id"], :name => "index_friends_on_friendable_id"
+
+  create_table "full_schedules", :force => true do |t|
+    t.boolean  "monday",           :default => true
+    t.boolean  "tuesday",          :default => true
+    t.boolean  "wednesday",        :default => true
+    t.boolean  "thursday",         :default => true
+    t.boolean  "friday",           :default => true
+    t.boolean  "saturday",         :default => true
+    t.boolean  "sunday",           :default => true
+    t.boolean  "free",             :default => true
+    t.time     "from"
+    t.time     "to"
+    t.integer  "schedulable_id"
+    t.string   "schedulable_type"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "full_schedules", ["schedulable_id"], :name => "index_full_schedules_on_schedulable_id"
+  add_index "full_schedules", ["schedulable_type"], :name => "index_full_schedules_on_schedulable_type"
 
   create_table "halls", :force => true do |t|
     t.string   "title"

@@ -32,7 +32,7 @@
             <% if @organizations.any? %>
               <ul class='posters_organizations'>
                 <% unless state == 'all' %>
-                  <% organization_list = @organizations.by_state(state) %>
+                  <% organization_list = @organizations.by_state(state) + @managed_organizations.by_state(state) %>
                 <% else %>
                   <% organization_list = @organizations + @managed_organizations %>
                 <% end %>
