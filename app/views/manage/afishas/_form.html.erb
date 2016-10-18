@@ -7,7 +7,7 @@
   <%= link_to 'Загрузить список фильмов с кинопоиска', manage_movies_from_kinopoisk_path, :class => 'movies_from_kinopoisk' %>
 </div>
 <%= f.input :original_title %>
-<%= f.input :description, :input_html => { :class => 'description' } %>
+<%= f.input :description, :as => :text, :input_html => { :id => 'html', :class => 'markitup' }  %>
 <%= f.input :vk_event_url %>
 <%= f.input :tag %>
 <%= f.input :allow_auction %>
