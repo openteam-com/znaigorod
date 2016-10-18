@@ -56,6 +56,7 @@ class Manage::ReviewsController < Manage::ApplicationController
           ReviewMailer.send_to_payment_again(@review).deliver
         end
         @review.to_payment!
+        MainPageReview.where(:review_id => @review.id).map(&:destroy)
         redirect_to manage_review_path(@review.id), :notice => "Обзор «#{@review.title}» допущен к оплате." and return
       else
         redirect_to manage_review_path(@review.id) and return

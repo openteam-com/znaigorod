@@ -7,7 +7,8 @@ class MainPageController < ApplicationController
         @organizations     = NewOrganizationsPresenter.new({})
         @accounts          = AccountsPresenter.new(:per_page => 6, :acts_as => ['inviter', 'invited'], :with_avatar => true)
         @webcams           = Webcam.our.published.shuffle.take(4)
-        @decorated_reviews = MainPageReview.used.map { |m| ReviewDecorator.new m.review }
+        @decorated_reviews = MainPageReview.used.map { |m| if m.review.published? then ReviewDecorator.new (m.review) end }
+        raise @decorated_reviews.inspect
         @afisha_excursions_list   = AfishaPresenter.new(:per_page => 6, :without_advertisement => true, :order_by => 'creation', :categories => ['excursions']).decorated_collection
       }
 
