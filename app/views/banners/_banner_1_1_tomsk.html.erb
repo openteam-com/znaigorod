@@ -3,8 +3,8 @@
   <div class="placed_banner_wrapper placed_banner11">
     <ul class='banner11'>
 
-      <% @placed_banners_first.each do |banner| %>
-        <li class='js-banner'>
+      <% @placed_banners_first.each_with_index do |banner, index| %>
+        <li class='js-banner1' style=<%="display:#{index == 0 ? 'list-item' : 'none'}"%>>
           <%= link_to (image_tag banner.image_url, size: "1200x100"), banner.url, :target => banner.target %>
         </li>
       <% end %>

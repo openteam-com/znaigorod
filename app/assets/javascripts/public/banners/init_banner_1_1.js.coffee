@@ -1,8 +1,6 @@
 @init_banner_1_1_shuffle = ->
   return if $('.banner11 li').length < 2
 
-  $('.banner11').shuffle()
-
   setInterval ->
     $('.banner11 li:nth-child(1)').fadeOut 'fast'
     $('.banner11 li:nth-child(2)').fadeIn 'fast', ->
