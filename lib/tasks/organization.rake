@@ -20,6 +20,40 @@ namespace :organization do
     p "Было удалено #{count_deleted} старых тарифов!" if count_deleted > 0
   end
 
+  desc 'conversion schedules to full_schedules'
+  task :to_full_schedules => :environment do
+    days_array = %w(ololo monday tuesday wednesday thursday friday saturday sunday)
+
+    bar = ProgressBar.new(Organization.count)
+    [Organization.find('medveditsa-banketnyy-zal')].each do |organization|
+      organization.full_schedules.map(&:destroy)
+      workdays = organization.schedules.where(:holiday => false)
+      modes = workdays.group_by{|e| [e.from, e.to]}.keys
+
+      modes.each do |mode|
+        fs = organization.full_schedules.create(:from => mode[0], :to => mode[1])
+        (1..7).each { |d| fs.update_attribute(days_array[d], false) }
+        fs.free = false
+        workdays.where(:from => mode[0], :to => mode[1]).each do |work|
+          fs.update_attribute(days_array[work.day], true)
+        end
+      end
+
+      holidays = organization.schedules.where(:holiday => true)
+
+      if holidays.count > 0
+        full_holidays = organization.full_schedules.create(:from => Time.new(2000, 1, 1), :to => Time.new(2000, 1, 1))
+        (1..7).each { |d| full_holidays.update_attribute(days_array[d], false) }
+        full_holidays.free = true
+        holidays.each do |holi|
+          full_holidays.update_attribute(days_array[holi.day], true)
+        end
+      end
+      bar.increment!
+    end
+  end
+
+
   desc 'Upload posters to vkontakte'
   task :posters_to_vk => :environment do
     puts 'Upload organization posters to vkontakte'
