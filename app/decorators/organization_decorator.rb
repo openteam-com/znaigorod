@@ -159,119 +159,82 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def work_schedule_for_list_view
-    return "Гибкий график работы" if schedules.empty?
-    from = schedules.pluck(:from).uniq
-    to   = schedules.pluck(:to).uniq
-    week_day = Time.zone.today.cwday
-    content = week_day
-    schedule = organization.schedules.find_by_day(week_day)
-    content = if from.size == to.size && from.size == 1
-                if from[0].blank? && to[0].nil?
-                  content = 'Гибкий график работы'
-                elsif from == to
-                  content = 'Работает круглосуточно'
-                else
-                  content = "Работает ежедневно #{schedule_time(from[0], to[0])}"
-                end
-              else
-                content = "Сегодня #{schedule_time(schedule.from, schedule.to)}"
-              end
+    return h.content_tag(:div, "Гибкий график работы", :class => "schedule_wrapper work_schedule") if full_schedules.empty?
+
+    week_day = Time.zone.today.strftime("%A").downcase
+    schedule = organization.get_full_schedule_by_day(week_day)
+    if !schedule.free
+      if schedule.from != schedule.to && !organization.work_all_day?
+        content = "<span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
+      elsif organization.work_all_day?
+        content = "Работает ежедевно <span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
+      else
+        content = "<span class='ul-toggler js-ul-toggler'>круглосуточно</span>".html_safe
+      end
+    else
+      content = "Сегодня <span class='ul-toggler js-ul-toggler'>выходной</span>".html_safe
+    end
+    content
   end
 
   def work_schedule
-    return h.content_tag(:div, "Гибкий график работы", :class => "schedule_wrapper work_schedule") if schedules.empty?
-    content = ''
-    more_schedule = ''
-    from = schedules.pluck(:from).uniq
-    to   = schedules.pluck(:to).uniq
-    week_day = Time.zone.today.cwday
-    content = week_day
-    schedule = organization.schedules.find_by_day(week_day)
-    if from.size == to.size && from.size == 1
-      if from[0].blank? && to[0].nil?
-        content = 'Гибкий график работы'
-      elsif from == to
-        content = 'Работает круглосуточно'
+    work_full_schedule
+  end
+
+  def work_full_schedule
+    return h.content_tag(:div, "Гибкий график работы", :class => "schedule_wrapper work_schedule") if full_schedules.empty?
+
+    week_day = Time.zone.today.strftime("%A").downcase
+    schedule = organization.get_full_schedule_by_day(week_day)
+    if !schedule.free
+      if schedule.from != schedule.to && !organization.work_all_day?
+        content = "<span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
+      elsif organization.work_all_day?
+        content = "Работает ежедевно <span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
       else
-        content = "Работает ежедневно #{schedule_time(from[0], to[0])}"
+        content = "<span class='ul-toggler js-ul-toggler'>круглосуточно</span>".html_safe
       end
     else
-      content = "Сегодня <span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
-      hash_schedule = {}
-      schedules.each do |schedule|
-        daily_schedule = schedule_time(schedule.from, schedule.to)
-        hash_schedule[daily_schedule] ||= []
-        hash_schedule[daily_schedule] << schedule.day
-      end
-      more_schedule = ""
-      hash_schedule.each do |daily_scheule, days|
-        more_schedule << h.content_tag(:li, "<span class='days'>#{schedule_day_names(days)}:</span> <span class='hours'>#{daily_scheule}</span>".html_safe)
-      end
-      more_schedule = h.content_tag(:ul, more_schedule.html_safe, class: 'js-ul-toggleable ul-toggleable')
+      content = "Сегодня <span class='ul-toggler js-ul-toggler'>выходной</span>".html_safe
     end
+    more_schedule = ""
+    full_schedules.where(:free => false).each do |sch|
+      more_schedule << h.content_tag(:li, "<span class='days'>#{sch.get_mode}</span>".html_safe)
+    end
+    full_schedules.where(:free => true).each do |sch|
+      more_schedule << h.content_tag(:li, "<span class='days'>#{sch.get_mode}</span>".html_safe)
+    end
+    more_schedule = h.content_tag(:ul, more_schedule.html_safe, class: 'js-ul-toggleable ul-toggleable')
     h.content_tag(:div, "Время работы: #{content}".html_safe, :class => "schedule_wrapper work_schedule #{open_closed(schedule.from, schedule.to)}") + more_schedule
   end
 
   # FIXME: mabe not used
   def schedule_content
-    content = ""
-    schedules.each do |schedule|
-      day = h.content_tag(:div, schedule.short_human_day, class: :dow)
-      schedule_content = if schedule.holiday?
-        h.content_tag(:div, "Выходной", class: :string)
-      elsif schedule.from == schedule.to
-        h.content_tag(:div, "Круглосуточно", class: :string)
-      else
-        (h.content_tag(:div, I18n.l(schedule.from, :format => "%H:%M"), class: :from) + h.content_tag(:div, I18n.l(schedule.to, :format => "%H:%M"), class: :to)).html_safe
-      end
-      content << h.content_tag(:li, (day + schedule_content).html_safe, class: I18n.l(Date.today, :format => '%a') == schedule.short_human_day ? 'today' : nil)
+    more_schedule = ""
+    full_schedules.where(:free => false).each do |sch|
+      more_schedule << h.content_tag(:li, "<div class='string'>#{sch.get_mode}</div>".html_safe)
     end
-    h.content_tag(:ul, content.html_safe, class: :schedule)
+    full_schedules.where(:free => true).each do |sch|
+      more_schedule << h.content_tag(:li, "<div class='string'>#{sch.get_mode}</div>".html_safe)
+    end
+    h.content_tag(:ul, more_schedule.html_safe, class: :schedule)
   end
 
   def schedule_today
-    klass = "schedule_today "
-    if schedules.any?
-      from = schedules.pluck(:from).uniq
-      to   = schedules.pluck(:to).uniq
-      if from.size == to.size && from.size == 1
-        if from[0].blank? && to[0].nil?
-          content = 'Гибкий график работы'
-        elsif from == to
-          content = 'Работает круглосуточно'
-        else
-          content = "Работает ежедневно #{schedule_time(from[0], to[0])}"
-        end
+    week_day = Time.zone.today.strftime("%A").downcase
+    schedule = organization.get_full_schedule_by_day(week_day)
+    if !schedule.free
+      if schedule.from != schedule.to && !organization.work_all_day?
+        content = "#{schedule_time(schedule.from, schedule.to)}".html_safe
+      elsif organization.work_all_day?
+        content = "Работает ежедевно #{schedule_time(schedule.from, schedule.to)}"
       else
-        content = "Сегодня "
-        wday = Time.zone.today.wday
-        wday = 7 if wday == 0
-        schedule = organization.schedules.find_by_day(wday)
-        if schedule.holiday?
-          content << "выходной"
-          klass << "closed"
-        elsif schedule.from == schedule.to
-          content << "работает круглосуточно"
-          klass << "twenty_four"
-        else
-          content << "работает #{schedule_time(schedule.from, schedule.to)}"
-          now = Time.zone.now
-          time = Time.utc(2000, "jan", 1, now.hour, now.min)
-          from = schedule.from
-          to = schedule.to
-          to = to + 1.day if to.hour < 12
-          if time.between?(from, to)
-            klass << "opened"
-          else
-            klass << "closed"
-          end
-        end
+        content = "круглосуточно"
       end
     else
-      content = "График работы неизвестен"
-      klass << "closed"
+      content = "Сегодня выходной"
     end
-    h.content_tag(:div, content, class: klass) unless content.blank?
+    h.content_tag(:div, content, class: schedule.free ? 'schedule_today closed' : 'schedule_today opened') unless content.blank?
   end
 
   def link_to_priority_category

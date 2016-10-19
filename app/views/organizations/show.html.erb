@@ -131,7 +131,7 @@
                         content_tag(:span, "#{@organization.address_link}".html_safe, itemprop:"address")%>
                       <% end if @organization.address_link.present? %>
                       <span itemprop="department" itemscope itemtype="http://schema.org/LocalBusiness">
-                        <div itemprop="openingHours"><%= @organization.work_schedule %></div>
+                        <div itemprop="openingHours"><%= @organization.work_full_schedule %></div>
                       </span>
                       <div class='phone_wrapper'>
                         <% if @organization.phone.present? %>

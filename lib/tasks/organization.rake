@@ -25,7 +25,7 @@ namespace :organization do
     days_array = %w(ololo monday tuesday wednesday thursday friday saturday sunday)
 
     bar = ProgressBar.new(Organization.count)
-    [Organization.find('medveditsa-banketnyy-zal')].each do |organization|
+    Organization.all.each do |organization|
       organization.full_schedules.map(&:destroy)
       workdays = organization.schedules.where(:holiday => false)
       modes = workdays.group_by{|e| [e.from, e.to]}.keys

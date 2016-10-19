@@ -70,7 +70,7 @@
 
     <div>
       <span class="label">Расписание работы:</span>
-      <% if true %>
+      <% if resource.schedules.present? %>
         <span class="value">
           <ul>
             <% resource.schedules.each do |schedule| %>
@@ -85,6 +85,30 @@
         <span class="blank">Не указано</span>
       <% end %>
     </div>
+
+    <div>
+      <span class="label">Расписание работы:</span>
+      <% if resource.full_schedules.present? %>
+        <span class="value">
+          <ul>
+            <% resource.full_schedules.where(:free => false).each do |full_schedule| %>
+              <li>
+                <span class='day'><%= full_schedule.get_mode %></span>
+              </li>
+            <% end %>
+            <% resource.full_schedules.where(:free => true).each do |full_schedule| %>
+              <li class='holiday'>
+                <span class='day'><%= full_schedule.get_mode %></span>
+              </li>
+            <% end %>
+
+          </ul>
+        </span>
+      <% else %>
+        <span class="blank">Не указано</span>
+      <% end %>
+    </div>
+
 
     <div>
       <span class="label">Категории:</span>

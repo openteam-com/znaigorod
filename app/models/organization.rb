@@ -406,6 +406,25 @@ class Organization < ActiveRecord::Base
     meal_cuisine
   end
 
+  def get_full_schedule_by_day(week_day)
+    full_schedules.where(week_day => true).first
+  end
+
+  def work_all_day?
+    if full_schedules.count == 1 &&
+        full_schedules.first.monday &&
+        full_schedules.first.tuesday &&
+        full_schedules.first.wednesday &&
+        full_schedules.first.thursday &&
+        full_schedules.first.friday &&
+        full_schedules.first.saturday &&
+        full_schedules.first.sunday
+      return true
+    else
+      return false
+    end
+  end
+
   %w[category feature offer payment].each do |method|
     define_method method do
       suborganizations.map { |s| s.send(method) if s.respond_to?(method) }.delete_if(&:blank?).join(', ')
