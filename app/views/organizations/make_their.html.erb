@@ -1,3 +1,5 @@
+<%= render partial: 'organizations/landing_content' %>
+<br>
 <h1>Заявка на присвоение организации</h1>
 <%= simple_form_for @request, :url => create_request_for_make_their_organization_path(@request.organization) do |f| %>
   <%= f.input :user_id, as: :hidden %>

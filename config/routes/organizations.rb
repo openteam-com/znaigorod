@@ -18,6 +18,7 @@ Znaigorod::Application.routes.draw do
   get '/salon_centers/:slug', :to => redirect { |params, req| "/#{params[:slug]}" }
 
   resources :organizations, :only => [:index, :show] do
+    get 'landing', on: :collection
     get 'i_agree_on_the_role', on: :collection
     get :make_their, :on => :member
     get :delete_make_their_request, :on => :member
