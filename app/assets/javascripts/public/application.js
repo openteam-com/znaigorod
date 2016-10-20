@@ -87,6 +87,8 @@
  * = require ./pagination
  * = require ./list_settings
  * = require ./swfkrpano
+ * = require Chart.bundle
+ * = require chartkick
  * = require ./move_to_top
  * = require ./webcams
  * = require ./menus

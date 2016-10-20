@@ -92,6 +92,7 @@ Znaigorod::Application.routes.draw do
       get 'send_about_confirm_role', :on => :member
       get 'close_role', :on => :member
       get 'managing', :on => :member
+      get 'statistics', :on => :member
       get 'transfer_main_role', :on => :member
       resources :tariff_organization_payments, :only => :create
       put 'publish'  => 'organizations#send_to_published', :on => :member, :as => :publish

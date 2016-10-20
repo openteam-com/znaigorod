@@ -1,0 +1,34 @@
+<% if resource.page_visits.present? %>
+  <h3>Статистика посещений страницы организции</h3>
+  <%= line_chart resource.page_visits.group_by_month(:created_at, format: "%B").count %>
+<% else %>
+  <span>Никто пока не посещал страницу организации :(</span>
+<% end %>
+
+<% if resource.reviews.map(&:page_visits).present? %>
+  <h3>Статистика посещений обзоров организции</h3>
+  <%= column_chart resource.reviews.map(&:page_visits).flatten.group_by_month(:created_at, :format => '%Y').count %>
+<% else %>
+  <span>Никто пока не посещал обзоры организации :(</span>
+<% end %>
+
+<% if resource.afisha.map(&:page_visits).present? %>
+  <h3>Статистика посещений афиш организции</h3>
+  <%= line_chart resource.afisha.map(&:page_visits).flatten.group_by_month(:created_at).count %>
+<% else %>
+  <span>Никто пока не посещал афишы организации :(</span>
+<% end %>
+
+<% if resource.discounts.map(&:page_visits).present? %>
+  <h3>Статистика посещений скидок организции</h3>
+  <%= column_chart resource.discounts.map(&:page_visits).flatten.group_by_month(:created_at).count %>
+<% else %>
+  <span>Никто пока не посещал скидки организации :(</span>
+<% end %>
+
+<% if resource.phone_lookups.present? %>
+  <h3>Статистика проосмотра номера телефона организции</h3>
+  <%= column_chart resource.phone_lookups.group_by_month(:created_at, :format => '%B').count %>
+<% else %>
+  <span>Никто пока не просматривал номер телефона организации :(</span>
+<% end %>

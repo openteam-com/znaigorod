@@ -14,6 +14,8 @@ end
 
 group :default do
   gem 'ads-rails'
+  gem 'chartkick'
+  gem 'groupdate'
   gem 'awesome_print'
   gem 'RedCloth'
   gem 'active_attr'

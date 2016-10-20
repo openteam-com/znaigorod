@@ -134,6 +134,9 @@ class My::OrganizationsController < My::ApplicationController
     redirect_to my_organizations_path
   end
 
+  def statistics
+  end
+
   def social_gallery
     @organization = Organization.find(params[:id])
 
