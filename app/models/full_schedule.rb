@@ -5,7 +5,20 @@ class FullSchedule < ActiveRecord::Base
   accepts_nested_attributes_for :breaks, :reject_if => :all_blank, :allow_destroy => true
 
   def get_mode
-    "#{!free ? from.strftime("%H:%M")+ ' - ' + to.strftime("%H:%M") : 'Выходные'}  #{mode_days}"
+    if !free
+      if breaks.present?
+        array = []
+        breaks.each do |b|
+          array << "#{b.from.strftime('%H:%M') + ' - ' + b.to.strftime('%H:%M')}"
+        end
+        str_breaks = " (Перерывы #{array.join(', ')})"
+      end
+      str = "#{from.strftime("%H:%M")+ ' - ' + to.strftime("%H:%M")}  #{mode_days}"
+      str = str + str_breaks if breaks.present?
+    else
+      str = "Выходные  #{mode_days}" if free
+    end
+    str
   end
 
   def days_array
