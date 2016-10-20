@@ -111,6 +111,7 @@ $ ->
 
   disableAvatarWrapperLinkClick() if $('.avatar-wrapper').length
   init_similar_afishas() if $('#afisha_title').length
+  init_full_schedules() if $('.full_schedules_edit').length
   loadRelatedAfishas() if $('.relations').length
   initMyDiscount() if $('.js-toggle-forms').length
 

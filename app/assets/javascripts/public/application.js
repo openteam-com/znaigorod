@@ -86,6 +86,7 @@
  * = require ./schedule_toggle
  * = require ./pagination
  * = require ./list_settings
+ * = require full_schedules
  * = require ./swfkrpano
  * = require Chart.bundle
  * = require chartkick

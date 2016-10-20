@@ -27,10 +27,12 @@
     <%= f.simple_fields_for :schedules %>
   </div>
 
+  <div class='full_schedules_edit'>
     <div class="full_schedules_fields">
       <%= f.simple_fields_for :full_schedules %>
       <%= f.link_to_add 'Добавить режим работы', :full_schedules, :class => 'add_full_schedules' %>
     </div>
+  </div>
 
   <% if resource.can_service? 'logotype' %>
     <div class='logo'>

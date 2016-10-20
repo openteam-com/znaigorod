@@ -1,13 +1,15 @@
 <%= f.input :from %>
 <%= f.input :to %>
-<%= f.input :monday %>
-<%= f.input :tuesday %>
-<%= f.input :wednesday %>
-<%= f.input :thursday %>
-<%= f.input :friday %>
-<%= f.input :saturday %>
-<%= f.input :sunday %>
-<%= f.input :free %>
+<div class='days'>
+  <%= f.input :monday, input_html: { class: 'monday' } %>
+  <%= f.input :tuesday, input_html: { class: 'tuesday' } %>
+  <%= f.input :wednesday, input_html: { class: 'wednesday' }  %>
+  <%= f.input :thursday, input_html: { class: 'thursday' }  %>
+  <%= f.input :friday, input_html: { class: 'friday' }  %>
+  <%= f.input :saturday, input_html: { class: 'saturday' }  %>
+  <%= f.input :sunday, input_html: { class: 'sunday' }  %>
+  <%= f.input :free, input_html: {class: 'free' } %>
+</div>
 <%= f.simple_fields_for :breaks do |b| %>
   <%= b.input :from %>
   <%= b.input :to %>
