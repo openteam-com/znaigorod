@@ -112,8 +112,6 @@ class OrganizationsController < ApplicationController
 
   end
 
-
-
   def i_agree_on_the_role
     @om = OrganizationManager.find(params[:organization_manager_id])
     @om.update_attribute(:status, 'true')

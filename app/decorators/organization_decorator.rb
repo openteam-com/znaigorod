@@ -159,20 +159,20 @@ class OrganizationDecorator < ApplicationDecorator
   end
 
   def work_schedule_for_list_view
-    return h.content_tag(:div, "Гибкий график работы", :class => "schedule_wrapper work_schedule") if full_schedules.empty?
+    return "Гибкий график работы" if full_schedules.empty?
 
     week_day = Time.zone.today.strftime("%A").downcase
     schedule = organization.get_full_schedule_by_day(week_day)
     if !schedule.free
       if schedule.from != schedule.to && !organization.work_all_day?
-        content = "<span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
+        content = "Сегодня #{schedule_time(schedule.from, schedule.to)}".html_safe
       elsif organization.work_all_day?
-        content = "Работает ежедевно <span class='ul-toggler js-ul-toggler'>#{schedule_time(schedule.from, schedule.to)}</span>".html_safe
+        content = "Работает ежедевно #{schedule_time(schedule.from, schedule.to)}".html_safe
       else
-        content = "<span class='ul-toggler js-ul-toggler'>круглосуточно</span>".html_safe
+        content = "Работает круглосуточно".html_safe
       end
     else
-      content = "Сегодня <span class='ul-toggler js-ul-toggler'>выходной</span>".html_safe
+      content = "Сегодня выходной".html_safe
     end
     content
   end

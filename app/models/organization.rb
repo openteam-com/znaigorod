@@ -14,7 +14,7 @@ class Organization < ActiveRecord::Base
                   :organization_managers_attributes, :clone_id, :site, :subdomain, :title, :vfs_path, :attachments_attributes,
                   :logotype_url, :non_cash, :priority_suborganization_kind,
                   :comment, :comment_for_draft, :organization_stand_attributes, :additional_rating,
-                  :social_links_attributes, :state, :state_event, :manager_id, :user_id, :ability_to_comment,
+                  :promoted_at, :social_links_attributes, :state, :state_event, :manager_id, :user_id, :ability_to_comment,
                   :vkontakte_likes, :fb_likes, :odn_likes, :poster_vk_id,
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
@@ -54,6 +54,7 @@ class Organization < ActiveRecord::Base
   has_many :page_visits,            :dependent => :destroy, :as => :page_visitable
   has_many :phone_lookups,          :dependent => :destroy
   has_many :places
+  has_many :promote_organization_payments, :as => :paymentable
   has_many :schedules,              :dependent => :destroy
   has_many :showings,               :dependent => :destroy
   has_many :situated_organizations, :class_name => 'Organization', :foreign_key => 'situated_at'
@@ -105,6 +106,7 @@ class Organization < ActiveRecord::Base
     [ :id,
       :created_at,
       :vfs_path,
+      :promoted_at,
       :organization_id,
       :rating,
       :non_cash,
@@ -312,6 +314,7 @@ class Organization < ActiveRecord::Base
     string :positive_activity_date
     string :search_kind
     string :status
+    time :promoted_at, stored: true, trie: true
     string :barter_status
 
     string(:inviteable_categories, :multiple => true) { ::Inviteables.instance.categories_for_organization self }

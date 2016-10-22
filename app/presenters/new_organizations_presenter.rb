@@ -177,10 +177,22 @@ class NewOrganizationsPresenter
       with :organization_category_slugs, category.slug if category
       without :status, [:client, :client_economy, :client_standart, :client_premium]
       with :state, :published
+      with :promoted_at, nil
       with :primary_organization_id, nil
 
       query ? keywords(query) : order_by(criterion, directions[criterion])
-    }.results
+    }
+
+    promoted = Organization.search {
+      paginate :page => 1, :per_page => 100
+      without :promoted_at, nil
+      with :organization_features, features if features.any?
+      with :organization_category_slugs, category.slug if category
+      with :state, :published
+      with :primary_organization_id, nil
+      order_by :promoted_at, :desc
+    }
+    Kaminari.paginate_array(promoted.results + @not_clients_results.results).page(not_clients_page).per(not_clients_per_page)
   end
 
   %w[clients not_clients].each do |prefix|

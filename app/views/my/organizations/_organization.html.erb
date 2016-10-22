@@ -1,4 +1,5 @@
 <%= render :partial => 'tariffs', locals: { :resource => resource }  if defined?(params['controller']) %>
+<%= link_to 'Поднять организацию', organization_promote_organization_payments_path(resource.id), method: 'POST', target: '_blank' %>
 <div class='title'>
   <%= resource.title %>
 </div>
