@@ -1,5 +1,7 @@
 <%= render :partial => 'tariffs', locals: { :resource => resource }  if defined?(params['controller']) %>
 <%= link_to 'Поднять организацию', organization_promote_organization_payments_path(resource.id), method: 'POST', target: '_blank' %>
+<%= link_to 'Добавить бронирование', new_my_organization_reservation_path(resource), :class => 'reservation_link' if !resource.reservation.present? %>
+<%= link_to 'Редактировать бронирование', edit_my_organization_reservation_path(resource), :class => 'reservation_link' if resource.reservation.present? %>
 <div class='title'>
   <%= resource.title %>
 </div>

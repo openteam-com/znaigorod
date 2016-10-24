@@ -6,7 +6,7 @@ class Organization < ActiveRecord::Base
   include DraftPublishedStates
   include MakePageVisit
   include ImageHelper
-
+  include SmsClaims
   extend FriendlyId
 
   attr_accessible :address_attributes, :brand_for_content_attributes, :description, :email, :halls_attributes,
@@ -43,6 +43,7 @@ class Organization < ActiveRecord::Base
   has_many :activities,             :dependent => :destroy
   has_many :comments,               :dependent => :destroy, :as => :commentable
   has_many :contacts,               :dependent => :destroy
+  has_one  :reservation,            :dependent => :destroy, :as => :reserveable
   has_many :gallery_files,          :dependent => :destroy, :as => :attachable
   has_many :organization_managers,  :dependent => :destroy
   has_many :managers, through: :organization_managers, class_name: 'User'

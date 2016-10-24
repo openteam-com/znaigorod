@@ -88,6 +88,7 @@ Znaigorod::Application.routes.draw do
 
     resources :organizations do
 
+      resource :reservation, :except => :show
       get 'subscriptions', :on => :member
       get 'send_about_confirm_role', :on => :member
       get 'close_role', :on => :member

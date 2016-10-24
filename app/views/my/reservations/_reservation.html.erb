@@ -1,0 +1,12 @@
+<tr>
+  <td><%= organization.class.model_name.human %></td>
+  <td><%= organization.reservation.try(:phone) %></td>
+  <td><%= organization.reservation.try(:balance) %></td>
+  <td>
+    <% if organization.reservation %>
+      <%= link_to 'редактировать', edit_organization_reservation_path(organization), :remote => true, :class => '.reservation_link' %>
+    <% else %>
+      <%= link_to 'добавить', new_organization_reservation_path(organization), :remote => true, :class => '.reservation_link' %>
+    <% end %>
+  </td>
+</tr>

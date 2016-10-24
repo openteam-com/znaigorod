@@ -1,0 +1,17 @@
+<tr class="grey">
+  <td colspan="4">
+    <%= simple_form_for @reservation, :url => my_organization_reservation_path(@organization) do |f| %>
+      <%= f.input :title %>
+      <%= f.input :placeholder %>
+      <%= f.input :phone %>
+      <%= f.input :balance %>
+
+      <div class="actions">
+        <%= f.submit 'Сохранить', :class => 'button' %>
+        <%= link_to 'Отмена', my_organization_path(@organization), :class => 'button' %>
+        <%= link_to 'удалить', my_organization_reservation_path(@organization), :method => :delete, :confirm => 'Вы уверены?', :class => 'button' if @reservation.persisted? %>
+      </div>
+    <% end %>
+
+  </td>
+</tr>
