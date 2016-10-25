@@ -1,0 +1,9 @@
+<tr>
+  <td><%= payment.id %></td>
+  <td><%= payment.amount %></td>
+  <td></td>
+  <td></td>
+  <td>Пополнение баланса для брони <%= link_to payment.paymentable, [:manage, payment.paymentable] if payment.paymentable %></td>
+  <td><%= payment.state_text %></td>
+  <td><%= l payment.created_at %></td>
+</tr>
