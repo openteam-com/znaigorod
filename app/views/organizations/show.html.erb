@@ -33,6 +33,14 @@
       </ul>
     <% end %>
 
+    <% if @organization.self_sms_claimable? %>
+      <ul class='sms_claims'>
+        <li>
+          <%= link_to @organization.reservation.title, new_organization_sms_claim_path(@organization), :class => :sms_claim_link %>
+        </li>
+      </ul>
+    <% end %>
+
     <%= render :partial => 'commons/social_block', :locals => { :inviteable => @organization.model } %>
 
     <% if @organization.navigation_collection.any? && @organization.client? %>

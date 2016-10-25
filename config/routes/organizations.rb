@@ -20,6 +20,7 @@ Znaigorod::Application.routes.draw do
   resources :organizations, :only => [:index, :show] do
     resources :promote_organization_payments, :only => :create
     get 'landing', on: :collection
+    resources :sms_claims, :only => [:new, :create]
     get 'i_agree_on_the_role', on: :collection
     get :make_their, :on => :member
     get :delete_make_their_request, :on => :member

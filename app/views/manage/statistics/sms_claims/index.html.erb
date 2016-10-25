@@ -19,9 +19,14 @@
         <td><%= sms_claim.name %></td>
         <td><%= sms_claim.phone %></td>
         <td>
-          <%= link_to sms_claim.claimed.organization_title, [:crm, sms_claim.claimed.organization]  %>
+          <% if sms_claim.claimed.class.name != 'Organization' %>
+            <%= link_to sms_claim.claimed.organization_title, [:crm, sms_claim.claimed.organization]  %>
+          <% else %>
+            <%= link_to sms_claim.claimed.title, [:crm, sms_claim.claimed]  %>
+          <% end %>
           (<%= number_to_currency sms_claim.claimed.reservation.try(:balance) %>)
         </td>
+
         <td><%= sms_claim.details %></td>
         <td>
           <% if sms_claim.claimed.reservation  %>

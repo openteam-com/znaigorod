@@ -194,6 +194,11 @@ class Organization < ActiveRecord::Base
     @priority_sms_claimable_suborganization ||= sms_claimable_suborganizations.include?(priority_suborganization) ? priority_suborganization : sms_claimable_suborganizations.first
   end
 
+  def self_sms_claimable?
+    return false unless reservation
+    reservation.phone? && reservation.enough_balance?
+  end
+
   ### Payments ===>
 
   def self.suborganization_kinds_for_navigation
