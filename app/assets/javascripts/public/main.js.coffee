@@ -21,6 +21,7 @@ $ ->
   init_organization_categories() if $('.root').length
   initMarkitup() if $('.markitup').length
   init_invitations()
+  init_set_reservation_balance_link() if $('.js-reservation_balance_input').length
   init_invitation_list_popup()
   init_additional_info()
   init_login()

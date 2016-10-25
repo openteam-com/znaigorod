@@ -2,5 +2,5 @@
 <%= @reservation.placeholder %>
 <%= @reservation.phone %>
 <%= @reservation.balance %>
-<%= number_field_tag 'set_balance', 0, class: 'balance_input' %>
-<%= link_to 'Пополнить баланс', my_organization_balance_reservation_organization_payments_path(@reservation.reserveable, amount: 12), data: {:balance => 0}, class: 'button balance_payment_link', method: 'POST', target: '_blank' %>
+<%= number_field_tag 'set_balance', 0, class: 'js-reservation_balance_input', :min => 0 %>
+<%= link_to 'Пополнить баланс', my_organization_balance_reservation_organization_payments_path(@reservation.reserveable, amount: 12), data: {:balance => 0, :slug => @reservation.reserveable.slug }, class: 'button js-balance_payment_link', method: 'POST', target: '_blank' %>
