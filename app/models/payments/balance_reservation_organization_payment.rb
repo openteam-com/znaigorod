@@ -1,12 +1,11 @@
-class PromoteOrganizationPayment < Payment
+class BalanceReservationOrganizationPayment < Payment
+  attr_accessible :amount
   def approve!
     super
 
-    promote_organization
+    set_balance_reservation
     create_notification_message
   end
-
-  default_value_for :amount, Settings['promote_organization.price'] || 50.0
 
   private
 
@@ -16,13 +15,13 @@ class PromoteOrganizationPayment < Payment
 
   alias :organization :paymentable
 
-  def promote_organization
-    organization.update_attributes! :promoted_at => Time.zone.now
+  def set_balance_reservation
+    organization.reservation.update_attribute(:balance, amount + organization.reservation.balance)
   end
 
   def create_notification_message
     if user
-      NotificationMessage.delay(:queue => 'critical').create(:account => user.account, :kind => :organization_promoted, :messageable => :organization)
+      NotificationMessage.delay(:queue => 'critical').create(:account => user.account, :kind => :set_balance, :messageable => :reservation)
     end
   end
 end

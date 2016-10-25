@@ -4,7 +4,7 @@
       <%= f.input :title %>
       <%= f.input :placeholder %>
       <%= f.input :phone %>
-      <%= f.input :balance %>
+      <%= "Баланс: #{f.object.balance}" %>
 
       <div class="actions">
         <%= f.submit 'Сохранить', :class => 'button' %>

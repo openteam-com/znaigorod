@@ -88,7 +88,7 @@ Znaigorod::Application.routes.draw do
 
     resources :organizations do
 
-      resource :reservation, :except => :show
+      resource :reservation, except: [:destroy]
       get 'subscriptions', :on => :member
       get 'send_about_confirm_role', :on => :member
       get 'close_role', :on => :member
@@ -96,6 +96,7 @@ Znaigorod::Application.routes.draw do
       get 'statistics', :on => :member
       get 'transfer_main_role', :on => :member
       resources :tariff_organization_payments, :only => :create
+      resources :balance_reservation_organization_payments, :only => :create
       put 'publish'  => 'organizations#send_to_published', :on => :member, :as => :publish
       put 'close' => 'organizations#close', :on => :member, :as => :close
       post 'sort', :on => :collection

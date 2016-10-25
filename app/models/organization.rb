@@ -56,6 +56,7 @@ class Organization < ActiveRecord::Base
   has_many :phone_lookups,          :dependent => :destroy
   has_many :places
   has_many :promote_organization_payments, :as => :paymentable
+  has_many :balance_reservation_organization_payments, :as => :paymentable
   has_many :schedules,              :dependent => :destroy
   has_many :showings,               :dependent => :destroy
   has_many :situated_organizations, :class_name => 'Organization', :foreign_key => 'situated_at'
