@@ -30,6 +30,7 @@ group :default do
   gem 'devise-russian'
   gem 'draper'
   gem 'el_vfs_client'
+  gem 'rmagick'
   gem 'enumerize'
   gem 'esp-ckeditor'
   gem 'fastimage'

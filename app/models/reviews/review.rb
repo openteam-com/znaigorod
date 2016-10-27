@@ -106,6 +106,29 @@ class Review < ActiveRecord::Base
     false
   end
 
+  def first_step_complete?
+    draft? || published?
+  end
+
+  def second_step_complete?
+    poster_url.present?
+  end
+
+  def third_step_complete?
+    all_images.any?
+  end
+
+  def fourth_step_complete?
+    relations.any?
+  end
+
+  def show_as_collage?
+    as_collage
+  end
+
+  def has_annotation_gallery?
+    (gallery_images.count + gallery_social_images.count) > 5
+  end
 
   def save_version
     self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
