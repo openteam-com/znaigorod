@@ -22,6 +22,17 @@ class Manage::OrganizationsController < Manage::ApplicationController
     end
   end
 
+  def update
+    @organization = Organization.find(params[:id])
+    @organization.attributes = params[:organization]
+    if params[:commit] == 'Обрезать логотип'
+      @organization.cropping_logotype_url
+    end
+    @organization.save
+    redirect_to manage_organization_path(@organization.id)
+  end
+
+
   def sort
     begin
       params[:position].each do |id, position|

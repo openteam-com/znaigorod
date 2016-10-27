@@ -123,6 +123,8 @@ Znaigorod::Application.routes.draw do
         end
       end
 
+      get 'poster/edit' => 'organizations#edit_poster', :on => :member
+
       post 'sort', :on => :collection
 
       resource :meal do

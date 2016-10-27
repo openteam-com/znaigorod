@@ -18,10 +18,11 @@ class Organization < ActiveRecord::Base
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
-                  :barter_status,
+                  :barter_status, :crop_x, :crop_y, :crop_height, :crop_width,
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
                   :organization_category_ids, :csv_id, :gis_title, :show_custom_balloon_icon
 
+  attr_accessor :crop_x, :crop_y, :crop_height, :crop_width
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
@@ -87,6 +88,14 @@ class Organization < ActiveRecord::Base
     slave_organizations.update_all :positive_activity_date => positive_activity_date if status == "client"
     slave_organizations.map(&:index)
 
+  end
+
+  def cropping_logotype_url
+    if crop_x && crop_y && crop_width && crop_height
+      img = Magick::Image.read(logotype_url)[0]
+      img.crop!(crop_x.to_i, crop_y.to_i, crop_width.to_i, crop_height.to_i, true)
+      img.write(logotype_url)
+    end
   end
 
   ### CRM ===>

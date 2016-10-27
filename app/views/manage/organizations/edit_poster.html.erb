@@ -1,0 +1,17 @@
+<%= simple_form_for [:manage, resource] do |f| %>
+  <div>
+    <%= f.input :crop_x%>
+    <%= f.input :crop_y%>
+    <%= f.input :crop_width%>
+    <%= f.input :crop_height%>
+  </div>
+
+  <div class='place_image_edit_wrapper'>
+    <%= image_tag resource.logotype_url, class: 'js-light_crop', data: { ratioW: 100, ratioH: 100 } %>
+  </div>
+  <div class='submit'>
+    <%= f.button :submit, 'Обрезать логотип', :class => 'flat-btn btn-lg btn-orange' %>
+    <%= link_to 'Отмена', manage_organization_path(resource) %>
+  </div>
+<% end %>
+
