@@ -177,6 +177,13 @@ Znaigorod::Application.routes.draw do
       end
     end
 
+    resources :sections, :only => [:show, :destroy, :edit, :update] do
+      resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update] do
+        delete 'destroy_file', :on => :member, :as => :destroy_file
+      end
+    end
+
+
     Organization.available_suborganization_kinds.each do |kind|
       resources kind.pluralize, :only => :index do
         resources :gallery_images, :only => [:new, :create, :destroy, :edit, :update]
