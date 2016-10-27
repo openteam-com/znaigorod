@@ -7,7 +7,7 @@ class Manage::GalleryImagesController < Manage::ApplicationController
   belongs_to *Organization.available_suborganization_kinds,
     :polymorphic => true, :optional => true
 
-  belongs_to :afisha, :organization, :sauna_hall, :review, :room, :polymorphic => true, :optional => true
+  belongs_to :section, :afisha, :organization, :sauna_hall, :review, :room, :polymorphic => true, :optional => true
 
   def create
     @gallery_image = parent.gallery_images.create(:file => params[:gallery_images][:file])

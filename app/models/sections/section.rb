@@ -1,6 +1,7 @@
 class Section < ActiveRecord::Base
   attr_accessible :title, :navigation_title
 
+  has_many :gallery_images,        :as => :attachable,     :dependent => :destroy
   has_many :section_pages, :dependent => :destroy
   belongs_to :organization
 

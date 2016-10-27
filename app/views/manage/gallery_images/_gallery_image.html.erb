@@ -1,6 +1,6 @@
 <li>
 
-  <% if gallery_image.attachable.is_a?(Organization) %>
+  <% if gallery_image.attachable.is_a?(Organization) || gallery_image.attachable.is_a?(Section) %>
     <div class='sortable_handle'>&#8597;</div>
     <%= hidden_field :position, gallery_image.id, :class => :position, :value => gallery_image.position %>
   <% end %>

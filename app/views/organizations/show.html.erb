@@ -235,6 +235,15 @@
                   </div>
                 </div>
               <% end %>
+              <% if section.gallery_images.any? %>
+                <div class='photogallery'>
+                  <ul>
+                    <% section.gallery_images.order('position').each do |image| %>
+                      <%= render :partial => image.partial_for_render_object, :object => image, :locals => { :rel => "organization_gallery_#{@organization.id}" } %>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
             </div>
           <% end %>
         <% end %>
