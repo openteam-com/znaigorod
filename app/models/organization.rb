@@ -3,6 +3,7 @@
 class Organization < ActiveRecord::Base
   include HasVirtualTour
   include VkUpload
+  include CropedPoster
   include MakePageVisit
   include ImageHelper
 
@@ -18,11 +19,10 @@ class Organization < ActiveRecord::Base
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
-                  :barter_status, :crop_x, :crop_y, :crop_height, :crop_width,
+                  :barter_status,
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
                   :organization_category_ids, :csv_id, :gis_title, :show_custom_balloon_icon
 
-  attr_accessor :crop_x, :crop_y, :crop_height, :crop_width
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
@@ -90,14 +90,6 @@ class Organization < ActiveRecord::Base
 
   end
 
-  def cropping_logotype_url
-    if crop_x && crop_y && crop_width && crop_height
-      img = Magick::Image.read(logotype_url)[0]
-      img.crop!(crop_x.to_i, crop_y.to_i, crop_width.to_i, crop_height.to_i, true)
-      img.write(logotype_url)
-    end
-  end
-
   ### CRM ===>
 
   ### <=== Payments
@@ -133,6 +125,7 @@ class Organization < ActiveRecord::Base
     has_one kind.to_sym, :dependent => :destroy
   end
   has_one :entertainment, :dependent => :destroy, :conditions => { type: nil }
+  has_croped_poster min_width: 200, min_height: 200, :default_url => 'public/post_poster_stub.jpg'
 
   validates_presence_of :title
   validates_presence_of :organization_category_ids, :message => "* Категория не может быть пустой"
@@ -183,6 +176,7 @@ class Organization < ActiveRecord::Base
   normalize_attribute :site,  :with => [:strip, :blank]
 
   alias_attribute :poster_url, :logotype_url
+  alias_attribute :poster_image_url, :logotype_url #для CropedPoster
   alias_attribute :title_ru, :title
   alias_attribute :title_translit, :title
   alias_attribute :category_ru, :category
@@ -194,6 +188,10 @@ class Organization < ActiveRecord::Base
 
   def organization_category_uniq_slugs
     organization_categories.flat_map { |c| c.path }.uniq.map(&:slug)
+  end
+
+  def poster_image_content_type
+    MIME::Types.type_for(logotype_url).first.content_type if !logotype_url.nil?
   end
 
   def most_valueable_organization_category
