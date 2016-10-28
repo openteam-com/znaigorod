@@ -16,7 +16,6 @@ $ ->
   init_file_upload() if $('.file_upload').length
   init_ajax_delete() if $('.ajax_delete').length
   init_crop()
-  init_light_crop() if $('.js-light_crop')
   init_webcam() if $('#webcam_snapshot_image').length
   init_webcam_map() if $('#webcam_map').length
   init_sortable() if $('.sortable').length

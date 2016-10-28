@@ -1,17 +1,71 @@
-<%= simple_form_for [:manage, resource] do |f| %>
-  <div>
-    <%= f.input :crop_x%>
-    <%= f.input :crop_y%>
-    <%= f.input :crop_width%>
-    <%= f.input :crop_height%>
-  </div>
+<div class="organizations_show">
+  <h1>Редактирование постера для <%= resource.title %></h1>
 
-  <div class='place_image_edit_wrapper'>
-    <%= image_tag resource.logotype_url, class: 'js-light_crop', data: { ratioW: 100, ratioH: 100 } %>
-  </div>
-  <div class='submit'>
-    <%= f.button :submit, 'Обрезать логотип', :class => 'flat-btn btn-lg btn-orange' %>
-    <%= link_to 'Отмена', manage_organization_path(resource) %>
-  </div>
+  <% if resource.poster_url? %>
+    <% crop_opt = resource.poster_url ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
+    <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
+
+    <%= simple_form_for resource,
+      :as => :organization,
+      :url => manage_organization_path(resource.id),
+      :html => { :class => 'default_simple_form' } do |f| %>
+
+      <p><strong>Для изменения постера - просто загрузи новый или измени область!</strong></p>
+
+      <div class='logotype'>
+        <h3>Логотип заведения:</h3>
+        <%= f.input :logotype_url, :as => :hidden %>
+          <%= link_to 'Поменять файл', '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}" %>
+        </div>
+      </div>
+
+      <%= f.error :poster_image_content_type %>
+
+      <div>
+        <%= f.input :set_region, :as => :hidden, :input_html => { :value => true } %>
+        <%= f.input :crop_x, :as => :hidden, :input_html => { :value => crop_x } %>
+        <%= f.input :crop_y, :as => :hidden, :input_html => { :value => crop_y } %>
+        <%= f.input :crop_width, :as => :hidden, :input_html => { :value => crop_width } %>
+        <%= f.input :crop_height, :as => :hidden, :input_html => { :value => crop_height } %>
+        <%= f.input :min_width, :as => :hidden, :input_html => { :value => 200 } %>
+
+        <%= hidden_field_tag :aspect_ratio, 1.0 / 1.0 %>
+
+        <%= image_tag resized_image_url(resource.poster_image_url,
+                                        resource.poster_image_resized_dimensions[:width],
+                                        resource.poster_image_resized_dimensions[:height]),
+        :class => 'jcrop' %>
+    </div>
+
+    <div class='submit'>
+      <%= f.button :submit, 'Обрезать постер', :class => 'btn btn-lg btn-grey' %>
+      <%= link_to 'Отмена', manage_organization_path(resource) %>
+    </div>
+  <% end %>
+<% else %>
+  <%= simple_form_for resource,
+    :as => :organization,
+    :url => manage_organization_path(resource.id),
+    :html => { :class => 'default_simple_form' } do |f| %>
+
+    <%= hidden_field_tag :crop, true %>
+
+    <div class='logotype'>
+      <h3>Логотип заведения:</h3>
+      <%= f.input :logotype_url, :as => :hidden %>
+      <div class="choose_file_wrapper">
+        <div class="uploaded_file_wrapper image">
+          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
+        </div>
+        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+      </div>
+    </div>
+
+
+    <div class='submit'>
+      <%= link_to 'Отмена', manage_organization_path(resource) %>
+    </div>
+  <% end %>
 <% end %>
-
+</div>
