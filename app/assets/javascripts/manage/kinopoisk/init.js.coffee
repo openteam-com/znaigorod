@@ -58,7 +58,7 @@
         if confirm('Данные с кинопоиска получены. Заменить?')
           $('#afisha_title', form).val(data.title)
           $('#afisha_original_title', form).val(data.original_title)
-          $('#afisha_description', form).val(data.description)
+          $('#html', form).val(data.description)
           $('#afisha_tag', form).val(data.tags)
           $('#afisha_distribution_starts_on', form).val(data.premiere)
           $('#afisha_age_min', form).val(data.minimal_age)
