@@ -191,7 +191,7 @@ class Organization < ActiveRecord::Base
   end
 
   def poster_image_content_type
-    MIME::Types.type_for(logotype_url).first.content_type if !logotype_url.nil?
+    MIME::Types.type_for(logotype_url).first.content_type if !logotype_url.blank?
   end
 
   def most_valueable_organization_category
