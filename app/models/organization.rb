@@ -12,7 +12,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :address_attributes, :description, :email, :halls_attributes,
                   :images_attributes, :organization_id, :phone, :schedules_attributes,
                   :site, :subdomain, :title, :vfs_path, :attachments_attributes,
-                  :logotype_url, :non_cash, :priority_suborganization_kind,
+                  :logotype_url, :poster_url, :non_cash, :priority_suborganization_kind,
                   :comment, :organization_stand_attributes, :additional_rating,
                   :social_links_attributes, :user_id, :ability_to_comment,
                   :vkontakte_likes, :fb_likes, :odn_likes, :poster_vk_id,
@@ -175,7 +175,6 @@ class Organization < ActiveRecord::Base
   normalize_attribute :email, :with => [:strip, :blank]
   normalize_attribute :site,  :with => [:strip, :blank]
 
-  alias_attribute :poster_url, :logotype_url
   alias_attribute :poster_image_url, :logotype_url #для CropedPoster
   alias_attribute :title_ru, :title
   alias_attribute :title_translit, :title
@@ -185,6 +184,14 @@ class Organization < ActiveRecord::Base
   alias_attribute :offer_ru, :offer
   alias_attribute :payment_ru, :payment
   alias_attribute :address_ru, :address
+
+  def poster_url
+    return poster_url? ? read_attribute(:poster_url) : read_attribute(:logotype_url)
+  end
+
+  def poster_url?
+    read_attribute(:poster_url).present?
+  end
 
   def organization_category_uniq_slugs
     organization_categories.flat_map { |c| c.path }.uniq.map(&:slug)

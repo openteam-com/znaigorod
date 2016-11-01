@@ -1,8 +1,8 @@
 <div class="organizations_show">
   <h1>Редактирование постера для <%= resource.title %></h1>
 
-  <% if resource.poster_url? %>
-    <% crop_opt = resource.poster_url ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
+  <% if resource.logotype_url? %>
+    <% crop_opt = resource.poster_url? ? resource.poster_url.match(/(?<=\/region\/)\w+\/\w+\/\w+\/\w+/).to_s.split('/').map{|o| (o.to_i/resource.resize_factor).round} : [] %>
     <% crop_width, crop_height, crop_x, crop_y = crop_opt.any? ? crop_opt : [resource.poster_image_resized_dimensions[:width] / resource.resize_factor, resource.poster_image_resized_dimensions[:height] , 0, 0] %>
 
     <%= simple_form_for resource,
@@ -28,13 +28,14 @@
         <%= f.input :crop_width, :as => :hidden, :input_html => { :value => crop_width } %>
         <%= f.input :crop_height, :as => :hidden, :input_html => { :value => crop_height } %>
         <%= f.input :min_width, :as => :hidden, :input_html => { :value => 200 } %>
+        <%= f.input :min_height, :as => :hidden, :input_html => { :value => 200 } %>
 
         <%= hidden_field_tag :aspect_ratio, 1.0 / 1.0 %>
 
-        <%= image_tag resized_image_url(resource.poster_image_url,
+        <%= image_tag resized_image_url(resource.logotype_url,
                                         resource.poster_image_resized_dimensions[:width],
                                         resource.poster_image_resized_dimensions[:height]),
-        :class => 'jcrop' %>
+                                        :class => 'jcrop' %>
     </div>
 
     <div class='submit'>

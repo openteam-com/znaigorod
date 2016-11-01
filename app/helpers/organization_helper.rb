@@ -5,7 +5,7 @@ module OrganizationHelper
   end
 
   def logotype_url(org)
-    org.primary_organization.try(:logotype_url) || org.logotype_url
+    org.primary_organization.try(:poster_url) || org.poster_url
   end
 
   def organization_sauna(org)

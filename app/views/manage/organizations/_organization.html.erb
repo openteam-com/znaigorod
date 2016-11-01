@@ -1,6 +1,6 @@
 <div class="logo">
   <% if resource.logotype_url.present? %>
-    <%= image_tag resized_image_url(resource.logotype_url, 137, 137, { crop: '!', orientation: 'n' }) %>
+    <%= image_tag resized_image_url(resource.poster_url, 137, 137, { crop: '!', orientation: 'n' }) %>
   <% else %>
     <%= image_tag "manage/stub.jpg", :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
   <% end %>

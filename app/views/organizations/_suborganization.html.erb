@@ -22,7 +22,7 @@
       <% end %>
       <% if suborganization.organization.logotype_url? %>
         <%= link_to organization_path(suborganization.organization) do %>
-          <%= image_tag(resized_image_url(suborganization.organization.logotype_url, width, height, :watermark => false), size: "#{width}x#{height}", alt: suborganization.organization.title) %>
+          <%= image_tag(resized_image_url(suborganization.organization.poster_url, width, height, :watermark => false), size: "#{width}x#{height}", alt: suborganization.organization.title) %>
         <% end %>
       <% else %>
         <%= link_to organization_path(suborganization.organization) do %>

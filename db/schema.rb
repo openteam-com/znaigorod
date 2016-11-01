@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160909152837) do
+ActiveRecord::Schema.define(:version => 20161101075106) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -198,6 +198,22 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
   add_index "bets", ["afisha_id"], :name => "index_bets_on_afisha_id"
   add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
 
+  create_table "brand_for_contents", :force => true do |t|
+    t.string   "content_type"
+    t.integer  "content_id"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.text     "background_url"
+    t.string   "color"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "brand_for_contents", ["content_id"], :name => "index_brand_for_contents_on_content_id"
+  add_index "brand_for_contents", ["content_type"], :name => "index_brand_for_contents_on_content_type"
+
   create_table "brands", :force => true do |t|
     t.string   "title"
     t.boolean  "show"
@@ -211,6 +227,14 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.string   "url"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+  end
+
+  create_table "breaks", :force => true do |t|
+    t.time     "from"
+    t.time     "to"
+    t.integer  "full_schedule_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "car_sales_centers", :force => true do |t|
@@ -496,6 +520,26 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
   add_index "friends", ["account_id"], :name => "index_friends_on_account_id"
   add_index "friends", ["friendable_id"], :name => "index_friends_on_friendable_id"
 
+  create_table "full_schedules", :force => true do |t|
+    t.boolean  "monday",           :default => true
+    t.boolean  "tuesday",          :default => true
+    t.boolean  "wednesday",        :default => true
+    t.boolean  "thursday",         :default => true
+    t.boolean  "friday",           :default => true
+    t.boolean  "saturday",         :default => true
+    t.boolean  "sunday",           :default => true
+    t.boolean  "free",             :default => true
+    t.time     "from"
+    t.time     "to"
+    t.integer  "schedulable_id"
+    t.string   "schedulable_type"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "full_schedules", ["schedulable_id"], :name => "index_full_schedules_on_schedulable_id"
+  add_index "full_schedules", ["schedulable_type"], :name => "index_full_schedules_on_schedulable_type"
+
   create_table "halls", :force => true do |t|
     t.string   "title"
     t.integer  "seating_capacity"
@@ -570,6 +614,15 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
   end
 
   add_index "main_page_reviews", ["review_id"], :name => "index_main_page_reviews_on_review_id"
+
+  create_table "make_their_organization_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "map_layers", :force => true do |t|
     t.string   "title"
@@ -757,6 +810,16 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.datetime "updated_at",               :null => false
   end
 
+  create_table "organization_managers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "email"
+    t.string   "status"
+    t.string   "user_name"
+  end
+
   create_table "organization_stands", :force => true do |t|
     t.integer  "organization_id"
     t.integer  "places"
@@ -767,6 +830,15 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
   end
 
   add_index "organization_stands", ["organization_id"], :name => "index_organization_stands_on_organization_id"
+
+  create_table "organization_tariffs", :force => true do |t|
+    t.integer  "organization_id"
+    t.integer  "tariff_id"
+    t.string   "duration"
+    t.integer  "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "organizations", :force => true do |t|
     t.text     "title"
@@ -818,6 +890,10 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.integer  "csv_id"
     t.string   "gis_title"
     t.boolean  "show_custom_balloon_icon",      :default => false
+    t.string   "state"
+    t.integer  "manager_id"
+    t.datetime "promoted_at"
+    t.text     "poster_url"
   end
 
   add_index "organizations", ["slug"], :name => "index_organizations_on_slug", :unique => true
@@ -882,6 +958,8 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.text     "details"
     t.string   "state"
     t.string   "email"
+    t.string   "duration"
+    t.integer  "tariff_id"
   end
 
   add_index "payments", ["paymentable_id"], :name => "index_payments_on_paymentable_id"
@@ -1429,6 +1507,24 @@ ActiveRecord::Schema.define(:version => 20160909152837) do
     t.text     "description"
     t.text     "category"
     t.text     "feature"
+  end
+
+  create_table "tariffs", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "price_for_month"
+    t.integer  "price_for_six_months"
+    t.integer  "price_for_year"
+    t.integer  "organization_id"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.boolean  "logotype",             :default => false
+    t.boolean  "gallery",              :default => false
+    t.boolean  "description_field",    :default => false
+    t.boolean  "small_comment"
+    t.boolean  "price_list"
+    t.boolean  "brand"
+    t.string   "tag"
   end
 
   create_table "teaser_items", :force => true do |t|
