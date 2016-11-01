@@ -16,6 +16,9 @@
     visible:  visible_count
     start:    start_position
 
+  if $('.section .photogallery ul li').length < 4
+    $('.section .photogallery ul').css({'width': 'auto', 'display': 'table', 'margin': '0px auto'})
+
   $('.body .photogallery a').colorbox
     close: 'закрыть'
     current: '{current} из {total}'
