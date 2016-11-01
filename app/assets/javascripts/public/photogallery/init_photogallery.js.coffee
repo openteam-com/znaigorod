@@ -16,8 +16,9 @@
     visible:  visible_count
     start:    start_position
 
-  if $('.section .photogallery ul li').length < 4
-    $('.section .photogallery ul').css({'width': 'auto', 'display': 'table', 'margin': '0px auto'})
+  $.each $('.section .photogallery ul'), ->
+    if $(this).find('li').length < 4
+      $(this).css({'width': 'auto', 'display': 'table', 'margin': '0px auto'})
 
   $('.body .photogallery a').colorbox
     close: 'закрыть'
