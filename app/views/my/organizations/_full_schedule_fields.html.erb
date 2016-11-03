@@ -1,5 +1,6 @@
-<%= f.input :from %>
-<%= f.input :to %>
+<label class='like_control_label'>Расписание работы</label>
+<%= f.input :from, as: :string %>
+<%= f.input :to, as: :string %>
 <div class='days'>
   <%= f.input :monday, input_html: { class: 'monday' } %>
   <%= f.input :tuesday, input_html: { class: 'tuesday' } %>
@@ -8,12 +9,19 @@
   <%= f.input :friday, input_html: { class: 'friday' }  %>
   <%= f.input :saturday, input_html: { class: 'saturday' }  %>
   <%= f.input :sunday, input_html: { class: 'sunday' }  %>
-  <%= f.input :free, input_html: {class: 'free' } %>
+  <%= f.input :free, input_html: {class: 'free' }, as: :hidden %>
 </div>
 <%= f.simple_fields_for :breaks do |b| %>
-  <%= b.input :from %>
-  <%= b.input :to %>
-  <%= b.link_to_remove 'Удалить перерыв' %>
+  <div class='break_fields'>
+    <label class='like_control_label'>Перерыв</label>
+    <%= b.input :from, as: :string %>
+    <%= b.input :to, as: :string %>
+    <div class='input remove_break'><%= b.link_to_remove 'Удалить перерыв' %></div>
+  </div>
 <% end  %>
 <%= f.link_to_add 'Добавить перерыв', :breaks %>
-<%= f.link_to_remove 'Удалить режим' %>
+<div class='comment_for_full_schedules'>
+  <label class='like_control_label'>Комментарий</label>
+  <%= f.input :comment, as: :text, label: false %>
+</div>
+<%= f.link_to_remove 'Удалить расписание' %>

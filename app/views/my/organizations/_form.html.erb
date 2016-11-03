@@ -1,111 +1,115 @@
 <%= simple_nested_form_for resource, :url => [:my, resource], :html => { :novalidate => true } do |f| %>
   <% content_for :yandex_map_scripts, javascript_include_tag('http://api-maps.yandex.ru/2.0.34/?load=package.full&lang=ru-RU') %>
 
-  <div class="addres_form">
-    <div class="address_fields">
-      <%= f.simple_fields_for :address %>
-      <%= f.link_to_add 'Добавить адрес', :address, :class => 'add_address' %>
-    </div>
-  </div>
-  <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
-  <%= f.input :title %>
-  <%= f.input :phone %>
-  <%= f.input :email %>
-  <%= f.input :site %>
-  <%= f.input :non_cash %>
-
-  <%= render :partial => 'organization_categories_fields' %>
-
-  <fieldset class='organization_social_links'>
-    <legend>Ссылки</legend>
-    <%= f.simple_fields_for :social_links %>
-    <%= f.link_to_add t('add_social_links'), :social_links %>
-  </fieldset>
-
-  <div class="schedules_fields">
-    <h3>Расписание работы:</h3>
-    <%= f.simple_fields_for :schedules %>
-  </div>
-
-  <div class='full_schedules_edit'>
-    <div class="full_schedules_fields">
-      <%= f.simple_fields_for :full_schedules %>
-      <%= f.link_to_add 'Добавить режим работы', :full_schedules, :class => 'add_full_schedules' %>
-    </div>
-  </div>
-
-  <% if resource.can_service? 'logotype' %>
-    <div class='logo'>
-      <h3>Логотип заведения:</h3>
-      <%= f.input :logotype_url, :as => :hidden %>
-      <div class="choose_file_wrapper">
-        <div class="uploaded_file_wrapper image">
-          <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
-        </div>
-        <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
-        <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+  <div class='left'>
+    <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => 'vfs_path' } %>
+    <%= f.input :title %>
+    <div class="addres_form">
+      <div class="address_fields">
+        <%= f.simple_fields_for :address %>
       </div>
     </div>
-    <hr>
-  <% end %>
 
-  <% if resource.can_service? 'description_field' %>
-    <%= javascript_include_tag 'esp-ckeditor/application' %>
-    <%= f.input :description, :as => :ckeditor, :label => false %>
-    <hr>
-  <% end %>
-
-  <% if resource.can_service? 'tour3d' %>
-    <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
-    <hr>
-  <% end %>
-
-  <% if resource.can_service? 'small_comment' %>
-    <div class='comment'>
-      <h3>Короткий комментарий</h3>
-       <%= f.input :comment %>
-    <hr>
-  <% end %>
-
-  <% if resource.can_service? 'gallery' %>
-    <div class='images'>
-      <h3>Галерея изображений</h3>
-        <% resource.gallery_images.each do |g| %>
-          <%= image_tag g.file.url, :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
-        <% end %>
-
-        <p><%= f.submit 'Редактировать галерею изображений', name: 'edit_gallery_images' %></p>
+    <div class='full_schedules_edit'>
+      <div class="full_schedules_fields">
+        <%= f.simple_fields_for :full_schedules %>
+        <%= f.link_to_add 'Добавить расписание', :full_schedules, :class => 'add_full_schedules' %>
+      </div>
     </div>
-    <hr>
-  <% end %>
 
-  <% if resource.can_service? 'price_list' %>
-      <div class="sections_wrapper">
-        <span>Разделы</span>
-        <div class="new_section">
-          <%= link_to 'Добавить раздел', new_my_organization_section_path(resource.id), target: '_blank' %>
-        </div>
-          <div class='sections'>
-              <% if resource.sections.any? %>
-                <% resource.sections.order_by_position.each do |section| %>
-                  <%= link_to section.title, my_organization_section_path(resource, section) %>
-                <% end %>
-              <% end %>
+    <hr>
+
+    <%= render :partial => 'organization_categories_fields' %>
+
+    <fieldset class='organization_social_links'>
+      <legend>Ссылки</legend>
+      <%= f.simple_fields_for :social_links %>
+      <%= f.link_to_add t('add_social_links'), :social_links %>
+    </fieldset>
+
+    <div class="schedules_fields">
+      <h3>Расписание работы:</h3>
+      <%= f.simple_fields_for :schedules %>
+    </div>
+
+    <%= f.input :phone %>
+    <%= f.input :email %>
+    <%= f.input :site %>
+    <%= f.input :non_cash %>
+
+    <% if resource.can_service? 'logotype' %>
+      <div class='logo'>
+        <h3>Логотип заведения:</h3>
+        <%= f.input :logotype_url, :as => :hidden %>
+        <div class="choose_file_wrapper">
+          <div class="uploaded_file_wrapper image">
+            <%= image_tag f.object.logotype_url if f.object.logotype_url.present? %>
           </div>
+          <%= link_to t('remove_link'), '#', :class => 'remove_link', :style => ("display: none;" unless f.object.logotype_url.present?) %>
+          <%= link_to t('choose_file'), '#', :class => 'organization_logotype_url choose_file', :params => "vfs_path=#{f.object.vfs_path}", :style => ('display: none;' if f.object.logotype_url.present?) %>
+        </div>
       </div>
+      <hr>
     <% end %>
 
-  <% if resource.can_service? 'brand' %>
-    <div class="brand_form">
-      <div class="brand_fields">
-        <%= f.simple_fields_for :brand_for_content %>
+    <% if resource.can_service? 'description_field' %>
+      <%= javascript_include_tag 'esp-ckeditor/application' %>
+      <%= f.input :description, :as => :ckeditor, :label => false %>
+      <hr>
+    <% end %>
+
+    <% if resource.can_service? 'tour3d' %>
+      <%= render :partial => 'virtual_tour_form_fields', :locals => { :f => f } %>
+      <hr>
+    <% end %>
+
+    <% if resource.can_service? 'small_comment' %>
+      <div class='comment'>
+        <h3>Короткий комментарий</h3>
+        <%= f.input :comment %>
+        <hr>
+      <% end %>
+
+      <% if resource.can_service? 'gallery' %>
+        <div class='images'>
+          <h3>Галерея изображений</h3>
+          <% resource.gallery_images.each do |g| %>
+            <%= image_tag g.file.url, :width => '137', :height => '100', :alt => resource.title, :title => resource.title %>
+          <% end %>
+
+          <p><%= f.submit 'Редактировать галерею изображений', name: 'edit_gallery_images' %></p>
+        </div>
+        <hr>
+      <% end %>
+
+      <% if resource.can_service? 'price_list' %>
+        <div class="sections_wrapper">
+          <span>Разделы</span>
+          <div class="new_section">
+            <%= link_to 'Добавить раздел', new_my_organization_section_path(resource.id), target: '_blank' %>
+          </div>
+          <div class='sections'>
+            <% if resource.sections.any? %>
+              <% resource.sections.order_by_position.each do |section| %>
+                <%= link_to section.title, my_organization_section_path(resource, section) %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if resource.can_service? 'brand' %>
+        <div class="brand_form">
+          <div class="brand_fields">
+            <%= f.simple_fields_for :brand_for_content %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= link_to "&larr; Назад".html_safe, :back %>
+        <%= f.submit 'Сохранить' %>
+        <%= link_to 'Удалить'.html_safe, my_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
       </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= link_to "&larr; Назад".html_safe, :back %>
-    <%= f.submit 'Сохранить' %>
-    <%= link_to 'Удалить'.html_safe, my_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
-  </div>
-<% end %>

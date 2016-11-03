@@ -165,7 +165,7 @@ class My::OrganizationsController < My::ApplicationController
     resource.organization_stand || resource.build_organization_stand
     resource.address || resource.build_address
     resource.brand_for_content || resource.build_brand_for_content
-
+    resource.full_schedules.present? || resource.full_schedules.build
     (1..7).each do |day|
       resource.schedules.build(:day => day)
     end unless resource.schedules.any?

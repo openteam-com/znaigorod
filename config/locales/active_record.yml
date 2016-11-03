@@ -320,6 +320,23 @@ ru:
         seating_capacity: Вместимость
         title: Название зала
 
+      full_schedule:
+        from: с
+        to:   по
+        monday: Пн
+        tuesday: Вт
+        wednesday: Ср
+        thursday: Чт
+        friday: Пт
+        saturday: Сб
+        sunday: Вс
+        free: Выходной
+        comment: Комментарий
+
+      break:
+        from: с
+        to:   по
+
       organization:
         <<: *common_attributes
         state: Статус
