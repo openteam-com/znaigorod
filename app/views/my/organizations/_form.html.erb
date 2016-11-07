@@ -13,6 +13,7 @@
     <div class='full_schedules_edit'>
       <div class="full_schedules_fields">
         <%= f.simple_fields_for :full_schedules %>
+        <%= f.error :full_schedules %>
         <%= f.link_to_add 'Добавить расписание', :full_schedules, :class => 'add_full_schedules' %>
       </div>
     </div>

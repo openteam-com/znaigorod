@@ -226,7 +226,7 @@ class Organization < ActiveRecord::Base
   has_one :entertainment, :dependent => :destroy, :conditions => { type: nil }
 
   validates_presence_of :title
-  validates_presence_of :full_schedules
+  validates_presence_of :full_schedules, :message => 'У заведения должно быть хотя бы одно расписание'
   validates_presence_of :organization_category_ids, :message => "* Категория не может быть пустой"
 
   validate :validate_email
