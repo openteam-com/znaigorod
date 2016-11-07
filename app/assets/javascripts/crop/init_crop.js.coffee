@@ -44,9 +44,13 @@
     true
 
 update_crop = (coords) ->
-  rx = 200/coords.w
-  ry = 269/coords.h
-  preview = $('.afisha_preview .poster img')
+  preview = $('.preview .poster img')
+  if $(preview).parents('.organizations_show').length
+    rx = 150/coords.w
+    ry = 150/coords.h
+  else
+    rx = 200/coords.w
+    ry = 269/coords.h
 
   preview.css
     width: Math.round(rx * preview.attr('width')) + 'px'
