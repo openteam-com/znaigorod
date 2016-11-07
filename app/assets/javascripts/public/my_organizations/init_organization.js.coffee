@@ -1,4 +1,5 @@
 @init_organization = () ->
+  initTagit()
   $('.new_section_link').click ->
     $('.new_section').toggle()
     false
@@ -217,3 +218,22 @@ beforeImageInsert = (h) ->
     fail: (e, data) ->
       message = data.jqXHR.responseText
       $('.message_wrapper').text(message).show().delay(5000).slideUp('slow')
+
+initTagit = ->
+
+  $('.tagit_categories').tagit {
+    fieldName:        'categories',
+    allowDuplicates:  false,
+    readOnly:         true,
+    placeholderText:  ''
+    beforeTagAdded: (event, ui) ->
+      if ui.tagLabel == $('.select_type option:first').text()
+        return false
+
+  }
+
+  $('.select_type').change ->
+    $('.tagit_categories').tagit('createTag', $(' option:selected', this).text())
+    $(this).val($('option:first', this).val())
+
+

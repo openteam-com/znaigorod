@@ -19,11 +19,12 @@ class Organization < ActiveRecord::Base
                   :situated_at, :page_meta_keywords, :page_meta_description,
                   :page_meta_title, :og_description, :og_title, :positive_activity_date,
                   :photo_block_title, :discounts_block_title, :afisha_block_title, :reviews_block_title, :comments_block_title,
-                  :barter_status,
+                  :barter_status, :tagit_categories, :category_flag,
                   :address_navigation_title, :discounts_navigation_title, :afishas_navigation_title, :reviews_navigation_title, :photos_navigation_title,
                   :organization_category_ids, :csv_id, :gis_title, :show_custom_balloon_icon
 
   attr_accessor :clone_id, :comment_for_draft
+  attr_accessor :tagit_categories, :category_flag
   ### <=== CRM
 
   attr_accessible :primary_organization_id, :balance_delta
@@ -83,6 +84,8 @@ class Organization < ActiveRecord::Base
   has_one :organization_stand,  :dependent => :destroy
   has_one :feed, :as => :feedable, :dependent => :destroy
 
+  before_validation :set_categories, :if => :category_flag
+
   extend Enumerize
   enumerize :status, :in => [:fresh, :talks, :waiting_for_payment, :client, :client_economy, :client_standart, :client_premium, :non_cooperation, :debtor],
               default: :fresh, predicates: true
@@ -94,6 +97,13 @@ class Organization < ActiveRecord::Base
 
   def client?
     status.client? || status.client_economy? || status.client_standart? || status.client_premium?
+  end
+
+  def set_categories
+    form_categories = tagit_categories.split(',').map(&:to_s)
+    ctgs = []
+    form_categories.each { |ctg| ctgs << OrganizationCategory.where(:title => ctg).first }
+    self.organization_categories = ctgs
   end
 
   def change_versionable?
@@ -216,6 +226,7 @@ class Organization < ActiveRecord::Base
   has_one :entertainment, :dependent => :destroy, :conditions => { type: nil }
 
   validates_presence_of :title
+  validates_presence_of :full_schedules
   validates_presence_of :organization_category_ids, :message => "* Категория не может быть пустой"
 
   validate :validate_email

@@ -1,4 +1,4 @@
-<label class='like_control_label'>Расписание работы</label>
+<%= label_tag :q, "Расписание работы<abbr title='Обязательное поле'>*</abbr>".html_safe, class: 'like_control_label' %>
 <%= f.input :from, as: :string %>
 <%= f.input :to, as: :string %>
 <div class='days'>

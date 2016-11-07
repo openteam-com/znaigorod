@@ -14,7 +14,7 @@
         for i in [0..(l-2)]
           fields = $(all_fields[i])
           checks = fields.find('.days .checkbox .boolean')
-          for j in [0..7]
+          for j in [0..6]
             if $(checks[j])[0].checked == true
               day_name = $(checks[j]).attr('class').split(' ')[2]
               added_fields.find('.days .checkbox .' + day_name).attr('checked', false)

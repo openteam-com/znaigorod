@@ -234,6 +234,24 @@ class Review < ActiveRecord::Base
 
       relation.save
     end
+    relations.destroy_all if related_items.nil?
+    return true unless related_items
+    relations.destroy_all
+
+    related_items.each do |item|
+      slave_type, slave_id = item.split("_")
+      if slave_type == 'review'
+        relation = Review.find(slave_id).relations.new
+        relation.slave_type = "Review"
+        relation.slave_id = id
+        relation.save
+      end
+      relation = relations.new
+      relation.slave_type = slave_type.classify
+      relation.slave_id = slave_id
+
+      relation.save
+    end
   end
 
   def store_cached_content_for_index

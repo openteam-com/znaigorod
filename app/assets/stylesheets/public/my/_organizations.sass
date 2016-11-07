@@ -31,9 +31,15 @@
   img
     display: block
 
+.my_organizations_new, .my_organizations_edit, .my_organizations_create
+  abbr
+    color: red !important
+    cursor: help
+    font-size: 20px
 
+  .error
+    margin: 0px !important
 
-.my_organizations_new, .my_organizaitons_edit
   font-size: 14px
 
   .left
@@ -48,6 +54,25 @@
     a
       font-size: 12px
 
+    .select_categories
+      input[type='text']
+        background-color: inherit
+
+      ul.tagit
+        border: none
+
+      .select_type
+        border-radius: 3px
+        -webkit-appearance: none
+        -moz-appearance: none
+        appearance: none
+        background: #fff url(http://znaigorod.ru/assets/public/down_arrow-89852a7b08912b882cd90a54d08030f0.jpg) no-repeat center right
+        border: 1px solid #909090
+        cursor: pointer
+        height: 28px
+        padding-left: 4px
+        width: 300px
+
 
     .required.control-label
       margin-top: 0px
@@ -61,17 +86,28 @@
       width: auto
       display: block
 
-    .like_control_label
-      font-size: 14px
-
     input[type='text']
       background-color: white
+      width: 98%
 
     .input
       textarea
         width: 98%
         height: 45px
         background-color: white
+
+    .phone_edit
+      .like_control_label
+        display: inline
+
+      .icon-info
+        background: url('more_button_sprite.png')
+        width: 25px
+        height: 25px
+        display: inline-block
+
+      .icon-info:hover
+        background-position: 0px 25px
 
     .full_schedules_fields
       label.control-label

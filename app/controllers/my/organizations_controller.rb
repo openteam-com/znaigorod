@@ -4,7 +4,7 @@ class My::OrganizationsController < My::ApplicationController
   load_and_authorize_resource
   defaults :resource_class => Organization
 
-  before_filter :build_nested_objects, :only => [:new, :edit]
+  before_filter :build_nested_objects, :only => [:new, :edit, :create]
 
   actions :all
 
@@ -25,6 +25,7 @@ class My::OrganizationsController < My::ApplicationController
   def create
     create! do |success, failure|
       success.html { redirect_to my_organization_path(resource) }
+      failure.html { render :new }
     end
   end
 
@@ -166,9 +167,6 @@ class My::OrganizationsController < My::ApplicationController
     resource.address || resource.build_address
     resource.brand_for_content || resource.build_brand_for_content
     resource.full_schedules.present? || resource.full_schedules.build
-    (1..7).each do |day|
-      resource.schedules.build(:day => day)
-    end unless resource.schedules.any?
   end
 
   def build_resource
