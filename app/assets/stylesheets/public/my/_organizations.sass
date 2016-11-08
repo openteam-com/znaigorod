@@ -32,10 +32,19 @@
     display: block
 
 .my_organizations_new, .my_organizations_edit, .my_organizations_create, .my_organizations_update
+
+
+  input, textarea, select
+    font-size: 14px !important
+
+  input.flat-btn.btn-lg.btn-orange
+    font-size: 13px !important
+
   abbr
     color: red !important
     cursor: help
     font-size: 20px
+    margin-left: -5px
 
   .error
     margin: 0px !important
@@ -43,7 +52,6 @@
     display: block
     font-size: 0.8em
 
-  font-size: 14px
 
   .left
     width: 740px
@@ -52,17 +60,33 @@
 
     h1
       margin: 12px 0 12px 0
-      font-size: 17px
+      font-size: 22px
 
     a
       font-size: 12px
 
     .select_categories
+
+      span.tagit-label
+        font-size: 12px
+        font-family: Verdana
+
       input[type='text']
         background-color: inherit
 
+      border-bottom: 1px solid #ccc
+      margin-bottom: 10px
+
       ul.tagit
         border: none
+        padding-left: 0px
+        span.text-icon
+          line-height: 18px
+      .organization_tagit_categories
+        margin-top: 10px
+        margin-bottom: 10px
+        li.tagit-new
+          display: none
 
       .select_type
         border-radius: 3px
@@ -72,7 +96,7 @@
         background: #fff url(http://znaigorod.ru/assets/public/down_arrow-89852a7b08912b882cd90a54d08030f0.jpg) no-repeat center right
         border: 1px solid #909090
         cursor: pointer
-        height: 28px
+        height: 26px
         padding-left: 4px
         width: 300px
 
@@ -94,6 +118,10 @@
       width: 98%
 
     .input
+      input
+        height: 22px
+      select
+        height: 26px
       textarea
         width: 98%
         height: 45px
@@ -104,21 +132,31 @@
         display: inline
 
       .icon-info
-        background: url('more_button_sprite.png')
-        width: 25px
-        height: 25px
+        background: url('info.png')
+        width: 18px
+        height: 18px
         display: inline-block
+        margin-left: 2px
 
-      .icon-info:hover
-        background-position: 0px 25px
+    .full_schedules_edit
+      border-bottom: 1px solid #ccc
+      margin-bottom: 10px
+
+      abbr
+        margin-left: 0px
 
     .full_schedules_fields
+
+      .organization_full_schedules_from
+        margin-right: 10px
+
       label.control-label
         font-weight: normal
         display: inline-block
 
       .fields
         margin: 0 0 15px 0
+
       a
         display: inline-block
 
@@ -136,22 +174,28 @@
         .input
           margin: 0px
 
+        .organization_full_schedules_breaks_from
+          margin-right: 10px
+
         .remove_break
           vertical-align: super
           margin-left: 22px
-
-
-      input[type='text']
-        width: 40px
-        margin: 0px 4px 0px 10px
 
       .input
         display: inline-block
 
       .input select
-        width: 55px
+        width: 52px
+        background: white
 
       .days
+
+        label.checkbox
+          margin: 0 5px 0 0
+
+        .organization_full_schedules_free
+          display: none
+
         display: inline
         margin-left: 21px
 
@@ -160,13 +204,9 @@
 
       .days .input label
         width: auto !important
-        margin: 0 5px 2px 3px
 
       .days .input input.boolean
-        margin: 3px 0 0 0 !important
-
-    hr
-      margin-bottom: 15px
+        margin: 1px 0 0 0 !important
 
     .addres_form
       float: none

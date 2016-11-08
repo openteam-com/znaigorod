@@ -1,4 +1,7 @@
 @init_full_schedules = ->
+
+  $('.full_schedules_edit .js-remove_full_schedule:first').css('display', 'none')
+
   $(document).on 'change', '.full_schedules_fields .fields .days .checkbox .boolean', ->
     if $(this)[0].checked == true
       day_name = $(this).attr('class').split(' ')[2]

@@ -1,6 +1,6 @@
 <%= label_tag :q, "Расписание работы<abbr title='Обязательное поле'>*</abbr>".html_safe, class: 'like_control_label' %>
-<%= f.input :from, as: :string %>
-<%= f.input :to, as: :string %>
+<%= f.input :from %>
+<%= f.input :to %>
 <div class='days'>
   <%= f.input :monday, input_html: { class: 'monday' } %>
   <%= f.input :tuesday, input_html: { class: 'tuesday' } %>
@@ -9,13 +9,13 @@
   <%= f.input :friday, input_html: { class: 'friday' }  %>
   <%= f.input :saturday, input_html: { class: 'saturday' }  %>
   <%= f.input :sunday, input_html: { class: 'sunday' }  %>
-  <%= f.input :free, input_html: {class: 'free' }, as: :hidden %>
+  <%= f.input :free, input_html: {class: 'free' } %>
 </div>
 <%= f.simple_fields_for :breaks do |b| %>
   <div class='break_fields'>
     <label class='like_control_label'>Перерыв</label>
-    <%= b.input :from, as: :string %>
-    <%= b.input :to, as: :string %>
+    <%= b.input :from %>
+    <%= b.input :to %>
     <div class='input remove_break'><%= b.link_to_remove 'Удалить перерыв' %></div>
   </div>
 <% end  %>
@@ -24,4 +24,4 @@
   <label class='like_control_label'>Комментарий</label>
   <%= f.input :comment, as: :text, label: false %>
 </div>
-<%= f.link_to_remove 'Удалить расписание' %>
+<%= f.link_to_remove 'Удалить расписание', class: 'js-remove_full_schedule' %>

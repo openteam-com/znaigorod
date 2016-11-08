@@ -18,11 +18,9 @@
       </div>
     </div>
 
-    <hr>
-
     <div class='phone_edit'>
       <label class='like_control_label'>Телефоны</label>
-      <div class='icon-info show_tipsy_w' original-title="Номера указываются через запятую в одной из следующих форм: 22-33-44, (3822)11-22-33, 333-444, (3822)333-444, 8-333-444-55-66"></div>
+      <div class='icon-info show_tipsy_w tipsy_black' original-title="Номера указываются через запятую в одной из следующих форм: <br> 22-33-44, (3822)11-22-33, 333-444, (3822)333-444, 8-333-444-55-66"></div>
       <%= f.input :phone, hint: false, label: false %>
     </div>
     <%= f.input :email, as: :string %>
@@ -45,9 +43,7 @@
     </div>
 
     <div class="actions">
-      <%= link_to "&larr; Назад".html_safe, :back %>
       <%= f.submit 'Сохранить', class: 'flat-btn btn-lg btn-orange' %>
-      <%= link_to 'Удалить'.html_safe, my_organization_path(resource), method: :delete, confirm: 'Уверены что хотите удалить?', class: :destroy unless resource.new_record? %>
     </div>
   </div>
 <% end %>

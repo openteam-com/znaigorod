@@ -8,8 +8,9 @@
 
   true
 
-  $('.show_tipsy_w').tipsy
+  $('.show_tipsy_w.tipsy_black').tipsy
     gravity: 'w'
     html: true
     opacity: 1
-    offset: 10
+    offset: 15
+    className: 'black'
