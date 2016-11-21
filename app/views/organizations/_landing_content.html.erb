@@ -52,4 +52,72 @@
 
   </ul>
 </div>
-<br><%= link_to 'Добавить заведение', new_my_organization_path %>
+<div class='tariffs'>
+  <h1 class='main'>ПОДПИСКИ</h1>
+  <div class='tariff'>
+    <div class='head'>
+      <h1>Минимальный пакет</h1>
+      <span>1000 руб./мес.</span>
+    </div>
+    <ul class='services'>
+      <li><div class='info'><p>Добавление логотипа</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Добавление краткого описания</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p class='disabled'>Добавление полного описания</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p class='disabled'>Размещение фотографий</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p class='disabled'>Размещение прайса</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+      <div></div>
+      <li class='heiger'><div class='info'><p class='disabled'>Индивидуальное брендирование<br>страницы организации</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+    </ul>
+  </div>
+
+  <div class='tariff' >
+    <div class='head'>
+      <h1>Базовый пакет</h1>
+      <span>1500 руб./мес.</span>
+    </div>
+    <ul class='services'>
+      <li><div class='info'><p>Добавление логотипа</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Добавление краткого описания</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Добавление полного описания</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Размещение фотографий</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p class='disabled'>Размещение прайса</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+      <div></div>
+      <li class='heiger'><div class='info'><p class='disabled'>Индивидуальное брендирование<br>страницы организации</p><span><%= image_tag 'landing/minus.png' %></span></div></li>
+    </ul>
+
+  </div>
+
+  <div class='tariff'>
+    <div class='head'>
+      <h1>Полный пакет</h1>
+      <span>2500 руб./мес.</span>
+    </div>
+    <ul class='services'>
+      <li><div class='info'><p>Добавление логотипа</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Добавление краткого описания</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Добавление полного описания</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Размещение фотографий</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li><div class='info'><p>Размещение прайса</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+      <div></div>
+      <li class='heiger'><div class='info'><p>Индивидуальное брендирование<br>страницы организации</p><span><%= image_tag 'landing/plus.png' %></span></div></li>
+    </ul>
+
+  </div>
+</div>
+<div class='end'>
+  <%= link_to new_my_organization_path, class: 'link_to_add flat-btn btn-red btn-lg' do %>
+    <span>Добавить организацию</span>
+  <% end %>
+</div>
