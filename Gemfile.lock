@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/semenyukdmitriy/omniauth-mailru
-  revision: fbf40e88732a184fdb5c7dfc893713b49fc7bb14
-  ref: fbf40e8
-  specs:
-    omniauth-mailru (1.0.0)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -286,6 +277,9 @@ GEM
     omniauth-google-oauth2 (0.1.13)
       omniauth (~> 1.0)
       omniauth-oauth2
+    omniauth-mailru (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -566,7 +560,7 @@ DEPENDENCIES
   nokogiri
   omniauth-facebook
   omniauth-google-oauth2
-  omniauth-mailru!
+  omniauth-mailru
   omniauth-odnoklassniki
   omniauth-twitter
   omniauth-vkontakte
@@ -607,4 +601,4 @@ DEPENDENCIES
   vkontakte_api
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

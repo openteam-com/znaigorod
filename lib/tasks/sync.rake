@@ -156,7 +156,7 @@ class GoodwinCinemaGroup
           end
           bar.increment!
         end
-        puts "Импорт информации от #{date}"
+        puts "Импорт информации от #{date} (#{url})"
         MovieSyncer.new(:place => cinema_name, :movies => movies, :date => date).sync
       else
         Airbrake.notify(:error_class => "Rake Task", :error_message => " Неверный формат ответа от кинотеатра #{cinema_name}")

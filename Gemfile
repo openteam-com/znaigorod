@@ -53,7 +53,7 @@ group :default do
   gem 'nokogiri'
   gem 'omniauth-facebook'
   gem 'omniauth-google-oauth2'
-  gem 'omniauth-mailru',            :git => 'git://github.com/semenyukdmitriy/omniauth-mailru', :ref => 'fbf40e8'
+  gem 'omniauth-mailru'
   gem 'omniauth-odnoklassniki'
   gem 'omniauth-twitter'
   gem 'omniauth-vkontakte'#,         '~> 1.3'
