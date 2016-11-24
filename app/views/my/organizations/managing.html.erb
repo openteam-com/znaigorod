@@ -11,31 +11,8 @@
     <%= email_field_tag :email, nil, class: 'target_email', placeholder: 'E-mail пользователя' %>
     <%= hidden_field_tag :user_id, nil, class: 'target_user_id' %>
     <div class='add_manager'>
-      <%= link_to 'Добавить менеджера', send_about_confirm_role_my_organization_path(resource.id, :user_id => nil, :user_email => nil), class: 'js-confirm_role_link' %>
+      <%= link_to 'Добавить менеджера', send_about_confirm_role_my_organization_path(resource.id, :user_id => nil, :user_email => nil), class: 'js-confirm_role_link', remote: true %>
     </div>
   </div>
-  <ul class='managers'>
-    <li>
-      <div class='manager'>
-        <%= mail_to resource.user.account.email %> -
-        <%= label_tag :name, resource.user.name + ', ' %>
-        <%= label_tag :role, 'главный менеджер' %>
-      </div>
-    </li>
-
-    <% resource.organization_managers.each do |m| %>
-      <li>
-        <div class='manager'>
-          <%= mail_to m.email %> -
-          <%= label_tag :name, m.user_name + "#{ ',' if m.status == 'true' }"%>
-          <%= label_tag :role, 'менеджер' if m.status == 'true'  %>
-          <%= label_tag :status, '(Отправлено письмо на подтверждение роли менеджера)' if m.status == 'waiting' %>
-          <div class='icons_right'>
-            <%= link_to '', transfer_main_role_my_organization_path(resource.id, :user_id => m.user_id), class: 'icon-star show_tipsy', :'original-title' => 'Передать права главного менеджера' %>
-            <%= link_to '', close_role_my_organization_path(resource.id, :organization_manager_id => m.id), class: 'icon-flat icon-delete show_tipsy', 'original-title' => 'Удалить права', :'data-confirm' => 'Вы уверены?' %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+  <%= render partial: 'managers', locals: { resource: resource } %>
 </div>

@@ -5,9 +5,9 @@
       Моя организация
     </div>
   <% else %>
-    <div class='tab'>
-      <%= link_to 'Моя организация', organization_path(organization.id) %>
-    </div>
+    <%= link_to organization_path(organization.id) do %>
+      <div class='tab'>Моя организация</div>
+    <% end %>
   <% end %>
 
   <% if action_name == 'subscriptions' %>
@@ -15,9 +15,9 @@
       Подписки
     </div>
   <% else %>
-    <div class='tab'>
-      <%= link_to 'Подписки', subscriptions_my_organization_path(organization.id) %>
-    </div>
+      <%= link_to subscriptions_my_organization_path(organization.id) do %>
+        <div class='tab'>Подписки</div>
+      <% end %>
   <% end %>
 
   <% if action_name == 'managing' %>
@@ -25,9 +25,9 @@
       Разграничение прав
     </div>
   <% else %>
-    <div class='tab'>
-      <%= link_to 'Разграничение прав', managing_my_organization_path(organization.id) %>
-    </div>
+      <%= link_to managing_my_organization_path(organization.id) do %>
+        <div class='tab'>Разграничение прав</div>
+      <% end %>
   <% end %>
 
  <% if action_name == 'statistics' %>
@@ -35,8 +35,8 @@
       Статистика
     </div>
   <% else %>
-    <div class='tab'>
-      <%= link_to 'Статистика', statistics_my_organization_path(organization.id) %>
-    </div>
+      <%= link_to statistics_my_organization_path(organization.id) do %>
+        <div class='tab'>Статистика</div>
+      <% end %>
   <% end %>
 </div>
