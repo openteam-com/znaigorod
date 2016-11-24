@@ -69,14 +69,14 @@ class My::OrganizationsController < My::ApplicationController
     @om.user_name = User.find(params[:user_id]).name
     if @om.save
       @om.user_id_temp = params[:user_id]
-      #MyMailer.send_confirm_role(@om).deliver
+      MyMailer.send_confirm_role(@om).deliver
     end
     render partial: '/my/organizations/managers', locals: { resource: Organization.find(params[:id]) } and return
   end
 
   def close_role
     @om = OrganizationManager.find(params[:organization_manager_id])
-    #MyMailer.close_role(@om).deliver
+    MyMailer.close_role(@om).deliver
     @om.destroy
     render partial: '/my/organizations/managers', locals: { resource: Organization.find(params[:id]) } and return
   end
