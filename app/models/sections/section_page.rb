@@ -2,7 +2,7 @@ class SectionPage < ActiveRecord::Base
   attr_accessible :title, :content, :poster, :vfs_path,
                   :poster_image, :position
 
-  validates_presence_of :title, :content
+  validates_presence_of :content
 
   has_many :gallery_images,        :as => :attachable,     :dependent => :destroy
   belongs_to :section

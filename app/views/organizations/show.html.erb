@@ -227,7 +227,9 @@
                     </div>
                   <% end %>
                   <div class='info'>
-                    <h2><%= page.title %></h2>
+                    <% if page.title.present? %>
+                      <h2><%= page.title %></h2>
+                    <% end %>
                     <div class='section_content'>
                       <%= page.content.as_html %>
                       <span class="js-closer-btn delimiter hidden">Спрятать</span>

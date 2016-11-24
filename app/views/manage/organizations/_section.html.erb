@@ -1,5 +1,5 @@
 <li>
   <div class='sortable_handle'>&#8597;</div>
   <%= hidden_field :position, section.id, :class => :position, :value => section.position %>
-  <%= link_to section.title, manage_organization_section_path(resource, section) %>
+  <%= link_to 'Редактировать ' + section.title, manage_organization_section_path(resource, section) %>
 </li>

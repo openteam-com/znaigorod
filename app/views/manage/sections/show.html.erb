@@ -20,7 +20,7 @@
           <li>
             <div class='sortable_handle'>&#8597;</div>
             <%= hidden_field :position, section_page.id, :class => :position, :value => section_page.position %>
-            <%= link_to section_page.title, edit_manage_organization_section_section_page_path(params[:organization_id], resource, section_page) %>
+            <%= link_to 'Редактировать ' + section_page.title, edit_manage_organization_section_section_page_path(params[:organization_id], resource, section_page) %>
             (<%= link_to "Удалить", manage_organization_section_section_page_path(params[:organization_id], resource, section_page), method: 'DELETE', data: { confirm: 'Вы уверены что хотите удалить?' } %>)
             <div class='section_page_content'>
               <%= section_page.content.as_html %>
