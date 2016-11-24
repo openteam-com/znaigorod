@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def manager?(organization)
-    managed_organizations.include?(organization)
+    managed_organizations.pluck(:id).include?(organization.id)
   end
 
   def name

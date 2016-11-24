@@ -236,6 +236,95 @@
         .input.organization_address_office
           margin: 0px 0 10px 0
 
+.my_organization_tabs
+  margin: 20px 0
+  height: 40px
+  background: none
+  font-size: 14px
+  border-bottom: 1px solid #ccc
+
+  div
+    display: inline-block
+    padding: 10px 20px
+
+  .tab.activ
+    border-top: 1px solid #ccc
+    border-left: 1px solid #ccc
+    border-right: 1px solid #ccc
+    height: 20px
+    z-index: 100
+    background: whitesmoke
+
+.my_organization.managers
+  width: 950px
+  min-height: 600px
+
+  h1
+    font-size: 23px
+
+  .js-users_auto_complete
+    margin: 15px 0 25px 0px
+    input
+      height: 27px
+      outline-color: #b9b4b4
+      width: 250px
+      padding-left: 10px
+      border: 1px solid #ccc
+
+  .add_manager
+    display: inline-block
+    vertical-align: top
+    height: 30px
+
+    a.js-confirm_role_link
+      display: inline-block
+      color: #000
+      line-height: 16px
+      background-color: #e8e8e8
+      padding: 6px 18px 7px
+      box-shadow: 0px 2px 0px 0px #cdcdcd
+      font-size: 13px
+      text-decoration: none
+
+      &:hover
+        background-color: #e5e5e5
+        box-shadow: 0px 2px 0px 0px #afadad
+
+  ul.managers
+    font-size: 14px
+    border-top: 1px solid #ccc
+    margin-bottom: 10px
+
+    li
+      border-bottom: 1px solid #ccc
+      padding: 10px 0
+
+      label[for='status']
+        font-size: 11px
+        color: #646565
+
+      .icons_right
+        margin-top: 2px
+        margin-right: 10px
+        float: right
+        display: inline-block
+
+        .icon-delete
+          vertical-align: top
+          margin-left: 7px
+
+        .icon-star
+          height: 15px
+          width: 13px
+          background: url('star.png')
+          display: inline-block
+
+          &:hover
+            background: url('star-dark.png')
+
+
+
+
 
 
 

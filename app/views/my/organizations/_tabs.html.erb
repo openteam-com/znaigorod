@@ -1,0 +1,42 @@
+<div class='my_organization_tabs'>
+
+  <% if !["managing", "subscriptions", "statistics"].include?(action_name) %>
+    <div class='tab activ'>
+      Моя организация
+    </div>
+  <% else %>
+    <div class='tab'>
+      <%= link_to 'Моя организация', organization_path(organization.id) %>
+    </div>
+  <% end %>
+
+  <% if action_name == 'subscriptions' %>
+    <div class='tab activ'>
+      Подписки
+    </div>
+  <% else %>
+    <div class='tab'>
+      <%= link_to 'Подписки', subscriptions_my_organization_path(organization.id) %>
+    </div>
+  <% end %>
+
+  <% if action_name == 'managing' %>
+    <div class='tab activ'>
+      Разграничение прав
+    </div>
+  <% else %>
+    <div class='tab'>
+      <%= link_to 'Разграничение прав', managing_my_organization_path(organization.id) %>
+    </div>
+  <% end %>
+
+ <% if action_name == 'statistics' %>
+    <div class='tab activ'>
+      Статистика
+    </div>
+  <% else %>
+    <div class='tab'>
+      <%= link_to 'Статистика', statistics_my_organization_path(organization.id) %>
+    </div>
+  <% end %>
+</div>

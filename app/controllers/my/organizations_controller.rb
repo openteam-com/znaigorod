@@ -89,7 +89,7 @@ class My::OrganizationsController < My::ApplicationController
     @user = User.where(:id => params[:user_id]).first
     if @organization && @user
       OrganizationManager.where("organization_id = ? and user_id = ?", @organization.id,  @user.id).map(&:destroy)
-      OrganizationManager.create(:user_name => @user.current_user.name, :email => current_user.email, :organization_id => @organization.id, :user_id => current_user.id, :status => 'true')
+      OrganizationManager.create(:user_name => current_user.name, :email => current_user.email, :organization_id => @organization.id, :user_id => current_user.id, :status => 'true')
       @organization.update_attribute(:user_id, @user.id)
       redirect_to my_organizations_path
     else

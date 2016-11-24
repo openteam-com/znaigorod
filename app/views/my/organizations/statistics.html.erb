@@ -1,3 +1,4 @@
+<%= render partial: 'tabs', locals: { organization: resource } %>
 <% if resource.page_visits.present? %>
   <h3>Статистика посещений страницы организции</h3>
   <%= line_chart resource.page_visits.group_by_month(:created_at, format: "%B").count %>

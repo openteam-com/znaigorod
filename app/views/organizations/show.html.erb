@@ -8,6 +8,7 @@
   <%= @organization.twitter_cards_meta %>
 <% end %>
 
+<%= render partial: '/my/organizations/tabs', locals: { organization: @organization } if current_user == @organization.user || current_user.try(:manager?, @organization) %>
 <div class='organization_show' itemscope itemtype="http://schema.org/Organization">
   <div class='left js-fixed-menu'>
     <div class='image'  itemprop="image" itemscope itemtype="http://schema.org/ImageObject">

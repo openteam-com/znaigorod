@@ -25,31 +25,30 @@
         <% end %>
       </ul>
 
-    <div class='content'>
-      <% %w[all moderation_to_published draft published].each do |state| %>
-        <div id='<%= state %>' class='list'>
-          <div class='organizations_main_page_list'>
-            <% if @organizations.any? %>
-              <ul class='posters_organizations'>
-                <% unless state == 'all' %>
-                  <% organization_list = @organizations.by_state(state) + @managed_organizations.by_state(state) %>
-                <% else %>
-                  <% organization_list = @organizations + @managed_organizations %>
-                <% end %>
-                <% organization_list.each do |organization| %>
-                  <%= render :partial => 'list_item', locals: { organization: organization }  %>
-                <% end %>
-              </ul>
-            <% else %>
-              <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
-            <% end %>
+      <div class='content'>
+        <% %w[all moderation_to_published draft published].each do |state| %>
+          <div id='<%= state %>' class='list'>
+            <div class='organizations_main_page_list'>
+              <% if @organizations.any? %>
+                <ul class='posters_organizations'>
+                  <% unless state == 'all' %>
+                    <% organization_list = @organizations.by_state(state) + @managed_organizations.by_state(state) %>
+                  <% else %>
+                    <% organization_list = @organizations + @managed_organizations %>
+                  <% end %>
+                  <% organization_list.each do |organization| %>
+                    <%= render :partial => 'list_item', locals: { organization: organization }  %>
+                  <% end %>
+                </ul>
+              <% else %>
+                <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
-      <%= paginate @organizations %>
-    </div>
+        <% end %>
+        <%= paginate @organizations %>
+      </div>
     </div>
   </div>
-  <%= render :partial => 'organizations/landing_content' %>
 <% end %>
 <%= render file: "my/accounts/wrapper" %>

@@ -1,36 +1,41 @@
-<%= text_field_tag :js_organization_id, resource.id, style: 'display:none' %>
-<%= "Главный менеджер: #{resource.user.name}" %>
-<div class='js-users_auto_complete'>
-  <%= simple_nested_form_for [:my, resource] do |f| %>
-    <%= f.simple_fields_for :organization_managers do |m| %>
+<%= render partial: 'tabs', locals: { organization: resource } %>
+<%= hidden_field_tag :js_organization_id, resource.id %>
+<div class='my_organization managers'>
+  <h1>Менеждеры</h1>
+  <div class='js-users_auto_complete'>
+    <%= text_field_tag :user_name,
+      nil,
+      :class => 'js-input_user',
+      :placeholder => 'Имя пользователя',
+      :data => { 'autocomplete-source' => find_users_path } %>
+    <%= email_field_tag :email, nil, class: 'target_email', placeholder: 'E-mail пользователя' %>
+    <%= hidden_field_tag :user_id, nil, class: 'target_user_id' %>
+    <div class='add_manager'>
+      <%= link_to 'Добавить менеджера', send_about_confirm_role_my_organization_path(resource.id, :user_id => nil, :user_email => nil), class: 'js-confirm_role_link' %>
+    </div>
+  </div>
+  <ul class='managers'>
+    <li>
       <div class='manager'>
-        <%= label_tag :q, 'Имя пользователя' %>
-
-        <% if m.object.persisted? %>
-          <%= label_tag :q, m.object.user_name %>
-        <% else %>
-        <%= text_field_tag :user_name,
-          nil,
-          :class => 'js-input_user',
-          :placeholder => 'Введите имя пользователя',
-          :data => { 'autocomplete-source' => find_users_path } %>
-        <% end %>
-
-        <%= m.input :user_id, input_html: { class: 'target_user_id' }, as: :hidden %>
-        <% if m.object.persisted? %>
-          <%= label_tag :q, m.object.email %>
-        <% else %>
-          <%= m.input :email, input_html: { class: 'target_email' }  %>
-        <% end %>
-        <%= m.link_to_remove 'Удалить' if m.object.status == nil %>
-        <%= link_to 'Удалить', close_role_my_organization_path(resource.id, :organization_manager_id => m.object) unless m.object.status == nil %>
-
-        <%= link_to 'Передать права главного менеджера', transfer_main_role_my_organization_path(resource.id, :user_id => m.object.user_id), data: {:organizationid => resource.id}, class: 'js-transfer_link' if m.object.status == 'true' %>
-        <%= link_to 'Отправить письмо для подтверждения роли', send_about_confirm_role_my_organization_path(resource.id, :user_id => m.object.user_id, :user_email => m.object.email), class: 'js-confirm_role_link' if m.object.status == nil %>
-        <%= 'Письмо на подтверждение роли отправлено' if m.object.status == 'waiting' %>
+        <%= mail_to resource.user.account.email %> -
+        <%= label_tag :name, resource.user.name + ', ' %>
+        <%= label_tag :role, 'главный менеджер' %>
       </div>
+    </li>
+
+    <% resource.organization_managers.each do |m| %>
+      <li>
+        <div class='manager'>
+          <%= mail_to m.email %> -
+          <%= label_tag :name, m.user_name + "#{ ',' if m.status == 'true' }"%>
+          <%= label_tag :role, 'менеджер' if m.status == 'true'  %>
+          <%= label_tag :status, '(Отправлено письмо на подтверждение роли менеджера)' if m.status == 'waiting' %>
+          <div class='icons_right'>
+            <%= link_to '', transfer_main_role_my_organization_path(resource.id, :user_id => m.user_id), class: 'icon-star show_tipsy', :'original-title' => 'Передать права главного менеджера' %>
+            <%= link_to '', close_role_my_organization_path(resource.id, :organization_manager_id => m.id), class: 'icon-flat icon-delete show_tipsy', 'original-title' => 'Удалить права', :'data-confirm' => 'Вы уверены?' %>
+          </div>
+        </div>
+      </li>
     <% end %>
-    <%= f.link_to_add 'Добавить управляющего', :organization_managers %>
-    <%= f.submit %>
-  <% end %>
+  </ul>
 </div>

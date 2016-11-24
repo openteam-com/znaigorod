@@ -13,9 +13,6 @@
     <div class="actions">
       <%= link_to 'Публиковать', publish_my_organization_path(organization), :method => :put if organization.draft? %>
       <%= link_to '', edit_my_organization_path(organization), class: 'edit_button' if (can? :edit, organization) && (organization.draft? || organization.published? ) %>
-      <%= link_to 'Подписки', subscriptions_my_organization_path(organization)  %>
-      <%= link_to 'Права доступа', managing_my_organization_path(organization) %>
-      <%= link_to 'Статистика', statistics_my_organization_path(organization) %>
       <%= link_to '', close_my_organization_path(organization), method: 'put', class: 'trash', confirm: 'Вы уверены что хотите удалить?' if (can? :destroy, organization)  %>
     </div>
   </div>

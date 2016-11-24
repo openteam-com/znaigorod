@@ -1,3 +1,4 @@
+<%= render partial: 'tabs', locals: { organization: resource } %>
 <% if @minimal && @middle && @premium %>
   <div class='js-price-tariffs'>
     <% [@minimal, @middle, @premium].each_with_index do |tariff, index| %>
