@@ -1,0 +1,37 @@
+<div class='payment'>
+  <% unless resource.tariffs.include? tariff %>
+    <div class='js-slider_price'><span class='left month'>1 месяц</span><span class='right month'>12 месяцев</span></div>
+
+    <div class='calculated_price' <%= "data-month=#{tariff.price_for_month} data-sixmonths=#{tariff.price_for_six_months} data-year=#{tariff.price_for_year}" %>>
+      <span class='formula'>
+        <span class='price md'><%= tariff.price_for_month %></span>
+        <span class='sm'>руб.</span>
+        <span class='md'>x</span>
+        <span class='duration md'>6</span>
+        <span class='sm'>мес.</span>
+        <span class='bg'>=</span>
+        <span class='result bg'><%= tariff.price_for_month %></span>
+        <span class='sm'>руб.</span>
+      </span>
+    </div>
+
+    <div class='action_payment'>
+      <%= link_to 'Купить пакет', my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 6), :method => :post, :target => '_blank', data: { slug: resource.slug, tariff_id: tariff.id }, :class => 'link_to_payment flat-btn btn-darkgreen btn-lg' %>
+      <%= link_to 'Отмена', :back, class: 'flat-btn btn-smoke btn-lg' if resource.tariffs.blank? && tariff.tag == 'min' && false %>
+    </div>
+  <% else %>
+    <div class='message'>
+      <h1>Приобретён</h1>
+      <div class=days_left>
+        <span class='wrapp'>
+          <div class="sign-icon"></div>
+          <span class='sign'><%= "Срок действия истекает через #{tariff.left_days(resource.id)} #{t('new_year', count: tariff.left_days(resource.id))}" %></span>
+        </span>
+      </div>
+      <div class='action_payment'>
+        <%= link_to 'Докупить пакет', my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 1), :method => :post, :target => '_blank', data: { slug: resource.slug, tariff_id: tariff.id }, :class => 'link_to_payment flat-btn btn-darkgreen btn-lg' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

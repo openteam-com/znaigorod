@@ -13,4 +13,8 @@ class Tariff < ActiveRecord::Base
   enumerize :tag, :in => [:min, :base, :full], :default => :min
   has_many :organization_tariffs
   has_many :organizations, :through => :organization_tariffs
+
+  def left_days(id)
+    self.organization_tariffs.where(:organization_id => id).first.left_days
+  end
 end
