@@ -25,7 +25,7 @@
       <% end %>
     </div>
 
-    <% if t("services.#{Settings['app.city']}.phone").present? %>
+    <% if t("services.#{Settings['app.city']}.phone", default: '').present? %>
       <div class="phones">
         <div class="icon">
         </div>

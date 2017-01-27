@@ -23,7 +23,7 @@
     <%= image_tag asset_path("public/map_projects/#{map_project.slug}_left.png"), :class => 'left_wreath' %>
     <p class='important'>Вас нет на карте?</p>
     <p> <%= link_to 'Добавьте свою метку',  map_placemarks_index_path, :class => 'flat-btn btn-lg btn-red' %> </p>
-    <% if t("services.#{Settings['app.city']}.phone").present? %>
+    <% if t("services.#{Settings['app.city']}.phone", default: '').present? %>
       <p>или</p>
       <p>Звоните нам:</p>
       <p class='phone with_icon'><%= t("services.#{Settings['app.city']}.phone").split(',').first.to_s.squish %></p>

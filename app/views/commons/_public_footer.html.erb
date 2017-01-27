@@ -20,7 +20,7 @@
       <div class="contacts">
         Реклама на сайте:
         <%= t("services.#{Settings['app.city']}.address") %>,
-        <% if t("services.#{Settings['app.city']}.phone").present? %>
+        <% if t("services.#{Settings['app.city']}.phone", default: '').present? %>
           <%= t("services.#{Settings['app.city']}.phone") %>,
         <% end %>
         <%= mail_to t("services.#{Settings['app.city']}.email") %>
