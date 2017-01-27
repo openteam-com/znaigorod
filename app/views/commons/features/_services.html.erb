@@ -1,3 +1,7 @@
 <div class="top_headline">
-  <%= link_to 'Реклама на сайте!', services_path %>  <span><%= t("services.#{Settings['app.city']}.phone") %>,</span> <%= mail_to 'office@znaigorod.ru' %>
+  <%= link_to 'Реклама на сайте!', services_path %>
+  <% if t("services.#{Settings['app.city']}.phone").present? %>
+    <span><%= t("services.#{Settings['app.city']}.phone") %>,</span>
+  <% end %>
+  <%= mail_to 'office@znaigorod.ru' %>
 </div>

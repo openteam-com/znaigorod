@@ -44,9 +44,11 @@
           <h5>Как с нами связаться</h5>
           <ul>
             <%= render :partial => "footer_content_#{Settings['app.city']}" %>
-            <li class='telephone'>
-              <%= t("services.#{Settings['app.city']}.phone") %>
-            </li>
+            <% if t("services.#{Settings['app.city']}.phone").present? %>
+              <li class='telephone'>
+                <%= t("services.#{Settings['app.city']}.phone") %>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="our_social_link">

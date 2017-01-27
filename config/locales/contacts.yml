@@ -1,7 +1,7 @@
 ru:
   services:
     tomsk:
-      phone: +7-952-800-55-44
+      #phone: +7-952-800-55-44
       email: office@znaigorod.ru
       address: 'г. Томск, ул. Алтайская 161 б, стр. 2'
 

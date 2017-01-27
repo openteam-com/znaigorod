@@ -18,7 +18,12 @@
       </div>
       <div style='clear: both'></div>
       <div class="contacts">
-      Реклама на сайте: <%= t("services.#{Settings['app.city']}.address") %>, <%= t("services.#{Settings['app.city']}.phone") %>, <%= mail_to t("services.#{Settings['app.city']}.email") %>
+        Реклама на сайте:
+        <%= t("services.#{Settings['app.city']}.address") %>,
+        <% if t("services.#{Settings['app.city']}.phone").present? %>
+          <%= t("services.#{Settings['app.city']}.phone") %>,
+        <% end %>
+        <%= mail_to t("services.#{Settings['app.city']}.email") %>
     </div>
     <% if Rails.env.production? %>
       <div class='counters'>

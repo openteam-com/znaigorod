@@ -25,15 +25,17 @@
       <% end %>
     </div>
 
-    <div class="phones">
-      <div class="icon">
+    <% if t("services.#{Settings['app.city']}.phone").present? %>
+      <div class="phones">
+        <div class="icon">
+        </div>
+        <div class="body">
+          <% t("services.#{Settings['app.city']}.phone").split(',').each do |p| %>
+            <strong><%= p %></strong> <br />
+          <% end %>
+        </div>
       </div>
-      <div class="body">
-        <% t("services.#{Settings['app.city']}.phone").split(',').each do |p| %>
-          <strong><%= p %></strong> <br />
-        <% end %>
-      </div>
-    </div>
+    <% end %>
 
     <div class="emails">
       <div class="icon">
