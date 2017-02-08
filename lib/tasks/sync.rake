@@ -26,7 +26,7 @@ class MovieSyncer
   end
 
   def self.now
-    @now ||= Time.zone.now.change(:sec => 0)
+    @now ||= Time.zone.now.change(sec: 0)
   end
 
   def self.finded_movies
@@ -35,13 +35,21 @@ class MovieSyncer
 
   def sync
     puts "#{place}: импорт сеансов"
-    now = Time.zone.now.change(:sec => 0)
+    now = Time.zone.now.change(sec: 0)
     bar = ProgressBar.new(movies.values.map(&:count).sum)
     movies.each do |title, seances|
       next unless title.squish
       if (movie = find_movie_by(title.squish)) && (cinematheatre = find_similar_cinematheatre_by(place.squish))
         MovieSyncer.finded_movies << movie
-        showings = Showing.where(:id => Showing.search{with(:afisha_id, movie.id); fulltext(place){fields(:place, :organization_title)}; paginate(:per_page => '100000')}.results.map(&:id))
+        showings = Showing.where(
+          id: Showing.search {
+            with(:afisha_id, movie.id)
+            fulltext(place) {
+              fields(:place, :organization_title)
+            }
+            paginate(per_page: '100000')
+          }.results.map(&:id)
+        )
 
         seances.each do |seance|
           seance.each do |k,v| v.squish! if v.is_a?(String) end
@@ -54,11 +62,13 @@ class MovieSyncer
               showing.update_attributes! seance
               showing.touch
             else
-              showing = Showing.new(:hall => seance[:hall],
-                                    :starts_at => seance[:starts_at],
-                                    :price_min => seance[:price_min],
-                                    :price_max => seance[:price_max],
-                                    :afisha_id => movie.id).tap do |s|
+              showing = Showing.new(
+                hall: seance[:hall],
+                starts_at: seance[:starts_at],
+                price_min: seance[:price_min],
+                price_max: seance[:price_max],
+                afisha_id: movie.id
+              ).tap do |s|
                 s.place = cinematheatre.title
                 s.organization_id = cinematheatre.id
               end
@@ -74,10 +84,10 @@ class MovieSyncer
       end
     end
 
-    message = I18n.localize(Time.now, :format => :short) + " Импорт сеансов '#{place}'"
+    message = I18n.localize(Time.now, format: :short) + " Импорт сеансов '#{place}'"
     message += " на #{date}" if date.present?
     message += " выполнен."
-    #MyMailer.delay(:queue => 'mailer').send_movie_sync_complete(message)
+    #MyMailer.delay(queue: 'mailer').send_movie_sync_complete(message)
   end
 
   private
@@ -98,27 +108,27 @@ class MovieSyncer
       if similar_movies.blank?
         text = "Не могу найти фильм '#{title}': [#{place}]"
         puts text
-        message = I18n.localize(Time.now, :format => :short) + " " + text
-        MyMailer.delay(:queue => 'mailer').send_movie_sync_error(message)
+        message = I18n.localize(Time.now, format: :short) + " " + text
+        MyMailer.delay(queue: 'mailer').send_movie_sync_error(message)
       end
       if similar_movies.many?
         text = "Нашел больше одной афиши для фильма '#{title}': [#{place}]"
         puts text
-        message = I18n.localize(Time.now, :format => :short) + " " + text
-        MyMailer.delay(:queue => 'mailer').send_movie_sync_error(message)
+        message = I18n.localize(Time.now, format: :short) + " " + text
+        MyMailer.delay(queue: 'mailer').send_movie_sync_error(message)
       end
       similar_movies.first
     end
 
     def find_similar_cinematheatre_by(cinema_title)
-      similar_cinematheatre = Organization.where(:title => cinema_title)
+      similar_cinematheatre = Organization.where(title: cinema_title)
       unless similar_cinematheatre.any?
         similar_cinematheatre = Organization.search{fulltext(cinema_title){fields(:title)}; fulltext('Кинотеатры'){fields(:category)}}.results
       end
       unless similar_cinematheatre.one?
         puts "Кинотеатр '#{cinema_title}' не найден"
 
-        message = I18n.localize(Time.now, :format => :short) + " Не могу найти кинотеатр '#{cinema_title}'"
+        message = I18n.localize(Time.now, format: :short) + " Не могу найти кинотеатр '#{cinema_title}'"
         Airbrake.notify(Exception.new(message))
       end
       similar_cinematheatre.first
@@ -136,7 +146,7 @@ class GoodwinCinemaGroup
   def sync
     puts cinema_name
     [0, 1, 2].each do |day_offset|
-      date = I18n.l(Time.zone.now + day_offset.day, :format => '%d.%m.%Y')
+      date = I18n.l(Time.zone.now + day_offset.day, format: '%d.%m.%Y')
       url = schedule_url+date
       response = Curl.get(url).body_str
       if response.is_json?
@@ -151,15 +161,19 @@ class GoodwinCinemaGroup
               time = session['time']
               starts_at = Time.zone.parse("#{date} #{time}")
               price_min = session['price']
-              movies[title] << {:starts_at => starts_at, :price_min => price_min, :price_max => price_min }
+              movies[title] << {
+                starts_at: starts_at,
+                price_min: price_min,
+                price_max: price_min
+              }
             end
           end
           bar.increment!
         end
         puts "Импорт информации от #{date} (#{url})"
-        MovieSyncer.new(:place => cinema_name, :movies => movies, :date => date).sync
+        MovieSyncer.new(place: cinema_name, movies: movies, date: date).sync
       else
-        Airbrake.notify(:error_class => "Rake Task", :error_message => " Неверный формат ответа от кинотеатра #{cinema_name}")
+        Airbrake.notify(error_class: "Rake Task", error_message: "Неверный формат ответа от кинотеатра #{cinema_name}")
       end
     end
   end
@@ -189,27 +203,37 @@ class SevastopolCinema
       date = Date.today
       time = seance.css('span').text
       hall = seance.css('span').first.attributes['class'].value == 'tech hall' ? 'Зал №1' : '3D зал'
-      movies[title] << {:starts_at => Time.zone.parse("#{date} #{time}"), :hall => hall, :price_min => price_min, :price_max => price_max }
+      movies[title] << {
+        starts_at: Time.zone.parse("#{date} #{time}"),
+        hall: hall,
+        price_min: price_min,
+        price_max: price_max
+      }
       bar.increment!
     end
 
-    MovieSyncer.new(:place => cinema_name, :movies => movies).sync
+    MovieSyncer.new(place: cinema_name, movies: movies).sync
   end
 end
 namespace :sync do
 
   desc "Sync movie seances from http://goodwincinema.ru"
-  task :goodwin => :environment do
+  task goodwin: :environment do
     GoodwinCinemaGroup.new('Goodwin cinema, кинотеатр','http://goodwincinema.ru/schedule/?ajax=1&date=' ).sync
   end
 
   desc "Sync movie seances from http://kino-polis.ru"
-  task :kinopolis => :environment do
+  task kinopolis: :environment do
     GoodwinCinemaGroup.new('Kinopolis, кинотеатр', 'http://kino-polis.ru/schedule/?ajax=1&date=' ).sync
   end
 
+  desc "Sync movie seances from http://kinomax.tomsk.ru"
+  task kinomax: :environment do
+    GoodwinCinemaGroup.new('Киномакс, кинотеатр', 'http://kinomax.tomsk.ru/schedule/?ajax=1&date=' ).sync
+  end
+
   desc "Sync movie seances from http://fakel.net.ru"
-  task :fakel => :environment do
+  task fakel: :environment do
     url = 'http://fakel.net.ru/cinema/schedule'
     page = Nokogiri::HTML(Curl.get(url).body_str)
     puts 'Fakel: парсинг'
@@ -227,11 +251,11 @@ namespace :sync do
       end
       bar.increment!
     end
-    MovieSyncer.new(:place => '"Fакел", развлекательный комплекс', :movies => movies).sync
+    MovieSyncer.new(place: '"Fакел", развлекательный комплекс', movies: movies).sync
   end
 
   desc "Sync movie seances from http://kinomax.tomsk.ru"
-  task :kinomax => :environment do
+  task kinomax_old: :environment do
     host = 'http://kinomax.tomsk.ru'
     url = "#{host}/schedule/"
     movies = {}
@@ -260,20 +284,21 @@ namespace :sync do
             price_min = prices.match(/\d+/).to_a.map(&:to_i).min
             price_max = prices.match(/\d+/).to_a.map(&:to_i).max
             movies[title] << {
-              :starts_at => Time.zone.parse("#{date} #{time}"),
-              :hall => [hall, three_d].join(' ').squish,
-              :price_min => price_min,
-              :price_max => price_max }
+              starts_at: Time.zone.parse("#{date} #{time}"),
+              hall: [hall, three_d].join(' ').squish,
+              price_min: price_min,
+              price_max: price_max
+            }
           end
         end
       end
       bar.increment!
     end
-    MovieSyncer.new(:place => 'Киномакс, кинотеатр', :movies => movies).sync
+    MovieSyncer.new(place: 'Киномакс, кинотеатр', movies: movies).sync
   end
 
   desc "Sync movie seances from http://kinomir.tom.ru"
-  task :kinomir => :environment do
+  task kinomir: :environment do
     host = 'http://kinomir.tom.ru'
     url = "#{host}/schedule/"
     movies = {}
@@ -307,7 +332,12 @@ namespace :sync do
               else
                 Time.parse(time)
               end
-              movies[title] << {:starts_at => Time.zone.parse("#{date} #{time}"), :hall => [hall, three_d].join(' ').squish, :price_min => amount.to_i, :price_max => amount.to_i }
+              movies[title] << {
+                starts_at: Time.zone.parse("#{date} #{time}"),
+                hall: [hall, three_d].join(' ').squish,
+                price_min: amount.to_i,
+                price_max: amount.to_i
+              }
             end
           end
         end
@@ -315,32 +345,36 @@ namespace :sync do
       bar.increment!
     end
 
-    MovieSyncer.new(:place => 'Киномир, кинотеатр', :movies => movies).sync
+    MovieSyncer.new(place: 'Киномир, кинотеатр', movies: movies).sync
   end
 
   desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-pobeda"
-  task :pobeda => :environment do
+  task pobeda: :environment do
     SevastopolCinema.new('Кинотеатр «Победа»','http://afisha.sevastopol.press/kinoteatr-pobeda', 100, 150).sync
   end
 
   desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-musson"
-  task :musson => :environment do
+  task musson: :environment do
     SevastopolCinema.new('Муссон','http://afisha.sevastopol.press/kinoteatr-musson', 110, 300).sync
   end
 
   desc "Sync movie seances from http://afisha.sevastopol.press/kinoteatr-musson"
-  task :apelsin => :environment do
+  task apelsin: :environment do
     SevastopolCinema.new('Апельсин, торгово-развлекательный центр','http://afisha.sevastopol.press/kinoteatr-apelsin', 90, 220).sync
   end
 end
 
-task :sync => ['sync:goodwin', 'sync:kinomax', 'sync:kinomir', 'sync:kinopolis'] do
-  organiation_ids = Organization.where(:title => [
+task sync: ['sync:goodwin', 'sync:kinopolis', 'sync:kinomax', 'sync:kinomir'] do
+  organiation_ids = Organization.where(title: [
     'Goodwin cinema, кинотеатр',
     '"Fакел", развлекательный комплекс',
     'Киномакс, кинотеатр', 'Киномир, кинотеатр',
     'Kinopolis, кинотеатр'
   ]).map(&:id)
-  bad_showings = Showing.where(:afisha_id => MovieSyncer.finded_movies.map(&:id).uniq).where(:organization_id => organiation_ids).where('starts_at > ?', MovieSyncer.now).where('updated_at <> ?', MovieSyncer.now)
+  bad_showings = Showing.where(
+    afisha_id: MovieSyncer.finded_movies.map(&:id).uniq)
+      .where(:organization_id => organiation_ids)
+      .where('starts_at > ?', MovieSyncer.now)
+      .where('updated_at <> ?', MovieSyncer.now)
   bad_showings.destroy_all
 end
