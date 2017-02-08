@@ -232,6 +232,11 @@ namespace :sync do
     GoodwinCinemaGroup.new('Киномакс, кинотеатр', 'http://kinomax.tomsk.ru/schedule/?ajax=1&date=' ).sync
   end
 
+  desc "Sync movie seances from http://kinomir.tom.ru"
+  task kinomir: :environment do
+    GoodwinCinemaGroup.new('Киномир, кинотеатр', 'http://kinomir.tom.ru/schedule/?ajax=1&date=' ).sync
+  end
+
   desc "Sync movie seances from http://fakel.net.ru"
   task fakel: :environment do
     url = 'http://fakel.net.ru/cinema/schedule'
@@ -254,7 +259,7 @@ namespace :sync do
     MovieSyncer.new(place: '"Fакел", развлекательный комплекс', movies: movies).sync
   end
 
-  desc "Sync movie seances from http://kinomax.tomsk.ru"
+  desc "OLD Sync movie seances from http://kinomax.tomsk.ru"
   task kinomax_old: :environment do
     host = 'http://kinomax.tomsk.ru'
     url = "#{host}/schedule/"
@@ -297,8 +302,8 @@ namespace :sync do
     MovieSyncer.new(place: 'Киномакс, кинотеатр', movies: movies).sync
   end
 
-  desc "Sync movie seances from http://kinomir.tom.ru"
-  task kinomir: :environment do
+  desc "OLD Sync movie seances from http://kinomir.tom.ru"
+  task kinomir_old: :environment do
     host = 'http://kinomir.tom.ru'
     url = "#{host}/schedule/"
     movies = {}
