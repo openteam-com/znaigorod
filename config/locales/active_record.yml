@@ -204,6 +204,23 @@ ru:
         <<: *common_attributes
         allow_auction: Позволять пользователям предлагать свою цену
         age_max: Максимальный возраст
+        year: Год
+        slogan: Слоган
+        film_created_in: Страна
+        producer: Продюссер
+        director: Режиссёр
+        art_directors: Художник
+        editors: Монтаж
+        scenario: Сценарий
+        operator: Оператор
+        compositor: Композитор
+        stars: Главные роли
+        genre: Жанр
+        premiere_world: Прьемьера (мир)
+        premiere_RF: Премьера (РФ)
+        age_category: Возрастная категория
+        duration: Продолжительность
+
         age_min: Минимальный возраст
         constant: Постоянная экспозиция
         distribution_ends_on: Окончание проката

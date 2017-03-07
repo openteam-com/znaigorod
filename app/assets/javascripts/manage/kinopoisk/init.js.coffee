@@ -1,7 +1,6 @@
 @init_kinopoisk = ->
-
   trigger_kinopoisk_link = ->
-    if movie_checkbox.is(':checked') && movie_title_field.val().length
+    if movie_checkbox.is(':checked')
       kinopoisk_links.slideDown()
     else
       kinopoisk_links.slideUp()

@@ -4,6 +4,22 @@
 <%= f.input :kind, as: :check_boxes %>
 <%= f.input :title %>
 <div class='input hidden kinopoisk_links'>
+  <%= f.input :year %>
+  <%= f.input :film_created_in %>
+  <%= f.input :slogan %>
+  <%= f.input :director %>
+  <%= f.input :scenario %>
+  <%= f.input :producer %>
+  <%= f.input :operator %>
+  <%= f.input :compositor %>
+  <%= f.input :art_directors %>
+  <%= f.input :editors %>
+  <%= f.input :stars %>
+  <%= f.input :genre %>
+  <%= f.input :premiere_world %>
+  <%= f.input :premiere_RF %>
+  <%= f.input :age_category %>
+  <%= f.input :duration %>
   <%= link_to 'Загрузить список фильмов с кинопоиска', manage_movies_from_kinopoisk_path, :class => 'movies_from_kinopoisk' %>
 </div>
 <%= f.input :original_title %>

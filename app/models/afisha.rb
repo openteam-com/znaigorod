@@ -23,6 +23,14 @@ class Afisha < ActiveRecord::Base
                   :fb_likes, :odn_likes, :vkontakte_likes, :poster_vk_id, :bkz_link,
                   :promoted_at
 
+  attr_accessible :year, :art_directors, :editors, :film_created_in, :slogan, :producer, :director, :scenario, :operator, :compositor,
+                :stars, :genre, :premiere_world, :premiere_RF, :genre,
+                :age_category, :duration
+
+  attr_accessor :year, :art_directors, :editors, :film_created_in, :slogan, :producer, :scenario, :director, :operator, :compositor,
+                :stars, :genre, :premiere_world, :premiere_RF, :genre,
+                :age_category, :duration
+
   belongs_to :user
 
   has_many :all_images,            :as => :attachable, :class_name => 'Attachment', :conditions => { :type => %w[GalleryImage GallerySocialImage] }
@@ -52,7 +60,6 @@ class Afisha < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
   has_one :feed, :as => :feedable, :dependent => :destroy
-
   serialize :kind, Array
   enumerize :kind,
     in: AfishaKind.new.send(Settings["app.city"]),
@@ -79,6 +86,7 @@ class Afisha < ActiveRecord::Base
   default_value_for :total_rating,              0
 
   before_save :prepare_trailer
+  before_save :build_description
   before_save :set_wmode_for_trailer, :if => :published?
 
   scope :actual,                -> { includes(:showings).where('showings.starts_at >= ? OR (showings.ends_at is not null AND showings.ends_at > ?)', DateTime.now.beginning_of_day, Time.zone.now).uniq }
@@ -317,6 +325,39 @@ class Afisha < ActiveRecord::Base
     external_links_attributes
     external_links_redirect
     real_external_url
+  end
+
+  def build_description
+    patch = ''
+    if kind.include? 'movie'
+      movies_properties_array.each do |value|
+        code_name = value.keys.first
+        civil_name = value[code_name]
+        patch += "|#{civil_name}|#{self.send(code_name)}|\n" if self.send(code_name).present?
+      end
+      self.description = patch + self.description
+    end
+  end
+
+  def movies_properties_array
+    [
+      { year:               'год' },
+      { film_created_in:    'страна' },
+      { slogan:             'слоган' },
+      { director:           'режиссёр' },
+      { scenario:           'сценарий' },
+      { producer:           'продюссер' },
+      { operator:           'оператор' },
+      { compositor:         'композитор' },
+      { art_directors:      'художник' },
+      { editors:            'монтаж' },
+      { stars:              'в главных ролях' },
+      { genre:              'жанр' },
+      { premiere_world:     'прьемьера (мир)' },
+      { premiere_RF:        'премьера (РФ)' },
+      { age_category:       'возрастная категория' },
+      { duration:           'время' }
+    ]
   end
 
   def text_description
