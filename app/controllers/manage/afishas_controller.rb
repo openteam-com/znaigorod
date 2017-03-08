@@ -18,6 +18,12 @@ class Manage::AfishasController < Manage::ApplicationController
     end
   end
 
+  def edit
+    edit! {
+      resource.rebuild_description if resource.kind.include? 'movie'
+    }
+  end
+
   def update
     update! do |success, failure|
       success.html {

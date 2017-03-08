@@ -328,14 +328,25 @@ class Afisha < ActiveRecord::Base
   end
 
   def build_description
-    patch = ''
     if kind.include? 'movie'
+      patch = ''
       movies_properties_array.each do |value|
         code_name = value.keys.first
         civil_name = value[code_name]
         patch += "|#{civil_name}|#{self.send(code_name)}|\n" if self.send(code_name).present?
       end
       self.description = patch + self.description
+    end
+  end
+
+  def rebuild_description
+    table = description.scan(/^\|(.+)\|(.+)\|\n/)
+    movies_properties_hash = movies_properties_array.reduce(:merge)
+    table.each do |row|
+      civil_name, value = row
+      code_name = movies_properties_hash.find {|k, v| v == civil_name }.first
+      self.send("#{code_name}=".to_sym, value) if code_name
+      description.gsub!(/^\|#{Regexp.escape(civil_name)}\|.+\|\n/, '')
     end
   end
 
@@ -353,7 +364,7 @@ class Afisha < ActiveRecord::Base
       { editors:            'монтаж' },
       { stars:              'в главных ролях' },
       { genre:              'жанр' },
-      { premiere_world:     'прьемьера (мир)' },
+      { premiere_world:     'премьера (мир)' },
       { premiere_RF:        'премьера (РФ)' },
       { age_category:       'возрастная категория' },
       { duration:           'время' }
