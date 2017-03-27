@@ -75,10 +75,11 @@ class AfishaPresenter
   def decorated_collection
     @decorated_collection ||= [].tap do |list|
       collection.each do |group|
-        afisha = Afisha.find(group.value)
-        showings = group.hits.map(&:result).compact
+        if afisha = Afisha.where(:id => group.value).first
+          showings = group.hits.map(&:result).compact
 
-        list << AfishaDecorator.new(afisha, ShowingDecorator.decorate(showings))
+          list << AfishaDecorator.new(afisha, ShowingDecorator.decorate(showings))
+        end
       end
     end
   end

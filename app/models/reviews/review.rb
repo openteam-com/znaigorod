@@ -134,6 +134,11 @@ class Review < ActiveRecord::Base
     self.versions.create!(:body => self.changes.to_json(:except => ignore_fields))
   end
 
+  def no_robots?
+    return true if (["megapolis", "adv_plus", "commercial"] & categories.to_a).any?
+    false
+  end
+
   def ignore_fields
     [ :created_at,
       :id,

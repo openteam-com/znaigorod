@@ -15,6 +15,12 @@
   <%= @review.twitter_cards_meta %>
 <% end %>
 
+<% if @review.no_robots? %>
+  <% content_for :disallowed_content do %>
+    <meta name="robots" content="none, noarchive, noyaca"/>
+  <% end %>
+<% end %>
+
 <div class="left margin">
   <div class="actions">
     <% if current_user && current_user.account == @review.account %>
