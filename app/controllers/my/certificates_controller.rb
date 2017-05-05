@@ -27,7 +27,7 @@ class My:: CertificatesController < My::ApplicationController
 
     def build_resource
       old_build_resource.tap do |object|
-        object.payment_system = :rbkmoney
+        object.payment_system = :robokassa
         object.account = current_user.account
       end
     end
