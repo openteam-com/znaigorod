@@ -49,4 +49,6 @@
  * = require ./main
  * = require ./organizations
  * = require ./map_project
+ * = require inputmask
+ * = require ../crm/reservations
  */

@@ -6,6 +6,10 @@ ru:
     other: "%{count} рубля"
 
   sms_claim:
+    afisha:
+      link_title: Заказать
+      placeholder: Укажите детали заказа
+
     billiard:
       link_title: Забронировать биллиард
       placeholder: Укажите ориентировочное время и продолжительность игры, пожелания по столу

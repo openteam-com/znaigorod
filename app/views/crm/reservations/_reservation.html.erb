@@ -6,7 +6,7 @@
     <% if suborganization.reservation %>
       <%= link_to 'редактировать', [:edit, :crm, suborganization, :reservation], :remote => true, :class => '.reservation_link' %>
     <% else %>
-      <%= link_to 'добавить', [:new, :crm, suborganization, :reservation], :remote => true, :class => '.reservation_link' %>
+      <%= link_to 'добавить', [:new, :crm, suborganization, :reservation], :remote => true, :class => '.reservation_link add_reservation_link' %>
     <% end %>
   </td>
 </tr>

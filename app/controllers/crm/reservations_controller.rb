@@ -5,7 +5,7 @@ class Crm::ReservationsController < ApplicationController
 
   actions :all
 
-  belongs_to *Organization.available_suborganization_kinds, :polymorphic => true, :optional => true
+  belongs_to *Organization.available_suborganization_kinds, :afisha, :polymorphic => true, :optional => true
 
   defaults :singleton => true
 
