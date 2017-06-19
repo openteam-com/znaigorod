@@ -11,6 +11,9 @@ handle_cancel = ->
     false
 
 @init_manipulate_reservations = ->
+  $('.add_reservation_link').on 'click',  ->
+    $(this).css('display', 'none')
+
   $('.reservations').on 'ajax:success', (evt, response) ->
     tr = $(evt.target).closest('tr')
 

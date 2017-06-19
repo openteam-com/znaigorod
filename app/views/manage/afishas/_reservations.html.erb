@@ -1,0 +1,19 @@
+<div class="reservations">
+  <h4>Бронирование услуг</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="phone">Телефон</th>
+        <th class="balance">Баланс</th>
+        <th class="details">Детали</th>
+        <th class="action"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => 'crm/reservations/reservation', :locals => { :suborganization => resource } %>
+    </tbody>
+  </table>
+</div>
+
+

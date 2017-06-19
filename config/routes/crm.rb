@@ -13,7 +13,7 @@ Znaigorod::Application.routes.draw do
       get :meetings, on: :collection
     end
 
-    Organization.available_suborganization_kinds.each do |kind|
+    (Organization.available_suborganization_kinds + ['afisha']).each do |kind|
       resources kind.pluralize, :only => [] do
         resource :reservation, :except => :show
       end

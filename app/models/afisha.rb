@@ -60,6 +60,7 @@ class Afisha < ActiveRecord::Base
 
   has_one :affiche_schedule, :dependent => :destroy
   has_one :feed, :as => :feedable, :dependent => :destroy
+  has_one :reservation, :as => :reserveable, :dependent => :destroy
   serialize :kind, Array
   enumerize :kind,
     in: AfishaKind.new.send(Settings["app.city"]),
