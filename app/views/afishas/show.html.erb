@@ -23,6 +23,15 @@
       <%= content_tag(:div, 'Премьера', class: :ribbon) if @afisha.premiere? %>
     </div>
 
+    <% if @afisha.reservation.present? %>
+      <ul class='sms_claims'>
+          <li>
+            <%= link_to @afisha.reservation_title,
+              new_afisha_sms_claim_path(@afisha), :class => :sms_claim_link %>
+          </li>
+      </ul>
+    <% end %>
+
     <!-- noindex -->
     <%= render :partial => 'afishas/promote', :locals => { :afisha => @afisha } %>
     <!-- /noindex -->

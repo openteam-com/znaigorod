@@ -95,7 +95,7 @@
           </thead>
           <tbody>
             <% @organization.claimable_suborganizations.each do |suborganization| %>
-              <%= render :partial => 'crm/reservations/reservation', :locals => { :suborganization => suborganization } if suborganization.present? %>
+              <%= render :partial => 'crm/reservations/reservation', :locals => { :suborganization => suborganization } %>
             <% end %>
           </tbody>
         </table>

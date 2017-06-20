@@ -3,7 +3,7 @@ class SmsClaimsController < ApplicationController
 
   actions :new, :create
 
-  Organization.available_suborganization_kinds.each do |kind|
+  (Organization.available_suborganization_kinds + ['afisha']).each do |kind|
     belongs_to kind, optional: true
   end
 

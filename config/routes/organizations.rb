@@ -56,7 +56,7 @@ Znaigorod::Application.routes.draw do
     get "/hotels/#{category.from_russian_to_param.pluralize}" => 'hotels#index', :defaults => { :categories => [category] }, :constraints => { :categories => [category] }
   end
 
-  Organization.available_suborganization_kinds.each do |kind|
+  (Organization.available_suborganization_kinds + ['afisha']).each do |kind|
     resources kind.pluralize, :only => [] do
       resources :sms_claims, :only => [:new, :create]
     end
