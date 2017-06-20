@@ -4,7 +4,7 @@
   <table>
     <thead>
       <tr>
-        <th class="phone">Тип</th>
+        <th class="type">Тип</th>
         <th class="phone">Телефон</th>
         <th class="balance">Баланс</th>
         <th class="action"></th>
@@ -14,6 +14,34 @@
       <%= render :partial => 'crm/reservations/reservation', :locals => { :suborganization => resource } %>
     </tbody>
   </table>
+
+  <hr>
+
+  <h4>Все заказы (<%= resource.sms_claims.count %>)</h4>
+
+  <% if resource.sms_claims.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Имя</th>
+          <th class="phone">Телефон</th>
+          <th class="details">Детали</th>
+          <th class="date">Дата</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% resource.sms_claims.reverse.each do |claim| %>
+          <tr>
+            <td><%= claim.name %></td>
+            <td><%= claim.phone %></td>
+            <td max-width='300px'><%= claim.details %></td>
+            <td><%= claim.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
 </div>
 
 
