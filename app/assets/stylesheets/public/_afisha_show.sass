@@ -4,6 +4,52 @@
   span.alert
     color: #f60
 
+  .sms_claims
+    font-size: 14px
+
+    li
+      margin-bottom: 10px
+
+      a
+        display: block
+        position: relative
+        height: 43px
+        color: #fff
+        line-height: 1.3
+        border: 1px solid #f60
+        +border-radius(25px)
+        background-color: #f93
+        +background(linear-gradient(top, #f93, #f60))
+        padding-top: 5px
+        padding-right: 10px
+        padding-left: 58px
+
+        &:before
+          content: ''
+          display: block
+          position: absolute
+          top: 0
+          left: 0
+          width: 48px
+          height: 48px
+          +border-radius(25px)
+          border-right: 1px solid #f60
+          background: #fff image_url('public/sms_claim.png') no-repeat center center
+          +background(image_url('public/sms_claim.png') no-repeat center center, linear-gradient(top, #fff, #ccc))
+          margin-right: 10px
+
+        &:hover
+          text-decoration: none
+          +background(none)
+          background-color: #f93
+
+        &:active
+          height: 42px
+          +background(linear-gradient(top, #f60, #f93))
+          padding-top: 6px
+
+
+
   .tickets
 
     li
