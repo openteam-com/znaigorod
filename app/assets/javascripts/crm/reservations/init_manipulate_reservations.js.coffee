@@ -7,6 +7,7 @@ handle_cancel = ->
   $('.cancel', '.reservations').on 'click', ->
     $(this).closest('tr').remove()
     $('.hidden', '.reservations').removeClass('hidden').show()
+    $('.add_reservation_link').css('display', 'inline-block')
 
     false
 
