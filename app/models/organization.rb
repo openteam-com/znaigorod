@@ -95,7 +95,18 @@ class Organization < ActiveRecord::Base
   ### <=== Payments
 
   def claimable_suborganizations
-    @claimable_suborganizations ||= I18n.t('sms_claim').keys.map { |kind| send(kind) }.compact - [[]]
+    res_keys = I18n.t('sms_claim').keys - except_keys_from_suborganizations
+    @claimable_suborganizations ||= res_keys.map { |kind| send(kind) }.compact
+  end
+
+  # I18n - sms_claim содержит названия для бронируемых подорганизаций.
+  # также там есть и названия моделей, которые принадлежат организации и отдельно бронируемы.
+  # например, афиша не должна входить в список бронируемых подорганизаций, но она в списке sms_claim.
+  # на ней всё рухнет.
+  # для исключения этих ситуаций следующий список.
+  # треш и угар)
+  def except_keys_from_suborganizations
+    [:afisha]
   end
 
   def sms_claimable_suborganizations
