@@ -20,7 +20,7 @@
         <td><%= sms_claim.phone %></td>
         <td>
           <% if sms_claim.claimed.class.name == 'Afisha' %>
-            <%= link_to sms_claim.claimed.title + '(А)', [sms_claim.claimed]  %>
+            <%= link_to sms_claim.claimed.title + '(А)', [:manage, sms_claim.claimed]  %>
           <% else %>
             <%= link_to sms_claim.claimed.organization_title + '(З)', [:crm, sms_claim.claimed.organization]  %>
           <% end %>
