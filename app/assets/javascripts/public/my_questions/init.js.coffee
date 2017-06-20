@@ -23,6 +23,7 @@
       .done (data) ->
         $('.reviews_show').html(data)
 
+  tagitFor $('#question_tag')
   $('.tagit_categories').tagit {
     fieldName:        'categories',
     allowDuplicates:  false,

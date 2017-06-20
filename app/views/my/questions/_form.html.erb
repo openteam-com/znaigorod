@@ -25,6 +25,9 @@
     <%= hidden_field_tag "question[category_flag]", true %>
   </div>
 
+  <%= f.input :tag, :as => :string,
+    :input_html => { :data => { 'autocomplete-source' => tags_available_my_reviews_path } } %>
+
   <div class='submit'>
     <%= f.submit 'Отправить', :class => 'flat-btn btn-lg btn-orange' %>
     <%= link_to 'Отмена', :back %>
