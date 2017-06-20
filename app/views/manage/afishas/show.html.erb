@@ -1,6 +1,5 @@
 <div class="show">
   <h1><%= resource.title %></h1>
-  <%= render partial: 'reservations', locals: { resource: resource }  %>
   <%= link_to "редактировать", edit_manage_afisha_path(resource), :class => 'edit_link' %>
   <%= link_to "посмотреть в публичном виде", afisha_show_path(resource), target: :_blank, :class => 'edit_link floatr' %>
   <% if resource.published? %>
@@ -374,3 +373,5 @@
 
 <%= render resource.virtual_tour %>
 </div>
+
+<%= render partial: 'reservations', locals: { resource: resource }  %>
