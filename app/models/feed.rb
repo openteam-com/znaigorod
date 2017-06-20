@@ -27,6 +27,7 @@ class Feed < ActiveRecord::Base
     self.type_of_feedable = self.feedable.is_answer? ? 'question' : 'comment' if self.feedable_type == 'Comment'
 
     self.save
+  rescue
   end
 end
 
