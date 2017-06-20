@@ -95,7 +95,7 @@ class Organization < ActiveRecord::Base
   ### <=== Payments
 
   def claimable_suborganizations
-    @claimable_suborganizations ||= I18n.t('sms_claim').keys.map { |kind| send(kind) }.compact
+    @claimable_suborganizations ||= I18n.t('sms_claim').keys.map { |kind| send(kind) }.compact - [[]]
   end
 
   def sms_claimable_suborganizations

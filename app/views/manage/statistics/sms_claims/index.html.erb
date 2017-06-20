@@ -6,7 +6,7 @@
       <th>ID</th>
       <th>Контактное лице</th>
       <th class="phone">Телефон</th>
-      <th>Заведение</th>
+      <th>Заведение / Афиша</th>
       <th>Детали</th>
       <th>Действия</th>
     </tr>
@@ -19,7 +19,11 @@
         <td><%= sms_claim.name %></td>
         <td><%= sms_claim.phone %></td>
         <td>
-          <%= link_to sms_claim.claimed.organization_title, [:crm, sms_claim.claimed.organization]  %>
+          <% if sms_claim.claimed.class.name == 'Afisha' %>
+            <%= link_to sms_claim.claimed.title + '(А)', [sms_claim.claimed]  %>
+          <% else %>
+            <%= link_to sms_claim.claimed.organization_title + '(З)', [:crm, sms_claim.claimed.organization]  %>
+          <% end %>
           (<%= number_to_currency sms_claim.claimed.reservation.try(:balance) %>)
         </td>
         <td><%= sms_claim.details %></td>
