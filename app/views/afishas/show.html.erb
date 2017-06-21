@@ -250,6 +250,7 @@
 
     <%= render :partial => 'comments/block', :locals => { :parent_obj => @afisha } %>
 
+    <!-- noindex -->
     <% if @afisha.similar_afisha.any? %>
       <div class='suborganization_info similar_afisha'>
         <div class='similar_afishas_header'>Другие мероприятия</div>
@@ -282,5 +283,6 @@
       </ul>
     </div>
     <% end %>
+    <!-- /noindex -->
   </div>
 </div>

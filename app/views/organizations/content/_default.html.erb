@@ -16,6 +16,7 @@
   <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
 </div>
 
+<!-- noindex -->
 <% if @reviews.present? %>
   <div class='organization_reviews'>
     <div class='reviews_title'>Обзоры</div>
@@ -37,3 +38,4 @@
     </ul>
   </div>
 <% end %>
+<!-- /noindex -->

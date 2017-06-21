@@ -1,3 +1,4 @@
+<!-- noindex -->
 <div class="comments ajaxed ajaxed_voteable">
   <% if parent_obj.is_a?(Question) %>
     <h3>Ответы</h3>
@@ -19,3 +20,4 @@
     <div class='auth_info_message'>Комментировать могут только авторизованные пользователи. <%= link_to 'Войти', polymorphic_url([:new, parent_obj, :comment].flatten), :remote => true, :rel => 'nofollow' %></div>
   <% end %>
 </div>
+<!-- /noindex -->

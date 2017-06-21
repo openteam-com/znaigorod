@@ -46,6 +46,7 @@
     </ul>
   <% end %>
 
+  <!-- noindex -->
   <%= render :partial => 'comments/block', :locals => { :parent_obj => @review } %>
 
   <% if @review.related_afishas.any? %>
@@ -143,9 +144,11 @@
       </ul>
     </div>
   <% end %>
+  <!-- /noindex -->
 
 </div>
 
+<!-- noindex -->
 <div class="right">
   <% if @review.related_reviews.present? || @review.decorated_similar.present? %>
     <h2>Смотрите также!</h2>
@@ -166,3 +169,4 @@
     </div>
   <% end %>
 </div>
+<!-- /noindex -->

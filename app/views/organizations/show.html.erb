@@ -90,6 +90,8 @@
       <%= render :partial => 'organizations/discounts', :locals => { :collection => @certificate_presenter.decorated_collection } if @certificate_presenter.collection.any? %>
       <%= render :partial => 'organizations/discounts', :locals => { :collection => @coupon_presenter.decorated_collection } if @coupon_presenter.collection.any? %>
 
+
+      <!-- noindex -->
       <% if @organization.similar_organizations.present? %>
         <div class='more_like_this'>
           <p class='title'>Другие заведения</p>
@@ -114,6 +116,7 @@
           </ul>
         </div>
       <% end %>
+      <!-- /noindex -->
 
     </div>
   </div>
@@ -253,6 +256,7 @@
     </div>
   <% end %>
 
+  <!-- noindex -->
   <div class="suborganization_info discount_details">
     <div class="title <%= scrolltrack(@organization.discounts_navigation_title) %>" id='<%= @organization.discounts_navigation_title.try(:from_russian_to_param) %>'>
       <%= @organization.discounts_block_title %>
@@ -330,5 +334,6 @@
   <%= render :partial => 'comments/block', :locals => { :parent_obj => @organization, :comments_block_title => @organization.comments_block_title } if @organization.ability_to_comment? %>
 
   <div class="js-scrolltrack"> </div>
+  <!-- noindex -->
 </div>
 </div>
