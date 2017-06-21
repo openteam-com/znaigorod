@@ -119,11 +119,16 @@ class Manage::AfishasController < Manage::ApplicationController
     @afisha = params[:include_gone] ? include_gone : only_actual
   end
 
+  # учитывая исключения
+  def kind_singularized
+    ['excursions'].include?(params[:by_kind]) ? params[:by_kind] : params[:by_kind].singularize
+  end
+
   def only_actual
     Afisha.search {
       keywords params[:q]
       with :state, params[:by_state] if params[:by_state].present?
-      with :kind, params[:by_kind].singularize if params[:by_kind].present?
+      with :kind, kind_singularized if params[:by_kind].present?
       order_by :created_at, :desc
       paginate paginate_options.merge(:per_page => per_page)
 
@@ -138,7 +143,7 @@ class Manage::AfishasController < Manage::ApplicationController
     Afisha.search {
       keywords params[:q]
       with :state, params[:by_state] if params[:by_state].present?
-      with :kind, params[:by_kind] if params[:by_kind].present?
+      with :kind, kind_singularized if params[:by_kind].present?
       order_by :created_at, :desc
       paginate :page => params[:page], :per_page => per_page
     }.results

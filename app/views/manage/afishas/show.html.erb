@@ -222,6 +222,8 @@
 </div>
 </div>
 
+<%= render partial: 'reservations', locals: { resource: resource }  %>
+
 <div style='clear:both;'>
   <h3>
     Видеоролик
@@ -374,4 +376,3 @@
 <%= render resource.virtual_tour %>
 </div>
 
-<%= render partial: 'reservations', locals: { resource: resource }  %>
