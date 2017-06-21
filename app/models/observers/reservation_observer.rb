@@ -4,7 +4,7 @@ class ReservationObserver < ActiveRecord::Observer
   def after_save(reservation)
     organization = reservation.reserveable.try(:organization)
     if organization
-      reservation.reserveable.delay.sunspot_index
+      reservation.reserveable.delay.index
       organization.delay.index
     else
       reservation.reserveable.delay.index
@@ -14,7 +14,7 @@ class ReservationObserver < ActiveRecord::Observer
   def after_destroy(reservation)
     organization = reservation.reserveable.try(:organization)
     if organization
-      reservation.reserveable.delay.sunspot_index
+      reservation.reserveable.delay.index
       organization.delay.index
     else
       reservation.reserveable.delay.index
