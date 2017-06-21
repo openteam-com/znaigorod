@@ -42,6 +42,12 @@ Znaigorod::Application.routes.draw do
   resources :placed_banners
   resources :comments_images, :only => [:create, :destroy]
 
+  ['afisha'].each do |claim|
+    resources claim.pluralize, :only => [] do
+      resources :sms_claims, :only => [:new, :create]
+    end
+  end
+
   resources :afisha, :only => [], :controller => 'afishas' do
     resources :comments, :only => [:new, :show, :create]
     resources :visits, :only => [:index, :create, :show, :destroy]
