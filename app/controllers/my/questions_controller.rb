@@ -16,7 +16,7 @@ class My::QuestionsController < My::ApplicationController
   end
 
   def update
-    create! do |success, failure|
+    update! do |success, failure|
       success.html {
         redirect_to question_path(resource.id)
       }

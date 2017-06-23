@@ -21,7 +21,10 @@
     </div>
 
     <%= select_tag :cat, options_for_select(Question.categories.options), :class => 'select_type', :prompt => 'Выберите категорию' %>
-    <%= f.input :tagit_categories, :as => :string, :label => false, :input_html => { :class => 'tagit_categories' } %>
+    <%= f.input :tagit_categories,
+      :as => :string,
+      :label => false,
+      :input_html => { :class => 'tagit_categories', :value => @question.categories.map(&:text).join(', ') }%>
     <%= hidden_field_tag "question[category_flag]", true %>
   </div>
 
