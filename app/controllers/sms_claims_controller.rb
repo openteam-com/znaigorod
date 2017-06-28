@@ -16,6 +16,13 @@ class SmsClaimsController < ApplicationController
   end
 
   def create
-    create! { parent.organization }
+    create! {
+      case parent
+      when Afisha
+        parent
+      else
+        parent.organization
+      end
+    }
   end
 end
