@@ -11,7 +11,7 @@ module Export
         requires :count, type: Integer
       end
       get '/' do
-        Afisha.actual.with_showings.limit(params[:count]).offset(params[:offset]).map {|afisha|
+        Afisha.published.actual.with_showings.limit(params[:count]).offset(params[:offset]).map {|afisha|
           {
             remote_id: afisha.id,
             title: afisha.title,
