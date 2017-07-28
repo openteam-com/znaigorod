@@ -2,6 +2,7 @@
 
 Znaigorod::Application.routes.draw do
   mount Affiches::API => '/'
+  mount Export::API => '/'
   mount Mobile::API => '/'
 
   get '/api/afisha_collection' => 'afishas#afisha_collection', :as => :afisha_collection_api
