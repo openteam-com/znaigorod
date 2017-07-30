@@ -26,7 +26,7 @@ module Export
             age_min: afisha.age_min,
             vk_event_url: afisha.vk_event_url,
             showings: afisha.constant ? [] :
-              afisha.showings.actual.where('starts_at < ?', Date.current + 2.months)
+              afisha.showings.actual.where('starts_at < ?', Date.current + 6.months)
                 .select('latitude, longitude, place, price_min, price_max, starts_at, ends_at'),
             schedule: !(afisha.constant && afisha.affiche_schedule.present?) ? nil :
               [
