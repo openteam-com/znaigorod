@@ -17,7 +17,7 @@ module Export
             remote_id: afisha.id,
             title: afisha.title,
             image_url: afisha.image_url,
-            description: afisha.description,
+            description: afisha.description_html,
             type: afisha.kind.to_a,
             original_title: afisha.original_title,
             trailer_code: afisha.trailer_code,
