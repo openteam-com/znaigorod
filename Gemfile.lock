@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/sergocap/kinopoisk_parser.git
+  revision: 2bb33b511a8962d723c7abf98d3f81961c4d8bda
+  specs:
+    kinopoisk_parser (2.2.3)
+      httpclient
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -195,7 +203,7 @@ GEM
     httparty (0.10.0)
       multi_json (~> 1.0)
       multi_xml
-    httpclient (2.8.0)
+    httpclient (2.8.3)
     i18n (0.6.11)
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
@@ -218,9 +226,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
-    kinopoisk_parser (2.2.0)
-      httpclient
-      nokogiri
     koala (1.7.0rc1)
       addressable
       faraday
@@ -550,7 +555,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.3)
   jquery.fileupload-rails
   kaminari
-  kinopoisk_parser
+  kinopoisk_parser!
   koala (~> 1.7.0rc1)
   letter_opener
   mainsms_api

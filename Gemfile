@@ -45,7 +45,7 @@ group :default do
   gem 'httparty'
   gem 'inherited_resources',        '1.4.1'
   gem 'kaminari'
-  gem 'kinopoisk_parser',           :require => false
+  gem 'kinopoisk_parser',           github: 'sergocap/kinopoisk_parser', :require => false
   gem 'koala',                      '~> 1.7.0rc1'
   gem 'mainsms_api'
   gem 'mandrill-api'
