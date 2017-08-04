@@ -7,7 +7,7 @@
     <% end %>
   </div>
 <% else %>
-  <%= render :partial => 'tariffs', locals: { :resource => resource } %>
+  <%= render :partial => 'tariffs', locals: { :resource => resource } if resource.published? %>
 <% end %>
 <div class='title'>
   <%= resource.title %>

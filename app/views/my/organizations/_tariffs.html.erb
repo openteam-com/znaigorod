@@ -20,6 +20,8 @@
           <div class='tariff'>
             <span class='title'><%= tariff.title %></span>
             <span class='description'>(<%= tariff.description %>)</span>
+            <% organization_tariff =  OrganizationTariff.where(:organization_id => @organization.id, :tariff_id => tariff.id).first %>
+            <span class='left_days'> - осталось дней: <%= organization_tariff.left_days %></span>
           </div>
         </li>
       <% end %>

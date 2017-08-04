@@ -4,6 +4,6 @@ class ManageMailer < ActionMailer::Base
   def message_about_publication(organization)
     @organization = organization
 
-    mail :to => @organization.email.split(',')[0], :subject => 'Ваша организация добавлена'
+    mail :to => @organization.email.split(',')[0], :subject => 'Ваша организация опубликована'
   end
 end

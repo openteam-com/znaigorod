@@ -1,0 +1,10 @@
+<h3>Наши тарифы:</h3>
+<ul>
+  <% Tariff.all.each do |item| %>
+    <li>
+      <span><%= item.title %> - </span>
+      <span><%= item.description %></span>
+      <span><%= "(#{item.price_for_month}/#{item.price_for_six_months}/#{item.price_for_year})" %></span>
+    </li>
+  <% end %>
+</ul>

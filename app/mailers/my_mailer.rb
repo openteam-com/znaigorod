@@ -3,6 +3,12 @@
 class MyMailer < ActionMailer::Base
   default :from => Settings['mail']['from']
 
+  def mail_tariff_expired(organization_tariff)
+    @organization = organization_tariff.organization
+    @organization_tariff = organization_tariff
+    mail(:to => @organization.email.split(',')[0], :subject => '[ZnaiGorod] Срок действия тарифа истёк') if @organization.email.present?
+  end
+
   def mail_new_pending_afisha(afisha)
     @afisha = afisha
     mail(:to => Settings['mail']['to_afisha'], :subject => '[ZnaiGorod] Добавлена новая афиша')

@@ -10,15 +10,8 @@ namespace :organization do
     bar = ProgressBar.new(organization_tariffs.count)
     count_deleted = 0
     organization_tariffs.each do |o_t|
-      duration = case o_t.duration
-                 when 'month'
-                   1.month
-                 when 'six_months'
-                   6.months
-                 when 'year'
-                   1.year
-                 end.to_i
-      if Time.now - o_t.created_at > duration
+      if o_t.left_days < 0
+        MyMailer.mail_tariff_expired(o_t).deliver
         o_t.destroy
         count_deleted+=1
       end
