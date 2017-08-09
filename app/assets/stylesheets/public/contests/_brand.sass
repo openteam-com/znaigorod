@@ -1,68 +1,48 @@
-.contest_wrapper
-  //+background(image_url('public/brand/zdorovie-2.png') no-repeat center top, transparent)
-
-  div.links
-    width: 1200px
-    height: 100px
-    margin: 0 auto
+// можно юзать вот это для брендинга (.branding_wrapper)- для примера смотри layouts/organization_layouts/ekskursii_sevastopolja.html.erb
+// ниже есть частный случай с экскурсиями Севастополя
+.branding_wrapper
+  .branding_links
     position: relative
-
-    .contest_links
-      position: absolute
-      width: 1200px
-      height: 100px
-      top: 0
-      left: 0
-
-      li
-        margin: 0 0 6px 0
-        display: block
-        width: 100%
-        height: 100%
-
-        a
-          color: #000
-          display: block
-          width: 100%
-          height: 100%
-          text-indent: -9999px
-
-          &:hover
-            color: #ff4729
-            text-decoration: none
-
-    .one, .two
-      position: absolute
-      text-indent: -9999px
-
-    .one
-      width: 1200px
-      height: 124px
-      left: 0px
-
-
-  .content_wrapper
-    background-color: #f5f5f5
-    position: relative
-
-    .left_links, .right_links
-      position: absolute
-      top: -140px
-      width: 20%
-      height: 100%
-
-      a
-        display: block
-        width: 100%
-        height: 100%
-        text-indent: -999em
-
-    .left_links
-      left: -20%
-
-    .right_links
-      right: -20%
-
-  .header_wrapper, .filters_wrapper
     width: 1200px
     margin: 0 auto
+
+    .branding_link.top_link
+      display: block
+
+    .branding_link.left_link
+      position: absolute
+      left: -500px
+      height: 1000px
+      width: 500px
+
+    .branding_link.right_link
+      position: absolute
+      right: -500px
+      top: 0px
+      width: 500px
+      height: 1000px
+
+  .branding_content_wrapper
+    display: table
+    margin: 0 auto
+
+    .content_wrapper
+      background: #f5f5f5
+
+.branding_wrapper.ekskursii_sevastopolja
+  background: url('brand/br-ariadna.png') no-repeat center top #782b2c
+
+  .branding_links
+    position: relative
+    width: 1200px
+    margin: 0 auto
+
+    .branding_link.top_link
+      height: 149px
+
+  .branding_content_wrapper
+    .header_wrapper
+      border-radius: 10px 10px 0 0
+
+    .content_wrapper
+      padding: 0 11px

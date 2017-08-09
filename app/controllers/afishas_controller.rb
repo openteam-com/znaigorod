@@ -31,6 +31,8 @@ class AfishasController < ApplicationController
             render partial: @presenter.partial, :locals => { :afishas => @presenter.decorated_collection, :presenter => @presenter }, :layout => false and return
           end
         end
+
+        render :index, layout: 'organization_layouts/ekskursii_sevastopolja' if ekskursii_sevastopolja?
       }
 
       format.rss {
@@ -59,6 +61,8 @@ class AfishasController < ApplicationController
         @certificates = @afisha.organization ? DiscountsPresenter.new(:organization_id => @afisha.organization.id, :type => 'certificate').decorated_collection : []
         @reviews = ReviewDecorator.decorate(@afisha.reviews.published.ordered)
         @last_reviews = ReviewsPresenter.new(:page => 1, :per_page => 6).decorated_collection
+
+        render :show, layout: 'organization_layouts/ekskursii_sevastopolja' if ekskursii_sevastopolja?
       }
 
       format.promotion do
@@ -101,6 +105,10 @@ class AfishasController < ApplicationController
   end
 
   private
+
+  def ekskursii_sevastopolja?
+    Settings['app.city'] == 'sevastopol' && @presenter.categories.include?('excursions')
+  end
 
   def params_exist?
     request.url.split('?').many?

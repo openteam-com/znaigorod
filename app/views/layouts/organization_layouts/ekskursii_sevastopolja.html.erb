@@ -1,0 +1,50 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'public/application', :media => 'all' %>
+<% end %>
+
+<% content_for :javascripts do %>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <%= javascript_include_tag 'http://userapi.com/js/api/openapi.js?52' %>
+  <%= javascript_include_tag "#{Settings['faye.url']}/faye/client.js" %>
+  <%= javascript_include_tag 'public/application' %>
+<% end %>
+
+<% content_for :metrics do %>
+  <%= render :partial => 'commons/google_analytics' if Rails.env.production? %>
+<% end %>
+
+<% content_for :flash_messages do %>
+  <div class='message_wrapper'></div>
+  <div class="ajax_blocking"></div>
+<% end %>
+
+<%= content_for :content do %>
+  <div class='branding_wrapper ekskursii_sevastopolja'>
+    <div class='branding_links'>
+      <a href='http://ariadna-crimea.ru/' target='blank' class='branding_link left_link'></a>
+      <a href='http://ariadna-crimea.ru/' target='blank' class='branding_link top_link'></a>
+      <a href='http://ariadna-crimea.ru/' target='blank' class='branding_link right_link'></a>
+    </div>
+
+    <div class='branding_content_wrapper'>
+      <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
+      <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
+      <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless @exepted_controllers.include?(controller_name) %>
+      <%= render :partial => 'commons/public_content' %>
+      <%= render :partial => 'commons/public_footer' %>
+      <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
+      <%= yield :yandex_map_scripts %>
+      <%= yield :two_gis_map_scripts %>
+      <%= render :partial => 'commons/public_reformal' %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :canonical_link do %>
+  <% if request.env['REQUEST_URI'].include?('?') %>
+    <link rel='canonical' href='<%= canonical_link %>' />
+  <% end %>
+<% end %>
+
+<%= render :template => 'layouts/application' %>
