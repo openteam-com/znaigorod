@@ -101,7 +101,10 @@ class MovieSyncer
     end
 
     def find_similar_movie_by(title)
-      similar_movies = Afisha.search{fulltext(title){fields(:title)}}.results
+      similar_movies = Afisha.search do
+        fulltext(title) { fields(:title) }
+        with :kind, :movie
+      end.results
       if similar_movies.one?
         puts "Найден похожий фильм '#{title}' -> '#{similar_movies.first.title}'"
       end
