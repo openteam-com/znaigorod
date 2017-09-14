@@ -19,15 +19,18 @@
 <% end %>
 
 <%= content_for :content do %>
-  <div class='health_wrapper' style="background: url(<%= @brand.background_url %>) no-repeat center top transparent">
+  <div class='doberman_wrapper'>
     <div class='links'>
-      <ul class='health_links'>
-        <li><%= link_to @brand.title, @brand.url, :target => :_blank %></li>
+      <ul class='doberman_links'>
+        <li>
+          <%= link_to 'Группа "ЗнайГород" и клуб "DOBERMAN" приготовили для вас крутые призы',
+            'https://vk.com/wall-35689602_173924', :target => :_blank %>
+        </li>
       </ul>
     </div>
 
     <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
-    <div class='health_content_wrapper'>
+    <div class='doberman_content_wrapper'>
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/public_header' %>
       <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
@@ -38,6 +41,9 @@
       <%= yield :yandex_map_scripts %>
       <%= yield :two_gis_map_scripts %>
       <%= render :partial => 'commons/public_reformal' %>
+      <script type="text/javascript">
+        (window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-158202-eTrDB';
+      </script>
     </div>
   </div>
 <% end %>

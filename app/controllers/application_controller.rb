@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def resolve_layout
-    return request.xhr? ? false : Brand.is_actual? ? 'public_contest' : 'public' if Settings['app.city'] == 'tomsk'
+    return request.xhr? ? false : (Brand.is_actual? || true ? 'public_contest' : 'public') if Settings['app.city'] == 'tomsk'
 
     return request.xhr? ? false : 'public' if Settings['app.city'] == 'sevastopol'
   end
