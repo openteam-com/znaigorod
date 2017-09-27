@@ -38,7 +38,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #end
 
     primary.item :reviews, 'Обзоры', reviews_path, highlights_on: -> { controller_name == 'reviews' } do |reviews|
-      Hash[Review.categories.options - [["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]].invert.each do |category, title|
+      Hash[Review.categories.options - [["18+", "eighteen_plus"], ["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]].invert.each do |category, title|
         reviews.item category, title, [:reviews, category]
       end
     end
