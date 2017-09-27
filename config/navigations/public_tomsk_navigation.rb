@@ -17,7 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :accounts, 'Поиск компании', accounts_path(:with_avatar => true), highlights_on: -> { controller_name == false  }
+    #primary.item :accounts, 'Поиск компании', accounts_path(:with_avatar => true), highlights_on: -> { controller_name == false  }
 
     primary.item :organizations, 'Заведения', organizations_path, highlights_on: -> {controller_name == 'organizations'} do |organization|
       OrganizationCategory.roots.order(:position).each do |category|
@@ -29,13 +29,14 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.item :saunas, 'Сауны', saunas_path, highlights_on: -> { controller_name == false  }
 
-    #primary.item :discounts, 'Скидки', discounts_path, highlights_on: -> { controller_name == 'discounts' } do |discount|
-      #Hash[Discount.kind.options].invert.each do |kind, title|
-        #discount.item kind, title, [:discounts, kind]
-      #end
-    #end
+    primary.item :discounts, 'Скидки', discounts_path, highlights_on: -> { controller_name == 'discounts' } do |discount|
+      Hash[Discount.kind.options].invert.each do |kind, title|
+        discount.item kind, title, [:discounts, kind]
+      end
+    end
+
+    primary.item :saunas, 'Сауны', saunas_path, highlights_on: -> { controller_name == false  }
 
     primary.item :reviews, 'Обзоры', reviews_path, highlights_on: -> { controller_name == 'reviews' } do |reviews|
       Hash[Review.categories.options - [["18+", "eighteen_plus"], ["Мегаполис", "megapolis"], ["Реклама+", "adv_plus"]]].invert.each do |category, title|
@@ -47,7 +48,7 @@ SimpleNavigation::Configuration.run do |navigation|
       highlights_on: -> { %w[contests works cooperation discounts photogalleries questions].include?(controller_name) } do |more|
 
       more.item :photogalleries, 'Фотостримы', photogalleries_path, highlights_on: -> { controller_name == 'photogalleries' }
-      more.item :discounts, 'Скидки', discounts_path, highlights_on: -> { controller_name == 'discounts' }
+      #more.item :discounts, 'Скидки', discounts_path, highlights_on: -> { controller_name == 'discounts' }
       more.item :tickets, 'Распродажа билетов', afisha_with_tickets_index_path, highlights_on: -> { controller_name == nil }
       more.item :news_of_tomsk, 'Новости Томска', 'http://news.znaigorod.ru'
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { controller_name == 'webcams' } if Settings['app.city'] == 'tomsk'
