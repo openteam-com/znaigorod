@@ -45,7 +45,7 @@ SimpleNavigation::Configuration.run do |navigation|
       highlights_on: -> { %w[contests works cooperation].include?(controller_name) } do |more|
 
       more.item :photogalleries, 'Фотостримы', photogalleries_path, highlights_on: -> { controller_name == 'photogalleries' }
-      more.item :accounts, 'Знакомства', accounts_path, highlights_on: -> { controller_name == 'accounts' }
+      more.item :accounts, 'Поиск компании', accounts_path, highlights_on: -> { controller_name == 'accounts' }
       more.item :tickets, 'Распродажа билетов', afisha_with_tickets_index_path, highlights_on: -> { controller_name == nil }
       more.item :news_of_sevastopol, 'Новости Севастополя', 'http://news.znaigorod.ru/sevastopol'
       more.item :webcams, 'Веб-камеры', webcams_path, highlights_on: -> { controller_name == 'webcams' } if Settings['app.city'] == 'tomsk'
