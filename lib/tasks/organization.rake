@@ -4,6 +4,29 @@ require 'progress_bar'
 
 namespace :organization do
 
+  desc 'Delete old tariffs from organization'
+  task :old_tariffs => :environment do
+    organization_tariffs = OrganizationTariff.all
+    bar = ProgressBar.new(organization_tariffs.count)
+    count_deleted = 0
+    organization_tariffs.each do |o_t|
+      duration = case o_t.duration
+                 when 'month'
+                   1.month
+                 when 'six_months'
+                   6.months
+                 when 'year'
+                   1.year
+                 end.to_i
+      if Time.now - o_t.created_at > duration
+        o_t.destroy
+        count_deleted+=1
+      end
+      bar.increment!
+    end
+    p "Было удалено #{count_deleted} старых тарифов!" if count_deleted > 0
+  end
+
   desc 'Upload posters to vkontakte'
   task :posters_to_vk => :environment do
     puts 'Upload organization posters to vkontakte'

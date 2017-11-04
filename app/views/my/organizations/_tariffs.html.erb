@@ -1,13 +1,29 @@
 <div class='tariffs'>
   <% Tariff.all.each do |tariff| %>
-    <div class='tariff'>
-      <p class='title'><%= tariff.title %></p>
-      <p class='description'><%= tariff.description %></p>
-      <span><%= link_to "На месяц (#{tariff.price_for_month})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'month'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
-      <span><%= link_to "На полгода (#{tariff.price_for_six_months})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'six_months'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
-      <span><%= link_to "На год (#{tariff.price_for_year})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'year'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
-      <div>
-    <br>
+    <% unless @organization.tariffs.include? tariff %>
+      <div class='tariff'>
+        <p class='title'><%= tariff.title %></p>
+        <p class='description'><%= tariff.description %></p>
+        <span><%= link_to "На месяц (#{tariff.price_for_month})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'month'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
+        <span><%= link_to "На полгода (#{tariff.price_for_six_months})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'six_months'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
+        <span><%= link_to "На год (#{tariff.price_for_year})", my_organization_tariff_organization_payments_path(resource, :tariff_id => tariff.id, :duration => 'year'), :method => :post, :target => '_blank', :class => 'flat-btn btn-orange' %></span>
+      </div>
+      <br>
+    <% end %>
+  <% end %>
+
+  <% if @organization.tariffs.any? %>
+    <span class='info'>Подключенные тарифы</span>
+    <ul>
+      <% @organization.tariffs.each do |tariff| %>
+        <li>
+          <div class='tariff'>
+            <span class='title'><%= tariff.title %></span>
+            <span class='description'>(<%= tariff.description %>)</span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 </div>
 <hr>

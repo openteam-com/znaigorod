@@ -777,11 +777,13 @@ ActiveRecord::Schema.define(:version => 20160803093525) do
 
   add_index "organization_stands", ["organization_id"], :name => "index_organization_stands_on_organization_id"
 
-  create_table "organization_tariffs", :id => false, :force => true do |t|
-    t.integer "organization_id"
-    t.integer "tariff_id"
-    t.string  "duration"
-    t.integer "price"
+  create_table "organization_tariffs", :force => true do |t|
+    t.integer  "organization_id"
+    t.integer  "tariff_id"
+    t.string   "duration"
+    t.integer  "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "organizations", :force => true do |t|

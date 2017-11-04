@@ -69,6 +69,24 @@
   </div>
 
   <div>
+    <span class='label'>Подключенные тарифы:</span>
+    <% if resource.tariffs.any? %>
+      <ul>
+        <% resource.tariffs.each do |tariff| %>
+          <li>
+            <div class='tariff'>
+              <span class='title'><%= tariff.title %></span>
+              <span class='description'>(<%= tariff.description %>)</span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <span class="blank">Не указано</span>
+    <% end %>
+  </div>
+
+  <div>
     <span class="label">Поддомен:</span>
     <% if resource.subdomain.present? %>
       <span class="value"><%= link_to "http://#{resource.subdomain}.znaigorod.ru", "http://#{resource.subdomain}.znaigorod.ru", :target => '_blank' %></span>
@@ -383,12 +401,12 @@
             <%= link_to afisha.title, [:manage, afisha] %> (<%= l showings.first.starts_at, :format => :long %>
             <% if showings.last.ends_at? %>
               &mdash; <%= l showings.last.ends_at, :format => :long %>
-            <% end %>)
-          </li>
-        <% end %>
-      </ul>
-    </span>
-  <% else %>
-    <span class="blank">Нет мероприятий</span>
-  <% end %>
+          <% end %>)
+        </li>
+      <% end %>
+    </ul>
+  </span>
+<% else %>
+  <span class="blank">Нет мероприятий</span>
+<% end %>
 </div>
