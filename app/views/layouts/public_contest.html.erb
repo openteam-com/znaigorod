@@ -1,5 +1,8 @@
 <% content_for :stylesheets do %>
   <%= stylesheet_link_tag 'public/application', :media => 'all' %>
+  <% if ['afishas'].include? controller_name %>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <% end %>
 <% end %>
 
 <% content_for :javascripts do %>
@@ -19,7 +22,7 @@
 <% end %>
 
 <%= content_for :content do %>
-  <div class='doberman_wrapper'>
+  <div class='doberman_wrapper <%= controller_name %>'>
     <div class='links'>
       <ul class='doberman_links'>
         <li>
