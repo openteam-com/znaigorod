@@ -257,3 +257,116 @@
 
           &.odnoklassniki a
             background-position: -96px 0
+
+.header_wrapper
+  &.header-wrapper-new
+    min-height: 135px
+
+    .header
+      .logo > a
+        width: 160px
+
+    .dashboard
+      top: -25px
+
+      > .user
+        .sign_in
+          display: block
+          color: #fff
+          width: 45px
+          margin-left: auto
+          background: transparent image_url('public/new_design/sign_in.png') no-repeat right center
+
+        .user_navigation
+          position: relative
+          left: auto
+          top: 23px
+          width: 150px
+
+          .my_action
+            p,
+            .actions a
+              font-size: 12px
+
+            p.my_new_action
+              padding: 2px 8px 2px
+              background-position: 135px center
+
+      &.dashboard-signed-in
+        top: -35px
+        padding-top: 5px
+
+        span.messages
+          display: inline-block
+          margin-top: 0
+
+          > a
+            &.new.new,
+            &.empty
+              padding-top: 1px
+              background: none
+              padding-right: 0
+              color: #fff
+              font-size: 14px
+              animation-duration: 1.8s
+
+            &:after
+              content: '\f003'
+              font-family: FontAwesome
+              padding-left: 5px
+
+        .user-dropdown-menu
+          display: inline-block
+          position: relative
+          height: 28px
+
+          &:after
+            content: '\f0d7'
+            font-family: FontAwesome
+            color: #fff
+            position: absolute
+            font-size: 12px
+            right: 8px
+            top: 4px
+
+          a.user_name
+            color: #fff
+            padding-left: 5px
+            padding-right: 20px
+            margin-top: 3px
+
+            &:hover
+              text-decoration: none
+
+          > ul
+            position: absolute
+            padding: 10px 0 5px
+            right: 0
+            top: 28px
+            min-width: 145px
+            display: none
+            background-color: #fff
+            z-index: 1000
+            +transition(all .3s)
+            +box-shadow(0 6px 12px rgba(0, 0, 0, 0.175))
+
+            li
+              padding: 0 10px 8px 15px
+              white-space: nowrap
+              text-align: left
+
+              > a.sign_out
+                border: 0
+                padding-left: 0
+                margin-left: 0
+
+          &:hover
+            > ul
+              display: block
+
+        .user_navigation
+          float: right
+
+    .weather_wrapper
+      left: 165px
+      top: 10px

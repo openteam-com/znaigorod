@@ -1,82 +1,76 @@
-<div class='header_wrapper'>
+<div class='header_wrapper header-wrapper-new'>
+  <%= render :partial => 'commons/public_menu' %>
+
   <div class='header'>
     <div class='logo'><a href='/'><%= t("meta.#{Settings['app.city']}.default.title") %></a></div>
-    <div class="<%= Settings['app.city'] %>">
-      <div class='select_menu'>
-        <span>
-          <%= current_city_ru %>
-        </span>
-        <ul>
-          <li>
-            <% if current_city == 'tomsk' %>
-              <% if request.original_fullpath.split('/').include?('afisha') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/afisha' %>
-              <% elsif request.original_fullpath.split('/').include?('discounts') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/discounts' %>
-              <% elsif request.original_fullpath.split('/').include?('organizations') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/organizations' %>
-              <% elsif request.original_fullpath.split('/').include?('reviews') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/reviews' %>
-              <% else %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru' %>
-              <% end %>
-            <% else %>
-              <% if request.original_fullpath.split('/').include?('afisha') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/afisha' %>
-              <% elsif request.original_fullpath.split('/').include?('discounts') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/discounts' %>
-              <% elsif request.original_fullpath.split('/').include?('organizations') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/organizations' %>
-              <% elsif request.original_fullpath.split('/').include?('reviews') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/reviews' %>
-              <% else %>
-                <%= link_to 'Томск', 'http://znaigorod.ru' %>
-              <% end %>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- weather -->
-    <% begin %>
-      <% cache("weather", expires_in: 1.hour) do %>
+    <% if request.path == '/' %>
+      <!-- weather -->
+      <% begin %>
+        <% cache("weather", expires_in: 1.hour) do %>
+          <div class="weather_wrapper weather-<%= Settings['app.city'] %>">
+            <div class="weather-icon <%= weather['condition'] %>">
+              <%= link_to weather_info[:url], :target => :_blank, :alt => weather_info[:alt], :title => weather_info[:title] do %>
+                <div class="weather-temperature">
+                  <%= weather['temperature'] %>°
+                </div>
+                <div class="weather-wind-speed">
+                  Ветер: <%= weather['wind_speed'] %> м/с
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% rescue %>
         <div class="weather_wrapper weather-<%= Settings['app.city'] %>">
-          <div class="weather-icon <%= weather['condition'] %>">
+          <div class="weather-icon clear">
             <%= link_to weather_info[:url], :target => :_blank, :alt => weather_info[:alt], :title => weather_info[:title] do %>
               <div class="weather-temperature">
-                <%= weather['temperature'] %>°
+                +20°
               </div>
               <div class="weather-wind-speed">
-                Ветер: <%= weather['wind_speed'] %> м/с
+                Ветер: 5 м/с
               </div>
             <% end %>
           </div>
         </div>
       <% end %>
-    <% rescue %>
-      <div class="weather_wrapper weather-<%= Settings['app.city'] %>">
-        <div class="weather-icon clear">
-          <%= link_to weather_info[:url], :target => :_blank, :alt => weather_info[:alt], :title => weather_info[:title] do %>
-            <div class="weather-temperature">
-              +20°
-            </div>
-            <div class="weather-wind-speed">
-              Ветер: 5 м/с
-            </div>
-          <% end %>
-        </div>
-      </div>
+      <!-- /weather -->
     <% end %>
-    <!-- /weather -->
 
     <span class='map_coords' data-latitude="<%= Settings['app.coords.latitude'] %>" data-longitude="<%= Settings['app.coords.longitude'] %>"></span>
 
     <!--noindex-->
-    <div class='dashboard'>
+    <div class='dashboard <%= 'dashboard-signed-in' if user_signed_in? %>'>
       <% if user_signed_in? %>
-        <div class='user'>
+        <span class='messages'>
+          <% if !current_user.account.private_messages.unread.any? %>
+            <%= link_to "+#{current_user.account.messages.unread.count}", my_dialogs_path, class: :new, title: 'Есть новые сообщения' %>
+          <% elsif current_user.account.notification_messages.unread.any? %>
+            <%= link_to "+#{current_user.account.messages.unread.count}", my_notification_messages_path, class: :new, title: 'Есть новые сообщения' %>
+          <% else %>
+            <%= link_to current_user.account.messages.count, my_root_path, class: :empty, title: 'Нет новых сообщений' %>
+          <% end %>
+        </span>
 
+        <div class='user user-dropdown-menu'>
+          <span class='user-dropdown-menu-person'>
+            <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
+              <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
+            <% end %>
+
+            <%= link_to(current_user.account, my_root_path, class: :user_name) %>
+          </span>
+
+          <ul>
+            <li>
+              <%= link_to('Личный кабинет', my_root_path) %>
+            </li>
+
+            <li><%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %></li>
+          </ul>
+        </div>
+        <div class='user'>
           <div class='user_navigation'>
             <div class='my_action'>
               <p class='my_new_action'>
@@ -91,30 +85,14 @@
               </div>
             </div>
           </div>
-
-          <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
-            <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
-          <% end %>
-
-          <%= link_to(current_user.account, my_root_path, class: :user_name) %>
-          <%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %>
         </div>
-        <p class='messages'>
-          <% if current_user.account.private_messages.unread.any? %>
-            <%= link_to "+#{current_user.account.messages.unread.count}", my_dialogs_path, class: :new, title: 'Есть новые сообщения' %>
-          <% elsif current_user.account.notification_messages.unread.any? %>
-            <%= link_to "+#{current_user.account.messages.unread.count}", my_notification_messages_path, class: :new, title: 'Есть новые сообщения' %>
-          <% else %>
-            <%= link_to current_user.account.messages.count, my_root_path, class: :empty, title: 'Нет новых сообщений' %>
-          <% end %>
-          <%= link_to('Личный кабинет', my_root_path) %>
-        </p>
       <% else %>
         <div class="user">
+          <span class='sign_in'>Войти:</span>
           <div class='user_navigation'>
             <div class='my_action'>
               <p class='my_new_action'>
-                Добавить свое
+                Добавить своё
               </p>
 
               <div class='actions'>
@@ -125,13 +103,10 @@
             </div>
           </div>
         </div>
-        <span class='sign_in'>Войти:</span>
-        <%= render :partial => 'commons/social_auth' %>
       <% end %>
     </div>
     <!--/noindex-->
 
-    <%= render :partial => 'commons/public_menu' %>
   </div>
 </div>
 
