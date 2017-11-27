@@ -7,7 +7,7 @@ $main_menu_margin_top: 78px
     height: 77px
     margin: 0 auto 0 205px
 
-    > ul
+    .main-menu-wrapper > ul
       margin-top: $main_menu_margin_top
       float: left
       width: 795px
@@ -134,7 +134,6 @@ $main_menu_margin_top: 78px
           right: 0
 
     .search_form
-      float: left
       width: 190px
       margin-top: $main_menu_margin_top
       margin-right: 10px
@@ -197,116 +196,4 @@ $main_menu_margin_top: 78px
 
 .footer .menu #main_menu_23-february
   display: none
-
-// New styles for main menu
-.main_menu
-  $menu-font-size: 12px
-  $menu-link-color-hover: #fc6700
-  $menu-bg-color: #ff6600
-  $menu-bg-color-active: #fff
-
-  &.main-menu-orange
-    margin: 0
-    height: 35px
-    background-color: $menu-bg-color
-
-    > ul
-      margin-top: 1px
-      height: 75%
-
-      li
-        background-color: inherit
-        text-transform: uppercase
-
-        &:hover
-          > a
-            background-color: $menu-bg-color-active
-            color: $menu-link-color-hover
-
-            &.selected
-              background-color: $menu-bg-color-active
-              color: $menu-link-color-hover
-
-          > ul
-            background-color: $menu-bg-color-active
-            +box-shadow(0 6px 12px rgba(0, 0, 0, 0.175))
-            top: 33px
-            left: 0
-
-            > li
-              text-transform: none
-
-              > a
-                line-height: 20px
-
-              > ul
-                left: 234px !important
-
-        &#main_menu_organizations
-          ul > li
-            &:hover
-              > a
-                &:before
-                  content: '\f054'
-                  height: 20px
-                  font-family: FontAwesome
-                  color: $menu-link-color-hover
-                  background: $menu-bg-color-active
-                  top: 5px
-                  right: -16px
-                  padding-top: 2px
-
-              > ul
-                > li
-                  &:hover
-                    > a:before
-                      display: none
-
-        > a
-          font-size: $menu-font-size
-          height: inherit
-          color: #fff
-          line-height: 27px
-          margin-right: 0
-          padding: 3px 20px
-
-          &.selected
-            color: $menu-link-color-hover
-            background-color: $menu-bg-color-active
-
-    .city-selector
-      height: 35px
-      width: 175px
-      position: relative
-      display: inline-block
-      float: left
-      top: 1px
-      left: 5px
-      padding-top: 6px
-      z-index: 1000
-
-      > .select_menu
-        &:before,
-        > span
-          color: #fff
-          border-color: #fff
-
-        > ul
-          background-color: #fff
-          +box-shadow(0 6px 12px rgba(0, 0, 0, 0.175))
-          border: 0
-
-    .search_form
-      margin-top: 93px
-      margin-left: 30px
-
-      input
-        &.search
-          border-bottom: 2px solid #e8e8e8
-
-        &.submit
-          background-position: 8px 7px
-
-          &:hover
-            background-position: 8px -57px
 

@@ -1,0 +1,11 @@
+// Paddings And Margins generator
+$direction-list: top right bottom left
+
+@for $i from 0 through 60
+  @each $direction in $direction-list
+    .margin-#{$direction}-#{$i}
+      margin-#{$direction}: unquote("#{$i}px") !important
+
+    .padding-#{$direction}-#{$i}
+      padding-#{$direction}: unquote("#{$i}px") !important
+

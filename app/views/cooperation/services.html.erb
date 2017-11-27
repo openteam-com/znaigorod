@@ -10,7 +10,9 @@
 
 <div class='cooperation'>
 
-  <h1><%= page_meta ? page_meta.header.squish.html_safe :  'Услуги и цены ЗнайГород' %></h1>
+  <% content_for :header_page_title do %>
+    <h1><%= page_meta ? page_meta.header.squish.html_safe :  'Услуги и цены ЗнайГород' %></h1>
+  <% end %>
 
   <div class='service_left'>
     <div class='service_payment_wrapper'>

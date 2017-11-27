@@ -33,6 +33,7 @@ group :default do
   gem 'enumerize'
   gem 'esp-ckeditor'
   gem 'fastimage'
+  gem 'compass-flexbox'
   gem 'friendly_id'
   gem 'geoip'
   gem 'gilenson'

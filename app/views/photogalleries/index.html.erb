@@ -6,10 +6,16 @@
 
 <div class="presentation_filters photogalleries">
   <div class="filter_header">
-    <% if page_meta %>
-      <h1><%= page_meta.header.squish.html_safe %></h1>
+    <% if request.path == '/photogalleries' %>
+      <% content_for :header_page_title do %>
+        <h1><%= page_meta ? page_meta.header.squish.html_safe : t("meta.#{Settings['app.city']}.photogalleries.page_header") %></h1>
+      <% end %>
     <% else %>
-      <h1><%= t("meta.#{Settings['app.city']}.photogalleries.page_header") %></h1>
+      <% if page_meta %>
+        <h1><%= page_meta.header.squish.html_safe %></h1>
+      <% else %>
+        <h1><%= t("meta.#{Settings['app.city']}.photogalleries.page_header") %></h1>
+      <% end %>
     <% end %>
   </div>
 </div>

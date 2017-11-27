@@ -1,48 +1,52 @@
-<div class='main_menu main-menu-orange'>
-  <span class="header">
-    <div class="city-selector <%= Settings['app.city'] %>">
-      <div class='select_menu'>
-        <span>
-          <%= current_city_ru %>
-        </span>
-        <ul>
-          <li>
-            <% if current_city == 'tomsk' %>
-              <% if request.original_fullpath.split('/').include?('afisha') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/afisha' %>
-              <% elsif request.original_fullpath.split('/').include?('discounts') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/discounts' %>
-              <% elsif request.original_fullpath.split('/').include?('organizations') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/organizations' %>
-              <% elsif request.original_fullpath.split('/').include?('reviews') %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/reviews' %>
+<div class='main_menu main-menu-orange <%= Settings['app.city'] %>'>
+  <div class='main-menu-inner-wrapper'>
+    <span class="header">
+      <div class="city-selector <%= Settings['app.city'] %>">
+        <div class='select_menu'>
+          <span>
+            <%= current_city_ru %>
+          </span>
+          <ul>
+            <li>
+              <% if current_city == 'tomsk' %>
+                <% if request.original_fullpath.split('/').include?('afisha') %>
+                  <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/afisha' %>
+                <% elsif request.original_fullpath.split('/').include?('discounts') %>
+                  <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/discounts' %>
+                <% elsif request.original_fullpath.split('/').include?('organizations') %>
+                  <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/organizations' %>
+                <% elsif request.original_fullpath.split('/').include?('reviews') %>
+                  <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru/reviews' %>
+                <% else %>
+                  <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru' %>
+                <% end %>
               <% else %>
-                <%= link_to 'Севастополь', 'http://sevastopol.znaigorod.ru' %>
+                <% if request.original_fullpath.split('/').include?('afisha') %>
+                  <%= link_to 'Томск', 'http://znaigorod.ru/afisha' %>
+                <% elsif request.original_fullpath.split('/').include?('discounts') %>
+                  <%= link_to 'Томск', 'http://znaigorod.ru/discounts' %>
+                <% elsif request.original_fullpath.split('/').include?('organizations') %>
+                  <%= link_to 'Томск', 'http://znaigorod.ru/organizations' %>
+                <% elsif request.original_fullpath.split('/').include?('reviews') %>
+                  <%= link_to 'Томск', 'http://znaigorod.ru/reviews' %>
+                <% else %>
+                  <%= link_to 'Томск', 'http://znaigorod.ru' %>
+                <% end %>
               <% end %>
-            <% else %>
-              <% if request.original_fullpath.split('/').include?('afisha') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/afisha' %>
-              <% elsif request.original_fullpath.split('/').include?('discounts') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/discounts' %>
-              <% elsif request.original_fullpath.split('/').include?('organizations') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/organizations' %>
-              <% elsif request.original_fullpath.split('/').include?('reviews') %>
-                <%= link_to 'Томск', 'http://znaigorod.ru/reviews' %>
-              <% else %>
-                <%= link_to 'Томск', 'http://znaigorod.ru' %>
-              <% end %>
-            <% end %>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </span>
+    </span>
 
-  <%= render_navigation :context => "public_#{Settings['app.city']}", :expand_all => true, :renderer => :list_with_noindex %>
-  <div class='search_form<%= ' selected' if params[:controller] == 'search' %>'>
-    <%= form_tag search_path, :method => :get do %>
-      <%= text_field_tag 'q', params[:q], placeholder: 'Поиск', class: 'search' %>
-      <%= submit_tag('', class: 'submit', name: nil, valule: nil) %>
-    <% end %>
+    <div class='main-menu-wrapper'>
+      <%= render_navigation :context => "public_#{Settings['app.city']}", :expand_all => true, :renderer => :list_with_noindex %>
+    </div>
+    <div class='search_form<%= ' selected' if params[:controller] == 'search' %>'>
+      <%= form_tag search_path, :method => :get do %>
+        <%= text_field_tag 'q', params[:q], placeholder: 'Поиск', class: 'search' %>
+        <%= submit_tag('', class: 'submit', name: nil, valule: nil) %>
+      <% end %>
+    </div>
   </div>
 </div>

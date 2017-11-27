@@ -1,11 +1,17 @@
-<div class="question_left">
+<div class="question_left padding-top-20">
   <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" %>
 
   <div class='filter_header'>
-    <% if page_meta %>
-      <h1><%= page_meta.header.squish.html_safe %></h1>
+    <% if request.path == '/questions' %>
+      <% content_for :header_page_title do %>
+        <h1><%= page_meta ? page_meta.header.squish.html_safe : t("meta.#{Settings['app.city']}.reviews.page_header") %></h1>
+      <% end %>
     <% else %>
-      <h1><%= t("meta.#{Settings['app.city']}.reviews.page_header") %></h1>
+      <% if page_meta %>
+        <h1><%= page_meta.header.squish.html_safe %></h1>
+      <% else %>
+        <h1><%= t("meta.#{Settings['app.city']}.reviews.page_header") %></h1>
+      <% end %>
     <% end %>
   </div>
 
