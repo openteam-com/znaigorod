@@ -1,7 +1,24 @@
-<div class='filters_wrapper <%= auto_content_class %>'>
+<div class='<%= auto_content_class %> grayline-navigation'>
+  <div class='filters'>
+    <div class='by_kind'>
+      <ul>
+        <% @presenter.categories_links.each do |category_link| %>
+          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'>
+            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
+              <%= content_tag :span,  category_link[:title], class: :name %>
+              <%#= content_tag :span, category_link[:count], class: :count  %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class='filters-by-date-wrapper'>
   <div class='filters afisha'>
     <div class='by_date'>
       <ul>
+        <li>Когда: </li>
         <% @presenter.periods_links.each do |period_link| %>
           <li<%= " class=selected" if period_link[:selected] %>>
             <%= link_to period_link[:title],
@@ -20,18 +37,4 @@
     </div>
   </div>
 
-  <div class='filters afisha'>
-    <div class='by_kind'>
-      <ul>
-        <% @presenter.categories_links.each do |category_link| %>
-          <li class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'>
-            <%= link_to send(category_link[:url], category_link[:parameters]) do %>
-              <%= content_tag :span,  category_link[:title], class: :name %>
-              <%= content_tag :span, category_link[:count], class: :count  %>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
 </div>

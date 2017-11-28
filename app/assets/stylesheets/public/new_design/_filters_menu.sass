@@ -1,0 +1,80 @@
+@import 'flexbox'
+
+$navigation-background-color: #e8e8e8
+$selected-link-bg-color: #ff6600
+
+.grayline-navigation
+  background-color: $navigation-background-color
+
+  .filters
+    max-width: 1200px
+    margin: 0 auto
+
+    .by_kind
+      margin: 0
+
+      ul
+        +display-flex
+        +justify-content(flex-start)
+
+        li
+          float: none
+          width: auto
+
+          a
+            padding: 10px 16px
+            text-transform: uppercase
+
+          &.selected,
+          &:hover
+            a
+              background-color: $selected-link-bg-color
+
+              > span
+                color: #fff
+
+          &:last-child
+            > a
+              padding: 10px 19px
+
+.filters-by-date-wrapper
+  padding-top: 20px
+  background-color: #fff
+
+  .filters
+    max-width: 1200px
+    margin: 0 auto
+
+    .by_date
+      ul
+        li
+          display: inline-block
+          border-right: 2px solid #e8e8e8
+          margin-right: -6px
+          padding: 3px 15px
+
+          &:nth-child(2)
+            +border-top-left-radius(15px)
+            +border-bottom-left-radius(15px)
+
+          &:nth-last-child(2)
+            +border-top-right-radius(15px)
+            +border-bottom-right-radius(15px)
+
+          &:last-child,
+          &:first-child
+            border: 0
+
+          &.selected
+            background-color: $selected-link-bg-color
+            border-color: $selected-link-bg-color
+
+            > a
+              color: #fff
+
+            + li
+              border-left-color: $selected-link-bg-color
+
+          a
+            color: #000
+            font-size: 12px
