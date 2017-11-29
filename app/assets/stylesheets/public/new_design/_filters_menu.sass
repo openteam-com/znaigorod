@@ -18,11 +18,12 @@ $selected-link-bg-color: #ff6600
         +justify-content(flex-start)
 
         li
+          position: relative
           float: none
           width: auto
 
           a
-            padding: 10px 16px
+            padding: 10px 16.6px
             text-transform: uppercase
 
           &.selected,
@@ -32,10 +33,6 @@ $selected-link-bg-color: #ff6600
 
               > span
                 color: #fff
-
-          &:last-child
-            > a
-              padding: 10px 19px
 
 .filters-by-date-wrapper
   padding-top: 20px
@@ -49,8 +46,9 @@ $selected-link-bg-color: #ff6600
       ul
         li
           display: inline-block
-          border-right: 2px solid #e8e8e8
-          margin-right: -6px
+          border: 2px solid #e8e8e8
+          border-right: 0
+          margin-right: -5px
           padding: 3px 15px
 
           &:nth-child(2)
@@ -60,6 +58,7 @@ $selected-link-bg-color: #ff6600
           &:nth-last-child(2)
             +border-top-right-radius(15px)
             +border-bottom-right-radius(15px)
+            border-right: 2px solid #e8e8e8
 
           &:last-child,
           &:first-child

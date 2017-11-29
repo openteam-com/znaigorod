@@ -27,14 +27,5 @@
         <% end %>
       </ul>
     </div>
-    <div class='by_tickets'>
-      <ul>
-        <li<%= " class=selected" if @presenter.has_tickets %>>
-          <a href='<%= send((@presenter.has_tickets ? @presenter.url.gsub("_with_tickets_", "_") : @presenter.url.sub("_", "_with_tickets_")),
-                            @presenter.url_parameters) %>'>Только с билетами</a>
-        </li>
-      </ul>
-    </div>
   </div>
-
 </div>
