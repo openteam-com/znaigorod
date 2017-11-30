@@ -36,7 +36,7 @@
 
     true
 
-  cal = $('<input id="ui-calendar" type="text" />').appendTo('body').datepicker
+  cal = $('<input id="ui-calendar" class="afishas-datepicker" type="text" />').appendTo('body').datepicker
     showButtonPanel: true
     dateFormat: 'yy-mm-dd'
     beforeShow: (input, inst) ->

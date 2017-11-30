@@ -1,0 +1,57 @@
+.afishas-datepicker
+  + .ui-datepicker
+    .ui-datepicker-header
+      background: #ff6600
+
+      .ui-datepicker-next,
+      .ui-datepicker-prev
+        background: #ff6600
+
+        &:before,
+        &:after
+          position: absolute
+          font-family: FontAwesome
+          +transition(all .5s)
+          +opacity(.8)
+          color: #fff
+          margin: auto
+          top: 3px
+
+        &:hover
+          border: 0
+          color: #fff
+          cursor: pointer
+
+        > span
+          background: none
+
+      .ui-datepicker-prev
+        &:before
+          content: '\f053'
+          left: 5px
+
+        &:hover
+          left: 2px
+          top: 2px
+
+          &:before
+            +opacity(1)
+
+      .ui-datepicker-next
+        &:after
+          content: '\f054'
+          left: 5px
+
+        &:hover
+          right: 2px
+          top: 2px
+
+          &:after
+            +opacity(1)
+
+    .ui-datepicker-calendar
+      tr td a
+        &.ui-state-default
+          border: 0
+          padding: 5px
+          text-align: center

@@ -25,6 +25,11 @@ $selected-link-bg-color: #ff6600
           a
             padding: 10px 16.6px
             text-transform: uppercase
+            margin-bottom: 0
+
+            &:active,
+            &:focus
+              margin-top: 0
 
           &.selected,
           &:hover
@@ -37,6 +42,8 @@ $selected-link-bg-color: #ff6600
 .filters-by-date-wrapper
   padding-top: 20px
   background-color: #fff
+  border-bottom: 1px solid #e5e5e5
+  padding-bottom: 20px
 
   .filters
     max-width: 1200px
@@ -50,6 +57,7 @@ $selected-link-bg-color: #ff6600
           border-right: 0
           margin-right: -5px
           padding: 3px 15px
+          font-size: 12px
 
           &:nth-child(2)
             +border-top-left-radius(15px)
@@ -64,6 +72,24 @@ $selected-link-bg-color: #ff6600
           &:first-child
             border: 0
 
+            a
+              &.ui-datepicker-next
+                background-color: #ff6600
+
+          &:last-child
+            position: relative
+            padding-left: 50px
+
+            &:before
+              content: '\f073'
+              position: absolute
+              font-family: FontAwesome
+              font-size: 18px
+              margin: auto
+              left: 25px
+              top: -1px
+              bottom: 0
+
           &.selected
             background-color: $selected-link-bg-color
             border-color: $selected-link-bg-color
@@ -76,4 +102,3 @@ $selected-link-bg-color: #ff6600
 
           a
             color: #000
-            font-size: 12px
