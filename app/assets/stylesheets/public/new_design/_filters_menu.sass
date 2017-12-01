@@ -10,7 +10,8 @@ $selected-link-bg-color: #ff6600
     max-width: 1200px
     margin: 0 auto
 
-    .by_kind
+    .by_kind,
+    .by_category
       margin: 0
 
       ul
@@ -28,6 +29,7 @@ $selected-link-bg-color: #ff6600
             padding: 10px 16px
             text-transform: uppercase
             margin-bottom: 0
+            background: none
 
             &:active,
             &:focus
@@ -49,6 +51,11 @@ $selected-link-bg-color: #ff6600
                 background-color: $selected-link-bg-color !important
                 color: #fff
 
+            &.selected
+              > a
+                padding: 10px 16px
+                +box-shadow(none)
+
 .filters-by-wrapper
   position: relative
   padding-top: 20px
@@ -65,8 +72,9 @@ $selected-link-bg-color: #ff6600
 
     .more
       top: 0 !important
-      left: 57px !important
-      min-width: 123px
+      min-width: 130px
+      right: 0
+      left: auto !important
       +box-shadow(0 6px 12px rgba(0, 0, 0, 0.175))
 
       li
