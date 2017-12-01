@@ -14,10 +14,10 @@
     </div>
   </div>
 </div>
-<div class='filters-by-date-wrapper'>
+<div class='filters-by-wrapper'>
   <div class='filters afisha'>
     <div class='by_date'>
-      <ul>
+      <ul class='with-datepicker'>
         <li>Когда: </li>
         <% @presenter.periods_links.each do |period_link| %>
           <li<%= " class=selected" if period_link[:selected] %>>

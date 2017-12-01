@@ -1,16 +1,4 @@
-<div class="filters_wrapper">
-  <div class="filters discount">
-    <div class="by_type">
-      <ul>
-        <% @presenter.type_filter.links.each do |link| %>
-          <li class="<%= link.klass %>">
-            <%= link_to link.title, link.path %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
+<div class="grayline-navigation gray-navigation-discounts">
   <div class="filters discount">
     <div class="by_kind">
       <ul>
@@ -18,7 +6,6 @@
           <li class="<%= link.klass %>">
             <%= link_to link.path do %>
               <span class="name"><%= link.title %></span>
-              <span class="count"><%= link.results_count %></span>
             <% end %>
           </li>
         <% end %>
@@ -29,22 +16,35 @@
         <% end %>
       </ul>
     </div>
+  </div>
+</div>
 
-    <div class="discount_more">
-      <%= render :partial => 'discounts/discount_help' %>
+<div class='filters-by-wrapper'>
+  <div class="filters discount">
+    <div class="by_type">
+      <ul class='clean-filters-list'>
+        <li>Тип: </li>
+        <% @presenter.type_filter.links.each do |link| %>
+          <li class="<%= link.klass %>">
+            <%= link_to link.title, link.path %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
   <% if @presenter.kind_filter.links.count > 8 %>
-    <ul class="more">
-      <% @presenter.kind_filter.links[8..@presenter.kind_filter.links.count].each do |link| %>
-        <li class="<%= link.klass %>">
-          <%= link_to link.path do %>
-            <span class="name"><%= link.title %></span>
-            <span class="count"><%= link.results_count %></span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <span class='filters_wrapper'>
+      <ul class="more">
+        <% @presenter.kind_filter.links[8..@presenter.kind_filter.links.count].each do |link| %>
+          <li class="<%= link.klass %>">
+            <%= link_to link.path do %>
+              <span class="name"><%= link.title %></span>
+              <span class="count"><%= link.results_count %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </span>
   <% end %>
 </div>

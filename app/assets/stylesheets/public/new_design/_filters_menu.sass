@@ -15,15 +15,17 @@ $selected-link-bg-color: #ff6600
 
       ul
         +display-flex
-        +justify-content(flex-start)
+        +justify-content(space-between)
+        +flex-wrap(nowrap)
 
         li
           position: relative
           float: none
           width: auto
+          +flex(1 0 auto)
 
           a
-            padding: 10px 16.6px
+            padding: 10px 16px
             text-transform: uppercase
             margin-bottom: 0
 
@@ -33,23 +35,52 @@ $selected-link-bg-color: #ff6600
 
           &.selected,
           &:hover
+            background-color: $selected-link-bg-color
+
             a
-              background-color: $selected-link-bg-color
+              color: #fff
 
               > span
                 color: #fff
 
-.filters-by-date-wrapper
+          &.more_link
+            &:hover
+              a
+                background-color: $selected-link-bg-color !important
+                color: #fff
+
+.filters-by-wrapper
+  position: relative
   padding-top: 20px
   background-color: #fff
   border-bottom: 1px solid #e5e5e5
   padding-bottom: 20px
 
+  .filters_wrapper
+    position: absolute
+    right: 0
+    top: 0
+    width: 200px
+    border: 0
+
+    .more
+      top: 0 !important
+      left: 57px !important
+      min-width: 123px
+      +box-shadow(0 6px 12px rgba(0, 0, 0, 0.175))
+
+      li
+        margin-bottom: 3px
+
+        &:last-child
+          margin-bottom: 0
+
   .filters
     max-width: 1200px
     margin: 0 auto
 
-    .by_date
+    .by_date,
+    .by_type
       ul
         li
           display: inline-block
@@ -63,19 +94,31 @@ $selected-link-bg-color: #ff6600
             +border-top-left-radius(15px)
             +border-bottom-left-radius(15px)
 
-          &:nth-last-child(2)
-            +border-top-right-radius(15px)
-            +border-bottom-right-radius(15px)
-            border-right: 2px solid #e8e8e8
-
           &:last-child,
           &:first-child
             border: 0
 
-            a
-              &.ui-datepicker-next
-                background-color: #ff6600
+          &.selected
+            background-color: $selected-link-bg-color
+            border-color: $selected-link-bg-color
 
+            > a
+              color: #fff
+
+              &:hover
+                color: #fff
+
+            + li
+              border-left-color: $selected-link-bg-color !important
+
+          a
+            color: #000
+
+            &:hover
+              color: #ff6600
+              text-decoration: none
+
+        &.with-datepicker li
           &:last-child
             position: relative
             padding-left: 50px
@@ -90,15 +133,35 @@ $selected-link-bg-color: #ff6600
               top: -1px
               bottom: 0
 
-          &.selected
-            background-color: $selected-link-bg-color
-            border-color: $selected-link-bg-color
+          &:nth-last-child(2)
+            +border-top-right-radius(15px)
+            +border-bottom-right-radius(15px)
+            border-right: 2px solid #e8e8e8
 
-            > a
-              color: #fff
-
-            + li
-              border-left-color: $selected-link-bg-color
+        &.clean-filters-list li
+          &:last-child
+            +border-top-right-radius(15px)
+            +border-bottom-right-radius(15px)
+            border: 2px solid #e8e8e8
 
           a
-            color: #000
+            &:active,
+            &:focus
+              padding: 0
+
+    .by_type
+      float: none
+
+      ul > li
+        float: none
+        margin-left: 0
+
+        a
+          border: 0
+          +box-shadow(none)
+          background-color: transparent
+          padding: 0
+
+        &:last-child
+          &.selected
+            border-color: $selected-link-bg-color
