@@ -9,3 +9,27 @@ $direction-list: top right bottom left
     .padding-#{$direction}-#{$i}
       padding-#{$direction}: unquote("#{$i}px") !important
 
+.margin-left-auto
+  margin-left: auto !important
+
+// Widths
+@for $i from 0 through 200
+  .max-width-#{$i}
+    max-width: unquote("#{$i}px")
+
+// Buttons
+.btn-custom
+  display: block
+  padding: 1px 8px 2px
+  font-size: 11px
+  height: 26px
+  line-height: 26px
+  outline: none
+  width: auto
+  white-space: nowrap
+
+  &.btn-custom-orange
+    color: white
+    background: #ff5700
+    box-shadow: 0px 2px 0px 0px #d15300
+    border: 1px solid #ff6600

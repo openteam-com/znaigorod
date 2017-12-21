@@ -1,4 +1,4 @@
-<div class="filters_wrapper review_filters">
+<div class="grayline-navigation gray-navigation-questions">
   <div class="filters reviews">
     <div class="by_category">
       <ul>
@@ -6,11 +6,9 @@
           <li class="<%= link.klass %>">
             <%= link_to link.path do %>
               <span class="name"><%= link.title %></span>
-              <span class="count"><%= link.results_count %></span>
             <% end %>
           </li>
         <% end %>
-
         <% if @presenter.category_filter.links.count > 8 %>
           <li class="more_link <%= 'selected' if @presenter.category_filter.more? %>">
             <a href='#'>&darr; Ещё вопросы</a>
@@ -19,21 +17,23 @@
       </ul>
     </div>
   </div>
+</div>
 
+<div class='filters-by-wrapper'>
   <% if @presenter.category_filter.links.count > 8 %>
-    <ul class="more">
-      <% @presenter.category_filter.links[8..@presenter.category_filter.links.count].each do |link| %>
-        <li class="<%= link.klass %>">
-          <%= link_to link.path do %>
-            <span class="name"><%= link.title %></span>
-            <span class="count"><%= link.results_count %></span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <span class='filters_wrapper'>
+      <ul class="more">
+        <% @presenter.category_filter.links[8..@presenter.category_filter.links.count].each do |link| %>
+          <li class="<%= link.klass %>">
+            <%= link_to link.path do %>
+              <span class="name"><%= link.title %></span>
+              <span class="count"><%= link.results_count %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </span>
   <% end %>
 
-  <div class="more_wrapper_toggler without_help">
-    <%= link_to 'Задать вопрос', new_my_question_path, :class => 'button' %>
-  </div>
+  <%= link_to 'Задать вопрос', new_my_question_path, :class => 'btn-custom btn-custom-orange margin-left-auto max-width-82' %>
 </div>

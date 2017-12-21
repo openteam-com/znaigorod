@@ -1,4 +1,5 @@
 @import 'flexbox'
+@import 'public/common_elements'
 
 $navigation-background-color: #e8e8e8
 $selected-link-bg-color: #ff6600
@@ -145,6 +146,9 @@ $selected-link-bg-color: #ff6600
             +border-top-right-radius(15px)
             +border-bottom-right-radius(15px)
             border-right: 2px solid #e8e8e8
+
+            &.selected
+              border-color: $selected-link-bg-color
 
         &.clean-filters-list li
           &:last-child
