@@ -1,12 +1,11 @@
-<div class='order_by'>
-  <p>По:</p>
-  <ul>
+<div class='presentation-filters-wrapper'>
+  <span class='label'>Сортировать по:</span>
+  <select onchange="location = this.value">
     <% @presenter.sortings_links.each do |sortings_link| %>
-      <li<%= " class=selected" if sortings_link[:selected] %>>
-        <%= link_to sortings_link[:title],
-          params.merge(sortings_link[:parameters]),
-          :class => sortings_link[:parameters][:order_by] %>
-      </li>
+      <option class="<%= sortings_link[:parameters][:order_by] %>" value="<%= url_for(params.merge(sortings_link[:parameters])) %>">
+        <%= sortings_link[:title] %>
+      </option>
     <% end %>
-  </ul>
+  </select>
 </div>
+

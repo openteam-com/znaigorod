@@ -35,5 +35,17 @@
     </span>
   <% end %>
 
-  <%= link_to 'Задать вопрос', new_my_question_path, :class => 'btn-custom btn-custom-orange margin-left-auto max-width-82' %>
+  <div class='filters-line'>
+    <%= link_to 'Задать вопрос', new_my_question_path, :class => 'btn-custom btn-custom-orange' %>
+    <div class='presentation-filters-wrapper'>
+      <span class='label'>Сортировать по:</span>
+      <select onchange="location = this.value">
+        <% @presenter.order_by_filter.links.each do |link| %>
+          <option class="<%= link.klass %>" value="<%= link.path %>" <%= request.fullpath == link.path ? 'selected' : '' %>>
+            <%= link.title %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+  </div>
 </div>

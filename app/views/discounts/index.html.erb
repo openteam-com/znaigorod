@@ -25,23 +25,6 @@
   </div>
 
   <div class="filter_and_share">
-    <div class="presentation_filters discounts">
-
-      <!--noindex-->
-      <div class="order_by">
-        <p>По:</p>
-        <ul>
-          <% @presenter.order_by_filter.links.each do |link| %>
-            <li class="<%= link.klass %>">
-              <%= link_to link.title, link.path %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-      <!--/noindex-->
-
-    </div>
-
     <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
   </div>
 

@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class='filters-by-wrapper'>
+<div class='filters-by-wrapper filters-for-discounts'>
   <div class="filters discount">
     <div class="by_type">
       <ul class='clean-filters-list'>
@@ -47,4 +47,17 @@
       </ul>
     </span>
   <% end %>
+
+  <div class='presentation-filters-wrapper'>
+    <!--noindex-->
+    <span class='label'>Сортировать по:</span>
+    <select onchange="location = this.value">
+      <% @presenter.order_by_filter.links.each do |link| %>
+        <option class="<%= link.klass %>" value="<%= link.path %>" <%= request.fullpath == link.path ? 'selected' : '' %>>
+          <%= link.title %>
+        </option>
+      <% end %>
+    </select>
+    <!--/noindex-->
+  </div>
 </div>

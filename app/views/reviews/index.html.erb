@@ -19,25 +19,6 @@
   <%= link_to 'Добавить обзор', add_my_reviews_path, :class => 'button new_review_button' %>
 </div>
 
-<div class="filter_and_share">
-  <div class="presentation_filters reviews">
-
-    <!--noindex-->
-    <div class="order_by">
-      <p>По:</p>
-      <ul>
-        <% @presenter.order_by_filter.links.each do |link| %>
-          <li class="<%= link.klass %>">
-            <%= link_to link.title, link.path %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <!--/noindex-->
-
-  </div>
-</div>
-
 <div class='reviews-paginator js-button-pagination'>
   <ul class='posters js-paginable-list'>
     <%= render :partial => 'reviews/posters', :locals => { :collection => @reviews, :height => '200', :width => '354' } %>

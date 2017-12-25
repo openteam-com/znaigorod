@@ -23,11 +23,6 @@
   </div>
 
   <div class="filter_and_share">
-    <div class='presentation_filters afisha'>
-      <!--noindex-->
-      <%= render :partial => 'commons/presentation_filters' %>
-      <!--/noindex-->
-    </div>
     <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
   </div>
 

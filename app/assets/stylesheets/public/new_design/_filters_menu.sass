@@ -96,7 +96,7 @@ $selected-link-bg-color: #ff6600
           border: 2px solid #e8e8e8
           border-right: 0
           margin-right: -5px
-          padding: 3px 15px
+          padding: 3px 15px 3px 13px
           font-size: 12px
 
           &:nth-child(2)
@@ -131,6 +131,7 @@ $selected-link-bg-color: #ff6600
           &:last-child
             position: relative
             padding-left: 50px
+            margin-left: 5px
 
             &:before
               content: '\f073'
@@ -183,3 +184,77 @@ $selected-link-bg-color: #ff6600
         &:last-child
           &.selected
             border-color: $selected-link-bg-color
+
+.filters-line
+  +display-flex
+  +justify-content(space-between)
+  +align-items(center)
+  padding-right: 10px
+  padding-left: 10px
+
+.presentation-filters-wrapper
+  position: relative
+  display: inline-block
+  font-size: 12px
+  height: 26px
+
+  &:after
+    content: '\f0d7'
+    position: absolute
+    +display-flex
+    +justify-content(center)
+    +align-items(center)
+    font-family: FontAwesome
+    font-size: 14px
+    color: #000
+    right: 0
+    top: 0
+    height: 100%
+    width: 24px
+    padding-left: 1px
+    pointer-events: none
+    background-color: #cdcdcd
+
+  > span
+    margin-right: 5px
+
+  select
+    border: 1px solid #cdcdcd
+    background-color: #fff
+    +appearance(none)
+    min-width: 180px
+    height: 26px
+    text-indent: 8px
+    padding-bottom: 1px
+
+    &:hover,
+    &:active,
+    &:focus
+      outline: none
+
+    option
+      height: 10px
+      text-indent: 8px
+
+.filters-by-wrapper
+  &.filters-for-afisha,
+  &.filters-for-discounts,
+  &.filters-for-reviews
+    +display-flex
+    +justify-content(space-between)
+    +align-items(center)
+    padding: 10px
+
+    .filters
+      margin: 0
+
+      .by_type
+        margin-left: 0
+
+      ul li
+        &:first-child
+          padding-left: 0
+
+  &.filters-for-discounts,
+  &.filters-for-reviews
+    padding: 20px 10px 20px 10px
