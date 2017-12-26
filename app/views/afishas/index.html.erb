@@ -31,10 +31,6 @@
       <div class="filter_and_share">
         <%= render :partial => 'commons/share_this', :locals => { :url => request.url.split('?').first } %>
       </div>
-      <div class='ads-block'>
-        <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '', height: '90' if current_city == 'tomsk' %>
-      </div>
-
     <% else %>
       <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
     <% end %>
