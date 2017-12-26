@@ -1,0 +1,63 @@
+.afishas_index
+  .afisha-index-left-part
+    width: auto
+    float: none
+    padding: 0
+
+    .filter_header
+      border-bottom: 0
+
+  .banner12_contest_wrapper
+    width: 100%
+
+  .ads-block
+    width: 100%
+    padding: 0 10px
+    +box-sizing(border-box)
+
+  .afisha_content
+    .posters
+      +display-flex
+      +flex-flow(row wrap)
+      +justify-content(space-between)
+      padding: 0 10px
+
+      .item
+        width: 214px
+        height: 380px
+        margin: 0 10px 25px 0
+        border: 1px solid #cccccc
+
+        &:nth-child(5n)
+          margin-right: 0
+
+        &.pagination
+          position: absolute
+          bottom: -72px
+
+          a
+            font-size: 14px
+            color: #4d81d5
+            background: #fff
+            border: 0
+            text-align: left
+            text-transform: uppercase
+
+        .image
+          height: 285px
+          width: 210px
+
+        .place
+          margin-top: 6px
+
+    .filter_and_share
+      display: block
+      width: 100%
+      margin-top: -10px
+      margin-bottom: 10px
+      text-align: right
+      height: 40px
+
+  .introduction
+    width: auto
+    margin: 25px 10px 10px

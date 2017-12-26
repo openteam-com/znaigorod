@@ -222,6 +222,7 @@ $selected-link-bg-color: #ff6600
     border: 1px solid #cdcdcd
     background-color: #fff
     +appearance(none)
+    +border-radius(0)
     min-width: 180px
     height: 26px
     text-indent: 8px
@@ -243,7 +244,10 @@ $selected-link-bg-color: #ff6600
     +display-flex
     +justify-content(space-between)
     +align-items(center)
-    padding: 10px
+    padding: 20px 10px
+
+    .presentation_filters
+      margin: 0
 
     .filters
       margin: 0
@@ -255,6 +259,3 @@ $selected-link-bg-color: #ff6600
         &:first-child
           padding-left: 0
 
-  &.filters-for-discounts,
-  &.filters-for-reviews
-    padding: 20px 10px 20px 10px

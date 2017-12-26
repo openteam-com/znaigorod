@@ -11,6 +11,8 @@
 
 <% unless presenter.collection.last_page? || controller_name == 'organizations'%>
   <li class="item pagination">
-    <%= link_to_next_page presenter.paginated_collection, "Еще события (#{presenter.current_count})", :remote => true, :class => 'js-next-page btn btn-block btn-grey btn-lg', :params => params %>
+    <%= link_to_next_page presenter.paginated_collection, "Еще события (#{presenter.current_count})", :remote => true, :class => 'js-next-page', :params => params %>
   </li>
 <% end %>
+
+

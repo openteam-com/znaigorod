@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<div class="afisha_left">
+<div class="afisha_left afisha-index-left-part">
 
   <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" %>
 
@@ -22,25 +22,24 @@
     <% end %>
   </div>
 
-  <div class="filter_and_share">
-    <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
-  </div>
-
   <div class="afisha_content js-button-pagination">
     <% if @presenter.collection.any? %>
       <ul class='posters js-paginable-list'>
         <%= render :partial => 'afishas/afisha_posters', :locals => { :afishas => @decorator, :presenter => @presenter } %>
       </ul>
 
-      <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '886', height: '90' if current_city == 'tomsk' %>
+      <div class="filter_and_share">
+        <%= render :partial => 'commons/share_this', :locals => { :url => request.url.split('?').first } %>
+      </div>
+      <div class='ads-block'>
+        <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '', height: '90' if current_city == 'tomsk' %>
+      </div>
 
-      <% if defined?(@organizations) %>
-        <%= render :partial => 'organizations/promo_block', :locals => { :promoted_clients => @organizations.promoted_clients, :sub_class => 'afisha' } %>
-      <% end %>
     <% else %>
       <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
     <% end %>
   </div>
+
 
   <% unless params_exist? %>
     <% if page_meta %>
@@ -53,8 +52,4 @@
       </div>
     <% end %>
   <% end %>
-</div>
-
-<div class="afisha_right">
-  <%= render :partial => 'commons/promotions' %>
 </div>
