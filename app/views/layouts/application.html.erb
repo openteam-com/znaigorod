@@ -2,6 +2,8 @@
 <html lang='ru'>
   <head prefix='og: http://ogp.me/ns#'>
     <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta name='google-site-verification' content='4WezRNvvwZCOYCxFNt9PKHdon29hbt-V7bMbhZhaMMk' />
     <meta name="yandex-verification" content="80e6d145655b9add" />
     <meta name="rpfe26e092c7954d7c8a1551ff5169c34f" content="46d58b82e71fe375debceed79ad42b29" />
@@ -52,7 +54,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:metrics) %>
   </head>
-  <body class='<%= Settings['app']['city'].downcase %>'>
+  <body class='<%= Settings['app']['city'].downcase %> <%= controller_name %>-with-adaptive-version'>
     <%= yield(:flash_messages) %>
     <%= yield(:content) %>
   </body>
