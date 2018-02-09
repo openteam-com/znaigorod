@@ -4,17 +4,11 @@
   </div>
 
   <% cache('main_page_accounts', :expires_in => 10.minutes) do %>
-    <div class="by_gender">
-      <ul>
-        <% @accounts.gender_links.each do |link| %>
-          <li><%= link_to link[:title], accounts_path(link[:parameters]) %></li>
-        <% end %>
-      </ul>
-    </div>
+    
 
-    <div class="filters_wrapper">
+    <div class="filters_wrapper grayline-navigation">
       <div class="filters account">
-        <div class="by_category">
+        <div class="by_kind">
           <ul>
             <li class="title">
               <div class="text">Ищут компанию:</div>

@@ -3,15 +3,9 @@
 </div>
 
 <% cache('main_page_discounts', :expires_in => 10.minutes) do %>
-  <div class="by_type">
-    <ul>
-      <% @discount_filter.type_filter.links.each do |link| %>
-        <li><%= link_to link.title, link.path %></li>
-      <% end %>
-    </ul>
-  </div>
 
-  <div class="filters_wrapper">
+
+  <div class="filters_wrapper grayline-navigation">
     <div class="filters discount">
       <div class="by_kind">
         <ul>

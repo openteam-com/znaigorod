@@ -1,6 +1,5 @@
 <% cache("main_page_afisha#{afisha.id}", expires: 10.minutes) do %>
   <div class='afisha_item'>
-    <div class='title'><%= afisha.truncated_title_link(30, separator: '') %></div>
     <div class='image'>
       <% if afisha.has_available_tickets? %>
         <% if afisha.has_tickets_for_sale? && afisha.max_tickets_discount > 0 %>
@@ -14,7 +13,7 @@
         <% end %>
       <% end %>
 
-      <%= afisha.poster_with_link(178, 240) %>
+      <%= afisha.poster_with_link(210, 285) %>
 
       <%= content_tag(:div, 'Премьера', class: :ribbon) if afisha.premiere?  %>
 
@@ -43,6 +42,7 @@
       <% end %>
     </div>
 
+    <div class='title'><%= afisha.truncated_title_link(30, separator: '') %></div>
     <div class='place'><%= afisha.afisha_place(:length => 23, :separator => nil) %></div>
     <div class='human_when'><%= afisha.human_when ? afisha.human_when : "&nbsp;".html_safe %></div>
   </div>

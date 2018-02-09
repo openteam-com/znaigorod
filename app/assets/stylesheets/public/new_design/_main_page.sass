@@ -1,0 +1,181 @@
+.main_page_show
+  #vk-group
+    padding: 0 8px
+    padding-bottom: 30px
+
+.organizations_main_page_list,
+.accounts_main_page_list,
+.afisha_main_page_list
+  .grayline-navigation
+    margin-bottom: 20px
+
+.grayline-navigation
+  .filters
+    width: 100% !important
+
+    .by_kind
+      width: 100% !important
+
+.filters_wrapper .filters.organization .by_kind
+  margin-left: 0
+
+  ul li
+    margin-right: 0
+
+.filters_wrapper
+  .filters.organization,
+  .filters.account,
+  .filters.afisha,
+  .filters.discount
+    .by_kind ul li a
+      padding: 10px
+      background-color: transparent
+      +box-shadow(none)
+      line-height: 17px
+
+      &:active
+        padding: 10px
+
+      .count
+        display: none
+
+.organizations_main_page_list .posters li.item_organization
+  margin: 0px 16px 20px 0
+
+  .info
+    border: 1px solid #cccccc !important
+
+.organizations_main_page_list,
+.accounts_main_page_list,
+.afisha_main_page_list,
+.discounts_main_page_list
+  .filters_wrapper
+    background-color: #e8e8e8
+
+.accounts_main_page_list .posters li .item
+  border: 1px solid #cccccc
+  width: 100%
+
+  .image
+    padding: 1px
+
+  .badges
+    height: 1px
+
+.grayline-navigation .filters .by_kind ul .title
+  background-color: white
+
+  &:hover
+    background-color: white
+
+  .text
+    background-color: #099
+    padding: 9px
+    padding-top: 10px
+    text-align: left
+    width: 72%
+    text-transform: uppercase
+    color: white
+
+    &:after
+      left: 83%
+      border: solid transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      pointer-events: none
+      border-color: rgba(0,155,219,0)
+      border-left-color: #099
+      border-width: 17px
+      top: 32%
+      margin-top: -11px
+      border-left: 12px solid #009999
+
+.afisha_main_page_list,
+.discounts_main_page_list
+  .filters_wrapper
+    .filters.afisha,
+    .filters.discount
+      .by_kind
+        margin: 0
+
+        ul li
+          a
+            background: none
+
+          &:hover
+            > a
+              > span.name
+                color: white
+
+.discounts_main_page_list
+  .filters_wrapper
+    margin-bottom: 20px
+
+  .posters.tiny li.item_wrapper
+    margin-left: 6px
+
+    img
+      width: 216px
+
+    .item
+      border: 1px solid #cccccc
+
+.afisha_main_page_list
+  .filter_header
+    padding-top: 10px
+
+  .posters .item
+    border: 1px solid #cccccc
+    height: 370px
+    width: 213px
+    margin-right: 16px
+
+    &:nth-child(3)
+      .image
+        > a
+          > img
+            margin-left: 0.5px
+
+    &:nth-child(5)
+      margin-right: 8px
+
+    .afisha_item
+      .image
+        height: 285px
+
+        img
+          padding: 2px
+          width: 208.5px
+
+      .title
+        text-align: left
+        border-bottom: 1px dashed #cccccc
+        padding-left: 7px
+        padding-top: 3px
+        width: 204px
+
+      .place
+        text-align: left
+        padding: 1px 7px
+
+      .human_when
+        text-align: left
+        padding: 0 7px
+        padding-bottom: 2px
+
+  .filters_wrapper .filters.afisha .by_kind ul
+    margin: 0
+
+.content_wrapper
+  .content.main_page_show
+    border-top: 2px solid #e8e8e8
+
+  .introduction
+    padding-left: 11px
+    color: black
+
+    + div
+      padding-left: 11px
+      padding-bottom: 30px

@@ -119,5 +119,6 @@
  * = require ./map_project
  * = require ./shuffle
  * = require ./collapse
+ * = require ./vk_group_widget
  * = require ./map_placemarks
  */

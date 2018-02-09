@@ -2,14 +2,9 @@
   <h1><%= link_to t("meta.#{Settings['app.city']}.afisha.page_header"), afisha_index_path %></h1>
 </div>
 
-<div class="by_tickets">
-  <ul>
-    <li><%= link_to 'Распродажа билетов', afisha_with_tickets_index_path %></li>
-  </ul>
-</div>
 
 <% cache('main_page_afishas', :expires_in => 10.minutes) do %>
-  <div class="filters_wrapper">
+  <div class="filters_wrapper grayline-navigation">
     <div class="filters afisha">
       <div class="by_kind">
         <ul>

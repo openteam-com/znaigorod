@@ -3,16 +3,11 @@
     <h2><%= link_to t("meta.#{Settings['app.city']}.organizations.page_header"), organizations_path %></h2>
   </div>
 
-  <div class="by_tickets">
-    <ul>
-      <li><%= link_to 'Бесплатный заказ', organizations_path(:sms_claimable => true) %></li>
-    </ul>
-  </div>
 
   <% cache('main_page_organizations', :expires_in => 10.minutes) do %>
-    <div class="filters_wrapper">
+    <div class="filters_wrapper grayline-navigation">
       <div class="filters organization">
-        <div class="by_categories">
+        <div class="by_kind">
           <ul>
             <% @organizations.categories_links.each do |category_link| %>
               <li class='<%= category_link[:klass] %>'>
