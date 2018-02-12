@@ -21,6 +21,22 @@
     </div>
   </div>
 
+  <div class='filters-by-wrapper filters-for-afisha'>
+    <div class='filters afisha'>
+      <div class='by_date'>
+        <ul class='with-datepicker'>
+          <li> </li>
+          <% @afisha_filters_presenter.periods_links.each do |period_link| %>
+            <li<%= " class=selected" if period_link[:selected] %>>
+              <%= link_to period_link[:title],
+                send(period_link[:url], period_link[:parameters]), :class => period_link[:class] %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <ul class="posters">
     <% @afisha_list.each do |afisha| %>
       <li class="item">

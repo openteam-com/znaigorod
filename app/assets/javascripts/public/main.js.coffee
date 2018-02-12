@@ -145,4 +145,8 @@ $(window).load ->
   init_organization_list_view_map() if $('.suborganizations_map_wrapper .map').length
   init_vk_group_widget() if $('.js-vk-widget').length
 
+$(document).on "ready", ->
+  $('.afisha_main_page_list').on "DOMSubtreeModified", ->
+    init_afisha_filter() if $('.filters .by_date .daily').length
+
   true

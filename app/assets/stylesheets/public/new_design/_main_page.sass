@@ -5,7 +5,6 @@
 
 .organizations_main_page_list,
 .accounts_main_page_list,
-.afisha_main_page_list
   .grayline-navigation
     margin-bottom: 20px
 
@@ -126,47 +125,84 @@
   .filter_header
     padding-top: 10px
 
-  .posters .item
-    border: 1px solid #cccccc
-    height: 370px
-    width: 213px
-    margin-right: 16px
+  .posters
+    margin-top: 22px
 
-    &:nth-child(3)
-      .image
-        > a
-          > img
-            margin-left: 0.5px
+    .item
+      border: 1px solid #cccccc
+      height: 370px
+      width: 213px
+      margin-right: 16px
 
-    &:nth-child(5)
-      margin-right: 8px
+      &:nth-child(3)
+        .image
+          > a
+            > img
+              margin-left: 0.5px
 
-    .afisha_item
-      .image
-        height: 285px
+      &:nth-child(5)
+        margin-right: 8px
 
-        img
-          padding: 2px
-          width: 208.5px
+      .afisha_item
+        .image
+          height: 285px
 
-      .title
-        text-align: left
-        border-bottom: 1px dashed #cccccc
-        padding-left: 7px
-        padding-top: 3px
-        width: 204px
+          img
+            padding: 2px
+            width: 208.5px
 
-      .place
-        text-align: left
-        padding: 1px 7px
+        .title
+          text-align: left
+          border-bottom: 1px dashed #cccccc
+          padding-left: 7px
+          padding-top: 3px
+          width: 204px
 
-      .human_when
-        text-align: left
-        padding: 0 7px
-        padding-bottom: 2px
+        .place
+          text-align: left
+          padding: 1px 7px
+
+        .human_when
+          text-align: left
+          padding: 0 7px
+          padding-bottom: 2px
 
   .filters_wrapper .filters.afisha .by_kind ul
     margin: 0
+
+  .filters-for-afisha
+    .filters
+      .by_date
+        ul
+          +display-flex
+
+          li
+            &:nth-child(1)
+              order: 2
+              display: none
+
+            &:nth-child(2)
+              order: 3
+              margin-right: -2px
+
+            &:nth-child(3)
+              order: 4
+
+            &:nth-child(4)
+              order: 5
+
+            &:nth-child(5)
+              order: 6
+
+            &:nth-child(6)
+              order: 1
+              padding-left: 25px
+              padding-right: 20px
+              margin-left: 0
+
+              &::before
+                left: 0
+
 
 .content_wrapper
   .content.main_page_show
@@ -178,4 +214,4 @@
 
     + div
       padding-left: 11px
-      padding-bottom: 30px
+      padding-bottom: 21px

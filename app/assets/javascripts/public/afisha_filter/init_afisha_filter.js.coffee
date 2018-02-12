@@ -67,11 +67,17 @@
     current_date = new Date
     cal.datepicker('setDate', current_date.toLocaleFormat('%Y-%m-%d'))
 
-  cal.css
-    'top': wrapper.offset().top
-    'left': wrapper.offset().left
-    'width': wrapper.outerWidth()
-    'height': wrapper.outerHeight()
+  set_calendar_position = ->
+    cal.css
+      'top': wrapper.offset().top
+      'left': wrapper.offset().left
+      'width': wrapper.outerWidth()
+      'height': wrapper.outerHeight()
+
+  set_calendar_position()
+  
+  $(window).resize ->
+    set_calendar_position()
 
   link.click (event) ->
     if cal.datepicker('widget').is(':hidden')
