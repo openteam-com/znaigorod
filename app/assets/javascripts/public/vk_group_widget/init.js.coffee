@@ -3,7 +3,7 @@
     VK.Widgets.Group 'vk-group',
       mode: 4
       no_cover: 0
-      width: '1184'
+      width: '1200'
       height: '620'
     , 35689602
 
