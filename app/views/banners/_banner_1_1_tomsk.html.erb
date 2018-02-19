@@ -5,7 +5,9 @@
 
       <% @placed_banners_first.each_with_index do |banner, index| %>
         <li class='js-banner1' style=<%="display:#{index == 0 ? 'list-item' : 'none'}"%>>
-          <%= link_to (image_tag banner.image_url, size: "1200x100"), banner.url, :target => banner.target %>
+          <noindex>
+          <%= link_to (image_tag banner.image_url, size: "1200x100"), banner.url, :target => banner.target, rel: 'nofollow' %>
+          </noindex>
         </li>
       <% end %>
 
