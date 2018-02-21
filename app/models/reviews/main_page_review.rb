@@ -9,7 +9,7 @@ class MainPageReview < ActiveRecord::Base
 
   scope :used, -> { actual.with_reviews.ordered }
 
-  validates :expires_at, :presence => true
+  validates :expires_at, :review_id, :presence => true
 
   before_create :set_position
 
