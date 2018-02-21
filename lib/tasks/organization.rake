@@ -44,4 +44,18 @@ namespace :organization do
       bar.increment!
     end
   end
+
+  desc "Генерация базы email заведений"
+  task :generate_emails => :environment do
+    CSV.open("#{Rails.root}/public/orgs.csv", 'wb', :col_sep => ';') do |csv|
+      csv << ['Организация', 'Email', 'Сферы']
+      Organization.where("email != '' OR email is not null").each do |org|
+        csv << [
+          org.title,
+          org.email,
+          org.organization_categories.map(&:title).join(", ")
+        ]
+      end
+    end
+  end
 end
