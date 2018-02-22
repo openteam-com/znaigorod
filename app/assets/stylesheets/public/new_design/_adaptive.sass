@@ -1,32 +1,64 @@
-.doberman_wrapper
-  @media screen and (min-width: 992px) and (max-width: 1200px)
-    .links_brand
+=visiability
+  display: none
+  visibility: hidden
+
+=header-width
+  .links_brand
+    width: 100%
+    a
+      background-size: 99%
       width: 100%
-      a
-        background-size: 99%
-        width: 100%
+
+.visible-xs
+  @media screen and (min-width: 768px) and (max-width: 992px)
+    +visiability
+
+  @media screen and (min-width: 992px) and (max-width: 1200px)
+    +visiability
+
+  @media screen and (min-width: 1200px)
+    +visiability
+
+.afishas-with-adaptive-version .doberman_wrapper
+  @media screen and (min-width: 992px) and (max-width: 1200px)
+    +header-width
 
   @media screen and (min-width: 768px) and (max-width: 992px)
-    .links_brand
-      width: 100%
-      a
-        background-size: 99%
-        width: 100%
+    +header-width
 
   @media screen and (max-width: 768px)
     .links_brand
       width: 100%
+      height: 60px
       a
         background-size: 99%
-        width: 100
+        width: 100%
+        height: 60px
+
+  @media screen and (max-width: 768px) and (orientation: landscape)
+    .links_brand
+      height: 80px
+      a
+        background-size: 100%
+        height: 80px
 
   .doberman_content_wrapper
     max-width: 1200px
     width: 100%
 
+
     @media screen and (max-width: 768px)
-      .grayline-navigation .filters .by_kind ul li a, .grayline-navigation .filters .by_category ul li a
-        padding: 10px 9px
+      .main_menu.main-menu-orange
+        .search_form
+          top: 0
+          margin-top: 48px
+          margin-right: 2.5%
+          ::-webkit-input-placeholder
+            color: black
+
+      .grayline-navigation
+        visibility: hidden
+        display: none
 
       .content_wrapper
         width: 100% !important
@@ -34,15 +66,208 @@
       .links_brand a
         background-size: 83%
 
-      .header_wrapper .header
-        width: 100% !important
+      .header_wrapper
+        .main-menu-wrapper
+          ul
+            visibility: hidden
+            display: none
+
+        .search_form
+          margin-right: 10px
+
+        .header
+          width: 100% !important
+
+          .logo-for-xs
+            position: absolute
+            top: 3px
+            left: 22px
+            z-index: 9999
+
+            a
+              display: block
+
+          .logo
+            visibility: hidden
+            display: none
+
+          .city-selector
+            .select_menu
+              margin-left: 49px
+
+          h1
+            left: 0
+            top: 45px
+            padding-top: 15px
+            margin: 0 5%
+            font-size: 18px
+            max-width: 100%
+            height: 100%
+            position: relative
+            display: block
+            padding-bottom: 55px
+
+          .dashboard
+            width: 100%
+            .user
+              .sign_in
+                margin-right: 12px
+
+            .user_navigation
+              width: 45px
+              height: 30px
+              top: 15px
+              right: 295px
+
+              .my_action
+                visibility: hidden
+                display: none
+
+            .menu-buttons
+              display: flex
+              position: absolute
+              margin-left: 8%
+              top: 36px
+
+              button
+                width: 32px
+                height: 32px
+                margin-right: 10px
+                background-color: #f60
+                border: #f60
+
+              .main-menu-xs
+                outline: none
+                ul li ul
+                  display: none
+
+                &:hover
+                  .main-menu-for-xs
+                    display: block
+
+                #burger-button
+                  outline: none
+
+                  span
+                    width: 16px
+                    height: 3px
+                    background-color: white
+                    margin: 5px 0
+                    z-index: 999999
+                    position: absolute
+                    left: 8px
+
+                    &:nth-child(1)
+                      top: 2px
+
+                    &:nth-child(2)
+                      top: 9px
+
+                .main-menu-for-xs
+                  position: absolute
+                  background-color: #f60
+                  top: 32px
+                  width: 110px
+                  display: none
+                  z-index: 9999
+
+                  .simple-navigation-active-leaf
+                    background-color: #ff7f1a
+
+                  a
+                    width: 87%
+                    text-decoration: none
+                    color: white
+                    padding: 7px
+                    font-size: 12px
+
+                    &:hover
+                      background-color: #ff7f1a
+
+              .add-yours
+                &:hover
+                  .actions
+                    display: block
+
+                #x-button
+                  outline: none
+                  position: relative
+
+                  span
+                    width: 17px
+                    height: 3px
+                    background-color: white
+                    margin: 5px 0
+                    z-index: 999999
+                    position: absolute
+
+                    &:nth-child(1)
+                      margin: auto
+                      top: 0
+                      left: 0
+                      right: 0
+                      bottom: 0
+
+                    &:nth-child(2)
+                      +transform(rotate(90deg))
+                      margin: auto
+                      top: 0
+                      left: 0
+                      right: 0
+                      bottom: 0
+
+
+
+
+                .actions
+                  width: 100%
+                  float: none
+                  margin: 0
+                  padding: 0
+                  position: absolute
+                  top: 32px
+                  background-color: #f60
+                  display: none
+                  z-index: 99
+
+                  a
+                    width: 140px
+                    padding-top: 7px
+                    padding-bottom: 7px
+                    font-size: 12px
+                    background-color: #f60
+
+                    &:hover
+                      background-color: #ff7f1a
+
 
         h1
           font-size: 18px
           left: 190px
+          padding-top: 20px
+
+    @media screen and (max-width: 768px) and (orientation: landscape)
+      .header_wrapper .header
+
+        .logo-for-xs
+          position: absolute
+          top: 3px
+          left: 37px
+
+        .city-selector
+          .select_menu
+            margin-left: 55px
+
+        .dashboard
+          .menu-buttons
+            margin-left: 7%
+
+          .user
+            .sign_in
+              margin-right: 19px
 
     @media screen and (min-width: 768px) and (max-width: 992px)
-      .grayline-navigation .filters .by_kind ul li a, .grayline-navigation .filters .by_category ul li a
+      .grayline-navigation .filters .by_kind ul li a
         padding: 10px 9px
 
       .content_wrapper
@@ -59,7 +284,7 @@
           left: 190px
 
     @media screen and (min-width: 992px) and (max-width: 1200px)
-      .grayline-navigation .filters .by_kind ul li a, .grayline-navigation .filters .by_category ul li a
+      .grayline-navigation .filters .by_kind ul li a
         padding: 10px 9px
 
       .content_wrapper
@@ -75,3 +300,35 @@
   .footer_wrapper
     display: flex
     width: 100%
+
+    @media screen and (max-width: 768px)
+      .footer .menu
+        ul
+          display: flex
+          flex-direction: column
+          line-height: 2.2em
+          font-size: 104%
+          li
+            ul
+              visibility: hidden
+              display: none
+
+            &#main_menu_more
+              ul
+                visibility: visible
+                display: list-item
+                margin-top: 10px
+                margin-bottom: 220px
+
+        .social-likes
+          right: 0
+          left: 20px
+          top: 358px
+
+      .wrapper
+        .our_social_link
+          visibility: hidden
+          display: none
+        img.rating_18
+          top: -560px
+          right: 15px

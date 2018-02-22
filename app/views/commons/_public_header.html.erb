@@ -46,6 +46,37 @@
 
     <!--noindex-->
     <div class='dashboard <%= 'dashboard-signed-in' if user_signed_in? %>'>
+      <div class='menu-buttons visible-xs'>
+        <div class='main-menu-xs'>
+          <button id='burger-button'>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <!--Main orange menu for adaptive version-->
+          <noindex>
+            <div class="main-menu-for-xs">
+              <%= render_navigation :context => "public_#{Settings['app.city']}", :expand_all => true, :renderer => :list_with_noindex %>
+            </div>
+          </noindex>
+        </div>
+
+        <div class='add-yours'>
+          <button id='x-button'>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class='actions'>
+            <%= link_to 'Добавить обзор', new_my_review_path, class: :my_new_action, :rel => 'nofollow' %>
+            <%= link_to 'Добавить скидку', help_my_discounts_path, class: :my_new_action, :rel => 'nofollow' %>
+            <%= link_to 'Добавить афишу', new_my_afisha_path, class: :my_new_action, :rel => 'nofollow' %>
+            <%= link_to 'Добавить заведение', organizations_add_path, class: :my_new_action, :rel => 'nofollow' %>
+          </div>
+        </div>
+      </div>
+
       <% if user_signed_in? %>
         <span class='messages'>
           <% if current_user.account.private_messages.unread.any? %>

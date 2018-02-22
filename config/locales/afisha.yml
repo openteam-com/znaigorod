@@ -9,6 +9,8 @@ ru:
       na_nedelyu: "на неделе"
       na_vyhodnye: "на выходных"
       weekend: "на выходных"
+      daily: "на сегодня"
+      all: ""
 
     discounts:
       buy: "Купить"

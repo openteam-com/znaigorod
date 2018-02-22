@@ -2,10 +2,10 @@
   <span class='label'>Сортировать по:</span>
   <select onchange="location = this.value">
     <% @presenter.sortings_links.each do |sortings_link| %>
-      <option class="<%= sortings_link[:parameters][:order_by] %>" value="<%= url_for(params.merge(sortings_link[:parameters])) %>">
-        <%= sortings_link[:title] %>
+      <option class="<%= sortings_link[:parameters][:order_by] %>" value="<%= url_for(params.merge(sortings_link[:parameters])) %>"
+        <%= 'selected' if sortings_link[:selected] %>>
+        &nbsp;<%= sortings_link[:title] %>  
       </option>
     <% end %>
   </select>
 </div>
-
