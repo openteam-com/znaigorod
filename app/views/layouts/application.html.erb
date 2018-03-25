@@ -54,7 +54,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:metrics) %>
   </head>
-  <body class='<%= Settings['app']['city'].downcase %> <%= controller_name %>-with-adaptive-version'>
+  <body class='<%= Settings['app']['city'].downcase %> <%= controller_name %>-<%= controller.action_name %>-with-adaptive-version'>
     <%= yield(:flash_messages) %>
     <%= yield(:content) %>
   </body>

@@ -1,0 +1,104 @@
+.visible-xs,
+.visible-sm
+  display: none
+
+.afishas-index-with-adaptive-version
+  @media screen and (min-width: 992px) and (max-width: 1200px)
+    .header_wrapper.header-wrapper-new
+
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 10px
+
+          .header
+            width: auto !important
+
+      .header
+        width: auto !important
+
+        .logo
+          left: 10px
+
+        .dashboard
+          right: 10px
+
+    // Grayline navigation
+    .grayline-navigation
+      .filters
+        ul li a
+          min-width: auto
+          padding: 10px
+
+    // Filters
+    .filters-by-wrapper
+      padding: 20px 10px !important
+
+    // Content wrapper
+    .content_wrapper
+      width: auto !important
+
+
+    // Footer wrapper
+    .footer_wrapper
+      .footer
+        width: auto !important
+        padding: 0 10px
+
+  @media screen and (min-width: 768px) and (max-width: 992px)
+    .visible-sm
+      display: block
+
+    .hidden-sm
+      display: none
+
+    .header_wrapper.header-wrapper-new
+
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 10px
+
+          .header
+            width: auto !important
+
+      .header
+        width: auto !important
+
+        h1
+          font-size: 18px
+          max-width: 45%
+
+        .logo
+          left: 10px
+
+        .dashboard
+          right: 10px
+
+    // Grayline navigation
+    .grayline-navigation
+      .filters
+        ul li a
+          min-width: auto
+          padding: 10px
+
+    // Filters
+    .filters-by-wrapper
+      padding: 20px 10px !important
+
+      &.filters-for-afisha
+        .filters
+          .by_date
+            ul.with-datepicker li
+              padding: 3px 11px 4px 11px
+
+    // Content wrapper
+    .content_wrapper
+      width: auto !important
+
+    // Footer wrapper
+    .footer_wrapper
+      .footer
+        width: auto !important
+        padding: 0 10px
+

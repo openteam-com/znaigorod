@@ -1,6 +1,6 @@
 @init_afisha_filter = () ->
 
-  link = $('.filters .by_date .daily')
+  link = $('.filters-by-wrapper .by_date .daily') || $('.filters_then_mobile .by_date .daily')
   wrapper = link.closest('li')
 
   create_obj_from_uri = ->
@@ -75,7 +75,7 @@
       'height': wrapper.outerHeight()
 
   set_calendar_position()
-  
+
   $(window).resize ->
     set_calendar_position()
 
