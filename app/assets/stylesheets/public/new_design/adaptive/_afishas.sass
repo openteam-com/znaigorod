@@ -5,6 +5,12 @@
         padding: 0 10px
         +justify-content(space-between)
 
+        &.paginable-list-paginated
+          &:after
+            content: ''
+            +flex(0 1 29%)
+            margin-left: 25px
+
         .item
           margin-right: 25px
 
@@ -14,7 +20,6 @@
           &.pagination
             left: 10px
 
-
       .filter_and_share
         padding-right: 10px
 
@@ -23,7 +28,7 @@
 
   @media screen and (min-width: 768px) and (max-width: 992px)
     .filters_for_mobile_afisha
-      margin: 10px
+      margin: 10px 10px 0
       width: 50%
 
       .filters_by_category_mobile
@@ -32,3 +37,28 @@
       .presentation_filters.afisha
         +presentation_filters
 
+    .content_wrapper .content
+      .posters
+        padding: 0 10px
+        +justify-content(space-between)
+
+        &.paginable-list-paginated
+          &:after
+            content: ''
+            +flex(0 1 29%)
+            margin-left: 25px
+
+        .item
+          margin-right: 30px
+
+          &:nth-child(3n+3)
+            margin-right: 0
+
+          &.pagination
+            left: 10px
+
+      .filter_and_share
+        padding-right: 10px
+
+      .introduction
+        margin: 10px

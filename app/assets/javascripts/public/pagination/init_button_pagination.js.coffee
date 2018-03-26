@@ -10,7 +10,7 @@ next_page_handler = () ->
   button.on 'ajax:success', (evt, response) ->
     $('.pagination').remove()
 
-    $('.js-paginable-list').append(response)
+    $('.js-paginable-list').addClass('paginable-list-paginated').append(response)
 
     init_sauna_halls_scroll() if $('.need_scrolling').length
 

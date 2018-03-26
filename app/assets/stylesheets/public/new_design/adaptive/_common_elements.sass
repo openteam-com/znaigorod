@@ -4,7 +4,7 @@
 =grey_block_for_select
   content: "\f0d7"
   position: absolute
-  display: flex
+  +display-flex
   align-items: center
   font-family: FontAwesome
   font-size: 14px
@@ -15,32 +15,30 @@
   pointer-events: none
   background-color: #cdcdcd
   width: 26px
-  justify-content: center
+  +justify-content(center)
 
 =filters_by_category_mobile
-  display: flex
-  font-size: 14px
+  +display-flex
 
   p
     padding-right: 10px
-    padding-top: 3px
+    padding-top: 5px
 
   .mobile-version-filters
     position: relative
-    display: flex
+    +display-flex
     width: 100%
 
     &:after
       +grey_block_for_select
 
     select
-      font-size: 14px
       background-color: white
       padding: 5px
       -webkit-appearance: none
       outline: none
       border: 1.5px solid #cdcdcd
-      +flex(2)
+      width: 100%
 
 =presentation_filters
   margin-bottom: 0
@@ -59,10 +57,8 @@
     span
       padding-top: 3px
       min-width: 110px
-      font-size: 14px
 
     select
-      font-size: 14px
       height: 29.14px
       outline: none
       margin-left: 5px

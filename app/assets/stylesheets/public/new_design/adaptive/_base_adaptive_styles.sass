@@ -23,7 +23,7 @@
         .dashboard
           right: 10px
 
-    // Grayline navigation
+    //Grayline navigation
     .grayline-navigation
       .filters
         ul li a
@@ -37,7 +37,6 @@
     // Content wrapper
     .content_wrapper
       width: auto !important
-
 
     // Footer wrapper
     .footer_wrapper
@@ -53,11 +52,13 @@
       display: none
 
     .header_wrapper.header-wrapper-new
-
       // Orange top main menu
       .main_menu
         &.main-menu-orange
           padding: 0 10px
+
+          ul
+            width: auto
 
           .header
             width: auto !important
@@ -75,7 +76,7 @@
         .dashboard
           right: 10px
 
-    // Grayline navigation
+    //Grayline navigation
     .grayline-navigation
       .filters
         ul li a
@@ -92,6 +93,27 @@
             ul.with-datepicker li
               padding: 3px 11px 4px 11px
 
+              &:last-child
+                position: relative
+                width: 20px
+                height: 20px
+                padding: 0 0 0 15px
+
+                &:before
+                  z-index: 0
+                  font-size: 22px
+                  top: -3px
+
+                > a.daily
+                  z-index: 100
+                  position: absolute
+                  color: transparent
+                  margin: auto
+                  top: 0
+                  bottom: 0
+                  left: 0
+                  right: 0
+
     // Content wrapper
     .content_wrapper
       width: auto !important
@@ -102,3 +124,22 @@
         width: auto !important
         padding: 0 10px
 
+        .social-likes
+          top: 330px
+          right: 235px
+
+        .menu > ul
+          +display-flex
+          +flex-flow(row wrap)
+
+          > li
+            width: 30%
+            padding-right: 15px
+
+            &#main_menu_reviews
+              ul li
+                float: none
+
+        .our_social_link,
+        .contacts
+          margin-left: 0
