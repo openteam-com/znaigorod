@@ -43,7 +43,7 @@
       </div>
     </span>
 
-    <div class='main-menu-wrapper'>
+    <div class='main-menu-wrapper hidden-xs'>
       <%= render_navigation :context => "public_#{Settings['app.city']}", :expand_all => true, :renderer => :list_with_noindex %>
     </div>
     <div class='search_form<%= ' selected' if params[:controller] == 'search' %>'>

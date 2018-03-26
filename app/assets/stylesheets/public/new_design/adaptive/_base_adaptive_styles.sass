@@ -143,3 +143,145 @@
         .our_social_link,
         .contacts
           margin-left: 0
+
+  @media screen and (max-width: 768px)
+    .visible-xs
+      display: block
+
+    .hidden-xs
+      display: none
+
+    .header_wrapper.header-wrapper-new
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 10px
+
+          ul
+            width: auto
+
+          .header
+            width: auto !important
+
+      .header
+        width: auto !important
+
+        .logo-for-xs
+          > a
+            position: absolute
+            top: 3px
+            left: 3px
+
+          + .city-selector
+            float: none
+            left: 40px
+
+        h1
+          position: relative
+          display: block
+          font-size: 18px
+          max-width: 95%
+          left: 10px
+          top: 60px
+          margin-bottom: 30px
+
+        .logo
+          left: 10px
+          right: auto
+
+        .menu-buttons
+          margin-left: 0
+
+        .dashboard
+          left: 10px
+          right: 10px
+
+          .actions
+            display: none
+            width: 150px
+            background-color: #ff7f1a
+
+            a
+              border: none
+              display: block
+              width: 100%
+              padding: 5px 8px 5px
+
+          .x-button
+            +x_button
+
+          .add-yours
+            z-index: 999
+
+            &:hover
+              .actions
+                margin-top: -4px
+                display: block
+
+      .search_form
+        top: 0
+        margin-top: 48px
+
+        ::-webkit-input-placeholder
+          color: black
+
+    // Filters
+    .filters-by-wrapper
+      padding: 20px 10px !important
+
+      &.filters-for-afisha
+        .filters
+          .by_date
+            ul.with-datepicker li
+              padding: 3px 11px 4px 11px
+
+              &:last-child
+                position: relative
+                width: 20px
+                height: 20px
+                padding: 0 0 0 15px
+
+                &:before
+                  z-index: 0
+                  font-size: 22px
+                  top: -3px
+
+                > a.daily
+                  z-index: 100
+                  position: absolute
+                  color: transparent
+                  margin: auto
+                  top: 0
+                  bottom: 0
+                  left: 0
+                  right: 0
+
+    // Content wrapper
+    .content_wrapper
+      width: auto !important
+
+    // Footer wrapper
+    .footer_wrapper
+      .footer
+        width: auto !important
+        padding: 0 10px
+
+        .social-likes
+          top: 330px
+          right: 235px
+
+        .menu > ul
+          +display-flex
+          +flex-flow(row wrap)
+
+          > li
+            width: 30%
+            padding-right: 15px
+
+            &#main_menu_reviews
+              ul li
+                float: none
+
+        .our_social_link,
+        .contacts
+          margin-left: 0

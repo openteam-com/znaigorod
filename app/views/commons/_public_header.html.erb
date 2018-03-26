@@ -2,7 +2,7 @@
   <%= render :partial => 'commons/public_menu' %>
 
   <div class='header'>
-    <div class='logo'><a href='/'><%= t("meta.#{Settings['app.city']}.default.title") %></a></div>
+    <div class='logo hidden-xs'><a href='/'><%= t("meta.#{Settings['app.city']}.default.title") %></a></div>
 
     <% if request.path == '/' %>
       <!-- weather -->
@@ -63,7 +63,7 @@
         </div>
 
         <div class='add-yours'>
-          <button id='x-button'>
+          <button class='x-button'>
             <span></span>
             <span></span>
           </button>
@@ -124,7 +124,7 @@
       <% else %>
         <div class="user">
           <span class='sign_in'>Войти:</span>
-          <div class='user_navigation'>
+          <div class='user_navigation hidden-xs'>
             <div class='my_action'>
               <p class='my_new_action'>
                 Добавить своё

@@ -1,4 +1,9 @@
 .afishas-index-with-adaptive-version
+  .posters
+    .item .image img
+      max-width: 100%
+      max-height: 100%
+
   @media screen and (min-width: 992px) and (max-width: 1200px)
     .content_wrapper .content
       .posters
@@ -56,6 +61,64 @@
 
           &.pagination
             left: 10px
+
+      .filter_and_share
+        padding-right: 10px
+
+      .introduction
+        margin: 10px
+
+  @media screen and (max-width: 768px)
+    .header
+      .menu-buttons
+        +menu_buttons
+
+    .filters_for_mobile_afisha
+      margin: 10px 10px 0
+
+      .filters_by_category_mobile
+        +filters_by_category_mobile
+
+      .presentation_filters.afisha
+        +presentation_filters
+
+      .filters_when_mobile
+        +filters_when_mobile
+
+    .content_wrapper
+      clear: both
+
+      .content
+        .posters
+          padding: 0 10px
+          +justify-content(space-between)
+
+          &.paginable-list-paginated
+            &:after
+              content: ''
+              +flex(0 1 29%)
+              margin-left: 25px
+
+          .item
+            width: 360px
+            height: 585px
+            margin-right: 0
+            padding-right: 4px
+
+            &:nth-child(3n+3)
+              margin-right: 0
+
+            &.pagination
+              left: 10px
+
+            .image
+              width: 100%
+              height: 488px
+
+            .title
+              +display-flex
+              +align-items(center)
+              width: auto
 
       .filter_and_share
         padding-right: 10px

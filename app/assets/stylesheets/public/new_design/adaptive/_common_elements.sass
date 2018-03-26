@@ -23,6 +23,7 @@
   p
     padding-right: 10px
     padding-top: 5px
+    font-size: 12px
 
   .mobile-version-filters
     position: relative
@@ -35,9 +36,10 @@
     select
       background-color: white
       padding: 5px
+      height: 30px
       -webkit-appearance: none
       outline: none
-      border: 1.5px solid #cdcdcd
+      border: 1px solid #cdcdcd
       width: 100%
 
 =presentation_filters
@@ -49,18 +51,174 @@
   .presentation-filters-wrapper
     +display-flex
     position: relative
+    max-height: 35px
 
     &:after
       +grey_block_for_select
-      height: 28.14px
+      height: 30px
 
     span
-      padding-top: 3px
+      padding-top: 5px
       min-width: 110px
+      height: 30px
 
     select
-      height: 29.14px
+      height: 30px
       outline: none
       margin-left: 5px
-      border: 1.5px solid #cdcdcd
+      border: 1px solid #cdcdcd
       +flex(2)
+      padding-bottom: 0
+
+=filters_when_mobile
+  padding-top: 10px
+  font-size: 12px
+
+  .by_date
+    display: flex
+
+    .mobile-date-filters
+      display: flex
+      position: relative
+      width: 65%
+      max-height: 30px
+
+      &:after
+        +grey_block_for_select
+
+      span
+        padding-top: 5px
+        height: 30px
+
+      select
+        background-color: white
+        margin-left: 20px
+        padding: 5px
+        padding-right: 15px
+        -webkit-appearance: none
+        font-size: 14px
+        outline: none
+        width: 100%
+        border: 1px solid #cdcdcd
+        height: 30px
+
+        option
+          &:hover
+            background-color: red
+
+    .with-datepicker
+      margin-left: 12px
+
+      li
+        width: 17px
+        height: 20px
+
+        &:before
+          content: "\f073"
+          position: relative
+          font-family: FontAwesome
+          font-size: 18px
+          margin: auto
+          bottom: 0
+
+        a
+          display: block
+          height: 20px
+          width: 30px
+          font-size: 0
+          z-index: 999999
+          position: relative
+          top: -20px
+
+=burger_menu
+  cursor: pointer
+  outline: none
+
+  span
+    width: 16px
+    height: 3px
+    background-color: white
+    margin: 5px 0
+    z-index: 999999
+    position: absolute
+    left: 8px
+
+    &:nth-child(1)
+      top: 2px
+
+    &:nth-child(2)
+      top: 9px
+
+=menu_buttons
+  display: flex
+  position: absolute
+  margin-left: 8%
+  top: 36px
+
+  button
+    width: 32px
+    height: 32px
+    margin-right: 10px
+    background-color: #f60
+    border: #f60
+
+  .main-menu-xs
+    outline: none
+    ul li ul
+      display: none
+
+    &:hover
+      .main-menu-for-xs
+        display: block
+
+    #burger-button
+      +burger_menu
+
+    .main-menu-for-xs
+      position: absolute
+      background-color: #f60
+      top: 32px
+      width: 110px
+      display: none
+      z-index: 9999
+
+      .simple-navigation-active-leaf
+        background-color: #ff7f1a
+
+      a
+        width: 87%
+        text-decoration: none
+        color: white
+        padding: 7px
+        font-size: 12px
+
+        &:hover
+          background-color: #ff7f1a
+
+=x_button
+  cursor: pointer
+  outline: none
+  position: relative
+
+  span
+    width: 17px
+    height: 3px
+    background-color: white
+    margin: 5px 0
+    z-index: 999999
+    position: absolute
+
+    &:nth-child(1)
+      margin: auto
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+
+    &:nth-child(2)
+      +transform(rotate(90deg))
+      margin: auto
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
