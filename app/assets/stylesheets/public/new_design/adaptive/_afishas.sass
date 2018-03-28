@@ -9,71 +9,6 @@
       .menu-buttons
         +menu_buttons
 
-    .filters_for_mobile_afisha
-      margin: 0 16px 0
-
-      .filters_by_category_mobile
-        +filters_by_category_mobile
-
-      .presentation_filters.afisha
-        +presentation_filters
-
-      .filters_when_mobile
-        +filters_when_mobile
-
-    .content_wrapper
-      clear: both
-
-      .content
-        .posters
-          padding: 0 16px
-          +justify-content(space-between)
-
-          &.paginable-list-paginated
-            &:after
-              content: ''
-              +flex(0 1 29%)
-              margin-left: 25px
-
-          .item
-            width: 360px
-            height: auto
-            margin: 5px auto 10px
-            padding-right: 4px
-
-            &.pagination
-              bottom: -120px
-              left: 16px
-
-            .image
-              width: 100%
-              height: auto
-
-            .title
-              +display-flex
-              +align-items(center)
-              width: auto
-              height: 55px
-              line-height: 24px
-
-            .title,
-            .place,
-            .human_when
-              font-size: 14px
-
-            .place
-              max-height: 25px
-
-      .filter_and_share
-        margin-top: 10px
-
-        > #st-1
-          padding-left: 16px
-          text-align: left
-
-      .introduction
-        margin: 70px 16px 10px
-
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
     .filters_for_mobile_afisha
       margin: 10px 16px 0
@@ -155,5 +90,19 @@
         padding-right: 16px
 
       .introduction
+<<<<<<< Updated upstream
         margin: 10px 16px
+=======
+        margin: 10px
+
+  @media screen and (max-width: 768px)
+    .filters_for_mobile_afisha
+      margin: 10px 16px 0
+
+      .filters_by_category_mobile
+        +filters_by_category_mobile
+
+      .presentation_filters.afisha
+        +presentation_filters
+>>>>>>> Stashed changes
 

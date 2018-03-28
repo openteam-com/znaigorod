@@ -7,7 +7,7 @@
     <%#= link_to image_tag(resized_image_url(account.avatar.url, 178, 178), size: '178x178', title: account, alt: account), account_path(account) %>
 
     <%= render :partial => 'accounts/avatar',
-      :locals => { :account => account, :width => 178, :height => 178, :title => account.title } %>
+      :locals => { :account => account, :width => 600, :height => 600, :title => account.title } %>
 
     <% if account.last_visit_at? %>
       <%= link_to account_path(account), rel: 'nofollow' do %>

@@ -4,9 +4,9 @@
   </div>
 
   <% cache('main_page_accounts', :expires_in => 10.minutes) do %>
-    
 
-    <div class="filters_wrapper grayline-navigation">
+
+    <div class="filters_wrapper grayline-navigation hidden-xs">
       <div class="filters account">
         <div class="by_kind">
           <ul>
@@ -25,6 +25,22 @@
         </div>
       </div>
     </div>
+
+    <div class="filters_for_mobile_accounts visible-xs">
+      <div class='mobile-version-filters'>
+        <p> Ищут компанию: </p>
+          <select onchange="location = this.value">
+            <% @accounts.categories_links.take(7).each do |link| %>
+              <option class='<%= link[:klass] %><%= ' selected' if link[:current] %>'
+                      value="<%= ("accounts_#{link[:klass]}_path") %>"
+                      <%= 'selected' if link[:current] %>>
+                  <%= link[:title] %>
+              </option>
+            <% end %>
+        </select>
+        </div>
+      </div>
+
 
     <ul class="posters">
       <% @accounts.collection.each do |account| %>

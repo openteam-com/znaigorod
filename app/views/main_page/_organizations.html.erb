@@ -5,7 +5,7 @@
 
 
   <% cache('main_page_organizations', :expires_in => 10.minutes) do %>
-    <div class="filters_wrapper grayline-navigation">
+    <div class="filters_wrapper grayline-navigation hidden-xs">
       <div class="filters organization">
         <div class="by_kind">
           <ul>
@@ -22,10 +22,25 @@
       </div>
     </div>
 
+    <div class="filters_for_mobile_organizations visible-xs">
+      <div class='mobile-version-filters'>
+        <p> Категория: </p>
+          <select onchange="location = this.value">
+            <% @organizations.categories_links.each do |category_link| %>
+              <option class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'
+                      value="<%= send(category_link[:url], category_link[:parameters]) %>"
+                      <%= 'selected' if category_link[:current] %>>
+                  <%= category_link[:title] %>
+              </option>
+            <% end %>
+        </select>
+      </div>
+    </div>
+
     <ul class="posters">
       <% @organizations.promoted_clients.each do |organization| %>
         <li class="item_organization">
-          <%= render :partial => 'organizations/organization', :locals => { :organization => organization, width: 150, height: 150 } %>
+          <%= render :partial => 'organizations/organization', :locals => { :organization => organization, width: 600, height: 600 } %>
         </li>
       <% end %>
     </ul>

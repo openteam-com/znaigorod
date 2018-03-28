@@ -1,0 +1,202 @@
+.main_page-show-with-adaptive-version
+  @media screen and (max-width: 768px)
+    .header_wrapper.header-wrapper-new
+      .weather_wrapper
+        left: 0
+        top: 30px
+
+    .content_wrapper
+      width: 100% !important
+      box-sizing: border-box
+      padding: 0 16px
+
+      .filter_header
+        float: none
+
+      .afisha_main_page_list
+
+        .filters_for_mobile_afisha
+          .filters_by_category_mobile
+            +filters_by_category_mobile
+
+          .filters_when_mobile
+            +filters_when_mobile
+
+        .posters
+          width: 98%
+          margin-left: auto
+          margin-right: auto
+          padding: 0
+
+          .item
+            width: 100%
+            height: 100%
+            margin-left: auto
+            margin-right: auto
+
+            .image
+              width: 100%
+              height: 100%
+              text-align: center
+
+              a
+                img
+                  width: 98%
+                  height: auto
+                  margin-right: auto
+                  margin-left: auto
+
+                  .first_line
+                    bottom: 0
+                    top: 90px
+
+                  .second_line
+                    bottom: 0
+                    top: 130px
+
+            .title
+              height: 30px
+              min-height: 30px
+              border: none
+              width: 100%
+
+              a
+                width: 100%
+
+            .place
+              padding: 8px 10px 0 10px
+              border-top: 1px dashed #ccc
+              margin: 6px 0 0 0
+
+      .organizations_main_page_list
+
+        .filters_for_mobile_organizations
+          +filters_by_category_mobile
+
+        .posters
+          padding-top: 20px
+
+          li.item_organization
+            &:last-child
+              display: none
+
+            width: 50%
+            margin: 0
+
+            .info
+              margin: 0
+
+              .image
+                margin: 0
+                width: 100%
+
+                a
+                  width: 100%
+
+                  img
+                    width: 100%
+                    height: auto
+
+                >a + a
+                  height: auto
+
+      .discounts_main_page_list
+
+        .filters_for_mobile_discounts
+          +filters_by_category_mobile
+
+        .posters
+          padding-top: 20px
+
+          .item_wrapper
+            width: 99%
+            margin-right: 0
+            margin-left: 0
+
+            .item
+              width: 100%
+              height: auto
+
+              .title
+                height: 30px
+                min-height: 30px
+                border: none
+                width: 100%
+
+              .place
+                padding: 15px 8px
+                margin: 13px 0 0 0
+                border-top: 1px dashed #ccc
+
+
+              .image
+                width: 99%
+                height: auto
+                margin: 0
+                padding: 0 2px
+
+                img
+                  width: 100%
+                  height: auto
+
+      .accounts_main_page_list
+
+        .filters_for_mobile_accounts
+          +filters_by_category_mobile
+          p
+            width: 130px
+
+
+        .posters
+          padding-top: 20px
+
+          li
+            margin-right: 0
+            margin-left: 0
+            width: 47%
+            height: auto
+            box-sizing: border-box
+
+            &:nth-child(odd)
+              margin-right: 15px
+
+            .image
+              width: 100%
+              padding: 0
+              height: auto
+
+              .avatar-wrapper
+                width: 100%
+                height: auto
+                margin: 0
+                float: none
+
+
+
+                img
+                  max-width: 100%
+                  height: auto
+                  padding: 2px
+                  box-sizing: border-box
+                  vertical-align: middle
+
+
+  .organizations_main_page_list
+    .posters
+      .image
+        img
+          max-width: 100%
+          max-height: 100%
+
+  .discounts_main_page_list
+    .posters
+      .image
+        img
+          height: auto
+
+  .accounts_main_page_list
+    .posters
+      .image
+        img
+          max-width: 178px
+          height: auto

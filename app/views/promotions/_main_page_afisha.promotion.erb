@@ -4,7 +4,7 @@
 
 
 <% cache('main_page_afishas', :expires_in => 10.minutes) do %>
-  <div class="filters_wrapper grayline-navigation">
+  <div class="filters_wrapper grayline-navigation hidden-xs">
     <div class="filters afisha">
       <div class="by_kind">
         <ul>
@@ -21,7 +21,50 @@
     </div>
   </div>
 
-  <div class='filters-by-wrapper filters-for-afisha'>
+  <div class='filters_for_mobile_afisha visible-xs'>
+    <div class='filters_by_category_mobile'>
+      <div class='mobile-version-filters'>
+        <p> Категория: </p>
+        <select onchange="location = this.value">
+          <% @afisha_filter.categories_links.each do |category_link| %>
+            <option class='<%= category_link[:klass] %><%= ' selected' if category_link[:current] %>'
+                    value="<%= send(category_link[:url]) %>"
+                    <%= 'selected' if category_link[:current] %>>
+                <%= category_link[:title] %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    <div class='filters filters_when_mobile visible-xs'>
+      <div class='by_date'>
+        <% calendar_item =  @afisha_filters_presenter.periods_links.last %>
+        <div class='mobile-date-filters'>
+          <span> Когда: </span>
+          <select onchange="location = this.value">
+            <% @afisha_filters_presenter.periods_links[0..-2].each do |period_link| %>
+            <option class='<%= period_link[:klass] %><%= 'selected' if period_link[:current] %>'
+                    value="<%= send(period_link[:url], period_link[:parameters]) %>"
+                    <%= 'selected' if period_link[:selected] %>>
+              <%= period_link[:title] %>
+            </option>
+          <% end %>
+        </select>
+        </div>
+
+        <ul class='with-datepicker'>
+          <li>
+            <%= link_to calendar_item[:title],
+              send(calendar_item[:url], calendar_item[:parameters]), :class => calendar_item[:class] %>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='filters-by-wrapper filters-for-afisha hidden-xs'>
     <div class='filters afisha'>
       <div class='by_date'>
         <ul class='with-datepicker'>

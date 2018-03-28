@@ -2,8 +2,22 @@
 .visible-sm
   display: none
 
-.afishas-index-with-adaptive-version
+.afishas-index-with-adaptive-version,
+.main_page-show-with-adaptive-version
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   @media (max-width: $max-xs-width)
+=======
+=======
+>>>>>>> Stashed changes
+  @media screen and (min-width: 992px) and (max-width: 1200px)
+    .header_wrapper.header-wrapper-new
+
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 10px
+>>>>>>> Stashed changes
 
     .visible-xs
       display: block
@@ -18,188 +32,6 @@
       .sign_in_with .cloud_wrapper .social_signin_links li
         margin: 0 6px 0 0
 
-    .header_wrapper.header-wrapper-new
-      // Orange top main menu
-      .main_menu
-        &.main-menu-orange
-          padding: 0 16px
-
-          ul
-            width: auto
-
-          .header
-            width: auto !important
-
-      .header
-        width: auto !important
-
-        .logo-for-xs
-          > a
-            position: absolute
-            top: 3px
-            left: 3px
-
-          + .city-selector
-            float: none
-            left: 40px
-
-        h1
-          position: static
-          padding-top: 60px
-          padding-left: 16px
-          padding-right: 16px
-          margin-bottom: 15px
-          display: block
-          font-size: 18px
-          max-width: 100%
-          height: auto
-
-        .logo
-          left: 10px
-          right: auto
-
-        .menu-buttons
-          margin-left: 7px
-
-        .dashboard
-          left: 10px
-          right: 16px
-
-          .actions
-            display: none
-            width: 150px
-            background-color: #ff7f1a
-
-            a
-              border: none
-              display: block
-              width: 100%
-              padding: 5px 8px 5px
-
-          .x-button
-            +x_button
-
-          .add-yours
-            z-index: 999
-
-            .actions
-              background-color: #ff6600
-
-              a
-                font-size: 12px
-                background-color: inherit
-
-            &:hover
-              .actions
-                margin-top: -4px
-                display: block
-
-        .dashboard-signed-in
-          .menu-buttons
-            top: 45px
-
-          .user-signed-in-wrapper
-            +display-flex
-            +justify-content(flex-end)
-
-            .user-dropdown-menu
-              .user_name
-                pointer-events: none
-
-          .user_navigation
-            display: none
-
-      .search_form
-        top: 0
-        margin-top: 48px
-
-        ::-webkit-input-placeholder
-          color: black
-
-    // Filters
-    .filters-by-wrapper
-      padding: 20px 10px !important
-
-      &.filters-for-afisha
-        .filters
-          .by_date
-            ul.with-datepicker li
-              padding: 3px 11px 4px 11px
-
-              &:last-child
-                position: relative
-                width: 20px
-                height: 20px
-                padding: 0 0 0 15px
-
-                &:before
-                  z-index: 0
-                  font-size: 22px
-                  top: -3px
-
-                > a.daily
-                  z-index: 100
-                  position: absolute
-                  color: transparent
-                  margin: auto
-                  top: 0
-                  bottom: 0
-                  left: 0
-                  right: 0
-
-    // Content wrapper
-    .content_wrapper
-      width: auto !important
-
-    // Footer wrapper
-    .footer_wrapper
-      .footer
-        width: auto !important
-        padding: 0 16px
-        position: relative
-
-        .social-likes
-          position: relative
-          top: 5px
-          right: auto
-          left: 6px
-
-        .menu > ul
-          +display-flex
-          +flex-flow(column)
-          margin-top: 30px
-
-          > li
-            width: 30%
-            padding-right: 15px
-            margin-bottom: 6px
-
-            &#main_menu_reviews
-              ul li
-                float: none
-
-            > ul
-              display: none
-
-            &#main_menu_more
-              > ul
-                display: block
-                margin-top: 10px
-
-                li
-                  margin-bottom: 6px
-
-        .wrapper
-          position: static
-
-          .rating_18
-            top: 0
-            right: 30px
-
-        .our_social_link,
-        .contacts
-          margin-left: 0
-
   @media (max-width: $max-xs-width) and (orientation: landscape)
     .ui-dialog
       width: 94% !important
@@ -213,6 +45,7 @@
 
     .header_wrapper.header-wrapper-new
       // Orange top main menu
+
       .main_menu
         &.main-menu-orange
           padding: 0 16px
@@ -228,6 +61,15 @@
 
             > ul li > a
               padding: 3px 10px
+
+        .menu-buttons
+          +menu_buttons
+
+        .logo-for-xs
+          > a
+            position: absolute
+            top: 3px
+            left: 3px
 
       .header
         width: auto !important
@@ -321,6 +163,7 @@
     .header_wrapper.header-wrapper-new
 
       // Orange top main menu
+
       .main_menu
         &.main-menu-orange
           padding: 0 16px
@@ -331,6 +174,34 @@
       .header
         width: auto !important
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> Stashed changes
+        .menu-buttons
+          +menu_buttons
+
+        .logo-for-xs
+          > a
+            position: absolute
+            top: 3px
+            left: 3px
+
+          + .city-selector
+            float: none
+            left: 40px
+
+        h1
+          position: relative
+          display: block
+          font-size: 18px
+          max-width: 90%
+          left: 16px
+          top: 60px
+          margin-bottom: 30px
+
+>>>>>>> Stashed changes
         .logo
           left: 16px
 
