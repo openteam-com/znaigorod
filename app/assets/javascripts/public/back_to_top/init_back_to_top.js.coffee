@@ -15,7 +15,7 @@
       block.fadeOut()
 
   $('a', block).click ->
-    $.scrollTo(0, 300)
+    $('html, body').animate({ scrollTop: 0 }, "slow")
     false
 
   true

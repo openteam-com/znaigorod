@@ -3,153 +3,20 @@
   display: none
 
 .afishas-index-with-adaptive-version
-  @media screen and (min-width: 992px) and (max-width: 1200px)
-    .header_wrapper.header-wrapper-new
+  @media (max-width: $max-xs-width)
 
-      // Orange top main menu
-      .main_menu
-        &.main-menu-orange
-          padding: 0 10px
-
-          .header
-            width: auto !important
-
-      .header
-        width: auto !important
-
-        .logo
-          left: 10px
-
-        .dashboard
-          right: 10px
-
-    //Grayline navigation
-    .grayline-navigation
-      .filters
-        ul li a
-          min-width: auto
-          padding: 10px
-
-    // Filters
-    .filters-by-wrapper
-      padding: 20px 10px !important
-
-    // Content wrapper
-    .content_wrapper
-      width: auto !important
-
-    // Footer wrapper
-    .footer_wrapper
-      .footer
-        width: auto !important
-        padding: 0 10px
-
-  @media screen and (min-width: 768px) and (max-width: 992px)
-    .visible-sm
-      display: block
-
-    .hidden-sm
-      display: none
-
-    .header_wrapper.header-wrapper-new
-      // Orange top main menu
-      .main_menu
-        &.main-menu-orange
-          padding: 0 10px
-
-          ul
-            width: auto
-
-          .header
-            width: auto !important
-
-      .header
-        width: auto !important
-
-        h1
-          font-size: 18px
-          max-width: 45%
-
-        .logo
-          left: 10px
-
-        .dashboard
-          right: 10px
-
-    //Grayline navigation
-    .grayline-navigation
-      .filters
-        ul li a
-          min-width: auto
-          padding: 10px
-
-    // Filters
-    .filters-by-wrapper
-      padding: 20px 10px !important
-
-      &.filters-for-afisha
-        .filters
-          .by_date
-            ul.with-datepicker li
-              padding: 3px 11px 4px 11px
-
-              &:last-child
-                position: relative
-                width: 20px
-                height: 20px
-                padding: 0 0 0 15px
-
-                &:before
-                  z-index: 0
-                  font-size: 22px
-                  top: -3px
-
-                > a.daily
-                  z-index: 100
-                  position: absolute
-                  color: transparent
-                  margin: auto
-                  top: 0
-                  bottom: 0
-                  left: 0
-                  right: 0
-
-    // Content wrapper
-    .content_wrapper
-      width: auto !important
-
-    // Footer wrapper
-    .footer_wrapper
-      .footer
-        width: auto !important
-        padding: 0 10px
-
-        .social-likes
-          top: 330px
-          right: 235px
-
-        .menu > ul
-          +display-flex
-          +flex-flow(row wrap)
-
-          > li
-            width: 30%
-            padding-right: 15px
-
-            &#main_menu_reviews
-              ul li
-                float: none
-
-        .our_social_link,
-        .contacts
-          margin-left: 0
-
-  @media screen and (max-width: 768px)
     .visible-xs
       display: block
 
     .hidden-xs
       display: none
+
+    .ui-dialog
+      width: 90% !important
+      left: 16px !important
+
+      .sign_in_with .cloud_wrapper .social_signin_links li
+        margin: 0 6px 0 0
 
     .header_wrapper.header-wrapper-new
       // Orange top main menu
@@ -177,13 +44,15 @@
             left: 40px
 
         h1
-          position: relative
+          position: static
+          padding-top: 60px
+          padding-left: 16px
+          padding-right: 16px
+          margin-bottom: 15px
           display: block
           font-size: 18px
-          max-width: 90%
-          left: 16px
-          top: 60px
-          margin-bottom: 30px
+          max-width: 100%
+          height: auto
 
         .logo
           left: 10px
@@ -224,6 +93,21 @@
               .actions
                 margin-top: -4px
                 display: block
+
+        .dashboard-signed-in
+          .menu-buttons
+            top: 45px
+
+          .user-signed-in-wrapper
+            +display-flex
+            +justify-content(flex-end)
+
+            .user-dropdown-menu
+              .user_name
+                pointer-events: none
+
+          .user_navigation
+            display: none
 
       .search_form
         top: 0
@@ -315,3 +199,162 @@
         .our_social_link,
         .contacts
           margin-left: 0
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .ui-dialog
+      width: 94% !important
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .visible-sm
+      display: block
+
+    .hidden-sm
+      display: none
+
+    .header_wrapper.header-wrapper-new
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 16px
+
+          ul
+            width: auto
+
+          .header
+            width: auto !important
+
+          .main-menu-wrapper
+            margin-left: 90px
+
+            > ul li > a
+              padding: 3px 10px
+
+      .header
+        width: auto !important
+
+        h1
+          font-size: 18px
+          max-width: 45%
+
+        .logo
+          left: 16px
+
+        .dashboard
+          right: 16px
+
+          &.dashboard-signed-in
+            .menu-buttons
+            .user-signed-in-wrapper
+              .user-dropdown-menu
+                .user_name
+                  pointer-events: none
+
+    //Grayline navigation
+    .grayline-navigation
+      .filters
+        ul li a
+          min-width: auto
+          padding: 6px
+
+    // Filters
+    .filters-by-wrapper
+      padding: 20px 16px !important
+
+      &.filters-for-afisha
+        .filters
+          .by_date
+            ul.with-datepicker li
+              padding: 3px 11px 4px 11px
+
+              &:last-child
+                position: relative
+                width: 20px
+                height: 20px
+                padding: 0 0 0 15px
+
+                &:before
+                  z-index: 0
+                  font-size: 22px
+                  top: -3px
+
+                > a.daily
+                  z-index: 100
+                  position: absolute
+                  color: transparent
+                  margin: auto
+                  top: 0
+                  bottom: 0
+                  left: 0
+                  right: 0
+
+    // Content wrapper
+    .content_wrapper
+      width: auto !important
+
+    // Footer wrapper
+    .footer_wrapper
+      .footer
+        width: auto !important
+        padding: 0 16px
+
+        .social-likes
+          top: 330px
+          right: 333px
+
+        .menu > ul
+          +display-flex
+          +flex-flow(row wrap)
+
+          > li
+            width: 25%
+            padding-right: 15px
+
+            &#main_menu_reviews
+              ul li
+                float: none
+
+        .our_social_link,
+        .contacts
+          margin-left: 0
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .header_wrapper.header-wrapper-new
+
+      // Orange top main menu
+      .main_menu
+        &.main-menu-orange
+          padding: 0 16px
+
+          .header
+            width: auto !important
+
+      .header
+        width: auto !important
+
+        .logo
+          left: 16px
+
+        .dashboard
+          right: 16px
+
+    //Grayline navigation
+    .grayline-navigation
+      .filters
+        ul li a
+          min-width: auto
+          padding: 6px
+
+    // Filters
+    .filters-by-wrapper
+      padding: 20px 16px !important
+
+    // Content wrapper
+    .content_wrapper
+      width: auto !important
+
+    // Footer wrapper
+    .footer_wrapper
+      .footer
+        width: auto !important
+        padding: 0 16px
+

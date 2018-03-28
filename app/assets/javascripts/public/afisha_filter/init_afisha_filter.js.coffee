@@ -1,6 +1,10 @@
 @init_afisha_filter = () ->
 
-  link = $('.filters-by-wrapper .by_date .daily') || $('.filters_then_mobile .by_date .daily')
+  if $('.filters-by-wrapper .by_date .daily').is(':visible')
+    link = $('.filters-by-wrapper .by_date .daily')
+  else
+    link = $('.filters_when_mobile .by_date .daily')
+
   wrapper = link.closest('li')
 
   create_obj_from_uri = ->

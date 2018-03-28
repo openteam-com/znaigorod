@@ -4,77 +4,13 @@
       max-width: 100%
       height: auto
 
-  @media screen and (min-width: 992px) and (max-width: 1200px)
-    .content_wrapper .content
-      .posters
-        padding: 0 10px
-        +justify-content(space-between)
-
-        &.paginable-list-paginated
-          &:after
-            content: ''
-            +flex(0 1 29%)
-            margin-left: 25px
-
-        .item
-          margin-right: 25px
-
-          &.fourth
-            margin-right: 0px
-
-          &.pagination
-            left: 10px
-
-      .filter_and_share
-        padding-right: 10px
-
-      .introduction
-        margin: 10px
-
-  @media screen and (min-width: 768px) and (max-width: 992px)
-    .filters_for_mobile_afisha
-      margin: 10px 10px 0
-      width: 50%
-
-      .filters_by_category_mobile
-        +filters_by_category_mobile
-
-      .presentation_filters.afisha
-        +presentation_filters
-
-    .content_wrapper .content
-      .posters
-        padding: 0 10px
-        +justify-content(space-between)
-
-        &.paginable-list-paginated
-          &:after
-            content: ''
-            +flex(0 1 29%)
-            margin-left: 25px
-
-        .item
-          margin-right: 30px
-
-          &:nth-child(3n+3)
-            margin-right: 0
-
-          &.pagination
-            left: 10px
-
-      .filter_and_share
-        padding-right: 10px
-
-      .introduction
-        margin: 10px
-
-  @media screen and (max-width: 768px)
+  @media (max-width: $max-xs-width)
     .header
       .menu-buttons
         +menu_buttons
 
     .filters_for_mobile_afisha
-      margin: 10px 16px 0
+      margin: 0 16px 0
 
       .filters_by_category_mobile
         +filters_by_category_mobile
@@ -102,11 +38,8 @@
           .item
             width: 360px
             height: auto
-            margin-right: 0
+            margin: 5px auto 10px
             padding-right: 4px
-
-            &:nth-child(3n+3)
-              margin-right: 0
 
             &.pagination
               bottom: -120px
@@ -132,9 +65,95 @@
               max-height: 25px
 
       .filter_and_share
+        margin-top: 10px
+
         > #st-1
           padding-left: 16px
           text-align: left
 
       .introduction
         margin: 70px 16px 10px
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .filters_for_mobile_afisha
+      margin: 10px 16px 0
+      width: 50%
+
+      .filters_by_category_mobile
+        +filters_by_category_mobile
+
+      .presentation_filters.afisha
+        +presentation_filters
+
+    .content_wrapper .content
+      .posters
+        padding: 0 16px
+        +justify-content(space-between)
+
+        &.paginable-list-paginated
+          &:after
+            content: ''
+            +flex(0 1 29%)
+            margin-left: 25px
+
+        .item
+          width: 350px
+          height: auto
+          padding-right: 4px
+          margin-right: 0
+
+          .image
+            width: 100%
+            height: auto
+
+          .title
+            +display-flex
+            +align-items(center)
+            width: auto
+            height: 55px
+            line-height: 24px
+
+          .title,
+          .place,
+          .human_when
+            font-size: 14px
+
+          .place
+            max-height: 25px
+
+          &.pagination
+            left: 16px
+
+      .filter_and_share
+        padding-right: 16px
+
+      .introduction
+        margin: 10px
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .content_wrapper .content
+      .posters
+        padding: 0 16px
+        +justify-content(space-between)
+
+        &.paginable-list-paginated
+          &:after
+            content: ''
+            +flex(0 1 29%)
+            margin-left: 25px
+
+        .item
+          margin-right: 25px
+
+          &.fourth
+            margin-right: 0px
+
+          &.pagination
+            left: 16px
+
+      .filter_and_share
+        padding-right: 16px
+
+      .introduction
+        margin: 10px 16px
+

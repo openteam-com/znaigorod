@@ -78,33 +78,35 @@
       </div>
 
       <% if user_signed_in? %>
-        <span class='messages'>
-          <% if current_user.account.private_messages.unread.any? %>
-            <%= link_to "+#{current_user.account.private_messages.unread.count}", my_dialogs_path, class: :new, title: 'Есть новые сообщения' %>
-          <% elsif current_user.account.notification_messages.unread.any? %>
-            <%= link_to "+#{current_user.account.notification_messages.unread.count}", my_notification_messages_path, class: :new, title: 'Есть новые сообщения' %>
-          <% else %>
-            <%= link_to '', my_root_path, class: :empty, title: 'Нет новых сообщений' %>
-          <% end %>
-        </span>
-
-        <div class='user user-dropdown-menu'>
-          <span class='user-dropdown-menu-person'>
-            <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
-              <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
+        <span class='user-signed-in-wrapper'>
+          <span class='messages'>
+            <% if current_user.account.private_messages.unread.any? %>
+              <%= link_to "+#{current_user.account.private_messages.unread.count}", my_dialogs_path, class: :new, title: 'Есть новые сообщения' %>
+            <% elsif current_user.account.notification_messages.unread.any? %>
+              <%= link_to "+#{current_user.account.notification_messages.unread.count}", my_notification_messages_path, class: :new, title: 'Есть новые сообщения' %>
+            <% else %>
+              <%= link_to '', my_root_path, class: :empty, title: 'Нет новых сообщений' %>
             <% end %>
-
-            <%= link_to(current_user.account, my_root_path, class: :user_name) %>
           </span>
 
-          <ul>
-            <li>
-              <%= link_to('Личный кабинет', my_root_path) %>
-            </li>
+          <div class='user user-dropdown-menu'>
+            <span class='user-dropdown-menu-person'>
+              <%= link_to account_path(current_user.account), target: :_blank, class: :avatar do %>
+                <%= image_tag(resized_image_url(current_user.account.avatar.url, 22, 22), size: '22x22', title: current_user.account, alt: current_user.account) %>
+              <% end %>
 
-            <li><%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %></li>
-          </ul>
-        </div>
+              <%= link_to(current_user.account, my_root_path, class: :user_name) %>
+            </span>
+
+            <ul>
+              <li>
+                <%= link_to('Личный кабинет', my_root_path) %>
+              </li>
+
+              <li><%= link_to('Выйти', destroy_user_session_path, method: :delete, class: :sign_out) %></li>
+            </ul>
+          </div>
+        </span>
         <div class='user'>
           <div class='user_navigation'>
             <div class='my_action'>
