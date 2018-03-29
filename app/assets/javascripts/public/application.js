@@ -32,6 +32,7 @@
  * = require modal_dialog
  * = require popup_window
  * = require ./main_page
+ * = require ./touch_devices_detect
  * = require ./share_to_vk_wall
  * = require ./auth
  * = require ./unauthorized_action

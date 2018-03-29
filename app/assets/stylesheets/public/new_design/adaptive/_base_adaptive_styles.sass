@@ -220,6 +220,13 @@
         &.main-menu-orange
           padding: 0 16px
 
+          &.need-touch
+            .main-menu-wrapper
+              > ul li
+                &:hover
+                  > ul
+                    display: none
+
           ul
             width: auto
 
@@ -328,6 +335,13 @@
         &.main-menu-orange
           padding: 0 16px
 
+          &.need-touch
+            .main-menu-wrapper
+              > ul li
+                &:hover
+                  > ul
+                    display: none
+
           .header
             width: auto !important
 
@@ -361,3 +375,11 @@
         width: auto !important
         padding: 0 16px
 
+  @media (min-width: $min-lg-width)
+    .main-menu-orange
+      &.need-touch
+        .main-menu-wrapper
+          > ul li
+            &:hover
+              > ul
+                display: none

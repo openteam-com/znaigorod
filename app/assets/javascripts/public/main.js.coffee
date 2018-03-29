@@ -24,6 +24,7 @@ $ ->
   init_afisha_extend() if $('.afisha_show .photogallery').length
   init_main_page_reviews_toggler() if $('.reviews_main_page .reviews_toggler').length
   init_main_page_reviews_carousel() if $('.reviews_main_page .reviews_carousel').length
+  init_touch_devices_detect() if $('.js-need-touch-detect').length
   init_afisha_extend() if $('.afisha_show .trailer')
   init_afisha_filter() if $('.filters .by_date .daily').length
   init_social_actions() if $('.afisha_show').length
