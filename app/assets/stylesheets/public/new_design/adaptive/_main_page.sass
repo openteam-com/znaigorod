@@ -1,19 +1,75 @@
 .main_page-show-with-adaptive-version
-  @media screen and (max-width: 768px)
+  @media screen and (max-width: $max-xs-width)
     .header_wrapper.header-wrapper-new
+      min-height: 140px
+
       .weather_wrapper
-        left: 0
-        top: 30px
+        left: 5px
+        top: 35px
+
+        .weather-icon > a
+          min-width: 140px
+          padding-top: 20px
+
+        .weather-temperature,
+        .weather-wind-speed
+          display: inline-block
+          width: auto
 
     .content_wrapper
       width: 100% !important
       box-sizing: border-box
       padding: 0 16px
 
+      .content.main_page_show
+        border-top: 0
+
+        .reviews_main_page
+          margin: 0
+
+          .left
+            border-bottom: 0
+            width: 100%
+
+            .reviews
+              li
+                max-width: 100%
+
+              .image_without_colorbox
+                display: block
+                float: none
+
+              .stats
+                float: none
+                margin-top: 10px
+
+              .categories,
+              .title,
+              .text
+                margin-left: 0
+
+            .reviews_toggler
+              display: none
+
+          .right
+            width: 100%
+            margin-top: 290px
+            border-top: 1px solid #ccc
+            padding-top: 20px
+
+            .last_reviews_header
+              margin-left: 0
+
+            .last_reviews_content
+              margin-left: 10px
+
       .filter_header
         float: none
 
       .afisha_main_page_list
+        border-top: 1px solid #ccc
+        margin-top: 20px
+        margin-bottom: 0
 
         .filters_for_mobile_afisha
           .filters_by_category_mobile
@@ -23,20 +79,25 @@
             +filters_when_mobile
 
         .posters
-          width: 98%
+          width: 100%
           margin-left: auto
           margin-right: auto
           padding: 0
 
           .item
-            width: 100%
+            width: auto
             height: 100%
             margin-left: auto
             margin-right: auto
 
+            .title,
+            .place,
+            .human_when
+              font-size: 14px
+
             .image
               width: 100%
-              height: 100%
+              height: auto
               text-align: center
 
               a
@@ -69,26 +130,41 @@
               margin: 6px 0 0 0
 
       .organizations_main_page_list
+        border-top: 1px solid #ccc
+        padding-top: 10px
+        margin-top: 0
+
+        h2
+          margin-bottom: 10px
 
         .filters_for_mobile_organizations
           +filters_by_category_mobile
 
         .posters
+          +display-flex
+          +justify-content(space-between)
+          +flex-flow(row wrap)
           padding-top: 20px
 
           li.item_organization
+            width: 48%
+            margin: 0 0 10px
+
             &:last-child
               display: none
 
-            width: 50%
-            margin: 0
-
             .info
               margin: 0
+              width: 145px
+              padding: 1px
 
               .image
                 margin: 0
                 width: 100%
+
+                &:hover
+                  img
+                    +opacity(1)
 
                 a
                   width: 100%
@@ -97,10 +173,24 @@
                     width: 100%
                     height: auto
 
-                >a + a
+                > a + a
                   height: auto
 
+                .sms_claimable
+                  width: 160px
+                  left: -7px
+
+              .details,
+              .sms_claim_link
+                display: none
+
       .discounts_main_page_list
+        border-top: 1px solid #ccc
+        padding-top: 15px
+        margin-top: 0
+
+        h2
+          margin-bottom: 12px
 
         .filters_for_mobile_discounts
           +filters_by_category_mobile
@@ -128,75 +218,100 @@
                 margin: 13px 0 0 0
                 border-top: 1px dashed #ccc
 
-
               .image
                 width: 99%
                 height: auto
                 margin: 0
                 padding: 0 2px
 
+                .for_sale
+                  display: none
+
+                &:hover
+                  img
+                    +opacity(1)
+
                 img
                   width: 100%
                   height: auto
 
       .accounts_main_page_list
+        border-top: 1px solid #ccc
+        padding-top: 15px
+        margin-top: 5px
+        margin-bottom: 10px
+
+        h2
+          margin-bottom: 12px
 
         .filters_for_mobile_accounts
           +filters_by_category_mobile
-          p
-            width: 130px
+          max-height: 30px
 
+          .mobile-version-filters
+            +align-items(center)
+
+            p
+              padding-top: 0
 
         .posters
           padding-top: 20px
+          +display-flex
+          +flex-flow(row wrap)
+          +justify-content(space-between)
 
           li
-            margin-right: 0
-            margin-left: 0
-            width: 47%
-            height: auto
-            box-sizing: border-box
+            margin: 0 2px 5px 0
+            width: 48%
+            border: 1px solid #ccc
+            padding-bottom: 1px
 
-            &:nth-child(odd)
-              margin-right: 15px
+            &:nth-child(2n)
+              margin-right: 0
 
-            .image
-              width: 100%
-              padding: 0
-              height: auto
+            .item
+              border: 0
 
-              .avatar-wrapper
-                width: 100%
+              .image
+                width: auto
                 height: auto
-                margin: 0
-                float: none
 
+                &:hover
+                  .details,
+                  .last_visit
+                    display: none
 
+                  img
+                    +opacity(1)
 
-                img
-                  max-width: 100%
-                  height: auto
-                  padding: 2px
-                  box-sizing: border-box
-                  vertical-align: middle
+                .avatar-wrapper
+                  margin: 0
 
+                  img
+                    max-width: 100%
+                    height: auto
+                    vertical-align: bottom
 
-  .organizations_main_page_list
-    .posters
-      .image
-        img
-          max-width: 100%
-          max-height: 100%
+                .invitation_link
+                  display: none
 
-  .discounts_main_page_list
-    .posters
-      .image
-        img
-          height: auto
+  @media screen and (max-width: $max-xs-width) and (orientation: landscape)
+    .content_wrapper .content.main_page_show
+      .reviews_main_page
+        .right
+          margin-top: 205px
 
-  .accounts_main_page_list
-    .posters
-      .image
-        img
-          max-width: 178px
-          height: auto
+      .organizations_main_page_list
+        .posters
+          li
+            width: 33%
+
+      .discounts_main_page_list
+        .item
+          width: 70%
+
+      .accounts_main_page_list
+        .posters
+          li
+            width: 30%
+            margin: 0 0 2px 0
