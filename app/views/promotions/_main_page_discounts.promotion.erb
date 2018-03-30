@@ -5,7 +5,7 @@
 <% cache('main_page_discounts', :expires_in => 10.minutes) do %>
 
 
-  <div class="filters_wrapper grayline-navigation hidden-xs">
+  <div class="filters_wrapper grayline-navigation hidden-xs hidden-sm">
     <div class="filters discount">
       <div class="by_kind">
         <ul>
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="filters_for_mobile_discounts visible-xs">
+  <div class="filters_for_mobile_discounts visible-xs visible-sm">
     <div class='mobile-version-filters'>
       <p> Категория: </p>
         <select onchange="location = this.value">

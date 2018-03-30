@@ -6,7 +6,7 @@
   <% cache('main_page_accounts', :expires_in => 10.minutes) do %>
 
 
-    <div class="filters_wrapper grayline-navigation hidden-xs">
+    <div class="filters_wrapper grayline-navigation hidden-xs hidden-sm">
       <div class="filters account">
         <div class="by_kind">
           <ul>
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="filters_for_mobile_accounts visible-xs">
+    <div class="filters_for_mobile_accounts visible-xs visible-sm">
       <div class='mobile-version-filters'>
         <p> Ищут компанию: </p>
           <select onchange="location = this.value">
