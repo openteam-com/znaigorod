@@ -23,6 +23,11 @@
       .sign_in_with .cloud_wrapper .social_signin_links li
         margin: 0 6px 0 0
 
+    .doberman_wrapper
+      .links_brand,
+      .doberman_content_wrapper
+        width: auto
+
     .header_wrapper.header-wrapper-new
       // Orange top main menu
       .main_menu
@@ -219,6 +224,23 @@
     .hidden-sm
       display: none
 
+    .doberman_wrapper
+      .links_brand,
+      .doberman_content_wrapper
+        width: auto
+
+        .header_wrapper.header-wrapper-new
+          .main-menu-inner-wrapper
+            .search_form
+              right: 0
+
+            .city-selector
+              left: 0
+
+          .header
+            .logo
+              left: 10px
+
     .header_wrapper.header-wrapper-new
       // Orange top main menu
       .main_menu
@@ -333,9 +355,24 @@
           margin-left: 0
 
   @media (min-width: $min-md-width) and (max-width: $max-md-width)
-    .header_wrapper.header-wrapper-new
+    .doberman_wrapper
+      .links_brand,
+      .doberman_content_wrapper
+        width: auto
 
-      // Orange top main menu
+        .header_wrapper.header-wrapper-new
+          .main-menu-inner-wrapper
+            .search_form
+              right: 0
+
+            .city-selector
+              left: 0
+
+          .header
+            .logo
+              left: 10px
+
+    .header_wrapper.header-wrapper-new
       .main_menu
         &.main-menu-orange
           padding: 0 16px
@@ -364,7 +401,7 @@
       .filters
         ul li a
           min-width: auto
-          padding: 6px
+          padding: 10px 6px
 
     // Filters
     .filters-by-wrapper

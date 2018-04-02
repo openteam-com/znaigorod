@@ -24,11 +24,13 @@
     <div class='links_brand'>
       <ul class='doberman_links'>
         <li>
-          <%#= link_to 'Здоровье', 'https://goo.gl/4KyiyC', target: '_blank', rel: 'nofollow' %>
+          <%#= link_to 'https://goo.gl/4KyiyC', target: '_blank', rel: 'nofollow' do %>
+            <%#= image_tag 'public/doberman/clinic.gif' %>
+          <%# end %>
         </li>
       </ul>
     </div>
-  -->
+    -->
 
     <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
 
