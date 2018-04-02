@@ -52,7 +52,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:metrics) %>
   </head>
-  <body>
+  <body class='<%= Settings['app']['city'].downcase %>'>
     <%= yield(:flash_messages) %>
     <%= yield(:content) %>
   </body>

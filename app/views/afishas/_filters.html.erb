@@ -16,23 +16,25 @@
 </div>
 
 <div class='filters-by-wrapper filters-for-afisha'>
-  <div class='filters afisha'>
-    <div class='by_date'>
-      <ul class='with-datepicker'>
-        <li>Когда: </li>
-        <% @presenter.periods_links.each do |period_link| %>
-          <li<%= " class=selected" if period_link[:selected] %>>
-            <%= link_to period_link[:title],
-              send(period_link[:url], period_link[:parameters]), :class => period_link[:class] %>
-          </li>
-        <% end %>
-      </ul>
+  <div class='filters-inner-wrapper'>
+    <div class='filters afisha'>
+      <div class='by_date'>
+        <ul class='with-datepicker'>
+          <li>Когда: </li>
+          <% @presenter.periods_links.each do |period_link| %>
+            <li<%= " class=selected" if period_link[:selected] %>>
+              <%= link_to period_link[:title],
+                send(period_link[:url], period_link[:parameters]), :class => period_link[:class] %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class='presentation_filters afisha'>
-    <!--noindex-->
-    <%= render :partial => 'commons/presentation_filters' %>
-    <!--/noindex-->
+    <div class='presentation_filters afisha'>
+      <!--noindex-->
+      <%= render :partial => 'commons/presentation_filters' %>
+      <!--/noindex-->
+    </div>
   </div>
 </div>

@@ -241,21 +241,26 @@ $selected-link-bg-color: #ff6600
   &.filters-for-afisha,
   &.filters-for-discounts,
   &.filters-for-reviews
-    +display-flex
-    +justify-content(space-between)
-    +align-items(center)
     padding: 20px 10px
+    background-color: #fff
 
-    .presentation_filters
-      margin: 0
+    .filters-inner-wrapper
+      +display-flex
+      +justify-content(space-between)
+      +align-items(center)
+      max-width: 1200px
+      margin: 0 auto
 
-    .filters
-      margin: 0
+      .presentation_filters
+        margin: 0
 
-      .by_type
-        margin-left: 0
+      .filters
+        margin: 0
 
-      ul li
-        &:first-child
-          padding-left: 0
+        .by_type
+          margin-left: 0
+
+        ul li
+          &:first-child
+            padding-left: 0
 
