@@ -244,6 +244,17 @@ $selected-link-bg-color: #ff6600
     padding: 20px 10px
     background-color: #fff
 
+    &.flexible
+      +display-flex
+      +justify-content(space-between)
+      +align-items(center)
+
+      .filters
+        margin: 0
+
+        .by_kind
+          margin-left: 0
+
     .filters-inner-wrapper
       +display-flex
       +justify-content(space-between)

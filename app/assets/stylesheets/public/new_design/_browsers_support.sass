@@ -13,6 +13,9 @@
           &:nth-child(6)
             min-width: 90px
 
+            @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+              min-width: auto
+
         &.with-datepicker li
           &:last-child
             padding: 5px 20px 4px 25px
@@ -39,9 +42,6 @@
   .main_page-show-with-adaptive-version, .afishas-index-with-adaptive-version
     .header_wrapper.header-wrapper-new .header .logo-for-xs > a
       top: 12px
-
-
-
 
 select:-moz-focusring
   color: transparent
