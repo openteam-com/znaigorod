@@ -1,5 +1,6 @@
 @media (max-width: $max-md-width)
-  .banner12_contest_wrapper.main_page
+  .banner12_contest_wrapper.main_page,
+  .banner12_contest_wrapper.afishas
     width: 100%
 
     .banner12
@@ -13,11 +14,17 @@
           height: auto
           max-height: 80px
 
-@media (max-width: $max-xs-width)
-  .banner12_contest_wrapper.main_page    
+@media (max-width: $max-xs-width) and (orientation: portrait)
+  .banner12_contest_wrapper.main_page,
+  .banner12_contest_wrapper.afishas
     .banner12
-      width: 100%
+      width: 95%
+      img
+        margin: 0 auto
 
-    img
-      padding: 16px
-      box-sizing: border-box
+  .banner12_contest_wrapper.afishas
+    ul
+      height: 40px
+
+    li
+      height: 40px
