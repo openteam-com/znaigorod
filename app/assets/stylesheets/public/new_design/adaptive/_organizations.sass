@@ -27,9 +27,23 @@
       img
         max-width: 100%
 
+  .wide_content_wrapper
+    .introduction
+      max-width: 100%
+      box-sizing: border-box
+      padding: 0 16px
+
+    .introduction.top_introduction
+      padding-right: 0
+      padding-left: 0
+
+  .filter_and_share
+    padding: 16px 0
+
   .filter_and_search
     .filter_and_share
       margin-bottom: 8px
+      padding: 16px 0
 
       .search_wrapper
         margin-top: 9px
@@ -69,6 +83,9 @@
       width: 100%
       padding: 0 16px
 
+      .introduction.suborganization.top_introduction
+        padding: 0
+
       .filter_and_share
         .search_wrapper
           width: 100%
@@ -98,11 +115,20 @@
         a.swap_position
           display: none
 
+      .list_view_organization_list
+        position: relative
+        width: 97%
+        margin-bottom: 50px
+        left: 6px
+
+        a.swap_position
+          display: none
+
       .ymaps-2-1-62-zoom
         left: 200px
 
-    .like_this
-      padding: 0 16px
+    .filter_and_share
+      padding: 16px
 
   @media (max-width: $max-xs-width) and (orientation: portrait)
     .recommended_organizations_wrapper.organization
@@ -155,6 +181,9 @@
       .tree
         width: 40%
 
+    .filter_and_share
+      padding: 16px
+
   @media (min-width: $min-md-width) and (max-width: $max-md-width)
 
     .content.organizations_index
@@ -193,3 +222,6 @@
 
           &:last-child
             margin-right: 0
+
+    .wide_content_wrapper .introduction
+      padding: 0
