@@ -1,0 +1,190 @@
+=posters_flexibility
+  +display-flex
+  justify-content: space-between
+  flex-flow: row wrap
+
+=images_adaptability
+  height: auto
+
+  a
+    width: 100%
+    height: auto
+    position: relative
+
+  .sms_claimable
+    position: absolute
+    width: 111%
+
+  a.sms_claim_link
+    width: 80px
+    position: absolute
+
+
+.organizations-index-with-adaptive-version
+  .recommended_organizations_wrapper.organization
+    max-width: 100%
+    li
+      img
+        max-width: 100%
+
+  .filter_and_search
+    .filter_and_share
+      margin-bottom: 8px
+
+      .search_wrapper
+        margin-top: 9px
+
+    .breadcrumbs
+      font-size: 18px
+
+  .recommended_organizations_wrapper.organization
+    width: 1160px
+    max-width: 100%
+    margin-top: 0
+
+  @media (max-width: $max-xs-width)
+    .recommended_organizations_wrapper.organization
+      padding: 16px
+      box-sizing: border-box
+
+      .posters
+        +posters_flexibility
+
+        li.item_organization
+          width: 44%
+          margin-bottom: 15px
+          max-width: 182px
+
+          &:last-child
+            display: none
+
+          .info
+            width: 100%
+
+            .image
+              +images_adaptability
+
+    .filter_and_search
+      box-sizing: border-box
+      width: 100%
+      padding: 0 16px
+
+      .filter_and_share
+        .search_wrapper
+          width: 100%
+          margin: 12px 0
+
+          .search_fields
+            width: 100%
+
+            input.search_field
+              width: 100%
+              box-sizing: border-box
+
+            button
+              position: relative
+              bottom: 30px
+              left: 96%
+
+    .organization_wrapper
+      max-width: 91%
+
+      .tree
+        position: relative
+        width: 98%
+        margin-bottom: 50px
+        left: 6px
+
+        a.swap_position
+          display: none
+
+      .ymaps-2-1-62-zoom
+        left: 200px
+
+  @media (max-width: $max-xs-width) and (orientation: portrait)
+    .recommended_organizations_wrapper.organization
+      .posters li.item_organization
+        margin-right: 3px
+
+    .filter_and_search
+      .filter_and_share .search_wrapper
+        .search_fields button
+          left: 93%
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .recommended_organizations_wrapper.organization
+      padding: 16px
+      box-sizing: border-box
+
+      .posters
+        +posters_flexibility
+
+        li.item_organization
+          margin-bottom: 15px
+          flex-basis: 24%
+          flex-wrap: wrap
+
+          &:last-child
+            display: none
+
+          .info
+            width: 100%
+            max-height: unset
+
+            .image
+              +images_adaptability
+
+    .filter_and_search
+      box-sizing: border-box
+      width: 100%
+      padding: 0 16px
+
+      .filter_and_share
+        margin-bottom: 8px
+
+        .search_wrapper
+          margin-top: 9px
+
+    .organization_wrapper
+      padding: 0 16px
+
+      .tree
+        width: 40%
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+
+    .content.organizations_index
+      margin-right: 16px
+      margin-left: 16px
+
+    .recommended_organizations_wrapper.organization
+      box-sizing: border-box
+
+      .posters
+        +posters_flexibility
+
+        li.item_organization
+          margin-bottom: 15px
+          flex-basis: 15%
+          flex-wrap: wrap
+
+          &:last-child
+            display: none
+
+          &:nth-child(6)
+            margin-right: 0
+
+          .info
+            width: 100%
+            max-height: unset
+
+            .image
+              +images_adaptability
+
+    @media (min-width: $min-lg-width)
+      .posters
+        li.item_organization
+          margin-right: 13px
+
+          &:last-child
+            margin-right: 0
