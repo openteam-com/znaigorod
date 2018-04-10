@@ -19,23 +19,22 @@
 <% end %>
 
 <%= content_for :content do %>
-  <!-- Uncomment for branding and comment for wide version
-  <div class='doberman_wrapper'>
+  <!-- Uncomment for branding and comment for wide version -->
+  <div class='doberman_wrapper without-banner'>
     <div class='links_brand'>
       <ul class='doberman_links'>
         <li>
-          <%#= link_to 'https://goo.gl/4KyiyC', target: '_blank', rel: 'nofollow' do %>
+          <%= link_to '/reviews/2018-02/franshiza-gorodskogo-portala-znaygorod-zarabotat-100-tys-v-mesyats-legko-iz-doma', rel: 'nofollow' do %>
             <%#= image_tag 'public/doberman/clinic.gif' %>
-          <%# end %>
+          <% end %>
         </li>
       </ul>
     </div>
-    -->
 
     <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" %>
 
     <!-- For branding replace wide_ to doberman_ -->
-    <div class='wide_content_wrapper'>
+    <div class='doberman_content_wrapper'>
       <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
       <%= render :partial => 'commons/public_header' %>
       <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
