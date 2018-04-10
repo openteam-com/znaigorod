@@ -1,4 +1,5 @@
 =posters_flexibility
+=posters_flexibility
   +display-flex
   justify-content: space-between
   flex-flow: row wrap
@@ -27,6 +28,27 @@
       img
         max-width: 100%
 
+  .organization_content
+    .posters
+      li.pagination
+        width: unset !important
+
+        a
+          background-color: white
+          background: white
+          border: none
+          text-transform: uppercase
+          color: #4d81d5
+          padding: 0
+
+    &.sauna_housing_content .posters
+      li.item_organization
+        border: 1px solid #ccc
+          margin-right: 15px
+
+        .image
+          margin: 2px 0 0
+
   .wide_content_wrapper
     .introduction
       max-width: 100%
@@ -40,13 +62,57 @@
   .filter_and_share
     padding: 16px 0
 
+  .presenter-organizations-tile
+    + .filter_and_share
+      position: relative
+      bottom: 74px
+      width: 400px
+      max-width: 100%
+      float: right
+      margin-bottom: -50px
+
+      .sharethis-inline-share-buttons
+        width: 400px
+        max-width: 100%
+
   .filter_and_search
     .filter_and_share
       margin-bottom: 8px
       padding: 16px 0
 
+      .presentation_filters.organization
+        float: right
+
+      .view_by
+        margin: 8px 25px 0 0
+
+        .tile_view, .list_view
+          height: 30px
+          width: 30px
+
+          &:hover, &:active
+            .view_link
+              -webkit-box-shadow: none
+              box-shadow: none
+
+          .view_link
+            -webkit-box-shadow: none
+            box-shadow: none
+
+          &.selected
+            .view_link
+              -webkit-box-shadow: none
+              box-shadow: none
+
+        .tile_view
+          margin-right: 8px
+
       .search_wrapper
-        margin-top: 9px
+        margin-top: 8px
+        margin-left: 0
+
+      .advanced .submit_action
+        margin-top: 15px
 
     .breadcrumbs
       font-size: 18px
@@ -78,6 +144,22 @@
             .image
               +images_adaptability
 
+    .organization_content.sauna_housing_content
+      .posters    
+        li.item_organization
+          margin-right: 15px
+          &.item_7
+            margin-right: 15px
+
+    .presenter-organizations-tile
+      + .filter_and_share
+        margin-bottom: -30px
+        float: left
+        bottom: 35px
+
+        .sharethis-inline-share-buttons#st-1
+          text-align: left
+
     .filter_and_search
       box-sizing: border-box
       width: 100%
@@ -87,6 +169,22 @@
         padding: 0
 
       .filter_and_share
+        padding: 0
+
+        .presentation_filters.organization
+          float: left
+
+          .presentation-filters-wrapper select
+            min-width: 150px
+
+        .view_by
+          margin-right: 0
+          float: right
+
+          .tile_view, .list_view
+            width: 28px
+            height: 28px
+
         .search_wrapper
           width: 100%
           margin: 12px 0
@@ -101,7 +199,13 @@
             button
               position: relative
               bottom: 30px
-              left: 96%
+              margin: 0
+              left: calc(100% - 27px)
+
+        .advanced .submit_action
+          .clear_wrapper
+            display: block
+            margin-top: 15px
 
     .organization_wrapper
       max-width: 91%
@@ -129,17 +233,13 @@
 
     .filter_and_share
       padding: 16px
+      float: left
 
   @media (max-width: $max-xs-width) and (orientation: portrait)
     .recommended_organizations_wrapper.organization
       .posters li.item_organization
         margin-right: 3px
         width: 44%
-
-    .filter_and_search
-      .filter_and_share .search_wrapper
-        .search_fields button
-          left: 93%
 
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
     .recommended_organizations_wrapper.organization
@@ -164,6 +264,13 @@
             .image
               +images_adaptability
 
+    .organization_content.sauna_housing_content
+      .posters
+        li.item_organization
+          margin-right: 28px
+          &.item_7
+            margin-right: 28px
+
     .filter_and_search
       box-sizing: border-box
       width: 100%
@@ -172,8 +279,15 @@
       .filter_and_share
         margin-bottom: 8px
 
+        .view_by
+          margin-right: 15px
+
         .search_wrapper
           margin-top: 9px
+          margin-right: 0
+
+          div.search_fields input.search_field
+            width: 190px
 
     .organization_wrapper
       padding: 0 16px
@@ -213,6 +327,17 @@
 
             .image
               +images_adaptability
+
+    .wide_content_wrapper
+      .introduction
+        padding: 0
+
+    .organization_content.sauna_housing_content
+      .posters
+        li.item_organization
+          margin-right: 40px
+          &.item_7
+            margin-right: 40px
 
   @media (min-width: $min-lg-width)
     .recommended_organizations_wrapper.organization

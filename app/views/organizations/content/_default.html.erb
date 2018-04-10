@@ -3,7 +3,9 @@
 <%= render partial: 'filters_and_search' %>
 
 <% if @presenter.category %>
+<div class="presenter-organizations-<%= @presenter.view_type %>">
   <%= render :partial => "#{@presenter.view_type}_view" %>
+</div>
 <% else %>
   <% if @presenter.query %>
     <%= render :partial => "#{@presenter.view_type}_view" %>
