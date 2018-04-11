@@ -1,3 +1,5 @@
+@import 'adaptive/common_elements'
+
 body
   &.sevastopol
     .presentation-filters-wrapper
@@ -20,3 +22,17 @@ body
 
       .top_headline
         height: 80px
+
+      @media (min-width: $min-md-width) and (max-width: $max-md-width)
+        .header_wrapper.header-wrapper-new.sevastopol
+          .city-selector,
+          .logo
+            left: 0
+
+          .main_menu
+            padding: 0 10px
+
+      @media (max-width: $max-xs-width)
+        .header_wrapper.header-wrapper-new.sevastopol
+          .city-selector,
+            left: 30px
