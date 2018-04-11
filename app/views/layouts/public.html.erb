@@ -19,20 +19,35 @@
 <% end %>
 
 <%= content_for :content do %>
-  <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" unless request.path.split('/').include? 'inform' %>
-  <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
-  <%= render :partial => 'commons/public_header' %>
-  <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
+  <!-- Uncomment for branding and comment for wide version -->
+  <div class='doberman_wrapper without-banner'>
+    <div class='links_brand'>
+      <ul class='doberman_links'>
+        <li>
+          <%= link_to '/reviews/2018-02/franshiza-gorodskogo-portala-znaygorod-zarabotat-100-tys-v-mesyats-legko-iz-doma', rel: 'nofollow' do %>
+            <%#= image_tag 'public/doberman/clinic.gif' %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
 
-  <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk organization_requests] %>
+    <!-- For branding replace wide_ to doberman_ -->
+    <div class='doberman_content_wrapper'>
+      <%= render :partial => "banners/banner_1_1_#{Settings['app.city']}" unless request.path.split('/').include? 'inform' %>
+      <%= render :partial => 'commons/not_answered_invitations' unless controller_path.match(/\Amy\//)%>
+      <%= render :partial => 'commons/public_header' %>
+      <%= render :partial => 'commons/geoip_form' if controller_name == 'main_page' && Settings['app.city'] == 'tomsk' && (city_name == 'Sevastopol' || country_name == 'Ukraine') %>
 
-  <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless (controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014') || request.path.split('/').include?('inform') %>
-  <%= render :partial => 'commons/public_content' %>
-  <%= render :partial => 'commons/public_footer' %>
-  <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
-  <%= yield :yandex_map_scripts %>
-  <%= yield :two_gis_map_scripts %>
-  <%= render :partial => 'commons/public_reformal' %>
+      <% controllers = %w[afishas organizations discounts questions suborganizations saunas hotels map_projects banki_tomsk organization_requests] %>
+
+      <%= render :partial => "banners/banner_1_2_#{Settings['app.city']}" unless (controllers.include? controller_name || params[:id] == 'parad-nashestvie-nevest-2014' || params[:photogallery_id] == 'parad-nashestvie-nevest-2014') || request.path.split('/').include?('inform') %>
+      <%= render :partial => 'commons/public_content' %>
+      <%= render :partial => 'commons/public_footer' %>
+      <%= render :partial => 'commons/yandex_metrika' if Rails.env.production? %>
+      <%= yield :yandex_map_scripts %>
+      <%= yield :two_gis_map_scripts %>
+      <%= render :partial => 'commons/public_reformal' %>
+    </div>
 <% end %>
 
 <% content_for :canonical_link do %>
