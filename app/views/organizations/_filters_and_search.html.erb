@@ -1,17 +1,16 @@
 <div class="filter_and_search">
   <div class='filter_header'>
-    <% if ['organizations', 'saunas'].include? request.path.gsub('/', '') %>
-      <% content_for :header_page_title do %>
-        <h1><%= page_meta ? page_meta.header.squish.html_safe : @presenter.page_header %></h1>
-      <% end %>
-    <% else %>
-      <% if page_meta %>
-        <h1><%= page_meta.header.squish.html_safe %></h1>
+    <% content_for :header_page_title do %>
+      <% if ['organizations', 'saunas'].include? request.path.gsub('/', '') %>
+          <h1><%= page_meta ? page_meta.header.squish.html_safe : @presenter.page_header %></h1>
       <% else %>
-        <h1><%= @presenter.page_header %></h1>
+        <% if page_meta %>
+          <h1><%= page_meta.header.squish.html_safe %></h1>
+        <% else %>
+          <h1><%= @presenter.page_header %></h1>
+        <% end %>
       <% end %>
     <% end %>
-    <%= link_to 'Добавить организацию', organizations_add_path, class: [:button, :big, :add_organization] %>
   </div>
 
   <% if page_meta && top_introduction? %>
@@ -24,7 +23,9 @@
     </div>
   <% end %>
 
-  <div class='breadcrumbs'><%= render_breadcrumbs :separator => ' / ' %></div>
+  <div class='breadcrumbs'><%= render_breadcrumbs :separator => ' / ' %>
+  <%= link_to 'Добавить организацию', organizations_add_path, class: [:button, :big, :add_organization] %>
+  </div>
 
   <% if @presenter.category %>
     <div class='organization_categories'>
@@ -77,5 +78,3 @@
     <!--/noindex-->
   </div>
 </div>
-
-

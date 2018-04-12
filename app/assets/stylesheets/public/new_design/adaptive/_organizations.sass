@@ -76,8 +76,14 @@
         max-width: 100%
 
   .filter_and_search
+    .breadcrumbs
+      .button.big
+        margin-bottom: 5px
+
+    .organization_categories ul li
+      width: 246px
+
     .filter_and_share
-      margin-bottom: 8px
       padding: 16px 0
 
       .presentation_filters.organization
@@ -145,7 +151,7 @@
               +images_adaptability
 
     .organization_content.sauna_housing_content
-      .posters    
+      .posters
         li.item_organization
           margin-right: 15px
           &.item_7
@@ -164,6 +170,7 @@
       box-sizing: border-box
       width: 100%
       padding: 0 16px
+      margin-top: 0
 
       .introduction.suborganization.top_introduction
         padding: 0
@@ -187,7 +194,10 @@
 
         .search_wrapper
           width: 100%
-          margin: 12px 0
+          margin: 12px 0 15px 0
+
+          form
+            height: 40px
 
           .search_fields
             width: 100%
@@ -241,6 +251,13 @@
         margin-right: 3px
         width: 44%
 
+    .filter_and_search
+      .breadcrumbs
+        .button.big
+          margin-top: 7px
+          margin-right: calc(100% - 136px)
+          margin-bottom: 12px
+
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
     .recommended_organizations_wrapper.organization
       padding: 16px
@@ -277,8 +294,6 @@
       padding: 0 16px
 
       .filter_and_share
-        margin-bottom: 8px
-
         .view_by
           margin-right: 15px
 
@@ -350,3 +365,9 @@
 
     .wide_content_wrapper .introduction
       padding: 0
+    
+    .doberman_content_wrapper
+      .content_wrapper
+        .filter_and_share, .breadcrumbs
+          padding-left: 11px
+          padding-right: 11px
