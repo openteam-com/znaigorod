@@ -28,6 +28,13 @@
       img
         max-width: 100%
 
+  .doberman_content_wrapper
+    .content_wrapper
+      .introduction
+        width: 100%
+        box-sizing: border-box
+        padding: 0 16px
+
   .organization_content
     .posters
       li.pagination
@@ -181,9 +188,6 @@
         .presentation_filters.organization
           float: left
 
-          .presentation-filters-wrapper select
-            min-width: 150px
-
         .view_by
           margin-right: 0
           float: right
@@ -252,10 +256,30 @@
         width: 44%
 
     .filter_and_search
+      .filter_and_share
+        display: grid
+        width: 100%
+
+        .presentation_filters.organization
+          margin: 8px 0
+
+          .presentation-filters-wrapper
+            width: 100%
+
+            span
+              vertical-align: -webkit-baseline-middle
+
+            select
+              position: absolute
+              width: 100%
+
+        .view_by
+          margin: 0
+
       .breadcrumbs
         .button.big
           margin-top: 7px
-          margin-right: calc(100% - 136px)
+          margin-right: calc(100% - 138px)
           margin-bottom: 12px
 
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
