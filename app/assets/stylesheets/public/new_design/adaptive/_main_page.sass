@@ -1,14 +1,14 @@
 .main_page-show-with-adaptive-version
   @media (max-width: $max-xs-width)
     .header_wrapper.header-wrapper-new
-      min-height: 140px
+      min-height: 150px
 
       .weather_wrapper
         left: 5px
-        top: 35px
+        top: 45px
 
         .weather-icon > a
-          min-width: 140px
+          min-width: 200px
           padding-top: 20px
 
         .weather-temperature,
@@ -73,6 +73,9 @@
         border-top: 1px solid #ccc
         margin-top: 20px
         margin-bottom: 0
+
+        h1
+          margin-left: 0
 
         .filters_for_mobile_afisha
           .filters_by_category_mobile
@@ -141,6 +144,7 @@
 
         h2
           margin-bottom: 10px
+          margin-left: 0
 
         .filters_for_mobile_organizations
           +filters_by_category_mobile
@@ -154,9 +158,6 @@
           li.item_organization
             width: 48%
             margin: 0 0 10px
-
-            &:last-child
-              display: none
 
             .info
               margin: 0
@@ -196,6 +197,7 @@
 
         h2
           margin-bottom: 12px
+          margin-left: 0
 
         .filters_for_mobile_discounts
           +filters_by_category_mobile
@@ -248,6 +250,7 @@
 
         h2
           margin-bottom: 12px
+          margin-left: 0
 
         .filters_for_mobile_accounts
           +filters_by_category_mobile
@@ -300,8 +303,64 @@
                 .invitation_link
                   display: none
 
+      .news_list_wrapper
+        margin: 10px 5px 20px
+
+        table
+          thead,
+          tbody
+            tr
+              th,
+              td
+                display: block
+                width: 100%
+
+                &:not(.left)
+                  display: none
+
+      .photogalleries_main_page_list
+        h2
+          margin-left: 0
+
+        .posters
+          padding-bottom: 0
+
+          li.item
+            width: 100%
+            float: none
+            margin: 10px 0
+            padding: 12px 0
+            clear: both
+
+            .title
+              text-align: left
+              font-size: 16px
+
+            .details
+              margin-right: 3px
+
+            .annotation
+              ul
+                +display-flex
+                +flex-flow(row wrap)
+                +align-items(flex-start)
+                height: auto
+
+                li
+                  width: 33%
+                  height: auto
+
+                  a img
+                    vertical-align: bottom
+                    width: 99%
+
+                  .fa-camera
+                    bottom: 5px
+                    right: 5px
+
       .introduction
         width: 100%
+        padding-left: 0
 
   @media (max-width: $max-xs-width) and (orientation: landscape)
     .content_wrapper .content.main_page_show
@@ -323,6 +382,14 @@
           li
             width: 30%
             margin: 0 0 2px 0
+
+      .photogalleries_main_page_list
+        .posters
+          li.item .annotation ul li
+            width: 20%
+
+            &:last-child
+              display: none
 
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
     .content_wrapper
@@ -382,6 +449,9 @@
           margin-top: 20px
           margin-bottom: 0
 
+          h1
+            margin-left: 0
+
           .filter_header
             float: none
 
@@ -435,6 +505,9 @@
           margin-top: 0
           padding-top: 10px
 
+          h2
+            margin-left: 0
+
           .filter_header
             float: none
 
@@ -450,9 +523,6 @@
             li.item_organization
               width: 33%
               margin: 0 0 10px
-
-              &:last-child
-                display: none
 
               .info
                 margin: 0 auto
@@ -495,6 +565,7 @@
 
           h2
             margin-bottom: 12px
+            margin-left: 0
 
           .filters_for_mobile_discounts
             +filters_by_category_mobile
@@ -552,6 +623,7 @@
 
         h2
           margin-bottom: 12px
+          margin-left: 0
 
         .filters_for_mobile_accounts
           +filters_by_category_mobile
@@ -604,8 +676,32 @@
                 .invitation_link
                   display: none
 
+      .news_list_wrapper
+        ul li
+          padding-right: 10px
+
+      .photogalleries_main_page_list
+        ul.posters li.item
+          width: 100%
+          margin: 10px 0
+
+          .title
+            text-align: left
+
+          .annotation
+            ul.images
+              height: auto
+
+              li
+                width: 20%
+                height: auto
+
+                &:last-child
+                  display: none
+
       .introduction
         width: 100%
+        padding-left: 0
 
   @media (min-width: $min-md-width) and (max-width: $max-md-width)
     .content_wrapper
@@ -656,6 +752,9 @@
               ul li > a
                 padding: 10px 7px
 
+          h1
+            margin-left: 0
+
           .filters-by-wrapper
             padding-left: 5px !important
 
@@ -695,6 +794,9 @@
             margin-left: 0
 
         .organizations_main_page_list
+          h2
+            margin-left: 0
+
           .posters
             +display-flex
             +justify-content(space-between)
@@ -792,6 +894,9 @@
 
                   .invitation_link
                     display: none
+
+        .news_list_wrapper
+          margin: 10px 0 20px
 
         .introduction
           padding-top: 15px

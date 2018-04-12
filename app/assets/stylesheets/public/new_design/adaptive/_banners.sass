@@ -19,8 +19,13 @@
   .banner12_contest_wrapper.afishas
     .banner12
       width: 95%
+
       img
         margin: 0 auto
+
+  .banner12_contest_wrapper.main_page,
+    .banner12
+      height: 45px
 
   .banner12_contest_wrapper.afishas
     ul
@@ -28,3 +33,14 @@
 
     li
       height: 40px
+
+@media (max-width: $max-xs-width) and (orientation: landscape)
+  .banner12_contest_wrapper.main_page,
+    .banner12
+      height: 60px
+
+@media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+  .banner12_contest_wrapper.main_page,
+    .banner12
+      height: 70px
+

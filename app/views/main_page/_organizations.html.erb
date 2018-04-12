@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <ul class="posters">
+    <ul class="posters <%= "posters-count-#{@organizations.promoted_clients.count}" %>">
       <% @organizations.promoted_clients.each do |organization| %>
         <li class="item_organization">
           <%= render :partial => 'organizations/organization', :locals => { :organization => organization, width: 600, height: 600 } %>
