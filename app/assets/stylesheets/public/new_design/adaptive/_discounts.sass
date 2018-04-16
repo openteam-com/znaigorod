@@ -1,0 +1,309 @@
+.discounts-index-with-adaptive-version
+  .filters-by-wrapper.filters-for-discounts
+    .by_type
+      margin-left: 0
+
+      .clean-filters-list
+        li
+          &:first-child
+            padding-left: 0
+
+  .discount_right
+    display: none
+
+  .content_wrapper
+    padding-left: 16px
+    padding-right: 16px
+
+    .discount_left
+      width: 100%
+      box-sizing: border-box
+      padding-right: 0
+      padding-left: 0
+
+      .banner12_contest_wrapper.discounts
+        margin: 0 auto
+        max-width: 100%
+
+      .discount_content
+        .posters
+          li.item_wrapper, li.item_wrapper.fourth
+            width: 20%
+            margin-right: 0
+            margin-left: 0
+            max-width: 360px
+            margin-right: auto
+            margin-left: auto
+
+            .item
+              width: 100%
+              height: auto
+
+              .title
+                height: 30px
+                min-height: 30px
+                border: none
+                width: 100%
+
+              .place
+                padding: 15px 8px
+                margin: 13px 0 0 0
+                border-top: 1px dashed #ccc
+
+              .image
+                width: 99%
+                height: auto
+                margin: 0
+                padding: 0
+
+                .for_sale
+                  display: none
+
+                &:hover
+                  img
+                    +opacity(1)
+
+                img
+                  width: 100%
+                  height: auto
+                  padding: 0 2px
+
+        .recommended_organizations_wrapper.organization_content.discounts
+          width: 100%
+          box-sizing: border-box
+
+          .posters
+            padding: 0
+            +justify-content(space-between)
+
+            li.item_organization
+              margin-right: 3px
+              min-width: 135px
+              margin-bottom: 10px
+
+              .info
+                width: 100%
+                max-height: unset
+
+                .title
+                  border: none
+
+                .place
+                  border-top: 1px dashed #ccc
+
+                .image
+                  +images_adaptability
+                  height: auto
+
+                  a
+                    width: 100%
+                    height: auto
+
+                    img
+                      height: auto
+                      width: 100%
+
+        .posters
+          +display-flex
+          flex-flow: row wrap
+
+          li.item_wrapper
+            border: 1px solid #ccc
+            margin-right: 0
+
+            .image
+              margin: 0
+
+            &.fourth
+              margin-right: 0
+
+      .introduction.discounts
+        width: 100%
+        box-sizing: border-box
+
+      .filter_and_share
+        padding: 0 0 16px
+
+      .filter_and_share + div
+        margin-left: auto
+        margin-right: auto
+        max-width: 90%
+
+  @media (max-width: $max-xs-width)
+    .filters_for_mobile_discounts
+      +filters_by_category_mobile
+      padding: 0 16px
+
+    .mobile-filters-discounts
+      padding: 0 16px
+
+      .by_type
+        +display-flex
+        position: relative
+        width: 100%
+        max-height: 30px
+        margin: 15px 0
+
+        &:after
+          +grey_block_for_select
+
+        > span
+          padding-top: 5px
+          height: 30px
+          font-size: 12px
+          padding-right: 5px
+
+      select
+        background-color: white
+        padding: 5px
+        height: 30px
+        -webkit-appearance: none
+        outline: none
+        border: 1px solid #cdcdcd
+        width: 100%
+
+      .presentation-filters-wrapper
+        +display-flex
+        position: relative
+        max-height: 35px
+
+        &:after
+          +grey_block_for_select
+          height: 30px
+
+        span
+          padding: 5px 0 0 0
+          min-width: 110px
+          height: 30px
+          margin-right: 0
+
+        select
+          height: 30px
+          outline: none
+          border: 1px solid #cdcdcd
+          +flex(2)
+          padding-bottom: 0
+          min-width: unset
+
+    .filters-by-wrapper.filters-for-discounts.flexible
+      display: none
+
+    .content_wrapper
+      padding-left: 0
+      padding-right: 0
+
+      .discount_left
+        .discount_content
+          .posters
+            padding: 0 16px
+
+            li.item_wrapper, li.item_wrapper.fourth
+              width: 99%
+              margin-right: 0
+              margin-left: 0
+              max-width: 360px
+              margin-right: auto
+              margin-left: auto
+
+          .filter_and_share
+            padding: 0 16px 16px
+
+          .recommended_organizations_wrapper.discounts
+            .posters
+              li.item_organization
+                width: 47%
+
+        .introduction.discounts
+          margin-right: auto
+          margin-left: auto
+          width: 92%
+
+        .banner12_contest_wrapper.afishas
+          width: 100%
+
+          .banner12
+            width: 80%
+
+            li
+              width: 100%
+
+              img
+                width: 100%
+                height: auto
+                max-height: 80px
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .content_wrapper .discount_left
+      .discount_content
+        .recommended_organizations_wrapper.discounts
+          .posters li.item_organization
+            width: 30%
+
+  @media (max-width: $max-xs-width) and (orientation: portrait)
+    .banner12_contest_wrapper.discounts
+      +banners_adaptability_xs
+
+    .banner12_contest_wrapper.discounts
+      ul
+        height: 40px
+
+      li
+        height: 40px
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .filters_for_mobile_discounts
+      +filters_by_category_mobile
+      padding: 0 16px
+      width: 50%
+      margin-top: 12px
+
+    .content_wrapper .discount_left
+      .discount_content
+        .recommended_organizations_wrapper.discounts
+          .posters li.item_organization
+            width: 27%
+
+        .posters
+          li.item_wrapper, li.item_wrapper.fourth
+            +flex-basis(31%)
+            min-width: 197px
+            margin-right: 20px
+            margin-left: 0
+
+            &:nth-child(3n+3)
+              margin-right: 0
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .content_wrapper .discount_left
+      .discount_content
+        .recommended_organizations_wrapper.discounts
+          .posters li.item_organization
+            width: 15%
+
+        .posters
+          li.item_wrapper, li.item_wrapper.fourth
+            +flex-basis(17%)
+            min-width: 176px
+            margin-right: 20px
+            margin-left: 0
+
+  @media (min-width: $min-lg-width)
+    .content_wrapper .discount_left
+      .discount_content
+        .recommended_organizations_wrapper.discounts
+          .posters li.item_organization
+            width: 15%
+
+        .posters
+          li.item_wrapper, li.item_wrapper.fourth
+            +flex-basis(18%)
+            min-width: 197px
+            margin-right: 25px
+            margin-left: 0
+
+            &:nth-child(5n+5)
+              margin-right: 0
+
+  @media (max-width: $max-md-width)
+    .banner12_contest_wrapper.discounts
+      +banners_adaptability

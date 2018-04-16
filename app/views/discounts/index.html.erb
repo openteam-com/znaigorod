@@ -24,14 +24,14 @@
     <% end %>
   </div>
 
-  <div class="filter_and_share">
-    <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
-  </div>
-
   <div class="discount_content js-button-pagination">
     <ul class="posters js-paginable-list">
       <%= render :partial => 'discounts/discount_posters', :locals => { :collection => @presenter.collection } %>
     </ul>
+
+    <div class="filter_and_share">
+      <%= render :partial => 'commons/share_this', :locals => { :url => request.url.split('?').first } %>
+    </div>
 
     <%= google_adsense_include_tag client: 'ca-pub-6605894770961296', slot: '2858015760', format: 'auto', width: '886', height: '90' if current_city == 'tomsk' %>
 
@@ -54,4 +54,3 @@
 <div class="discount_right">
   <%= render :partial => 'commons/promotions' %>
 </div>
-

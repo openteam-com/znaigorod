@@ -1,4 +1,4 @@
-<div class="grayline-navigation gray-navigation-discounts">
+<div class="grayline-navigation gray-navigation-discounts hidden-sm hidden-xs">
   <div class="filters discount">
     <div class="by_kind">
       <ul>
@@ -19,7 +19,51 @@
   </div>
 </div>
 
-<div class='filters-by-wrapper filters-for-discounts flexible'>
+<div class='filters_for_mobile_discounts visible-xs visible-sm'>
+  <div class='mobile-version-filters'>
+    <p> Категория: </p>
+      <select onchange='location = this.value'>
+        <% @presenter.kind_filter.links.each do |link| %>
+
+          <option class='<%= link.klass %>'
+                  value="<%= link.path %>"
+                  <%= 'selected' if link[:klass].include?("selected") %>>
+              <%= link[:title] %>
+          </option>
+        <% end %>
+    </select>
+  </div>
+</div>
+
+<div class="mobile-filters-discounts visible-xs">
+  <div class="by_type">
+    <span> Тип: </span>
+      <select onchange='location = this.value'>
+        <% @presenter.type_filter.links.each do |link| %>
+          <option class='<%= link.klass %>'
+                  value="<%= link.path %>"
+                  <%= 'selected' if link[:klass].include?("selected") %>>
+              <%= link[:title] %>
+          </option>
+        <% end %>
+    </select>
+  </div>
+
+  <div class='presentation-filters-wrapper'>
+    <!--noindex-->
+    <span class='label'>Сортировать по:</span>
+    <select onchange="location = this.value">
+      <% @presenter.order_by_filter.links.each do |link| %>
+        <option class="<%= link.klass %>" value="<%= link.path %>" <%= request.fullpath == link.path ? 'selected' : '' %>>
+          <%= link.title %>
+        </option>
+      <% end %>
+    </select>
+    <!--/noindex-->
+  </div>
+</div>
+
+<div class='filters-by-wrapper filters-for-discounts flexible hidden-xs'>
   <div class="filters discount">
     <div class="by_type">
       <ul class='clean-filters-list'>

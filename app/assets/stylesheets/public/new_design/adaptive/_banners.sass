@@ -1,22 +1,32 @@
+=banners_adaptability
+  width: 100%
+
+  .banner12
+    width: 80%
+
+    li
+      width: 100%
+
+      img
+        width: 100%
+        height: auto
+        max-height: 80px
+
+=banners_adaptability_xs
+  .banner12
+    width: 95%
+    img
+      margin: 0 auto
+
 @media (max-width: $max-md-width)
   .banner12_contest_wrapper.main_page,
   .banner12_contest_wrapper.afishas
-    width: 100%
-
-    .banner12
-      width: 80%
-
-      li
-        width: 100%
-
-        img
-          width: 100%
-          height: auto
-          max-height: 80px
+    +banners_adaptability
 
 @media (max-width: $max-xs-width) and (orientation: portrait)
   .banner12_contest_wrapper.main_page,
   .banner12_contest_wrapper.afishas
+    +banners_adaptability_xs
     .banner12
       width: 95%
 
