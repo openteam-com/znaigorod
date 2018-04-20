@@ -16,7 +16,6 @@
       <h1><%= t("meta.#{Settings['app.city']}.reviews.page_header") %></h1>
     <% end %>
   <% end %>
-  <%= link_to 'Добавить обзор', add_my_reviews_path, :class => 'button new_review_button' %>
 </div>
 
 <div class='reviews-paginator js-button-pagination'>
@@ -30,7 +29,7 @@
 </div>
 
 <% if page_meta %>
-  <div class='introduction reviews'>
+  <div class='introduction reviews green'>
     <%= page_meta.html_introduction %>
   </div>
 <% end %>

@@ -1,0 +1,324 @@
+.reviews-index-with-adaptive-version
+  .filters-by-wrapper
+    .filters .by_type
+      margin: 0
+
+      ul li
+        &:nth-child(1)
+          padding-left: 0
+
+  .content_wrapper
+    .reviews_index
+      .filter_header
+        border: none
+
+      .posters
+        +display-flex
+        flex-flow: row wrap
+        +justify-content(space-between)
+
+        li.pagination
+          min-width: 300px
+          max-width: 100%
+
+          a
+            background-color: white
+            background: white
+            border: none
+            text-transform: uppercase
+            color: #4d81d5
+            padding: 0
+            text-align: left
+
+    .reviews-paginator .posters li.item
+      max-width: 354px
+      max-height: 354px
+
+      .details
+        margin-right: 3px
+
+      .date
+        margin-left: 3px
+
+      .annotation
+        .images
+          width: 100%
+
+          li
+            width: 33%
+            height: 33%
+
+            &:first-child
+              width: 67%
+              height: 66%
+
+            &:nth-child(4)
+              width: 34%
+
+            img
+              height: 100%
+              vertical-align: bottom
+
+        .text
+          padding: 0 1px
+
+    .recommended_organizations_wrapper.organization_content.reviews
+      width: 100%
+      box-sizing: border-box
+      margin-left: 0
+
+      .posters
+        +display-flex
+        flex-flow: row wrap
+        padding: 0
+        +justify-content(space-between)
+
+        li.item_organization
+          margin-right: 3px
+          min-width: 135px
+          margin-bottom: 10px
+          max-width: 180px
+
+          .info
+            width: 100%
+            max-height: unset
+
+            .title
+              border: none
+
+            .place
+              border-top: 1px dashed #ccc
+
+            .image
+              +images_adaptability
+              height: auto
+
+              a
+                width: 100%
+                height: auto
+
+                img
+                  height: auto
+                  width: 100%
+
+    .reviews-paginator
+      .posters li.item
+        padding: 2px
+        margin: 20px 0
+        border: 1px solid #ccc
+
+    .introduction.reviews
+      max-width: 100%
+      padding: 0
+      background: #cef2f2
+      box-sizing: border-box
+      width: auto
+
+      &.green
+        background: #cef2f2
+        color: #222
+        margin: 20px 0 0
+        overflow: visible
+        padding: 15px
+        position: relative
+
+        &:after
+          bottom: 100%
+          left: 5%
+          border: solid transparent
+          content: " "
+          height: 0
+          width: 0
+          position: absolute
+          pointer-events: none
+          border-color: rgba(206, 242, 242, 0)
+          border-bottom-color: #cef2f2
+          border-width: 17px
+          margin-left: -17px
+
+      p
+        margin: 0
+
+  @media (max-width: $max-xs-width)
+    .filters_for_mobile_reviews
+      +filters_by_category_mobile
+      padding: 0 16px
+
+    .filters-by-wrapper.filters-for-reviews.flexible
+      display: none
+
+    .mobile-filters-discounts
+      padding: 0 16px
+
+      .by_type
+        +display-flex
+        position: relative
+        width: 100%
+        max-height: 30px
+        margin: 15px 0
+
+        &:after
+          +grey_block_for_select
+
+        > span
+          padding-top: 5px
+          height: 30px
+          font-size: 12px
+          padding-right: 5px
+
+      select
+        background-color: white
+        padding: 5px
+        height: 30px
+        -webkit-appearance: none
+        outline: none
+        border: 1px solid #cdcdcd
+        width: 100%
+
+      .presentation-filters-wrapper
+        +display-flex
+        position: relative
+        max-height: 35px
+
+        &:after
+          +grey_block_for_select
+          height: 30px
+
+        span
+          padding: 5px 0 0 0
+          min-width: 110px
+          height: 30px
+          margin-right: 0
+
+        select
+          height: 30px
+          outline: none
+          border: 1px solid #cdcdcd
+          +flex(2)
+          padding-bottom: 0
+          min-width: unset
+
+    .content_wrapper
+      .filter_header
+        padding: 0
+
+      .reviews_index
+        padding: 0 0 10px
+
+        .reviews-paginator .posters
+          padding: 0 16px 10px
+
+          .promo_discounts.review
+            max-width: 100%
+            margin-left: 0
+            background-repeat: repeat
+
+            .text
+              padding: 0
+              margin: 20px auto
+              width: auto
+
+            .discount_content
+              width: 100%
+
+              .posters li.item_wrapper
+                margin: 0 auto 10px
+
+          li.item
+            width: 100%
+            max-width: 380px
+            max-height: 380px
+            margin-left: auto
+            margin-right: auto
+
+      .recommended_organizations_wrapper.organization_content.reviews
+        margin-left: 0
+        padding: 20px 8px
+
+        .posters li.item_organization
+          +flex-basis(44%)
+          margin-right: 8px
+          margin-left: 8px
+
+          &:nth-child(7)
+            display: none
+
+      .introduction.reviews.green
+        margin-right: 16px
+        margin-left: 16px
+        width: auto
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .content_wrapper
+      .reviews_index
+        .reviews-paginator .posters li.item
+          width: 44%
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .filters_for_mobile_reviews
+      +filters_by_category_mobile
+      padding: 0 16px
+
+    .presentation-filters-wrapper
+      select
+        max-width: 190px
+
+    .content_wrapper
+      padding-left: 16px
+      padding-right: 16px
+
+      .content.reviews_index
+        padding-left: 0
+        padding-right: 0
+
+      .filter_header
+        padding: 0
+
+      .reviews_index
+        .reviews-paginator .posters li.item
+          width: 45%
+          margin-left: 0
+          margin-right: 0
+          max-width: 380px
+          max-height: 380px
+
+
+      .recommended_organizations_wrapper.organization_content.reviews
+        .posters li.item_organization
+          +flex-basis(30%)
+          max-width: 220px
+
+          &:nth-child(7)
+            display: none
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .content_wrapper
+      .reviews_index
+        padding: 10px 16px
+      .recommended_organizations_wrapper.organization_content.reviews
+        li
+          +flex-basis(15%)
+
+          &:nth-child(7)
+            display: none
+
+      .reviews-paginator .posters
+        li.item
+          +flex-basis(30%)
+          margin: 20px 0
+
+        .promo_discounts.review
+          margin-left: 0
+
+  @media (min-width: $min-lg-width)
+    .content_wrapper
+      .recommended_organizations_wrapper.organization_content.reviews
+        li
+          +flex-basis(14%)
+
+      .reviews-paginator .posters li.item
+        +flex-basis(31%)
+
+      .promo_discounts.review
+        margin-left: 0
+        width: 100%

@@ -1,6 +1,6 @@
 .visible-xs,
 .visible-sm
-  display: none 
+  display: none
 
 .posters
   li img
@@ -10,6 +10,7 @@
 .organizations-index-with-adaptive-version,
 .afishas-index-with-adaptive-version,
 .discounts-index-with-adaptive-version,
+.reviews-index-with-adaptive-version,
 .main_page-show-with-adaptive-version
   @media (max-width: $max-xs-width)
     .visible-xs
@@ -250,6 +251,12 @@
     .header_wrapper.header-wrapper-new
       // Orange top main menu
       .main_menu
+        .main-menu-wrapper>ul #main_menu_more
+          width: auto
+
+          a
+            padding: 3px 10px
+            
         &.main-menu-orange
           padding: 0 16px
 
