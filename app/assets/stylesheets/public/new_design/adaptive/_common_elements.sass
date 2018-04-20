@@ -195,9 +195,19 @@ $max-xs-width: 767px
       position: absolute
       background-color: #f60
       top: 32px
-      width: 110px
       display: none
       z-index: 9999
+
+      ul li a
+        width: 100%
+        min-width: 160px
+        box-sizing: border-box
+
+      #main_menu_more
+        >a
+          display: none
+        ul
+          display: list-item
 
       .simple-navigation-active-leaf
         background-color: #ff7f1a
