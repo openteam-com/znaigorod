@@ -18,39 +18,47 @@
     img
       margin: 0 auto
 
-@media (max-width: $max-md-width)
-  .banner12_contest_wrapper.main_page,
-  .banner12_contest_wrapper.afishas
-    +banners_adaptability
+.banner12_contest_wrapper
+  &.main_page, &.reviews
+  background-color: white !important
 
-@media (max-width: $max-xs-width) and (orientation: portrait)
-  .banner12_contest_wrapper.main_page,
-  .banner12_contest_wrapper.afishas
-    +banners_adaptability_xs
-    .banner12
-      width: 95%
+  @media (max-width: $max-md-width)
+    &.main_page,
+    &.afishas,
+    &.reviews
+      +banners_adaptability
 
-      img
-        margin: 0 auto
+  @media (max-width: $max-xs-width) and (orientation: portrait)
+    &.main_page,
+    &.afishas,
+    &.reviews
 
-  .banner12_contest_wrapper.main_page,
-    .banner12
-      height: 45px
+      +banners_adaptability_xs
+      .banner12
+        width: 95%
 
-  .banner12_contest_wrapper.afishas
-    ul
-      height: 40px
+        img
+          margin: 0 auto
 
-    li
-      height: 40px
+    &.main_page,
+      .banner12
+        height: 45px
 
-@media (max-width: $max-xs-width) and (orientation: landscape)
-  .banner12_contest_wrapper.main_page,
-    .banner12
-      height: 60px
+    &.afishas, &.reviews
+      ul
+        height: 40px
 
-@media (min-width: $min-sm-width) and (max-width: $max-sm-width)
-  .banner12_contest_wrapper.main_page,
-    .banner12
-      height: 70px
+      li
+        height: 40px
 
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    &.main_page,
+    &.reviews
+      .banner12
+        height: 60px
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    &.main_page,
+    &.reviews
+      .banner12
+        height: 70px
