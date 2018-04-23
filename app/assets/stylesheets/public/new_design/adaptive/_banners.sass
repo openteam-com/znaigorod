@@ -19,19 +19,21 @@
       margin: 0 auto
 
 .banner12_contest_wrapper
-  &.main_page, &.reviews
+  &.main_page, &.reviews, &.photogalleries
   background-color: white !important
 
   @media (max-width: $max-md-width)
     &.main_page,
     &.afishas,
-    &.reviews
+    &.reviews,
+    &.photogalleries
       +banners_adaptability
 
   @media (max-width: $max-xs-width) and (orientation: portrait)
     &.main_page,
     &.afishas,
-    &.reviews
+    &.reviews,
+    &.photogalleries
 
       +banners_adaptability_xs
       .banner12
@@ -40,11 +42,11 @@
         img
           margin: 0 auto
 
-    &.main_page,
+    &.main_page, &.photogalleries
       .banner12
         height: 45px
 
-    &.afishas, &.reviews
+    &.afishas, &.reviews, &.photogalleries
       ul
         height: 40px
 
@@ -53,12 +55,14 @@
 
   @media (max-width: $max-xs-width) and (orientation: landscape)
     &.main_page,
-    &.reviews
+    &.reviews,
+    &.photogalleries
       .banner12
         height: 60px
 
   @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
     &.main_page,
-    &.reviews
+    &.reviews,
+    &.photogalleries
       .banner12
         height: 70px
