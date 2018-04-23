@@ -26,6 +26,10 @@
   </ul>
 </div>
 
+<div class="filter_and_share">
+  <%= render :partial => 'commons/share_this', :locals => { :url => request.url.split('?').first } %>
+</div>
+
 <% if page_meta %>
   <div class="introduction">
     <%= page_meta.html_introduction %>
