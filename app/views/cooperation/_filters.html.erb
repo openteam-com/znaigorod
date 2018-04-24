@@ -1,4 +1,4 @@
-<div class='filters_wrapper'>
+<div class='filters_wrapper hidden-xs hidden-sm'>
   <div class='filters cooperation'>
     <div class='by_kind'>
       <ul>
@@ -8,6 +8,21 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class='filters_for_mobile_afisha visible-xs visible-sm'>
+  <div class='filters_by_category_mobile'>
+    <div class='mobile-version-filters'>
+      <p> Категория: </p>
+      <select onchange="location = this.value">
+        <% %w[services benefit statistics our_customers ticket_sales].each do |item| %>
+        <option value="<%= item %>" <%= :selected if params[:action] == item %>>
+           <%= t("cooperation.#{item}.link") %>
+        </option>
+      <% end %>
+    </select>
     </div>
   </div>
 </div>

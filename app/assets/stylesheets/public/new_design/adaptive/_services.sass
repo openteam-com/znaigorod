@@ -1,0 +1,297 @@
+.cooperation-services-with-adaptive-version,
+.cooperation-benefit-with-adaptive-version,
+.cooperation-statistics-with-adaptive-version,
+.cooperation-our_customers-with-adaptive-version,
+.cooperation-ticket_sales-with-adaptive-version
+  .filters_wrapper
+    border-bottom: none
+    padding-top: 0
+
+    .filters.cooperation
+      background-color: #e8e8e8
+      width: 100% !important
+
+      .by_kind
+        margin: 0
+        width: 100%
+
+        ul li a
+          background: none
+          padding: 10px 16px
+          text-transform: uppercase
+
+  .filters_for_mobile_afisha
+    margin: 0 16px 0
+
+    .filters_by_category_mobile
+      +filters_by_category_mobile
+
+  .content .cooperation
+    margin-left: 0
+    margin-right: 0
+
+    img
+      max-width: 100%
+      box-sizing: border-box
+
+  .content_wrapper
+    padding: 0 16px
+    box-sizing: border-box
+
+
+    .introduction.green
+      width: 100%
+      box-sizing: border-box
+      padding: 10px 10px 6px
+      margin-bottom: 10px
+
+  @media (min-width: $min-lg-width)
+    .content_wrapper
+      padding: 0
+
+    .doberman_content_wrapper
+      .content_wrapper
+        padding: 0 11px
+
+.cooperation-services-with-adaptive-version
+  .content .cooperation .service_right
+    .brand_examples ul
+      margin-bottom: 0
+
+      li
+        &:last-child
+          margin-bottom: 0
+
+  @media (max-width: $max-xs-width)
+    .content_wrapper
+      .content .cooperation
+        font-size: 9px
+        margin: 0
+
+        .service_left
+          float: none
+          width: 100%
+
+          .our_logotype
+            margin-top: 90px
+
+          .service_payment_wrapper form .input
+            input
+              width: 96%
+
+            textarea
+              width: 96%
+              height: 50px
+
+          .emails
+            width: 100%
+            box-sizing: border-box
+
+        .service_right
+          margin-left: 0
+
+          .toggable .info table td
+            padding: 5px
+
+          .brand_examples ul
+            margin-bottom: 0
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .content_wrapper .content .cooperation
+      font-size: 10px
+
+.cooperation-benefit-with-adaptive-version
+  .content_wrapper
+    padding: 0
+
+    .content
+      padding: 0 16px
+
+  @media (max-width: $max-xs-width)
+    .content_wrapper .content
+      .cooperation
+        .benefit_left
+          width: 100%
+          float: none
+
+          table
+            width: 100%
+            font-size: 10px
+
+            td
+              width: 5%
+              height: 40px
+              font-size: 8px
+
+              &:first-child
+                padding: 5px
+                font-size: 9px
+
+              span.positive
+                width: 18px
+
+        .benefit_right
+          margin: 0
+
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .content_wrapper .content .cooperation
+      .benefit_left table td
+        font-size: 10px
+
+        &:first-child
+          font-size: 10px
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .content_wrapper
+      padding: 0
+
+      .content
+        padding: 0 16px
+
+        .cooperation
+          .benefit_left
+            width: 60%
+            margin-right: 20px
+
+            table
+              width: 100%
+              font-size: 10px
+
+              td
+                width: 5%
+                height: 40px
+                font-size: 8px
+
+                &:first-child
+                  padding: 5px
+                  font-size: 10px
+
+                span.positive
+                  width: 18px
+
+
+          .benefit_right
+            margin: 35px 0 0
+
+  @media (min-width: $min-lg-width)
+    .content_wrapper
+      padding: 0
+
+      .content
+        padding: 0
+
+    .doberman_content_wrapper
+      .content_wrapper
+        padding: 0
+
+        .content
+          padding: 0 11px
+
+
+.cooperation-statistics-with-adaptive-version
+  .content .cooperation .statistics
+    +display-flex
+    flex-flow: row wrap
+    +justify-content(space-between)
+
+    li
+      max-width: 380px
+      height: auto
+      box-sizing: border-box
+      margin-bottom: 15px
+      width: 32%
+      margin-right: 10px
+
+      &:nth-child(3)
+        margin-right: 0
+
+      img
+        height: auto
+
+    @media (max-width: $max-xs-width)
+      li
+        width: 100%
+        float: none
+        margin-right: auto
+        margin-left: auto
+
+        &:nth-child(3)
+          margin-right: auto
+
+.cooperation-ticket_sales-with-adaptive-version
+  @media (max-width: $max-xs-width) and (orientation: portrait)
+    .content .cooperation
+      .service_left
+        width: 100%
+        float: none
+
+        .emails
+          width: 100%
+          box-sizing: border-box
+          margin: 0 0 10px
+
+        .scheme
+          margin: 10px auto 0
+
+      .service_right
+        margin-left: 0
+
+      h1
+        margin-top: 10px
+
+.cooperation-our_customers-with-adaptive-version
+  .content .cooperation .organizations_list
+    width: 100%
+
+    .posters
+      +posters_flexibility
+
+      li.item_organization
+        width: 14%
+        margin-right: 0
+        max-width: 182px
+
+        &:last-child
+          display: none
+
+        .info
+          width: 100%
+          border: 1px solid #ccc
+          box-sizing: border-box
+
+          .image
+            +images_adaptability
+
+      li.pagination
+        min-width: 300px
+        max-width: 100%
+
+        a
+          background-color: white
+          background: white
+          border: none
+          text-transform: uppercase
+          color: #4d81d5
+          padding: 0
+          text-align: left
+
+  @media (max-width: $max-xs-width)
+    .content .cooperation .organizations_list
+      .posters li.item_organization
+        width: 48%
+
+  @media (max-width: $max-xs-width) and (orientation: landscape)
+    .content .cooperation .organizations_list
+      .posters li.item_organization
+        width: 30%
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .content .cooperation .organizations_list
+      .posters li.item_organization
+        width: 25%
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .content .cooperation .organizations_list
+      .posters li.item_organization
+        width: 16%
