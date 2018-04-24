@@ -1,8 +1,12 @@
 <% content_for :page_title, "Конкурсы #{current_city_declension}" %>
 
-<div class='contest'>
-  <h1>Наши конкурсы</h1>
+<div class="filter_header">
+  <% content_for :header_page_title do %>
+    <h1>Наши конкурсы</h1>
+  <% end %>
+</div>
 
+<div class='contest'>
   <ul class='contests_list'>
     <% @contests.each do |contest| %>
       <li><%= link_to contest.title, contest %></li>
