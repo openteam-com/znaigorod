@@ -19,15 +19,21 @@
       margin: 0 auto
 
 .banner12_contest_wrapper
-  &.main_page, &.reviews, &.photogalleries, &.cooperation
-  background-color: white !important
+  &.main_page, &.reviews, &.photogalleries, &.cooperation, &.questions
+    background-color: white !important
+
+  &.feedback, &.questions
+    margin-left: auto
+    margin-right: auto
 
   @media (max-width: $max-md-width)
     &.main_page,
     &.afishas,
     &.reviews,
     &.photogalleries,
-    &.cooperation
+    &.cooperation,
+    &.feedback,
+    &.questions
       +banners_adaptability
 
   @media (max-width: $max-xs-width) and (orientation: portrait)
@@ -35,7 +41,9 @@
     &.afishas,
     &.reviews,
     &.photogalleries,
-    &.cooperation
+    &.cooperation,
+    &.feedback,
+    &.questions
       +banners_adaptability_xs
       .banner12
         width: 95%
@@ -43,22 +51,23 @@
         img
           margin: 0 auto
 
-    &.main_page, &.photogalleries, &.cooperation
+    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions
       .banner12
-        height: 45px
+        height: 60px
 
-    &.afishas, &.reviews, &.photogalleries, &.cooperation
+    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions
       ul
-        height: 40px
+        height: 60px
 
       li
-        height: 40px
+        height: 60px
 
   @media (max-width: $max-xs-width) and (orientation: landscape)
     &.main_page,
     &.reviews,
     &.photogalleries,
-    &.cooperation
+    &.cooperation,
+    &.feedback, &.questions
       .banner12
         height: 60px
 
@@ -66,6 +75,19 @@
     &.main_page,
     &.reviews,
     &.photogalleries,
-    &.cooperation
+    &.cooperation,
+    &.feedback, &.questions
       .banner12
+        height: 70px
+
+  @media (min-width: 430px) and (max-width: 720px)
+    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions
+      .banner12
+        height: 70px
+
+    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions
+      ul
+        height: 70px
+
+      li
         height: 70px

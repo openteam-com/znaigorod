@@ -1,4 +1,4 @@
-<div class="grayline-navigation gray-navigation-questions">
+<div class="grayline-navigation gray-navigation-questions hidden-xs hidden-sm">
   <div class="filters reviews">
     <div class="by_category">
       <ul>
@@ -15,6 +15,36 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class='filters_for_mobile_afisha visible-xs visible-sm'>
+  <div class='filters_by_category_mobile'>
+    <div class='mobile-version-filters'>
+      <p> Категория: </p>
+      <select onchange="location = this.value">
+        <% @presenter.category_filter.links.delete_if{|link| link.klass == "inform"}.each do |link|  %>
+          <option class='<%= link.class %>'
+                  value="<%= link.path %>"
+                  <%= 'selected' if link[:klass].include?("selected") %>>
+              <%= link[:title] %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+<div class="presentation_filters questions">
+    <div class='presentation-filters-wrapper hidden-sm'>
+      <span class='label'>Сортировать по:</span>
+      <select onchange="location = this.value">
+        <% @presenter.order_by_filter.links.each do |link| %>
+          <option class="<%= link.klass %>" value="<%= link.path %>" <%= request.fullpath == link.path ? 'selected' : '' %>>
+            <%= link.title %>
+          </option>
+        <% end %>
+      </select>
     </div>
   </div>
 </div>
@@ -37,7 +67,7 @@
 
   <div class='filters-line'>
     <%= link_to 'Задать вопрос', new_my_question_path, :class => 'button big btn-custom btn-custom-orange' %>
-    <div class='presentation-filters-wrapper'>
+    <div class='presentation-filters-wrapper hidden-xs'>
       <span class='label'>Сортировать по:</span>
       <select onchange="location = this.value">
         <% @presenter.order_by_filter.links.each do |link| %>

@@ -1,0 +1,119 @@
+.questions-index-with-adaptive-version,
+.questions-show-with-adaptive-version
+  .filters-by-wrapper
+    padding: 20px 11px !important
+    box-sizing: border-box
+
+    .filters-line
+      padding: 0
+
+  .content_wrapper
+    padding: 0 16px
+    box-sizing: border-box
+
+    .banner12_contest_wrapper .banner12.questions
+      margin-top: 0
+
+    .filter_header
+      margin: 20px 0
+
+    .question_right, .right
+      display: none
+
+    .question_left
+      width: 100%
+      padding: 25px 0
+
+    .left
+      width: 100%
+
+  .question_content_wrapper
+    .posters
+      .item.pagination
+        min-width: 300px
+        max-width: 100%
+        border-bottom: none
+        padding-top: 10px
+
+        a
+          background-color: white
+          background: white
+          border: none
+          text-transform: uppercase
+          color: #4d81d5
+          padding: 0
+          text-align: left
+          line-height: 21px
+
+  .questions_show
+    .share_and_likes
+      padding-bottom: 15px
+
+  .filters_for_mobile_afisha
+    margin: 0 16px 0
+
+    .filters_by_category_mobile
+      +filters_by_category_mobile
+
+  .filter_and_share
+    margin-top: -46px
+
+  @media (max-width: $max-xs-width)
+    .filter_and_share
+      margin-top: 0
+      text-align: left
+
+      #st-1
+        text-align: left
+
+        .st-total
+          padding-left: 0
+
+    .filters_for_mobile_afisha
+      .presentation_filters.questions
+        +presentation_filters
+        margin-top: 10px
+        border-bottom: none
+        padding-bottom: 5px
+
+    .filters-by-wrapper
+      padding-top: 5px !important
+
+      a
+        padding-left: 15px
+        padding-right: 15px
+
+      .filters-line
+        padding-top: 5px
+
+    .questions_show
+      .questions h1
+        line-height: 18px
+        font-size: 16px
+        margin-bottom: -6px
+
+      .description
+        padding-top: 5px
+
+        p
+          padding-top: 10px
+          font-size: 16px
+
+  @media (max-width: 403px)
+    .comments .comment_item .comment_wrapper .user_info
+      padding-bottom: 14px
+
+  @media (max-width: $max-sm-width) and (min-width: $min-sm_width)
+    .filters-by-wrapper
+      padding: 0 16px 20px !important
+
+    .questions_show h1
+      font-size: 22px
+
+  @media (min-width: $min-lg-width)
+    .doberman_content_wrapper
+      .content_wrapper
+        padding: 0 11px
+
+    .content_wrapper
+      padding: 0

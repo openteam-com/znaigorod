@@ -15,10 +15,6 @@
     <% end %>
   </div>
 
-  <div class="filter_and_share">
-    <%= render :partial => 'commons/like_this', :locals => { :url => request.url.split('?').first } %>
-  </div>
-
   <div class='question_content_wrapper js-button-pagination'>
     <% if @presenter.collection.any? %>
       <ul class='posters js-paginable-list' data-item-width="220">
@@ -27,6 +23,10 @@
     <% else %>
       <p class='empty_items_list'>По заданным параметрам ничего не найдено ;(</p>
     <% end %>
+  </div>
+
+  <div class="filter_and_share">
+    <%= render :partial => 'commons/share_this', :locals => { :url => request.url.split('?').first } %>
   </div>
 </div>
 
