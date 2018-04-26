@@ -1,0 +1,33 @@
+.help-show-with-adaptive-version
+  .help_show .left
+    max-width: 100%
+    padding: 0 16px
+    box-sizing: border-box
+
+    .information
+      margin: 15px 0
+
+      li
+        img
+          width: 100%
+
+  @media (max-width: $max-xs-width)
+    .help_show .right
+      display: none
+
+  @media (min-width: $min-sm-width) and (max-width: $max-sm-width)
+    .help_show .right
+      display: none
+
+  @media (min-width: $min-md-width) and (max-width: $max-md-width)
+    .help_show .left
+      max-width: 78%
+      padding: 0 0 0 16px
+
+  @media (min-width: $min-lg-width)
+    .doberman_content_wrapper
+      .help_show .left
+        padding: 0 16px 0 11px
+
+    .help_show .left
+      padding: 0 16px 0 0

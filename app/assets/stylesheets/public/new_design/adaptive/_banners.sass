@@ -19,10 +19,10 @@
       margin: 0 auto
 
 .banner12_contest_wrapper
-  &.main_page, &.reviews, &.photogalleries, &.cooperation, &.questions
+  &.main_page, &.reviews, &.photogalleries, &.cooperation, &.questions, &.help
     background-color: white !important
 
-  &.feedback, &.questions
+  &.feedback, &.questions, &.help
     margin-left: auto
     margin-right: auto
 
@@ -33,7 +33,8 @@
     &.photogalleries,
     &.cooperation,
     &.feedback,
-    &.questions
+    &.questions,
+    &.help
       +banners_adaptability
 
   @media (max-width: $max-xs-width) and (orientation: portrait)
@@ -43,7 +44,8 @@
     &.photogalleries,
     &.cooperation,
     &.feedback,
-    &.questions
+    &.questions,
+    &.help
       +banners_adaptability_xs
       .banner12
         width: 95%
@@ -51,11 +53,11 @@
         img
           margin: 0 auto
 
-    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions
+    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions, &.help
       .banner12
         height: 60px
 
-    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions
+    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions, &.help
       ul
         height: 60px
 
@@ -67,7 +69,7 @@
     &.reviews,
     &.photogalleries,
     &.cooperation,
-    &.feedback, &.questions
+    &.feedback, &.questions, &.help
       .banner12
         height: 60px
 
@@ -76,16 +78,16 @@
     &.reviews,
     &.photogalleries,
     &.cooperation,
-    &.feedback, &.questions
+    &.feedback, &.questions, &.help
       .banner12
         height: 70px
 
   @media (min-width: 430px) and (max-width: 720px)
-    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions
+    &.main_page, &.photogalleries, &.cooperation, &.feedback, &.questions, &.help
       .banner12
         height: 70px
 
-    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions
+    &.afishas, &.reviews, &.photogalleries, &.cooperation, &.feedback, &.questions, &.help
       ul
         height: 70px
 

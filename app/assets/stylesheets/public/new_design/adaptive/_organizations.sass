@@ -27,12 +27,11 @@
       img
         max-width: 100%
 
-  .doberman_content_wrapper
-    .content_wrapper
-      .introduction
-        width: 100%
-        box-sizing: border-box
-        padding: 0 16px
+  .content_wrapper
+    .introduction
+      width: 100%
+      box-sizing: border-box
+      padding: 0 16px
 
   .organization_content
     .posters
@@ -61,9 +60,13 @@
       box-sizing: border-box
       padding: 0 16px
 
-    .introduction.top_introduction
-      padding-right: 0
-      padding-left: 0
+  .sauna_housing_content .sauna_posters
+    > li.sauna_item
+      border: 1px solid #ccc
+      margin-right: 20px
+
+    > li.item_3
+      margin-right: 20px
 
   .filter_and_share
     padding: 16px 0
@@ -178,11 +181,15 @@
       padding: 0 16px
       margin-top: 0
 
-      .introduction.suborganization.top_introduction
+      .introduction.suborganization.top_introduction, .breadcrumbs
         padding: 0
 
       .filter_and_share
         padding: 0
+
+        form .advanced .filter.used
+          .filter_slider_wrapper.amount, .filter_slider_wrapper.capacity
+            margin-left: 0
 
         .presentation_filters.organization
           float: left
@@ -319,6 +326,9 @@
       padding: 0 16px
 
       .filter_and_share
+        .introduction.suborganization.top_introduction
+          padding: 0
+
         .view_by
           margin-right: 15px
 
@@ -337,6 +347,11 @@
 
     .filter_and_share
       padding: 16px
+
+    .content_wrapper
+      .introduction.top_introduction, .breadcrumbs
+        padding-right: 0
+        padding-left: 0
 
   @media (min-width: $min-md-width) and (max-width: $max-md-width)
 
@@ -379,6 +394,11 @@
           &.item_7
             margin-right: 40px
 
+    .content_wrapper
+      .introduction.top_introduction, .breadcrumbs
+        padding-right: 0
+        padding-left: 0
+
   @media (min-width: $min-lg-width)
     .recommended_organizations_wrapper.organization
       .posters
@@ -392,7 +412,25 @@
       padding: 0
 
     .doberman_content_wrapper
+      .organization_content .posters
+        li.item_organization.not_client_poster
+          margin-right: 14px
+
+        li.item_organization.item_7
+          margin-right: 0
+
+      .sauna_housing_content .sauna_posters
+        > li.sauna_item
+          margin-right: 19px
+
+        > li.item_3
+          margin-right: 0
+
       .content_wrapper
-        .filter_and_share, .breadcrumbs, .organization_categories
+        .filter_and_share, .breadcrumbs, .organization_categories, .introduction.top_introduction, .introduction.suborganization
           padding-left: 11px
           padding-right: 11px
+
+        .presenter-organizations-tile
+          padding: 0 11px
+          box-sizing: border-box
