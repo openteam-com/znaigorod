@@ -155,7 +155,7 @@ GEM
       formtastic
       rails
     eventmachine (1.0.0)
-    excon (0.45.3)
+    excon (0.71.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fabrication (2.5.0)
